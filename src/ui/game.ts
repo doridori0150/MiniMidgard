@@ -8,7 +8,7 @@ import { FieldRenderer } from '../render/field.ts';
 import { audio } from '../audio/audio.ts';
 import { zone } from '../game/data/zones.ts';
 
-export type PanelId = 'status' | 'skills' | 'equip' | 'bag' | 'map' | 'town' | 'party' | 'settings';
+export type PanelId = 'status' | 'skills' | 'equip' | 'cards' | 'bag' | 'map' | 'town' | 'party' | 'settings';
 export type TownView = 'menu' | 'tool' | 'weapon' | 'armor' | 'costume' | 'refine' | 'stylist' | 'job';
 
 export interface Toast { id: number; text: string; kind: 'info' | 'good' | 'bad' | 'card' | 'level' }

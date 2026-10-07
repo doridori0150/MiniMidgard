@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 import { game, useGame } from './game.ts';
-import { zone } from '../game/data/zones.ts';
 import { MONSTERS } from '../game/data/monsters.ts';
 import { QuickBar } from './QuickBar.tsx';
+import { PartyRail } from './Hud.tsx';
 
 function Minimap() {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -94,14 +94,13 @@ export function FieldView() {
     if (!r || !wrap.current) return;
     const fieldH = wrap.current.clientHeight;
     const appH = wrap.current.parentElement!.clientHeight;
-    const sheet = appH * (g.panel === 'equip' || g.panel === 'town' || g.panel === 'map' ? 0.78 : 0.6);
+    const sheet = appH * (g.panel === 'equip' || g.panel === 'town' || g.panel === 'map' || g.panel === 'cards' ? 0.78 : 0.6);
     r.insetBottom = g.panel ? Math.max(0, Math.min(fieldH - 90, sheet)) : 84; // keep the party above the quick bar
   }, [g.panel]);
-  const z = zone(g.s.zone);
   return (
     <div class="field" ref={wrap}>
       <canvas class="main" ref={ref} />
-      <div class="zone-tag">{z.name}<small>{z.id === 'town' ? '휴식' : `Lv ${z.lv[0]}~${z.lv[1]}`}</small></div>
+      <PartyRail />
       <Minimap />
       <Gauges />
       <Chat />

@@ -86,10 +86,10 @@ export function MobCanvas(props: { id: string; class?: string; animate?: boolean
   return <canvas ref={ref} class={props.class} />;
 }
 
-export function CardArt(props: { id: string }) {
+export function CardArt(props: { id: string; w?: number; h?: number }) {
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => { if (ref.current) drawCardArt(ref.current, props.id.replace('c_', '')); }, [props.id]);
-  return <canvas ref={ref} style={{ width: '140px', height: '196px' }} />;
+  return <canvas ref={ref} style={{ width: (props.w ?? 140) + 'px', height: (props.h ?? 196) + 'px' }} />;
 }
 
 export function Win(props: { title: string; onClose?: () => void; children: ComponentChildren; right?: ComponentChildren }) {

@@ -7,6 +7,7 @@ import { StatusPanel, SkillsPanel } from './panels/StatusSkills.tsx';
 import { EquipPanel, BagPanel } from './panels/EquipBag.tsx';
 import { TownPanel, PartyPanel, SettingsPanel } from './panels/World.tsx';
 import { MapPanel } from './WorldMap.tsx';
+import { CardPanel } from './panels/Cards.tsx';
 import { LookCanvas } from './widgets.tsx';
 import { newGame, load, defaultLook, HAIR_COLORS, HAIR_STYLES, SKIN_TONES, autoDistribute } from '../game/state.ts';
 import type { Look } from '../game/types.ts';
@@ -20,7 +21,7 @@ function Toasts() {
 function GameScreen() {
   const g = useGame();
   const p = g.panel;
-  const tall = p === 'equip' || p === 'town' || p === 'map';
+  const tall = p === 'equip' || p === 'town' || p === 'map' || p === 'cards';
   return (
     <div class="app">
       <Hud />
@@ -29,6 +30,7 @@ function GameScreen() {
         {p === 'status' && <StatusPanel />}
         {p === 'skills' && <SkillsPanel />}
         {p === 'equip' && <EquipPanel />}
+        {p === 'cards' && <CardPanel />}
         {p === 'bag' && <BagPanel />}
         {p === 'map' && <MapPanel />}
         {p === 'town' && <TownPanel />}
