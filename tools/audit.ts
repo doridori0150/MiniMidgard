@@ -43,7 +43,7 @@ for (const m of Object.values(MONSTERS)) {
   if (!own.length) warn.push(`${m.id}: no etc item of its own (${etc.map((d) => d.id).join(',')})`);
 }
 for (const it of Object.values(ITEMS)) {
-  if (it.kind === 'card') {
+  if (it.kind === 'card' && !it.star) {
     const mob = it.id.slice(2);
     if (!MONSTERS[mob]) errors.push(`${it.id}: card of unknown monster`);
     if (!it.cardLoc) errors.push(`${it.id}: no cardLoc`);
@@ -112,7 +112,7 @@ for (const [name, info] of Object.entries(REGION_INFO)) {
 }
 
 if (on('errors') || want === 'all') {
-  console.log(`== integrity: ${Object.keys(MONSTERS).length} monsters, ${Object.values(ITEMS).filter((i) => i.kind === 'card').length} cards, ${ZONES.length} zones (${ZONES.filter((z) => z.mobs.length).length} hunting maps, ${ZONES.filter((z) => z.start).length} open from the start), ${Object.keys(ITEMS).length} items`);
+  console.log(`== integrity: ${Object.keys(MONSTERS).length} monsters, ${Object.values(ITEMS).filter((i) => i.kind === 'card' && !i.star).length} cards, ${ZONES.length} zones (${ZONES.filter((z) => z.mobs.length).length} hunting maps, ${ZONES.filter((z) => z.start).length} open from the start), ${Object.keys(ITEMS).length} items`);
   console.log(errors.length ? 'ERRORS:\n  ' + errors.join('\n  ') : 'no errors');
   if (warn.length) console.log('warnings:\n  ' + warn.join('\n  '));
 }
@@ -145,7 +145,7 @@ if (on('cards')) {
   console.log('\n== cards by slot');
   for (const loc of ['weapon', 'armor', 'shield', 'garment', 'shoes', 'acc', 'head']) {
     console.log(`  [${loc}]`);
-    for (const c of Object.values(ITEMS).filter((i) => i.kind === 'card' && i.cardLoc === loc)) {
+    for (const c of Object.values(ITEMS).filter((i) => i.kind === 'card' && !i.star && i.cardLoc === loc)) {
       const m = MONSTERS[c.id.slice(2)];
       const rate = m.drops.find((d) => d.id === c.id)!.rate;
       console.log(`    ${c.name.padEnd(12)} Lv${String(m.lv).padStart(2)} ${fmtRate(rate).padStart(6)} ${(c.rarity ?? '').padEnd(5)} ${c.desc.split('\n').slice(0, -1).join(' / ')}  @${(mobZones[m.id] ?? ['summon']).join(',')}`);

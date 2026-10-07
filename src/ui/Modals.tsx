@@ -8,7 +8,7 @@ import { zone } from '../game/data/zones.ts';
 import type { ClassId, CostumeSlot, Look } from '../game/types.ts';
 import {
   addEquip, canEquip, cardFits, compound, defaultLook, equip, equippedBy, itemName, jobChange, newHero, removeStack, nextJobs,
-  sellEquip, sellPrice, sellStack, setCostume, unequipUid, refineInfo, HAIR_COLORS, HAIR_STYLES, equipAmmo, buy, setQuick, rosterRoom,
+  sellEquip, sellPrice, sellStack, setCostume, unequipUid, refineInfo, HAIR_COLORS, HAIR_STYLES, equipAmmo, buy, setQuick, rosterRoom, awakenCard,
 } from '../game/state.ts';
 import { heroLookDraw } from '../render/field.ts';
 import { itemIconURL } from '../render/icons.ts';
@@ -22,6 +22,7 @@ import { BuildModal, PinButton } from './BuildModal.tsx';
 import { TargetsModal } from './Targets.tsx';
 import { RosterModal } from './Roster.tsx';
 import { GRADE_KO, gradeBase, gradeOf, rerollCost, rerollOption } from '../game/gear.ts';
+import { awakenCost, nextStarId } from '../game/data/cardstars.ts';
 import { sourcesOf } from '../game/targets.ts';
 import { skillIconURL } from '../render/icons.ts';
 import { RACE_KO } from '../game/data/elements.ts';
@@ -121,6 +122,12 @@ function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
         {d.kind === 'ammo' && have > 0 && <button class="btn pri" disabled={!!canEquip(h, id)} onClick={() => { const e = equipAmmo(s, h, id); if (e) g.toast(e, 'bad'); else { g.commit('equip'); close(); } }}>{h.name} 화살통 장착</button>}
         {inst && inst.cards.includes(null) && <button class="btn gold" onClick={() => setCardPick(!cardPick)}>카드 꽂기</button>}
         {d.kind === 'card' && have > 0 && <button class="btn gold" onClick={() => setCardPick(!cardPick)}>장비에 꽂기</button>}
+        {d.kind === 'card' && nextStarId(id) && (
+          <button class="btn" disabled={have < 3 || s.zeny < awakenCost(id)} title="같은 카드 3장 → 다음 별"
+            onClick={() => { const e = awakenCard(s, id); if (e) { g.toast(e, 'bad'); return; } g.toast(`각성! ${ITEMS[nextStarId(id)!]?.name ?? ''}`, 'card'); g.commit('refine_ok'); g.setModal({ kind: 'item', id: nextStarId(id)! }); }}>
+            각성 {have}/3 · {fmt(awakenCost(id))}z
+          </button>
+        )}
         {isCostumable && <button class="btn" onClick={() => { setCostume(s, h, d.loc as CostumeSlot, inst!.uid); g.toast(`${h.name}의 의상으로 표시합니다`, 'good'); g.commit('equip'); close(); }}>의상으로</button>}
         {d.kind === 'use' && have > 0 && <button class="btn gold" onClick={() => {
           let i = s.quick.findIndex((x) => x.id === id);

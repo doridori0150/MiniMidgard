@@ -103,7 +103,7 @@ export function MobCanvas(props: { id: string; class?: string; animate?: boolean
 
 export function CardArt(props: { id: string; w?: number; h?: number }) {
   const ref = useRef<HTMLCanvasElement>(null);
-  useEffect(() => { if (ref.current) drawCardArt(ref.current, props.id.replace('c_', '')); }, [props.id]);
+  useEffect(() => { if (ref.current) drawCardArt(ref.current, props.id.replace('c_', '').replace(/~[23]$/, ''), ITEMS[props.id]?.star); }, [props.id]);
   return <canvas ref={ref} style={{ width: (props.w ?? 140) + 'px', height: (props.h ?? 196) + 'px' }} />;
 }
 

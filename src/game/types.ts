@@ -116,6 +116,8 @@ export interface ItemDef {
   cardLoc?: CardLoc;
   prefix?: string;
   rarity?: 'common' | 'rare' | 'epic' | 'mvp';
+  /** awakened card form (data/cardstars.ts): ★2 / ★3 */
+  star?: 2 | 3;
 }
 
 export interface EquipInst {

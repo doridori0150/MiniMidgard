@@ -246,7 +246,7 @@ function drawCardMini(ctx: CanvasRenderingContext2D, mob: string) {
 }
 
 /** large card illustration for detail popups */
-export function drawCardArt(canvas: HTMLCanvasElement, mob: string) {
+export function drawCardArt(canvas: HTMLCanvasElement, mob: string, star?: number) {
   const m = MONSTERS[mob];
   const dpr = Math.min(3, window.devicePixelRatio || 1);
   const w = canvas.clientWidth || 140, h = canvas.clientHeight || 196;
@@ -279,6 +279,14 @@ export function drawCardArt(canvas: HTMLCanvasElement, mob: string) {
   ctx.font = "9px 'Galmuri9', sans-serif";
   ctx.fillStyle = '#7a6a50';
   ctx.fillText('CARD', w / 2, h - 12);
+  if (star) {
+    // awakened: a gold (★2) or crimson (★3) frame and the stars over the art
+    ctx.strokeStyle = star === 3 ? '#d8303a' : '#e0a000'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.roundRect(2.5, 2.5, w - 5, h - 5, 8); ctx.stroke();
+    ctx.font = "bold 14px 'Galmuri11', sans-serif"; ctx.fillStyle = star === 3 ? '#d8303a' : '#e0a000';
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 3;
+    ctx.strokeText('★'.repeat(star), w / 2, ay + 18); ctx.fillText('★'.repeat(star), w / 2, ay + 18);
+  }
 }
 
 export function itemIcon(id: string): HTMLCanvasElement | null {

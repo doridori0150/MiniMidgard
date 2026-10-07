@@ -6,6 +6,7 @@ import { ITEMS } from './data/items.ts';
 import { ZONES, openers, type ZoneDef, type GateNeed } from './data/zones.ts';
 import { MONSTERS } from './data/monsters.ts';
 import { buildOf } from './data/builds.ts'; // also registers the build identity items and their drops
+import { awakenCost, nextStarId } from './data/cardstars.ts'; // also registers the ★2/★3 card forms
 import { START_STAT_POINTS, statCost } from './exp.ts';
 import { ARMOR_SAFE, WEAPON_SAFE, partyPerks } from './stats.ts';
 
@@ -685,4 +686,17 @@ export function gateLines(s: GameState, z: ZoneDef, now = new Date()): { text: s
       case 'hours': return { ok, text: `${hoursText(n)}에만 열림` };
     }
   });
+}
+
+/** card awakening (ENDGAME.md §5): three of a card + zeny → one of the next star */
+export function awakenCard(s: GameState, id: string): string | null {
+  const next = nextStarId(id);
+  if (!next) return '이미 최고 각성입니다.';
+  if ((s.stacks[id] ?? 0) < 3) return '같은 카드가 3장 필요합니다.';
+  const cost = awakenCost(id);
+  if (s.zeny < cost) return `제니가 부족합니다. (${cost.toLocaleString()}z)`;
+  s.zeny -= cost;
+  removeStack(s, id, 3);
+  s.stacks[next] = (s.stacks[next] ?? 0) + 1;
+  return null;
 }
