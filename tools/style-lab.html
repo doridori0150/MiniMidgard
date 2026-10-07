@@ -43,6 +43,10 @@
     <div class="stage"><div class="cell"><canvas id="scene" class="scene"></canvas><small>실제 화면 크기 미리보기 (×2)</small></div></div>
   </div>
 
+  <h2>배경 톤 검증 — 필드에 올려 보기</h2>
+  <p class="sub">A′는 지금 코드로 그리는 필드·캐릭터 그대로, D′는 같은 필드를 통째로 도트 변환한 것. A·C·D 키트는 Codex 배경 키트(타일 + 소품)로 조립한 필드입니다.</p>
+  <div class="card"><div class="stage" id="fields"></div></div>
+
   <h2>B·C·D 이미지 부품 합성 (몸 1장 + 액세서리 조각)</h2>
   <div class="card">
     <div class="grp"><b>액세서리</b><span id="g-part"></span></div>
@@ -51,6 +55,10 @@
 </main>
 <script type="module">
   import { drawHero } from '/src/render/hero.ts';
+  import { buildZoneArt, drawProp } from '/src/render/bg.ts';
+  import { drawMob } from '/src/render/monster.ts';
+  import { ZONES } from '/src/game/data/zones.ts';
+  import { MONSTERS } from '/src/game/data/monsters.ts';
 
   // ───── D′: code paper-doll rendered small, then snapped to pixels
   const TOP = [['없음', ''], ['머리핀', 'hairpin'], ['풀잎', 'leaf'], ['리본', 'ribbon'], ['꽃', 'flower'], ['고양이귀', 'cat'], ['토끼귀', 'bunny'], ['버섯', 'mushroom'], ['티아라', 'tiara'], ['모자', 'cap']];
@@ -166,6 +174,108 @@
     });
   }
   requestAnimationFrame(frame);
+
+  // ───── field tone test: the real meadow art + party + slimes, as code (A′) and pixelated (D′)
+  const FW = 300, FH = 420, ZOOM = 1.13;
+  const meadow = ZONES.find((z) => z.id === 'meadow');
+  const art = buildZoneArt(meadow, false);
+  const VW = FW / ZOOM, VH = FH / ZOOM;
+  const cx = meadow.w * 0.42, cy = meadow.h * 0.62, x0 = cx - VW / 2, y0 = cy - VH / 2;
+  const actors = [
+    { kind: 'hero', i: 0, x: cx - 34, y: cy + 10, state: 'ready' },
+    { kind: 'hero', i: 1, x: cx + 4, y: cy - 12, state: 'attack' },
+    { kind: 'hero', i: 2, x: cx - 70, y: cy + 46, state: 'cast' },
+    { kind: 'mob', x: cx + 40, y: cy - 6 }, { kind: 'mob', x: cx + 62, y: cy + 30 }, { kind: 'mob', x: cx + 30, y: cy + 52 },
+  ];
+  const jelly = MONSTERS.jelly;
+  function fieldFrame(ctx, k, t, pixel) {
+    ctx.imageSmoothingEnabled = true;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.drawImage(art.ground, x0 * art.scale, y0 * art.scale, VW * art.scale, VH * art.scale, 0, 0, VW * k, VH * k);
+    const things = [
+      ...art.props.filter((p) => p.x > x0 - 60 && p.x < x0 + VW + 60 && p.y > y0 - 20 && p.y < y0 + VH + 120).map((p) => ({ y: p.y, draw: () => { ctx.setTransform(k, 0, 0, k, -x0 * k, -y0 * k); drawProp(ctx, p, t); } })),
+      ...actors.map((a) => ({ y: a.y, draw: () => {
+        if (a.kind === 'mob') {
+          ctx.setTransform(k, 0, 0, k, (a.x - x0) * k, (a.y - y0) * k);
+          drawMob(ctx, jelly.sprite, jelly.palette, { state: 'idle', t: t + a.x * 7, facing: -1, hurt: 0, frozen: false, spawn: 1, dead: 0 }, 1);
+          return;
+        }
+        const look = looksWith(CAST[a.i].look);
+        if (pixel) {
+          const sp = sprite(look, a.state, a.state === 'attack' ? (t % 900) * 0.5 : t, Math.round(74 * k), st.ol);
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.drawImage(sp, Math.round((a.x - x0) * k - sp.width / 2), Math.round((a.y - y0) * k - sp.height + 3));
+        } else {
+          ctx.setTransform(k, 0, 0, k, (a.x - x0) * k, (a.y - y0) * k);
+          drawHero(ctx, look, { state: a.state, t: a.state === 'attack' ? (t % 900) * 0.5 : t, dur: 420, facing: 1 }, { shadow: true });
+        }
+      } })),
+    ].sort((a, b) => a.y - b.y);
+    for (const th of things) th.draw();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+  }
+  /** posterize the background buffer so it shares the sprites' chunky colour steps */
+  // 4×4 Bayer ordered dithering: soft gradients become the checkered texture of classic pixel art
+  const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+  function posterize(ctx, w, h) {
+    const im = ctx.getImageData(0, 0, w, h), d = im.data, STEP = 22;
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * 4, th = (BAYER[(y & 3) * 4 + (x & 3)] / 16 - 0.5) * STEP;
+      for (let k = 0; k < 3; k++) d[i + k] = Math.max(0, Math.min(255, Math.round((d[i + k] + th) / STEP) * STEP));
+    }
+    ctx.putImageData(im, 0, 0);
+  }
+  const fields = document.getElementById('fields');
+  function fieldCell(label) {
+    const cell = document.createElement('div'); cell.className = 'cell';
+    const cv = document.createElement('canvas'); cv.width = FW; cv.height = FH; cv.style.borderRadius = '10px';
+    const lab = document.createElement('small'); lab.textContent = label;
+    cell.append(cv, lab); fields.append(cell);
+    return cv;
+  }
+  const fA = fieldCell('A′ 지금 코드 그대로'), fD = fieldCell('D′ 코드 필드 → 도트');
+  const buf = document.createElement('canvas'); buf.width = FW / 2; buf.height = FH / 2;
+  const bctx = buf.getContext('2d', { willReadFrequently: true });
+  let lastF = 0;
+  function fieldLoop(now) {
+    requestAnimationFrame(fieldLoop);
+    if (now - lastF < 125) return;
+    lastF = now;
+    const t = Math.floor(now / 125) * 125;
+    fieldFrame(fA.getContext('2d'), ZOOM, t, false);
+    // D′: background at half resolution, posterized, sprites on the same grid, then ×2 nearest
+    bctx.clearRect(0, 0, buf.width, buf.height);
+    const k = ZOOM / 2;
+    bctx.imageSmoothingEnabled = true;
+    bctx.drawImage(art.ground, x0 * art.scale, y0 * art.scale, VW * art.scale, VH * art.scale, 0, 0, buf.width, buf.height);
+    const props = art.props.filter((p) => p.x > x0 - 60 && p.x < x0 + VW + 60 && p.y > y0 - 20 && p.y < y0 + VH + 120);
+    const order = [...props.map((p) => ({ y: p.y, p })), ...actors.map((a) => ({ y: a.y, a }))].sort((a, b) => a.y - b.y);
+    // props first pass (posterized together with the ground), then sprites in y order on top
+    for (const o of order) if (o.p) { bctx.setTransform(k, 0, 0, k, -x0 * k, -y0 * k); drawProp(bctx, o.p, t); }
+    bctx.setTransform(1, 0, 0, 1, 0, 0);
+    posterize(bctx, buf.width, buf.height);
+    for (const o of order) {
+      if (!o.a) continue;
+      const a = o.a;
+      if (a.kind === 'mob') {
+        const mc = document.createElement('canvas'); mc.width = 40; mc.height = 34;
+        const mx = mc.getContext('2d'); mx.setTransform(k, 0, 0, k, 20, 30);
+        drawMob(mx, jelly.sprite, jelly.palette, { state: 'idle', t: t + a.x * 7, facing: -1, hurt: 0, frozen: false, spawn: 1, dead: 0 }, 1);
+        const im = mx.getImageData(0, 0, 40, 34);
+        for (let i = 0; i < im.data.length; i += 4) { if (im.data[i + 3] < 110) im.data[i + 3] = 0; else im.data[i + 3] = 255; }
+        mx.putImageData(im, 0, 0);
+        bctx.drawImage(mc, Math.round((a.x - x0) * k - 20), Math.round((a.y - y0) * k - 30));
+        continue;
+      }
+      const look = looksWith(CAST[a.i].look);
+      const sp = sprite(look, a.state, a.state === 'attack' ? (now % 900) * 0.5 : t, Math.round(74 * k), st.ol);
+      bctx.drawImage(sp, Math.round((a.x - x0) * k - sp.width / 2), Math.round((a.y - y0) * k - sp.height + 3));
+    }
+    const dctx = fD.getContext('2d');
+    dctx.imageSmoothingEnabled = false;
+    dctx.drawImage(buf, 0, 0, FW, FH);
+  }
+  requestAnimationFrame(fieldLoop);
 
   // ───── B·C·D: image part sheets (3×3 grid on a flat key colour: [0] body, [1..8] accessories)
   const PARTS = ['없음', '머리핀', '풀잎', '리본', '꽃', '고양이귀', '안경', '풀피리', '베레모'];
