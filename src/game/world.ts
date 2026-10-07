@@ -119,6 +119,10 @@ export interface GroundItem {
 export type Unit = HeroUnit | MobUnit;
 
 const STEP = 50;
+/** when a swing / melee skill / bow release lands, in ms after the action starts (poses are timed to these) */
+export const MELEE_CONTACT = 140;
+export const SKILL_CONTACT = 130;
+export const BOW_RELEASE = 120;
 const HP_TICK = 3000;
 const SP_TICK = 4000;
 const REVIVE_MS = 15000;
@@ -242,6 +246,9 @@ export class World {
   }
 
   // ───────────────────────────── main loop
+  /** sim time plus the not-yet-stepped remainder: smooth 60 fps animation clocks */
+  get renderTime() { return this.time + this.acc; }
+
   advance(ms: number) {
     this.acc += Math.min(ms, 5000);
     while (this.acc >= STEP) {
@@ -280,7 +287,8 @@ export class World {
     for (const m of this.mobs) this.mobTick(m, dt);
     this.separate();
     this.groundTick();
-    this.mobs = this.mobs.filter((m) => !(m.state === 'dead' && this.time - m.deadAt > CORPSE_MS));
+    // bosses get a longer collapse so their fall can be read
+    this.mobs = this.mobs.filter((m) => !(m.state === 'dead' && this.time - m.deadAt > (m.m.boss ? 1800 : CORPSE_MS)));
   }
 
   // ───────────────────────────── sealed & hidden maps
@@ -932,17 +940,21 @@ export class World {
     h.atkReady = this.time + d.delay;
     h.lockUntil = this.time + Math.min(320, d.delay * 0.8);
     if (d.ranged) {
-      const fly = Math.max(120, dist(h, t) / 0.75);
-      this.emit({ t: 'shot', from: h.uid, to: t.uid, kind: 'arrow', dur: fly, element: d.weaponElement });
-      this.sound('arrow');
-      this.after(fly + 60, () => {
-        const hit = this.resolvePhys(h, t, 100, d.weaponElement, 0, true, 'pierce');
-        this.autoBlitz(h, t, hit);
+      // draw → release (the arrow leaves on the release frame) → flight → hit
+      this.after(BOW_RELEASE, () => {
+        if (!this.alive(t)) return;
+        const fly = Math.max(120, dist(h, t) / 0.75);
+        this.emit({ t: 'shot', from: h.uid, to: t.uid, kind: 'arrow', dur: fly, element: d.weaponElement });
+        this.sound('arrow');
+        this.after(fly, () => {
+          const hit = this.resolvePhys(h, t, 100, d.weaponElement, 0, true, 'pierce');
+          this.autoBlitz(h, t, hit);
+        });
       });
       return;
     }
     this.sound('swing');
-    this.after(140, () => {
+    this.after(MELEE_CONTACT, () => {
       const r = this.resolvePhys(h, t, 100, d.weaponElement, 0, true, d.wtype === 'mace' || d.wtype === 'staff' || d.wtype === 'none' ? 'blunt' : 'slash');
       // double attack
       const da = h.hero.skills.double_attack ?? 0;
@@ -1153,22 +1165,26 @@ export class World {
     switch (sk.kind) {
       case 'melee': {
         if (!tm || !this.alive(tm)) return;
-        this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm.uid, x: tm.x, y: tm.y, lv, element: el });
+        // the skill's impact effect bursts when the weapon arrives, not when the swing starts
+        this.after(SKILL_CONTACT - 20, () => { if (this.alive(tm)) this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm.uid, x: tm.x, y: tm.y, lv, element: el }); });
         const mhits = sk.bySize ? (tm.m.size === 'small' ? 1 : tm.m.size === 'medium' ? 2 : 3) : sk.hits ? sk.hits(lv) : 1;
         if (mhits > 1) {
           let total = 0;
           for (let i = 0; i < mhits; i++) {
-            this.after(110 + i * (sk.id === 'sonic_blow' ? 70 : 120), () => {
+            this.after(SKILL_CONTACT + i * (sk.id === 'sonic_blow' ? 70 : 120), () => {
               const before = tm.hp;
               this.resolvePhys(h, tm, sk.mult ? sk.mult(lv) : 100, el, sk.hitBonus ? sk.hitBonus(lv) : 0, false, sk.id === 'pierce' ? 'pierce' : 'slash', i);
               total += Math.max(0, before - Math.max(0, tm.hp));
-              if (i === mhits - 1 && total > 0) this.emit({ t: 'dmg', uid: tm.uid, n: total, kind: 'total' });
+              if (i === mhits - 1 && total > 0) {
+                this.emit({ t: 'dmg', uid: tm.uid, n: total, kind: 'total' });
+                // the flurry's weight lands with its total, once
+                if (sk.id === 'sonic_blow') this.emit({ t: 'shake', power: 1.5 });
+              }
             });
           }
-          if (sk.id === 'sonic_blow') this.emit({ t: 'shake', power: 3 });
           return;
         }
-        this.after(130, () => {
+        this.after(SKILL_CONTACT, () => {
           const flat = sk.id === 'envenom' ? lv * 15 : 0;
           const hit = this.resolvePhys(h, tm, sk.mult ? sk.mult(lv) : 100, el, sk.hitBonus ? sk.hitBonus(lv) : 0, false, 'slash', 0, flat);
           if (!hit || !this.alive(tm)) return;
@@ -1190,11 +1206,11 @@ export class World {
         if (!tm) return;
         const hits = sk.hits ? sk.hits(lv) : 1;
         const fly = Math.max(100, dist(h, tm) / 0.9);
-        this.sound('arrow');
+        this.after(BOW_RELEASE, () => this.sound('arrow'));
         let total = 0;
         for (let i = 0; i < hits; i++) {
-          this.after(i * 110, () => this.emit({ t: 'shot', from: h.uid, to: tm.uid, kind: 'arrow', dur: fly, element: el }));
-          this.after(i * 110 + fly, () => {
+          this.after(BOW_RELEASE + i * 110, () => this.emit({ t: 'shot', from: h.uid, to: tm.uid, kind: 'arrow', dur: fly, element: el }));
+          this.after(BOW_RELEASE + i * 110 + fly, () => {
             const before = tm.hp;
             this.resolvePhys(h, tm, sk.mult ? sk.mult(lv) : 100, el, 0, false, 'pierce', i);
             total += Math.max(0, before - Math.max(0, tm.hp));

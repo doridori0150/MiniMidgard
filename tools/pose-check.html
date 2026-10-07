@@ -1,0 +1,26 @@
+<!doctype html><html><body style="margin:0;background:#cfe3b8">
+<canvas id="c"></canvas>
+<script type="module">
+  // Dev-only: attack poses sampled around the world's contact time (MELEE_CONTACT / BOW_RELEASE)
+  import { drawHero } from '/src/render/hero.ts';
+  import { inked } from '/src/render/ink.ts';
+  import { MELEE_CONTACT, BOW_RELEASE } from '/src/game/world.ts';
+  const rows = [['swordsman', 'sword'], ['thief', 'dagger'], ['knight', 'spear'], ['assassin', 'katar'], ['blacksmith', 'axe'], ['archer', 'bow']];
+  const times = [0, 60, 100, 140, 180, 240, 300];
+  const c = document.getElementById('c'); const S = 1.5, dpr = 2, CW = 92, RH = 100;
+  c.width = (times.length * CW + 90) * dpr; c.height = rows.length * RH * dpr; c.style.width = c.width / dpr + 'px';
+  const ctx = c.getContext('2d');
+  ctx.font = '12px system-ui';
+  rows.forEach(([cls, w], r) => {
+    const contact = w === 'bow' ? BOW_RELEASE : MELEE_CONTACT;
+    const dur = w === 'bow' ? BOW_RELEASE / 0.6 : w === 'spear' ? MELEE_CONTACT / 0.47 : MELEE_CONTACT / 0.5;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillStyle = '#333'; ctx.fillText(w, 6, r * RH + 50);
+    times.forEach((t, i) => {
+      const x = 90 + i * CW + CW / 2, y = r * RH + 90;
+      if (t === contact) { ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillStyle = 'rgba(255,80,80,0.25)'; ctx.fillRect(x - CW / 2, r * RH, CW, RH); }
+      ctx.setTransform(dpr * S, 0, 0, dpr * S, x * dpr, y * dpr);
+      inked(ctx, 120, 120, 60, 106, 1.25, (o) => drawHero(o, { cls, gender: 'm', hair: 0, hairColor: 0, skin: 0, dye: 0, wtype: w, refine: 0, shield: false }, { state: 'attack', t, dur, facing: 1 }, { shadow: false }));
+      if (r === 0) { ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillStyle = '#333'; ctx.fillText(t + 'ms', x - 14, 12); }
+    });
+  });
+</script></body></html>

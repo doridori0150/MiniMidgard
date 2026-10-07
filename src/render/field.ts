@@ -5,6 +5,7 @@ import { buildZoneArt, drawProp, kitPropBox, kitVersion, type ZoneArt, type Prop
 import { inked } from './ink.ts';
 import { drawHero, drawFalcon, type HeroLookDraw } from './hero.ts';
 import { drawMob, mobHeight, mobShadow } from './monster.ts';
+import { MELEE_CONTACT, BOW_RELEASE } from '../game/world.ts';
 import { drawNumber, type DmgNum, warmFont } from './dmgfont.ts';
 import { ELEMENT_COLOR } from '../game/data/elements.ts';
 import { ITEMS } from '../game/data/items.ts';
@@ -844,12 +845,14 @@ export class FieldRenderer {
   private drawHeroUnit(ctx: CanvasRenderingContext2D, h: HeroUnit, sm: Smooth, now: number) {
     const w = this.world;
     const look = this.heroLook(h);
-    const t = w.time - h.stateT;
+    const rt = w.renderTime;
+    const t = rt - h.stateT;
     const state = w.wipeUntil ? 'dead' : h.state === 'spawn' ? 'idle' : h.state;
-    const flash = w.time - h.hurtAt < 160 ? 1 - (w.time - h.hurtAt) / 160 : 0;
+    const flash = rt - h.hurtAt < 160 ? 1 - (rt - h.hurtAt) / 160 : 0;
     ctx.save();
     ctx.translate(sm.x, sm.y);
-    const dur = h.state === 'attack' ? Math.min(420, Math.max(220, h.d.delay * 0.8)) : undefined;
+    // swing length chosen so the blade/spear/katar passes straight ahead at MELEE_CONTACT and the bow releases at BOW_RELEASE
+    const dur = h.state === 'attack' ? (h.d.wtype === 'bow' ? BOW_RELEASE / 0.6 : h.d.wtype === 'spear' ? MELEE_CONTACT / 0.47 : MELEE_CONTACT / 0.5) : undefined;
     const pose = { state: flash > 0.5 && (state === 'idle' || state === 'ready') ? 'hurt' : state, t: state === 'idle' || state === 'ready' || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing };
     ctx.fillStyle = 'rgba(20,30,20,0.28)';
     ctx.beginPath(); ctx.ellipse(0, 0, state === 'dead' ? 17 : 11, 3.8, 0, 0, Math.PI * 2); ctx.fill();
@@ -868,10 +871,11 @@ export class FieldRenderer {
 
   private drawMobUnit(ctx: CanvasRenderingContext2D, m: MobUnit, sm: Smooth, now: number) {
     const w = this.world;
-    const t = m.state === 'walk' || m.state === 'idle' ? now + m.uid * 137 : w.time - m.stateT;
-    const hurt = w.time - m.hurtAt < 140 ? 1 - (w.time - m.hurtAt) / 140 : 0;
-    const spawn = m.state === 'spawn' ? Math.min(1, (w.time - m.stateT) / 600) : 1;
-    const dead = m.state === 'dead' ? Math.min(1, (w.time - m.deadAt) / 900) : 0;
+    const rt = w.renderTime;
+    const t = m.state === 'walk' || m.state === 'idle' ? now + m.uid * 137 : rt - m.stateT;
+    const hurt = rt - m.hurtAt < 140 ? 1 - (rt - m.hurtAt) / 140 : 0;
+    const spawn = m.state === 'spawn' ? Math.min(1, (rt - m.stateT) / 600) : 1;
+    const dead = m.state === 'dead' ? Math.min(1, (rt - m.deadAt) / (m.m.boss ? 1600 : 900)) : 0;
     ctx.save();
     ctx.translate(sm.x, sm.y);
     if (m.m.boss && !dead) {

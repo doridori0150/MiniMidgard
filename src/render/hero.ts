@@ -453,7 +453,8 @@ function hairFront(ctx: CanvasRenderingContext2D, style: number, c: string, line
 
 // ───────── face
 function face(ctx: CanvasRenderingContext2D, gender: 'm' | 'f', state: string, t: number, eyeHidden: boolean) {
-  const blink = (Math.floor(t / 100) % 38) === 0 && state !== 'dead';
+  // blink only on continuous clocks; action poses restart t at 0 and would blink on every swing
+  const blink = (state === 'idle' || state === 'ready' || state === 'walk') && (Math.floor(t / 100) % 38) === 0;
   const ey = -32;
   if (state === 'dead') {
     ctx.strokeStyle = '#3a2a2a'; ctx.lineWidth = 1.1;
