@@ -813,3 +813,16 @@ input { font-family: inherit; }
 .tac-row + .tac-row { border-top: 1px solid #eef1f8; }
 .tac-l { font-size: 11.5px; color: var(--title2); margin-bottom: 4px; }
 .tac-d { margin-top: 4px; font-size: 10.5px; color: var(--ink2); line-height: 1.35; }
+
+/* ───── sealed / hidden maps */
+.pin.sealed .pin-dot { filter: none; opacity: 1; background: radial-gradient(circle at 50% 40%, #6a4aa8, #2a1a4a); border-color: #c8a8ff; box-shadow: 0 0 12px 3px rgba(180,140,255,0.55); animation: pinpulse 2.4s ease-in-out infinite; }
+.pin.sealed .pin-label { background: rgba(48,36,78,0.92); border-color: #9a80d0; }
+.pin.sealed .pin-label b, .pin.sealed .pin-lv { color: #e8dcff; }
+.pin.secret:not(.sealed) .pin-dot { box-shadow: 0 0 0 2px #c8a8ff; }
+.zc-gate { display: flex; flex-direction: column; gap: 8px; }
+.zc-rumor { padding: 8px 10px; border-radius: 8px; background: linear-gradient(#f3eeff, #e8e0fb); border: 1px solid #c8b8ec; color: #4a3a78; font-size: 12px; line-height: 1.5; font-style: italic; }
+.zc-needs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; }
+.zc-needs li { display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--ink2); }
+.zc-needs li i { width: 16px; height: 16px; flex: none; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-style: normal; font-size: 10px; background: #e8e4f2; color: #8a80a8; }
+.zc-needs li.ok { color: var(--ink); }
+.zc-needs li.ok i { background: #5ac06a; color: #fff; }

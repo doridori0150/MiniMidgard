@@ -3,7 +3,8 @@ import { STAT_KEYS, QUICK_SLOTS } from './types.ts';
 import { CLASSES, FIRST_JOBS, SECOND_JOB_OF, SECOND_JOB_LV, lineage } from './data/classes.ts';
 import { SKILLS } from './data/skills.ts';
 import { ITEMS } from './data/items.ts';
-import { ZONES } from './data/zones.ts';
+import { ZONES, type ZoneDef, type GateNeed } from './data/zones.ts';
+import { MONSTERS } from './data/monsters.ts';
 import { START_STAT_POINTS, statCost } from './exp.ts';
 import { ARMOR_SAFE, WEAPON_SAFE, partyPerks } from './stats.ts';
 
@@ -517,4 +518,83 @@ export function applyExp(hero: Hero, base: number, job: number): { base: number;
     if (hero.jobLv >= cls.jobMax) hero.jobExp = 0;
   }
   return { base: bu, job: ju };
+}
+
+// ───────── sealed & hidden maps (ZoneDef.gate)
+export function inHours(n: { from: number; to: number }, now = new Date()): boolean {
+  const h = now.getHours();
+  return n.from <= n.to ? h >= n.from && h < n.to : h >= n.from || h < n.to;
+}
+
+export function needMet(s: GameState, n: GateNeed, now = new Date()): boolean {
+  switch (n.kind) {
+    case 'item': return (s.stacks[n.id] ?? 0) >= n.qty;
+    case 'kills': return (s.book[n.mob]?.kills ?? 0) >= n.n;
+    case 'boss': return (s.book[n.mob]?.kills ?? 0) > 0;
+    case 'card': return !!s.book[n.mob]?.card;
+    case 'level': return Math.max(...s.heroes.map((h) => h.baseLv)) >= n.lv;
+    case 'job': return s.heroes.some((h) => CLASSES[h.cls].tier >= n.tier);
+    case 'hours': return inHours(n, now);
+  }
+}
+
+/** on the world map at all? hidden maps appear once discovered */
+export function zoneKnown(s: GameState, z: ZoneDef): boolean {
+  return !z.gate?.hidden || s.unlocked.includes(z.id) || !!s.discovered?.includes(z.id);
+}
+
+/** a hidden map reveals itself when its clue item turns up or its first condition is met */
+export function gateDiscoverable(s: GameState, z: ZoneDef): boolean {
+  const g = z.gate;
+  if (!g) return true;
+  if (g.clue && (s.stacks[g.clue] ?? 0) > 0) return true;
+  const first = g.need.find((n) => n.kind !== 'hours');
+  return !!first && needMet(s, first);
+}
+
+/** every condition except the clock holds → the seal can be broken */
+export function gateReady(s: GameState, z: ZoneDef): boolean {
+  return !!z.gate && z.gate.need.every((n) => n.kind === 'hours' || needMet(s, n));
+}
+
+/** break the seal for good, offering the `consume` items */
+export function openGate(s: GameState, z: ZoneDef): string | null {
+  if (s.unlocked.includes(z.id)) return null;
+  if (!gateReady(s, z)) return '아직 조건이 부족합니다.';
+  for (const n of z.gate!.need) if (n.kind === 'item' && n.consume) removeStack(s, n.id, n.qty);
+  s.unlocked.push(z.id);
+  return null;
+}
+
+export function hoursText(n: { from: number; to: number }): string {
+  const f = (h: number) => (h % 24 === 0 ? '자정' : h === 12 ? '정오' : h < 12 ? `오전 ${h}시` : `오후 ${h - 12}시`);
+  return `${f(n.from)} ~ ${f(n.to)}`;
+}
+
+/** can the party go there right now? null = yes, otherwise the reason */
+export function canEnter(s: GameState, z: ZoneDef, now = new Date()): string | null {
+  if (!s.unlocked.includes(z.id)) return z.gate ? '봉인되어 있다.' : '아직 길이 열리지 않았다.';
+  const h = z.gate?.need.find((n) => n.kind === 'hours');
+  if (h && h.kind === 'hours' && !inHours(h, now)) return `${hoursText(h)}에만 길이 보인다.`;
+  return null;
+}
+
+/** checklist for the map card; names of things never met stay "???" */
+export function gateLines(s: GameState, z: ZoneDef, now = new Date()): { text: string; ok: boolean }[] {
+  return (z.gate?.need ?? []).map((n) => {
+    const ok = needMet(s, n, now);
+    const seen = (mob: string) => !!s.book[mob];
+    switch (n.kind) {
+      case 'item': {
+        const have = Math.min(n.qty, s.stacks[n.id] ?? 0);
+        return { ok, text: `${ITEMS[n.id].name} ${have}/${n.qty}${n.consume ? ' — 바치면 사라진다' : ''}` };
+      }
+      case 'kills': return { ok, text: `${seen(n.mob) ? MONSTERS[n.mob].name : '???'} ${Math.min(n.n, s.book[n.mob]?.kills ?? 0)}/${n.n}마리 처치` };
+      case 'boss': return { ok, text: `${seen(n.mob) ? MONSTERS[n.mob].name : '이름 모를 강적'} 처치` };
+      case 'card': return { ok, text: `${seen(n.mob) ? MONSTERS[n.mob].name : '???'} 카드 발견` };
+      case 'level': return { ok, text: `파티 최고 레벨 ${n.lv} 이상` };
+      case 'job': return { ok, text: n.tier === 2 ? '2차 전직한 동료' : '전직한 동료' };
+      case 'hours': return { ok, text: `${hoursText(n)}에만 열림` };
+    }
+  });
 }

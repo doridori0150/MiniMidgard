@@ -8,7 +8,7 @@ import { ITEMS } from './data/items.ts';
 import { zone as zoneDef, ZONES, type ZoneDef } from './data/zones.ts';
 import { CLASSES, lineage } from './data/classes.ts';
 import { expNext } from './exp.ts';
-import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics } from './state.ts';
+import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics, gateDiscoverable, gateReady, openGate, zoneKnown, inHours } from './state.ts';
 
 export type DmgKind = 'normal' | 'crit' | 'taken' | 'heal' | 'sp' | 'miss' | 'lucky' | 'total' | 'zero';
 
@@ -153,6 +153,11 @@ export class World {
   onPersist: () => void = () => {};
   /** UI notices like job-change ready */
   notices: { kind: string; heroId: number; text: string }[] = [];
+  /** the world moved the party by itself (e.g. a night-only path faded at dawn) */
+  onTravel: (id: string) => void = () => {};
+  private gateAt = 0;
+  /** when a night-only path closes under the party's feet */
+  private fadeAt = 0;
 
   constructor(s: GameState, rng: () => number = Math.random) {
     this.s = s;
@@ -267,6 +272,7 @@ export class World {
       if (this.time >= this.wipeUntil) this.recoverWipe();
       return;
     }
+    this.gateTick();
     this.spawnTick();
     this.autoItems();
     this.partyScan();
@@ -275,6 +281,57 @@ export class World {
     this.separate();
     this.groundTick();
     this.mobs = this.mobs.filter((m) => !(m.state === 'dead' && this.time - m.deadAt > CORPSE_MS));
+  }
+
+  // ───────────────────────────── sealed & hidden maps
+  /** every few seconds: rumours of hidden maps, seals that can open, night paths that fade */
+  private gateTick() {
+    if (this.time < this.gateAt) return;
+    this.gateAt = this.time + 3000;
+    const s = this.s;
+    for (const z of ZONES) {
+      const g = z.gate;
+      if (!g || s.unlocked.includes(z.id)) continue;
+      if (!zoneKnown(s, z)) {
+        if (!gateDiscoverable(s, z)) continue;
+        (s.discovered ??= []).push(z.id);
+        this.emit({ t: 'announce', text: '어딘가에 숨겨진 길이 있다는 소문…', kind: 'unlock' });
+        this.log(`[소문] ${g.hint}`, '#d8b8ff');
+        this.sound('joblevel');
+        this.onPersist();
+      }
+      if (!gateReady(s, z)) continue;
+      if (g.need.some((n) => n.kind === 'item' && n.consume)) {
+        // offerings are made by hand on the world map, once
+        if (!s.tutorial['gate:' + z.id]) {
+          s.tutorial['gate:' + z.id] = true;
+          this.emit({ t: 'announce', text: `「${z.name}」의 봉인을 풀 수 있다`, kind: 'unlock' });
+          this.log(`「${z.name}」: 바칠 것이 모두 모였다. 월드 맵에서 봉인을 풀 수 있다.`, '#d8b8ff');
+          this.onPersist();
+        }
+        continue;
+      }
+      openGate(s, z);
+      this.emit({ t: 'announce', text: `「${z.name}」의 길이 열렸다!`, kind: 'unlock' });
+      this.log(g.openText ?? `숨겨진 장소 「${z.name}」로 가는 길이 열렸다.`, '#d8b8ff');
+      this.sound('levelup');
+      this.onPersist();
+    }
+    // a night-only path fades at dawn: leave once the fight is over
+    const hz = this.zone.gate?.need.find((n) => n.kind === 'hours');
+    if (!hz || hz.kind !== 'hours' || inHours(hz)) { this.fadeAt = 0; return; }
+    if (!this.fadeAt) {
+      this.fadeAt = this.time + 20000;
+      this.log(`주위가 밝아온다. 「${this.zone.name}」의 길이 흐려지기 시작했다…`, '#d8b8ff');
+    }
+    if (!this.pc.engaged.length || this.time >= this.fadeAt) {
+      this.fadeAt = 0;
+      const back = this.zone.unlockBy && s.unlocked.includes(this.zone.unlockBy) ? this.zone.unlockBy : 'town';
+      this.log(`날이 바뀌자 「${this.zone.name}」로 이어진 길이 흐려졌다…`, '#d8b8ff');
+      this.setZone(back);
+      this.onTravel(back);
+      this.onPersist();
+    }
   }
 
   // ───────────────────────────── spawning
@@ -1766,7 +1823,7 @@ export class World {
       }
       // unlocks
       for (const nz of ZONES) {
-        if (nz.unlockBy === z.id && !s.unlocked.includes(nz.id) && m.boss === 'field') {
+        if (nz.unlockBy === z.id && !nz.gate && !s.unlocked.includes(nz.id) && m.boss === 'field') {
           s.unlocked.push(nz.id);
           this.emit({ t: 'announce', text: `새 사냥터 「${nz.name}」 개방!`, kind: 'unlock' });
           this.log(`새 사냥터 「${nz.name}」이(가) 열렸습니다.`, '#9fe0ff');

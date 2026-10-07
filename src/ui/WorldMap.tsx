@@ -10,6 +10,7 @@ import { ELEMENTS, ELEMENT_KO, RACE_KO, SIZE_KO, elementMod } from '../game/data
 import { drawWorldMap } from '../render/worldmap.ts';
 import { itemIconURL } from '../render/icons.ts';
 import { audio } from '../audio/audio.ts';
+import { zoneKnown, gateLines, gateReady, openGate, canEnter } from '../game/state.ts';
 
 type Fit = { label: string; cls: string };
 export function zoneFit(z: ZoneDef, avgLv: number): Fit {
@@ -67,6 +68,8 @@ export function MapPanel() {
   const avg = s.heroes.reduce((a, h) => a + h.baseLv, 0) / s.heroes.length;
   const z = ZONES.find((x) => x.id === sel) ?? ZONES[0];
   const locked = !unlocked.has(z.id);
+  const sealed = locked && !!z.gate;
+  const blocked = locked ? null : canEnter(s, z);
   const here = s.zone === z.id;
   const fit = zoneFit(z, avg);
   const p = s.progress[z.id];
@@ -76,17 +79,18 @@ export function MapPanel() {
       <div class="wm">
         <div class="wm-map">
           <MapCanvas unlocked={unlocked} />
-          {ZONES.map((zz) => {
+          {ZONES.filter((zz) => zoneKnown(s, zz)).map((zz) => {
             const lk = !unlocked.has(zz.id);
+            const sealed = lk && !!zz.gate;
             const f = zoneFit(zz, avg);
             const pr = s.progress[zz.id];
             const bossReady = !lk && zz.boss && (pr.bossGauge >= zz.bossGauge || (zz.mvp && pr.mvpGauge >= zz.mvpGauge));
             return (
-              <button class={'pin ' + zz.theme + (lk ? ' locked' : '') + (sel === zz.id ? ' sel' : '') + (s.zone === zz.id ? ' here' : '')}
+              <button class={'pin ' + zz.theme + (lk ? ' locked' : '') + (sealed ? ' sealed' : '') + (zz.gate ? ' secret' : '') + (sel === zz.id ? ' sel' : '') + (s.zone === zz.id ? ' here' : '')}
                 style={{ left: zz.map[0] + '%', top: zz.map[1] + '%' }}
                 onClick={() => { setSel(zz.id); audio.play('click'); }}>
                 {s.zone === zz.id && <span class="pin-hero"><HeroCanvas hero={s.heroes[0]} face /></span>}
-                <span class="pin-dot">{lk ? '🔒' : THEME_ICON[zz.theme]}</span>
+                <span class="pin-dot">{sealed ? '🔮' : lk ? '🔒' : THEME_ICON[zz.theme]}</span>
                 <span class="pin-label">
                   <b>{zz.name}</b>
                   <span class="pin-lv">{zz.id === 'town' ? '마을' : `Lv ${zz.lv[0]}~${zz.lv[1]}`}{!lk && zz.id !== 'town' && <i class={'fit ' + f.cls}>{f.label}</i>}</span>
@@ -100,24 +104,45 @@ export function MapPanel() {
 
         <div class={'zcard ' + z.theme + (locked ? ' locked' : '')}>
           <div class="zc-head">
-            <span class="zc-icon">{locked ? '🔒' : THEME_ICON[z.theme]}</span>
+            <span class="zc-icon">{sealed ? '🔮' : locked ? '🔒' : THEME_ICON[z.theme]}</span>
             <div class="sp1">
               <div class="zc-name">{z.name}</div>
               <div class="zc-sub">{z.id === 'town' ? '안전 지대' : `권장 Lv ${z.lv[0]} ~ ${z.lv[1]}`}{!locked && z.id !== 'town' && <i class={'fit ' + fit.cls}>{fit.label}</i>}</div>
             </div>
             {here ? <span class="zc-here">현재 위치</span>
               : locked ? null
-              : <button class="btn gold zc-go" onClick={() => { g.travel(z.id); g.openPanel(null); }}>이동</button>}
+              : <button class="btn gold zc-go" disabled={!!blocked} onClick={() => { g.travel(z.id); g.openPanel(null); }}>이동</button>}
           </div>
           <div class="zc-body">
-            <div class="zc-desc">{locked ? `🔒 ${ZONES.find((x) => x.id === z.unlockBy)?.name}의 필드 보스를 처치하면 길이 열립니다.` : z.desc}</div>
+            {z.gate && (locked || blocked) ? (
+              <div class="zc-gate">
+                <div class="zc-rumor">“{z.gate.hint}”</div>
+                <ul class="zc-needs">
+                  {gateLines(s, z).map((l) => <li class={l.ok ? 'ok' : ''}><i>{l.ok ? '✓' : '·'}</i>{l.text}</li>)}
+                </ul>
+                {locked && gateReady(s, z) && z.gate.need.some((n) => n.kind === 'item' && n.consume) && (
+                  <button class="btn gold block" onClick={() => {
+                    g.setModal({ kind: 'confirm', text: `${z.name}의 봉인에 물건을 바칠까요?\n바친 물건은 돌아오지 않습니다.`, ok: () => {
+                      const e = openGate(s, z);
+                      if (e) { g.toast(e, 'bad'); return; }
+                      g.toast(`「${z.name}」의 봉인이 풀렸다!`, 'level');
+                      g.announce(`「${z.name}」 개방`, 'unlock');
+                      g.commit('levelup');
+                    } });
+                  }}>봉인에 바치기</button>
+                )}
+                {!locked && blocked && <div class="small muted">{blocked}</div>}
+              </div>
+            ) : (
+              <div class="zc-desc">{locked ? `🔒 ${ZONES.find((x) => x.id === z.unlockBy)?.name}의 필드 보스를 처치하면 길이 열립니다.` : z.desc}</div>
+            )}
             {z.boss && !locked && (
               <div class="zc-gauges">
                 <div><span>보스 게이지</span><div class="mini-bar"><i style={{ width: p.bossGauge / z.bossGauge * 100 + '%', background: 'linear-gradient(#ffb090,#ff6a3a)' }} /></div><small>{p.bossGauge}/{z.bossGauge} · 처치 {p.bossKills}</small></div>
                 <div><span>MVP 게이지</span><div class="mini-bar"><i style={{ width: p.mvpGauge / z.mvpGauge * 100 + '%', background: 'linear-gradient(#fff0a0,#ffb020)' }} /></div><small>{p.mvpGauge}/{z.mvpGauge} · 처치 {p.mvpKills}</small></div>
               </div>
             )}
-            {mobs.length > 0 && (
+            {mobs.length > 0 && !sealed && (
               <>
                 <div class="zc-sec">출현 몬스터 <small>누르면 상세 정보</small></div>
                 <div class="mcards">

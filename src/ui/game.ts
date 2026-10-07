@@ -59,6 +59,7 @@ class Game {
     }
     this.world = new World(s);
     this.world.onPersist = () => { this.dirty = true; };
+    this.world.onTravel = (id) => { this.bossMusic = false; audio.playBgm(zone(id).bgm); this.announce(zone(id).name, 'zone'); this.notify(); };
     this.world.setZone(s.zone);
     this.started = true;
     audio.setVolumes(s.settings.sfx, s.settings.bgm, s.settings.muted);
