@@ -74,6 +74,8 @@ export interface HeroUnit {
   kiteUntil: number;
   /** a melee damage dealer that dropped low steps behind the tank until it's patched up */
   backOff: boolean;
+  /** what this hero decided to do this tick and why, in words (set at each decision point; shown in the UI) */
+  doing: string;
   kiteNext: number;
 }
 
@@ -186,7 +188,7 @@ export class World {
         kind: 'hero', uid: this.uidSeq++, hero, x: sx - i * 26, y: sy + (i % 2 ? 22 : -10), facing: 1,
         hp: d.maxHp, sp: d.maxSp, d, dAt: 0, state: 'idle', stateT: 0, lockUntil: 0, atkReady: 0,
         target: null, cast: null, buffs: [], cds: {}, deadUntil: 0, hpTickAt: HP_TICK, spTickAt: SP_TICK, potAt: 0,
-        poisonUntil: 0, poisonNext: 0, hurtAt: -9999, sitting: false, thinkAt: 0, kiteUntil: 0, kiteNext: 0, backOff: false,
+        poisonUntil: 0, poisonNext: 0, hurtAt: -9999, sitting: false, thinkAt: 0, kiteUntil: 0, kiteNext: 0, backOff: false, doing: '',
       } satisfies HeroUnit;
     });
   }
@@ -446,6 +448,7 @@ export class World {
   private heroTick(h: HeroUnit, dt: number) {
     if (this.time - h.dAt > 250) this.refresh(h);
     if (h.state === 'dead') {
+      h.doing = '쓰러짐';
       if (this.time >= h.deadUntil && this.aliveHeroes().length > 0) this.revive(h, 0.3);
       return;
     }
@@ -458,6 +461,8 @@ export class World {
     }
 
     if (h.cast) {
+      const ct = this.unit(h.cast.target);
+      h.doing = h.cast.sk.name + (ct?.kind === 'hero' && ct !== h ? ` → ${ct.hero.name}` : ct?.kind === 'mob' ? ` → ${ct.m.name}` : '') + ' 시전';
       if (this.time >= h.cast.end) this.releaseCast(h);
       else {
         const t = this.unit(h.cast.target);
@@ -477,7 +482,8 @@ export class World {
         if (h.hp < h.d.maxHp || h.sp < h.d.maxSp) return;
         h.sitting = false; this.setState(h, 'idle');
       }
-      if (h.hp < h.d.maxHp || h.sp < h.d.maxSp) { h.sitting = true; this.setState(h, 'sit'); return; }
+      if (h.hp < h.d.maxHp || h.sp < h.d.maxSp) { h.sitting = true; this.setState(h, 'sit'); h.doing = '마을에서 휴식'; return; }
+      h.doing = '마을';
       this.idleFollow(h, dt);
       return;
     }
@@ -502,12 +508,14 @@ export class World {
     if (!t) { this.idleFollow(h, dt); return; }
 
     // tank provoke, crowd control
-    if (this.tryProvoke(h)) return;
+    if (this.tryProvoke(h)) { h.doing = '도발'; return; }
     if (this.tryCc(h, t)) return;
 
     // offensive skill or normal attack from this hero's position (front / mid / back)
     const act = this.chooseSkill(h, t);
     const range = act ? this.skillRange(h, act.sk) : h.d.range;
+    const saving = !act && this.tactics(h).skills === 'conserve' && h.sp < h.d.maxSp * 0.5 && this.enabledSkills(h, ['attack', 'aoe']).length > 0;
+    h.doing = t.m.name + (act ? (act.sk.kind === 'heal' ? ' — 힐로 공격' : ' — ' + act.sk.name) : saving ? ' 공격 (SP 절약)' : ' 공격');
     if (this.position(h, t, range, dt)) return;
     h.facing = t.x >= h.x ? 1 : -1;
     if (act) { this.startSkill(h, act.sk, act.lv, t); return; }
@@ -667,6 +675,7 @@ export class World {
     // back line: step away from a melee mob on you and bring it to the front-liner
     if (pos !== 'front' && front) {
       if (this.time < h.kiteUntil) {
+        h.doing = '전열 뒤로 빠지는 중';
         const D = { x: front.x + (front.x - t.x) * 0.4, y: front.y + (front.y - t.y) * 0.4 };
         const chaser = this.mobs.find((m) => m.target === h.uid && this.alive(m));
         const away = chaser ? { x: h.x + (h.x - chaser.x), y: h.y + (h.y - chaser.y) } : D;
@@ -685,6 +694,7 @@ export class World {
     if (pos !== 'front' && !front && !melee) {
       const chaser = this.mobs.find((m) => this.alive(m) && m.target === h.uid && m.m.range < 60 && dist(m, h) < this.bodyR(m) + 34);
       if (this.time < h.kiteUntil && chaser) {
+        h.doing = '거리 두기';
         const dx = h.x - chaser.x, dy = h.y - chaser.y, d = Math.hypot(dx, dy) || 1;
         this.moveTo(h, clamp(h.x + dx / d * 90, 24, this.zone.w - 24), clamp(h.y + dy / d * 90, 70, this.zone.h - 24), h.d.moveSpd * 1.1, dt, 4);
         return true;
@@ -712,6 +722,7 @@ export class World {
     if (melee) {
       // a melee weapon can't reach from the back line: hold a spot behind the front-liner (in heal range)
       const D = this.standSpot(h, t, front, dist(front!, t) + (pos === 'mid' ? 45 : 85));
+      h.doing = h.backOff ? '체력 회복 대기 (후퇴)' : '전열 뒤에서 대기';
       if (dist(h, D) > 16) { this.moveTo(h, D.x, D.y, h.d.moveSpd, dt, 6); return true; }
       this.setState(h, 'ready');
       h.facing = t.x >= h.x ? 1 : -1;
@@ -736,19 +747,20 @@ export class World {
       // a caster sitting for SP stays down while the front line handles things; everyone else gets up for a fight
       const casterOk = this.usesSp(h) && h.sp < h.d.maxSp * 0.5 && !!this.frontLiner(h);
       if (onMe || (threat && !casterOk) || this.restDone()) { h.sitting = false; this.setState(h, 'idle'); return false; }
+      h.doing = this.pc.engaged.length ? 'SP 회복 (앉음)' : '파티 휴식';
       return true;
     }
     if (this.pc.engaged.length) {
       // mid-fight: a caster or healer out of SP sits behind the front line if nothing is on it
       const front = this.frontLiner(h);
       if (this.usesSp(h) && h.sp < h.d.maxSp * 0.12 && front && !this.mobs.some((m) => this.alive(m) && m.target === h.uid && dist(m, h) < 180)) {
-        h.sitting = true; h.target = null; this.setState(h, 'sit');
+        h.sitting = true; h.target = null; this.setState(h, 'sit'); h.doing = 'SP 회복 (앉음)';
         return true;
       }
       return false;
     }
     if (rest > 0 && this.heroes.some((a) => a.state !== 'dead' && (a.hp / a.d.maxHp * 100 < rest || (this.usesSp(a) && a.sp / a.d.maxSp * 100 < rest)))) {
-      h.sitting = true; h.target = null; this.setState(h, 'sit');
+      h.sitting = true; h.target = null; this.setState(h, 'sit'); h.doing = '파티 휴식';
       return true;
     }
     return false;
@@ -772,13 +784,15 @@ export class World {
     const resting = this.heroes.some((x) => x.sitting && x.state !== 'dead');
     if (!lead) return;
     if (lead === h) {
-      if (resting || this.zone.id === 'town') { this.setState(h, 'idle'); return; }
+      if (resting || this.zone.id === 'town') { this.setState(h, 'idle'); if (resting) h.doing = '휴식하는 동료 기다림'; return; }
       // explore toward the nearest huntable mob
       const best = this.pullCandidate(h, Infinity);
+      h.doing = best ? '사냥감 찾는 중' : '대기';
       if (best) this.moveTo(h, best.x, best.y, h.d.moveSpd * 0.85, dt, 60);
       else this.setState(h, 'idle');
       return;
     }
+    h.doing = '리더 따라가는 중';
     // formation behind the leader by position: front beside, mid behind, back further behind
     const i = this.heroes.indexOf(h);
     const pos = this.posOf(h);
@@ -815,6 +829,7 @@ export class World {
       const pick = chaser ?? (free(t) && (t.m.aggressive || t.target !== null) ? t : undefined);
       if (!pick) continue;
       h.facing = pick.x >= h.x ? 1 : -1;
+      h.doing = `${pick.m.name} — ${sk.name}`;
       this.startSkill(h, sk, lv, pick);
       return true;
     }
@@ -866,7 +881,7 @@ export class World {
     for (const { sk, lv } of this.enabledSkills(h, ['revive'])) {
       if (!this.canPay(h, sk, lv)) continue;
       const dead = this.heroes.find((x) => x.state === 'dead' && x !== h && dist(x, h) < 300);
-      if (dead) { this.startSkill(h, sk, lv, dead); return true; }
+      if (dead) { h.doing = `${sk.name} → ${dead.hero.name}`; this.startSkill(h, sk, lv, dead); return true; }
     }
     // heal
     for (const { sk, lv } of this.enabledSkills(h, ['heal'])) {
@@ -887,7 +902,7 @@ export class World {
         const worth = r < 0.35 || a.d.maxHp - a.hp >= amt * 0.6;
         if (r * 100 < pct && worth && r < br && dist(a, h) < 260) { br = r; best = a; }
       }
-      if (best) { this.startSkill(h, sk, lv, best); return true; }
+      if (best) { h.doing = best === h ? `${sk.name} (자신)` : `${sk.name} → ${best.hero.name}`; this.startSkill(h, sk, lv, best); return true; }
     }
     // buffs (only when not being chased hard)
     const pressed = this.mobs.some((m) => m.target === h.uid && this.alive(m) && dist(m, h) < 40);
@@ -899,7 +914,7 @@ export class World {
         const b = a.buffs.find((x) => x.id === sk.buff!.id);
         return !b || b.until - this.time < 4000;
       });
-      if (need) { this.startSkill(h, sk, lv, sk.kind === 'selfBuff' ? h : null); return true; }
+      if (need) { h.doing = sk.name; this.startSkill(h, sk, lv, sk.kind === 'selfBuff' ? h : null); return true; }
     }
     return false;
   }

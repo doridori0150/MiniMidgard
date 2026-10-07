@@ -68,6 +68,7 @@ for (const sc of scenarios) {
   wrap('startSkill', (h, sk, _lv, t) => { (casts[h.uid] ??= {})[sk.id] = (casts[h.uid][sk.id] ?? 0) + 1; if (sk.kind === 'heal' && t?.kind === 'mob') healBurns++; });
 
   const time: Record<number, Record<string, number>> = {};
+  const doing: Record<number, Record<string, number>> = {};
   const gapT: Record<number, [number, number]> = {}, gapL: Record<number, [number, number]> = {};
   const STEP = 100, total = minutes * 60000;
   for (let ms = 0; ms < total; ms += STEP) {
@@ -77,6 +78,8 @@ for (const sc of scenarios) {
       const st = h.state === 'hurt' ? 'ready' : h.state === 'spawn' ? 'idle' : h.state;
       (time[h.uid] ??= {})[st] = (time[h.uid][st] ?? 0) + STEP;
       const t = w.mob(h.target);
+      const label = (h.doing || '-').replace(/^[^—→]+ (— |공격)/, (m) => m.includes('—') ? '몹 — ' : '몹 공격').replace(/→ [^ ]+ 시전$/, '→ … 시전');
+      (doing[h.uid] ??= {})[label] = (doing[h.uid][label] ?? 0) + 1;
       if (t && h.state !== 'dead') { const g = (gapT[h.uid] ??= [0, 0]); g[0] += Math.hypot(t.x - h.x, t.y - h.y); g[1]++; }
       if (h !== lead && h.state !== 'dead') { const g = (gapL[h.uid] ??= [0, 0]); g[0] += Math.hypot(lead.x - h.x, lead.y - h.y); g[1]++; }
     }
@@ -90,6 +93,7 @@ for (const sc of scenarios) {
     const share = STATES.map((k) => [k, Math.round((tm[k] ?? 0) / total * 100)] as const).filter(([, v]) => v > 0).map(([k, v]) => `${k} ${v}%`).join(' ');
     const avg = (g?: [number, number]) => (g && g[1] ? Math.round(g[0] / g[1]) : '-');
     const sk = Object.entries(casts[h.uid] ?? {}).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([id, n]) => `${SKILLS[id]?.name ?? id}×${n}`).join(', ');
-    console.log(`  ${h.hero.name.padEnd(12)} ${heroRole(h.hero).padEnd(6)} 딜 ${String(dealt[h.uid] ?? 0).padStart(7)} 피해 ${String(taken[h.uid] ?? 0).padStart(6)}  대상거리 ${String(avg(gapT[h.uid])).padStart(3)} 리더거리 ${String(avg(gapL[h.uid])).padStart(3)}  | ${share}${sk ? `  | ${sk}` : ''}`);
+    const top = Object.entries(doing[h.uid] ?? {}).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([k, n]) => `${k} ${Math.round(n * STEP / total * 100)}%`).join(' / ');
+    console.log(`  ${h.hero.name.padEnd(12)} ${heroRole(h.hero).padEnd(6)} 딜 ${String(dealt[h.uid] ?? 0).padStart(7)} 피해 ${String(taken[h.uid] ?? 0).padStart(6)}  대상거리 ${String(avg(gapT[h.uid])).padStart(3)} 리더거리 ${String(avg(gapL[h.uid])).padStart(3)}  | ${share}${sk ? `  | ${sk}` : ''}\n${' '.repeat(16)}↳ ${top}`);
   }
 }
