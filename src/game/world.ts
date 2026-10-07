@@ -20,7 +20,7 @@ export type FxEvent =
   | { t: 'castEnd'; uid: number }
   | { t: 'shot'; from: number; to: number; kind: 'arrow' | 'bone' | 'shadow' | 'falcon'; dur: number; element: Element }
   | { t: 'drop'; gid: number }
-  | { t: 'pickup'; gid: number; to: number }
+  | { t: 'pickup'; gid: number; to: number; id: string; name: string; zeny: number }
   | { t: 'levelup'; uid: number; job: boolean }
   | { t: 'die'; uid: number }
   | { t: 'spawn'; uid: number }
@@ -114,6 +114,8 @@ export interface GroundItem {
   pickAt: number;
   rarity: string;
   picked: boolean;
+  /** already credited to the save when it dropped; the pickup is presentation only */
+  got: { name: string; zeny: number };
 }
 
 export type Unit = HeroUnit | MobUnit;
@@ -1872,14 +1874,16 @@ export class World {
       const gx = t.x + Math.cos(a) * (14 + n * 6);
       const gy = t.y + Math.sin(a) * (9 + n * 4);
       const rarity = def.kind === 'card' ? (def.rarity ?? 'rare') : def.rarity ?? (def.kind === 'equip' ? 'rare' : 'common');
+      // the real reward is credited right away (safe against travel / closing the app); the ground item is the show
       const g: GroundItem = {
         gid: this.gidSeq++, id: d.id, slots: d.slots, x: clamp(gx, 20, this.zone.w - 20), y: clamp(gy, 70, this.zone.h - 20),
         fromX: t.x, fromY: t.y, born: this.time, pickAt: this.time + 900 + n * 120 + (def.kind === 'card' ? 900 : 0), rarity, picked: false,
+        got: this.grant(d.id, d.slots),
       };
       this.ground.push(g);
       this.emit({ t: 'drop', gid: g.gid });
       if (def.kind === 'card') {
-        this.emit({ t: 'announce', text: `${def.name} 획득!!`, kind: 'card' });
+        // anticipation at the kill (light pillar + chime); the banner comes when it reaches the hero
         this.sound('card');
         this.s.totals.cards++;
         (this.s.book[t.m.id] ??= { kills: 0 }).card = true;
@@ -1896,21 +1900,28 @@ export class World {
       g.picked = true;
       let best: HeroUnit | undefined; let bd = Infinity;
       for (const h of this.heroes) { if (h.state === 'dead') continue; const d = dist(h, g); if (d < bd) { bd = d; best = h; } }
-      this.emit({ t: 'pickup', gid: g.gid, to: best?.uid ?? 0 });
+      this.emit({ t: 'pickup', gid: g.gid, to: best?.uid ?? 0, id: g.id, name: g.got.name, zeny: g.got.zeny });
       const def = ITEMS[g.id];
-      if (def.kind === 'etc' && this.s.settings.autoSellEtc && !isKeepItem(g.id)) {
-        addItem(this.s, g.id, 1);
-        const z = sellStack(this.s, g.id, 1);
-        this.s.rate.zeny += z;
-      } else {
-        const inst = addItem(this.s, g.id, 1, g.slots);
-        const name = inst ? itemName(inst) : def.name;
-        const col = def.kind === 'card' ? '#ffcc4a' : def.kind === 'equip' ? '#7ec8ff' : def.rarity ? '#d79bff' : '#c8f0c8';
-        if (def.kind !== 'etc' || def.rarity) this.log(`「${name}」을(를) 획득했습니다.`, col);
-      }
-      this.sound(def.kind === 'card' ? 'pickup' : 'pickup');
+      const col = def.kind === 'card' ? '#ffcc4a' : def.kind === 'equip' ? '#7ec8ff' : def.rarity ? '#d79bff' : '#c8f0c8';
+      if (!g.got.zeny && (def.kind !== 'etc' || def.rarity)) this.log(`「${g.got.name}」을(를) 획득했습니다.`, col);
+      if (def.kind === 'card') this.emit({ t: 'announce', text: `${g.got.name} 획득!!`, kind: 'card' });
+      this.sound('pickup');
     }
     this.ground = this.ground.filter((g) => !g.picked || this.time - g.pickAt < 600);
+  }
+
+  /** credit a drop to the save (inventory, or zeny when auto-sold) */
+  private grant(id: string, slots?: number): { name: string; zeny: number } {
+    const def = ITEMS[id];
+    if (def.kind === 'etc' && this.s.settings.autoSellEtc && !isKeepItem(id)) {
+      addItem(this.s, id, 1);
+      const z = sellStack(this.s, id, 1);
+      this.s.rate.zeny += z;
+      return { name: def.name, zeny: z };
+    }
+    const inst = addItem(this.s, id, 1, slots);
+    this.onPersist();
+    return { name: inst ? itemName(inst) : def.name, zeny: 0 };
   }
 
   private gainExp(base: number, job: number) {

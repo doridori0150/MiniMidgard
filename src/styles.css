@@ -827,3 +827,5 @@ input { font-family: inherit; }
 .zc-needs li.ok { color: var(--ink); }
 .zc-needs li.ok i { background: #5ac06a; color: #fff; }
 .zc-needs li.unk { color: #8a80a8; font-style: italic; }
+.zeny.up { animation: zenyUp 0.45s ease-out; }
+@keyframes zenyUp { 0% { transform: scale(1.12); border-color: var(--gold); box-shadow: 0 0 10px rgba(255,204,74,0.7); } 100% { transform: none; } }

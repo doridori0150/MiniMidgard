@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { game, useGame, type PanelId } from './game.ts';
 import { HeroCanvas, fmt } from './widgets.tsx';
 import { CLASSES } from '../game/data/classes.ts';
@@ -10,13 +11,20 @@ export function Hud() {
   const g = useGame();
   const s = g.s;
   const z = zone(s.zone);
+  // the wallet reacts when zeny comes in (auto-sold loot, sales, quests)
+  const prev = useRef(s.zeny);
+  const [pulse, setPulse] = useState(0);
+  useEffect(() => {
+    if (s.zeny > prev.current) setPulse((p) => p + 1);
+    prev.current = s.zeny;
+  });
   return (
     <div class="hud">
       <button class="tb-zone" onClick={() => g.openPanel('map')} aria-label="사냥터 지도 열기">
         <b>{z.name}</b><small>{z.id === 'town' ? '휴식' : `Lv ${z.lv[0]}~${z.lv[1]}`}</small>
       </button>
       <span class="sp1" />
-      <div class="zeny"><b>{fmt(s.zeny)}</b> z</div>
+      <div class={'zeny' + (pulse ? ' up' : '')} key={pulse}><b>{fmt(s.zeny)}</b> z</div>
       <button class="tb-btn" onClick={() => g.openPanel('party')} aria-label="파티">
         <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="8" r="3.4" /><circle cx="16.5" cy="9" r="2.8" /><path d="M2.5 20c0-4 2.9-6.6 6.5-6.6s6.5 2.6 6.5 6.6z" /><path d="M16.2 13.4c3 0 5.3 2.2 5.3 5.6h-4.6c0-2.2-.7-4-2-5.3.4-.2.8-.3 1.3-.3z" /></svg>
       </button>

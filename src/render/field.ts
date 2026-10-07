@@ -233,6 +233,8 @@ export class FieldRenderer {
       case 'pickup': {
         const d = this.dropVis.get(e.gid);
         if (d) { d.pickT = now; d.to = e.to; }
+        // when the loot arrives at the hero, say what changed (bundled per hero so a pile reads as one line)
+        this.later(380, () => this.lootTag(e.to, e.name, e.zeny));
         break;
       }
       case 'levelup': this.levelFx(e.uid, e.job); break;
@@ -283,6 +285,27 @@ export class FieldRenderer {
   private pending: { at: number; fn: () => void }[] = [];
   /** run something a bit later on the renderer clock (works with stepped QA frames too) */
   private later(ms: number, fn: () => void) { this.pending.push({ at: this.now + ms, fn }); }
+
+  private loot = new Map<number, { zeny: number; items: Map<string, number>; at: number }>();
+  private lootTag(uid: number, name: string, zeny: number) {
+    const b = this.loot.get(uid) ?? { zeny: 0, items: new Map<string, number>(), at: 0 };
+    if (zeny) b.zeny += zeny; else b.items.set(name, (b.items.get(name) ?? 0) + 1);
+    const flush = !b.at;
+    b.at = this.now;
+    this.loot.set(uid, b);
+    if (!flush) return;
+    // one quiet line a moment later: "+38z · 끈적한 점액 ×2 외 1"
+    this.later(260, () => {
+      const x = this.loot.get(uid);
+      if (!x) return;
+      this.loot.delete(uid);
+      const parts: string[] = [];
+      if (x.zeny) parts.push(`+${x.zeny.toLocaleString()}z`);
+      const its = [...x.items];
+      if (its.length) parts.push(`${its[0][0]}${its[0][1] > 1 ? ' ×' + its[0][1] : ''}${its.length > 1 ? ` 외 ${its.length - 1}` : ''}`);
+      if (parts.length) this.bubbles.push({ uid, text: parts.join(' · '), color: x.zeny && !its.length ? '#ffd84a' : '#d8f4d0', t0: this.now });
+    });
+  }
 
   // ───────── particles
   private burst(x: number, y: number, n: number, color: string, kind: Particle['kind'], speed: number, life: number, vz = 0, add = true) {
