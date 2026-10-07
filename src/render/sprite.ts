@@ -108,6 +108,12 @@ function hair(file: string, tint: number[] | null): CanvasImageSource | undefine
 }
 
 const FEATURES = ['eyes', 'brows', 'nose', 'mouth'] as const;
+export type FeatureKind = typeof FEATURES[number];
+/** how many painted types each face feature has for a gender (0 while the sprites are missing) — drives the pickers */
+export function featureTypes(gender: 'm' | 'f'): Record<FeatureKind, number> {
+  const f = M?.features[gender === 'm' ? 'male' : 'female'];
+  return { eyes: Object.keys(f?.eyes ?? {}).length, brows: Object.keys(f?.brows ?? {}).length, nose: Object.keys(f?.nose ?? {}).length, mouth: Object.keys(f?.mouth ?? {}).length };
+}
 /** game hair style index → this gender's painted styles (until all eight exist) */
 const HAIR_IDS: Record<string, string[]> = { female: ['01', '05'], male: ['02', '03'] };
 

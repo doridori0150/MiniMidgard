@@ -104,6 +104,8 @@ export interface Look {
   skin: number;
   dye: number;
   costume: Partial<Record<CostumeSlot, number>>;
+  /** painted-face features: type index per feature (absent = the default face) */
+  eyes?: number; brows?: number; nose?: number; mouth?: number;
 }
 
 export interface AutoConfig {

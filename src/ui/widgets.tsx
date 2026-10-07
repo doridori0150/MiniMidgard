@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef } from 'preact/hooks';
 import type { Element, EquipInst, Hero } from '../game/types.ts';
 import { inked } from '../render/ink.ts';
 import { drawRigHero, rigSupports } from '../render/rig.ts';
+import { featureTypes, type FeatureKind } from '../render/sprite.ts';
 import { drawHero, type HeroLookDraw } from '../render/hero.ts';
 import { drawMob, mobHeight } from '../render/monster.ts';
 import { itemIconURL, drawCardArt } from '../render/icons.ts';
@@ -53,7 +54,8 @@ export function LookCanvas(props: { look: HeroLookDraw; state?: string; class?: 
     const dpr = c.width / c.clientWidth;
     const h = c.clientHeight;
     const rig = rigSupports(lookRef.current);
-    const s = (props.zoom ?? h / 70) * dpr * (props.face && rig ? 1.2 : 1);
+    // painted heroes carry a bigger head (and ponytails): closer for a face, a little further for the full figure
+    const s = (props.zoom ?? h / 70) * dpr * (rig ? (props.face ? 1.2 : 0.86) : 1);
     if (props.face) {
       // painted heroes carry a bigger head: frame it a little closer so the face fills the portrait
       ctx.setTransform(s, 0, 0, s, c.width / 2, c.height + (rig ? 30 : 16) * s);
@@ -216,4 +218,27 @@ export function dur(ms: number): string {
   const m = Math.floor(ms / 60000);
   if (m < 60) return `${m}분`;
   return `${Math.floor(m / 60)}시간 ${m % 60}분`;
+}
+
+const FEATURE_KO: Record<FeatureKind, string> = { eyes: '눈', brows: '눈썹', nose: '코', mouth: '입' };
+/** steppers for the painted face's eyes / brows / nose / mouth (character creation and the stylist) */
+export function FeaturePicker(props: { look: { gender: 'm' | 'f'; eyes?: number; brows?: number; nose?: number; mouth?: number }; onPick: (k: FeatureKind, v: number) => void }) {
+  const counts = featureTypes(props.look.gender);
+  return (
+    <>
+      {(Object.keys(FEATURE_KO) as FeatureKind[]).filter((k) => counts[k] > 1).map((k) => {
+        const n = counts[k], cur = (props.look[k] ?? 0) % n;
+        return (
+          <div class="field-row" style={{ marginTop: '6px' }}>
+            <label>{FEATURE_KO[k]}</label>
+            <div class="stepper">
+              <button class="btn xs" aria-label={`${FEATURE_KO[k]} 이전`} onClick={() => props.onPick(k, (cur + n - 1) % n)}>◀</button>
+              <span>{cur + 1} / {n}</span>
+              <button class="btn xs" aria-label={`${FEATURE_KO[k]} 다음`} onClick={() => props.onPick(k, (cur + 1) % n)}>▶</button>
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
 }

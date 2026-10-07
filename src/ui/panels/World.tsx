@@ -2,7 +2,7 @@ import { useState } from 'preact/hooks';
 import { useGame, useBackHandler, type TownView } from '../game.ts';
 import { ShopView } from '../Shop.tsx';
 import { SECOND_JOB_LV } from '../../game/data/classes.ts';
-import { ElChip, HeroTabs, ItemSlot, LookCanvas, MobCanvas, Win, fmt, nameClass, HeroCanvas } from '../widgets.tsx';
+import { ElChip, FeaturePicker, HeroTabs, ItemSlot, LookCanvas, MobCanvas, Win, fmt, nameClass, HeroCanvas } from '../widgets.tsx';
 import { ZONES } from '../../game/data/zones.ts';
 import { MONSTERS } from '../../game/data/monsters.ts';
 import { RACE_KO, SIZE_KO } from '../../game/data/elements.ts';
@@ -105,7 +105,8 @@ function StylistView() {
           <div class="small muted" style={{ marginBottom: '6px' }}>변경 1회 {COST}z</div>
           <div class="field-row"><label>헤어</label><div class="stepper"><button class="btn xs" onClick={() => change(() => { L.hair = (L.hair + HAIR_STYLES - 1) % HAIR_STYLES; })}>◀</button><span>{L.hair + 1} / {HAIR_STYLES}</span><button class="btn xs" onClick={() => change(() => { L.hair = (L.hair + 1) % HAIR_STYLES; })}>▶</button></div></div>
           <div class="field-row" style={{ marginTop: '6px' }}><label>옷 염색</label><div class="stepper"><button class="btn xs" onClick={() => change(() => { L.dye = (L.dye + DYE_COUNT - 1) % DYE_COUNT; })}>◀</button><span>{L.dye + 1} / {DYE_COUNT}</span><button class="btn xs" onClick={() => change(() => { L.dye = (L.dye + 1) % DYE_COUNT; })}>▶</button></div></div>
-          <div class="field-row" style={{ marginTop: '6px' }}><label>얼굴형</label><div class="seg"><button class={L.gender === 'f' ? 'on' : ''} onClick={() => L.gender !== 'f' && change(() => { L.gender = 'f'; })}>A</button><button class={L.gender === 'm' ? 'on' : ''} onClick={() => L.gender !== 'm' && change(() => { L.gender = 'm'; })}>B</button></div></div>
+          <FeaturePicker look={L} onPick={(k, v) => change(() => { L[k] = v; })} />
+          <div class="field-row" style={{ marginTop: '6px' }}><label>성별</label><div class="seg"><button class={L.gender === 'f' ? 'on' : ''} onClick={() => L.gender !== 'f' && change(() => { L.gender = 'f'; })}>여</button><button class={L.gender === 'm' ? 'on' : ''} onClick={() => L.gender !== 'm' && change(() => { L.gender = 'm'; })}>남</button></div></div>
         </div>
       </div>
       <div class="sec">머리 색</div>

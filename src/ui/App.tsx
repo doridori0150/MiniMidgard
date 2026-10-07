@@ -4,7 +4,7 @@ import { Hud, Nav } from './Hud.tsx';
 import { FieldView } from './FieldView.tsx';
 import { Modals } from './Modals.tsx';
 import { ManagePage } from './Page.tsx';
-import { LookCanvas } from './widgets.tsx';
+import { FeaturePicker, LookCanvas } from './widgets.tsx';
 import { newGame, load, defaultLook, HAIR_COLORS, HAIR_STYLES, SKIN_TONES, autoDistribute } from '../game/state.ts';
 import type { Look } from '../game/types.ts';
 import { audio } from '../audio/audio.ts';
@@ -65,7 +65,7 @@ function Create(props: { onDone: (name: string, look: Look) => void; onBack: () 
   const [name, setName] = useState('');
   const [look, setLook] = useState<Look>(defaultLook('f'));
   const [state, setState] = useState('idle');
-  const preview = { cls: 'novice' as const, gender: look.gender, hair: look.hair, hairColor: look.hairColor, skin: look.skin, dye: look.dye, wtype: 'dagger' as const, refine: 0, shield: false };
+  const preview = { cls: 'novice' as const, gender: look.gender, hair: look.hair, hairColor: look.hairColor, skin: look.skin, dye: look.dye, eyes: look.eyes, brows: look.brows, nose: look.nose, mouth: look.mouth, wtype: 'dagger' as const, refine: 0, shield: false };
   const ok = name.trim().length > 0;
   return (
     <div class="app">
@@ -76,7 +76,8 @@ function Create(props: { onDone: (name: string, look: Look) => void; onBack: () 
         <div class="form">
           <div class="row"><b style={{ fontSize: '14px' }}>모험가 만들기</b><span class="sp1" /><button class="btn sm" onClick={props.onBack}>뒤로</button></div>
           <div class="field-row"><label>이름</label><input class="text-in" maxLength={10} placeholder="최대 10자" value={name} onInput={(e) => setName((e.target as HTMLInputElement).value)} /></div>
-          <div class="field-row"><label>얼굴형</label><div class="seg"><button class={look.gender === 'f' ? 'on' : ''} onClick={() => setLook({ ...look, gender: 'f' })}>A</button><button class={look.gender === 'm' ? 'on' : ''} onClick={() => setLook({ ...look, gender: 'm' })}>B</button></div></div>
+          <div class="field-row"><label>성별</label><div class="seg"><button class={look.gender === 'f' ? 'on' : ''} onClick={() => setLook({ ...look, gender: 'f' })}>여</button><button class={look.gender === 'm' ? 'on' : ''} onClick={() => setLook({ ...look, gender: 'm' })}>남</button></div></div>
+          <FeaturePicker look={look} onPick={(k, v) => setLook({ ...look, [k]: v })} />
           <div class="field-row"><label>헤어</label><div class="stepper"><button class="btn xs" onClick={() => setLook({ ...look, hair: (look.hair + HAIR_STYLES - 1) % HAIR_STYLES })}>◀</button><span style={{ minWidth: '40px', textAlign: 'center' }}>{look.hair + 1} / {HAIR_STYLES}</span><button class="btn xs" onClick={() => setLook({ ...look, hair: (look.hair + 1) % HAIR_STYLES })}>▶</button></div></div>
           <div class="field-row"><label>머리색</label><div class="swatches">{HAIR_COLORS.map((c, i) => <button class={'swatch' + (look.hairColor === i ? ' on' : '')} style={{ background: c }} onClick={() => setLook({ ...look, hairColor: i })} />)}</div></div>
           <div class="field-row"><label>피부</label><div class="swatches">{SKIN_TONES.map((c, i) => <button class={'swatch' + (look.skin === i ? ' on' : '')} style={{ background: c }} onClick={() => setLook({ ...look, skin: i })} />)}</div></div>
@@ -90,7 +91,9 @@ function Create(props: { onDone: (name: string, look: Look) => void; onBack: () 
 }
 
 export function App() {
-  const [screen, setScreen] = useState<'title' | 'create' | 'game'>(game.started ? 'game' : 'title');
+  // dev: /?create opens the creation screen directly for screenshots
+  const devCreate = import.meta.env.DEV && new URLSearchParams(location.search).has('create');
+  const [screen, setScreen] = useState<'title' | 'create' | 'game'>(game.started ? 'game' : devCreate ? 'create' : 'title');
   const canLoad = game.hasSave();
   if (screen === 'game') return <GameScreen />;
   if (screen === 'create') return (

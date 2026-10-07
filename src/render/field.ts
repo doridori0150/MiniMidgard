@@ -74,6 +74,7 @@ export function heroLookDraw(s: GameState, h: Hero): HeroLookDraw {
   const gcolors: Record<string, string> = { g_hood: '#a89070', g_muffler: '#c84a4a', g_manteau: '#3a5aa0' };
   return {
     cls: h.cls, gender: h.look.gender, hair: h.look.hair, hairColor: h.look.hairColor, skin: h.look.skin, dye: h.look.dye,
+    eyes: h.look.eyes, brows: h.look.brows, nose: h.look.nose, mouth: h.look.mouth,
     headTop: look('headTop'), headMid: look('headMid'), headLow: look('headLow'),
     wtype: wd?.wtype ?? 'none', weaponColor: wd?.icon.color, refine: w?.refine ?? 0,
     shield: !!eq('shield'),
