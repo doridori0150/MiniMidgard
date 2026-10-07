@@ -1,0 +1,16 @@
+{
+  "method": "Built-in image_gen for design source; editable curve tracing for clean production alpha; native vector facial ink; preserved v1 pose sprites. No model or network call during rebuild.",
+  "generatedSource": "source/heads_generated.png",
+  "prompt": "source/generation_prompt.txt",
+  "productionHeadHairSource": "source/contours.py",
+  "references": [
+    "../concepts/round3/class_lineup.png",
+    "../concepts/round3/hair_faces.png",
+    "../rig-frames/manifest.json"
+  ],
+  "sha256": {
+    "source/heads_generated.png": "c612740a7e13a91ec7ecfac92995892b2ee55e8acb7e705f40fe6aa21c12f1ca",
+    "source/generation_prompt.txt": "66f0a48c7f36ec6124c9e6614d89932c62c0aab1f864946050ab6372d5b5b199",
+    "source/contours.py": "fbe96fe3cf52adb562189a5fc11ab3e7fe34ee38b542fae8ae1a1882589e95b5"
+  }
+}

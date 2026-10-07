@@ -1,0 +1,394 @@
+[
+  {
+    "bounds" : [
+      9,
+      0,
+      320,
+      295
+    ],
+    "file" : "assets\/body\/novice\/idle_0.png",
+    "pixels" : 58389,
+    "size" : [
+      320,
+      298
+    ]
+  },
+  {
+    "bounds" : [
+      9,
+      0,
+      320,
+      299
+    ],
+    "file" : "assets\/body\/novice\/idle_1.png",
+    "pixels" : 59057,
+    "size" : [
+      320,
+      302
+    ]
+  },
+  {
+    "bounds" : [
+      85,
+      94,
+      343,
+      376
+    ],
+    "file" : "assets\/body\/novice\/walk_0.png",
+    "pixels" : 49159,
+    "size" : [
+      418,
+      418
+    ]
+  },
+  {
+    "bounds" : [
+      72,
+      97,
+      353,
+      376
+    ],
+    "file" : "assets\/body\/novice\/walk_1.png",
+    "pixels" : 46945,
+    "size" : [
+      416,
+      418
+    ]
+  },
+  {
+    "bounds" : [
+      69,
+      62,
+      336,
+      339
+    ],
+    "file" : "assets\/body\/novice\/walk_2.png",
+    "pixels" : 48815,
+    "size" : [
+      418,
+      407
+    ]
+  },
+  {
+    "bounds" : [
+      77,
+      53,
+      356,
+      339
+    ],
+    "file" : "assets\/body\/novice\/walk_3.png",
+    "pixels" : 48341,
+    "size" : [
+      418,
+      407
+    ]
+  },
+  {
+    "bounds" : [
+      79,
+      64,
+      349,
+      342
+    ],
+    "file" : "assets\/body\/novice\/attack_0.png",
+    "pixels" : 48856,
+    "size" : [
+      418,
+      407
+    ]
+  },
+  {
+    "bounds" : [
+      85,
+      68,
+      378,
+      342
+    ],
+    "file" : "assets\/body\/novice\/attack_1.png",
+    "pixels" : 48314,
+    "size" : [
+      416,
+      407
+    ]
+  },
+  {
+    "bounds" : [
+      57,
+      67,
+      390,
+      329
+    ],
+    "file" : "assets\/body\/novice\/attack_2.png",
+    "pixels" : 48641,
+    "size" : [
+      418,
+      386
+    ]
+  },
+  {
+    "bounds" : [
+      70,
+      59,
+      357,
+      337
+    ],
+    "file" : "assets\/body\/novice\/cast_0.png",
+    "pixels" : 51388,
+    "size" : [
+      418,
+      386
+    ]
+  },
+  {
+    "bounds" : [
+      74,
+      37,
+      338,
+      337
+    ],
+    "file" : "assets\/body\/novice\/cast_1.png",
+    "pixels" : 49964,
+    "size" : [
+      418,
+      386
+    ]
+  },
+  {
+    "bounds" : [
+      89,
+      121,
+      343,
+      330
+    ],
+    "file" : "assets\/body\/novice\/sit_0.png",
+    "pixels" : 37934,
+    "size" : [
+      416,
+      386
+    ]
+  },
+  {
+    "bounds" : [
+      66,
+      49,
+      358,
+      349
+    ],
+    "file" : "assets\/body\/novice\/hurt_0.png",
+    "pixels" : 45406,
+    "size" : [
+      418,
+      458
+    ]
+  },
+  {
+    "bounds" : [
+      57,
+      150,
+      379,
+      315
+    ],
+    "file" : "assets\/body\/novice\/dead_0.png",
+    "pixels" : 38880,
+    "size" : [
+      418,
+      458
+    ]
+  },
+  {
+    "bounds" : [
+      13,
+      0,
+      320,
+      295
+    ],
+    "file" : "assets\/body\/swordsman\/idle_0.png",
+    "pixels" : 60237,
+    "size" : [
+      320,
+      298
+    ]
+  },
+  {
+    "bounds" : [
+      13,
+      0,
+      320,
+      299
+    ],
+    "file" : "assets\/body\/swordsman\/idle_1.png",
+    "pixels" : 60912,
+    "size" : [
+      320,
+      302
+    ]
+  },
+  {
+    "bounds" : [
+      84,
+      93,
+      345,
+      378
+    ],
+    "file" : "assets\/body\/swordsman\/walk_0.png",
+    "pixels" : 50539,
+    "size" : [
+      418,
+      418
+    ]
+  },
+  {
+    "bounds" : [
+      73,
+      94,
+      360,
+      378
+    ],
+    "file" : "assets\/body\/swordsman\/walk_1.png",
+    "pixels" : 49510,
+    "size" : [
+      416,
+      418
+    ]
+  },
+  {
+    "bounds" : [
+      69,
+      61,
+      339,
+      341
+    ],
+    "file" : "assets\/body\/swordsman\/walk_2.png",
+    "pixels" : 50013,
+    "size" : [
+      418,
+      407
+    ]
+  },
+  {
+    "bounds" : [
+      74,
+      55,
+      357,
+      341
+    ],
+    "file" : "assets\/body\/swordsman\/walk_3.png",
+    "pixels" : 49625,
+    "size" : [
+      418,
+      407
+    ]
+  },
+  {
+    "bounds" : [
+      78,
+      61,
+      350,
+      342
+    ],
+    "file" : "assets\/body\/swordsman\/attack_0.png",
+    "pixels" : 49846,
+    "size" : [
+      418,
+      407
+    ]
+  },
+  {
+    "bounds" : [
+      83,
+      66,
+      387,
+      342
+    ],
+    "file" : "assets\/body\/swordsman\/attack_1.png",
+    "pixels" : 50051,
+    "size" : [
+      416,
+      407
+    ]
+  },
+  {
+    "bounds" : [
+      54,
+      64,
+      392,
+      333
+    ],
+    "file" : "assets\/body\/swordsman\/attack_2.png",
+    "pixels" : 50028,
+    "size" : [
+      418,
+      386
+    ]
+  },
+  {
+    "bounds" : [
+      69,
+      57,
+      360,
+      338
+    ],
+    "file" : "assets\/body\/swordsman\/cast_0.png",
+    "pixels" : 53014,
+    "size" : [
+      418,
+      386
+    ]
+  },
+  {
+    "bounds" : [
+      75,
+      36,
+      341,
+      339
+    ],
+    "file" : "assets\/body\/swordsman\/cast_1.png",
+    "pixels" : 51293,
+    "size" : [
+      418,
+      386
+    ]
+  },
+  {
+    "bounds" : [
+      88,
+      123,
+      350,
+      332
+    ],
+    "file" : "assets\/body\/swordsman\/sit_0.png",
+    "pixels" : 38995,
+    "size" : [
+      416,
+      386
+    ]
+  },
+  {
+    "bounds" : [
+      65,
+      50,
+      360,
+      353
+    ],
+    "file" : "assets\/body\/swordsman\/hurt_0.png",
+    "pixels" : 46682,
+    "size" : [
+      418,
+      458
+    ]
+  },
+  {
+    "bounds" : [
+      60,
+      149,
+      385,
+      314
+    ],
+    "file" : "assets\/body\/swordsman\/dead_0.png",
+    "pixels" : 40052,
+    "size" : [
+      418,
+      458
+    ]
+  }
+]

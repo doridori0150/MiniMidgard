@@ -1,0 +1,25 @@
+Built-in imagegen edits. transparent_background=true for every call.
+Base prompt and character specifications: generation-prompts.txt.
+Inputs for initial sheets: approved class_lineup.png (identity/style) and rig-frames/preview_frames.png (pose guide only).
+
+Initial swordsman extra instructions:
+The two idle poses must be nearly identical, weapon-hand EMPTY fist DOWN beside hip at the same location as lineup sword-hand, NOT raised to shoulder. Idle feet evenly grounded. Walk 0 left leg forward/right back, walk1 feet passing under pelvis, walk2 right leg forward/left back, walk3 feet passing with opposite arm phase. Attack windup RIGHT SIDE weapon fist near right shoulder, contact RIGHT SIDE weapon fist extended right at chest height. Same weapon hand throughout.
+
+SWORDSMAN REVISION — input swordsman-sheet-v1.png:
+Precisely edit this 4x4 transparent sprite sheet preserving all 14 cells, positions, drawing scale, bodies, silver armor, blue tunic and small red tab, flat colors and dark brown outlines. Fix only these things:
+1. In EVERY cell give the swordsman clearly SHORT masculine BLUE HAIR: preserve crown height and ahoge, preserve pointed forehead fringe and brow, but cut all long locks at the ear. Visible ear and short sideburn, exposed neck at both sides. No bob, no locks descending to shoulders. Slight firmer masculine brow, SAME narrow face and big blue eyes; don't widen head.
+2. Row1 cell1 and cell2: same relaxed idle arms, left fist down left hip, right fist slightly out from right hip in the EXACT same pose for both; cell2 just tiny 2px breathing chest lift. No raised hand at all.
+3. Row2 cell3: attack windup must have the RIGHT-SIDE fist raised outside RIGHT shoulder, LEFT fist down at left waist. Current wrong hand is raised. Keep row2 cell4 rightward horizontal punch/contact.
+4. Row1 cell4: walk passing pose legs close together beneath pelvis, one knee bent up, not long stride. Row2 cell2 opposite passing legs under pelvis.
+All other poses and expressions unchanged. Actual transparent RGBA background. Entire complete painted figures with no equipment. 4x4 regular grid last two cells empty. Maintain character size and flat style, one hard shadow tone, no gradients.
+
+NOVICE REVISION — inputs novice-sheet-v1.png and approved-lineup.png:
+Edit the FIRST image sprite sheet. SECOND image is exact identity reference, the top-left novice. Preserve first image's 4x4 grid, 14 complete figures and last two blank cells, transparent background. Correct:
+Row1 cell1 and cell2 must EXACTLY match the top-left novice's resting pose in image2, but REMOVE dagger entirely leaving empty gripping right-side fist. Both arms DOWN, left fist beside left hip, right fist slightly out beside right hip, same feet. Both cells same pose except subtle breathing. Preserve reference face, cream pointed bob and ahoge and head-to-body proportions precisely.
+Row1 cell4 and row2 cell2 must be walk PASSING poses, feet near together beneath pelvis, one leg bent, opposite phases. Row1 cell3 and row2 cell1 keep opposite stride poses.
+Row2 cell3 attack windup: empty fist on RIGHT SIDE of image raised near RIGHT shoulder, LEFT fist down waist. Never raise left-side fist here. Row2 cell4 keep horizontal rightward attack fist.
+All other poses remain same. All cells same exact novice identity, cream hair, ochre tunic, brown wristbands belt and cuffed boots. Thick single dark brown outline, flat fills with one hard shadow, no gradients. No weapon, no headgear, no effects, no text. Whole painted characters not layered parts. Each frame entirely inside its 4x4 cell.
+
+Observed limits of these edits:
+The generator retained the left guard fist in attack windup. The actual weapon anchor therefore uses the lower right-side fist with the blade raised at -78 degrees. It does not switch hands at contact. This discrepancy is disclosed in PLAN.md and REPORT.md.
+The generator did not produce a pixel-identical novice idle. The selected sheet is normalized as a complete painting; original and pilot remain side-by-side in preview_vs_lineup.png.

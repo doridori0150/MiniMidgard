@@ -1,0 +1,738 @@
+{
+  "protectedFiles": 52,
+  "changedProtectedFiles": [],
+  "manifestByteIdentical": true,
+  "featurePNGs": 52,
+  "featureBounds": [
+    {
+      "file": "assets/features/female/eyes/01_normal.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        10,
+        4,
+        130,
+        56
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/eyes/01_hurt.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        13,
+        17,
+        132,
+        49
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/eyes/01_closed.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        13,
+        27,
+        132,
+        39
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/eyes/02_normal.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        7,
+        8,
+        138,
+        55
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/eyes/02_hurt.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        9,
+        14,
+        136,
+        52
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/eyes/02_closed.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        8,
+        27,
+        137,
+        44
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/eyes/03_normal.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        4,
+        13,
+        141,
+        52
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/eyes/03_hurt.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        10,
+        22,
+        135,
+        44
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/eyes/03_closed.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        8,
+        27,
+        137,
+        36
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/brows/01_normal.png",
+      "size": [
+        160,
+        40
+      ],
+      "inkBounds": [
+        7,
+        17,
+        138,
+        36
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/brows/01_hurt.png",
+      "size": [
+        160,
+        40
+      ],
+      "inkBounds": [
+        8,
+        20,
+        137,
+        32
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/brows/02_normal.png",
+      "size": [
+        160,
+        40
+      ],
+      "inkBounds": [
+        8,
+        11,
+        137,
+        25
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/brows/02_hurt.png",
+      "size": [
+        160,
+        40
+      ],
+      "inkBounds": [
+        8,
+        13,
+        137,
+        28
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/brows/03_normal.png",
+      "size": [
+        160,
+        40
+      ],
+      "inkBounds": [
+        2,
+        20,
+        143,
+        29
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/brows/03_hurt.png",
+      "size": [
+        160,
+        40
+      ],
+      "inkBounds": [
+        2,
+        16,
+        143,
+        31
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/nose/01_normal.png",
+      "size": [
+        34,
+        34
+      ],
+      "inkBounds": [
+        15,
+        16,
+        19,
+        20
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/nose/02_normal.png",
+      "size": [
+        34,
+        34
+      ],
+      "inkBounds": [
+        11,
+        9,
+        25,
+        24
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/mouth/01_normal.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        6,
+        13,
+        35,
+        23
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/mouth/01_hurt.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        7,
+        13,
+        36,
+        24
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/mouth/01_ko.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        9,
+        16,
+        34,
+        22
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/mouth/02_normal.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        4,
+        10,
+        38,
+        31
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/mouth/02_hurt.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        11,
+        10,
+        31,
+        33
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/mouth/02_ko.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        14,
+        12,
+        28,
+        30
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/mouth/03_normal.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        2,
+        15,
+        40,
+        20
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/mouth/03_hurt.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        4,
+        14,
+        38,
+        23
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/female/mouth/03_ko.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        6,
+        17,
+        36,
+        21
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/eyes/01_normal.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        12,
+        9,
+        131,
+        54
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/eyes/01_hurt.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        13,
+        17,
+        132,
+        49
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/eyes/01_closed.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        13,
+        27,
+        132,
+        40
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/eyes/02_normal.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        8,
+        9,
+        137,
+        53
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/eyes/02_hurt.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        9,
+        14,
+        136,
+        52
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/eyes/02_closed.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        8,
+        27,
+        137,
+        45
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/eyes/03_normal.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        7,
+        13,
+        138,
+        50
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/eyes/03_hurt.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        10,
+        21,
+        135,
+        45
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/eyes/03_closed.png",
+      "size": [
+        160,
+        72
+      ],
+      "inkBounds": [
+        8,
+        27,
+        137,
+        36
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/brows/01_normal.png",
+      "size": [
+        160,
+        40
+      ],
+      "inkBounds": [
+        6,
+        20,
+        139,
+        33
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/brows/01_hurt.png",
+      "size": [
+        160,
+        40
+      ],
+      "inkBounds": [
+        7,
+        19,
+        138,
+        33
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/brows/02_normal.png",
+      "size": [
+        160,
+        40
+      ],
+      "inkBounds": [
+        8,
+        10,
+        137,
+        26
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/brows/02_hurt.png",
+      "size": [
+        160,
+        40
+      ],
+      "inkBounds": [
+        8,
+        12,
+        137,
+        29
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/brows/03_normal.png",
+      "size": [
+        160,
+        40
+      ],
+      "inkBounds": [
+        1,
+        20,
+        144,
+        30
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/brows/03_hurt.png",
+      "size": [
+        160,
+        40
+      ],
+      "inkBounds": [
+        1,
+        15,
+        144,
+        32
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/nose/01_normal.png",
+      "size": [
+        34,
+        34
+      ],
+      "inkBounds": [
+        15,
+        16,
+        19,
+        20
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/nose/02_normal.png",
+      "size": [
+        34,
+        34
+      ],
+      "inkBounds": [
+        11,
+        9,
+        25,
+        24
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/mouth/01_normal.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        6,
+        13,
+        35,
+        23
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/mouth/01_hurt.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        7,
+        13,
+        36,
+        24
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/mouth/01_ko.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        9,
+        16,
+        34,
+        22
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/mouth/02_normal.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        4,
+        10,
+        38,
+        31
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/mouth/02_hurt.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        11,
+        10,
+        31,
+        33
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/mouth/02_ko.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        14,
+        12,
+        28,
+        30
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/mouth/03_normal.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        2,
+        15,
+        40,
+        20
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/mouth/03_hurt.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        4,
+        14,
+        38,
+        23
+      ],
+      "transparentMarginPass": true
+    },
+    {
+      "file": "assets/features/male/mouth/03_ko.png",
+      "size": [
+        66,
+        46
+      ],
+      "inkBounds": [
+        6,
+        17,
+        36,
+        21
+      ],
+      "transparentMarginPass": true
+    }
+  ],
+  "allTypeAnchorChecks": 1232,
+  "maxAnchorErrorPx": 0
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MiniMidgard — whole-figure reference player</title>
+<style>
+body{font:15px system-ui;background:#e0e9c7;color:#3d2a1c;max-width:1080px;margin:32px auto;padding:0 24px}h1{font-size:24px}fieldset{border:1px solid #a6ad91;border-radius:8px;display:flex;gap:16px;flex-wrap:wrap;padding:18px}label{display:flex;gap:6px;align-items:center}select,button,input{font:inherit}button{padding:6px 12px}canvas{display:block;width:100%;height:auto;background:#edf1de;border-radius:12px;margin:20px 0}a{color:#32604a}#error{color:#a02828}small{display:block;line-height:1.6}
+</style>
+<h1>Whole-figure sprite reference</h1>
+<p>One complete figure per frame. Weapons, headgear and masked hair colour remain swappable.</p>
+<fieldset>
+<label>Character <select id="character"><option>novice_female</option><option>swordsman_male</option></select></label>
+<label>State <select id="state"><option>idle</option><option>walk</option><option>attack</option><option>cast</option><option>sit</option><option>hurt</option><option>dead</option></select></label>
+<label>Weapon <select id="weapon"><option>dagger</option><option>sword</option><option>none</option></select></label>
+<label>Hair <select id="hair"><option>cream</option><option>blue</option><option>auburn</option></select></label>
+<label><input id="leaf" type="checkbox">Leaf</label><label><input id="hairpin" type="checkbox">Star pin</label>
+<label><input id="mirror" type="checkbox">Face left</label><label><input id="anchors" type="checkbox">Anchors</label>
+<button id="play">Pause</button><button id="contact">Contact · 140 ms</button>
+<label>Time <input id="time" type="range" min="0" max="1600" value="0"><output id="readout"></output></label>
+</fieldset>
+<canvas id="canvas" width="1024" height="500"></canvas><p id="error"></p>
+<small>Left: 240px reference scale. Right: 80px game scale. Looping states wrap; attacks hold their last frame after 280ms.<br>
+Serve this directory: <code>python3 -m http.server 8765 --directory docs/art/sprites</code>, then open <code>http://localhost:8765</code>.<br>
+Canonical port: <a href="player.py">player.py</a> · <a href="manifest.json">manifest</a> · <a href="preview_vs_lineup.png">lineup comparison</a> · <a href="verification/REPORT.md">verification report</a></small>
+<script type="module">
+const $=id=>document.getElementById(id), canvas=$('canvas'),ctx=canvas.getContext('2d');
+try {
+const M=await(await fetch('manifest.json')).json(),images=new Map(),tinted=new Map();
+const paths=new Set();
+for(const c of Object.values(M.characters))for(const f of Object.values(c.frames))for(const k of ['image','hairMask','gripOverlay'])if(f[k])paths.add(f[k]);
+for(const v of [...Object.values(M.weapons),...Object.values(M.headgear)])paths.add(v.image);
+await Promise.all([...paths].map(async path=>{const im=new Image();im.src=path;await im.decode();images.set(path,im)}));
+function selectFrame(state,time){const a=M.animations[state];let t=Math.max(0,Math.floor(time));t=a.loop?t%a.duration:Math.min(t,a.duration-1);for(let i=0;i<a.frames.length;i++){if(t<a.durations[i])return a.frames[i];t-=a.durations[i]}throw Error('bad durations')}
+function figure(f,tintId){const key=f.image+tintId;if(tinted.has(key))return tinted.get(key);const c=document.createElement('canvas');c.width=512;c.height=400;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(images.get(f.image),0,0);const data=x.getImageData(0,0,512,400);x.clearRect(0,0,512,400);x.drawImage(images.get(f.hairMask),0,0);const mask=x.getImageData(0,0,512,400),rgb=M.hairTints[tintId];for(let i=0;i<data.data.length;i+=4){const m=mask.data[i]/255;for(let j=0;j<3;j++)data.data[i+j]=Math.round(data.data[i+j]*(1-m+m*rgb[j]))}x.putImageData(data,0,0);tinted.set(key,c);return c}
+function item(image,anchor,pivot){ctx.save();ctx.translate(...anchor.point);ctx.rotate(anchor.angle*Math.PI/180);ctx.drawImage(images.get(image),-pivot[0],-pivot[1]);ctx.restore()}
+function draw(x,ground,height,time){const c=M.characters[$('character').value],f=c.frames[selectFrame($('state').value,time)],w=M.weapons[$('weapon').value];ctx.save();ctx.translate(x,ground);const scale=height/310;ctx.scale($('mirror').checked?-scale:scale,scale);ctx.translate(-220,-360);const visible=w&&f.hand.visible;
+if(visible&&f.hand.z==='behind')item(w.image,f.hand,w.pivot);ctx.drawImage(figure(f,$('hair').value),0,0);if(visible&&f.hand.z==='front'){item(w.image,f.hand,w.pivot);if(f.gripOverlay)ctx.drawImage(images.get(f.gripOverlay),0,0)}for(const id of ['leaf','hairpin'])if($(id).checked){const g=M.headgear[id];item(g.image,f[g.anchor],g.pivot)}if($('anchors').checked)for(const [k,color]of [['hand','#0088bb'],['crown','#cc4433'],['side','#8844cc']]){ctx.fillStyle=color;ctx.beginPath();ctx.arc(...f[k].point,4,0,7);ctx.fill()}ctx.restore()}
+let playing=true,time=0,last=performance.now();
+function reset(){time=0;$('time').max=M.animations[$('state').value].duration}
+$('character').onchange=()=>{const c=M.characters[$('character').value];$('weapon').value=c.defaultWeapon;$('hair').value=c.defaultHairTint;reset()};$('state').onchange=reset;
+$('time').oninput=()=>{time=+$('time').value;playing=false;$('play').textContent='Play'};
+$('play').onclick=()=>{playing=!playing;$('play').textContent=playing?'Pause':'Play'};
+$('contact').onclick=()=>{$('state').value='attack';reset();time=140;playing=false;$('play').textContent='Play'};
+function tick(now){if(playing)time+=now-last;last=now;const a=M.animations[$('state').value],display=a.loop?Math.floor(time)%a.duration:Math.min(Math.floor(time),a.duration-1);$('time').value=display;$('readout').textContent=`${display} ms · ${selectFrame($('state').value,time)}`;ctx.clearRect(0,0,1024,500);draw(350,400,240,time);draw(790,400,80,time);ctx.fillStyle='#3d2a1c';ctx.font='16px system-ui';ctx.fillText('240 px',310,450);ctx.fillText('80 px',765,450);requestAnimationFrame(tick)}requestAnimationFrame(tick);
+}catch(e){$('error').textContent='Could not load assets. Serve this folder over HTTP. '+e.message;console.error(e)}
+</script></html>

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><title>수채풍 화풍 테스트</title>
+<style>
+body{margin:0;background:#eae4d4;color:#433827;font:16px system-ui}main{max-width:1440px;margin:auto;padding:24px}h1{font-size:24px}button,select{font:inherit;padding:7px 14px;margin:0 8px 12px 0}canvas{width:100%;display:block;border-radius:8px;background:#bdc18d}.note{line-height:1.7}a{color:#595f35}
+</style><main><h1>수채풍 화풍 테스트 — 초보자 / 검사</h1><p class="note">idle 800+800ms · walk 4×180ms · attack 100/80/100ms (접촉 140ms). 원본 PNG를 그대로 재생합니다.</p><button id="play">일시 정지</button><button id="reset">처음부터</button><select id="size"><option value="80">80px 높이</option><option value="600">600px 원본 높이</option></select><canvas id="view" width="1440" height="680"></canvas><p id="status"></p><p class="note">공격은 검토를 위해 280ms 뒤 720ms 휴식을 두고 반복합니다. 실제 manifest에서는 loop=false입니다.<br><a href="preview.png">전체 프레임 1× PNG</a> · <a href="NOTES.md">한국어 제작 노트</a> · <a href="manifest.json">manifest</a></p></main>
+<script type="module">
+const manifest=await fetch('./manifest.json').then(r=>r.json()), cache=new Map();
+const paths=[...Object.values(manifest.animations).flatMap(c=>Object.values(c).flatMap(s=>s.frames)),'verification/kit/grass.png','verification/kit/dirt.png','verification/kit/tree.png','verification/kit/pine.png','verification/kit/bush.png','verification/kit/flowers.png'];
+await Promise.all(paths.map(p=>new Promise((resolve,reject)=>{const im=new Image;im.onload=()=>{cache.set(p,im);resolve()};im.onerror=reject;im.src=p})));
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),sel=document.querySelector('#size'),status=document.querySelector('#status');let running=true,t=0,last=performance.now();
+document.querySelector('#play').onclick=e=>{running=!running;e.target.textContent=running?'일시 정지':'재생'};document.querySelector('#reset').onclick=()=>t=0;
+function frame(a,ms){let total=a.durations.reduce((x,y)=>x+y,0),u=a.loop?ms%total:Math.min(ms%1000,total-1);for(let i=0;i<a.frames.length;i++){if(u<a.durations[i])return i;u-=a.durations[i]}return a.frames.length-1}
+function render(now){if(running)t+=Math.min(now-last,100);last=now;const h=Number(sel.value),k=h/600;canvas.width=h===600?3072:1440;canvas.height=h===600?1640:680;ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.fillStyle=ctx.createPattern(cache.get('verification/kit/grass.png'),'repeat');ctx.fillRect(0,0,canvas.width,canvas.height);
+for(let row=0;row<2;row++){let cls=['novice','swordsman'][row];for(let col=0;col<3;col++){let state=['idle','walk','attack'][col],a=manifest.animations[cls][state],i=frame(a,t),x=canvas.width*(col+.5)/3,y=(row+1)*canvas.height/2-60;ctx.drawImage(cache.get(a.frames[i]),x-manifest.origin[0]*k,y-manifest.origin[1]*k,manifest.canvas[0]*k,manifest.canvas[1]*k);ctx.fillStyle='#f4eedc';ctx.fillRect(x-160,y+10,320,34);ctx.fillStyle='#433827';ctx.font='18px system-ui';ctx.textAlign='center';ctx.fillText(`${cls} / ${state}_${i} / ${a.durations[i]}ms`,x,y+33)}}
+status.textContent=`공통 원점 (${manifest.origin.join(', ')}) · 표시 높이 ${h}px · ${Math.floor(t)}ms`;requestAnimationFrame(render)}requestAnimationFrame(render);
+</script></html>

@@ -1,0 +1,170 @@
+[
+  {
+    "cls": "novice",
+    "frame": "idle_0",
+    "changedCollarPixels": 281,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "idle_1",
+    "changedCollarPixels": 296,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "walk_0",
+    "changedCollarPixels": 91,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "walk_1",
+    "changedCollarPixels": 78,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "walk_2",
+    "changedCollarPixels": 198,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "walk_3",
+    "changedCollarPixels": 64,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "attack_0",
+    "changedCollarPixels": 77,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "attack_1",
+    "changedCollarPixels": 89,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "attack_2",
+    "changedCollarPixels": 298,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "cast_0",
+    "changedCollarPixels": 178,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "cast_1",
+    "changedCollarPixels": 128,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "sit_0",
+    "changedCollarPixels": 67,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "hurt_0",
+    "changedCollarPixels": 198,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "novice",
+    "frame": "dead_0",
+    "changedCollarPixels": 91,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "idle_0",
+    "changedCollarPixels": 83,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "idle_1",
+    "changedCollarPixels": 93,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "walk_0",
+    "changedCollarPixels": 444,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "walk_1",
+    "changedCollarPixels": 410,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "walk_2",
+    "changedCollarPixels": 417,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "walk_3",
+    "changedCollarPixels": 325,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "attack_0",
+    "changedCollarPixels": 374,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "attack_1",
+    "changedCollarPixels": 450,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "attack_2",
+    "changedCollarPixels": 281,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "cast_0",
+    "changedCollarPixels": 419,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "cast_1",
+    "changedCollarPixels": 463,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "sit_0",
+    "changedCollarPixels": 367,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "hurt_0",
+    "changedCollarPixels": 253,
+    "poseAndAlphaUnchanged": true
+  },
+  {
+    "cls": "swordsman",
+    "frame": "dead_0",
+    "changedCollarPixels": 262,
+    "poseAndAlphaUnchanged": true
+  }
+]

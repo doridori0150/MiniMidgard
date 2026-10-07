@@ -1,0 +1,1803 @@
+{
+  "alphaFailures" : 0,
+  "cases" : 48384,
+  "failures" : [
+
+  ],
+  "groups" : [
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/idle_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/idle_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/idle_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/idle_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/walk_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/walk_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/walk_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/walk_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/walk_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/walk_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/walk_3\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/walk_3\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/attack_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/attack_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/attack_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/attack_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/attack_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/attack_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/cast_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/cast_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/cast_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/cast_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/sit_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/sit_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/hurt_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/hurt_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/dead_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/01\/dead_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/idle_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/idle_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/idle_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/idle_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/walk_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/walk_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/walk_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/walk_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/walk_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/walk_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/walk_3\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/walk_3\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/attack_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/attack_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/attack_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/attack_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/attack_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/attack_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/cast_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/cast_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/cast_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/cast_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/sit_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/sit_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/hurt_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/hurt_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/dead_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/female\/05\/dead_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/idle_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/idle_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/idle_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/idle_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/walk_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/walk_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/walk_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/walk_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/walk_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/walk_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/walk_3\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/walk_3\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/attack_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/attack_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/attack_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/attack_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/attack_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/attack_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/cast_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/cast_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/cast_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/cast_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/sit_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/sit_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/hurt_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/hurt_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/dead_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/02\/dead_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/idle_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/idle_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/idle_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/idle_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/walk_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/walk_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/walk_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/walk_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/walk_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/walk_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/walk_3\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/walk_3\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/attack_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/attack_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/attack_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/attack_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/attack_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/attack_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/cast_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/cast_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/cast_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/cast_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/sit_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/sit_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/hurt_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/hurt_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/dead_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "novice\/male\/03\/dead_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/idle_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/idle_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/idle_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/idle_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/walk_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/walk_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/walk_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/walk_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/walk_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/walk_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/walk_3\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/walk_3\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/attack_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/attack_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/attack_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/attack_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/attack_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/attack_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/cast_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/cast_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/cast_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/cast_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/sit_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/sit_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/hurt_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/hurt_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/dead_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/01\/dead_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/idle_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/idle_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/idle_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/idle_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/walk_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/walk_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/walk_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/walk_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/walk_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/walk_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/walk_3\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/walk_3\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/attack_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/attack_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/attack_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/attack_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/attack_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/attack_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/cast_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/cast_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/cast_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/cast_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/sit_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/sit_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/hurt_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/hurt_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/dead_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/female\/05\/dead_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/idle_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/idle_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/idle_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/idle_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/walk_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/walk_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/walk_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/walk_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/walk_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/walk_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/walk_3\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/walk_3\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/attack_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/attack_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/attack_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/attack_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/attack_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/attack_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/cast_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/cast_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/cast_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/cast_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/sit_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/sit_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/hurt_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/hurt_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/dead_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/02\/dead_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/idle_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/idle_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/idle_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/idle_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/walk_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/walk_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/walk_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/walk_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/walk_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/walk_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/walk_3\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/walk_3\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/attack_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/attack_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/attack_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/attack_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/attack_2\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/attack_2\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/cast_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/cast_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/cast_1\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/cast_1\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/sit_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/sit_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/hurt_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/hurt_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/dead_0\/1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 0,
+      "cases" : 216,
+      "failedCases" : 0,
+      "id" : "swordsman\/male\/03\/dead_0\/-1",
+      "minAlpha" : 255,
+      "whitePixels" : 0
+    }
+  ],
+  "sampledPixels" : 81945216,
+  "whiteFailures" : 0
+}

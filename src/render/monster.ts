@@ -33,6 +33,7 @@ export function mobHeight(sprite: string): number {
     case 'fish': return variant === 'puffer' ? 28 : 24;
     case 'book': return 40;
     case 'bird': return variant === 'swan' ? 44 : 38;
+    case 'chest': return variant === 'fang' ? 32 : 24;
     case 'jelly': return 22;
     case 'bunny': return 30;
     case 'worm': return 18;
@@ -58,7 +59,7 @@ export function mobShadow(ctx: CanvasRenderingContext2D, sprite: string, s: numb
   const [kind] = spriteKind(sprite);
   const flying = kind === 'bee' || kind === 'bat' || kind === 'wisp' || kind === 'wraith' || kind === 'book' || kind === 'bird';
   ctx.fillStyle = 'rgba(20,20,30,0.26)';
-  const shw = (kind === 'wolf' || kind === 'scorpion' || kind === 'crab' ? 16 : kind === 'treant' || kind === 'golem' || kind === 'yeti' ? 19 : kind === 'worm' || kind === 'fish' ? 13 : 11) * s;
+  const shw = (kind === 'wolf' || kind === 'scorpion' || kind === 'crab' || kind === 'chest' ? 16 : kind === 'treant' || kind === 'golem' || kind === 'yeti' ? 19 : kind === 'worm' || kind === 'fish' ? 13 : 11) * s;
   ctx.beginPath(); ctx.ellipse(0, 0, shw * (flying ? 0.7 : 1), 3.6 * s * (flying ? 0.7 : 1), 0, 0, Math.PI * 2); ctx.fill();
 }
 
@@ -589,6 +590,21 @@ export function drawMob(ctx: CanvasRenderingContext2D, sprite: string, pal: stri
         const ex = sx + (sx > 0 ? 6 + k * 8 : -5), ey = sy - k * 8;
         ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(ex, ey); ctx.stroke();
         for (const d of [-2, 0, 2]) { ctx.beginPath(); ctx.moveTo(ex, ey); ctx.lineTo(ex + (sx > 0 ? 3 : -3), ey + d); ctx.stroke(); }
+        if (variant === 'bell' && sx > 0) {
+          // 'bell': a bronze hand bell hanging from the front claw, swinging harder when it tolls
+          ctx.save(); ctx.translate(ex + 2, ey + 1); ctx.rotate(Math.sin(t / 210) * 0.35 + k * 0.9);
+          const bl = shade(eyes, -0.55);
+          ctx.strokeStyle = bl; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(0, 0.6, 1.4, 0, Math.PI * 2); ctx.stroke();
+          const bell = () => { ctx.moveTo(-2.4, 2.2); ctx.quadraticCurveTo(-3, 7, -5.2, 9.4); ctx.lineTo(5.2, 9.4); ctx.quadraticCurveTo(3, 7, 2.4, 2.2); ctx.quadraticCurveTo(0, 1, -2.4, 2.2); ctx.closePath(); };
+          ctx.beginPath(); bell(); blob(ctx, eyes, bl, 1.1);
+          hardShade(ctx, bell, () => ctx.rect(-6, 0, 4.2, 11), shade(eyes, -0.25));
+          ctx.beginPath(); ctx.arc(0.6, 10.4, 1.3, 0, Math.PI * 2); blob(ctx, bl, '#0a0414', 0.8);
+          ctx.restore();
+          if (attacking || casting) {
+            ctx.strokeStyle = rgba(eyes, 0.7 * (1 - k * 0.5)); ctx.lineWidth = 1.2;
+            for (const r of [10, 15]) { ctx.beginPath(); ctx.arc(ex + 2, ey + 7, r + k * 4, -0.9, 0.9); ctx.stroke(); }
+          }
+        }
       }
       break;
     }
@@ -793,6 +809,88 @@ export function drawMob(ctx: CanvasRenderingContext2D, sprite: string, pal: stri
       if (owl) { ctx.translate(-6, 2); ctx.rotate(-0.55 + f * 0.5); } else { ctx.translate(-2, -2); ctx.rotate(-1.1 + f * 0.75); }
       ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(-6, -8, -2, -16); ctx.quadraticCurveTo(3, -10, 4, -2); ctx.closePath(); blob(ctx, main, line, 1.1);
       ctx.strokeStyle = shade(main, -0.3); ctx.lineWidth = 0.8; ctx.beginPath(); ctx.moveTo(-1, -4); ctx.lineTo(-3, -11); ctx.moveTo(1.5, -4); ctx.lineTo(0, -12); ctx.stroke();
+      ctx.restore();
+      break;
+    }
+    case 'chest': {
+      // a treasure chest seen from the side, lid hinged at the back (left) so it opens like a mouth toward the front.
+      // states: idle (closed) · cast (the lid rattles: someone is opening it) · open (loot, gold glow).
+      // 'fang' = the trap chest awake: lid gaping, teeth, tongue, eyes in the dark, stubby legs that hop.
+      const [wood, band, trim] = pal;
+      const line = shade(band, -0.55);
+      const fang = variant === 'fang';
+      const k = attacking ? Math.sin(Math.min(1, t / 380) * Math.PI) : 0;
+      const hop = fang && moving ? (t / 280) % 1 : 0;
+      const air = fang && moving ? Math.sin(hop * Math.PI) : 0;
+      if (fang) {
+        // four stubby legs under the box
+        ctx.lineCap = 'round';
+        for (const [x, ph] of [[-9, 0], [-3.5, Math.PI], [3.5, Math.PI * 0.5], [9, Math.PI * 1.5]] as const) {
+          const sw = moving ? Math.sin(t / 60 + ph) * 2.6 : Math.sin(t / 400 + ph) * 0.4;
+          const leg = () => { ctx.beginPath(); ctx.moveTo(x, -6 - air * 3); ctx.lineTo(x + sw, -0.6 - air * 1.5); };
+          leg(); ctx.strokeStyle = line; ctx.lineWidth = 4.4; ctx.stroke();
+          leg(); ctx.strokeStyle = shade(wood, -0.25); ctx.lineWidth = 2.6; ctx.stroke();
+        }
+        ctx.translate(k * 5, -5 - air * 3.5);
+        ctx.rotate(Math.sin(t / 240) * 0.04 - k * 0.1 + (moving ? Math.cos(hop * Math.PI * 2) * 0.06 : 0));
+      }
+      const rattle = casting ? Math.sin(t / 32) * 0.1 + 0.06 : 0;
+      if (casting) ctx.translate(Math.sin(t / 45) * 0.8, -Math.abs(Math.sin(t / 70)) * 1.6);
+      const open = fang ? 0.85 + k * 0.55 + Math.sin(t / 170) * 0.07 : p.state === 'open' ? 1.75 : rattle;
+      const W = 13, H = 12, LH = 9;
+      const hx = -W, hy = -H; // the hinge
+      const fx = hx + Math.cos(-open) * W * 2, fy = hy + Math.sin(-open) * W * 2; // lid's front-bottom corner
+      // inside: the mouth (fang) or the treasure (open), seen in the wedge between body and lid
+      if (open > 0.15) {
+        ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(W, hy); ctx.lineTo(fx, fy); ctx.closePath();
+        ctx.fillStyle = fang ? '#3a0a14' : '#2a1608'; ctx.fill();
+        if (!fang) {
+          inkGlow(ctx, (c) => {
+            c.globalCompositeOperation = 'lighter';
+            const g = c.createRadialGradient(2, hy - 4, 1, 2, hy - 4, 24);
+            g.addColorStop(0, rgba(trim, 0.85)); g.addColorStop(1, rgba(trim, 0));
+            c.fillStyle = g; c.beginPath(); c.arc(2, hy - 4, 24, 0, Math.PI * 2); c.fill();
+          });
+          // a heap of coins over the rim
+          for (const [x, y, r] of [[-6, -1.5, 3.2], [-1, -3, 3.6], [4.5, -1.8, 3.2], [9, -0.8, 2.6], [1.5, -5.4, 2.6]] as const) {
+            ctx.beginPath(); ctx.ellipse(x, hy + y, r, r * 0.6, 0, 0, Math.PI * 2); blob(ctx, trim, shade(trim, -0.5), 0.8);
+          }
+        } else {
+          const cx = (hx + W + fx) / 3, cy = (hy + hy + fy) / 3;
+          // eyes glaring out of the dark
+          for (const [dx, dy] of [[-2.8, 0.4], [2.6, -0.6]] as const) {
+            ctx.fillStyle = '#ffd040'; ctx.beginPath(); ctx.ellipse(cx + dx, cy + dy, 1.9, 1.1, -0.35, 0, Math.PI * 2); ctx.fill();
+            ctx.fillStyle = '#1e0a0a'; ctx.beginPath(); ctx.ellipse(cx + dx + 0.4, cy + dy, 0.6, 0.9, 0, 0, Math.PI * 2); ctx.fill();
+          }
+          // tongue lolling over the front rim
+          const tl = 6 + k * 7 + Math.sin(t / 150) * 1.2;
+          const tongue = () => { ctx.beginPath(); ctx.moveTo(cx + 2, cy + 3); ctx.quadraticCurveTo(W + 1, hy - 1, W + tl * 0.6, hy + 3 + tl * 0.35); };
+          tongue(); ctx.strokeStyle = '#5a1020'; ctx.lineWidth = 5.4; ctx.lineCap = 'round'; ctx.stroke();
+          tongue(); ctx.strokeStyle = '#ff6a8a'; ctx.lineWidth = 3.4; ctx.stroke();
+          // teeth along the body rim
+          for (let x = -8; x <= 11; x += 4.6) {
+            ctx.beginPath(); ctx.moveTo(x - 1.9, hy); ctx.lineTo(x + 1.9, hy); ctx.lineTo(x, hy - 3.6); ctx.closePath(); blob(ctx, '#fffaf0', line, 0.7);
+          }
+        }
+      }
+      // body: planks, iron bands, one hard shadow tone
+      const body = () => ctx.roundRect(-W, -H, W * 2, H, 1.5);
+      ctx.beginPath(); body(); blob(ctx, wood, line, 1.3);
+      hardShade(ctx, body, () => ctx.rect(-W - 1, -4.2, W * 2 + 2, 5), shade(wood, -0.24));
+      ctx.strokeStyle = shade(wood, -0.32); ctx.lineWidth = 0.8; ctx.beginPath(); ctx.moveTo(-W + 1, -7.5); ctx.lineTo(W - 1, -7.5); ctx.stroke();
+      for (const x of [-8.5, 6.5]) { ctx.beginPath(); ctx.rect(x, -H, 2.6, H); blob(ctx, band, line, 0.8); }
+      for (const x of [-W, W - 2.4]) { ctx.beginPath(); ctx.rect(x, -3, 2.4, 3); blob(ctx, trim, shade(trim, -0.5), 0.7); }
+      // lid on its hinge
+      ctx.save(); ctx.translate(hx, hy); ctx.rotate(-open);
+      const lid = () => { ctx.moveTo(0, 0); ctx.lineTo(0, -LH + 4); ctx.quadraticCurveTo(0, -LH, 5, -LH); ctx.lineTo(W * 2 - 5, -LH); ctx.quadraticCurveTo(W * 2, -LH, W * 2, -LH + 4); ctx.lineTo(W * 2, 0); ctx.closePath(); };
+      ctx.beginPath(); lid(); blob(ctx, wood, line, 1.3);
+      hardShade(ctx, lid, () => ctx.rect(-1, -LH - 1, 7, LH + 2), shade(wood, -0.2));
+      ctx.fillStyle = rgba('#ffffff', 0.35); ctx.fillRect(6, -LH + 1.2, W * 2 - 12, 1.2);
+      for (const x of [4.5, 19.5]) { ctx.beginPath(); ctx.rect(x, -LH, 2.6, LH); blob(ctx, band, line, 0.8); }
+      if (fang) for (let x = 7; x <= W * 2 - 2; x += 4.6) { ctx.beginPath(); ctx.moveTo(x - 1.9, 0); ctx.lineTo(x + 1.9, 0); ctx.lineTo(x, 3.6); ctx.closePath(); blob(ctx, '#fffaf0', line, 0.7); }
+      // the lock hasp on the lid's front edge
+      ctx.beginPath(); ctx.roundRect(W * 2 - 1.5, -3, 3.8, 6.5, 1); blob(ctx, trim, shade(trim, -0.55), 0.9);
+      ctx.fillStyle = shade(trim, -0.6); ctx.beginPath(); ctx.arc(W * 2 + 0.4, 0.6, 0.8, 0, Math.PI * 2); ctx.fill();
       ctx.restore();
       break;
     }

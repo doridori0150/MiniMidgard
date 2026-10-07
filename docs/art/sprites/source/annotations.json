@@ -1,0 +1,1014 @@
+{
+  "novice": {
+    "idle_0": {
+      "sourceCell": [
+        0,
+        0,
+        313,
+        330
+      ],
+      "sourceHeadBox": [
+        78,
+        30,
+        240,
+        185
+      ],
+      "sourceHand": [
+        218,
+        246
+      ],
+      "scale": 1.0933333333333333,
+      "translation": [
+        37.96000000000001,
+        14.50666666666666
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          47.30666666666666,
+          216.7733333333333
+        ],
+        "destinationHeadTopBottom": [
+          47.30666666666666,
+          228.30666666666667
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "idle_1": {
+      "sourceCell": [
+        313,
+        0,
+        627,
+        330
+      ],
+      "sourceHeadBox": [
+        393,
+        30,
+        555,
+        185
+      ],
+      "sourceHand": [
+        531,
+        246
+      ],
+      "scale": 1.086092715231788,
+      "translation": [
+        38.6225165562914,
+        16.794701986754944
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          49.377483443708584,
+          217.72185430463574
+        ],
+        "destinationHeadTopBottom": [
+          45.377483443708584,
+          226.37748344370857
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "walk_0": {
+      "sourceCell": [
+        627,
+        0,
+        940,
+        330
+      ],
+      "sourceHeadBox": [
+        702,
+        30,
+        866,
+        185
+      ],
+      "sourceHand": [
+        858,
+        223
+      ],
+      "scale": 1.0789473684210527,
+      "translation": [
+        31.7236842105263,
+        14.736842105263122
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          47.105263157894704,
+          214.34210526315786
+        ],
+        "destinationHeadTopBottom": [
+          46.105263157894704,
+          227.1052631578947
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "walk_1": {
+      "sourceCell": [
+        940,
+        0,
+        1254,
+        330
+      ],
+      "sourceHeadBox": [
+        1016,
+        31,
+        1177,
+        187
+      ],
+      "sourceHand": [
+        1152,
+        249
+      ],
+      "scale": 1.0789473684210527,
+      "translation": [
+        43.05263157894737,
+        17.9736842105263
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          51.42105263157893,
+          219.73684210526315
+        ],
+        "destinationHeadTopBottom": [
+          51.42105263157893,
+          232.42105263157893
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "walk_2": {
+      "sourceCell": [
+        0,
+        330,
+        313,
+        643
+      ],
+      "sourceHeadBox": [
+        78,
+        338,
+        242,
+        491
+      ],
+      "sourceHand": [
+        236,
+        541
+      ],
+      "scale": 1.086092715231788,
+      "translation": [
+        29.933774834437088,
+        43.94701986754967
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          52.63576158940398,
+          218.80794701986756
+        ],
+        "destinationHeadTopBottom": [
+          48.63576158940398,
+          229.63576158940398
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "walk_3": {
+      "sourceCell": [
+        313,
+        330,
+        627,
+        643
+      ],
+      "sourceHeadBox": [
+        392,
+        338,
+        556,
+        492
+      ],
+      "sourceHand": [
+        530,
+        546
+      ],
+      "scale": 1.0933333333333333,
+      "translation": [
+        36.866666666666674,
+        41.84000000000003
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          50.5866666666667,
+          218.96
+        ],
+        "destinationHeadTopBottom": [
+          52.5866666666667,
+          233.5866666666667
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "attack_0": {
+      "sourceCell": [
+        627,
+        330,
+        940,
+        643
+      ],
+      "sourceHeadBox": [
+        700,
+        339,
+        865,
+        493
+      ],
+      "sourceHand": [
+        856,
+        542
+      ],
+      "scale": 1.0789473684210527,
+      "translation": [
+        44.67105263157893,
+        49.26315789473682
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          58.973684210526294,
+          225.1315789473684
+        ],
+        "destinationHeadTopBottom": [
+          58.973684210526294,
+          239.9736842105263
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "attack_1": {
+      "sourceCell": [
+        940,
+        330,
+        1254,
+        643
+      ],
+      "sourceHeadBox": [
+        1009,
+        339,
+        1173,
+        494
+      ],
+      "sourceHand": [
+        1185,
+        493
+      ],
+      "scale": 1.0649350649350648,
+      "translation": [
+        44.285714285714306,
+        54.363636363636374
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          63.948051948051955,
+          229.012987012987
+        ],
+        "destinationHeadTopBottom": [
+          63.948051948051955,
+          244.94805194805195
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": -1
+    },
+    "attack_2": {
+      "sourceCell": [
+        0,
+        643,
+        313,
+        951
+      ],
+      "sourceHeadBox": [
+        86,
+        656,
+        255,
+        805
+      ],
+      "sourceHand": [
+        229,
+        859
+      ],
+      "scale": 1.0414201183431953,
+      "translation": [
+        61.704142011834335,
+        69.44378698224853
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": false,
+        "sourceHeadTopBottom": [
+          82.98224852071006,
+          238.15384615384616
+        ],
+        "destinationHeadTopBottom": [
+          82.98224852071006,
+          238.15384615384616
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 1
+    },
+    "cast_0": {
+      "sourceCell": [
+        313,
+        643,
+        627,
+        951
+      ],
+      "sourceHeadBox": [
+        392,
+        643,
+        558,
+        797
+      ],
+      "sourceHand": [
+        548,
+        782
+      ],
+      "scale": 1.0512820512820513,
+      "translation": [
+        34.97435897435898,
+        68.79487179487177
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          68.79487179487177,
+          230.69230769230768
+        ],
+        "destinationHeadTopBottom": [
+          49.79487179487177,
+          230.79487179487177
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "cast_1": {
+      "sourceCell": [
+        627,
+        643,
+        940,
+        951
+      ],
+      "sourceHeadBox": [
+        715,
+        645,
+        867,
+        799
+      ],
+      "sourceHand": [
+        869,
+        757
+      ],
+      "scale": 1.1578947368421053,
+      "translation": [
+        28.36842105263156,
+        38.10526315789474
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          40.42105263157895,
+          218.73684210526318
+        ],
+        "destinationHeadTopBottom": [
+          51.42105263157895,
+          232.42105263157896
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "sit_0": {
+      "sourceCell": [
+        940,
+        643,
+        1254,
+        951
+      ],
+      "sourceHeadBox": [
+        1004,
+        687,
+        1164,
+        840
+      ],
+      "sourceHand": [
+        1158,
+        863
+      ],
+      "scale": 1.0718954248366013,
+      "translation": [
+        29.202614379084963,
+        60.94117647058823
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          108.10457516339869,
+          272.1045751633987
+        ],
+        "destinationHeadTopBottom": [
+          108.10457516339869,
+          289.1045751633987
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "hurt_0": {
+      "sourceCell": [
+        0,
+        951,
+        313,
+        1254
+      ],
+      "sourceHeadBox": [
+        62,
+        956,
+        228,
+        1111
+      ],
+      "sourceHand": [
+        239,
+        1080
+      ],
+      "scale": 1.0602409638554218,
+      "translation": [
+        2.6506024096385374,
+        73.73493975903614
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": false,
+        "sourceHeadTopBottom": [
+          79.03614457831324,
+          243.3734939759036
+        ],
+        "destinationHeadTopBottom": [
+          79.03614457831324,
+          243.3734939759036
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "dead_0": {
+      "sourceCell": [
+        313,
+        951,
+        627,
+        1254
+      ],
+      "sourceHeadBox": [
+        322,
+        1091,
+        475,
+        1234
+      ],
+      "sourceHand": [
+        533,
+        1196
+      ],
+      "scale": 1.2913385826771653,
+      "translation": [
+        16.61417322834646,
+        1.0078740157480297
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": false,
+        "sourceHeadTopBottom": [
+          181.79527559055117,
+          366.4566929133858
+        ],
+        "destinationHeadTopBottom": [
+          181.79527559055117,
+          366.4566929133858
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    }
+  },
+  "swordsman": {
+    "idle_0": {
+      "sourceCell": [
+        0,
+        0,
+        313,
+        330
+      ],
+      "sourceHeadBox": [
+        99,
+        30,
+        262,
+        197
+      ],
+      "sourceHand": [
+        240,
+        248
+      ],
+      "scale": 1.0810810810810811,
+      "translation": [
+        25.40540540540539,
+        11.891891891891873
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          44.32432432432431,
+          224.86486486486487
+        ],
+        "destinationHeadTopBottom": [
+          47.32432432432431,
+          228.32432432432432
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "idle_1": {
+      "sourceCell": [
+        313,
+        0,
+        627,
+        330
+      ],
+      "sourceHeadBox": [
+        392,
+        30,
+        558,
+        197
+      ],
+      "sourceHand": [
+        530,
+        249
+      ],
+      "scale": 1.0810810810810811,
+      "translation": [
+        43.24324324324323,
+        11.891891891891873
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          44.32432432432431,
+          224.86486486486487
+        ],
+        "destinationHeadTopBottom": [
+          47.32432432432431,
+          228.32432432432432
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "walk_0": {
+      "sourceCell": [
+        627,
+        0,
+        940,
+        330
+      ],
+      "sourceHeadBox": [
+        696,
+        30,
+        862,
+        197
+      ],
+      "sourceHand": [
+        840,
+        243
+      ],
+      "scale": 1.0738255033557047,
+      "translation": [
+        60.536912751677846,
+        13.154362416107404
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          45.36912751677855,
+          224.69798657718124
+        ],
+        "destinationHeadTopBottom": [
+          47.36912751677855,
+          228.36912751677855
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "walk_1": {
+      "sourceCell": [
+        940,
+        0,
+        1254,
+        330
+      ],
+      "sourceHeadBox": [
+        1006,
+        30,
+        1173,
+        198
+      ],
+      "sourceHand": [
+        1139,
+        260
+      ],
+      "scale": 1.0738255033557047,
+      "translation": [
+        62.14765100671141,
+        13.154362416107404
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          45.36912751677855,
+          225.77181208053693
+        ],
+        "destinationHeadTopBottom": [
+          53.36912751677855,
+          234.36912751677855
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "walk_2": {
+      "sourceCell": [
+        0,
+        330,
+        313,
+        643
+      ],
+      "sourceHeadBox": [
+        92,
+        347,
+        263,
+        513
+      ],
+      "sourceHand": [
+        247,
+        548
+      ],
+      "scale": 1.0666666666666667,
+      "translation": [
+        33.866666666666674,
+        32.53333333333336
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          50.66666666666669,
+          227.73333333333335
+        ],
+        "destinationHeadTopBottom": [
+          48.66666666666669,
+          229.66666666666669
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "walk_3": {
+      "sourceCell": [
+        313,
+        330,
+        627,
+        643
+      ],
+      "sourceHeadBox": [
+        388,
+        347,
+        556,
+        513
+      ],
+      "sourceHand": [
+        527,
+        560
+      ],
+      "scale": 1.0596026490066226,
+      "translation": [
+        52.582781456953626,
+        34.70198675496687
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          52.71523178807945,
+          228.6092715231788
+        ],
+        "destinationHeadTopBottom": [
+          54.71523178807945,
+          235.71523178807945
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "attack_0": {
+      "sourceCell": [
+        627,
+        330,
+        940,
+        643
+      ],
+      "sourceHeadBox": [
+        698,
+        347,
+        865,
+        514
+      ],
+      "sourceHand": [
+        848,
+        565
+      ],
+      "scale": 1.0738255033557047,
+      "translation": [
+        48.18791946308724,
+        31.409395973154346
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          49.664429530201325,
+          228.993288590604
+        ],
+        "destinationHeadTopBottom": [
+          49.664429530201325,
+          230.66442953020132
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "attack_1": {
+      "sourceCell": [
+        940,
+        330,
+        1254,
+        643
+      ],
+      "sourceHeadBox": [
+        993,
+        347,
+        1159,
+        513
+      ],
+      "sourceHand": [
+        1171,
+        521
+      ],
+      "scale": 1.0738255033557047,
+      "translation": [
+        68.59060402684563,
+        31.409395973154346
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          49.664429530201325,
+          227.91946308724832
+        ],
+        "destinationHeadTopBottom": [
+          49.664429530201325,
+          230.66442953020132
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "attack_2": {
+      "sourceCell": [
+        0,
+        643,
+        313,
+        951
+      ],
+      "sourceHeadBox": [
+        86,
+        657,
+        256,
+        831
+      ],
+      "sourceHand": [
+        237,
+        876
+      ],
+      "scale": 1.0596026490066226,
+      "translation": [
+        50.99337748344371,
+        43.178807947019834
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": false,
+        "sourceHeadTopBottom": [
+          58.013245033112554,
+          242.3841059602649
+        ],
+        "destinationHeadTopBottom": [
+          58.013245033112554,
+          242.3841059602649
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "cast_0": {
+      "sourceCell": [
+        313,
+        643,
+        627,
+        951
+      ],
+      "sourceHeadBox": [
+        382,
+        657,
+        559,
+        831
+      ],
+      "sourceHand": [
+        548,
+        813
+      ],
+      "scale": 1.0596026490066226,
+      "translation": [
+        49.93377483443706,
+        40.0
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          54.83443708609272,
+          239.20529801324506
+        ],
+        "destinationHeadTopBottom": [
+          43.83443708609272,
+          224.83443708609272
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "cast_1": {
+      "sourceCell": [
+        627,
+        643,
+        940,
+        951
+      ],
+      "sourceHeadBox": [
+        692,
+        657,
+        869,
+        831
+      ],
+      "sourceHand": [
+        862,
+        782
+      ],
+      "scale": 1.0526315789473684,
+      "translation": [
+        61.57894736842107,
+        42.10526315789474
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          56.8421052631579,
+          240.0
+        ],
+        "destinationHeadTopBottom": [
+          43.8421052631579,
+          224.8421052631579
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "sit_0": {
+      "sourceCell": [
+        940,
+        643,
+        1254,
+        951
+      ],
+      "sourceHeadBox": [
+        998,
+        725,
+        1165,
+        883
+      ],
+      "sourceHand": [
+        1149,
+        909
+      ],
+      "scale": 1.0738255033557047,
+      "translation": [
+        50.335570469798654,
+        31.409395973154346
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": true,
+        "sourceHeadTopBottom": [
+          119.46308724832213,
+          289.1275167785235
+        ],
+        "destinationHeadTopBottom": [
+          119.46308724832213,
+          300.46308724832215
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "hurt_0": {
+      "sourceCell": [
+        0,
+        951,
+        313,
+        1254
+      ],
+      "sourceHeadBox": [
+        63,
+        968,
+        233,
+        1131
+      ],
+      "sourceHand": [
+        253,
+        1132
+      ],
+      "scale": 1.035294117647059,
+      "translation": [
+        7.247058823529386,
+        70.11764705882348
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": false,
+        "sourceHeadTopBottom": [
+          87.71764705882347,
+          256.4705882352941
+        ],
+        "destinationHeadTopBottom": [
+          87.71764705882347,
+          256.4705882352941
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 0
+    },
+    "dead_0": {
+      "sourceCell": [
+        313,
+        951,
+        627,
+        1254
+      ],
+      "sourceHeadBox": [
+        324,
+        1084,
+        481,
+        1231
+      ],
+      "sourceHand": [
+        538,
+        1195
+      ],
+      "scale": 1.1940298507462686,
+      "translation": [
+        28.955223880597032,
+        32.83582089552243
+      ],
+      "wholeCanvasVerticalMap": {
+        "enabled": false,
+        "sourceHeadTopBottom": [
+          191.64179104477614,
+          367.1641791044776
+        ],
+        "destinationHeadTopBottom": [
+          191.64179104477614,
+          367.1641791044776
+        ],
+        "fixedGround": 360
+      },
+      "rasterGroundShift": 1
+    }
+  }
+}

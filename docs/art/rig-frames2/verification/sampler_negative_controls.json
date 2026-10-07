@@ -1,0 +1,38 @@
+{
+  "alphaFailures" : 16,
+  "cases" : 2,
+  "failures" : [
+    {
+      "alphaPixels" : 0,
+      "id" : "white",
+      "variant" : 0,
+      "whitePixels" : 16
+    },
+    {
+      "alphaPixels" : 16,
+      "id" : "transparent",
+      "variant" : 0,
+      "whitePixels" : 0
+    }
+  ],
+  "groups" : [
+    {
+      "alphaPixels" : 0,
+      "cases" : 1,
+      "failedCases" : 1,
+      "id" : "white",
+      "minAlpha" : 255,
+      "whitePixels" : 16
+    },
+    {
+      "alphaPixels" : 16,
+      "cases" : 1,
+      "failedCases" : 1,
+      "id" : "transparent",
+      "minAlpha" : 0,
+      "whitePixels" : 0
+    }
+  ],
+  "sampledPixels" : 32,
+  "whiteFailures" : 16
+}

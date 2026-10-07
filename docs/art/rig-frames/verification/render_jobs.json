@@ -1,0 +1,78 @@
+[
+  {
+    "op": "render",
+    "file": "verification/cmp_idle_01.png",
+    "size": [
+      1024,
+      800
+    ],
+    "draws": [
+      {
+        "file": "assets/equipment/dagger.png",
+        "matrix": [
+          0.6691306063588582,
+          -0.7431448254773942,
+          0.7431448254773942,
+          0.6691306063588582,
+          445.3949107494037,
+          558.4424692309117
+        ]
+      },
+      {
+        "file": "assets/body/novice/idle_0.png",
+        "matrix": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          210.0,
+          430.0
+        ]
+      },
+      {
+        "file": "assets/hair/01_back.png",
+        "matrix": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          190.0,
+          98.0
+        ]
+      },
+      {
+        "file": "assets/head_base.png",
+        "matrix": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          190.0,
+          98.0
+        ]
+      },
+      {
+        "file": "assets/faces/normal.png",
+        "matrix": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          190.0,
+          98.0
+        ]
+      },
+      {
+        "file": "assets/hair/01_front.png",
+        "matrix": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          190.0,
+          98.0
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "file": "preview_animation.gif",
+  "frames": 80,
+  "frameDurationMs": 40,
+  "durationMs": 3200,
+  "loop": 0,
+  "status": "pass"
+}

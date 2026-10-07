@@ -1,0 +1,19 @@
+{
+  "status": "reviewed",
+  "inspected": [
+    "preview_overview.png",
+    "preview_frames.png",
+    "preview_faces.png",
+    "verification/neck_closeups.png",
+    "verification/animation_frames/004.png",
+    "verification/assembled/novice_female_01_idle_0.png",
+    "verification/neck_tiles/novice_female_01_walk_0.png"
+  ],
+  "observations": [
+    "Neck is visibly connected through skin overlap; no cream rear-hair band below the central jaw.",
+    "Male has narrower eyes, thicker brows, broader jaw; female uses longer eyes and rounder jaw.",
+    "All poses remain recognizable and feature labels remain clear of the heads.",
+    "Inherited body paint variability and minor edge color remnants remain; see PLAN.md."
+  ],
+  "automatedReport": "report.json"
+}

@@ -1,0 +1,1430 @@
+{
+  "assets/body/novice/attack_0.png": {
+    "bounds": [
+      79,
+      62,
+      349,
+      335
+    ],
+    "file": "assets/body/novice/attack_0.png",
+    "pixels": 47872,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          322,
+          172
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 6.082762530298219,
+        "point": [
+          230,
+          66
+        ],
+        "rgba": [
+          0,
+          0,
+          0,
+          0.00784313725490196
+        ]
+      }
+    ],
+    "size": [
+      418,
+      399
+    ]
+  },
+  "assets/body/novice/attack_1.png": {
+    "bounds": [
+      85,
+      68,
+      378,
+      340
+    ],
+    "file": "assets/body/novice/attack_1.png",
+    "pixels": 48087,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          357,
+          108
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 4.47213595499958,
+        "point": [
+          238,
+          68
+        ],
+        "rgba": [
+          0,
+          0,
+          0,
+          0.00392156862745098
+        ]
+      }
+    ],
+    "size": [
+      416,
+      405
+    ]
+  },
+  "assets/body/novice/attack_2.png": {
+    "bounds": [
+      57,
+      73,
+      390,
+      359
+    ],
+    "file": "assets/body/novice/attack_2.png",
+    "pixels": 53054,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          362,
+          241
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          218,
+          94
+        ],
+        "rgba": [
+          0.8919506669044495,
+          0.7730546593666077,
+          0.6457816958427429,
+          0.984313725490196
+        ]
+      }
+    ],
+    "size": [
+      418,
+      421
+    ]
+  },
+  "assets/body/novice/cast_0.png": {
+    "bounds": [
+      70,
+      59,
+      357,
+      336
+    ],
+    "file": "assets/body/novice/cast_0.png",
+    "pixels": 51197,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          328,
+          87
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 1,
+        "point": [
+          228,
+          65
+        ],
+        "rgba": [
+          0.584982693195343,
+          0.40851640701293945,
+          0.2685299515724182,
+          0.3764705882352941
+        ]
+      }
+    ],
+    "size": [
+      418,
+      385
+    ]
+  },
+  "assets/body/novice/cast_1.png": {
+    "bounds": [
+      74,
+      40,
+      338,
+      364
+    ],
+    "file": "assets/body/novice/cast_1.png",
+    "pixels": 53982,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          310,
+          70
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          229,
+          89
+        ],
+        "rgba": [
+          0.2942012548446655,
+          0.20829305052757263,
+          0.14573118090629578,
+          0.9764705882352941
+        ]
+      }
+    ],
+    "size": [
+      418,
+      417
+    ]
+  },
+  "assets/body/novice/dead_0.png": {
+    "bounds": [
+      57,
+      150,
+      379,
+      315
+    ],
+    "file": "assets/body/novice/dead_0.png",
+    "pixels": 38880,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          183,
+          267
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          87,
+          200
+        ],
+        "rgba": [
+          0.818421483039856,
+          0.6124232411384583,
+          0.33421197533607483,
+          0.9882352941176471
+        ]
+      }
+    ],
+    "size": [
+      418,
+      458
+    ]
+  },
+  "assets/body/novice/hurt_0.png": {
+    "bounds": [
+      66,
+      44,
+      358,
+      312
+    ],
+    "file": "assets/body/novice/hurt_0.png",
+    "pixels": 40594,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          214,
+          68
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.996078431372549
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 6,
+        "point": [
+          176,
+          49
+        ],
+        "rgba": [
+          0,
+          0,
+          0,
+          0.00392156862745098
+        ]
+      }
+    ],
+    "size": [
+      418,
+      410
+    ]
+  },
+  "assets/body/novice/idle_0.png": {
+    "bounds": [
+      9,
+      7,
+      313,
+      295
+    ],
+    "file": "assets/body/novice/idle_0.png",
+    "pixels": 56801,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          282,
+          126
+        ],
+        "rgba": [
+          0.9989739060401917,
+          0.9048723578453064,
+          0.8237937092781067,
+          1
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          190,
+          24
+        ],
+        "rgba": [
+          0.9443812370300293,
+          0.751946747303009,
+          0.5087161064147949,
+          1
+        ]
+      }
+    ],
+    "size": [
+      320,
+      298
+    ]
+  },
+  "assets/body/novice/idle_1.png": {
+    "bounds": [
+      9,
+      7,
+      313,
+      299
+    ],
+    "file": "assets/body/novice/idle_1.png",
+    "pixels": 57457,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          282,
+          128
+        ],
+        "rgba": [
+          0.9986314177513123,
+          0.9209757447242737,
+          0.8566650748252869,
+          1
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          190,
+          25
+        ],
+        "rgba": [
+          0.9565535187721252,
+          0.7888068556785583,
+          0.5727890729904175,
+          1
+        ]
+      }
+    ],
+    "size": [
+      320,
+      302
+    ]
+  },
+  "assets/body/novice/sit_0.png": {
+    "bounds": [
+      89,
+      117,
+      343,
+      320
+    ],
+    "file": "assets/body/novice/sit_0.png",
+    "pixels": 36771,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          121,
+          254
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          235,
+          125
+        ],
+        "rgba": [
+          0.29884791374206543,
+          0.20362666249275208,
+          0.14027157425880432,
+          0.9882352941176471
+        ]
+      }
+    ],
+    "size": [
+      416,
+      374
+    ]
+  },
+  "assets/body/novice/walk_0.png": {
+    "bounds": [
+      85,
+      94,
+      343,
+      374
+    ],
+    "file": "assets/body/novice/walk_0.png",
+    "pixels": 48918,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          317,
+          199
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          229,
+          103
+        ],
+        "rgba": [
+          0.2942012548446655,
+          0.20829305052757263,
+          0.14573118090629578,
+          0.9764705882352941
+        ]
+      }
+    ],
+    "size": [
+      418,
+      416
+    ]
+  },
+  "assets/body/novice/walk_1.png": {
+    "bounds": [
+      72,
+      98,
+      353,
+      379
+    ],
+    "file": "assets/body/novice/walk_1.png",
+    "pixels": 47376,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          332,
+          168
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          237,
+          105
+        ],
+        "rgba": [
+          0.29876241087913513,
+          0.20830363035202026,
+          0.14026093482971191,
+          0.984313725490196
+        ]
+      }
+    ],
+    "size": [
+      416,
+      422
+    ]
+  },
+  "assets/body/novice/walk_2.png": {
+    "bounds": [
+      69,
+      61,
+      336,
+      333
+    ],
+    "file": "assets/body/novice/walk_2.png",
+    "pixels": 47868,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          303,
+          190
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 7,
+        "point": [
+          218,
+          61
+        ],
+        "rgba": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "size": [
+      418,
+      399
+    ]
+  },
+  "assets/body/novice/walk_3.png": {
+    "bounds": [
+      77,
+      52,
+      356,
+      334
+    ],
+    "file": "assets/body/novice/walk_3.png",
+    "pixels": 47629,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          327,
+          176
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          228,
+          59
+        ],
+        "rgba": [
+          0.29428830742836,
+          0.20361581444740295,
+          0.14574143290519714,
+          0.9450980392156862
+        ]
+      }
+    ],
+    "size": [
+      418,
+      401
+    ]
+  },
+  "assets/body/swordsman/attack_0.png": {
+    "bounds": [
+      78,
+      60,
+      350,
+      336
+    ],
+    "file": "assets/body/swordsman/attack_0.png",
+    "pixels": 48868,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          322,
+          170
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 1,
+        "point": [
+          230,
+          66
+        ],
+        "rgba": [
+          0.37697580456733704,
+          0.2657000720500946,
+          0.18732187151908875,
+          0.6352941176470588
+        ]
+      }
+    ],
+    "size": [
+      418,
+      399
+    ]
+  },
+  "assets/body/swordsman/attack_1.png": {
+    "bounds": [
+      83,
+      66,
+      387,
+      340
+    ],
+    "file": "assets/body/swordsman/attack_1.png",
+    "pixels": 49795,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          361,
+          106
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 1.4142135623730951,
+        "point": [
+          238,
+          68
+        ],
+        "rgba": [
+          0.40886032581329346,
+          0.3621573746204376,
+          0.33197420835494995,
+          0.2823529411764706
+        ]
+      }
+    ],
+    "size": [
+      416,
+      405
+    ]
+  },
+  "assets/body/swordsman/attack_2.png": {
+    "bounds": [
+      54,
+      69,
+      392,
+      358
+    ],
+    "file": "assets/body/swordsman/attack_2.png",
+    "pixels": 53785,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          362,
+          239
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.996078431372549
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          218,
+          93
+        ],
+        "rgba": [
+          0.50180584192276,
+          0.354123592376709,
+          0.23602131009101868,
+          0.9882352941176471
+        ]
+      }
+    ],
+    "size": [
+      418,
+      415
+    ]
+  },
+  "assets/body/swordsman/cast_0.png": {
+    "bounds": [
+      69,
+      57,
+      360,
+      336
+    ],
+    "file": "assets/body/swordsman/cast_0.png",
+    "pixels": 52552,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          329,
+          86
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 1,
+        "point": [
+          228,
+          65
+        ],
+        "rgba": [
+          0.5475155115127563,
+          0.39158114790916443,
+          0.25473201274871826,
+          0.7254901960784313
+        ]
+      }
+    ],
+    "size": [
+      418,
+      383
+    ]
+  },
+  "assets/body/swordsman/cast_1.png": {
+    "bounds": [
+      75,
+      38,
+      341,
+      363
+    ],
+    "file": "assets/body/swordsman/cast_1.png",
+    "pixels": 54910,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          312,
+          69
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          229,
+          88
+        ],
+        "rgba": [
+          0.29876241087913513,
+          0.20830363035202026,
+          0.14026093482971191,
+          0.984313725490196
+        ]
+      }
+    ],
+    "size": [
+      418,
+      413
+    ]
+  },
+  "assets/body/swordsman/dead_0.png": {
+    "bounds": [
+      60,
+      149,
+      385,
+      314
+    ],
+    "file": "assets/body/swordsman/dead_0.png",
+    "pixels": 40052,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          186,
+          266
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          87,
+          200
+        ],
+        "rgba": [
+          0.7400521636009216,
+          0.757468044757843,
+          0.7676553130149841,
+          0.9921568627450981
+        ]
+      }
+    ],
+    "size": [
+      418,
+      458
+    ]
+  },
+  "assets/body/swordsman/hurt_0.png": {
+    "bounds": [
+      65,
+      44,
+      360,
+      312
+    ],
+    "file": "assets/body/swordsman/hurt_0.png",
+    "pixels": 41253,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          217,
+          67
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.996078431372549
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 5,
+        "point": [
+          176,
+          48
+        ],
+        "rgba": [
+          0.40781933069229126,
+          0.40781933069229126,
+          0.40781933069229126,
+          0.011764705882352941
+        ]
+      }
+    ],
+    "size": [
+      418,
+      405
+    ]
+  },
+  "assets/body/swordsman/idle_0.png": {
+    "bounds": [
+      13,
+      7,
+      313,
+      295
+    ],
+    "file": "assets/body/swordsman/idle_0.png",
+    "pixels": 58556,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          282,
+          126
+        ],
+        "rgba": [
+          0.9986900687217712,
+          0.9174736738204956,
+          0.8402725458145142,
+          1
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          190,
+          24
+        ],
+        "rgba": [
+          0.9501824975013733,
+          0.9404568076133728,
+          0.9341060519218445,
+          1
+        ]
+      }
+    ],
+    "size": [
+      320,
+      298
+    ]
+  },
+  "assets/body/swordsman/idle_1.png": {
+    "bounds": [
+      13,
+      7,
+      313,
+      299
+    ],
+    "file": "assets/body/swordsman/idle_1.png",
+    "pixels": 59216,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          282,
+          128
+        ],
+        "rgba": [
+          0.9984162449836731,
+          0.9304097294807434,
+          0.8696970343589783,
+          1
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          190,
+          25
+        ],
+        "rgba": [
+          0.9626912474632263,
+          0.9561716914176941,
+          0.9499215483665466,
+          1
+        ]
+      }
+    ],
+    "size": [
+      320,
+      302
+    ]
+  },
+  "assets/body/swordsman/sit_0.png": {
+    "bounds": [
+      88,
+      118,
+      350,
+      319
+    ],
+    "file": "assets/body/swordsman/sit_0.png",
+    "pixels": 37463,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          121,
+          252
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.996078431372549
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          235,
+          124
+        ],
+        "rgba": [
+          0.31633421778678894,
+          0.23727840185165405,
+          0.18248280882835388,
+          0.9921568627450981
+        ]
+      }
+    ],
+    "size": [
+      416,
+      371
+    ]
+  },
+  "assets/body/swordsman/walk_0.png": {
+    "bounds": [
+      84,
+      92,
+      345,
+      374
+    ],
+    "file": "assets/body/swordsman/walk_0.png",
+    "pixels": 49930,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          317,
+          198
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          229,
+          103
+        ],
+        "rgba": [
+          0.3932037055492401,
+          0.3059723377227783,
+          0.2413012683391571,
+          0.9882352941176471
+        ]
+      }
+    ],
+    "size": [
+      418,
+      413
+    ]
+  },
+  "assets/body/swordsman/walk_1.png": {
+    "bounds": [
+      73,
+      94,
+      360,
+      379
+    ],
+    "file": "assets/body/swordsman/walk_1.png",
+    "pixels": 49632,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          336,
+          165
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          237,
+          104
+        ],
+        "rgba": [
+          0.32063230872154236,
+          0.24649226665496826,
+          0.18755891919136047,
+          0.9882352941176471
+        ]
+      }
+    ],
+    "size": [
+      416,
+      419
+    ]
+  },
+  "assets/body/swordsman/walk_2.png": {
+    "bounds": [
+      69,
+      59,
+      339,
+      332
+    ],
+    "file": "assets/body/swordsman/walk_2.png",
+    "pixels": 48648,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          305,
+          190
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 4,
+        "point": [
+          218,
+          61
+        ],
+        "rgba": [
+          0.3190954327583313,
+          0.3190953731536865,
+          0.3190953731536865,
+          0.01568627450980392
+        ]
+      }
+    ],
+    "size": [
+      418,
+      396
+    ]
+  },
+  "assets/body/swordsman/walk_3.png": {
+    "bounds": [
+      74,
+      53,
+      357,
+      333
+    ],
+    "file": "assets/body/swordsman/walk_3.png",
+    "pixels": 48536,
+    "samples": [
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          328,
+          175
+        ],
+        "rgba": [
+          1,
+          0.9169764518737793,
+          0.8204532265663147,
+          0.9921568627450981
+        ]
+      },
+      {
+        "nearestOpaqueDistance": 0,
+        "point": [
+          228,
+          59
+        ],
+        "rgba": [
+          0.2988510727882385,
+          0.20374846458435059,
+          0.14572423696517944,
+          0.8274509803921568
+        ]
+      }
+    ],
+    "size": [
+      418,
+      398
+    ]
+  },
+  "assets/equipment/dagger.png": {
+    "bounds": [
+      0,
+      0,
+      167,
+      64
+    ],
+    "file": "assets/equipment/dagger.png",
+    "pixels": 6381,
+    "size": [
+      167,
+      64
+    ]
+  },
+  "assets/equipment/hairpin.png": {
+    "bounds": [
+      0,
+      0,
+      66,
+      40
+    ],
+    "file": "assets/equipment/hairpin.png",
+    "pixels": 1596,
+    "size": [
+      66,
+      40
+    ]
+  },
+  "assets/equipment/leaf.png": {
+    "bounds": [
+      0,
+      0,
+      64,
+      43
+    ],
+    "file": "assets/equipment/leaf.png",
+    "pixels": 1499,
+    "size": [
+      64,
+      43
+    ]
+  },
+  "assets/equipment/sword.png": {
+    "bounds": [
+      0,
+      0,
+      246,
+      74
+    ],
+    "file": "assets/equipment/sword.png",
+    "pixels": 10711,
+    "size": [
+      246,
+      74
+    ]
+  },
+  "assets/faces/hurt.png": {
+    "bounds": [
+      3,
+      8,
+      146,
+      92
+    ],
+    "file": "assets/faces/hurt.png",
+    "pixels": 1930,
+    "size": [
+      146,
+      92
+    ]
+  },
+  "assets/faces/ko.png": {
+    "bounds": [
+      3,
+      31,
+      146,
+      92
+    ],
+    "file": "assets/faces/ko.png",
+    "pixels": 1160,
+    "size": [
+      146,
+      92
+    ]
+  },
+  "assets/faces/normal.png": {
+    "bounds": [
+      157,
+      229,
+      279,
+      313
+    ],
+    "file": "assets/faces/normal.png",
+    "pixels": 3020,
+    "size": [
+      380,
+      380
+    ]
+  },
+  "assets/grip/novice_attack_0.png": {
+    "bounds": [
+      0,
+      6,
+      56,
+      53
+    ],
+    "file": "assets/grip/novice_attack_0.png",
+    "pixels": 2308,
+    "size": [
+      58,
+      58
+    ]
+  },
+  "assets/grip/novice_attack_1.png": {
+    "bounds": [
+      0,
+      6,
+      50,
+      53
+    ],
+    "file": "assets/grip/novice_attack_1.png",
+    "pixels": 2102,
+    "size": [
+      58,
+      58
+    ]
+  },
+  "assets/grip/novice_attack_2.png": {
+    "bounds": [
+      0,
+      6,
+      57,
+      53
+    ],
+    "file": "assets/grip/novice_attack_2.png",
+    "pixels": 2387,
+    "size": [
+      58,
+      58
+    ]
+  },
+  "assets/grip/swordsman_attack_0.png": {
+    "bounds": [
+      0,
+      6,
+      57,
+      53
+    ],
+    "file": "assets/grip/swordsman_attack_0.png",
+    "pixels": 2358,
+    "size": [
+      58,
+      58
+    ]
+  },
+  "assets/grip/swordsman_attack_1.png": {
+    "bounds": [
+      0,
+      6,
+      55,
+      53
+    ],
+    "file": "assets/grip/swordsman_attack_1.png",
+    "pixels": 2299,
+    "size": [
+      58,
+      58
+    ]
+  },
+  "assets/grip/swordsman_attack_2.png": {
+    "bounds": [
+      0,
+      6,
+      58,
+      53
+    ],
+    "file": "assets/grip/swordsman_attack_2.png",
+    "pixels": 2408,
+    "size": [
+      58,
+      58
+    ]
+  },
+  "assets/hair/01_back.png": {
+    "bounds": [
+      0,
+      247,
+      69,
+      331
+    ],
+    "file": "assets/hair/01_back.png",
+    "pixels": 4011,
+    "size": [
+      380,
+      380
+    ]
+  },
+  "assets/hair/01_front.png": {
+    "bounds": [
+      1,
+      5,
+      357,
+      353
+    ],
+    "file": "assets/hair/01_front.png",
+    "pixels": 62159,
+    "size": [
+      380,
+      380
+    ]
+  },
+  "assets/hair/02_back.png": {
+    "bounds": [
+      12,
+      135,
+      105,
+      247
+    ],
+    "file": "assets/hair/02_back.png",
+    "pixels": 6141,
+    "size": [
+      394,
+      336
+    ]
+  },
+  "assets/hair/02_front.png": {
+    "bounds": [
+      16,
+      11,
+      382,
+      257
+    ],
+    "file": "assets/hair/02_front.png",
+    "pixels": 38522,
+    "size": [
+      394,
+      336
+    ]
+  },
+  "assets/head_base.png": {
+    "bounds": [
+      66,
+      81,
+      324,
+      361
+    ],
+    "file": "assets/head_base.png",
+    "pixels": 57787,
+    "size": [
+      380,
+      380
+    ]
+  }
+}

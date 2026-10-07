@@ -1,0 +1,6 @@
+.raster
+.swift-cache/
+.venv/
+.uv-cache/
+__pycache__/
+source/__pycache__/

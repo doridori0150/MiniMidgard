@@ -113,7 +113,7 @@ export function CardPanel(props: { view?: 'slots' | 'book' } = {}) {
   const bookZones = ZONES.filter((z) => z.mobs.length > 0);
   const bookIds = (zid: string) => {
     const z = ZONES.find((x) => x.id === zid)!;
-    return [...z.mobs.map((m) => m.id), ...(z.boss ? [z.boss] : []), ...(z.mvp ? [z.mvp] : [])].filter((id) => ITEMS['c_' + id]);
+    return [...z.mobs.map((m) => m.id), ...(z.boss ? [z.boss] : []), ...(z.mvp ? [z.mvp] : []), ...(z.danger ?? []).map((d) => d.id), ...(z.chest ? [z.chest.trap] : [])].filter((id) => ITEMS['c_' + id]);
   };
   const allBook = [...new Set(bookZones.flatMap((z) => bookIds(z.id)))];
   const found = allBook.filter((id) => s.book[id]?.card).length;
@@ -209,7 +209,7 @@ export function CardPanel(props: { view?: 'slots' | 'book' } = {}) {
                       <button key={id} class={'book-card' + (got ? '' : ' unk') + (m.boss ? ' ' + m.boss : '')}
                         onClick={() => g.setModal(got ? { kind: 'item', id: 'c_' + id } : { kind: 'mob', id })}>
                         {got ? <CardArt id={'c_' + id} w={64} h={90} /> : <span class="book-back">?</span>}
-                        <span class="book-nm">{m.name}</span>
+                        <span class="book-nm">{m.danger && !s.book[id]?.kills ? '???' : m.name}</span>
                         <span class="book-rate">{got ? LOC_KO[ITEMS['c_' + id].cardLoc!] : pct(cardRate(id))}</span>
                       </button>
                     );

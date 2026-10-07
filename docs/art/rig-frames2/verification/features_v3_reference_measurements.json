@@ -1,0 +1,75 @@
+{
+  "v1": [
+    {
+      "blueBoundsInV2Head": [
+        186,
+        262,
+        214,
+        308
+      ],
+      "width": 28,
+      "height": 46,
+      "bluePixels": 1060
+    },
+    {
+      "blueBoundsInV2Head": [
+        274,
+        264,
+        298,
+        308
+      ],
+      "width": 24,
+      "height": 44,
+      "bluePixels": 856
+    }
+  ],
+  "female01": [
+    {
+      "blueBoundsInV2Head": [
+        185,
+        262,
+        213,
+        307
+      ],
+      "width": 28,
+      "height": 45,
+      "bluePixels": 1102
+    },
+    {
+      "blueBoundsInV2Head": [
+        274,
+        264,
+        298,
+        308
+      ],
+      "width": 24,
+      "height": 44,
+      "bluePixels": 899
+    }
+  ],
+  "male01": [
+    {
+      "blueBoundsInV2Head": [
+        185,
+        265,
+        213,
+        305
+      ],
+      "width": 28,
+      "height": 40,
+      "bluePixels": 965
+    },
+    {
+      "blueBoundsInV2Head": [
+        274,
+        267,
+        298,
+        306
+      ],
+      "width": 24,
+      "height": 39,
+      "bluePixels": 784
+    }
+  ],
+  "method": "Blue pixels: alpha >127, blue > red+40, blue > green. V1 translated +20,+20 to register neck [210,356] with [230,376]. Rectangles are exclusive-right/bottom; a curve redraw, not pixel-identical ink."
+}

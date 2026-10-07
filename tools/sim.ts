@@ -3,6 +3,9 @@
 //   flags (comma separated): gear  = equip drops/shop upgrades, compound cards, safe-refine, buy better potions
 //                            quiet = summary only, solo = never recruit party members
 //                            stay=<zone> = hunt only there until the whole party is Lv 15, then stop (beginner-field pace)
+//                            fight = the party order 위험 몹: 맞서기 (default 피하기: expedition maps' danger monsters are avoided)
+//                            farm=<zone> = once that map is open and the party is at its entry level, hunt only there (expedition
+//                              maps: reports when each of its specialty items first dropped)
 // Map choice (multi-map regions): go for unkilled field bosses that unlock something, try each new map once,
 // then hunt the map with the best measured EXP/h (wipes penalised), spending ~30 of every 120 minutes on the
 // best loot / ore / secret map. Sealed maps open through a local copy of the gate rules (sim clock starts 09:00,
@@ -28,6 +31,9 @@ const QUIET = flags.has('quiet');
 const SOLO = flags.has('solo');
 const STAY = [...flags].find((f) => f.startsWith('stay='))?.slice(5);
 const STAY_LV = 15;
+const FIGHT = flags.has('fight');
+const FARM = [...flags].find((f) => f.startsWith('farm='))?.slice(5);
+const farmGot: Record<string, number> = {};
 const rng = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
 
 const SKILL_PLAN: Partial<Record<ClassId, string[]>> = {
@@ -364,6 +370,10 @@ function chooseZone(minLv: number) {
     if (back) return goTo(back.id, 'retreat');
   }
   if (STAY) { if (s.zone !== STAY) goTo(STAY, 'stay'); return; }
+  if (FARM) {
+    const fz = ZONES.find((z) => z.id === FARM)!;
+    if (canEnterNow(fz) && minLv >= fz.lv[0]) { if (s.zone !== FARM) goTo(FARM, 'farm'); return; }
+  }
   if (curMin < nextPick && canEnterNow(cur)) return;
   nextPick = curMin + 10;
   const open = ZONES.filter(canEnterNow);
@@ -396,6 +406,7 @@ function chooseZone(minLv: number) {
 
 // ───────── run + report
 const s = newGame('Hero', defaultLook());
+if (FIGHT) s.orders = { ...s.orders, danger: 'fight' };
 const w = new World(s, rng);
 w.fx = false;
 // time-of-day paths fade by the world's clock: give it the simulated one (09:00 start), not the machine's
@@ -429,6 +440,7 @@ const LV_MARKS = [5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 84, 90, 95, 99];
 const lvAt: Record<number, number> = {};
 let ran = minutes;
 if (STAY && !ZONES.some((z) => z.id === STAY)) throw new Error('unknown stay zone ' + STAY);
+if (FARM && !ZONES.some((z) => z.id === FARM)) throw new Error('unknown farm zone ' + FARM);
 if (STAY) { s.unlocked.push(STAY); w.setZone(STAY); visit = { zone: STAY, min: 0, exp: 0, deaths: 0 }; }
 for (let min = 1; min <= minutes; min++) {
   curMin = min;
@@ -469,7 +481,7 @@ for (let min = 1; min <= minutes; min++) {
       expByZone[zid] = (expByZone[zid] ?? 0) + e - lastExp;
       if (visit.zone === zid) { visit.exp += e - lastExp; visit.min += 1 / 6; }
       lastExp = e;
-      for (const e of s.equips) if (e.uid > seenUid) { seenUid = Math.max(seenUid, e.uid); if (!bought.has(e.uid)) equipFound[e.id + (e.slots ? `[${e.slots}]` : '')] = (equipFound[e.id + (e.slots ? `[${e.slots}]` : '')] ?? 0) + 1; }
+      for (const e of s.equips) if (e.uid > seenUid) { seenUid = Math.max(seenUid, e.uid); if (!bought.has(e.uid)) { equipFound[e.id + (e.slots ? `[${e.slots}]` : '')] = (equipFound[e.id + (e.slots ? `[${e.slots}]` : '')] ?? 0) + 1; farmGot[e.id] ??= min; } }
       manage(s, w, party);
       if (GEARUP && sec === 0) gearUp(s, w);
       if (GEARUP && sec === 30 && min % 5 === 0) shopUp(s, w);
@@ -493,6 +505,15 @@ if (STAY) {
 }
 console.log(`final: ${s.heroes.map((h) => `${CLASSES[h.cls].name} ${h.baseLv}/${h.jobLv}`).join(', ')}  deaths ${s.totals.deaths}  zeny ${s.zeny}  cards ${s.totals.cards}`);
 console.log(`2nd job at: ${secondJobAt.map((m) => (m / 60).toFixed(1) + 'h').join(', ') || '-'}`);
+{
+  const d = w.dangerStats;
+  if (d.spawns || d.chests) console.log(`expedition (${FIGHT ? '맞서기' : '피하기'}): danger ${d.spawns} appeared · ${d.kills} felled · ${d.left} left · runs ${d.runs} (${Math.round(d.evadeMs / 60000)} min) · chests ${d.chests}, traps ${d.traps}`);
+  if (FARM) {
+    const fz = ZONES.find((z) => z.id === FARM)!, zs = zoneStat[FARM];
+    const items = (fz.specialty ?? []).filter((id) => ITEMS[id]?.kind === 'equip');
+    console.log(`farm ${FARM}: ${zs ? `arrived ${(zs.first / 60).toFixed(1)}h (Lv ${zs.minLv}), ${(zs.min / 60).toFixed(1)}h there, ${zs.deaths} wipes` : 'never opened'} · ${items.map((id) => `${ITEMS[id].name} ${farmGot[id] !== undefined ? `${(farmGot[id] / 60).toFixed(1)}h${zs ? ` (+${((farmGot[id] - zs.first) / 60).toFixed(1)}h)` : ''}` : '-'}`).join(' · ')}`);
+  }
+}
 console.log('milestones:\n' + miles.join('\n'));
 console.log('zones (first@min minLv | hours kills kph wipes | boss/mvp kills | exp/h cards pots-z/h):');
 for (const z of ZONES) {

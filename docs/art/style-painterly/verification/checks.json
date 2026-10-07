@@ -1,0 +1,642 @@
+{
+  "attackAt140ms" : 1,
+  "frameCount" : 18,
+  "frames" : [
+    {
+      "bounds" : [
+        209,
+        80,
+        497,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/novice/idle_0.png",
+      "height" : 600,
+      "nearOpaquePixels" : 95408,
+      "opaquePixels" : 28,
+      "partialAlphaPixels" : 106695,
+      "sourceOrigin" : [
+        657,
+        1202
+      ],
+      "sourceScale" : 0.54995417048579287,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 679709
+    },
+    {
+      "bounds" : [
+        200,
+        76,
+        491,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/novice/idle_1.png",
+      "height" : 604,
+      "nearOpaquePixels" : 97467,
+      "opaquePixels" : 217,
+      "partialAlphaPixels" : 108435,
+      "sourceOrigin" : [
+        677,
+        1191
+      ],
+      "sourceScale" : 0.55719557195571956,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 677780
+    },
+    {
+      "bounds" : [
+        223,
+        82,
+        542,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/novice/walk_0.png",
+      "height" : 598,
+      "nearOpaquePixels" : 97493,
+      "opaquePixels" : 306,
+      "partialAlphaPixels" : 109201,
+      "sourceOrigin" : [
+        646.5,
+        1198
+      ],
+      "sourceScale" : 0.54862385321100915,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 676925
+    },
+    {
+      "bounds" : [
+        206,
+        76,
+        493,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/novice/walk_1.png",
+      "height" : 604,
+      "nearOpaquePixels" : 91042,
+      "opaquePixels" : 255,
+      "partialAlphaPixels" : 101161,
+      "sourceOrigin" : [
+        672.5,
+        1189
+      ],
+      "sourceScale" : 0.56186046511627907,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 685016
+    },
+    {
+      "bounds" : [
+        216,
+        82,
+        544,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/novice/walk_2.png",
+      "height" : 598,
+      "nearOpaquePixels" : 90533,
+      "opaquePixels" : 185,
+      "partialAlphaPixels" : 101716,
+      "sourceOrigin" : [
+        667.5,
+        1203
+      ],
+      "sourceScale" : 0.53392857142857142,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 684531
+    },
+    {
+      "bounds" : [
+        176,
+        76,
+        493,
+        681
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/novice/walk_3.png",
+      "height" : 604,
+      "nearOpaquePixels" : 98418,
+      "opaquePixels" : 287,
+      "partialAlphaPixels" : 107399,
+      "sourceOrigin" : [
+        723,
+        1215
+      ],
+      "sourceScale" : 0.52158894645941278,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 678746
+    },
+    {
+      "bounds" : [
+        220,
+        110,
+        574,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/novice/attack_0.png",
+      "height" : 570,
+      "nearOpaquePixels" : 102282,
+      "opaquePixels" : 200,
+      "partialAlphaPixels" : 112876,
+      "sourceOrigin" : [
+        653.5,
+        1173
+      ],
+      "sourceScale" : 0.55827619980411358,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 673356
+    },
+    {
+      "bounds" : [
+        221,
+        125,
+        749,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/novice/attack_1.png",
+      "height" : 554,
+      "nearOpaquePixels" : 100637,
+      "opaquePixels" : 295,
+      "partialAlphaPixels" : 111808,
+      "sourceOrigin" : [
+        527,
+        1153
+      ],
+      "sourceScale" : 0.54154447702834796,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 674329
+    },
+    {
+      "bounds" : [
+        225,
+        90,
+        517,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/novice/attack_2.png",
+      "height" : 590,
+      "nearOpaquePixels" : 91424,
+      "opaquePixels" : 283,
+      "partialAlphaPixels" : 99819,
+      "sourceOrigin" : [
+        659.5,
+        1186
+      ],
+      "sourceScale" : 0.55451127819548873,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 686330
+    },
+    {
+      "bounds" : [
+        217,
+        80,
+        518,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/swordsman/idle_0.png",
+      "height" : 600,
+      "nearOpaquePixels" : 106430,
+      "opaquePixels" : 870,
+      "partialAlphaPixels" : 113099,
+      "sourceOrigin" : [
+        636.5,
+        1208
+      ],
+      "sourceScale" : 0.51993067590987874,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 672463
+    },
+    {
+      "bounds" : [
+        210,
+        76,
+        511,
+        681
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/swordsman/idle_1.png",
+      "height" : 604,
+      "nearOpaquePixels" : 106804,
+      "opaquePixels" : 578,
+      "partialAlphaPixels" : 115203,
+      "sourceOrigin" : [
+        646,
+        1215
+      ],
+      "sourceScale" : 0.52249134948096887,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 670651
+    },
+    {
+      "bounds" : [
+        154,
+        82,
+        619,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/swordsman/walk_0.png",
+      "height" : 598,
+      "nearOpaquePixels" : 114516,
+      "opaquePixels" : 388,
+      "partialAlphaPixels" : 124344,
+      "sourceOrigin" : [
+        505,
+        1200
+      ],
+      "sourceScale" : 0.53680430879712748,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 661700
+    },
+    {
+      "bounds" : [
+        211,
+        75,
+        521,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/swordsman/walk_1.png",
+      "height" : 604,
+      "nearOpaquePixels" : 105038,
+      "opaquePixels" : 492,
+      "partialAlphaPixels" : 113670,
+      "sourceOrigin" : [
+        570.5,
+        1185
+      ],
+      "sourceScale" : 0.54959053685168335,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 672270
+    },
+    {
+      "bounds" : [
+        217,
+        82,
+        549,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/swordsman/walk_2.png",
+      "height" : 598,
+      "nearOpaquePixels" : 107802,
+      "opaquePixels" : 664,
+      "partialAlphaPixels" : 115008,
+      "sourceOrigin" : [
+        635.5,
+        1219
+      ],
+      "sourceScale" : 0.51198630136986301,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 670760
+    },
+    {
+      "bounds" : [
+        190,
+        76,
+        538,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/swordsman/walk_3.png",
+      "height" : 604,
+      "nearOpaquePixels" : 112476,
+      "opaquePixels" : 770,
+      "partialAlphaPixels" : 120435,
+      "sourceOrigin" : [
+        623,
+        1197
+      ],
+      "sourceScale" : 0.52889667250437833,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 665227
+    },
+    {
+      "bounds" : [
+        192,
+        110,
+        591,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/swordsman/attack_0.png",
+      "height" : 570,
+      "nearOpaquePixels" : 115380,
+      "opaquePixels" : 374,
+      "partialAlphaPixels" : 124436,
+      "sourceOrigin" : [
+        566.5,
+        1175
+      ],
+      "sourceScale" : 0.53023255813953485,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 661622
+    },
+    {
+      "bounds" : [
+        165,
+        126,
+        866,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/swordsman/attack_1.png",
+      "height" : 554,
+      "nearOpaquePixels" : 122000,
+      "opaquePixels" : 437,
+      "partialAlphaPixels" : 135130,
+      "sourceOrigin" : [
+        392.5,
+        1123
+      ],
+      "sourceScale" : 0.58010471204188485,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 650865
+    },
+    {
+      "bounds" : [
+        235,
+        90,
+        535,
+        680
+      ],
+      "canvas" : [
+        1024,
+        768
+      ],
+      "clipped" : false,
+      "file" : "chars/swordsman/attack_2.png",
+      "height" : 590,
+      "nearOpaquePixels" : 101914,
+      "opaquePixels" : 466,
+      "partialAlphaPixels" : 110085,
+      "sourceOrigin" : [
+        596,
+        1184
+      ],
+      "sourceScale" : 0.54128440366972475,
+      "targetOrigin" : [
+        380,
+        680
+      ],
+      "transparentPixels" : 675881
+    }
+  ],
+  "kitKeyPixelsNormalized" : 547454,
+  "notes" : "Technical checks only. Artistic consistency is reviewed in NOTES.md.",
+  "props" : [
+    {
+      "borderNonKeyPixels" : 0,
+      "bounds" : [
+        24,
+        14,
+        287,
+        309
+      ],
+      "cell" : [
+        0,
+        640,
+        320,
+        320
+      ],
+      "name" : "tree"
+    },
+    {
+      "borderNonKeyPixels" : 0,
+      "bounds" : [
+        44,
+        13,
+        277,
+        311
+      ],
+      "cell" : [
+        320,
+        640,
+        320,
+        320
+      ],
+      "name" : "pine"
+    },
+    {
+      "borderNonKeyPixels" : 0,
+      "bounds" : [
+        34,
+        58,
+        287,
+        290
+      ],
+      "cell" : [
+        640,
+        640,
+        320,
+        320
+      ],
+      "name" : "bush"
+    },
+    {
+      "borderNonKeyPixels" : 0,
+      "bounds" : [
+        28,
+        79,
+        291,
+        284
+      ],
+      "cell" : [
+        960,
+        640,
+        320,
+        320
+      ],
+      "name" : "rock"
+    },
+    {
+      "borderNonKeyPixels" : 0,
+      "bounds" : [
+        31,
+        59,
+        291,
+        268
+      ],
+      "cell" : [
+        0,
+        960,
+        320,
+        320
+      ],
+      "name" : "flowers"
+    },
+    {
+      "borderNonKeyPixels" : 0,
+      "bounds" : [
+        20,
+        65,
+        300,
+        262
+      ],
+      "cell" : [
+        320,
+        960,
+        320,
+        320
+      ],
+      "name" : "stump"
+    },
+    {
+      "borderNonKeyPixels" : 0,
+      "bounds" : [
+        22,
+        48,
+        300,
+        270
+      ],
+      "cell" : [
+        640,
+        960,
+        320,
+        320
+      ],
+      "name" : "fence"
+    },
+    {
+      "borderNonKeyPixels" : 0,
+      "bounds" : [
+        76,
+        18,
+        274,
+        294
+      ],
+      "cell" : [
+        960,
+        960,
+        320,
+        320
+      ],
+      "name" : "sign"
+    }
+  ]
+}

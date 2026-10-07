@@ -47,6 +47,10 @@ export interface MonsterDef {
   flying?: boolean;
   /** M1: share of critical chance this monster shrugs off (bosses default to 0.25 / MVPs 0.5) */
   critRes?: number;
+  /** M10: a roaming danger monster of an expedition map (map level +20~30): one at a time, the party avoids it by default */
+  danger?: boolean;
+  /** M7: a status its hits put on heroes (the curse is world.ts curseHero, blind its blindHero) */
+  onHit?: { status: 'curse' | 'blind'; chance: number };
   desc: string;
 }
 
@@ -1292,6 +1296,61 @@ mob({
   skills: [{ kind: 'bolt', cd: 4000, mult: 1.5, element: 'water' }, { kind: 'charge', cd: 8000, mult: 1.6 }, { kind: 'summon', cd: 16000, summon: 'swan', count: 2 }, { kind: 'heal', cd: 24000, below: 0.3 }],
   drops: [{ id: 'e_swanfeather', rate: 1 }, { id: 'h_swanwing', rate: 0.08 }, { id: 'x_mistmirror', rate: 0.08, slots: 1 }, { id: 'w_lakewand', rate: 0.06, slots: 2 }, { id: 'u_blue', rate: 0.6 }, { id: 'r_ori', rate: 0.3 }, { id: 'r_elu', rate: 0.3 }, { id: 'c_swanqueen', rate: CARD.sboss }],
   desc: '물에 비친 달을 왕관으로 쓴 백조. 거울 호수의 주인이다. 물속성이라 바람이 잘 든다. [필드 보스]',
+});
+
+// ═══════════════════════════ 원정 맵 (M10, docs/design/BUILD_TREE.md §5.1)
+// Maps that are dangerous on purpose: each has one signature regular monster and a roaming danger monster about
+// 20–30 levels over the map (danger: true) — one at a time, rare, avoided by the party unless ordered to fight.
+// Danger monsters are elites, not bosses: ~3× the HP of a normal monster of their level, EXP ×3, no crit resistance.
+// ── E-1 버려진 상인의 창고 (푸른 항구, 함정 상자)
+mob({
+  id: 'ledger', name: '떠도는 장부', lv: 24, hp: 920, atk: [56, 72], def: 8, mdef: 25, agi: 20, dex: 44, expMul: 0.9,
+  element: 'neutral', race: 'formless', size: 'small', range: 110, delay: 1600, speed: 46, aggressive: false, flying: true,
+  sprite: 'book', palette: ['#6a4a2a', '#f4ecd0', '#ffc040'],
+  drops: [{ id: 'e_ledgerpage', rate: 0.5 }, { id: 'e_coin', rate: 0.1 }, { id: 'u_orange', rate: 0.03 }, { id: 'x_glove', rate: 0.0012 }, { id: 'x_glove', rate: 0.0002, slots: 1 }, { id: 'c_ledger', rate: CARD.loot }],
+  desc: '망한 상인의 장부가 혼자 펄럭이며 빚을 받으러 다닌다. 멀리서 종잇장을 날려 보낸다.',
+});
+mob({
+  id: 'trapchest', name: '탐욕 상자', lv: 45, hp: 9000, atk: [250, 310], def: 35, mdef: 20, agi: 45, dex: 75, luk: 20, expMul: 3,
+  element: 'neutral', race: 'formless', size: 'medium', range: 28, delay: 1000, speed: 95, aggressive: true, danger: true, scale: 1.25,
+  sprite: 'chest:fang', palette: ['#b07a3a', '#5a3a1a', '#ffd040'],
+  skills: [{ kind: 'charge', cd: 11000, mult: 1.5 }],
+  drops: [{ id: 'e_chestfang', rate: 0.6 }, { id: 'e_doubloon', rate: 0.4 }, { id: 'e_gem', rate: 0.05 }, { id: 'x_brooch', rate: 0.012, slots: 1 }, { id: 'x_glove', rate: 0.012, slots: 1 }, { id: 'r_ori', rate: 0.1 }, { id: 'c_trapchest', rate: CARD.boss }],
+  desc: '보물 상자인 척 기다리다 여는 손을 문다. 깨어나면 생각보다 빨리 쫓아온다 — 강해지기 전에는 도망칠 것. [위험]',
+});
+// ── E-2 망자의 성 지하 감옥 (잿빛 광산, 핏빛 기사)
+mob({
+  id: 'jailer', name: '감옥 간수', lv: 37, hp: 2400, atk: [104, 134], def: 22, mdef: 10, agi: 28, dex: 50, expMul: 0.9,
+  element: 'undead', race: 'undead', size: 'medium', range: 28, delay: 1300, speed: 58, aggressive: true,
+  sprite: 'skeleton', palette: ['#d8d0b8', '#8a8470', '#5a3a30'],
+  drops: [{ id: 'e_jailkeys', rate: 0.5 }, { id: 'u_yellow', rate: 0.03 }, { id: 's_shield', rate: 0.001, slots: 1 }, { id: 'x_necklace', rate: 0.0012 }, { id: 'r_elu', rate: 0.005 }, { id: 'c_jailer', rate: CARD.loot }],
+  desc: '주인 없는 감옥을 아직도 순찰하는 간수. 허리춤의 열쇠 꾸러미가 짤랑거린다.',
+});
+mob({
+  id: 'bloodknight', name: '핏빛 기사', lv: 65, hp: 24000, atk: [400, 490], def: 40, mdef: 25, agi: 35, dex: 100, luk: 30, expMul: 3,
+  element: 'undead', race: 'undead', size: 'large', range: 34, delay: 1200, speed: 80, aggressive: true, danger: true, scale: 1.45,
+  onHit: { status: 'curse', chance: 20 },
+  sprite: 'skeleton_knight', palette: ['#e8d8c8', '#5a1a24', '#c01830'],
+  skills: [{ kind: 'slam', cd: 8000, mult: 1.8, radius: 90 }],
+  drops: [{ id: 'e_bloodcrest', rate: 0.6 }, { id: 'u_white', rate: 0.3 }, { id: 'a_plate', rate: 0.02, slots: 1 }, { id: 'r_ori', rate: 0.3 }, { id: 'r_elu', rate: 0.2 }, { id: 'c_bloodknight', rate: CARD.boss }],
+  desc: '붉은 달이 뜬 밤 성을 지키다 죽은 기사. 지하 감옥을 떠돌며 베는 자에게 저주를 남긴다. 발은 느리다. [위험]',
+});
+// ── E-3 가라앉은 수도원 (햇살 평원, 밤에만 깨어나는 유령)
+mob({
+  id: 'drownedmonk', name: '물에 잠긴 수도사', lv: 30, hp: 1500, atk: [74, 92], def: 12, mdef: 20, agi: 10, dex: 42, expMul: 0.9,
+  element: 'undead', race: 'undead', size: 'medium', range: 26, delay: 1500, speed: 40, aggressive: false,
+  sprite: 'zombie', palette: ['#a8c8c0', '#5a7a80', '#4a5078'],
+  drops: [{ id: 'e_wetprayer', rate: 0.5 }, { id: 'u_orange', rate: 0.04 }, { id: 'x_rosary', rate: 0.001 }, { id: 'a_saint', rate: 0.002, slots: 1 }, { id: 'c_drownedmonk', rate: CARD.loot }],
+  desc: '물이 차오른 예배당에서 아직도 기도를 외는 수도사. 느리고 순하지만 성수가 없으면 질기다.',
+});
+mob({
+  id: 'bellghost', name: '종 치는 유령', lv: 50, hp: 12000, atk: [270, 330], def: 10, mdef: 50, agi: 60, dex: 95, luk: 30, expMul: 3,
+  element: 'ghost', race: 'undead', size: 'medium', range: 30, delay: 1200, speed: 75, aggressive: true, danger: true, flying: true, scale: 1.15,
+  onHit: { status: 'blind', chance: 30 },
+  sprite: 'wraith:bell', palette: ['#c8d8f0', '#8ab0ff', '#ffe060'],
+  skills: [{ kind: 'slam', cd: 9000, mult: 1.4, radius: 100, element: 'shadow' }],
+  drops: [{ id: 'e_bellclapper', rate: 0.6 }, { id: 'u_white', rate: 0.3 }, { id: 'a_saint', rate: 0.03, slots: 1 }, { id: 'x_rosary', rate: 0.02, slots: 1 }, { id: 'c_bellghost', rate: CARD.boss }],
+  desc: '가라앉은 종탑에서 밤마다 종을 치는 유령. 종소리를 들으면 눈앞이 캄캄해진다. 무속성 공격은 거의 통하지 않는다. [위험]',
 });
 
 export function monster(id: string): MonsterDef {

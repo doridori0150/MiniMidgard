@@ -1,0 +1,163 @@
+{
+  "status": "reviewed",
+  "revision": "features_r3",
+  "inspected": [
+    "verification/features_v3_catalog.png",
+    "verification/features_v3_vs_original.png",
+    "verification/features_v3_80px.png",
+    "preview_overview.png",
+    "verification/animation_frames/004.png",
+    "verification/neck_tiles/novice_female_01_walk_0.png"
+  ],
+  "pairReview": [
+    {
+      "gender": "female",
+      "feature": "eyes",
+      "pair": "01-02",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 tall vertical blue silhouette; 02 wider round blue mass and arched top; 03 sloping angular lid and tapered lower iris. All pairs read differently in the 80px contact sheet."
+    },
+    {
+      "gender": "female",
+      "feature": "eyes",
+      "pair": "01-03",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 tall vertical blue silhouette; 02 wider round blue mass and arched top; 03 sloping angular lid and tapered lower iris. All pairs read differently in the 80px contact sheet."
+    },
+    {
+      "gender": "female",
+      "feature": "eyes",
+      "pair": "02-03",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 tall vertical blue silhouette; 02 wider round blue mass and arched top; 03 sloping angular lid and tapered lower iris. All pairs read differently in the 80px contact sheet."
+    },
+    {
+      "gender": "female",
+      "feature": "brows",
+      "pair": "01-02",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 inward determined slant, 02 elevated curved arch, 03 wider heavy horizontal bar. Male 01 stays thicker and straighter than female 01."
+    },
+    {
+      "gender": "female",
+      "feature": "brows",
+      "pair": "01-03",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 inward determined slant, 02 elevated curved arch, 03 wider heavy horizontal bar. Male 01 stays thicker and straighter than female 01."
+    },
+    {
+      "gender": "female",
+      "feature": "brows",
+      "pair": "02-03",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 inward determined slant, 02 elevated curved arch, 03 wider heavy horizontal bar. Male 01 stays thicker and straighter than female 01."
+    },
+    {
+      "gender": "female",
+      "feature": "nose",
+      "pair": "01-02",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 tiny dot versus 02 hooked stroke. Distinguishable side by side at 80px, but the smallest and least salient change."
+    },
+    {
+      "gender": "female",
+      "feature": "mouth",
+      "pair": "01-02",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 small curved smile, 02 visibly open dark happy mouth, 03 longer firm straight line. Cat-mouth draft was rejected as too similar at 80px."
+    },
+    {
+      "gender": "female",
+      "feature": "mouth",
+      "pair": "01-03",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 small curved smile, 02 visibly open dark happy mouth, 03 longer firm straight line. Cat-mouth draft was rejected as too similar at 80px."
+    },
+    {
+      "gender": "female",
+      "feature": "mouth",
+      "pair": "02-03",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 small curved smile, 02 visibly open dark happy mouth, 03 longer firm straight line. Cat-mouth draft was rejected as too similar at 80px."
+    },
+    {
+      "gender": "male",
+      "feature": "eyes",
+      "pair": "01-02",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 tall vertical blue silhouette; 02 wider round blue mass and arched top; 03 sloping angular lid and tapered lower iris. All pairs read differently in the 80px contact sheet."
+    },
+    {
+      "gender": "male",
+      "feature": "eyes",
+      "pair": "01-03",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 tall vertical blue silhouette; 02 wider round blue mass and arched top; 03 sloping angular lid and tapered lower iris. All pairs read differently in the 80px contact sheet."
+    },
+    {
+      "gender": "male",
+      "feature": "eyes",
+      "pair": "02-03",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 tall vertical blue silhouette; 02 wider round blue mass and arched top; 03 sloping angular lid and tapered lower iris. All pairs read differently in the 80px contact sheet."
+    },
+    {
+      "gender": "male",
+      "feature": "brows",
+      "pair": "01-02",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 inward determined slant, 02 elevated curved arch, 03 wider heavy horizontal bar. Male 01 stays thicker and straighter than female 01."
+    },
+    {
+      "gender": "male",
+      "feature": "brows",
+      "pair": "01-03",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 inward determined slant, 02 elevated curved arch, 03 wider heavy horizontal bar. Male 01 stays thicker and straighter than female 01."
+    },
+    {
+      "gender": "male",
+      "feature": "brows",
+      "pair": "02-03",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 inward determined slant, 02 elevated curved arch, 03 wider heavy horizontal bar. Male 01 stays thicker and straighter than female 01."
+    },
+    {
+      "gender": "male",
+      "feature": "nose",
+      "pair": "01-02",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 tiny dot versus 02 hooked stroke. Distinguishable side by side at 80px, but the smallest and least salient change."
+    },
+    {
+      "gender": "male",
+      "feature": "mouth",
+      "pair": "01-02",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 small curved smile, 02 visibly open dark happy mouth, 03 longer firm straight line. Cat-mouth draft was rejected as too similar at 80px."
+    },
+    {
+      "gender": "male",
+      "feature": "mouth",
+      "pair": "01-03",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 small curved smile, 02 visibly open dark happy mouth, 03 longer firm straight line. Cat-mouth draft was rejected as too similar at 80px."
+    },
+    {
+      "gender": "male",
+      "feature": "mouth",
+      "pair": "02-03",
+      "judgment": "distinguishable in side-by-side 80px reference renders",
+      "observation": "01 small curved smile, 02 visibly open dark happy mouth, 03 longer firm straight line. Cat-mouth draft was rejected as too similar at 80px."
+    }
+  ],
+  "variants": "All 52 entries inspected on bare bases and with default hair. Hurt eyes retain > <; 02 has larger curved closed lids, 03 flatter closed lids. Brows and mouth expression variants remain independently selectable.",
+  "limitations": [
+    "This is visual review of native reference-player output, not user approval or an in-game usability study.",
+    "Nose and small-mouth choices are less salient than eyes and brows at 80px; movement, display scaling and game background can reduce legibility.",
+    "The accepted v2 head and hair remain unchanged, so overall head contour is not pixel-identical to the approved lineup."
+  ],
+  "automatedReport": "report.json",
+  "distinctnessReport": "features_v3_distinctness.json",
+  "preservationReport": "features_v3_preservation.json"
+}

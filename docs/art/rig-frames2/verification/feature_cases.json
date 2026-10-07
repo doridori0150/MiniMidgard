@@ -1,0 +1,3030 @@
+{
+  "female": [
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    }
+  ],
+  "male": [
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "01",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "02",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "01",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "02",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "01",
+      "mouth": "03",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "01",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "02",
+      "expression": "blink"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "normal"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "hurt"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "ko"
+    },
+    {
+      "eyes": "03",
+      "brows": "03",
+      "nose": "02",
+      "mouth": "03",
+      "expression": "blink"
+    }
+  ]
+}

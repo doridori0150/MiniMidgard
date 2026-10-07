@@ -1,0 +1,38 @@
+{
+  "alphaFailures" : 38,
+  "cases" : 2,
+  "failures" : [
+    {
+      "alphaPixels" : 8,
+      "id" : "v1\/idle\/01",
+      "variant" : 0,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 30,
+      "id" : "v1\/idle\/02",
+      "variant" : 0,
+      "whitePixels" : 0
+    }
+  ],
+  "groups" : [
+    {
+      "alphaPixels" : 8,
+      "cases" : 1,
+      "failedCases" : 1,
+      "id" : "v1\/idle\/01",
+      "minAlpha" : 228,
+      "whitePixels" : 0
+    },
+    {
+      "alphaPixels" : 30,
+      "cases" : 1,
+      "failedCases" : 1,
+      "id" : "v1\/idle\/02",
+      "minAlpha" : 0,
+      "whitePixels" : 0
+    }
+  ],
+  "sampledPixels" : 3510,
+  "whiteFailures" : 0
+}

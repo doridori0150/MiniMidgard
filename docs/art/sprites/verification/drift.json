@@ -1,0 +1,900 @@
+[
+  {
+    "character": "novice",
+    "frame": "idle_0",
+    "scale": 1.09333,
+    "silhouetteBounds": [
+      124,
+      50,
+      300,
+      360
+    ],
+    "silhouetteHeight": 310,
+    "headBox": [
+      123.24,
+      47.307,
+      300.36,
+      228.307
+    ],
+    "headWidth": 177.12,
+    "headHeight": 181.0,
+    "headCentre": [
+      211.8,
+      137.807
+    ],
+    "anatomicalHeadWidth": 177.12,
+    "hairMaskBounds": [
+      130,
+      56,
+      295,
+      222
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "novice",
+    "frame": "idle_1",
+    "scale": 1.09333,
+    "silhouetteBounds": [
+      124,
+      49,
+      300,
+      360
+    ],
+    "silhouetteHeight": 311,
+    "headBox": [
+      123.24,
+      47.307,
+      300.36,
+      228.307
+    ],
+    "headWidth": 177.12,
+    "headHeight": 181.724,
+    "headCentre": [
+      211.8,
+      136.918
+    ],
+    "anatomicalHeadWidth": 177.12,
+    "hairMaskBounds": [
+      130,
+      55,
+      295,
+      221
+    ],
+    "groundErrorPx": 0,
+    "source": "idle_0 whole-figure breathing deformation"
+  },
+  {
+    "character": "novice",
+    "frame": "walk_0",
+    "scale": 1.07895,
+    "silhouetteBounds": [
+      113,
+      50,
+      301,
+      360
+    ],
+    "silhouetteHeight": 310,
+    "headBox": [
+      112.645,
+      46.105,
+      289.592,
+      227.105
+    ],
+    "headWidth": 176.947,
+    "headHeight": 181.0,
+    "headCentre": [
+      201.118,
+      136.605
+    ],
+    "anatomicalHeadWidth": 176.947,
+    "hairMaskBounds": [
+      119,
+      56,
+      283,
+      221
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "novice",
+    "frame": "walk_1",
+    "scale": 1.07895,
+    "silhouetteBounds": [
+      126,
+      56,
+      301,
+      360
+    ],
+    "silhouetteHeight": 304,
+    "headBox": [
+      125.053,
+      51.421,
+      298.763,
+      232.421
+    ],
+    "headWidth": 173.711,
+    "headHeight": 181.0,
+    "headCentre": [
+      211.908,
+      141.921
+    ],
+    "anatomicalHeadWidth": 173.711,
+    "hairMaskBounds": [
+      132,
+      62,
+      296,
+      226
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "novice",
+    "frame": "walk_2",
+    "scale": 1.08609,
+    "silhouetteBounds": [
+      117,
+      50,
+      306,
+      360
+    ],
+    "silhouetteHeight": 310,
+    "headBox": [
+      114.649,
+      48.636,
+      292.768,
+      229.636
+    ],
+    "headWidth": 178.119,
+    "headHeight": 181.0,
+    "headCentre": [
+      203.708,
+      139.136
+    ],
+    "anatomicalHeadWidth": 178.119,
+    "hairMaskBounds": [
+      123,
+      56,
+      288,
+      222
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "novice",
+    "frame": "walk_3",
+    "scale": 1.09333,
+    "silhouetteBounds": [
+      123,
+      57,
+      300,
+      360
+    ],
+    "silhouetteHeight": 303,
+    "headBox": [
+      123.24,
+      52.587,
+      302.547,
+      233.587
+    ],
+    "headWidth": 179.307,
+    "headHeight": 181.0,
+    "headCentre": [
+      212.894,
+      143.087
+    ],
+    "anatomicalHeadWidth": 179.307,
+    "hairMaskBounds": [
+      130,
+      62,
+      295,
+      227
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "novice",
+    "frame": "attack_0",
+    "scale": 1.07895,
+    "silhouetteBounds": [
+      123,
+      59,
+      311,
+      360
+    ],
+    "silhouetteHeight": 301,
+    "headBox": [
+      123.434,
+      58.974,
+      301.461,
+      239.974
+    ],
+    "headWidth": 178.026,
+    "headHeight": 181.0,
+    "headCentre": [
+      212.447,
+      149.474
+    ],
+    "anatomicalHeadWidth": 178.026,
+    "hairMaskBounds": [
+      130,
+      64,
+      294,
+      230
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "novice",
+    "frame": "attack_1",
+    "scale": 1.06494,
+    "silhouetteBounds": [
+      118,
+      68,
+      325,
+      360
+    ],
+    "silhouetteHeight": 292,
+    "headBox": [
+      117.766,
+      62.948,
+      292.416,
+      243.948
+    ],
+    "headWidth": 174.649,
+    "headHeight": 181.0,
+    "headCentre": [
+      205.091,
+      153.448
+    ],
+    "anatomicalHeadWidth": 174.649,
+    "hairMaskBounds": [
+      124,
+      73,
+      289,
+      237
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "novice",
+    "frame": "attack_2",
+    "scale": 1.04142,
+    "silhouetteBounds": [
+      137,
+      85,
+      327,
+      360
+    ],
+    "silhouetteHeight": 275,
+    "headBox": [
+      151.266,
+      83.982,
+      327.266,
+      239.154
+    ],
+    "headWidth": 176.0,
+    "headHeight": 155.172,
+    "headCentre": [
+      239.266,
+      161.568
+    ],
+    "anatomicalHeadWidth": 176.0,
+    "hairMaskBounds": [
+      162,
+      90,
+      322,
+      233
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "novice",
+    "frame": "cast_0",
+    "scale": 1.05128,
+    "silhouetteBounds": [
+      117,
+      50,
+      301,
+      360
+    ],
+    "silhouetteHeight": 310,
+    "headBox": [
+      118.026,
+      49.795,
+      292.538,
+      230.795
+    ],
+    "headWidth": 174.513,
+    "headHeight": 181.0,
+    "headCentre": [
+      205.282,
+      140.295
+    ],
+    "anatomicalHeadWidth": 174.513,
+    "hairMaskBounds": [
+      123,
+      55,
+      288,
+      221
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "novice",
+    "frame": "cast_1",
+    "scale": 1.15789,
+    "silhouetteBounds": [
+      112,
+      50,
+      321,
+      360
+    ],
+    "silhouetteHeight": 310,
+    "headBox": [
+      130.263,
+      51.421,
+      306.263,
+      232.421
+    ],
+    "headWidth": 176.0,
+    "headHeight": 181.0,
+    "headCentre": [
+      218.263,
+      141.921
+    ],
+    "anatomicalHeadWidth": 176.0,
+    "hairMaskBounds": [
+      143,
+      56,
+      299,
+      220
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "novice",
+    "frame": "sit_0",
+    "scale": 1.0719,
+    "silhouetteBounds": [
+      99,
+      104,
+      308,
+      360
+    ],
+    "silhouetteHeight": 256,
+    "headBox": [
+      97.804,
+      108.105,
+      269.307,
+      289.105
+    ],
+    "headWidth": 171.503,
+    "headHeight": 181.0,
+    "headCentre": [
+      183.555,
+      198.605
+    ],
+    "anatomicalHeadWidth": 171.503,
+    "hairMaskBounds": [
+      105,
+      109,
+      270,
+      276
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "novice",
+    "frame": "hurt_0",
+    "scale": 1.06024,
+    "silhouetteBounds": [
+      72,
+      78,
+      296,
+      360
+    ],
+    "silhouetteHeight": 282,
+    "headBox": [
+      68.386,
+      79.036,
+      244.386,
+      243.373
+    ],
+    "headWidth": 176.0,
+    "headHeight": 164.337,
+    "headCentre": [
+      156.386,
+      161.204
+    ],
+    "anatomicalHeadWidth": 176.0,
+    "hairMaskBounds": [
+      78,
+      83,
+      238,
+      226
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "novice",
+    "frame": "dead_0",
+    "scale": 1.29134,
+    "silhouetteBounds": [
+      29,
+      182,
+      410,
+      360
+    ],
+    "silhouetteHeight": 178,
+    "headBox": [
+      28.236,
+      181.795,
+      225.811,
+      366.457
+    ],
+    "headWidth": 197.575,
+    "headHeight": 184.662,
+    "headCentre": [
+      127.023,
+      274.126
+    ],
+    "anatomicalHeadWidth": 184.661,
+    "hairMaskBounds": [
+      35,
+      188,
+      208,
+      353
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "idle_0",
+    "scale": 1.08108,
+    "silhouetteBounds": [
+      129,
+      50,
+      307,
+      360
+    ],
+    "silhouetteHeight": 310,
+    "headBox": [
+      132.432,
+      47.324,
+      308.649,
+      228.324
+    ],
+    "headWidth": 176.216,
+    "headHeight": 181.0,
+    "headCentre": [
+      220.541,
+      137.824
+    ],
+    "anatomicalHeadWidth": 176.216,
+    "hairMaskBounds": [
+      140,
+      55,
+      300,
+      207
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "idle_1",
+    "scale": 1.08108,
+    "silhouetteBounds": [
+      129,
+      48,
+      307,
+      360
+    ],
+    "silhouetteHeight": 312,
+    "headBox": [
+      132.432,
+      47.324,
+      308.649,
+      228.324
+    ],
+    "headWidth": 176.216,
+    "headHeight": 181.724,
+    "headCentre": [
+      220.541,
+      136.935
+    ],
+    "anatomicalHeadWidth": 176.216,
+    "hairMaskBounds": [
+      140,
+      54,
+      300,
+      206
+    ],
+    "groundErrorPx": 0,
+    "source": "idle_0 whole-figure breathing deformation"
+  },
+  {
+    "character": "swordsman",
+    "frame": "walk_0",
+    "scale": 1.07383,
+    "silhouetteBounds": [
+      133,
+      50,
+      312,
+      360
+    ],
+    "silhouetteHeight": 310,
+    "headBox": [
+      134.631,
+      47.369,
+      312.886,
+      228.369
+    ],
+    "headWidth": 178.255,
+    "headHeight": 181.0,
+    "headCentre": [
+      223.759,
+      137.869
+    ],
+    "anatomicalHeadWidth": 178.255,
+    "hairMaskBounds": [
+      144,
+      55,
+      304,
+      208
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "walk_1",
+    "scale": 1.07383,
+    "silhouetteBounds": [
+      137,
+      56,
+      311,
+      360
+    ],
+    "silhouetteHeight": 304,
+    "headBox": [
+      133.02,
+      53.369,
+      312.349,
+      234.369
+    ],
+    "headWidth": 179.329,
+    "headHeight": 181.0,
+    "headCentre": [
+      222.685,
+      143.869
+    ],
+    "anatomicalHeadWidth": 179.329,
+    "hairMaskBounds": [
+      143,
+      61,
+      303,
+      212
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "walk_2",
+    "scale": 1.06667,
+    "silhouetteBounds": [
+      129,
+      50,
+      315,
+      360
+    ],
+    "silhouetteHeight": 310,
+    "headBox": [
+      132.0,
+      48.667,
+      314.4,
+      229.667
+    ],
+    "headWidth": 182.4,
+    "headHeight": 181.0,
+    "headCentre": [
+      223.2,
+      139.167
+    ],
+    "anatomicalHeadWidth": 182.4,
+    "hairMaskBounds": [
+      145,
+      55,
+      305,
+      209
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "walk_3",
+    "scale": 1.0596,
+    "silhouetteBounds": [
+      139,
+      56,
+      310,
+      360
+    ],
+    "silhouetteHeight": 304,
+    "headBox": [
+      132.053,
+      54.715,
+      310.066,
+      235.715
+    ],
+    "headWidth": 178.013,
+    "headHeight": 181.0,
+    "headCentre": [
+      221.059,
+      145.215
+    ],
+    "anatomicalHeadWidth": 178.013,
+    "hairMaskBounds": [
+      144,
+      61,
+      304,
+      214
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "attack_0",
+    "scale": 1.07383,
+    "silhouetteBounds": [
+      123,
+      51,
+      313,
+      360
+    ],
+    "silhouetteHeight": 309,
+    "headBox": [
+      124.43,
+      49.664,
+      303.758,
+      230.664
+    ],
+    "headWidth": 179.329,
+    "headHeight": 181.0,
+    "headCentre": [
+      214.094,
+      140.164
+    ],
+    "anatomicalHeadWidth": 179.329,
+    "hairMaskBounds": [
+      144,
+      56,
+      304,
+      210
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "attack_1",
+    "scale": 1.07383,
+    "silhouetteBounds": [
+      127,
+      51,
+      339,
+      360
+    ],
+    "silhouetteHeight": 309,
+    "headBox": [
+      125.503,
+      49.664,
+      303.758,
+      230.664
+    ],
+    "headWidth": 178.255,
+    "headHeight": 181.0,
+    "headCentre": [
+      214.63,
+      140.164
+    ],
+    "anatomicalHeadWidth": 178.255,
+    "hairMaskBounds": [
+      143,
+      56,
+      303,
+      211
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "attack_2",
+    "scale": 1.0596,
+    "silhouetteBounds": [
+      134,
+      65,
+      326,
+      360
+    ],
+    "silhouetteHeight": 295,
+    "headBox": [
+      142.119,
+      58.013,
+      322.252,
+      242.384
+    ],
+    "headWidth": 180.132,
+    "headHeight": 184.371,
+    "headCentre": [
+      232.185,
+      150.198
+    ],
+    "anatomicalHeadWidth": 180.132,
+    "hairMaskBounds": [
+      159,
+      71,
+      319,
+      220
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "cast_0",
+    "scale": 1.0596,
+    "silhouetteBounds": [
+      130,
+      50,
+      316,
+      360
+    ],
+    "silhouetteHeight": 310,
+    "headBox": [
+      123.046,
+      43.834,
+      310.596,
+      224.834
+    ],
+    "headWidth": 187.55,
+    "headHeight": 181.0,
+    "headCentre": [
+      216.821,
+      134.334
+    ],
+    "anatomicalHeadWidth": 187.55,
+    "hairMaskBounds": [
+      142,
+      55,
+      302,
+      199
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "cast_1",
+    "scale": 1.05263,
+    "silhouetteBounds": [
+      131,
+      50,
+      328,
+      360
+    ],
+    "silhouetteHeight": 310,
+    "headBox": [
+      130.0,
+      43.842,
+      316.316,
+      224.842
+    ],
+    "headWidth": 186.316,
+    "headHeight": 181.0,
+    "headCentre": [
+      223.158,
+      134.342
+    ],
+    "anatomicalHeadWidth": 186.316,
+    "hairMaskBounds": [
+      142,
+      55,
+      302,
+      201
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "sit_0",
+    "scale": 1.07383,
+    "silhouetteBounds": [
+      119,
+      121,
+      312,
+      360
+    ],
+    "silhouetteHeight": 239,
+    "headBox": [
+      112.617,
+      119.463,
+      291.946,
+      300.463
+    ],
+    "headWidth": 179.329,
+    "headHeight": 181.0,
+    "headCentre": [
+      202.282,
+      209.963
+    ],
+    "anatomicalHeadWidth": 179.329,
+    "hairMaskBounds": [
+      126,
+      128,
+      286,
+      282
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "hurt_0",
+    "scale": 1.03529,
+    "silhouetteBounds": [
+      76,
+      88,
+      286,
+      360
+    ],
+    "silhouetteHeight": 272,
+    "headBox": [
+      72.471,
+      87.718,
+      248.471,
+      256.471
+    ],
+    "headWidth": 176.0,
+    "headHeight": 168.753,
+    "headCentre": [
+      160.471,
+      172.095
+    ],
+    "anatomicalHeadWidth": 176.0,
+    "hairMaskBounds": [
+      83,
+      93,
+      240,
+      236
+    ],
+    "groundErrorPx": 0
+  },
+  {
+    "character": "swordsman",
+    "frame": "dead_0",
+    "scale": 1.19403,
+    "silhouetteBounds": [
+      45,
+      187,
+      396,
+      360
+    ],
+    "silhouetteHeight": 173,
+    "headBox": [
+      42.09,
+      192.642,
+      229.552,
+      368.164
+    ],
+    "headWidth": 187.463,
+    "headHeight": 175.522,
+    "headCentre": [
+      135.821,
+      280.403
+    ],
+    "anatomicalHeadWidth": 175.522,
+    "hairMaskBounds": [
+      50,
+      194,
+      215,
+      354
+    ],
+    "groundErrorPx": 0
+  }
+]

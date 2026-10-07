@@ -5,7 +5,7 @@ import { elementMod, sizeMod, ELEMENT_KO } from './data/elements.ts';
 import { SKILLS, type SkillDef, type FixedCtx } from './data/skills.ts';
 import { MONSTERS, type MonsterDef, type MobSkill } from './data/monsters.ts';
 import { ITEMS, CARD_SKILLS } from './data/items.ts';
-import { zone as zoneDef, ZONES, openers, type ZoneDef } from './data/zones.ts';
+import { zone as zoneDef, ZONES, openers, isExpedition, type ZoneDef, type DangerDef } from './data/zones.ts';
 import { CLASSES, lineage } from './data/classes.ts';
 import { expNext } from './exp.ts';
 import { applyGrade, rollGrade } from './gear.ts';
@@ -25,7 +25,7 @@ export type FxEvent =
   | { t: 'levelup'; uid: number; job: boolean }
   | { t: 'die'; uid: number }
   | { t: 'spawn'; uid: number }
-  | { t: 'announce'; text: string; kind: 'boss' | 'mvp' | 'card' | 'info' | 'wipe' | 'unlock' }
+  | { t: 'announce'; text: string; kind: 'boss' | 'mvp' | 'card' | 'info' | 'wipe' | 'unlock' | 'danger' }
   | { t: 'sound'; key: string }
   | { t: 'telegraph'; x: number; y: number; r: number; dur: number; color: string }
   | { t: 'shake'; power: number }
@@ -107,6 +107,29 @@ export interface MobUnit {
   hurtAt: number;
   dmgBy: Record<number, number>;
   charge: { tx: number; ty: number; until: number; target: number; mult: number } | null;
+  /** M10: a roaming danger monster — how long it roams before leaving, and the hours it is awake (null = ordinary mob) */
+  danger: { stay: number; hours?: { from: number; to: number }; def?: DangerDef } | null;
+  bornAt: number;
+  /** last time a hero did real damage to it (danger monsters leave or lose interest when nobody fights them) */
+  dmgAt: number;
+  /** when it locked on to its current target */
+  chaseSince: number;
+  /** a danger monster that gave up a chase ignores the party until then */
+  boredUntil: number;
+  /** left the map (fades out instead of collapsing; no rewards) */
+  vanish: boolean;
+}
+
+/** M10: a treasure chest lying on an expedition map; the party walks over and opens it */
+export interface FieldChest {
+  id: number;
+  x: number; y: number;
+  born: number;
+  /** being opened: the lid rattles until then (0 = closed) */
+  openAt: number;
+  openBy: number;
+  /** opened as a real chest at this time (it lingers open for a moment, then goes) */
+  opened: number;
 }
 
 export interface GroundItem {
@@ -135,6 +158,9 @@ const SP_TICK = 4000;
 const REVIVE_MS = 15000;
 const CORPSE_MS = 1100;
 const SPAWN_MS = 600;
+// M10 danger monsters: how close one may come before the party runs (200, then keep running until 300 away), how long
+// it chases without being fought before it loses interest, and how long it then ignores the party
+const RUN_NEAR = 200, RUN_CLEAR = 300, CHASE_MS = 9000, BORED_MS = 12000;
 
 
 function clamp(v: number, a: number, b: number) { return v < a ? a : v > b ? b : v; }
@@ -171,12 +197,21 @@ export class World {
   clock: () => Date = () => new Date();
   /** when a night-only path closes under the party's feet */
   private fadeAt = 0;
+  /** M10 expedition maps: chests on the field, when the next danger monster / chest may appear, the party's run */
+  chests: FieldChest[] = [];
+  private dangerAt = Infinity;
+  private chestAt = Infinity;
+  /** 피하기: the leader runs for this spot, away from danger monster `from`; everyone follows */
+  run: { from: number; x: number; y: number; until: number; at: number } | null = null;
+  /** counters for tools (expedition-check) */
+  dangerStats = { spawns: 0, kills: 0, left: 0, traps: 0, chests: 0, evadeMs: 0, runs: 0 };
 
   constructor(s: GameState, rng: () => number = Math.random) {
     this.s = s;
     this.rng = rng;
     this.zone = zoneDef(s.zone);
     this.syncParty();
+    this.armExpedition();
   }
 
   // ───────────────────────────── setup
@@ -217,6 +252,7 @@ export class World {
       h.target = null; h.cast = null; h.state = h.state === 'dead' ? 'dead' : 'idle'; h.sitting = false;
     });
     this.spawnAt = this.time + 400;
+    this.armExpedition();
     if (this.s.rate.zone !== id) this.s.rate = { zone: id, kills: 0, ms: 0, exp: 0, jexp: 0, zeny: 0, deaths: 0 };
     this.log(`${this.zone.name}에 도착했습니다.`, '#9fe0ff');
     this.version++;
@@ -290,8 +326,10 @@ export class World {
     }
     this.gateTick();
     this.spawnTick();
+    this.expeditionTick();
     this.autoItems();
     this.partyScan();
+    if (this.run) this.dangerStats.evadeMs += dt;
     for (const h of this.heroes) this.heroTick(h, dt);
     for (const m of this.mobs) this.mobTick(m, dt);
     this.separate();
@@ -355,7 +393,7 @@ export class World {
   private spawnTick() {
     const z = this.zone;
     if (!z.mobs.length) return;
-    const normal = this.mobs.filter((m) => !m.summoned && !m.m.boss && m.state !== 'dead').length;
+    const normal = this.mobs.filter((m) => !m.summoned && !m.m.boss && !m.danger && m.state !== 'dead').length;
     if (normal < z.maxMobs && this.time >= this.spawnAt) {
       this.spawnAt = this.time + 900 + this.rng() * 1400;
       // per-type quotas keep the mix stable even when the party skips some monsters
@@ -437,10 +475,194 @@ export class World {
       provokeUntil: 0, provokeBy: 0, provokeDef: 0, provokeAtk: 0, stolen: false,
       skillCd: (m.skills ?? []).map((sk) => this.time + sk.cd * (0.4 + this.rng() * 0.4)),
       summoned, deadAt: 0, hurtAt: -9999, dmgBy: {}, charge: null,
+      danger: m.danger ? { stay: 60000 } : null, bornAt: this.time, dmgAt: -99999, chaseSince: 0, boredUntil: 0, vanish: false,
     };
     this.mobs.push(u);
     this.emit({ t: 'spawn', uid: u.uid });
     return u;
+  }
+
+  // ───────────────────────────── expedition maps (M10): danger monsters & treasure chests
+  /** fight (맞서기) or keep away (피하기, the default) */
+  avoidDanger(): boolean { return (this.s.orders?.danger ?? 'avoid') !== 'fight'; }
+  /** a danger monster the party keeps away from right now (the player tapping it overrides the order) */
+  shunned(m: MobUnit): boolean { return !!m.danger && m.uid !== this.focus && this.avoidDanger(); }
+
+  /** new map: first danger monster and first chest after a while */
+  private armExpedition() {
+    this.chests = [];
+    this.run = null;
+    const d = this.zone.danger?.[0];
+    this.dangerAt = d ? this.time + d.every * (0.4 + this.rng() * 0.6) : Infinity;
+    this.chestAt = this.zone.chest ? this.time + this.zone.chest.every * (0.25 + this.rng() * 0.5) : Infinity;
+  }
+
+  private expeditionTick() {
+    const z = this.zone;
+    if (!z.danger && !z.chest) return;
+    if (this.wipeUntil) return;
+    // a danger monster appears now and then, one at a time (a woken trap chest counts)
+    if (z.danger?.length && this.time >= this.dangerAt && !this.mobs.some((m) => m.danger && m.state !== 'dead')) {
+      const now = this.clock();
+      const awake = z.danger.filter((d) => !d.hours || inHours(d.hours, now));
+      if (awake.length) this.spawnDanger(awake[Math.floor(this.rng() * awake.length)]);
+      else this.dangerAt = this.time + 30000;
+    }
+    // danger monsters leave when nobody fights them for long, or when their hours end
+    for (const m of this.mobs) {
+      if (!m.danger || !this.alive(m)) continue;
+      const age = this.time - m.bornAt;
+      const fought = this.time - m.dmgAt < 20000;
+      const h = m.danger.hours;
+      if (h && !inHours(h, this.clock())) this.dangerLeave(m, `날이 밝자 ${m.m.name}이(가) 모습을 감췄다.`);
+      else if (age > m.danger.stay && !fought) this.dangerLeave(m, `${m.m.name}이(가) 어둠 속으로 사라졌다.`);
+      else if (age > Math.max(m.danger.stay * 4, 300000)) this.dangerLeave(m, `${m.m.name}이(가) 싸움에 흥미를 잃고 사라졌다.`);
+    }
+    // treasure chests
+    if (z.chest && !this.chests.some((c) => !c.opened) && this.time >= this.chestAt) this.spawnChest();
+    if (this.chests.length) this.chests = this.chests.filter((c) => !c.opened || this.time - c.opened < 1600);
+  }
+
+  /** a random spot far from the party (and from `avoid` points) */
+  private farPoint(minD: number, avoid: { x: number; y: number }[] = [], avoidR = 0) {
+    const z = this.zone, c = this.center();
+    let best = { x: z.w / 2, y: z.h / 2 }, bs = -Infinity;
+    for (let i = 0; i < 20; i++) {
+      const p = { x: 70 + this.rng() * (z.w - 140), y: 110 + this.rng() * (z.h - 170) };
+      const d = dist(p, c);
+      if (avoid.some((a) => dist(a, p) < avoidR)) continue;
+      if (d >= minD) return p;
+      if (d > bs) { bs = d; best = p; }
+    }
+    return best;
+  }
+
+  private spawnDanger(def: DangerDef) {
+    const p = this.farPoint(400);
+    const u = this.spawnMob(def.id, false, p.x, p.y);
+    u.danger = { stay: def.stay, hours: def.hours, def };
+    this.dangerAt = Infinity; // the next one is timed from when this one goes
+    this.dangerStats.spawns++;
+    this.emit({ t: 'announce', text: `⚠ ${u.m.name} 출현!`, kind: 'danger' });
+    this.log(`[위험] ${u.m.name}(Lv ${u.m.lv})이(가) 나타났다! ${this.avoidDanger() ? '작전: 피하기 — 마주치면 반대편으로 물러납니다.' : '작전: 맞서기'}`, '#ff6a6a');
+    this.sound('boss');
+    this.emit({ t: 'shake', power: 3 });
+  }
+
+  /** a danger monster left (or fell): time the next one */
+  private dangerGone(m: MobUnit) {
+    const def = m.danger?.def;
+    if (def && this.zone.danger?.includes(def)) this.dangerAt = this.time + def.every * (0.6 + this.rng() * 0.8);
+    else if (this.dangerAt === Infinity && this.zone.danger?.length) this.dangerAt = this.time + this.zone.danger[0].every * (0.6 + this.rng() * 0.8);
+    if (this.run?.from === m.uid) this.run = null;
+  }
+
+  private dangerLeave(m: MobUnit, text: string) {
+    m.vanish = true;
+    m.target = null;
+    m.charge = null;
+    this.setState(m, 'dead');
+    m.deadAt = this.time;
+    if (this.focus === m.uid) this.focus = null;
+    for (const h of this.heroes) if (h.target === m.uid) h.target = null;
+    this.emit({ t: 'status', uid: m.uid, text: '…', color: '#c8b8e0' });
+    this.log(text, '#d8b8ff');
+    this.dangerStats.left++;
+    this.dangerGone(m);
+  }
+
+  /** M10: per-step thinking of a danger monster — give up a chase nobody fights back, then roam away for a while */
+  private dangerThink(m: MobUnit) {
+    if (m.target === null) return;
+    const t = this.heroUnit(m.target);
+    const far = !t || dist(t, m) > 340;
+    const unfought = this.time - m.dmgAt > 6000;
+    if (far || (unfought && this.time - m.chaseSince > CHASE_MS)) {
+      m.target = null;
+      m.provokeUntil = 0;
+      m.boredUntil = this.time + BORED_MS;
+      // wander off to the side away from the party
+      const c = this.center();
+      const dx = m.x - c.x, dy = m.y - c.y, d = Math.hypot(dx, dy) || 1;
+      m.dest = { x: clamp(m.x + dx / d * 260, 50, this.zone.w - 50), y: clamp(m.y + dy / d * 200, 90, this.zone.h - 50) };
+      m.wanderAt = this.time + 5000;
+      this.emit({ t: 'status', uid: m.uid, text: '…흥미를 잃었다', color: '#c8b8e0' });
+    }
+  }
+
+  private spawnChest() {
+    const p = this.farPoint(170, this.mobs.filter((m) => m.danger && this.alive(m)), 260);
+    this.chests.push({ id: this.gidSeq++, x: p.x, y: p.y, born: this.time, openAt: 0, openBy: 0, opened: 0 });
+    this.chestAt = Infinity; // the next one is timed from when this one is opened
+    this.dangerStats.chests++;
+    this.log('어딘가에 보물 상자가 놓여 있다…', '#ffe080');
+  }
+
+  /** the closed chest the leader should go for (none near a danger monster the party avoids) */
+  private chestFor(h: HeroUnit): FieldChest | undefined {
+    if (!this.chests.length) return undefined;
+    let best: FieldChest | undefined; let bd = Infinity;
+    for (const c of this.chests) {
+      if (c.opened || (c.openAt && c.openBy !== h.uid)) continue;
+      if (this.pc.dangers.some((m) => dist(m, c) < 240)) continue;
+      const d = dist(h, c);
+      if (d < bd) { bd = d; best = c; }
+    }
+    return best;
+  }
+
+  /** walk to the chest and open it (a short rattle, then loot — or a trap) */
+  private goChest(h: HeroUnit, c: FieldChest, dt: number) {
+    if (c.openAt) { h.doing = '보물 상자 여는 중'; this.setState(h, 'cast'); return; }
+    if (dist(h, c) > 24) {
+      h.doing = '보물 상자로';
+      this.moveTo(h, c.x - 12, c.y + 2, h.d.moveSpd, dt, 3);
+      return;
+    }
+    c.openAt = this.time + 900;
+    c.openBy = h.uid;
+    h.facing = c.x >= h.x ? 1 : -1;
+    h.lockUntil = this.time + 950;
+    this.setState(h, 'cast');
+    h.doing = '보물 상자 여는 중';
+    this.emit({ t: 'status', uid: h.uid, text: '덜컥…', color: '#ffe8a0' });
+    this.sound('click');
+    this.after(900, () => this.openChest(c));
+  }
+
+  private openChest(c: FieldChest) {
+    const cd = this.zone.chest;
+    if (!cd || !this.chests.includes(c) || c.opened) return;
+    const opener = this.heroUnit(c.openBy) ?? this.leader();
+    this.chestAt = this.time + cd.every * (0.6 + this.rng() * 0.8);
+    if (this.rng() < cd.trapRate) {
+      // a trap: the chest grows teeth
+      this.chests = this.chests.filter((x) => x !== c);
+      const u = this.spawnMob(cd.trap, false, c.x, c.y);
+      u.lockUntil = this.time + 350;
+      if (opener && opener.state !== 'dead') { u.target = opener.uid; u.chaseSince = this.time; }
+      this.dangerStats.traps++;
+      this.emit({ t: 'announce', text: `⚠ 함정! ${u.m.name} 출현!`, kind: 'danger' });
+      this.log(`[함정] 보물 상자가 아니었다! ${u.m.name}(Lv ${u.m.lv})이(가) 이빨을 드러냈다.`, '#ff6a6a');
+      this.sound('boss');
+      this.emit({ t: 'shake', power: 6 });
+      return;
+    }
+    c.opened = this.time;
+    let n = 0;
+    const got: string[] = [];
+    for (const d of cd.drops) {
+      if (this.rng() >= d.rate) continue;
+      const g = this.dropAt(c.x, c.y - 6, d.id, d.slots, n++);
+      if (ITEMS[d.id].kind !== 'etc' || ITEMS[d.id].rarity) got.push(g.got.name);
+    }
+    const zeny = cd.zeny[0] + Math.floor(this.rng() * (cd.zeny[1] - cd.zeny[0] + 1));
+    this.s.zeny += zeny;
+    this.s.rate.zeny += zeny;
+    if (opener) this.emit({ t: 'pickup', gid: -1, to: opener.uid, id: '', name: '', zeny });
+    this.log(`보물 상자를 열었다! ${zeny.toLocaleString()}z${got.length ? ' · ' + got.join(', ') : ''}`, '#ffe080');
+    this.sound('drop');
+    this.onPersist();
   }
 
   // ───────────────────────────── heroes
@@ -463,6 +685,11 @@ export class World {
       if ((h.state as string) === 'dead') return;
     }
 
+    // 피하기: a danger monster right on top of a caster breaks the cast — get away first
+    if (h.cast && this.run) {
+      const m = this.mob(this.run.from);
+      if (m && dist(m, h) < 170) { h.cast = null; this.emit({ t: 'castEnd', uid: h.uid }); this.setState(h, 'idle'); }
+    }
     if (h.cast) {
       const ct = this.unit(h.cast.target);
       h.doing = h.cast.sk.name + (ct?.kind === 'hero' && ct !== h ? ` → ${ct.hero.name}` : ct?.kind === 'mob' ? ` → ${ct.m.name}` : '') + ' 시전';
@@ -491,6 +718,8 @@ export class World {
       return;
     }
 
+    // 피하기: a danger monster closing in — run for the far side of the map, together
+    if (this.tryEvade(h, dt)) return;
     // support: revive, heal & buffs first
     if (this.trySupport(h)) return;
     // party rest (orders.rest) and casters sitting for SP
@@ -527,13 +756,15 @@ export class World {
   }
 
   // ───────────────────────────── party brain
-  private pc: { engaged: MobUnit[]; target: MobUnit | undefined } = { engaged: [], target: undefined };
+  private pc: { engaged: MobUnit[]; target: MobUnit | undefined; dangers: MobUnit[] } = { engaged: [], target: undefined, dangers: [] };
 
   /** once per step: the mobs the party is fighting and the shared (assist) target */
   private partyScan() {
     const ids = new Set(this.heroes.map((h) => h.uid));
     const lead = this.leader();
-    const engaged = this.mobs.filter((m) => this.alive(m) && ((m.target !== null && ids.has(m.target))
+    // 피하기: danger monsters are never part of the fight — they are what the party keeps away from
+    const dangers = this.mobs.filter((m) => this.alive(m) && this.shunned(m));
+    const engaged = this.mobs.filter((m) => this.alive(m) && !this.shunned(m) && ((m.target !== null && ids.has(m.target))
       || (Object.keys(m.dmgBy).length > 0 && !!lead && dist(m, lead) < 320)));
     let target: MobUnit | undefined;
     const f = this.mob(this.focus);
@@ -545,7 +776,81 @@ export class World {
       if (tt && this.alive(tt)) target = tt;
     }
     if (!target && lead && engaged.length) target = engaged.reduce((a, b) => (dist(a, lead) <= dist(b, lead) ? a : b));
-    this.pc = { engaged, target };
+    this.pc = { engaged, target, dangers };
+    this.updateRun(dangers);
+  }
+
+  /** 피하기: start / keep / end the party's run from a danger monster that comes close or chases one of us */
+  private updateRun(dangers: MobUnit[]) {
+    const lead = this.leader();
+    if (!dangers.length || !lead || this.zone.id === 'town') { this.run = null; return; }
+    const live = this.aliveHeroes();
+    let threat: MobUnit | undefined; let td = Infinity;
+    for (const m of dangers) {
+      let near = Infinity;
+      for (const h of live) near = Math.min(near, dist(h, m));
+      const chasing = m.target !== null && !!this.heroUnit(m.target);
+      // once running, keep going until it is well behind (hysteresis)
+      if ((near < (this.run ? RUN_CLEAR : RUN_NEAR) || (chasing && near < 360)) && near < td) { td = near; threat = m; }
+    }
+    if (!threat) {
+      if (this.run && this.time >= this.run.until) this.run = null;
+      return;
+    }
+    const fresh = !this.run;
+    const cur = this.run;
+    if (!cur || cur.from !== threat.uid || this.time >= cur.at || dist(lead, cur) < 30) {
+      // re-plan now and then — but keep heading for the same spot unless another is clearly better (no zig-zag)
+      const p = this.farSpot(lead, threat);
+      const keep = cur && cur.from === threat.uid && dist(lead, cur) >= 30 && this.spotScore(cur, lead, threat) > this.spotScore(p, lead, threat) - 150;
+      this.run = keep ? { ...cur!, until: this.time + 2500, at: this.time + 1500 } : { from: threat.uid, x: p.x, y: p.y, until: this.time + 2500, at: this.time + 1500 };
+    } else cur.until = this.time + 2500;
+    if (fresh) {
+      this.dangerStats.runs++;
+      this.log(`${threat.m.name}을(를) 피해 반대편으로 물러납니다.`, '#ffb0a0');
+      for (const h of this.heroes) if (h.target !== null) h.target = null;
+    }
+  }
+
+  /** the far side of the map from a danger monster, without running past it */
+  private farSpot(lead: HeroUnit, m: MobUnit) {
+    const z = this.zone, inX = 70, inY = 100;
+    const pts: { x: number; y: number }[] = [];
+    for (let i = 0; i < 6; i++) {
+      const fx = inX + (z.w - 2 * inX) * i / 5, fy = inY + (z.h - inY - 50) * i / 5;
+      pts.push({ x: fx, y: inY }, { x: fx, y: z.h - 50 }, { x: inX, y: fy }, { x: z.w - inX, y: fy });
+    }
+    let best = pts[0], bs = -Infinity;
+    for (const p of pts) {
+      const sc = this.spotScore(p, lead, m);
+      if (sc > bs) { bs = sc; best = p; }
+    }
+    return best;
+  }
+
+  /** how good a spot is to run to: far from the danger, not too far to go, and the way there doesn't pass it */
+  private spotScore(p: { x: number; y: number }, lead: HeroUnit, m: MobUnit) {
+    const sx = p.x - lead.x, sy = p.y - lead.y, L2 = sx * sx + sy * sy || 1;
+    const k = clamp(((m.x - lead.x) * sx + (m.y - lead.y) * sy) / L2, 0, 1);
+    const pass = Math.hypot(lead.x + sx * k - m.x, lead.y + sy * k - m.y);
+    return dist(p, m) - 0.35 * dist(p, lead) - (pass < 120 && k > 0.05 ? 900 : 0);
+  }
+
+  /** while the party runs (피하기): everyone heads for the leader's safe spot; healers patch people up when it is safe */
+  private tryEvade(h: HeroUnit, dt: number): boolean {
+    const run = this.run;
+    if (!run) return false;
+    const m = this.mob(run.from);
+    h.target = null;
+    if (h.sitting) { h.sitting = false; this.setState(h, 'idle'); }
+    if (m && dist(h, m) > 260 && this.trySupport(h)) return true;
+    const lead = this.leader();
+    const i = this.heroes.indexOf(h);
+    const ox = h === lead ? 0 : (i % 2 ? 1 : -1) * 24, oy = h === lead ? 0 : (i % 2 ? 16 : -12);
+    h.doing = `${m?.m.name ?? '위험 몹'} 피하는 중`;
+    this.moveTo(h, clamp(run.x + ox, 24, this.zone.w - 24), clamp(run.y + oy, 70, this.zone.h - 24), h.d.moveSpd, dt, 8);
+    if (dist(h, { x: run.x + ox, y: run.y + oy }) <= 9) this.setState(h, 'ready');
+    return true;
   }
 
   tactics(h: HeroUnit): Tactics { return h.hero.tactics ?? defaultTactics(h.hero.cls); }
@@ -586,6 +891,8 @@ export class World {
     const isLead = !lead || lead === h;
     const anchor = isLead ? h : lead!;
     const R = isLead ? 340 : CHASE_R[tac.chase];
+    // a treasure chest on the field (expedition map): the leader walks over to open it once nothing is fighting us
+    if (isLead && !this.pc.engaged.length && this.chestFor(h)) return undefined;
     const reach = (m: MobUnit) => m.target === h.uid || dist(m, anchor) <= R;
     const eng = this.pc.engaged.filter(reach);
     const cur = this.mob(h.target);
@@ -632,13 +939,15 @@ export class World {
     return pick;
   }
 
-  /** nearest mob nobody fights yet, skipping ones well above the party level */
+  /** nearest mob nobody fights yet, skipping ones well above the party level (and, 피하기, anything near a danger monster) */
   private pullCandidate(h: HeroUnit, radius: number): MobUnit | undefined {
     const avgLv = this.heroes.reduce((a, x) => a + x.hero.baseLv, 0) / this.heroes.length;
     let best: MobUnit | undefined; let bd = radius;
     for (const m of this.mobs) {
       if (!this.alive(m) || this.pc.engaged.includes(m)) continue;
-      if (!m.m.boss && m.m.lv > avgLv + 3) continue;
+      if (m.danger) { if (this.shunned(m)) continue; } // 맞서기: hunted like a boss, whatever its level
+      else if (!m.m.boss && m.m.lv > avgLv + 3) continue;
+      if (this.pc.dangers.length && this.pc.dangers.some((d) => dist(d, m) < 230)) continue;
       const d = dist(m, h);
       if (d < bd) { bd = d; best = m; }
     }
@@ -746,7 +1055,7 @@ export class World {
 
   /** party rest after fights (orders.rest) and casters sitting for SP; true while sitting */
   private tryRest(h: HeroUnit): boolean {
-    const threat = this.pc.engaged.some((m) => dist(m, h) < 240);
+    const threat = this.pc.engaged.some((m) => dist(m, h) < 240) || this.pc.dangers.some((m) => dist(m, h) < 380);
     const rest = this.s.orders?.rest ?? 20;
     if (h.sitting) {
       const onMe = this.mobs.some((m) => this.alive(m) && m.target === h.uid);
@@ -791,7 +1100,9 @@ export class World {
     if (!lead) return;
     if (lead === h) {
       if (resting || this.zone.id === 'town') { this.setState(h, 'idle'); if (resting) h.doing = '휴식하는 동료 기다림'; return; }
-      // explore toward the nearest huntable mob
+      // a treasure chest first (expedition maps), then explore toward the nearest huntable mob
+      const chest = this.chestFor(h);
+      if (chest) { this.goChest(h, chest, dt); return; }
       const best = this.pullCandidate(h, Infinity);
       h.doing = best ? '사냥감 찾는 중' : '대기';
       if (best) this.moveTo(h, best.x, best.y, h.d.moveSpd * 0.85, dt, 60);
@@ -938,7 +1249,7 @@ export class World {
     if (!lv || h.hero.auto.skills.provoke === false || this.roleOf(h) !== 'tank') return false;
     const sk = SKILLS.provoke;
     if (!this.canPay(h, sk, lv)) return false;
-    const loose = this.mobs.find((m) => this.alive(m) && m.target !== null && m.target !== h.uid && this.heroUnit(m.target) && dist(m, h) < 180 && m.provokeUntil < this.time);
+    const loose = this.mobs.find((m) => this.alive(m) && !this.shunned(m) && m.target !== null && m.target !== h.uid && this.heroUnit(m.target) && dist(m, h) < 180 && m.provokeUntil < this.time);
     if (!loose) return false;
     h.facing = loose.x >= h.x ? 1 : -1;
     this.startSkill(h, sk, lv, loose);
@@ -966,7 +1277,7 @@ export class World {
       let v: number;
       if (sk.kind === 'aoe' || sk.kind === 'selfAoe') {
         const cx = sk.kind === 'selfAoe' ? h.x : t.x, cy = sk.kind === 'selfAoe' ? h.y : t.y;
-        const n = this.mobs.filter((m) => this.alive(m) && Math.hypot(m.x - cx, m.y - cy) < (sk.radius ?? 60)).length;
+        const n = this.mobs.filter((m) => this.alive(m) && !this.shunned(m) && Math.hypot(m.x - cx, m.y - cy) < (sk.radius ?? 60)).length;
         if (n < minAoe) continue;
         v = this.estimateSkill(h, t, sk, lv) * n;
       } else {
@@ -1103,6 +1414,20 @@ export class World {
     this.emit({ t: 'status', uid: h.uid, text: '저주!', color: '#b070e0' });
   }
 
+  /** M7: blinded by a hit — 8 s of HIT and FLEE −25% (RO), unless warded */
+  blindHero(h: HeroUnit) {
+    const res = h.d.b.statusRes?.blind ?? 0;
+    if (res >= 100 || this.rng() * 100 < res) {
+      this.emit({ t: 'status', uid: h.uid, text: '실명 무효', color: '#d0c0ff' });
+      return;
+    }
+    h.buffs = h.buffs.filter((b) => b.id !== 'blind');
+    this.refresh(h);
+    h.buffs.push({ id: 'blind', name: '실명', lv: 1, until: this.time + 8000, bonus: { hit: -Math.round(h.d.hit * 0.25), flee: -Math.round(h.d.flee * 0.25) } });
+    this.refresh(h);
+    this.emit({ t: 'status', uid: h.uid, text: '실명!', color: '#a8a8b8' });
+  }
+
   private fixedCtx(h: HeroUnit): FixedCtx {
     return { dex: h.d.total.dex, int: h.d.total.int, luk: h.d.total.luk, baseLv: h.hero.baseLv, skills: h.hero.skills };
   }
@@ -1120,7 +1445,7 @@ export class World {
         if (!this.alive(t)) return;
         const cx = t.x, cy = t.y;
         total += this.dealFixed(h, t, per, 'neutral', i, 'claw');
-        for (const m of this.mobs) if (m !== t && this.alive(m) && Math.hypot(m.x - cx, m.y - cy) <= r) this.dealFixed(h, m, per, 'neutral', i, 'claw');
+        for (const m of this.mobs) if (m !== t && this.alive(m) && !this.shunned(m) && Math.hypot(m.x - cx, m.y - cy) <= r) this.dealFixed(h, m, per, 'neutral', i, 'claw');
         if (i === hits - 1 && hits > 1 && total > 0) this.emit({ t: 'dmg', uid: t.uid, n: total, kind: 'total' });
       });
     }
@@ -1230,13 +1555,14 @@ export class World {
     t.dmgBy[h.uid] = (t.dmgBy[h.uid] ?? 0) + n;
     this.aggro(t, h);
     if (n <= 0) return;
+    t.dmgAt = this.time;
     t.hp -= n;
     if (t.hp <= 0) this.killMob(t, h);
   }
 
   private aggro(t: MobUnit, h: HeroUnit) {
     if (t.provokeUntil > this.time) return;
-    if (t.target === null || !this.alive(this.heroUnit(t.target))) t.target = h.uid;
+    if (t.target === null || !this.alive(this.heroUnit(t.target))) { t.target = h.uid; t.chaseSince = this.time; }
   }
 
   private trySteal(h: HeroUnit, t: MobUnit) {
@@ -1392,7 +1718,7 @@ export class World {
         for (let i = 0; i < hits; i++) {
           this.after(150 + i * 180, () => {
             for (const m of this.mobs) {
-              if (!this.alive(m) || Math.hypot(m.x - cx, m.y - cy) > r) continue;
+              if (!this.alive(m) || Math.hypot(m.x - cx, m.y - cy) > r || this.shunned(m)) continue;
               if (sk.fixed) this.dealFixed(h, m, sk.fixed(lv, this.fixedCtx(h)), el, i);
               else if (sk.magic) this.resolveMagic(h, m, this.skMult(h, sk, lv), el, i, sk, lv);
               else this.resolvePhys(h, m, this.skMult(h, sk, lv), el, 20, false, sk.fx === 'shower' ? 'pierce' : 'blunt', i);
@@ -1456,7 +1782,7 @@ export class World {
         this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm.uid, x: tm.x, y: tm.y, lv, radius: 110 });
         this.sound('buff');
         for (const m of this.mobs) {
-          if (!this.alive(m) || dist(m, tm) > 110) continue;
+          if (!this.alive(m) || dist(m, tm) > 110 || this.shunned(m)) continue;
           m.provokeUntil = this.time + 30000;
           m.provokeBy = h.uid;
           m.provokeDef = (5 + lv * 5) / 100;
@@ -1671,6 +1997,8 @@ export class World {
         this.bossRetryAt = this.time + 5 * 60_000;
       }
     }
+    for (const m of this.mobs) if (m.danger && m.state !== 'dead') this.dangerLeave(m, `${m.m.name}이(가) 쓰러진 파티를 두고 떠났다.`);
+    this.run = null;
     this.mobs = this.mobs.filter((m) => !m.summoned);
     this.s.totals.deaths++;
     this.s.rate.deaths++;
@@ -1688,7 +2016,7 @@ export class World {
     if (this.wipeTimes.length >= 3) {
       // fall back to the strongest easier map the party has open — same region first, never into a secret place
       const cur = this.zone;
-      const easier = ZONES.filter((z) => z.id !== 'town' && z.id !== cur.id && !z.gate && this.s.unlocked.includes(z.id) && z.lv[0] < cur.lv[0])
+      const easier = ZONES.filter((z) => z.id !== 'town' && z.id !== cur.id && !z.gate && !isExpedition(z) && this.s.unlocked.includes(z.id) && z.lv[0] < cur.lv[0])
         .sort((a, b) => (b.region === cur.region ? 1 : 0) - (a.region === cur.region ? 1 : 0) || b.lv[0] - a.lv[0]);
       const prev = easier[0];
       this.wipeTimes = [];
@@ -1740,17 +2068,18 @@ export class World {
       const p = this.heroUnit(m.provokeBy);
       if (p && p.state !== 'dead') m.target = p.uid;
     }
+    if (m.danger) this.dangerThink(m);
     let t = this.heroUnit(m.target);
     if (!t || t.state === 'dead') { m.target = null; t = undefined; }
-    if (!t && m.m.aggressive) {
-      const range = m.m.boss ? 320 : 130;
+    if (!t && m.m.aggressive && !(m.danger && m.boredUntil > this.time)) {
+      const range = m.m.boss ? 320 : m.danger ? 160 : 130;
       let bd = range;
       for (const h of this.heroes) {
         if (h.state === 'dead') continue;
         const d = dist(h, m);
         if (d < bd) { bd = d; t = h; }
       }
-      if (t) { m.target = t.uid; if (!m.m.boss) this.emit({ t: 'status', uid: m.uid, text: '!', color: '#ff6060' }); }
+      if (t) { m.target = t.uid; m.chaseSince = this.time; if (!m.m.boss) this.emit({ t: 'status', uid: m.uid, text: '!', color: m.danger ? '#ff2030' : '#ff6060' }); }
     }
 
     if (m.m.skills && t && this.mobSkill(m, t)) return;
@@ -1771,7 +2100,12 @@ export class World {
 
   private wander(m: MobUnit, dt: number) {
     if (m.m.immobile) { this.setState(m, 'idle'); return; }
-    if (this.time >= m.wanderAt) {
+    if (m.danger && this.time >= m.wanderAt) {
+      // danger monsters roam the whole map
+      m.wanderAt = this.time + 3000 + this.rng() * 3500;
+      m.dest = this.rng() < 0.8 ? { x: 60 + this.rng() * (this.zone.w - 120), y: 100 + this.rng() * (this.zone.h - 150) } : null;
+    }
+    if (!m.danger && this.time >= m.wanderAt) {
       m.wanderAt = this.time + 2000 + this.rng() * 3500;
       if (this.rng() < 0.6) {
         m.dest = {
@@ -1827,7 +2161,7 @@ export class World {
     const n = Math.max(1, Math.floor(dmg));
     this.emit({ t: 'hit', uid: t.uid, style: 'claw', element: el });
     const ac = t.hero.skills.auto_counter ?? 0;
-    if (ac && !magic && m.m.range < 60 && this.rng() * 100 < ac * 6) {
+    if (ac && !magic && m.m.range < 60 && !this.shunned(m) && this.rng() * 100 < ac * 6) {
       this.emit({ t: 'status', uid: t.uid, text: '반격!', color: '#ffb0a0' });
       this.after(80, () => this.resolvePhys(t, m, 100, t.d.weaponElement, 100, true, 'slash'));
     }
@@ -1837,6 +2171,11 @@ export class World {
     }
     if (d.b.procs) for (const p of d.b.procs) if (p.on === 'hit' && this.rng() * 100 < p.chance) this.runProc(t, m, p);
     this.damageHero(t, n, m);
+    // M7: the monster's own status on hit (핏빛 기사 = curse, 종 치는 유령 = blind)
+    const oh = m.m.onHit;
+    if (oh && (t.state as string) !== 'dead' && this.rng() * 100 < oh.chance) {
+      if (oh.status === 'curse') this.curseHero(t); else this.blindHero(t);
+    }
   }
 
   private mobSkill(m: MobUnit, t: HeroUnit): boolean {
@@ -2007,6 +2346,13 @@ export class World {
       // field bosses also ping the MVP gauge
       if (m.boss === 'field' && z.mvp) prog.mvpGauge = Math.min(z.mvpGauge, prog.mvpGauge + Math.floor(z.mvpGauge * 0.1));
     }
+    if (t.danger) {
+      this.dangerStats.kills++;
+      this.emit({ t: 'announce', text: `⚠ ${m.name} 처치!`, kind: 'danger' });
+      this.log(`[위험] ${m.name}을(를) 쓰러뜨렸다!${book.kills === 1 ? ' 도감에 이름과 드롭이 기록되었다.' : ''}`, '#ffb070');
+      this.sound('levelup');
+      this.dangerGone(t);
+    }
     this.onPersist();
   }
 
@@ -2019,7 +2365,10 @@ export class World {
 
   private rollDrops(t: MobUnit, killer: HeroUnit) {
     const perks = partyPerks(this.s);
-    const etcMul = 1 + perks.dropPct / 100;
+    // the party's best drop-rate gear (탐욕 상자 카드) adds to the pushcart perk
+    let gear = 0;
+    for (const h of this.heroes) gear = Math.max(gear, h.d.b.dropPct ?? 0);
+    const etcMul = 1 + (perks.dropPct + gear) / 100;
     let n = 0;
     for (const d of t.m.drops) {
       const def = ITEMS[d.id];
@@ -2027,28 +2376,35 @@ export class World {
       if (def.kind === 'etc' || def.kind === 'use') rate *= etcMul;
       if (d.id.startsWith('r_')) rate *= 1 + perks.oreDrop / 100;
       if (this.rng() >= rate) continue;
-      const a = (n++ * 2.1) + this.rng();
-      const gx = t.x + Math.cos(a) * (14 + n * 6);
-      const gy = t.y + Math.sin(a) * (9 + n * 4);
-      const rarity = def.kind === 'card' ? (def.rarity ?? 'rare') : def.rarity ?? (def.kind === 'equip' ? 'rare' : 'common');
-      // the real reward is credited right away (safe against travel / closing the app); the ground item is the show
-      const g: GroundItem = {
-        gid: this.gidSeq++, id: d.id, slots: d.slots, x: clamp(gx, 20, this.zone.w - 20), y: clamp(gy, 70, this.zone.h - 20),
-        fromX: t.x, fromY: t.y, born: this.time, pickAt: this.time + 900 + n * 120 + (def.kind === 'card' ? 900 : 0), rarity, picked: false,
-        got: this.grant(d.id, d.slots, t.m),
-      };
-      this.ground.push(g);
-      this.emit({ t: 'drop', gid: g.gid });
+      this.dropAt(t.x, t.y, d.id, d.slots, n++, t.m);
       if (def.kind === 'card') {
-        // anticipation at the kill (light pillar + chime); the banner comes when it reaches the hero
-        this.sound('card');
         this.s.totals.cards++;
         (this.s.book[t.m.id] ??= { kills: 0 }).card = true;
-      } else if (def.kind === 'equip' || def.rarity) {
-        this.sound('drop');
       }
     }
     void killer;
+  }
+
+  /** credit a drop and show it flying out of (x, y); n = its place in the pile */
+  /** `from`: the monster that dropped it (gear grade and item level roll from it; chests roll plain) */
+  private dropAt(x: number, y: number, id: string, slots: number | undefined, n: number, from?: MonsterDef): GroundItem {
+    const def = ITEMS[id];
+    const a = (n * 2.1) + this.rng();
+    const gx = x + Math.cos(a) * (14 + (n + 1) * 6);
+    const gy = y + Math.sin(a) * (9 + (n + 1) * 4);
+    const rarity = def.kind === 'card' ? (def.rarity ?? 'rare') : def.rarity ?? (def.kind === 'equip' ? 'rare' : 'common');
+    // the real reward is credited right away (safe against travel / closing the app); the ground item is the show
+    const g: GroundItem = {
+      gid: this.gidSeq++, id, slots, x: clamp(gx, 20, this.zone.w - 20), y: clamp(gy, 70, this.zone.h - 20),
+      fromX: x, fromY: y, born: this.time, pickAt: this.time + 900 + (n + 1) * 120 + (def.kind === 'card' ? 900 : 0), rarity, picked: false,
+      got: this.grant(id, slots, from),
+    };
+    this.ground.push(g);
+    this.emit({ t: 'drop', gid: g.gid });
+    // anticipation at the kill (light pillar + chime for a card); the banner comes when it reaches the hero
+    if (def.kind === 'card') this.sound('card');
+    else if (def.kind === 'equip' || def.rarity) this.sound('drop');
+    return g;
   }
 
   private groundTick() {

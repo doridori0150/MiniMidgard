@@ -1,5 +1,5 @@
 // Field renderer: camera, y-sorted sprites, skill effects, damage numbers, lighting.
-import type { World, FxEvent, HeroUnit, MobUnit, GroundItem } from '../game/world.ts';
+import type { World, FxEvent, HeroUnit, MobUnit, GroundItem, FieldChest } from '../game/world.ts';
 import type { Element, Hero, GameState } from '../game/types.ts';
 import { buildZoneArt, drawProp, kitPropBox, kitVersion, type ZoneArt, type Prop } from './bg.ts';
 import { inked } from './ink.ts';
@@ -12,6 +12,7 @@ import { MELEE_CONTACT, BOW_RELEASE } from '../game/world.ts';
 import { drawNumber, type DmgNum, warmFont } from './dmgfont.ts';
 import { ELEMENT_COLOR } from '../game/data/elements.ts';
 import { ITEMS } from '../game/data/items.ts';
+import { MONSTERS } from '../game/data/monsters.ts';
 import { findEquip } from '../game/stats.ts';
 import { itemIcon } from './icons.ts';
 import { rgba } from './color.ts';
@@ -281,7 +282,7 @@ export class FieldRenderer {
         const u = this.world.unit(e.uid);
         if (u?.kind === 'mob') {
           this.burst(p.x, p.y - p.h * 0.4, 10, u.m.palette[0], 'smoke', 60, 0.8);
-          if (u.m.boss) { this.kick('climax', 8, 0.3, '#ffffff', 120); this.burst(p.x, p.y - p.h * 0.5, 40, '#ffe080', 'star', 200, 1.4); }
+          if (u.m.boss || (u.danger && !u.vanish)) { this.kick('climax', 8, 0.3, '#ffffff', 120); this.burst(p.x, p.y - p.h * 0.5, 40, '#ffe080', 'star', 200, 1.4); }
         }
         break;
       }
@@ -884,6 +885,7 @@ export class FieldRenderer {
       } });
     }
     for (const g of w.ground) drawables.push({ y: g.y - 1, draw: () => this.drawGroundItem(ctx, g, nowMs) });
+    for (const c of w.chests) drawables.push({ y: c.y, draw: () => this.drawChest(ctx, c, nowMs) });
     for (const h of w.heroes) {
       const sm = this.smooth.get(h.uid)!;
       drawables.push({ y: sm.y, draw: () => this.drawHeroUnit(ctx, h, sm, nowMs) });
@@ -1008,17 +1010,20 @@ export class FieldRenderer {
     const t = m.state === 'walk' || m.state === 'idle' ? now + m.uid * 137 : rt - m.stateT;
     const hurt = rt - m.hurtAt < 140 ? 1 - (rt - m.hurtAt) / 140 : 0;
     const spawn = m.state === 'spawn' ? Math.min(1, (rt - m.stateT) / 600) : 1;
-    const dead = m.state === 'dead' ? Math.min(1, (rt - m.deadAt) / (m.m.boss ? 1600 : 900)) : 0;
+    let dead = m.state === 'dead' ? Math.min(1, (rt - m.deadAt) / (m.m.boss ? 1600 : 900)) : 0;
     ctx.save();
     ctx.translate(sm.x, sm.y);
-    if (m.m.boss && !dead) {
+    if ((m.m.boss || m.danger) && !dead) {
       ctx.save(); ctx.globalCompositeOperation = 'lighter';
-      const col = m.m.boss === 'mvp' ? '#ffcc4a' : '#ff7050';
-      ctx.globalAlpha = 0.35 + Math.sin(now / 200) * 0.12;
+      // a danger monster (M10) burns red and pulses faster than a boss
+      const col = m.danger ? '#ff2a3a' : m.m.boss === 'mvp' ? '#ffcc4a' : '#ff7050';
+      ctx.globalAlpha = m.danger ? 0.45 + Math.sin(now / 120) * 0.18 : 0.35 + Math.sin(now / 200) * 0.12;
       ctx.drawImage(glow(col), -34 * m.m.scale / 1.6, -10, 68 * m.m.scale / 1.6, 20);
       ctx.restore();
     }
-    const mpose = { state: m.state === 'spawn' ? 'idle' : m.state, t, facing: m.facing, hurt, frozen: m.frozenUntil > w.time, spawn, dead };
+    // a danger monster leaving the map fades where it stands instead of collapsing
+    if (m.vanish) { ctx.globalAlpha *= 1 - dead; dead = 0; }
+    const mpose = { state: m.state === 'spawn' ? 'idle' : m.vanish ? 'idle' : m.state, t, facing: m.facing, hurt, frozen: m.frozenUntil > w.time, spawn, dead };
     if (this.lowFx) drawMob(ctx, m.m.sprite, m.m.palette, mpose, m.m.scale);
     else {
       if (!dead) mobShadow(ctx, m.m.sprite, m.m.scale);
@@ -1038,6 +1043,40 @@ export class FieldRenderer {
     }
     if (m.poisonUntil > w.time && !dead && Math.random() < 0.1) this.burst(sm.x, sm.y - 10, 1, '#a050e0', 'glow', 10, 0.6, -30);
     ctx.restore();
+  }
+
+  /** M10: a treasure chest on the field — it looks exactly like the map's trap chest asleep */
+  private chestBurst = new Set<number>();
+  private drawChest(ctx: CanvasRenderingContext2D, c: FieldChest, now: number) {
+    const w = this.world, rt = w.renderTime;
+    const trap = w.zone.chest ? MONSTERS[w.zone.chest.trap] : undefined;
+    const pal = trap?.palette ?? ['#b07a3a', '#5a3a1a', '#ffd040'];
+    const sc = trap?.scale ?? 1.2;
+    const opening = c.openAt > 0 && !c.opened;
+    const fade = c.opened ? Math.max(0, Math.min(1, (rt - c.opened - 900) / 700)) : 0;
+    const pose = { state: c.opened ? 'open' : opening ? 'cast' : 'idle', t: opening ? rt - c.openAt + 900 : now + c.id * 97, facing: 1 as const, hurt: 0, frozen: false, spawn: Math.min(1, (rt - c.born) / 500), dead: 0 };
+    ctx.save();
+    ctx.translate(c.x, c.y);
+    ctx.globalAlpha *= 1 - fade;
+    if (!c.opened) {
+      // a slow golden glint so a chest reads as treasure from across the map
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      ctx.globalAlpha *= 0.25 + Math.max(0, Math.sin(now / 420)) * 0.35;
+      ctx.drawImage(glow('#ffd040'), -26, -34, 52, 40);
+      ctx.restore();
+    }
+    if (this.lowFx) drawMob(ctx, 'chest', pal, pose, sc);
+    else {
+      mobShadow(ctx, 'chest', sc);
+      const bw = 80 * sc, bh = (mobHeight('chest') + 30) * sc;
+      inked(ctx, bw, bh, bw / 2, bh - 12 * sc, 1.2, (cc) => drawMob(cc, 'chest', pal, pose, sc, false, false));
+    }
+    ctx.restore();
+    if (c.opened && !this.chestBurst.has(c.id)) {
+      this.chestBurst.add(c.id);
+      this.burst(c.x, c.y - 16, 16, '#ffd84a', 'star', 110, 1.0);
+      this.burst(c.x, c.y - 12, 8, '#ffd84a', 'coin', 90, 0.9, 60);
+    }
   }
 
   private drawNpc(ctx: CanvasRenderingContext2D, p: Prop, now: number) {
@@ -1266,14 +1305,15 @@ export class FieldRenderer {
       const sm = this.smooth.get(m.uid); if (!sm) continue;
       const [x, y] = this.toScreen(sm.x, sm.y);
       if (x < -40 || x > this.cssW + 40) continue;
-      const showBar = m.hp < m.maxHp || m.m.boss || w.focus === m.uid;
-      if (showBar) this.hpBar(ctx, x, y + 5, m.m.boss ? 46 : 26, m.hp / m.maxHp, m.m.boss ? '#ff6a3a' : '#ff4a6a');
-      if (m.m.boss) {
+      const big = !!m.m.boss || !!m.danger;
+      const showBar = m.hp < m.maxHp || big || w.focus === m.uid;
+      if (showBar) this.hpBar(ctx, x, y + 5, big ? 46 : 26, m.hp / m.maxHp, m.danger ? '#ff2a3a' : m.m.boss ? '#ff6a3a' : '#ff4a6a');
+      if (big) {
         const top = y - mobHeight(m.m.sprite) * m.m.scale * this.cam.zoom - 8;
         ctx.font = "bold 11px 'Galmuri11', sans-serif";
         ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(0,0,0,0.8)';
-        ctx.fillStyle = m.m.boss === 'mvp' ? '#ffd84a' : '#ffa07a';
-        const label = `${m.m.boss === 'mvp' ? '[MVP] ' : '[BOSS] '}${m.m.name}`;
+        ctx.fillStyle = m.danger ? '#ff6a78' : m.m.boss === 'mvp' ? '#ffd84a' : '#ffa07a';
+        const label = m.danger ? `⚠ ${m.m.name} Lv ${m.m.lv}` : `${m.m.boss === 'mvp' ? '[MVP] ' : '[BOSS] '}${m.m.name}`;
         ctx.strokeText(label, x, top); ctx.fillText(label, x, top);
       }
     }

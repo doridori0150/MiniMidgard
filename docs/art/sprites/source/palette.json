@@ -1,0 +1,168 @@
+{
+  "colors": {
+    "ink": [
+      60,
+      40,
+      20
+    ],
+    "hairLight": [
+      254,
+      240,
+      220
+    ],
+    "hairShadow": [
+      252,
+      237,
+      209
+    ],
+    "skinLight": [
+      255,
+      217,
+      184
+    ],
+    "skinShadow": [
+      249,
+      222,
+      198
+    ],
+    "tanLight": [
+      238,
+      168,
+      100
+    ],
+    "tanShadow": [
+      230,
+      157,
+      85
+    ],
+    "brownLight": [
+      189,
+      136,
+      89
+    ],
+    "brownShadow": [
+      130,
+      86,
+      55
+    ],
+    "blueLight": [
+      96,
+      138,
+      189
+    ],
+    "blueShadow": [
+      92,
+      135,
+      185
+    ],
+    "metalLight": [
+      219,
+      218,
+      218
+    ],
+    "metalShadow": [
+      203,
+      202,
+      199
+    ],
+    "redLight": [
+      207,
+      69,
+      51
+    ],
+    "redShadow": [
+      155,
+      56,
+      41
+    ],
+    "eyeLight": [
+      34,
+      105,
+      202
+    ],
+    "eyeShadow": [
+      24,
+      77,
+      161
+    ],
+    "gold": [
+      242,
+      192,
+      105
+    ]
+  },
+  "sourcePixels": {
+    "ink": [
+      113,
+      211
+    ],
+    "hairLight": [
+      130,
+      150
+    ],
+    "hairShadow": [
+      138,
+      95
+    ],
+    "skinLight": [
+      154,
+      222
+    ],
+    "skinShadow": [
+      161,
+      245
+    ],
+    "tanLight": [
+      110,
+      304
+    ],
+    "tanShadow": [
+      113,
+      331
+    ],
+    "brownLight": [
+      99,
+      360
+    ],
+    "brownShadow": [
+      111,
+      379
+    ],
+    "blueLight": [
+      373,
+      139
+    ],
+    "blueShadow": [
+      313,
+      224
+    ],
+    "metalLight": [
+      329,
+      262
+    ],
+    "metalShadow": [
+      334,
+      266
+    ],
+    "redLight": [
+      384,
+      326
+    ],
+    "redShadow": [
+      389,
+      313
+    ],
+    "eyeLight": [
+      133,
+      217
+    ],
+    "eyeShadow": [
+      132,
+      205
+    ],
+    "gold": [
+      210,
+      302
+    ]
+  }
+}

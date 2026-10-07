@@ -1,0 +1,946 @@
+{
+  "schema": "minimidgard.cutout/1",
+  "canvas": {
+    "size": [
+      384,
+      320
+    ],
+    "origin": [
+      148,
+      286
+    ],
+    "referenceHeight": 257,
+    "displayHeight": 80,
+    "axis": "x right, y down",
+    "angles": "clockwise degrees"
+  },
+  "parts": {
+    "face": {
+      "file": "parts/face.png",
+      "size": [
+        96,
+        88
+      ],
+      "pivot": [
+        47,
+        83
+      ],
+      "anchors": {
+        "top": [
+          47,
+          0
+        ],
+        "mid": [
+          78,
+          37
+        ],
+        "low": [
+          59,
+          77
+        ]
+      },
+      "z": 70,
+      "restAngle": 0
+    },
+    "hair_front": {
+      "file": "parts/hair_front.png",
+      "size": [
+        125,
+        126
+      ],
+      "pivot": [
+        62,
+        117
+      ],
+      "anchors": {
+        "top": [
+          63,
+          20
+        ],
+        "mid": [
+          98,
+          58
+        ],
+        "low": [
+          87,
+          109
+        ]
+      },
+      "z": 80,
+      "restAngle": 0
+    },
+    "hair_back": {
+      "file": "parts/hair_back.png",
+      "size": [
+        117,
+        100
+      ],
+      "pivot": [
+        58,
+        91
+      ],
+      "anchors": {},
+      "z": 10,
+      "restAngle": 0
+    },
+    "novice_torso": {
+      "file": "parts/novice_torso.png",
+      "size": [
+        80,
+        78
+      ],
+      "pivot": [
+        40,
+        10
+      ],
+      "anchors": {
+        "neck": [
+          42,
+          0
+        ]
+      },
+      "z": 40,
+      "restAngle": 0
+    },
+    "novice_arm_near": {
+      "file": "parts/novice_arm_near.png",
+      "size": [
+        32,
+        64
+      ],
+      "pivot": [
+        15,
+        10
+      ],
+      "anchors": {
+        "grip": [
+          17,
+          53
+        ]
+      },
+      "z": 90,
+      "restAngle": 0
+    },
+    "novice_arm_far": {
+      "file": "parts/novice_arm_far.png",
+      "size": [
+        31,
+        62
+      ],
+      "pivot": [
+        15,
+        10
+      ],
+      "anchors": {
+        "grip": [
+          17,
+          52
+        ]
+      },
+      "z": 20,
+      "restAngle": 0
+    },
+    "leg_near": {
+      "file": "parts/leg_near.png",
+      "size": [
+        39,
+        58
+      ],
+      "pivot": [
+        16,
+        5
+      ],
+      "anchors": {
+        "foot": [
+          23,
+          56
+        ]
+      },
+      "z": 35,
+      "restAngle": 0
+    },
+    "leg_far": {
+      "file": "parts/leg_far.png",
+      "size": [
+        38,
+        58
+      ],
+      "pivot": [
+        16,
+        5
+      ],
+      "anchors": {
+        "foot": [
+          23,
+          56
+        ]
+      },
+      "z": 30,
+      "restAngle": 0
+    },
+    "swordsman_torso": {
+      "file": "parts/swordsman_torso.png",
+      "size": [
+        84,
+        82
+      ],
+      "pivot": [
+        42,
+        10
+      ],
+      "anchors": {
+        "neck": [
+          42,
+          0
+        ]
+      },
+      "z": 40,
+      "restAngle": 0
+    },
+    "swordsman_arm_near": {
+      "file": "parts/swordsman_arm_near.png",
+      "size": [
+        34,
+        64
+      ],
+      "pivot": [
+        15,
+        10
+      ],
+      "anchors": {
+        "grip": [
+          20,
+          54
+        ]
+      },
+      "z": 90,
+      "restAngle": 0
+    },
+    "dagger": {
+      "file": "parts/dagger.png",
+      "size": [
+        76,
+        29
+      ],
+      "pivot": [
+        15,
+        15
+      ],
+      "anchors": {
+        "tip": [
+          74,
+          15
+        ],
+        "offhand": [
+          8,
+          15
+        ]
+      },
+      "z": 85,
+      "restAngle": 0
+    },
+    "sword": {
+      "file": "parts/sword.png",
+      "size": [
+        107,
+        32
+      ],
+      "pivot": [
+        20,
+        16
+      ],
+      "anchors": {
+        "tip": [
+          105,
+          16
+        ],
+        "offhand": [
+          8,
+          16
+        ]
+      },
+      "z": 85,
+      "restAngle": 0
+    },
+    "leaf": {
+      "file": "parts/leaf.png",
+      "size": [
+        40,
+        27
+      ],
+      "pivot": [
+        15,
+        26
+      ],
+      "anchors": {},
+      "z": 100,
+      "restAngle": 0
+    },
+    "hairpin": {
+      "file": "parts/hairpin.png",
+      "size": [
+        33,
+        20
+      ],
+      "pivot": [
+        17,
+        10
+      ],
+      "anchors": {},
+      "z": 110,
+      "restAngle": 0
+    },
+    "novice_arm_contact": {
+      "file": "parts/novice_arm_contact.png",
+      "size": [
+        68,
+        28
+      ],
+      "pivot": [
+        12,
+        15
+      ],
+      "anchors": {
+        "grip": [
+          56,
+          13
+        ]
+      },
+      "z": 90,
+      "restAngle": 0
+    },
+    "swordsman_arm_contact": {
+      "file": "parts/swordsman_arm_contact.png",
+      "size": [
+        68,
+        31
+      ],
+      "pivot": [
+        12,
+        17
+      ],
+      "anchors": {
+        "grip": [
+          57,
+          17
+        ]
+      },
+      "z": 90,
+      "restAngle": 0
+    }
+  },
+  "nodes": {
+    "body": {
+      "parent": null,
+      "offset": [
+        148,
+        174
+      ]
+    },
+    "head": {
+      "parent": "body",
+      "offset": [
+        2,
+        -7
+      ],
+      "scale": [
+        1.18,
+        1.18
+      ]
+    },
+    "hair_back": {
+      "parent": "head",
+      "part": "hair_back"
+    },
+    "arm_far": {
+      "parent": "body",
+      "offset": [
+        -27,
+        6
+      ],
+      "slot": "arm_far",
+      "angle": 24,
+      "z": 45
+    },
+    "leg_far": {
+      "parent": "body",
+      "offset": [
+        -17,
+        59
+      ],
+      "part": "leg_far",
+      "angle": 5
+    },
+    "leg_near": {
+      "parent": "body",
+      "offset": [
+        17,
+        59
+      ],
+      "part": "leg_near",
+      "angle": -5
+    },
+    "torso": {
+      "parent": "body",
+      "slot": "torso"
+    },
+    "face": {
+      "parent": "head",
+      "part": "face"
+    },
+    "hair_front": {
+      "parent": "head",
+      "part": "hair_front"
+    },
+    "arm_near": {
+      "parent": "body",
+      "offset": [
+        29,
+        8
+      ],
+      "slot": "arm_near",
+      "angle": -32
+    },
+    "weapon": {
+      "parent": "arm_near",
+      "anchor": "grip",
+      "slot": "weapon",
+      "worldAngle": -48
+    },
+    "head_top": {
+      "parent": "hair_front",
+      "anchor": "top",
+      "slot": "head_top"
+    },
+    "head_mid": {
+      "parent": "hair_front",
+      "anchor": "mid",
+      "slot": "head_mid"
+    },
+    "head_low": {
+      "parent": "face",
+      "anchor": "low",
+      "slot": "head_low"
+    }
+  },
+  "outfits": {
+    "novice": {
+      "torso": "novice_torso",
+      "arm_near": "novice_arm_near",
+      "arm_far": "novice_arm_far",
+      "arm_contact": "novice_arm_contact"
+    },
+    "swordsman": {
+      "torso": "swordsman_torso",
+      "arm_near": "swordsman_arm_near",
+      "arm_far": "swordsman_arm_near",
+      "arm_contact": "swordsman_arm_contact"
+    }
+  },
+  "hairStyles": {
+    "novice_bob": {
+      "front": "hair_front",
+      "back": "hair_back"
+    }
+  },
+  "hairColors": {
+    "cream": null,
+    "blue": "#5986d0",
+    "brown": "#9f6339",
+    "red": "#d95250",
+    "purple": "#aa6bc5",
+    "pink": "#e886a4",
+    "green": "#85af6c",
+    "black": "#59535d",
+    "gray": "#aba6b6",
+    "gold": "#edbb60"
+  },
+  "faces": [
+    "face"
+  ],
+  "equipment": {
+    "head_top": [
+      "leaf"
+    ],
+    "head_mid": [
+      "hairpin"
+    ],
+    "head_low": [],
+    "weapon": [
+      "dagger",
+      "sword"
+    ]
+  },
+  "defaults": {
+    "outfit": "novice",
+    "weapon": "dagger",
+    "hairColor": "cream",
+    "head_top": null,
+    "head_mid": null,
+    "head_low": null
+  },
+  "animations": {
+    "idle": {
+      "duration": 1200,
+      "loop": true,
+      "keys": [
+        {
+          "time": 0,
+          "nodes": {}
+        },
+        {
+          "time": 600,
+          "nodes": {
+            "body": {
+              "offset": [
+                148,
+                172
+              ],
+              "scale": [
+                1,
+                1.008
+              ]
+            }
+          }
+        },
+        {
+          "time": 1200,
+          "nodes": {}
+        }
+      ]
+    },
+    "walk": {
+      "duration": 640,
+      "loop": true,
+      "keys": [
+        {
+          "time": 0,
+          "nodes": {
+            "leg_near": {
+              "angle": -16,
+              "offset": [
+                21,
+                59
+              ]
+            },
+            "leg_far": {
+              "angle": 16,
+              "offset": [
+                -21,
+                59
+              ]
+            },
+            "arm_near": {
+              "angle": -18
+            },
+            "arm_far": {
+              "angle": 30
+            },
+            "body": {
+              "offset": [
+                148,
+                172
+              ]
+            }
+          }
+        },
+        {
+          "time": 160,
+          "nodes": {}
+        },
+        {
+          "time": 320,
+          "nodes": {
+            "leg_near": {
+              "angle": 10,
+              "offset": [
+                19,
+                57
+              ]
+            },
+            "leg_far": {
+              "angle": -10,
+              "offset": [
+                -19,
+                59
+              ]
+            },
+            "arm_near": {
+              "angle": -43
+            },
+            "arm_far": {
+              "angle": 5
+            },
+            "body": {
+              "offset": [
+                148,
+                172
+              ]
+            }
+          }
+        },
+        {
+          "time": 480,
+          "nodes": {}
+        },
+        {
+          "time": 640,
+          "nodes": {
+            "leg_near": {
+              "angle": -16,
+              "offset": [
+                21,
+                59
+              ]
+            },
+            "leg_far": {
+              "angle": 16,
+              "offset": [
+                -21,
+                59
+              ]
+            },
+            "arm_near": {
+              "angle": -18
+            },
+            "arm_far": {
+              "angle": 30
+            },
+            "body": {
+              "offset": [
+                148,
+                172
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "melee": {
+      "duration": 500,
+      "loop": false,
+      "events": [
+        {
+          "time": 220,
+          "name": "contact"
+        }
+      ],
+      "keys": [
+        {
+          "time": 0,
+          "nodes": {}
+        },
+        {
+          "time": 130,
+          "nodes": {
+            "arm_near": {
+              "angle": -120
+            },
+            "weapon": {
+              "worldAngle": -140
+            },
+            "body": {
+              "angle": -8
+            }
+          }
+        },
+        {
+          "time": 220,
+          "nodes": {
+            "arm_near": {
+              "slot": "arm_contact",
+              "angle": 0
+            },
+            "weapon": {
+              "worldAngle": 0
+            },
+            "body": {
+              "offset": [
+                153,
+                174
+              ],
+              "angle": 8
+            },
+            "head": {
+              "angle": -8
+            },
+            "leg_near": {
+              "angle": -18
+            },
+            "leg_far": {
+              "angle": 18
+            }
+          }
+        },
+        {
+          "time": 300,
+          "nodes": {
+            "arm_near": {
+              "slot": "arm_contact",
+              "angle": 16
+            },
+            "weapon": {
+              "worldAngle": 24
+            },
+            "body": {
+              "angle": 10
+            }
+          }
+        },
+        {
+          "time": 500,
+          "nodes": {}
+        }
+      ]
+    },
+    "bow": {
+      "duration": 850,
+      "loop": false,
+      "events": [
+        {
+          "time": 550,
+          "name": "release"
+        }
+      ],
+      "keys": [
+        {
+          "time": 0,
+          "nodes": {}
+        },
+        {
+          "time": 220,
+          "nodes": {
+            "arm_near": {
+              "slot": "arm_contact",
+              "angle": -8
+            },
+            "arm_far": {
+              "angle": -90,
+              "z": 95
+            },
+            "weapon": {
+              "worldAngle": -90
+            }
+          }
+        },
+        {
+          "time": 500,
+          "nodes": {
+            "arm_near": {
+              "slot": "arm_contact",
+              "angle": -8
+            },
+            "arm_far": {
+              "angle": -120,
+              "z": 95
+            },
+            "weapon": {
+              "worldAngle": -90
+            }
+          }
+        },
+        {
+          "time": 550,
+          "nodes": {
+            "arm_near": {
+              "slot": "arm_contact",
+              "angle": -8
+            },
+            "arm_far": {
+              "angle": -75,
+              "z": 95
+            },
+            "weapon": {
+              "worldAngle": -90
+            }
+          }
+        },
+        {
+          "time": 850,
+          "nodes": {}
+        }
+      ],
+      "status": "pose scaffold; bow/arrow/string art not included"
+    },
+    "cast": {
+      "duration": 900,
+      "loop": false,
+      "events": [
+        {
+          "time": 420,
+          "name": "cast"
+        }
+      ],
+      "keys": [
+        {
+          "time": 0,
+          "nodes": {}
+        },
+        {
+          "time": 280,
+          "nodes": {
+            "arm_near": {
+              "slot": "arm_contact",
+              "angle": -50
+            },
+            "arm_far": {
+              "angle": 60
+            },
+            "weapon": {
+              "visible": false
+            },
+            "head": {
+              "angle": -6
+            }
+          }
+        },
+        {
+          "time": 420,
+          "nodes": {
+            "arm_near": {
+              "slot": "arm_contact",
+              "angle": -35
+            },
+            "arm_far": {
+              "angle": 50
+            },
+            "weapon": {
+              "visible": false
+            },
+            "body": {
+              "offset": [
+                148,
+                171
+              ]
+            }
+          }
+        },
+        {
+          "time": 900,
+          "nodes": {}
+        }
+      ]
+    },
+    "sit": {
+      "duration": 500,
+      "loop": false,
+      "keys": [
+        {
+          "time": 0,
+          "nodes": {}
+        },
+        {
+          "time": 500,
+          "nodes": {
+            "body": {
+              "offset": [
+                148,
+                189
+              ]
+            },
+            "leg_near": {
+              "angle": -76
+            },
+            "leg_far": {
+              "angle": -62
+            },
+            "arm_near": {
+              "angle": -18
+            },
+            "weapon": {
+              "visible": false
+            }
+          }
+        }
+      ]
+    },
+    "hurt": {
+      "duration": 400,
+      "loop": false,
+      "keys": [
+        {
+          "time": 0,
+          "nodes": {}
+        },
+        {
+          "time": 100,
+          "nodes": {
+            "body": {
+              "offset": [
+                139,
+                177
+              ],
+              "angle": -15
+            },
+            "head": {
+              "angle": -9
+            },
+            "arm_near": {
+              "angle": -72
+            },
+            "arm_far": {
+              "angle": 48
+            },
+            "weapon": {
+              "visible": false
+            }
+          }
+        },
+        {
+          "time": 400,
+          "nodes": {}
+        }
+      ]
+    },
+    "dead": {
+      "duration": 550,
+      "loop": false,
+      "keys": [
+        {
+          "time": 0,
+          "nodes": {}
+        },
+        {
+          "time": 550,
+          "nodes": {
+            "body": {
+              "offset": [
+                164,
+                216
+              ],
+              "angle": -90
+            },
+            "head": {
+              "angle": 8
+            },
+            "arm_near": {
+              "angle": -8
+            },
+            "arm_far": {
+              "angle": 12
+            },
+            "leg_near": {
+              "angle": 5
+            },
+            "leg_far": {
+              "angle": -5
+            },
+            "weapon": {
+              "visible": false
+            }
+          }
+        }
+      ]
+    }
+  },
+  "renderRules": {
+    "attachment": "parent matrix * translate(parent anchor - parent pivot + offset) * rotate(angle) * scale; draw at -pivot",
+    "worldAngle": "absolute canvas-space rotation, preserving transformed grip position and inherited scale; apply facing mirror afterward",
+    "sorting": "ascending part.z then node id; optional node.z overrides",
+    "interpolation": "linear numeric fields; missing fields resolve to rest node; slot and visible step at key time",
+    "tint": "multiply RGB on hair_front/hair_back only, restore original alpha",
+    "facing": "mirror entire character around canvas.origin.x, including attachments",
+    "nonLoop": "clamp at duration",
+    "missingAsset": "error for unknown non-null slot value; null equipment skips node"
+  }
+}

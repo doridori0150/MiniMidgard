@@ -1,0 +1,104 @@
+{
+  "schema": "minimidgard.frames/2",
+  "status": "pass",
+  "bodyFrames": 28,
+  "bodyGenderSets": 4,
+  "sharedBodyFrames": true,
+  "headBases": 2,
+  "hairstyles": 4,
+  "featurePNGs": 52,
+  "assetPNGs": 101,
+  "seam": {
+    "cases": 48384,
+    "sampledPixels": 81945216,
+    "alphaFailures": 0,
+    "whiteFailures": 0,
+    "failedGeometryGroups": 0,
+    "expressions": [
+      "normal",
+      "hurt",
+      "ko",
+      "blink"
+    ],
+    "featureCombinationsPerGender": 54,
+    "facings": [
+      1,
+      -1
+    ],
+    "method": "Actually render all combinations into 160x160 transparent neck crops using reference player transforms. Sample an independent 39x44 head-space chin-to-collar corridor. Reject alpha<254 or near-white RGB>245/240/220 outside visible cream hair; a separately composited material mask distinguishes hair from neck skin. No bounding-box or cache-based substitution.",
+    "details": "seam_pixels.json"
+  },
+  "cut": {
+    "thresholdPx": 12,
+    "directions": [
+      "all angles via contour fitting",
+      "horizontal/vertical/diagonal exact raster runs"
+    ],
+    "unoutlinedCuts": 0,
+    "paintedContourCandidates": 397,
+    "method": "Trace all alpha contours and fit straight segments at arbitrary angles with <=0.75 px raster tolerance; also enumerate exact raster runs; report every run >12 px. A >=80% dark closed painted outline marks a natural contour/tangent, not a raw alpha slice. All candidates kept for inspection.",
+    "details": "cut_edges.json"
+  },
+  "animation": {
+    "decodedFrames": 80,
+    "distinctDecodedImagesPerRowIdleWalkAttack": [
+      [
+        2,
+        4,
+        4
+      ],
+      [
+        2,
+        4,
+        4
+      ],
+      [
+        2,
+        4,
+        4
+      ],
+      [
+        2,
+        4,
+        4
+      ]
+    ],
+    "frameDurationMs": 40,
+    "frameSizes": [
+      "890x1050"
+    ],
+    "rows": [
+      "novice female",
+      "novice male",
+      "swordsman female",
+      "swordsman male"
+    ],
+    "status": "pass",
+    "totalDurationMs": 3200.000000000002
+  },
+  "bodyPreservation": {
+    "frames": 28,
+    "allAlphaUnchanged": true,
+    "allChangesInsideCollar": true
+  },
+  "anchors": {
+    "checks": 1056,
+    "maxErrorPx": 1.2710574864626038e-13,
+    "canvasBoundsFailures": [],
+    "featureIndependenceChecks": 8
+  },
+  "regression": {
+    "v1AlphaFailures": 38,
+    "v1WhiteFailures": 0,
+    "v1Hair02UnoutlinedCuts": 24,
+    "samplerNegativeControlsPass": true
+  },
+  "limitations": [
+    "Game integration is not modified or tested; frames/2 requires the new player layer order and feature contract.",
+    "Both genders intentionally share each class body pose. Gender difference is in head shape, hair, eyes and brows.",
+    "Approved body poses are retained, including their inherited small cloth and armor variation and idle shading. Only local collar skin and the overbright steel rim colors are normalized.",
+    "Clean head/hair contours are manually normalized curves based on saved generated art; they are not pixel-identical to approved art.",
+    "Cut detection uses 0.75 px contour-fit tolerance and painted-outline classification; tiny or strongly antialiased defects can still require visual review.",
+    "Arbitrary extra head rotations outside the provided pose angles are not part of the shipped animation contract."
+  ]
+}

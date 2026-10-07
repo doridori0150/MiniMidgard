@@ -1,0 +1,226 @@
+[
+  {
+    "file" : "parts\/face.png",
+    "size" : [
+      96,
+      88
+    ],
+    "sourceBounds" : [
+      39,
+      125,
+      236,
+      213
+    ],
+    "transparentSourcePixels" : 32092
+  },
+  {
+    "file" : "parts\/hair_front.png",
+    "size" : [
+      125,
+      126
+    ],
+    "sourceBounds" : [
+      311,
+      59,
+      292,
+      296
+    ],
+    "transparentSourcePixels" : 60026
+  },
+  {
+    "file" : "parts\/hair_back.png",
+    "size" : [
+      117,
+      100
+    ],
+    "sourceBounds" : [
+      650,
+      112,
+      285,
+      259
+    ],
+    "transparentSourcePixels" : 36096
+  },
+  {
+    "file" : "parts\/novice_torso.png",
+    "size" : [
+      80,
+      78
+    ],
+    "sourceBounds" : [
+      1001,
+      141,
+      204,
+      217
+    ],
+    "transparentSourcePixels" : 35590
+  },
+  {
+    "file" : "parts\/novice_arm_near.png",
+    "size" : [
+      32,
+      64
+    ],
+    "sourceBounds" : [
+      99,
+      430,
+      117,
+      242
+    ],
+    "transparentSourcePixels" : 23363
+  },
+  {
+    "file" : "parts\/novice_arm_far.png",
+    "size" : [
+      31,
+      62
+    ],
+    "sourceBounds" : [
+      428,
+      433,
+      117,
+      240
+    ],
+    "transparentSourcePixels" : 23609
+  },
+  {
+    "file" : "parts\/leg_near.png",
+    "size" : [
+      39,
+      58
+    ],
+    "sourceBounds" : [
+      702,
+      515,
+      150,
+      164
+    ],
+    "transparentSourcePixels" : 11540
+  },
+  {
+    "file" : "parts\/leg_far.png",
+    "size" : [
+      38,
+      58
+    ],
+    "sourceBounds" : [
+      1034,
+      515,
+      141,
+      164
+    ],
+    "transparentSourcePixels" : 12325
+  },
+  {
+    "file" : "parts\/swordsman_torso.png",
+    "size" : [
+      84,
+      82
+    ],
+    "sourceBounds" : [
+      53,
+      724,
+      233,
+      238
+    ],
+    "transparentSourcePixels" : 32581
+  },
+  {
+    "file" : "parts\/swordsman_arm_near.png",
+    "size" : [
+      34,
+      64
+    ],
+    "sourceBounds" : [
+      426,
+      730,
+      125,
+      231
+    ],
+    "transparentSourcePixels" : 23201
+  },
+  {
+    "file" : "parts\/dagger.png",
+    "size" : [
+      76,
+      29
+    ],
+    "sourceBounds" : [
+      638,
+      801,
+      234,
+      93
+    ],
+    "transparentSourcePixels" : 22265
+  },
+  {
+    "file" : "parts\/sword.png",
+    "size" : [
+      107,
+      32
+    ],
+    "sourceBounds" : [
+      918,
+      797,
+      302,
+      99
+    ],
+    "transparentSourcePixels" : 27453
+  },
+  {
+    "file" : "parts\/leaf.png",
+    "size" : [
+      40,
+      27
+    ],
+    "sourceBounds" : [
+      58,
+      1056,
+      206,
+      129
+    ],
+    "transparentSourcePixels" : 29447
+  },
+  {
+    "file" : "parts\/hairpin.png",
+    "size" : [
+      33,
+      20
+    ],
+    "sourceBounds" : [
+      361,
+      1059,
+      205,
+      123
+    ],
+    "transparentSourcePixels" : 28839
+  },
+  {
+    "file" : "parts\/novice_arm_contact.png",
+    "size" : [
+      68,
+      28
+    ],
+    "sourceBounds" : [
+      643,
+      1070,
+      247,
+      94
+    ],
+    "transparentSourcePixels" : 26595
+  },
+  {
+    "file" : "parts\/swordsman_arm_contact.png",
+    "size" : [
+      68,
+      31
+    ],
+    "sourceBounds" : [
+      977,
+      1047,
+      238,
+      117
+    ],
+    "transparentSourcePixels" : 26943
+  }
+]

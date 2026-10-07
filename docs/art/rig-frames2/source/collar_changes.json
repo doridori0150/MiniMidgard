@@ -1,0 +1,114 @@
+[
+  {
+    "file": "assets/body/novice/idle_0.png",
+    "recoloredPixels": 281
+  },
+  {
+    "file": "assets/body/novice/idle_1.png",
+    "recoloredPixels": 296
+  },
+  {
+    "file": "assets/body/novice/walk_0.png",
+    "recoloredPixels": 91
+  },
+  {
+    "file": "assets/body/novice/walk_1.png",
+    "recoloredPixels": 78
+  },
+  {
+    "file": "assets/body/novice/walk_2.png",
+    "recoloredPixels": 198
+  },
+  {
+    "file": "assets/body/novice/walk_3.png",
+    "recoloredPixels": 64
+  },
+  {
+    "file": "assets/body/novice/attack_0.png",
+    "recoloredPixels": 77
+  },
+  {
+    "file": "assets/body/novice/attack_1.png",
+    "recoloredPixels": 89
+  },
+  {
+    "file": "assets/body/novice/attack_2.png",
+    "recoloredPixels": 298
+  },
+  {
+    "file": "assets/body/novice/cast_0.png",
+    "recoloredPixels": 178
+  },
+  {
+    "file": "assets/body/novice/cast_1.png",
+    "recoloredPixels": 128
+  },
+  {
+    "file": "assets/body/novice/sit_0.png",
+    "recoloredPixels": 67
+  },
+  {
+    "file": "assets/body/novice/hurt_0.png",
+    "recoloredPixels": 198
+  },
+  {
+    "file": "assets/body/novice/dead_0.png",
+    "recoloredPixels": 91
+  },
+  {
+    "file": "assets/body/swordsman/idle_0.png",
+    "recoloredPixels": 83
+  },
+  {
+    "file": "assets/body/swordsman/idle_1.png",
+    "recoloredPixels": 93
+  },
+  {
+    "file": "assets/body/swordsman/walk_0.png",
+    "recoloredPixels": 444
+  },
+  {
+    "file": "assets/body/swordsman/walk_1.png",
+    "recoloredPixels": 410
+  },
+  {
+    "file": "assets/body/swordsman/walk_2.png",
+    "recoloredPixels": 417
+  },
+  {
+    "file": "assets/body/swordsman/walk_3.png",
+    "recoloredPixels": 325
+  },
+  {
+    "file": "assets/body/swordsman/attack_0.png",
+    "recoloredPixels": 374
+  },
+  {
+    "file": "assets/body/swordsman/attack_1.png",
+    "recoloredPixels": 450
+  },
+  {
+    "file": "assets/body/swordsman/attack_2.png",
+    "recoloredPixels": 281
+  },
+  {
+    "file": "assets/body/swordsman/cast_0.png",
+    "recoloredPixels": 419
+  },
+  {
+    "file": "assets/body/swordsman/cast_1.png",
+    "recoloredPixels": 463
+  },
+  {
+    "file": "assets/body/swordsman/sit_0.png",
+    "recoloredPixels": 367
+  },
+  {
+    "file": "assets/body/swordsman/hurt_0.png",
+    "recoloredPixels": 253
+  },
+  {
+    "file": "assets/body/swordsman/dead_0.png",
+    "recoloredPixels": 262
+  }
+]

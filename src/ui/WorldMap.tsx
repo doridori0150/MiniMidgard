@@ -3,14 +3,14 @@ import { useState } from 'preact/hooks';
 import { useGame, useViewState, useBackHandler } from './game.ts';
 import { HeroCanvas, MobCanvas, ElChip, Win, fmt, nameClass, usePainter } from './widgets.tsx';
 import { useRef } from 'preact/hooks';
-import { ZONES, REGION_INFO, regions, regionOf, openers, type ZoneDef, type ZoneRole } from '../game/data/zones.ts';
+import { ZONES, REGION_INFO, regions, regionOf, openers, isExpedition, type ZoneDef, type ZoneRole } from '../game/data/zones.ts';
 import { MONSTERS, type MonsterDef } from '../game/data/monsters.ts';
 import { ITEMS } from '../game/data/items.ts';
 import { ELEMENTS, ELEMENT_KO, RACE_KO, SIZE_KO, elementMod } from '../game/data/elements.ts';
 import { drawWorldMap } from '../render/worldmap.ts';
 import { itemIconURL } from '../render/icons.ts';
 import { audio } from '../audio/audio.ts';
-import { zoneKnown, gateLines, gateReady, openGate, canEnter } from '../game/state.ts';
+import { zoneKnown, gateLines, gateReady, openGate, canEnter, hoursText } from '../game/state.ts';
 import { computeDerived } from '../game/stats.ts';
 
 type Fit = { label: string; cls: string };
@@ -43,19 +43,26 @@ export function weakness(m: MonsterDef) {
   return { weak, resist, neutral };
 }
 
+/** M10: a danger monster stays "???" in the book until the party has felled it once */
+export function dangerUnknown(s: { book: Record<string, { kills: number }> }, id: string) {
+  return !!MONSTERS[id]?.danger && !(s.book[id]?.kills);
+}
+
 function MobCard(props: { id: string; onOpen: () => void }) {
   const g = useGame();
   const m = MONSTERS[props.id];
   const book = g.s.book[m.id];
   const w = weakness(m);
+  const unk = dangerUnknown(g.s, m.id);
   return (
-    <button class={'mcard' + (m.boss === 'mvp' ? ' mvp' : m.boss ? ' boss' : '')} onClick={props.onOpen}>
+    <button class={'mcard' + (m.boss === 'mvp' ? ' mvp' : m.boss ? ' boss' : '') + (m.danger ? ' danger' : '')} onClick={props.onOpen}>
       {m.boss && <span class="mtag">{m.boss === 'mvp' ? 'MVP' : 'BOSS'}</span>}
-      <MobCanvas id={m.id} animate={false} />
-      <b class="mname">{m.name}</b>
-      <span class="mlv">Lv {m.lv}</span>
-      <span class="mchips"><ElChip el={m.element} />{m.aggressive && <span class="chip agg">선공</span>}</span>
-      {w.weak[0] && <span class="mweak">약점 {ELEMENT_KO[w.weak[0].e]}</span>}
+      {m.danger && <span class="mtag danger">⚠ 위험</span>}
+      <span class={unk ? 'msil' : ''}><MobCanvas id={m.id} animate={false} /></span>
+      <b class="mname">{unk ? '???' : m.name}</b>
+      <span class="mlv">{unk ? 'Lv ??' : `Lv ${m.lv}`}</span>
+      {!unk && <span class="mchips"><ElChip el={m.element} />{m.aggressive && <span class="chip agg">선공</span>}</span>}
+      {!unk && w.weak[0] && <span class="mweak">약점 {ELEMENT_KO[w.weak[0].e]}</span>}
       {book?.card && <span class="mcardgot">🎴</span>}
     </button>
   );
@@ -140,7 +147,7 @@ export function MapPanel() {
                       <span class="mr-kind">{zz.id === 'town' ? '🏰' : sealed ? '🔮' : lk ? '🔒' : zz.kind === 'dungeon' ? '⛏️' : '🌿'}</span>
                       <span class="mr-main">
                         <b>{zz.name}</b>
-                        <small>{zz.id === 'town' ? '휴식 · 상점 · 정련' : `Lv ${zz.lv[0]}~${zz.lv[1]}`}{(zz.role ?? []).map((ro) => <i class={'mr-role ' + ro}>{ROLE_KO[ro]}</i>)}</small>
+                        <small>{zz.id === 'town' ? '휴식 · 상점 · 정련' : `Lv ${zz.lv[0]}~${zz.lv[1]}`}{isExpedition(zz) && <i class="mr-role expedition">⚠ 원정</i>}{(zz.role ?? []).map((ro) => <i class={'mr-role ' + ro}>{ROLE_KO[ro]}</i>)}</small>
                       </span>
                       <span class="mr-state">{here ? <i class="zc-here">현재</i> : sealed ? <i class="mr-seal">봉인</i> : lk ? null : zz.id !== 'town' && <i class={'fit ' + f.cls}>{f.label}</i>}</span>
                     </button>
@@ -157,7 +164,7 @@ export function MapPanel() {
           const here = s.zone === z.id;
           const fit = zoneFit(z, avg);
           const p = s.progress[z.id];
-          const mobs = [...z.mobs.map((e) => e.id), ...(z.boss ? [z.boss] : []), ...(z.mvp ? [z.mvp] : [])];
+          const mobs = [...z.mobs.map((e) => e.id), ...(z.boss ? [z.boss] : []), ...(z.mvp ? [z.mvp] : []), ...(z.danger ?? []).map((d) => d.id), ...(z.chest ? [z.chest.trap] : [])];
           return (
             <div class={'zcard ' + z.theme + (locked ? ' locked' : '')}>
               <div class="zc-head">
@@ -165,7 +172,7 @@ export function MapPanel() {
                 <span class="zc-icon">{sealed ? '🔮' : locked ? '🔒' : THEME_ICON[z.theme]}</span>
                 <div class="sp1">
                   <div class="zc-name">{z.name}</div>
-                  <div class="zc-sub">{z.id === 'town' ? '안전 지대' : `권장 Lv ${z.lv[0]} ~ ${z.lv[1]}`}{!locked && z.id !== 'town' && <i class={'fit ' + fit.cls}>{fit.label}</i>}</div>
+                  <div class="zc-sub">{z.id === 'town' ? '안전 지대' : `권장 Lv ${z.lv[0]} ~ ${z.lv[1]}`}{!locked && z.id !== 'town' && <i class={'fit ' + fit.cls}>{fit.label}</i>}{isExpedition(z) && <i class="mr-role expedition">⚠ 원정</i>}</div>
                 </div>
                 {here ? <span class="zc-here">현재 위치</span>
                   : locked ? null
@@ -236,7 +243,29 @@ export function MobModal(props: { id: string }) {
   const m = MONSTERS[props.id];
   const book = g.s.book[m.id];
   const w = weakness(m);
-  const zone = ZONES.find((z) => z.mobs.some((e) => e.id === m.id) || z.boss === m.id || z.mvp === m.id);
+  const zone = ZONES.find((z) => z.mobs.some((e) => e.id === m.id) || z.boss === m.id || z.mvp === m.id || z.danger?.some((d) => d.id === m.id) || z.chest?.trap === m.id);
+  const unk = dangerUnknown(g.s, m.id);
+  const hours = zone?.danger?.find((d) => d.id === m.id)?.hours;
+  if (unk) return (
+    // M10: a danger monster nobody has felled yet — only its shadow and the rumour
+    <div class="modal">
+      <div class="win-title"><span>몬스터 정보</span><span class="sp" /><button class="x" aria-label="닫기" onClick={() => g.popModal()}>×</button></div>
+      <div class="win-body">
+        <div class={'mob-hero ' + (zone?.theme ?? '')}>
+          <span class="msil"><MobCanvas id={m.id} class="mob-big" /></span>
+          <div class="mob-title">
+            <span class="mtag inline danger">⚠ 위험 몹</span>
+            <b>???</b>
+            <span>Lv ?? · {zone?.name}</span>
+          </div>
+        </div>
+        <div class="desc">{zone?.chest?.trap === m.id ? '보물 상자 중 몇 개는 상자가 아니라는 소문이 있다.' : '이 근방의 몬스터보다 훨씬 강한 무언가가 가끔 나타난다고 한다.'}{hours ? ` ${hoursText(hours)}에만 깨어난다고.` : ''}
+          {'\n'}처음 쓰러뜨리면 이름과 드롭이 도감에 기록됩니다. 그전에는 마주치면 작전(위험 몹: 피하기)에 따라 반대편으로 물러납니다.</div>
+        <div class="zc-sec">드롭 아이템</div>
+        <div class="small muted">??? — 쓰러뜨려야 알 수 있다.</div>
+      </div>
+    </div>
+  );
   return (
     <div class="modal">
       <div class="win-title"><span>몬스터 정보</span><span class="sp" /><button class="x" aria-label="닫기" onClick={() => g.popModal()}>×</button></div>
@@ -245,8 +274,9 @@ export function MobModal(props: { id: string }) {
           <MobCanvas id={m.id} class="mob-big" />
           <div class="mob-title">
             {m.boss && <span class={'mtag inline ' + (m.boss === 'mvp' ? 'mvp' : 'boss')}>{m.boss === 'mvp' ? 'MVP' : '필드 보스'}</span>}
+            {m.danger && <span class="mtag inline danger">⚠ 위험 몹</span>}
             <b>{m.name}</b>
-            <span>Lv {m.lv} · {zone?.name}</span>
+            <span>Lv {m.lv} · {zone?.name}{hours ? ` · ${hoursText(hours)}` : ''}</span>
           </div>
         </div>
         <div class="row wrap" style={{ gap: '4px', marginTop: '8px' }}>

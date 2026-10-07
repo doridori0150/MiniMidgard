@@ -1,0 +1,292 @@
+{
+  "status": "PASS",
+  "configurations": 672,
+  "maxGripTransformErrorPx": 6.355287432313019e-14,
+  "maxHeadgearTransformErrorPx": 5.684341886080802e-14,
+  "contact140ms": "PASS / both weapons, both characters, both directions",
+  "maskLeaks": [],
+  "boundsFailures": [],
+  "palette": [
+    {
+      "character": "novice_female",
+      "frame": "idle_0",
+      "opaquePixels": 32240,
+      "antialiasOffPalettePixels": 16250,
+      "flatInteriorPixels": 11900,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.6618
+    },
+    {
+      "character": "novice_female",
+      "frame": "idle_1",
+      "opaquePixels": 31703,
+      "antialiasOffPalettePixels": 16998,
+      "flatInteriorPixels": 11260,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 7.4083
+    },
+    {
+      "character": "novice_female",
+      "frame": "walk_0",
+      "opaquePixels": 31827,
+      "antialiasOffPalettePixels": 16332,
+      "flatInteriorPixels": 11266,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.5843
+    },
+    {
+      "character": "novice_female",
+      "frame": "walk_1",
+      "opaquePixels": 28928,
+      "antialiasOffPalettePixels": 14837,
+      "flatInteriorPixels": 10306,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.8604
+    },
+    {
+      "character": "novice_female",
+      "frame": "walk_2",
+      "opaquePixels": 31799,
+      "antialiasOffPalettePixels": 16406,
+      "flatInteriorPixels": 11322,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.4157
+    },
+    {
+      "character": "novice_female",
+      "frame": "walk_3",
+      "opaquePixels": 31346,
+      "antialiasOffPalettePixels": 16300,
+      "flatInteriorPixels": 11045,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.6177
+    },
+    {
+      "character": "novice_female",
+      "frame": "attack_0",
+      "opaquePixels": 32262,
+      "antialiasOffPalettePixels": 16708,
+      "flatInteriorPixels": 11358,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.6386
+    },
+    {
+      "character": "novice_female",
+      "frame": "attack_1",
+      "opaquePixels": 30758,
+      "antialiasOffPalettePixels": 15739,
+      "flatInteriorPixels": 11079,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.7365
+    },
+    {
+      "character": "novice_female",
+      "frame": "attack_2",
+      "opaquePixels": 29799,
+      "antialiasOffPalettePixels": 12933,
+      "flatInteriorPixels": 11659,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 5.9045
+    },
+    {
+      "character": "novice_female",
+      "frame": "cast_0",
+      "opaquePixels": 33241,
+      "antialiasOffPalettePixels": 16018,
+      "flatInteriorPixels": 12158,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.6073
+    },
+    {
+      "character": "novice_female",
+      "frame": "cast_1",
+      "opaquePixels": 34513,
+      "antialiasOffPalettePixels": 17744,
+      "flatInteriorPixels": 12431,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.6458
+    },
+    {
+      "character": "novice_female",
+      "frame": "sit_0",
+      "opaquePixels": 29325,
+      "antialiasOffPalettePixels": 14995,
+      "flatInteriorPixels": 10468,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.8111
+    },
+    {
+      "character": "novice_female",
+      "frame": "hurt_0",
+      "opaquePixels": 30450,
+      "antialiasOffPalettePixels": 14110,
+      "flatInteriorPixels": 10908,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.3897
+    },
+    {
+      "character": "novice_female",
+      "frame": "dead_0",
+      "opaquePixels": 36550,
+      "antialiasOffPalettePixels": 16138,
+      "flatInteriorPixels": 14951,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.1002
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "idle_0",
+      "opaquePixels": 34104,
+      "antialiasOffPalettePixels": 16382,
+      "flatInteriorPixels": 12578,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 7.4926
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "idle_1",
+      "opaquePixels": 33576,
+      "antialiasOffPalettePixels": 17953,
+      "flatInteriorPixels": 11692,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 8.3039
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "walk_0",
+      "opaquePixels": 32609,
+      "antialiasOffPalettePixels": 16285,
+      "flatInteriorPixels": 11836,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 7.7198
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "walk_1",
+      "opaquePixels": 29913,
+      "antialiasOffPalettePixels": 13789,
+      "flatInteriorPixels": 11611,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 7.3908
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "walk_2",
+      "opaquePixels": 32746,
+      "antialiasOffPalettePixels": 16416,
+      "flatInteriorPixels": 12191,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 7.7928
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "walk_3",
+      "opaquePixels": 29280,
+      "antialiasOffPalettePixels": 14680,
+      "flatInteriorPixels": 10893,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 7.927
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "attack_0",
+      "opaquePixels": 34683,
+      "antialiasOffPalettePixels": 17876,
+      "flatInteriorPixels": 12341,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 7.932
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "attack_1",
+      "opaquePixels": 34339,
+      "antialiasOffPalettePixels": 17457,
+      "flatInteriorPixels": 12477,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 7.5961
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "attack_2",
+      "opaquePixels": 31923,
+      "antialiasOffPalettePixels": 13731,
+      "flatInteriorPixels": 12691,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.7904
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "cast_0",
+      "opaquePixels": 34958,
+      "antialiasOffPalettePixels": 18379,
+      "flatInteriorPixels": 11944,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 7.7616
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "cast_1",
+      "opaquePixels": 34317,
+      "antialiasOffPalettePixels": 18105,
+      "flatInteriorPixels": 11621,
+      "flatInteriorOffPalettePixels": 1,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 7.9527
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "sit_0",
+      "opaquePixels": 27441,
+      "antialiasOffPalettePixels": 12747,
+      "flatInteriorPixels": 10933,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 7.3079
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "hurt_0",
+      "opaquePixels": 30118,
+      "antialiasOffPalettePixels": 13194,
+      "flatInteriorPixels": 11407,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 6.838
+    },
+    {
+      "character": "swordsman_male",
+      "frame": "dead_0",
+      "opaquePixels": 34345,
+      "antialiasOffPalettePixels": 14939,
+      "flatInteriorPixels": 13746,
+      "flatInteriorOffPalettePixels": 0,
+      "flatInteriorBeyondRoundingPixels": 0,
+      "meanNearestPaletteRGBDistance": 7.3049
+    }
+  ],
+  "failures": []
+}

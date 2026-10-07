@@ -1,0 +1,1478 @@
+{
+  "schema": "minimidgard.frames/2",
+  "canvas": {
+    "size": [
+      1024,
+      800
+    ],
+    "origin": [
+      400,
+      725
+    ],
+    "referenceHeight": 620,
+    "displayHeight": 80,
+    "axes": "x right, y down",
+    "angles": "clockwise degrees"
+  },
+  "classes": {
+    "novice": {
+      "frames": {
+        "idle_0": {
+          "body": "assets/body/novice/idle_0.png",
+          "bodyPosition": [
+            210,
+            430
+          ],
+          "bodySize": [
+            320,
+            298
+          ],
+          "neck": {
+            "point": [
+              400,
+              454
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              492,
+              556
+            ],
+            "angle": -48
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "normal"
+        },
+        "idle_1": {
+          "body": "assets/body/novice/idle_1.png",
+          "bodyPosition": [
+            210,
+            426
+          ],
+          "bodySize": [
+            320,
+            302
+          ],
+          "neck": {
+            "point": [
+              400,
+              451
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              492,
+              554
+            ],
+            "angle": -48
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "normal"
+        },
+        "walk_0": {
+          "body": "assets/body/novice/walk_0.png",
+          "bodyPosition": [
+            171,
+            351
+          ],
+          "bodySize": [
+            418,
+            416
+          ],
+          "neck": {
+            "point": [
+              400,
+              454
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              488,
+              550
+            ],
+            "angle": -40
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "normal"
+        },
+        "walk_1": {
+          "body": "assets/body/novice/walk_1.png",
+          "bodyPosition": [
+            163,
+            345
+          ],
+          "bodySize": [
+            416,
+            422
+          ],
+          "neck": {
+            "point": [
+              400,
+              450
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              495,
+              513
+            ],
+            "angle": -32
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "normal"
+        },
+        "walk_2": {
+          "body": "assets/body/novice/walk_2.png",
+          "bodyPosition": [
+            182,
+            393
+          ],
+          "bodySize": [
+            418,
+            399
+          ],
+          "neck": {
+            "point": [
+              400,
+              454
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              485,
+              583
+            ],
+            "angle": -55
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "normal"
+        },
+        "walk_3": {
+          "body": "assets/body/novice/walk_3.png",
+          "bodyPosition": [
+            172,
+            391
+          ],
+          "bodySize": [
+            418,
+            401
+          ],
+          "neck": {
+            "point": [
+              400,
+              450
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              499,
+              567
+            ],
+            "angle": -58
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "normal"
+        },
+        "attack_0": {
+          "body": "assets/body/novice/attack_0.png",
+          "bodyPosition": [
+            164,
+            390
+          ],
+          "bodySize": [
+            418,
+            399
+          ],
+          "neck": {
+            "point": [
+              394,
+              456
+            ],
+            "angle": -3
+          },
+          "hand": {
+            "point": [
+              486,
+              562
+            ],
+            "angle": -115
+          },
+          "weaponZ": "front",
+          "weaponVisible": true,
+          "expression": "normal",
+          "gripOverlay": {
+            "file": "assets/grip/novice_attack_0.png",
+            "position": [
+              457,
+              533
+            ]
+          }
+        },
+        "attack_1": {
+          "body": "assets/body/novice/attack_1.png",
+          "bodyPosition": [
+            170,
+            384
+          ],
+          "bodySize": [
+            416,
+            405
+          ],
+          "neck": {
+            "point": [
+              408,
+              452
+            ],
+            "angle": 2
+          },
+          "hand": {
+            "point": [
+              527,
+              492
+            ],
+            "angle": 0
+          },
+          "weaponZ": "front",
+          "weaponVisible": true,
+          "expression": "normal",
+          "gripOverlay": {
+            "file": "assets/grip/novice_attack_1.png",
+            "position": [
+              498,
+              463
+            ]
+          }
+        },
+        "attack_2": {
+          "body": "assets/body/novice/attack_2.png",
+          "bodyPosition": [
+            194,
+            366
+          ],
+          "bodySize": [
+            418,
+            421
+          ],
+          "neck": {
+            "point": [
+              412,
+              460
+            ],
+            "angle": 4
+          },
+          "hand": {
+            "point": [
+              556,
+              607
+            ],
+            "angle": 32
+          },
+          "weaponZ": "front",
+          "weaponVisible": true,
+          "expression": "normal",
+          "gripOverlay": {
+            "file": "assets/grip/novice_attack_2.png",
+            "position": [
+              527,
+              578
+            ]
+          }
+        },
+        "cast_0": {
+          "body": "assets/body/novice/cast_0.png",
+          "bodyPosition": [
+            172,
+            389
+          ],
+          "bodySize": [
+            418,
+            385
+          ],
+          "neck": {
+            "point": [
+              400,
+              454
+            ],
+            "angle": -2
+          },
+          "hand": {
+            "point": [
+              500,
+              476
+            ],
+            "angle": -80
+          },
+          "weaponZ": "behind",
+          "weaponVisible": false,
+          "expression": "normal"
+        },
+        "cast_1": {
+          "body": "assets/body/novice/cast_1.png",
+          "bodyPosition": [
+            171,
+            361
+          ],
+          "bodySize": [
+            418,
+            417
+          ],
+          "neck": {
+            "point": [
+              400,
+              450
+            ],
+            "angle": -2
+          },
+          "hand": {
+            "point": [
+              481,
+              431
+            ],
+            "angle": -80
+          },
+          "weaponZ": "behind",
+          "weaponVisible": false,
+          "expression": "normal"
+        },
+        "sit_0": {
+          "body": "assets/body/novice/sit_0.png",
+          "bodyPosition": [
+            165,
+            405
+          ],
+          "bodySize": [
+            416,
+            374
+          ],
+          "neck": {
+            "point": [
+              400,
+              530
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              286,
+              659
+            ],
+            "angle": -15
+          },
+          "weaponZ": "behind",
+          "weaponVisible": false,
+          "expression": "normal"
+        },
+        "hurt_0": {
+          "body": "assets/body/novice/hurt_0.png",
+          "bodyPosition": [
+            215,
+            412
+          ],
+          "bodySize": [
+            418,
+            410
+          ],
+          "neck": {
+            "point": [
+              391,
+              461
+            ],
+            "angle": -8
+          },
+          "hand": {
+            "point": [
+              429,
+              480
+            ],
+            "angle": -65
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "hurt"
+        },
+        "dead_0": {
+          "body": "assets/body/novice/dead_0.png",
+          "bodyPosition": [
+            353,
+            396
+          ],
+          "bodySize": [
+            418,
+            458
+          ],
+          "neck": {
+            "point": [
+              440,
+              596
+            ],
+            "angle": -55
+          },
+          "hand": {
+            "point": [
+              536,
+              663
+            ],
+            "angle": 0
+          },
+          "weaponZ": "behind",
+          "weaponVisible": false,
+          "expression": "ko"
+        }
+      },
+      "defaultWeapon": "dagger",
+      "defaultHairColor": "cream",
+      "bodySets": {
+        "female": {
+          "sharedFrames": true,
+          "framesRef": "classes.novice.frames"
+        },
+        "male": {
+          "sharedFrames": true,
+          "framesRef": "classes.novice.frames"
+        }
+      },
+      "defaultHair": {
+        "female": "01",
+        "male": "02"
+      }
+    },
+    "swordsman": {
+      "frames": {
+        "idle_0": {
+          "body": "assets/body/swordsman/idle_0.png",
+          "bodyPosition": [
+            210,
+            430
+          ],
+          "bodySize": [
+            320,
+            298
+          ],
+          "neck": {
+            "point": [
+              400,
+              454
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              492,
+              556
+            ],
+            "angle": -48
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "normal"
+        },
+        "idle_1": {
+          "body": "assets/body/swordsman/idle_1.png",
+          "bodyPosition": [
+            210,
+            426
+          ],
+          "bodySize": [
+            320,
+            302
+          ],
+          "neck": {
+            "point": [
+              400,
+              451
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              492,
+              554
+            ],
+            "angle": -48
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "normal"
+        },
+        "walk_0": {
+          "body": "assets/body/swordsman/walk_0.png",
+          "bodyPosition": [
+            171,
+            351
+          ],
+          "bodySize": [
+            418,
+            413
+          ],
+          "neck": {
+            "point": [
+              400,
+              454
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              488,
+              549
+            ],
+            "angle": -40
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "normal"
+        },
+        "walk_1": {
+          "body": "assets/body/swordsman/walk_1.png",
+          "bodyPosition": [
+            163,
+            346
+          ],
+          "bodySize": [
+            416,
+            419
+          ],
+          "neck": {
+            "point": [
+              400,
+              450
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              499,
+              511
+            ],
+            "angle": -32
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "normal"
+        },
+        "walk_2": {
+          "body": "assets/body/swordsman/walk_2.png",
+          "bodyPosition": [
+            182,
+            393
+          ],
+          "bodySize": [
+            418,
+            396
+          ],
+          "neck": {
+            "point": [
+              400,
+              454
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              487,
+              583
+            ],
+            "angle": -55
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "normal"
+        },
+        "walk_3": {
+          "body": "assets/body/swordsman/walk_3.png",
+          "bodyPosition": [
+            172,
+            391
+          ],
+          "bodySize": [
+            418,
+            398
+          ],
+          "neck": {
+            "point": [
+              400,
+              450
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              500,
+              566
+            ],
+            "angle": -58
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "normal"
+        },
+        "attack_0": {
+          "body": "assets/body/swordsman/attack_0.png",
+          "bodyPosition": [
+            164,
+            390
+          ],
+          "bodySize": [
+            418,
+            399
+          ],
+          "neck": {
+            "point": [
+              394,
+              456
+            ],
+            "angle": -3
+          },
+          "hand": {
+            "point": [
+              486,
+              560
+            ],
+            "angle": -115
+          },
+          "weaponZ": "front",
+          "weaponVisible": true,
+          "expression": "normal",
+          "gripOverlay": {
+            "file": "assets/grip/swordsman_attack_0.png",
+            "position": [
+              457,
+              531
+            ]
+          }
+        },
+        "attack_1": {
+          "body": "assets/body/swordsman/attack_1.png",
+          "bodyPosition": [
+            170,
+            384
+          ],
+          "bodySize": [
+            416,
+            405
+          ],
+          "neck": {
+            "point": [
+              408,
+              452
+            ],
+            "angle": 2
+          },
+          "hand": {
+            "point": [
+              531,
+              490
+            ],
+            "angle": 0
+          },
+          "weaponZ": "front",
+          "weaponVisible": true,
+          "expression": "normal",
+          "gripOverlay": {
+            "file": "assets/grip/swordsman_attack_1.png",
+            "position": [
+              502,
+              461
+            ]
+          }
+        },
+        "attack_2": {
+          "body": "assets/body/swordsman/attack_2.png",
+          "bodyPosition": [
+            194,
+            367
+          ],
+          "bodySize": [
+            418,
+            415
+          ],
+          "neck": {
+            "point": [
+              412,
+              460
+            ],
+            "angle": 4
+          },
+          "hand": {
+            "point": [
+              556,
+              606
+            ],
+            "angle": 32
+          },
+          "weaponZ": "front",
+          "weaponVisible": true,
+          "expression": "normal",
+          "gripOverlay": {
+            "file": "assets/grip/swordsman_attack_2.png",
+            "position": [
+              527,
+              577
+            ]
+          }
+        },
+        "cast_0": {
+          "body": "assets/body/swordsman/cast_0.png",
+          "bodyPosition": [
+            172,
+            389
+          ],
+          "bodySize": [
+            418,
+            383
+          ],
+          "neck": {
+            "point": [
+              400,
+              454
+            ],
+            "angle": -2
+          },
+          "hand": {
+            "point": [
+              501,
+              475
+            ],
+            "angle": -80
+          },
+          "weaponZ": "behind",
+          "weaponVisible": false,
+          "expression": "normal"
+        },
+        "cast_1": {
+          "body": "assets/body/swordsman/cast_1.png",
+          "bodyPosition": [
+            171,
+            362
+          ],
+          "bodySize": [
+            418,
+            413
+          ],
+          "neck": {
+            "point": [
+              400,
+              450
+            ],
+            "angle": -2
+          },
+          "hand": {
+            "point": [
+              483,
+              431
+            ],
+            "angle": -80
+          },
+          "weaponZ": "behind",
+          "weaponVisible": false,
+          "expression": "normal"
+        },
+        "sit_0": {
+          "body": "assets/body/swordsman/sit_0.png",
+          "bodyPosition": [
+            165,
+            406
+          ],
+          "bodySize": [
+            416,
+            371
+          ],
+          "neck": {
+            "point": [
+              400,
+              530
+            ],
+            "angle": 0
+          },
+          "hand": {
+            "point": [
+              286,
+              658
+            ],
+            "angle": -15
+          },
+          "weaponZ": "behind",
+          "weaponVisible": false,
+          "expression": "normal"
+        },
+        "hurt_0": {
+          "body": "assets/body/swordsman/hurt_0.png",
+          "bodyPosition": [
+            215,
+            413
+          ],
+          "bodySize": [
+            418,
+            405
+          ],
+          "neck": {
+            "point": [
+              391,
+              461
+            ],
+            "angle": -8
+          },
+          "hand": {
+            "point": [
+              432,
+              480
+            ],
+            "angle": -65
+          },
+          "weaponZ": "behind",
+          "weaponVisible": true,
+          "expression": "hurt"
+        },
+        "dead_0": {
+          "body": "assets/body/swordsman/dead_0.png",
+          "bodyPosition": [
+            353,
+            396
+          ],
+          "bodySize": [
+            418,
+            458
+          ],
+          "neck": {
+            "point": [
+              440,
+              596
+            ],
+            "angle": -55
+          },
+          "hand": {
+            "point": [
+              539,
+              662
+            ],
+            "angle": 0
+          },
+          "weaponZ": "behind",
+          "weaponVisible": false,
+          "expression": "ko"
+        }
+      },
+      "defaultWeapon": "sword",
+      "defaultHairColor": "blue",
+      "bodySets": {
+        "female": {
+          "sharedFrames": true,
+          "framesRef": "classes.swordsman.frames"
+        },
+        "male": {
+          "sharedFrames": true,
+          "framesRef": "classes.swordsman.frames"
+        }
+      },
+      "defaultHair": {
+        "female": "01",
+        "male": "02"
+      }
+    }
+  },
+  "animations": {
+    "idle": {
+      "frames": [
+        "idle_0",
+        "idle_1"
+      ],
+      "durations": [
+        800,
+        800
+      ],
+      "duration": 1600,
+      "loop": true,
+      "interpolation": "step"
+    },
+    "walk": {
+      "frames": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durations": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "duration": 720,
+      "loop": true,
+      "interpolation": "step"
+    },
+    "attack": {
+      "frames": [
+        "attack_0",
+        "attack_1",
+        "attack_2"
+      ],
+      "durations": [
+        100,
+        80,
+        100
+      ],
+      "duration": 280,
+      "loop": false,
+      "interpolation": "step",
+      "events": [
+        {
+          "time": 140,
+          "name": "hit"
+        }
+      ]
+    },
+    "cast": {
+      "frames": [
+        "cast_0",
+        "cast_1"
+      ],
+      "durations": [
+        360,
+        360
+      ],
+      "duration": 720,
+      "loop": true,
+      "interpolation": "step"
+    },
+    "sit": {
+      "frames": [
+        "sit_0"
+      ],
+      "durations": [
+        1
+      ],
+      "duration": 1,
+      "loop": false,
+      "interpolation": "step"
+    },
+    "hurt": {
+      "frames": [
+        "hurt_0"
+      ],
+      "durations": [
+        1
+      ],
+      "duration": 1,
+      "loop": false,
+      "interpolation": "step"
+    },
+    "dead": {
+      "frames": [
+        "dead_0"
+      ],
+      "durations": [
+        1
+      ],
+      "duration": 1,
+      "loop": false,
+      "interpolation": "step"
+    }
+  },
+  "head": {
+    "size": [
+      440,
+      460
+    ],
+    "neck": [
+      230,
+      376
+    ],
+    "neckLayer": "assets/head/neck.png",
+    "bases": {
+      "female": "assets/head/female.png",
+      "male": "assets/head/male.png"
+    },
+    "featureAnchors": {
+      "eyes": [
+        250,
+        282
+      ],
+      "brows": [
+        250,
+        251
+      ],
+      "nose": [
+        269,
+        310
+      ],
+      "mouth": [
+        252,
+        333
+      ]
+    },
+    "skullAnchors": {
+      "crown": [
+        214,
+        100
+      ],
+      "brow": [
+        294,
+        243
+      ]
+    },
+    "expressionMap": {
+      "normal": {
+        "eyes": "normal",
+        "brows": "normal",
+        "nose": "normal",
+        "mouth": "normal"
+      },
+      "hurt": {
+        "eyes": "hurt",
+        "brows": "hurt",
+        "nose": "normal",
+        "mouth": "hurt"
+      },
+      "ko": {
+        "eyes": "closed",
+        "brows": "hurt",
+        "nose": "normal",
+        "mouth": "ko"
+      },
+      "blink": {
+        "eyes": "closed",
+        "brows": "normal",
+        "nose": "normal",
+        "mouth": "normal"
+      }
+    }
+  },
+  "hairStyles": {
+    "female": {
+      "01": {
+        "name": "bob with ahoge",
+        "front": "assets/hair/female01.png",
+        "back": "assets/hair/female01_back.png"
+      },
+      "05": {
+        "name": "high ponytail",
+        "front": "assets/hair/female05.png",
+        "back": "assets/hair/female05_back.png"
+      }
+    },
+    "male": {
+      "02": {
+        "name": "short spiky",
+        "front": "assets/hair/male02.png",
+        "back": "assets/hair/male02_back.png"
+      },
+      "03": {
+        "name": "short side part",
+        "front": "assets/hair/male03.png",
+        "back": "assets/hair/male03_back.png"
+      }
+    }
+  },
+  "hairColors": {
+    "cream": null,
+    "blue": [
+      0.39,
+      0.6,
+      0.79
+    ],
+    "brown": [
+      0.65,
+      0.43,
+      0.27
+    ],
+    "black": [
+      0.35,
+      0.36,
+      0.38
+    ]
+  },
+  "headgear": {
+    "leaf": {
+      "file": "assets/equipment/leaf.png",
+      "anchor": "crown",
+      "offset": [
+        -18,
+        -2
+      ],
+      "pivot": [
+        24,
+        41
+      ]
+    },
+    "hairpin": {
+      "file": "assets/equipment/hairpin.png",
+      "anchor": "brow",
+      "offset": [
+        17,
+        -52
+      ],
+      "pivot": [
+        34,
+        20
+      ]
+    }
+  },
+  "weapons": {
+    "dagger": {
+      "file": "assets/equipment/dagger.png",
+      "size": [
+        167,
+        64
+      ],
+      "grip": [
+        33,
+        33
+      ],
+      "tip": [
+        163,
+        33
+      ]
+    },
+    "sword": {
+      "file": "assets/equipment/sword.png",
+      "size": [
+        246,
+        74
+      ],
+      "grip": [
+        46,
+        37
+      ],
+      "tip": [
+        241,
+        37
+      ]
+    }
+  },
+  "renderContract": {
+    "order": [
+      "weaponBehind",
+      "neck",
+      "hairBack",
+      "body",
+      "headBase",
+      "eyes",
+      "brows",
+      "nose",
+      "mouth",
+      "hair",
+      "headgear",
+      "weaponFront",
+      "gripOverlay"
+    ],
+    "headUnitOrder": [
+      "headBase",
+      "eyes",
+      "brows",
+      "nose",
+      "mouth",
+      "hair",
+      "headgear"
+    ],
+    "mirror": "mirror completed assembly around canvas.origin.x",
+    "time": "integer milliseconds; negative clamps to zero; loops modulo duration; nonloop holds last",
+    "head": "neck uses the same rigid head matrix but renders before body; rear hair is a complete closed silhouette before body; front fringe is a complete closed contour",
+    "tint": "multiply only hair RGB with red > 127; preserve dark outline and alpha",
+    "nullEquipment": "weapon=null skips weapon; headgear=[] skips decorations",
+    "unknownIds": "error, including unsupported gender/hair pairs; no silent fallback",
+    "units": "source pixels; world scale = desired character height / referenceHeight",
+    "features": "selected types are independent; body expression resolves variant through head.expressionMap; blink explicitly overrides expression",
+    "gender": "female and male bases, hair and features; bodySets intentionally resolve to shared class frames"
+  },
+  "features": {
+    "female": {
+      "eyes": {
+        "01": {
+          "pivot": [
+            80,
+            30
+          ],
+          "variants": {
+            "normal": "assets/features/female/eyes/01_normal.png",
+            "hurt": "assets/features/female/eyes/01_hurt.png",
+            "closed": "assets/features/female/eyes/01_closed.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            80,
+            30
+          ],
+          "variants": {
+            "normal": "assets/features/female/eyes/02_normal.png",
+            "hurt": "assets/features/female/eyes/02_hurt.png",
+            "closed": "assets/features/female/eyes/02_closed.png"
+          }
+        },
+        "03": {
+          "pivot": [
+            80,
+            30
+          ],
+          "variants": {
+            "normal": "assets/features/female/eyes/03_normal.png",
+            "hurt": "assets/features/female/eyes/03_hurt.png",
+            "closed": "assets/features/female/eyes/03_closed.png"
+          }
+        }
+      },
+      "brows": {
+        "01": {
+          "pivot": [
+            80,
+            20
+          ],
+          "variants": {
+            "normal": "assets/features/female/brows/01_normal.png",
+            "hurt": "assets/features/female/brows/01_hurt.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            80,
+            20
+          ],
+          "variants": {
+            "normal": "assets/features/female/brows/02_normal.png",
+            "hurt": "assets/features/female/brows/02_hurt.png"
+          }
+        },
+        "03": {
+          "pivot": [
+            80,
+            20
+          ],
+          "variants": {
+            "normal": "assets/features/female/brows/03_normal.png",
+            "hurt": "assets/features/female/brows/03_hurt.png"
+          }
+        }
+      },
+      "nose": {
+        "01": {
+          "pivot": [
+            17,
+            17
+          ],
+          "variants": {
+            "normal": "assets/features/female/nose/01_normal.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            17,
+            17
+          ],
+          "variants": {
+            "normal": "assets/features/female/nose/02_normal.png"
+          }
+        }
+      },
+      "mouth": {
+        "01": {
+          "pivot": [
+            33,
+            23
+          ],
+          "variants": {
+            "normal": "assets/features/female/mouth/01_normal.png",
+            "hurt": "assets/features/female/mouth/01_hurt.png",
+            "ko": "assets/features/female/mouth/01_ko.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            33,
+            23
+          ],
+          "variants": {
+            "normal": "assets/features/female/mouth/02_normal.png",
+            "hurt": "assets/features/female/mouth/02_hurt.png",
+            "ko": "assets/features/female/mouth/02_ko.png"
+          }
+        },
+        "03": {
+          "pivot": [
+            33,
+            23
+          ],
+          "variants": {
+            "normal": "assets/features/female/mouth/03_normal.png",
+            "hurt": "assets/features/female/mouth/03_hurt.png",
+            "ko": "assets/features/female/mouth/03_ko.png"
+          }
+        }
+      }
+    },
+    "male": {
+      "eyes": {
+        "01": {
+          "pivot": [
+            80,
+            30
+          ],
+          "variants": {
+            "normal": "assets/features/male/eyes/01_normal.png",
+            "hurt": "assets/features/male/eyes/01_hurt.png",
+            "closed": "assets/features/male/eyes/01_closed.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            80,
+            30
+          ],
+          "variants": {
+            "normal": "assets/features/male/eyes/02_normal.png",
+            "hurt": "assets/features/male/eyes/02_hurt.png",
+            "closed": "assets/features/male/eyes/02_closed.png"
+          }
+        },
+        "03": {
+          "pivot": [
+            80,
+            30
+          ],
+          "variants": {
+            "normal": "assets/features/male/eyes/03_normal.png",
+            "hurt": "assets/features/male/eyes/03_hurt.png",
+            "closed": "assets/features/male/eyes/03_closed.png"
+          }
+        }
+      },
+      "brows": {
+        "01": {
+          "pivot": [
+            80,
+            20
+          ],
+          "variants": {
+            "normal": "assets/features/male/brows/01_normal.png",
+            "hurt": "assets/features/male/brows/01_hurt.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            80,
+            20
+          ],
+          "variants": {
+            "normal": "assets/features/male/brows/02_normal.png",
+            "hurt": "assets/features/male/brows/02_hurt.png"
+          }
+        },
+        "03": {
+          "pivot": [
+            80,
+            20
+          ],
+          "variants": {
+            "normal": "assets/features/male/brows/03_normal.png",
+            "hurt": "assets/features/male/brows/03_hurt.png"
+          }
+        }
+      },
+      "nose": {
+        "01": {
+          "pivot": [
+            17,
+            17
+          ],
+          "variants": {
+            "normal": "assets/features/male/nose/01_normal.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            17,
+            17
+          ],
+          "variants": {
+            "normal": "assets/features/male/nose/02_normal.png"
+          }
+        }
+      },
+      "mouth": {
+        "01": {
+          "pivot": [
+            33,
+            23
+          ],
+          "variants": {
+            "normal": "assets/features/male/mouth/01_normal.png",
+            "hurt": "assets/features/male/mouth/01_hurt.png",
+            "ko": "assets/features/male/mouth/01_ko.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            33,
+            23
+          ],
+          "variants": {
+            "normal": "assets/features/male/mouth/02_normal.png",
+            "hurt": "assets/features/male/mouth/02_hurt.png",
+            "ko": "assets/features/male/mouth/02_ko.png"
+          }
+        },
+        "03": {
+          "pivot": [
+            33,
+            23
+          ],
+          "variants": {
+            "normal": "assets/features/male/mouth/03_normal.png",
+            "hurt": "assets/features/male/mouth/03_hurt.png",
+            "ko": "assets/features/male/mouth/03_ko.png"
+          }
+        }
+      }
+    }
+  },
+  "defaultFeatures": {
+    "female": {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01"
+    },
+    "male": {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01"
+    }
+  },
+  "verification": {
+    "joinRegion": {
+      "space": "head",
+      "polygon": [
+        [
+          208,
+          355
+        ],
+        [
+          247,
+          355
+        ],
+        [
+          246,
+          399
+        ],
+        [
+          208,
+          399
+        ]
+      ],
+      "note": "Independent chin-to-collar interior corridor; includes overlap with chin and collar. Not derived from assembled alpha."
+    }
+  }
+}

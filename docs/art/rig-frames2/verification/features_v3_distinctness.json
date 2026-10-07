@@ -1,0 +1,625 @@
+{
+  "method": "Mean absolute RGB channel difference on opaque skin, 0..255. Each gender/feature has one fixed union-of-normal-ink ROI + 2 source pixels padding, reused across all type pairs. 80px images are rasterized at 80/620 in head space before the same ROI is scaled with floor/ceil. No per-type recentering, no threshold substitutes for visual review.",
+  "pairs": [
+    {
+      "gender": "female",
+      "feature": "eyes",
+      "pair": "01-02",
+      "headSpaceROI": [
+        172,
+        254,
+        313,
+        310
+      ],
+      "source": {
+        "meanAbsoluteRGB": 21.2766,
+        "maxChannelDifference": 235,
+        "roi": [
+          172,
+          254,
+          313,
+          310
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 13.0197,
+        "maxChannelDifference": 137,
+        "roi": [
+          22,
+          32,
+          41,
+          40
+        ]
+      }
+    },
+    {
+      "gender": "female",
+      "feature": "eyes",
+      "pair": "01-03",
+      "headSpaceROI": [
+        172,
+        254,
+        313,
+        310
+      ],
+      "source": {
+        "meanAbsoluteRGB": 27.6681,
+        "maxChannelDifference": 235,
+        "roi": [
+          172,
+          254,
+          313,
+          310
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 17.1864,
+        "maxChannelDifference": 194,
+        "roi": [
+          22,
+          32,
+          41,
+          40
+        ]
+      }
+    },
+    {
+      "gender": "female",
+      "feature": "eyes",
+      "pair": "02-03",
+      "headSpaceROI": [
+        172,
+        254,
+        313,
+        310
+      ],
+      "source": {
+        "meanAbsoluteRGB": 27.9463,
+        "maxChannelDifference": 235,
+        "roi": [
+          172,
+          254,
+          313,
+          310
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 17.2061,
+        "maxChannelDifference": 194,
+        "roi": [
+          22,
+          32,
+          41,
+          40
+        ]
+      }
+    },
+    {
+      "gender": "female",
+      "feature": "brows",
+      "pair": "01-02",
+      "headSpaceROI": [
+        170,
+        240,
+        315,
+        269
+      ],
+      "source": {
+        "meanAbsoluteRGB": 30.107,
+        "maxChannelDifference": 196,
+        "roi": [
+          170,
+          240,
+          315,
+          269
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 13.0767,
+        "maxChannelDifference": 93,
+        "roi": [
+          21,
+          30,
+          41,
+          35
+        ]
+      }
+    },
+    {
+      "gender": "female",
+      "feature": "brows",
+      "pair": "01-03",
+      "headSpaceROI": [
+        170,
+        240,
+        315,
+        269
+      ],
+      "source": {
+        "meanAbsoluteRGB": 39.2256,
+        "maxChannelDifference": 196,
+        "roi": [
+          170,
+          240,
+          315,
+          269
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 17.0967,
+        "maxChannelDifference": 130,
+        "roi": [
+          21,
+          30,
+          41,
+          35
+        ]
+      }
+    },
+    {
+      "gender": "female",
+      "feature": "brows",
+      "pair": "02-03",
+      "headSpaceROI": [
+        170,
+        240,
+        315,
+        269
+      ],
+      "source": {
+        "meanAbsoluteRGB": 50.5336,
+        "maxChannelDifference": 196,
+        "roi": [
+          170,
+          240,
+          315,
+          269
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 23.7533,
+        "maxChannelDifference": 114,
+        "roi": [
+          21,
+          30,
+          41,
+          35
+        ]
+      }
+    },
+    {
+      "gender": "female",
+      "feature": "nose",
+      "pair": "01-02",
+      "headSpaceROI": [
+        261,
+        300,
+        279,
+        319
+      ],
+      "source": {
+        "meanAbsoluteRGB": 43.192,
+        "maxChannelDifference": 196,
+        "roi": [
+          261,
+          300,
+          279,
+          319
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 10.9722,
+        "maxChannelDifference": 47,
+        "roi": [
+          33,
+          38,
+          36,
+          42
+        ]
+      }
+    },
+    {
+      "gender": "female",
+      "feature": "mouth",
+      "pair": "01-02",
+      "headSpaceROI": [
+        219,
+        318,
+        261,
+        343
+      ],
+      "source": {
+        "meanAbsoluteRGB": 67.8876,
+        "maxChannelDifference": 202,
+        "roi": [
+          219,
+          318,
+          261,
+          343
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 39.3611,
+        "maxChannelDifference": 130,
+        "roi": [
+          28,
+          41,
+          34,
+          45
+        ]
+      }
+    },
+    {
+      "gender": "female",
+      "feature": "mouth",
+      "pair": "01-03",
+      "headSpaceROI": [
+        219,
+        318,
+        261,
+        343
+      ],
+      "source": {
+        "meanAbsoluteRGB": 29.9787,
+        "maxChannelDifference": 196,
+        "roi": [
+          219,
+          318,
+          261,
+          343
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 9.6528,
+        "maxChannelDifference": 41,
+        "roi": [
+          28,
+          41,
+          34,
+          45
+        ]
+      }
+    },
+    {
+      "gender": "female",
+      "feature": "mouth",
+      "pair": "02-03",
+      "headSpaceROI": [
+        219,
+        318,
+        261,
+        343
+      ],
+      "source": {
+        "meanAbsoluteRGB": 64.006,
+        "maxChannelDifference": 203,
+        "roi": [
+          219,
+          318,
+          261,
+          343
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 34.4861,
+        "maxChannelDifference": 111,
+        "roi": [
+          28,
+          41,
+          34,
+          45
+        ]
+      }
+    },
+    {
+      "gender": "male",
+      "feature": "eyes",
+      "pair": "01-02",
+      "headSpaceROI": [
+        175,
+        259,
+        310,
+        308
+      ],
+      "source": {
+        "meanAbsoluteRGB": 21.8522,
+        "maxChannelDifference": 235,
+        "roi": [
+          175,
+          259,
+          310,
+          308
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 13.5132,
+        "maxChannelDifference": 123,
+        "roi": [
+          22,
+          33,
+          40,
+          40
+        ]
+      }
+    },
+    {
+      "gender": "male",
+      "feature": "eyes",
+      "pair": "01-03",
+      "headSpaceROI": [
+        175,
+        259,
+        310,
+        308
+      ],
+      "source": {
+        "meanAbsoluteRGB": 30.6025,
+        "maxChannelDifference": 235,
+        "roi": [
+          175,
+          259,
+          310,
+          308
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 18.4683,
+        "maxChannelDifference": 169,
+        "roi": [
+          22,
+          33,
+          40,
+          40
+        ]
+      }
+    },
+    {
+      "gender": "male",
+      "feature": "eyes",
+      "pair": "02-03",
+      "headSpaceROI": [
+        175,
+        259,
+        310,
+        308
+      ],
+      "source": {
+        "meanAbsoluteRGB": 30.5965,
+        "maxChannelDifference": 237,
+        "roi": [
+          175,
+          259,
+          310,
+          308
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 18.6534,
+        "maxChannelDifference": 183,
+        "roi": [
+          22,
+          33,
+          40,
+          40
+        ]
+      }
+    },
+    {
+      "gender": "male",
+      "feature": "brows",
+      "pair": "01-02",
+      "headSpaceROI": [
+        169,
+        239,
+        316,
+        266
+      ],
+      "source": {
+        "meanAbsoluteRGB": 46.5276,
+        "maxChannelDifference": 196,
+        "roi": [
+          169,
+          239,
+          316,
+          266
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 17.76,
+        "maxChannelDifference": 106,
+        "roi": [
+          21,
+          30,
+          41,
+          35
+        ]
+      }
+    },
+    {
+      "gender": "male",
+      "feature": "brows",
+      "pair": "01-03",
+      "headSpaceROI": [
+        169,
+        239,
+        316,
+        266
+      ],
+      "source": {
+        "meanAbsoluteRGB": 29.2683,
+        "maxChannelDifference": 196,
+        "roi": [
+          169,
+          239,
+          316,
+          266
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 13.8733,
+        "maxChannelDifference": 114,
+        "roi": [
+          21,
+          30,
+          41,
+          35
+        ]
+      }
+    },
+    {
+      "gender": "male",
+      "feature": "brows",
+      "pair": "02-03",
+      "headSpaceROI": [
+        169,
+        239,
+        316,
+        266
+      ],
+      "source": {
+        "meanAbsoluteRGB": 60.7105,
+        "maxChannelDifference": 196,
+        "roi": [
+          169,
+          239,
+          316,
+          266
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 25.92,
+        "maxChannelDifference": 117,
+        "roi": [
+          21,
+          30,
+          41,
+          35
+        ]
+      }
+    },
+    {
+      "gender": "male",
+      "feature": "nose",
+      "pair": "01-02",
+      "headSpaceROI": [
+        261,
+        300,
+        279,
+        319
+      ],
+      "source": {
+        "meanAbsoluteRGB": 43.192,
+        "maxChannelDifference": 196,
+        "roi": [
+          261,
+          300,
+          279,
+          319
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 10.9722,
+        "maxChannelDifference": 47,
+        "roi": [
+          33,
+          38,
+          36,
+          42
+        ]
+      }
+    },
+    {
+      "gender": "male",
+      "feature": "mouth",
+      "pair": "01-02",
+      "headSpaceROI": [
+        219,
+        318,
+        261,
+        343
+      ],
+      "source": {
+        "meanAbsoluteRGB": 67.8876,
+        "maxChannelDifference": 202,
+        "roi": [
+          219,
+          318,
+          261,
+          343
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 39.3611,
+        "maxChannelDifference": 130,
+        "roi": [
+          28,
+          41,
+          34,
+          45
+        ]
+      }
+    },
+    {
+      "gender": "male",
+      "feature": "mouth",
+      "pair": "01-03",
+      "headSpaceROI": [
+        219,
+        318,
+        261,
+        343
+      ],
+      "source": {
+        "meanAbsoluteRGB": 29.9787,
+        "maxChannelDifference": 196,
+        "roi": [
+          219,
+          318,
+          261,
+          343
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 9.6528,
+        "maxChannelDifference": 41,
+        "roi": [
+          28,
+          41,
+          34,
+          45
+        ]
+      }
+    },
+    {
+      "gender": "male",
+      "feature": "mouth",
+      "pair": "02-03",
+      "headSpaceROI": [
+        219,
+        318,
+        261,
+        343
+      ],
+      "source": {
+        "meanAbsoluteRGB": 64.006,
+        "maxChannelDifference": 203,
+        "roi": [
+          219,
+          318,
+          261,
+          343
+        ]
+      },
+      "80px": {
+        "meanAbsoluteRGB": 34.4861,
+        "maxChannelDifference": 111,
+        "roi": [
+          28,
+          41,
+          34,
+          45
+        ]
+      }
+    }
+  ]
+}

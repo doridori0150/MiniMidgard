@@ -15,7 +15,8 @@ export function sourcesOf(id: string): { mob: string; rate: number; zones: ZoneD
   for (const m of Object.values(MONSTERS)) {
     const d = m.drops.find((x) => x.id === id);
     if (!d) continue;
-    out.push({ mob: m.id, rate: d.rate, zones: ZONES.filter((z) => z.mobs.some((x) => x.id === m.id) || z.boss === m.id || z.mvp === m.id) });
+    // danger monsters and trap chests of the expedition maps count as where they live too
+    out.push({ mob: m.id, rate: d.rate, zones: ZONES.filter((z) => z.mobs.some((x) => x.id === m.id) || z.boss === m.id || z.mvp === m.id || z.danger?.some((x) => x.id === m.id) || z.chest?.trap === m.id) });
   }
   return out.sort((a, b) => b.rate - a.rate);
 }

@@ -1,0 +1,242 @@
+[
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      20,
+      98,
+      274,
+      265
+    ],
+    "size": [
+      96,
+      88
+    ],
+    "file": "parts/face.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      294,
+      29,
+      309,
+      343
+    ],
+    "size": [
+      125,
+      126
+    ],
+    "file": "parts/hair_front.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      612,
+      98,
+      323,
+      279
+    ],
+    "size": [
+      117,
+      100
+    ],
+    "file": "parts/hair_back.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      960,
+      108,
+      255,
+      269
+    ],
+    "size": [
+      80,
+      78
+    ],
+    "file": "parts/novice_torso.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      69,
+      402,
+      157,
+      284
+    ],
+    "size": [
+      32,
+      64
+    ],
+    "file": "parts/novice_arm_near.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      397,
+      402,
+      157,
+      284
+    ],
+    "size": [
+      31,
+      62
+    ],
+    "file": "parts/novice_arm_far.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      666,
+      515,
+      186,
+      164
+    ],
+    "size": [
+      39,
+      58
+    ],
+    "file": "parts/leg_near.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      989,
+      515,
+      186,
+      164
+    ],
+    "size": [
+      38,
+      58
+    ],
+    "file": "parts/leg_far.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      24,
+      696,
+      274,
+      269
+    ],
+    "size": [
+      84,
+      82
+    ],
+    "file": "parts/swordsman_torso.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      397,
+      696,
+      162,
+      269
+    ],
+    "size": [
+      34,
+      64
+    ],
+    "file": "parts/swordsman_arm_near.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      607,
+      764,
+      265,
+      132
+    ],
+    "size": [
+      76,
+      29
+    ],
+    "file": "parts/dagger.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      882,
+      764,
+      338,
+      132
+    ],
+    "size": [
+      107,
+      32
+    ],
+    "file": "parts/sword.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      29,
+      1009,
+      245,
+      176
+    ],
+    "size": [
+      40,
+      27
+    ],
+    "file": "parts/leaf.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      333,
+      1009,
+      245,
+      176
+    ],
+    "size": [
+      33,
+      20
+    ],
+    "file": "parts/hairpin.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      607,
+      1009,
+      284,
+      157
+    ],
+    "size": [
+      68,
+      28
+    ],
+    "file": "parts/novice_arm_contact.png"
+  },
+  {
+    "op": "extract",
+    "source": "source/atlas.png",
+    "rect": [
+      931,
+      999,
+      284,
+      167
+    ],
+    "size": [
+      68,
+      31
+    ],
+    "file": "parts/swordsman_arm_contact.png"
+  }
+]

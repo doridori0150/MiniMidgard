@@ -1,0 +1,37 @@
+{
+  "decodedFrames" : 80,
+  "distinctDecodedImagesPerRowIdleWalkAttack" : [
+    [
+      2,
+      4,
+      4
+    ],
+    [
+      2,
+      4,
+      4
+    ],
+    [
+      2,
+      4,
+      4
+    ],
+    [
+      2,
+      4,
+      4
+    ]
+  ],
+  "frameDurationMs" : 40,
+  "frameSizes" : [
+    "890x1050"
+  ],
+  "rows" : [
+    "novice female",
+    "novice male",
+    "swordsman female",
+    "swordsman male"
+  ],
+  "status" : "pass",
+  "totalDurationMs" : 3200.0000000000018
+}
