@@ -187,40 +187,6 @@ export function TownPanel() {
   );
 }
 
-export function PartyPanel() {
-  const g = useGame();
-  const s = g.s;
-  const move = (i: number, d: number) => {
-    const j = i + d;
-    if (j < 0 || j >= s.heroes.length) return;
-    [s.heroes[i], s.heroes[j]] = [s.heroes[j], s.heroes[i]];
-    g.sel = j;
-    g.commit('click');
-  };
-  return (
-    <Win title="파티" onClose={() => g.openPanel(null)}>
-      <div class="win-body">
-        {s.heroes.map((h, i) => (
-          <div class="li" key={h.id}>
-            <HeroCanvas hero={h} face />
-            <div class="mid">
-              <div class="nm"><b>{h.name}</b> {i === 0 && <span class="chip" style={{ background: '#ffcc4a' }}>리더</span>}</div>
-              <div class="small muted"><span style={{ color: CLASSES[h.cls].color }}>{CLASSES[h.cls].name}</span> · Lv {h.baseLv} / Job {h.jobLv} · {CLASSES[h.cls].role}</div>
-            </div>
-            <button class="btn xs" disabled={i === 0} onClick={() => move(i, -1)}>▲</button>
-            <button class="btn xs" disabled={i === s.heroes.length - 1} onClick={() => move(i, 1)}>▼</button>
-          </div>
-        ))}
-        {s.heroes.length < s.partySlots && <button class="btn pri block" style={{ marginTop: '8px' }} onClick={() => g.setModal({ kind: 'recruit' })}>+ 새 동료 영입</button>}
-        <div class="hint" style={{ marginTop: '8px' }}>
-          파티 슬롯은 Lv 10, Lv 22에 열립니다. 경험치는 파티원끼리 나누고(인원당 +15% 보너스), 레벨이 낮은 동료는 2.5배로 빠르게 따라옵니다.
-          리더(맨 위)가 사냥터를 돌아다니고, 도발을 가진 검사가 몹을 끌어 줍니다. 힐러·버퍼와 딜러를 섞어 조합을 연구해 보세요!
-        </div>
-      </div>
-    </Win>
-  );
-}
-
 export function SettingsPanel() {
   const g = useGame();
   const st = g.s.settings;

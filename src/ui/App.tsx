@@ -5,7 +5,8 @@ import { FieldView } from './FieldView.tsx';
 import { Modals } from './Modals.tsx';
 import { StatusPanel, SkillsPanel } from './panels/StatusSkills.tsx';
 import { EquipPanel, BagPanel } from './panels/EquipBag.tsx';
-import { TownPanel, PartyPanel, SettingsPanel } from './panels/World.tsx';
+import { TownPanel, SettingsPanel } from './panels/World.tsx';
+import { PartyPanel } from './panels/Party.tsx';
 import { MapPanel } from './WorldMap.tsx';
 import { CardPanel } from './panels/Cards.tsx';
 import { LookCanvas } from './widgets.tsx';
@@ -21,7 +22,7 @@ function Toasts() {
 function GameScreen() {
   const g = useGame();
   const p = g.panel;
-  const tall = p === 'equip' || p === 'town' || p === 'map' || p === 'cards';
+  const tall = p === 'equip' || p === 'town' || p === 'map' || p === 'cards' || p === 'party';
   return (
     <div class="app">
       <Hud />

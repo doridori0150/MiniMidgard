@@ -94,7 +94,7 @@ export function FieldView() {
     if (!r || !wrap.current) return;
     const fieldH = wrap.current.clientHeight;
     const appH = wrap.current.parentElement!.clientHeight;
-    const sheet = appH * (g.panel === 'equip' || g.panel === 'town' || g.panel === 'map' || g.panel === 'cards' ? 0.78 : 0.6);
+    const sheet = appH * (g.panel === 'equip' || g.panel === 'town' || g.panel === 'map' || g.panel === 'cards' || g.panel === 'party' ? 0.78 : 0.6);
     r.insetBottom = g.panel ? Math.max(0, Math.min(fieldH - 90, sheet)) : 84; // keep the party above the quick bar
   }, [g.panel]);
   return (

@@ -1,0 +1,161 @@
+import { useState } from 'preact/hooks';
+import { useGame } from '../game.ts';
+import { HeroCanvas, Win } from '../widgets.tsx';
+import { CLASSES } from '../../game/data/classes.ts';
+import { defaultOrders, defaultTactics } from '../../game/state.ts';
+import type { PartyRole } from '../../game/world.ts';
+import type { Hero, PartyOrders, Tactics } from '../../game/types.ts';
+
+const ROLE: Record<PartyRole, [string, string]> = {
+  tank: ['탱커', '#4e7ad0'], melee: ['근접 딜러', '#c05a3a'], ranged: ['원거리', '#3f9a4a'], caster: ['마법', '#8a5ad0'], healer: ['힐러', '#c8962a'],
+};
+const AUTO_POS: Record<PartyRole, string> = { tank: '전열', melee: '전열', ranged: '중열', caster: '후열', healer: '전열↔중열' };
+
+type Opt<K extends string> = [K, string, string];
+const TARGET: Opt<Tactics['target']>[] = [
+  ['assist', '협공', '리더·탱커가 치는 적을 같이 칩니다. 파티가 한 몸처럼 움직여요.'],
+  ['protect', '보호', '아군을 때리는 적부터. 후열·체력이 낮은 동료를 노리는 적이 우선입니다.'],
+  ['nearest', '근처', '가장 가까운 적. 각자 흩어져 사냥해 효율은 높지만 위험해요.'],
+  ['weakest', '마무리', '체력이 가장 적은 적을 끝냅니다. 크리·연타 딜러에게 좋아요.'],
+  ['boss', '보스', '보스·MVP가 있으면 무조건 보스. 없으면 협공합니다.'],
+];
+const POSITION: Opt<Tactics['position']>[] = [
+  ['auto', '자동', '직업에 맞게 섭니다.'],
+  ['front', '전열', '적에게 붙어 싸웁니다.'],
+  ['mid', '중열', '전열 뒤 약 100px. 근접 무기라면 전열 뒤에서 대기합니다.'],
+  ['back', '후열', '최대 사거리에서 전열 뒤에 숨습니다. 적이 붙으면 전열 쪽으로 빠집니다.'],
+];
+const SKILLS: Opt<Tactics['skills']>[] = [
+  ['aggressive', '적극', 'SP를 아끼지 않고 공격 스킬을 씁니다. 광역기도 2마리부터.'],
+  ['normal', '보통', '평타보다 확실히 나을 때 스킬을 씁니다.'],
+  ['conserve', '절약', 'SP 50% 이상일 때만 공격 스킬. 힐·버프·부활 몫을 남겨 둡니다.'],
+];
+const CHASE: Opt<Tactics['chase']>[] = [
+  ['tight', '리더 곁', '리더 주변 짧은 거리만 쫓습니다. 흩어지지 않아요.'],
+  ['normal', '보통', '적당한 거리까지 쫓습니다.'],
+  ['free', '자유', '멀리까지 쫓고, 직접 새 몹도 끌어옵니다.'],
+];
+const PULL: [number, string][] = [[1, '하나씩'], [2, '2'], [3, '3'], [5, '5'], [99, '무제한']];
+const REST: [number, string][] = [[0, '안 쉼'], [10, '10%'], [20, '20%'], [35, '35%'], [50, '50%']];
+
+/** one-tap 작전 presets (DQ-style): orders + per-hero tactics */
+const PRESETS: { id: string; name: string; desc: string; orders: PartyOrders; tac: (h: Hero) => Tactics }[] = [
+  { id: 'balance', name: '균형', desc: '직업별 추천 요령', orders: defaultOrders(), tac: (h) => defaultTactics(h.cls) },
+  { id: 'focus', name: '집중 공격', desc: '한 마리씩 협공', orders: { pull: 1, rest: 20 }, tac: (h) => ({ ...defaultTactics(h.cls), target: 'assist', chase: 'tight' }) },
+  { id: 'farm', name: '각자 사냥', desc: '흩어져 빠르게', orders: { pull: 5, rest: 10 }, tac: (h) => ({ ...defaultTactics(h.cls), target: 'nearest', chase: 'free', skills: 'aggressive' }) },
+  { id: 'safe', name: '안전 제일', desc: '보호·자주 휴식', orders: { pull: 1, rest: 50 }, tac: (h) => ({ ...defaultTactics(h.cls), target: 'protect', chase: 'tight', skills: 'conserve' }) },
+];
+
+const same = (a: object, b: object) => JSON.stringify(a) === JSON.stringify(b);
+
+function Seg<K extends string | number>(props: { opts: [K, string][]; value: K; onPick: (k: K) => void }) {
+  return (
+    <div class="tseg">
+      {props.opts.map(([k, label]) => (
+        <button class={props.value === k ? 'on' : ''} onClick={() => props.onPick(k)}>{label}</button>
+      ))}
+    </div>
+  );
+}
+
+export function PartyPanel() {
+  const g = useGame();
+  const s = g.s;
+  const [open, setOpen] = useState<number | null>(s.heroes.length === 1 ? 0 : null);
+  const move = (i: number, d: number) => {
+    const j = i + d;
+    if (j < 0 || j >= s.heroes.length) return;
+    [s.heroes[i], s.heroes[j]] = [s.heroes[j], s.heroes[i]];
+    g.world.syncParty();
+    g.sel = j;
+    if (open === i) setOpen(j); else if (open === j) setOpen(i);
+    g.commit('click');
+  };
+  const setOrders = (o: Partial<PartyOrders>) => { s.orders = { ...s.orders, ...o }; g.commit('click'); };
+  const setTac = (h: Hero, t: Partial<Tactics>) => { h.tactics = { ...h.tactics, ...t }; g.commit('click'); };
+  const active = PRESETS.find((p) => same(p.orders, s.orders) && s.heroes.every((h) => same(p.tac(h), h.tactics)));
+
+  return (
+    <Win title="파티" onClose={() => g.openPanel(null)}>
+      <div class="win-body party-body">
+        <div class="pt-sec">작전</div>
+        <div class="presets">
+          {PRESETS.map((p) => (
+            <button class={'preset' + (active?.id === p.id ? ' on' : '')} onClick={() => {
+              s.orders = { ...p.orders };
+              for (const h of s.heroes) h.tactics = p.tac(h);
+              g.commit('click');
+              g.toast(`작전: ${p.name}`, 'info');
+            }}>
+              <b>{p.name}</b><small>{p.desc}</small>
+            </button>
+          ))}
+        </div>
+        <div class="orders">
+          <div class="ord-row">
+            <span class="ord-l">동시 교전<small>리더가 끌어올 최대 몹 수</small></span>
+            <Seg opts={PULL} value={s.orders.pull} onPick={(v) => setOrders({ pull: v })} />
+          </div>
+          <div class="ord-row">
+            <span class="ord-l">휴식 기준<small>전투 후 HP·SP가 이 아래면 다 같이 휴식</small></span>
+            <Seg opts={REST} value={s.orders.rest} onPick={(v) => setOrders({ rest: v })} />
+          </div>
+        </div>
+
+        <div class="pt-sec">파티원 <span class="muted small">맨 위가 리더 — 사냥터를 돌며 몹을 끌어옵니다</span></div>
+        {s.heroes.map((h, i) => {
+          const u = g.world.heroes.find((x) => x.hero.id === h.id);
+          const role = u ? g.world.roleOf(u) : 'melee';
+          const [rname, rcolor] = ROLE[role];
+          const tac = h.tactics;
+          const isOpen = open === i;
+          const custom = !same(tac, defaultTactics(h.cls));
+          const line = `${TARGET.find((o) => o[0] === tac.target)![1]} · ${tac.position === 'auto' ? AUTO_POS[role] : POSITION.find((o) => o[0] === tac.position)![1]} · 스킬 ${SKILLS.find((o) => o[0] === tac.skills)![1]} · ${CHASE.find((o) => o[0] === tac.chase)![1]}`;
+          return (
+            <div class={'pmem' + (isOpen ? ' open' : '')} key={h.id}>
+              <div class="pmem-head">
+                <button class="pmem-main" onClick={() => setOpen(isOpen ? null : i)} aria-expanded={isOpen}>
+                  <span class="pmem-face"><HeroCanvas hero={h} face zoom={0.74} animate={false} /></span>
+                  <span class="pmem-txt">
+                    <span class="pmem-nm"><b>{h.name}</b>{i === 0 && <i class="lead">리더</i>}<i class="role" style={{ background: rcolor }}>{rname}</i></span>
+                    <span class="pmem-sub"><span style={{ color: CLASSES[h.cls].color }}>{CLASSES[h.cls].name}</span> Lv {h.baseLv}</span>
+                    <span class="pmem-tac">{line}{custom && <i class="cust">사용자</i>}</span>
+                  </span>
+                  <span class="pmem-chev">{isOpen ? '▲' : '▼'}</span>
+                </button>
+                <div class="pmem-order">
+                  <button class="btn xs" aria-label="위로" disabled={i === 0} onClick={() => move(i, -1)}>▲</button>
+                  <button class="btn xs" aria-label="아래로" disabled={i === s.heroes.length - 1} onClick={() => move(i, 1)}>▼</button>
+                </div>
+              </div>
+              {isOpen && (
+                <div class="tac">
+                  {([['공격 대상', TARGET, 'target'], ['위치', POSITION, 'position'], ['스킬 사용', SKILLS, 'skills'], ['추격 범위', CHASE, 'chase']] as const).map(([label, opts, key]) => {
+                    const cur = (opts as readonly Opt<string>[]).find((o) => o[0] === tac[key])!;
+                    return (
+                      <div class="tac-row">
+                        <div class="tac-l">{label}</div>
+                        <Seg opts={(opts as readonly Opt<string>[]).map((o) => [o[0], o[1]] as [string, string])} value={tac[key]} onPick={(v) => setTac(h, { [key]: v } as Partial<Tactics>)} />
+                        <div class="tac-d">{key === 'position' && tac.position === 'auto' ? `직업에 맞게: ${AUTO_POS[role]}` : cur[2]}</div>
+                      </div>
+                    );
+                  })}
+                  <div class="row" style={{ marginTop: '4px' }}>
+                    <span class="small muted">힐·포션 기준은 [스킬]·퀵슬롯에서 설정합니다.</span>
+                    <span class="sp1" />
+                    <button class="btn sm" disabled={!custom} onClick={() => { h.tactics = defaultTactics(h.cls); g.commit('click'); }}>직업 추천값</button>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+        {s.heroes.length < s.partySlots && <button class="btn pri block" style={{ marginTop: '8px' }} onClick={() => g.setModal({ kind: 'recruit' })}>+ 새 동료 영입</button>}
+        <div class="hint" style={{ marginTop: '8px' }}>
+          파티 슬롯은 Lv 10, Lv 22에 열립니다. 경험치는 파티원끼리 나누고(인원당 +15%), 레벨이 낮은 동료는 2.5배로 따라옵니다.
+          탱커를 맨 위(리더)에 두면 몹을 끌어오고, 후열은 탱커 뒤에서 싸웁니다.
+        </div>
+      </div>
+    </Win>
+  );
+}

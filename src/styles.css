@@ -772,3 +772,44 @@ input { font-family: inherit; }
 .book-nm { max-width: 100%; font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .book-card.unk .book-nm { color: var(--ink2); }
 .book-rate { font-family: 'Galmuri9'; font-size: 9px; color: var(--ink2); }
+
+/* ───── party panel (작전 · 행동 요령) */
+.party-body { padding-bottom: 16px; }
+.pt-sec { display: flex; align-items: baseline; gap: 8px; margin: 4px 2px 6px; font-size: 13px; color: var(--ink); }
+.pt-sec + .presets { margin-top: 0; }
+.presets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
+.preset { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 7px 3px 6px; border-radius: 9px; border: 1px solid var(--line2); background: #fff; cursor: pointer; font: inherit; color: var(--ink); }
+.preset b { font-weight: normal; font-size: 12px; }
+.preset small { font-family: 'Galmuri9'; font-size: 9px; color: var(--ink2); text-align: center; line-height: 1.25; }
+.preset.on { border-color: var(--title2); background: #e6edff; box-shadow: 0 0 0 1px var(--title2) inset; }
+.orders { margin: 8px 0 12px; padding: 8px; border-radius: 9px; background: #fff; border: 1px solid var(--line2); display: flex; flex-direction: column; gap: 8px; }
+.ord-row { display: flex; align-items: center; gap: 8px; }
+.ord-l { flex: none; width: 92px; display: flex; flex-direction: column; font-size: 12px; }
+.ord-l small { font-family: 'Galmuri9'; font-size: 9px; color: var(--ink2); line-height: 1.25; }
+.tseg { flex: 1; min-width: 0; display: flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; background: #fff; }
+.tseg button { flex: 1 1 0; min-width: 0; padding: 6px 2px; border: 0; border-left: 1px solid var(--line2); background: none; cursor: pointer; font-size: 11px; color: var(--ink2); white-space: nowrap; }
+.tseg button:first-child { border-left: 0; }
+.tseg button.on { background: var(--title2); color: #fff; }
+.pmem { background: #fff; border: 1px solid var(--line2); border-radius: 10px; overflow: hidden; }
+.pmem + .pmem { margin-top: 6px; }
+.pmem.open { border-color: var(--title2); }
+.pmem-head { display: flex; align-items: center; gap: 4px; padding-right: 6px; }
+.pmem-main { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; padding: 6px 4px 6px 6px; background: none; border: 0; text-align: left; cursor: pointer; font: inherit; color: inherit; }
+.pmem-face { flex: none; width: 40px; height: 40px; border-radius: 8px; background: radial-gradient(circle at 50% 30%, #dfe8ff, #8ea4d8 90%); overflow: hidden; }
+.pmem-face canvas { width: 40px; height: 40px; display: block; }
+.pmem-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.pmem-nm { display: flex; align-items: center; gap: 4px; font-size: 12.5px; white-space: nowrap; }
+.pmem-nm b { font-weight: normal; overflow: hidden; text-overflow: ellipsis; }
+.pmem-nm i, .pmem-tac i { font-style: normal; flex: none; font-family: 'Galmuri9'; font-size: 9px; padding: 0 5px; border-radius: 6px; line-height: 14px; }
+.pmem-nm .lead { background: var(--gold); color: #4a2c00; }
+.pmem-nm .role { color: #fff; }
+.pmem-sub { font-family: 'Galmuri9'; font-size: 10px; color: var(--ink2); }
+.pmem-tac { display: flex; align-items: center; gap: 4px; font-size: 10.5px; color: #2a5ab0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pmem-tac .cust { background: #eef2fa; color: var(--ink2); border: 1px solid var(--line2); }
+.pmem-chev { flex: none; font-size: 9px; color: var(--ink2); padding: 0 2px; }
+.pmem-order { flex: none; display: flex; flex-direction: column; gap: 2px; }
+.tac { padding: 4px 8px 8px; border-top: 1px dashed var(--line2); background: #f8faff; }
+.tac-row { padding: 6px 0 4px; }
+.tac-row + .tac-row { border-top: 1px solid #eef1f8; }
+.tac-l { font-size: 11.5px; color: var(--title2); margin-bottom: 4px; }
+.tac-d { margin-top: 4px; font-size: 10.5px; color: var(--ink2); line-height: 1.35; }
