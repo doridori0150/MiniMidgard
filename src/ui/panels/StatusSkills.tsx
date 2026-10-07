@@ -90,7 +90,7 @@ export function StatusPanel() {
     <div class="dv"><span>{label}</span><b>{value}</b>{sub && <small>{sub}</small>}</div>
   );
   return (
-    <Win title="캐릭터 정보" onClose={() => g.openPanel(null)}>
+    <Win title={`스탯 — ${h.name}`} onClose={() => g.openPanel(null)}>
       <div class="win-body st">
         <HeroTabs sel={g.sel} onSel={(i) => { g.sel = i; g.notify(); }} />
         <div class="st-head">
@@ -194,7 +194,7 @@ export function SkillsPanel() {
             )}
           </div>
         )}
-        {h.skillPts === 0 && <div class="small muted" style={{ margin: '0 2px 6px' }}>스킬 포인트가 없습니다. 직업 레벨이 오를 때마다 1점씩 얻습니다.</div>}
+        <div class="small muted" style={{ margin: '0 2px 6px' }}>스킬 포인트 <b>{h.skillPts}</b>{h.skillPts === 0 ? ' — 직업 레벨이 오를 때마다 1점씩 얻습니다.' : ''}</div>
         {list.map((sk, idx) => {
           const lv = h.skills[sk.id] ?? 0;
           const header = idx === 0 || list[idx - 1].cls !== sk.cls ? (
@@ -219,11 +219,12 @@ export function SkillsPanel() {
                   <span class={'toggle' + (auto ? ' on' : '')} /><small>{auto ? '자동' : '수동'}</small>
                 </button>
               )}
-              {/* one clear state per row: MAX, locked behind a prerequisite, or the learn button (hidden with no points) */}
-              {canLearnTier(sk.cls) && (lv >= sk.maxLv ? <span class="sk-state max">MAX</span>
-                : locked ? <span class="sk-state">잠김</span>
-                : h.skillPts > 0 ? <button class="sk-learn" disabled={!can} aria-label={`${sk.name} 배우기`} onClick={() => { if (learnSkill(h, sk.id)) g.commit('confirm'); }}>+</button>
-                : null)}
+              {/* one readable state per row (codex_r2 §4-7): MAX › 학습 종료 › 선행 필요 › 포인트 부족 › 배우기 */}
+              {lv >= sk.maxLv ? <span class="sk-state max">MAX</span>
+                : !canLearnTier(sk.cls) ? <span class="sk-state">학습 종료</span>
+                : locked ? <span class="sk-state">선행 필요</span>
+                : h.skillPts <= 0 ? <span class="sk-state">포인트 부족</span>
+                : <button class="sk-learn" disabled={!can} aria-label={`${sk.name} 배우기`} onClick={() => { if (canLearn(h, sk.id) && learnSkill(h, sk.id)) g.commit('confirm'); }}>+1</button>}
             </div></>
           );
         })}

@@ -102,7 +102,7 @@ export function QuickSetupModal(props: { slot: number }) {
   const d = q.id ? ITEMS[q.id] : null;
   return (
     <div class="modal qmodal">
-      <div class="win-title"><span>퀵슬롯 설정</span><span class="sp" /><button class="x" onClick={() => g.setModal(null)}>×</button></div>
+      <div class="win-title"><span>퀵슬롯 설정</span><span class="sp" /><button class="x" aria-label="닫기" onClick={() => g.popModal()}>×</button></div>
       <div class="win-body">
         <div class="qpick">
           {s.quick.map((x, i) => (

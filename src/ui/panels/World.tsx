@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks';
-import { useGame, type TownView } from '../game.ts';
+import { useGame, useBackHandler, type TownView } from '../game.ts';
 import { ShopView } from '../Shop.tsx';
 import { SECOND_JOB_LV } from '../../game/data/classes.ts';
 import { ElChip, HeroTabs, ItemSlot, LookCanvas, MobCanvas, Win, fmt, nameClass, HeroCanvas } from '../widgets.tsx';
@@ -152,6 +152,7 @@ function JobView() {
 export function TownPanel() {
   const g = useGame();
   const v = g.town;
+  useBackHandler(v !== 'menu', () => { g.town = 'menu'; });
   const titles: Record<TownView, string> = { menu: '마을 서비스', tool: '도구 상점', weapon: '무기 상점', armor: '방어구 상점', costume: '의상실', refine: '정련소', stylist: '미용실·의상실', job: '전직 교관' };
   return (
     <Win title={titles[v]} onClose={() => g.openPanel(null)} right={<>{v !== 'menu' && <button class="x" style={{ width: 'auto', padding: '0 6px' }} onClick={() => { g.town = 'menu'; g.notify(); }}>◀ 목록</button>}<span class="small" style={{ color: '#ffe8a0' }}>{fmt(g.s.zeny)}z</span></>}>
@@ -191,7 +192,12 @@ export function SettingsPanel() {
   const g = useGame();
   const st = g.s.settings;
   const set = (f: () => void) => { f(); audio.setVolumes(st.sfx, st.bgm, st.muted); if (g.renderer) { g.renderer.lowFx = st.lowFx; g.renderer.showDamage = st.showDamage; } g.commit(); };
-  const T = (on: boolean, f: () => void) => <button class={'toggle' + (on ? ' on' : '')} onClick={() => set(f)} />;
+  // the whole 48px row is the switch: label + state text, not a lone 34×18 knob
+  const Sw = (label: string, on: boolean, f: () => void) => (
+    <button class="set-row" role="switch" aria-checked={on} onClick={() => set(f)}>
+      <span>{label}</span><span class="sp1" /><small>{on ? '켬' : '끔'}</small><span class={'toggle' + (on ? ' on' : '')} aria-hidden="true" />
+    </button>
+  );
   const t = g.s.totals;
   return (
     <Win title="설정" onClose={() => g.openPanel(null)}>
@@ -199,14 +205,14 @@ export function SettingsPanel() {
         <div class="box">
           <div class="row"><span style={{ width: '70px' }}>배경음</span><input class="range" type="range" min={0} max={1} step={0.05} value={st.bgm} onInput={(e) => set(() => { st.bgm = +(e.target as HTMLInputElement).value; })} /></div>
           <div class="row"><span style={{ width: '70px' }}>효과음</span><input class="range" type="range" min={0} max={1} step={0.05} value={st.sfx} onInput={(e) => set(() => { st.sfx = +(e.target as HTMLInputElement).value; })} /></div>
-          <div class="row"><span>음소거</span><span class="sp1" />{T(st.muted, () => { st.muted = !st.muted; })}</div>
+          {Sw('음소거', st.muted, () => { st.muted = !st.muted; })}
         </div>
         <div class="box">
-          <div class="row"><span>대미지 숫자 표시</span><span class="sp1" />{T(st.showDamage, () => { st.showDamage = !st.showDamage; })}</div>
-          <div class="row" style={{ marginTop: '6px' }}><span>이펙트 간소화 (저사양)</span><span class="sp1" />{T(st.lowFx, () => { st.lowFx = !st.lowFx; })}</div>
-          <div class="row" style={{ marginTop: '6px' }}><span>도트 모드 (레트로 픽셀)</span><span class="sp1" />{T(!!st.pixel, () => { st.pixel = !st.pixel; if (g.renderer) { g.renderer.pixelMode = !!st.pixel; g.renderer.resize(); } })}</div>
-          <div class="row" style={{ marginTop: '6px' }}><span>잡템 자동 판매</span><span class="sp1" />{T(st.autoSellEtc, () => { st.autoSellEtc = !st.autoSellEtc; })}</div>
-          <div class="row" style={{ marginTop: '6px' }}><span>보스·MVP 자동 소환</span><span class="sp1" />{T(st.autoBoss, () => { st.autoBoss = !st.autoBoss; })}</div>
+          {Sw('대미지 숫자 표시', st.showDamage, () => { st.showDamage = !st.showDamage; })}
+          {Sw('이펙트 간소화 (저사양)', st.lowFx, () => { st.lowFx = !st.lowFx; })}
+          {Sw('도트 모드 (레트로 픽셀)', !!st.pixel, () => { st.pixel = !st.pixel; if (g.renderer) { g.renderer.pixelMode = !!st.pixel; g.renderer.resize(); } })}
+          {Sw('잡템 자동 판매', st.autoSellEtc, () => { st.autoSellEtc = !st.autoSellEtc; })}
+          {Sw('보스·MVP 자동 소환', st.autoBoss, () => { st.autoBoss = !st.autoBoss; })}
         </div>
         <div class="sec">기록</div>
         <div class="derived">

@@ -1,5 +1,5 @@
-import { useState } from 'preact/hooks';
-import { useGame } from './game.ts';
+import { useEffect, useRef, useState } from 'preact/hooks';
+import { useGame, type Modal } from './game.ts';
 import { CardArt, HeroTabs, ItemSlot, LookCanvas, fmt, nameClass, dur } from './widgets.tsx';
 import { ITEMS } from '../game/data/items.ts';
 import { CLASSES, FIRST_JOBS } from '../game/data/classes.ts';
@@ -30,7 +30,7 @@ function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
   const id = inst?.id ?? props.id!;
   const d = ITEMS[id];
   if (!d) return null;
-  const close = () => g.setModal(null);
+  const close = () => g.popModal();
   const h = s.heroes[Math.min(heroIdx, s.heroes.length - 1)];
   const owner = inst ? equippedBy(s, inst.uid) : undefined;
   const have = d.kind !== 'equip' ? s.stacks[id] ?? 0 : 0;
@@ -189,7 +189,7 @@ function JobModal(props: { heroIdx: number }) {
   };
   return (
     <div class="modal job-modal">
-      <div class="win-title"><span>{second ? '2차 전직' : '1차 전직'} — {h.name}</span><span class="sp" /><button class="x" onClick={() => g.setModal(null)}>×</button></div>
+      <div class="win-title"><span>{second ? '2차 전직' : '1차 전직'} — {h.name}</span><span class="sp" /><button class="x" aria-label="닫기" onClick={() => g.popModal()}>×</button></div>
       <div class="win-body">
         {second ? (
           <div class="ascend">
@@ -246,7 +246,7 @@ function RecruitModal() {
   const ok = name.trim().length > 0;
   return (
     <div class="modal">
-      <div class="win-title"><span>동료 영입</span><span class="sp" /><button class="x" onClick={() => g.setModal(null)}>×</button></div>
+      <div class="win-title"><span>동료 영입</span><span class="sp" /><button class="x" aria-label="닫기" onClick={() => g.popModal()}>×</button></div>
       <div class="win-body">
         <div class="row" style={{ alignItems: 'flex-start' }}>
           <LookCanvas look={preview} zoom={1.9} anchor={6} class="" />
@@ -303,30 +303,64 @@ Kenney (kenney.nl), artisticdude, rubberduck, StarNinjas, Vehicle (Jan Schupke),
 
 자세한 출처는 docs/CREDITS.md를 참고하세요.`;
 
+function ModalBody(props: { m: Modal }) {
+  const g = useGame();
+  const m = props.m;
+  switch (m.kind) {
+    case 'item': return <ItemModal uid={m.uid} id={m.id} heroIdx={m.heroIdx} />;
+    case 'offline': return <OfflineModal report={m.report} />;
+    case 'job': return <JobModal heroIdx={m.heroIdx} />;
+    case 'recruit': return <RecruitModal />;
+    case 'quick': return <QuickSetupModal slot={m.slot} />;
+    case 'mob': return <MobModal id={m.id} />;
+    case 'buy': return <BuyModal id={m.id} />;
+    case 'sell': return <SellModal id={m.id} uid={m.uid} />;
+    case 'confirm': return <ConfirmModal text={m.text} ok={m.ok} danger={m.danger} closeAll={m.closeAll} />;
+    case 'card': return null;
+    case 'credits': return (
+      <div class="modal">
+        <div class="win-title"><span>크레딧</span><span class="sp" /><button class="x" aria-label="닫기" onClick={() => g.popModal()}>×</button></div>
+        <div class="win-body"><div class="credits">{CREDITS}</div></div>
+      </div>
+    );
+  }
+}
+
+const FOCUSABLE = 'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
 export function Modals() {
   const g = useGame();
-  const m = g.modal;
-  if (!m) return null;
+  const stack = g.modals;
+  const top = stack[stack.length - 1];
+  const bg = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLElement | null>(null);
+  // focus moves into the newest detail and goes back to whatever opened the first one when all are closed
+  useEffect(() => {
+    if (top && !trigger.current) trigger.current = document.activeElement as HTMLElement | null;
+    if (!top) { trigger.current?.focus?.(); trigger.current = null; return; }
+    const layer = bg.current?.querySelector<HTMLElement>('.modal-layer:not([hidden])');
+    (layer?.querySelector<HTMLElement>(FOCUSABLE) ?? layer)?.focus?.();
+  }, [stack.length, top]);
+  if (!top) return null;
   // tapping outside steps back one detail (item → monster → drop returns to the monster); the offline report needs its button
-  const close = () => { if (m.kind !== 'offline') g.popModal(); };
+  const close = () => { if (top.kind !== 'offline') g.popModal(); };
+  // keep Tab inside the open detail (the rest of the app is inert while it is open)
+  const trap = (e: KeyboardEvent) => {
+    if (e.key !== 'Tab') return;
+    const layer = bg.current?.querySelector<HTMLElement>('.modal-layer:not([hidden])');
+    const els = [...(layer?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? [])];
+    if (!els.length) return;
+    const i = els.indexOf(document.activeElement as HTMLElement);
+    if (e.shiftKey && i <= 0) { e.preventDefault(); els[els.length - 1].focus(); }
+    else if (!e.shiftKey && i === els.length - 1) { e.preventDefault(); els[0].focus(); }
+  };
   return (
-    <div class="modal-bg" role="dialog" aria-modal="true" onClick={(e) => { if (e.target === e.currentTarget) close(); }}>
-      {g.modals.length > 1 && <button class="modal-back" onClick={() => g.popModal()} aria-label="이전 정보로">‹ 뒤로</button>}
-      {m.kind === 'item' && <ItemModal uid={m.uid} id={m.id} heroIdx={m.heroIdx} />}
-      {m.kind === 'offline' && <OfflineModal report={m.report} />}
-      {m.kind === 'job' && <JobModal heroIdx={m.heroIdx} />}
-      {m.kind === 'recruit' && <RecruitModal />}
-      {m.kind === 'quick' && <QuickSetupModal slot={m.slot} />}
-      {m.kind === 'mob' && <MobModal id={m.id} />}
-      {m.kind === 'buy' && <BuyModal id={m.id} />}
-      {m.kind === 'sell' && <SellModal id={m.id} uid={m.uid} />}
-      {m.kind === 'confirm' && <ConfirmModal text={m.text} ok={m.ok} danger={m.danger} closeAll={m.closeAll} />}
-      {m.kind === 'credits' && (
-        <div class="modal">
-          <div class="win-title"><span>크레딧</span><span class="sp" /><button class="x" onClick={() => g.setModal(null)}>×</button></div>
-          <div class="win-body"><div class="credits">{CREDITS}</div></div>
-        </div>
-      )}
+    <div class="modal-bg" ref={bg} role="dialog" aria-modal="true" onKeyDown={trap} onClick={(e) => { if (e.target === e.currentTarget) close(); }}>
+      {stack.length > 1 && <button class="modal-back" onClick={() => g.popModal()} aria-label="이전 정보로">‹ 뒤로</button>}
+      {/* parents stay mounted but hidden, so coming back keeps their picked hero, half-done choice and scroll */}
+      {stack.map((m, i) => (
+        <div class="modal-layer" key={`${i}:${m.kind}`} hidden={i !== stack.length - 1} tabIndex={-1}><ModalBody m={m} /></div>
+      ))}
     </div>
   );
 }

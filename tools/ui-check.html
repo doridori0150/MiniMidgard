@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ui-check</title></head>
+<body style="margin:0;background:#222;color:#ddd;font:12px monospace">
+<!-- Dev tool: scripted UI checks for the page shell (navigation, back order, detail stack, badges, single execution).
+     Drives the real app in a 390×844 iframe booted with ?qa (QA boots never save). Prints PASS/FAIL lines into #out.
+     Headless: chrome --headless=new --dump-dom http://localhost:4200/tools/ui-check.html -->
+<pre id="out">running</pre>
+<iframe id="f" style="width:390px;height:844px;border:0"></iframe>
+<script type="module">
+  const out = [];
+  const log = (ok, name, info = '') => out.push(`${ok ? 'PASS' : 'FAIL'}  ${name}${info ? '  — ' + info : ''}`);
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const f = document.getElementById('f');
+  const boot = (q) => new Promise((res) => { f.onload = () => setTimeout(res, 1200); f.src = '/?qa&' + q; });
+  const W = () => f.contentWindow, D = () => f.contentDocument, G = () => W().__game;
+  const $ = (sel) => D().querySelector(sel), $$ = (sel) => [...D().querySelectorAll(sel)];
+  const click = async (el) => { el?.click(); await sleep(60); };
+  const nav = (label) => $$('.nav button').find((b) => b.textContent.includes(label));
+  const esc = async () => { W().dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' })); await sleep(60); };
+  const savedBefore = localStorage.getItem('minimidgard.save.v1');
+
+  try {
+    await boot('party=swordsman,acolyte,mage&lv=30');
+    const g = G();
+    // 1. every nav tab opens its page, and tapping the open tab again keeps it open
+    for (const [label, page] of [['파티', 'party'], ['성장', 'grow'], ['장비', 'gear'], ['카드', 'cards'], ['탐험', 'explore']]) {
+      await click(nav(label)); const a = g.page; await click(nav(label));
+      log(a === page && g.page === page, `nav ${label}`, `${a} → ${g.page}`);
+    }
+    await click(nav('사냥')); log(g.page === null, 'nav 사냥 returns to hunting');
+    // 2. rail portrait → that hero's 성장/스탯
+    await click($$('.pf')[2]); log(g.page === 'grow' && g.sub.grow === 'status' && g.hero.name === '보리', 'rail portrait opens that hero', `${g.page}/${g.sub.grow}/${g.hero.name}`);
+    // 3. selection follows the hero across a reorder
+    await click(nav('파티')); await click($$('.subnav button').find((b) => b.textContent === '파티원'));
+    await click($$('.pm-order .btn').find((b) => b.textContent.includes('앞으로')));
+    log(g.hero.name === '보리' && g.s.heroes[1].name === '보리', 'selection kept by id after reorder', g.s.heroes.map((h) => h.name).join(','));
+    // 4. back order: shop → service list → hunting
+    await click(nav('탐험')); await click($$('.subnav button').find((b) => b.textContent === '마을 서비스'));
+    g.openTown('tool'); await sleep(60);
+    await click($$('.subnav button').find((b) => b.textContent === '마을 서비스'));
+    log(g.town === 'tool', 're-tapping the open inner tab keeps the shop', g.town);
+    await esc(); log(g.page === 'explore' && g.town === 'menu', 'Escape in a shop → service list', `${g.page}/${g.town}`);
+    await esc(); log(g.page === null, 'Escape again → hunting', String(g.page));
+    // 5. NPC entry from the field is a page entry in history
+    await sleep(150); // let the previous history.back() settle
+    const before = W().history.state?.mm; g.openTown('tool'); await sleep(60);
+    log(before !== 'page' && W().history.state?.mm === 'page' && g.page === 'explore', 'NPC shop entry pushes a page entry', `${before} → ${W().history.state?.mm}`);
+    g.goHunt(); await sleep(60);
+    // 6. map zone detail: back closes the detail, keeps the page
+    await click(nav('탐험')); await click($$('.subnav button').find((b) => b.textContent === '지도'));
+    await click($('.mrow:not(.locked)') ?? $('.mrow'));
+    const inDetail = !!g.view.get('map.zone');
+    await esc(); log(inDetail && !g.view.get('map.zone') && g.page === 'explore', 'Escape in a map detail → region list', `detail=${inDetail}`);
+    // 7. detail stack: item → sell confirm → cancel returns to the same item with the same hero picked
+    await click(nav('장비')); await click($$('.subnav button').find((b) => b.textContent === '가방'));
+    const unequipped = g.s.equips.find((e) => !g.s.heroes.some((h) => Object.values(h.equip).includes(e.uid)));
+    if (unequipped) {
+      g.setModal({ kind: 'item', uid: unequipped.uid }); await sleep(80);
+      await click($$('.modal-layer:not([hidden]) .hero-sel button')[2]);
+      await click($$('.modal-layer:not([hidden]) .btn').find((b) => b.textContent === '판매'));
+      const depth = g.modals.length, inert = $('.app-main').inert;
+      await click($$('.modal-layer:not([hidden]) .btn').find((b) => b.textContent === '취소'));
+      const heroKept = $$('.modal-layer:not([hidden]) .hero-sel button')[2]?.classList.contains('on');
+      log(depth === 2 && g.modals.length === 1 && g.modal.kind === 'item' && heroKept, 'confirm cancel returns to the item, hero choice kept', `depth ${depth} → ${g.modals.length}, hero kept ${heroKept}`);
+      log(inert === true, 'background is inert under a detail');
+      // 8. confirm OK runs once and closes everything (the item is gone)
+      const z0 = g.s.zeny, n0 = g.s.equips.length;
+      await click($$('.modal-layer:not([hidden]) .btn').find((b) => b.textContent === '판매'));
+      await click($$('.modal-layer:not([hidden]) .btn').find((b) => b.textContent === '확인'));
+      log(g.modals.length === 0 && g.s.equips.length === n0 - 1 && g.s.zeny > z0, 'sell confirm runs once and closes', `equips ${n0}→${g.s.equips.length}`);
+    } else log(false, 'detail stack checks', 'no unequipped item in the QA bag');
+    // 9. X in a drilled-in detail steps back one level
+    g.setModal({ kind: 'mob', id: 'jelly' }); await sleep(60);
+    g.pushModal({ kind: 'item', id: 'e_jelly' }); await sleep(60);
+    await click($('.modal-layer:not([hidden]) .win-title .x'));
+    log(g.modals.length === 1 && g.modal.kind === 'mob', 'X in a drilled detail returns to the parent', g.modals.map((m) => m.kind).join('>'));
+    g.setModal(null); await sleep(40);
+    // 10. band tap never focus-fires
+    await click(nav('성장')); const f0 = g.world.focus; await click($('.band-hit'));
+    log(g.world.focus === f0, 'band tap does not focus a monster');
+    // 11. badges: an unaffordable stat point lights nothing; learnable skills light only 스킬
+    const h = g.s.heroes[0]; for (const k of Object.keys(h.stats)) h.stats[k] = 20; h.statPts = 1; h.skillPts = 5;
+    g.sel = 0; g.openPage('grow', 'status'); await sleep(80);
+    const dots = $$('.subnav button').map((b) => b.textContent + (b.querySelector('.sub-dot') ? '•' : ''));
+    log(!dots[0].includes('•') && dots[1].includes('•'), 'stat/skill tab dots follow what is doable', dots.join(' '));
+    // 12. skill rows show one readable state each
+    await click($$('.subnav button').find((b) => b.textContent.startsWith('스킬')));
+    const states = new Set($$('.skill .sk-state').map((e) => e.textContent).concat($$('.skill .sk-learn').map(() => '+1')));
+    log(states.has('+1') && [...states].every((x) => ['MAX', '학습 종료', '선행 필요', '포인트 부족', '+1'].includes(x)), 'skill row states', [...states].join(','));
+  } catch (e) { log(false, 'exception', e.message); }
+  log(localStorage.getItem('minimidgard.save.v1') === savedBefore, 'QA run never touched the save');
+  const fails = out.filter((l) => l.startsWith('FAIL')).length;
+  document.getElementById('out').textContent = out.join('\n') + `\n\n${out.length - fails}/${out.length} passed`;
+  document.title = 'done';
+</script></body></html>

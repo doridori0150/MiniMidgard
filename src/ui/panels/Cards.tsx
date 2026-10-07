@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
-import { useGame } from '../game.ts';
+import { useGame, useViewState, useBackHandler } from '../game.ts';
 import { CardArt, HeroTabs, Win, nameClass } from '../widgets.tsx';
 import { ITEMS } from '../../game/data/items.ts';
 import { MONSTERS } from '../../game/data/monsters.ts';
@@ -41,9 +41,10 @@ export function CardPanel(props: { view?: 'slots' | 'book' } = {}) {
   const h = g.hero;
   const [ownTab, setTab] = useState<'slots' | 'book'>('slots');
   const tab = props.view ?? ownTab;
-  const [filter, setFilter] = useState<CardLoc | 'all'>('all');
+  const [filter, setFilter] = useViewState<CardLoc | 'all'>('cards.filter', 'all');
   const [pickCard, setPickCard] = useState<string | null>(null);
   const [pickEquip, setPickEquip] = useState<number | null>(null);
+  useBackHandler(!!(pickCard || pickEquip !== null), () => { setPickCard(null); setPickEquip(null); });
   const boardRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   useEffect(() => { if (s.cardSeen !== s.totals.cards) { s.cardSeen = s.totals.cards; g.notify(); } }, []);
@@ -118,8 +119,8 @@ export function CardPanel(props: { view?: 'slots' | 'book' } = {}) {
   const found = allBook.filter((id) => s.book[id]?.card).length;
 
   return (
-    <Win title="카드" onClose={() => g.openPanel(null)}>
-      {props.view ? (tab === 'book' && <div class="page-info">카드 도감 <b>{found}</b> / {allBook.length}</div>) : (
+    <Win title={tab === 'book' ? '카드 도감' : `카드 슬롯 — ${g.hero.name}`} onClose={() => g.openPanel(null)} right={tab === 'book' ? <span>모은 카드 <b>{found}</b> / {allBook.length}</span> : undefined}>
+      {props.view ? null : (
         <div class="tabs">
           <button class={tab === 'slots' ? 'on' : ''} onClick={() => setTab('slots')}>슬롯 관리</button>
           <button class={tab === 'book' ? 'on' : ''} onClick={() => setTab('book')}>카드 도감 <small>{found}/{allBook.length}</small></button>

@@ -318,7 +318,7 @@ export function BuyModal(props: { id: string }) {
   void addEquip;
   return (
     <div class="modal buy">
-      <div class="win-title"><span>구매</span><span class="sp" /><button class="x" onClick={() => g.setModal(null)}>×</button></div>
+      <div class="win-title"><span>구매</span><span class="sp" /><button class="x" aria-label="닫기" onClick={() => g.popModal()}>×</button></div>
       <div class="win-body">
         <div class="buy-hero">
           <span class="bh-icon"><img src={itemIconURL(d.id)} alt="" /></span>
@@ -346,7 +346,7 @@ export function BuyModal(props: { id: string }) {
         <div class="buy-total">합계 <b class={s.zeny >= price * (stack ? q : 1) ? '' : 'poor'}>{fmt(price * (stack ? q : 1))} z</b> <small>보유 {fmt(s.zeny)} z</small></div>
       </div>
       <div class="foot">
-        <button class="btn" onClick={() => g.setModal(null)}>닫기</button>
+        <button class="btn" onClick={() => g.popModal()}>닫기</button>
         {(d.kind === 'equip' || d.kind === 'ammo') && !err && <button class="btn gold" disabled={s.zeny < price} onClick={() => doBuy(true)}>사서 바로 장착</button>}
         <button class="btn pri" disabled={s.zeny < price * (stack ? q : 1)} onClick={() => doBuy(false)}>구매</button>
       </div>
@@ -366,7 +366,7 @@ export function SellModal(props: { id?: string; uid?: number }) {
   const unit = sellPrice(s, id, inst?.refine ?? 0);
   return (
     <div class="modal buy">
-      <div class="win-title"><span>판매</span><span class="sp" /><button class="x" onClick={() => g.setModal(null)}>×</button></div>
+      <div class="win-title"><span>판매</span><span class="sp" /><button class="x" aria-label="닫기" onClick={() => g.popModal()}>×</button></div>
       <div class="win-body">
         <div class="buy-hero">
           <span class="bh-icon"><img src={itemIconURL(id)} alt="" /></span>
@@ -380,7 +380,7 @@ export function SellModal(props: { id?: string; uid?: number }) {
         <div class="buy-total">받는 금액 <b>{fmt(unit * (inst ? 1 : q))} z</b></div>
       </div>
       <div class="foot">
-        <button class="btn" onClick={() => g.setModal(null)}>닫기</button>
+        <button class="btn" onClick={() => g.popModal()}>닫기</button>
         <button class="btn gold" onClick={() => {
           const z = inst ? sellEquip(s, inst.uid) : sellStack(s, id, q);
           if (z) g.toast(`+${fmt(z)} 제니`, 'good'); else g.toast('팔 수 없는 상태입니다. (의상으로 쓰는 중?)', 'bad');

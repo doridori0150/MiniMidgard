@@ -201,7 +201,7 @@ export function PartyPanel(props: { view?: 'ops' | 'members' } = {}) {
   if (props.view === 'members') {
     const h = g.hero, i = g.sel;
     return (
-      <Win title="파티원">
+      <Win title={`파티원 — ${h.name}`}>
         <div class="win-body party-body">
           <div class="pmem open">
             <div class="pmem-head"><div class="pmem-main static">{ident(h, i)}</div></div>

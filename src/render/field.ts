@@ -200,8 +200,10 @@ export class FieldRenderer {
     return [(sx - this.cssW / 2) / this.cam.zoom + this.cam.x, (sy - (this.cssH - this.insetBottom) / 2) / this.cam.zoom + this.cam.y];
   }
 
+  /** set by the UI while a detail (modal) is open */
+  blockInput = false;
   private onPointer(e: PointerEvent) {
-    if (this.observe) return; // the band only watches: no focus-fire or NPC taps while a page is open
+    if (this.observe || this.blockInput) return; // the band only watches; no focus-fire or NPC taps under a detail
     const r = this.canvas.getBoundingClientRect();
     const [wx, wy] = this.toWorld(e.clientX - r.left, e.clientY - r.top);
     if (this.world.zone.id === 'town' && this.art) {
@@ -728,40 +730,51 @@ export class FieldRenderer {
   }
 
   // ───────── frame
-  /** fit every living hero head-to-feet inside the band (8px margin); if that needs a zoom below 0.75, fit the selected
-   *  hero instead and count who is left outside. No map-edge clamp here, so nobody gets cut at the border. */
+  private snapNext = true;
+  private lastFocus = -1;
+  private deadSeen = new Set<number>();
+  /** jump the observe camera to its target on the next frame (entering a page, switching hero) */
+  snapCamera() { this.snapNext = true; }
+
+  /** fit the living heroes plus the selected one (even if it lies dead far away) head-to-feet inside the band with an
+   *  8px margin; if that needs a zoom below 0.75, fit the selected hero alone. Entering the band, a new selection or a
+   *  revive jumps straight there so nobody starts cut off. No map-edge clamp here, so nobody gets cut at the border. */
   private observeCamera(dt: number) {
     const w = this.world;
+    if (!w.heroes.length) return;
     const box = (list: HeroUnit[]) => {
       let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
       for (const h of list) {
         const sm = this.smooth.get(h.uid) ?? h;
         const lying = h.state === 'dead';
-        x0 = Math.min(x0, sm.x - (lying ? 34 : 18)); x1 = Math.max(x1, sm.x + (lying ? 34 : 18));
-        // head + hair on top, name tag and bars below the feet
-        y0 = Math.min(y0, sm.y - (lying ? 34 : 94)); y1 = Math.max(y1, sm.y + 24);
+        // weapon reach to the sides, hair + headgear above, name tag and bars below the feet
+        x0 = Math.min(x0, sm.x - (lying ? 40 : 26)); x1 = Math.max(x1, sm.x + (lying ? 40 : 26));
+        y0 = Math.min(y0, sm.y - (lying ? 36 : 96)); y1 = Math.max(y1, sm.y + 24);
       }
       return { x0, y0, x1, y1 };
     };
     const fit = (b: { x0: number; y0: number; x1: number; y1: number }) => Math.min((this.cssW - 16) / (b.x1 - b.x0), (this.cssH - 16) / (b.y1 - b.y0));
-    const alive = w.heroes.filter((h) => h.state !== 'dead');
-    const all = alive.length ? alive : w.heroes;
-    if (!all.length) return;
-    let b = box(all), z = fit(b);
-    this.offscreen = 0;
-    if (z < 0.75) {
-      const me = w.heroes.find((h) => h.hero.id === this.focusHeroId) ?? all[0];
-      b = box([me]); z = fit(b);
-      const vw = this.cssW / z / 2, vh = this.cssH / z / 2, cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
-      this.offscreen = all.filter((h) => h !== me && (Math.abs(h.x - cx) > vw || Math.abs(h.y - 40 - cy) > vh)).length;
+    const me = w.heroes.find((h) => h.hero.id === this.focusHeroId) ?? w.heroes[0];
+    if (this.focusHeroId !== this.lastFocus) { this.lastFocus = this.focusHeroId; this.snapNext = true; }
+    for (const h of w.heroes) {
+      if (h.state === 'dead') this.deadSeen.add(h.uid);
+      else if (this.deadSeen.delete(h.uid)) this.snapNext = true; // just revived
     }
+    const group = [...new Set([...w.heroes.filter((h) => h.state !== 'dead'), me])];
+    let b = box(group), z = fit(b);
+    if (z < 0.75) { b = box([me]); z = fit(b); }
     z = Math.min(z, 2.1);
-    const k = 1 - Math.exp(-dt / 220);
-    const snap = Math.abs(this.cam.zoom - z) > 1.2; // first frame in the band: jump instead of sliding in from the full view
-    this.cam.zoom = snap ? z : this.cam.zoom + (z - this.cam.zoom) * k;
+    const snap = this.snapNext || Math.abs(this.cam.zoom - z) > 1.2;
+    this.snapNext = false;
+    const k = snap ? 1 : 1 - Math.exp(-dt / 220);
     const cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
-    this.cam.x = snap ? cx : this.cam.x + (cx - this.cam.x) * k;
-    this.cam.y = snap ? cy : this.cam.y + (cy - this.cam.y) * k;
+    this.cam.zoom += (z - this.cam.zoom) * k;
+    this.cam.x += (cx - this.cam.x) * k;
+    this.cam.y += (cy - this.cam.y) * k;
+    // who is outside the band as it is actually drawn this frame
+    const hw = this.cssW / this.cam.zoom / 2, hh = this.cssH / this.cam.zoom / 2;
+    this.offscreen = w.heroes.filter((h) => h !== me && h.state !== 'dead'
+      && (Math.abs(h.x - this.cam.x) > hw + 10 || h.y < this.cam.y - hh || h.y - 80 > this.cam.y + hh)).length; // wholly out of view
   }
 
   frame(nowMs: number) {

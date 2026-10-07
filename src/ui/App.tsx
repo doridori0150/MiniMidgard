@@ -20,10 +20,13 @@ function GameScreen() {
   const manage = g.page !== null;
   return (
     <div class={'app' + (manage ? ' manage' : '')}>
-      <Hud />
-      <FieldView />
-      {manage && <ManagePage />}
-      <Nav />
+      {/* while a detail is open nothing behind it can be tapped, tabbed to or read out */}
+      <div class="app-main" inert={g.modals.length > 0}>
+        <Hud />
+        <FieldView />
+        {manage && <ManagePage />}
+        <Nav />
+      </div>
       <Modals />
       <Toasts />
     </div>
@@ -94,6 +97,7 @@ export function App() {
     <Create onBack={() => setScreen('title')} onDone={(name, look) => {
       const s = newGame(name, look);
       autoDistribute(s.heroes[0]);
+      game.resetUi();
       game.begin(s, true);
       audio.play('levelup');
       setScreen('game');

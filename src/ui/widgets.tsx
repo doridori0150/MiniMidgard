@@ -110,9 +110,10 @@ export const PageCtx = createContext<{ heroRow: boolean } | null>(null);
 
 export function Win(props: { title: string; onClose?: () => void; children: ComponentChildren; right?: ComponentChildren }) {
   const page = useContext(PageCtx);
+  // on the page shell the panel's own title names what is being edited ("장비 — 쿠키", "도구 상점") in a slim line
   if (page) return (
     <div class="page-win">
-      {props.right && <div class="page-info">{props.right}</div>}
+      <div class="page-info"><b class="pi-title">{props.title}</b><span class="sp1" />{props.right}</div>
       {props.children}
     </div>
   );
@@ -171,11 +172,12 @@ export function HeroTabs(props: { sel: number; onSel: (i: number) => void }) {
 }
 
 /** what a hero can act on right now (shared by the rail, the selector and the nav badges) */
+export function statReady(h: Hero) { return STAT_KEYS.some((k) => h.stats[k] < 99 && h.statPts >= statCost(h.stats[k])); }
+export function skillReady(h: Hero) { return h.skillPts > 0 && lineage(h.cls).some((c) => Object.values(SKILLS).some((sk) => sk.cls === c && canLearn(h, sk.id))); }
+export function jobReady(h: Hero) { return !canJobChange(h); }
 export function heroReady(h: Hero): 'job' | 'grow' | null {
-  if (!canJobChange(h)) return 'job';
-  const stat = STAT_KEYS.some((k) => h.stats[k] < 99 && h.statPts >= statCost(h.stats[k]));
-  const skill = h.skillPts > 0 && lineage(h.cls).some((c) => Object.values(SKILLS).some((sk) => sk.cls === c && canLearn(h, sk.id)));
-  return stat || skill ? 'grow' : null;
+  if (jobReady(h)) return 'job';
+  return statReady(h) || skillReady(h) ? 'grow' : null;
 }
 
 /** one row of portrait buttons (48px) — picks whose stats / gear / cards / tactics the page edits */

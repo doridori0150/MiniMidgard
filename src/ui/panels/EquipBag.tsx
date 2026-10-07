@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks';
-import { useGame } from '../game.ts';
+import { useGame, useViewState, useBackHandler } from '../game.ts';
 import { HeroCanvas, HeroTabs, ItemSlot, Win, fmt, nameClass } from '../widgets.tsx';
 import type { CostumeSlot, EquipInst, EquipSlot } from '../../game/types.ts';
 import { ITEMS } from '../../game/data/items.ts';
@@ -25,6 +25,7 @@ export function EquipPanel(props: { view?: 'equip' | 'costume' } = {}) {
   const [ownTab, setTab] = useState<'equip' | 'costume'>('equip');
   const tab = props.view ?? ownTab; // on the page shell the inner tab row picks the view
   const [pick, setPick] = useState<string | null>(null);
+  useBackHandler(!!pick, () => setPick(null));
   const instOf = (uid?: number) => (uid === undefined ? undefined : s.equips.find((e) => e.uid === uid));
   const cell = (slot: EquipSlot, label: string, right: boolean) => {
     const inst = instOf(h.equip[slot]);
@@ -154,7 +155,7 @@ type BagTab = 'equip' | 'use' | 'etc' | 'card';
 export function BagPanel() {
   const g = useGame();
   const s = g.s;
-  const [tab, setTab] = useState<BagTab>('equip');
+  const [tab, setTab] = useViewState<BagTab>('bag.tab', 'equip');
   const stacks = Object.entries(s.stacks).filter(([id, n]) => n > 0 && ITEMS[id]);
   const of = (k: string[]) => stacks.filter(([id]) => k.includes(ITEMS[id].kind)).sort((a, b) => ITEMS[a[0]].price - ITEMS[b[0]].price);
   const equips = [...s.equips].sort((a, b) => (equippedBy(s, b.uid) ? 1 : 0) - (equippedBy(s, a.uid) ? 1 : 0) || ITEMS[a.id].loc!.localeCompare(ITEMS[b.id].loc!) || (ITEMS[b.id].price - ITEMS[a.id].price));

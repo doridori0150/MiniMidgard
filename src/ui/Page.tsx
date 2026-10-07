@@ -2,7 +2,7 @@
 // row of inner tabs for every page; the panels below render their body only (Win in page mode).
 import { useEffect, useRef } from 'preact/hooks';
 import { useGame, SUBTABS, type MainTab } from './game.ts';
-import { HeroSelector, PageCtx, heroReady } from './widgets.tsx';
+import { HeroSelector, PageCtx, skillReady, statReady } from './widgets.tsx';
 import { StatusPanel, SkillsPanel } from './panels/StatusSkills.tsx';
 import { EquipPanel, BagPanel } from './panels/EquipBag.tsx';
 import { TownPanel, SettingsPanel } from './panels/World.tsx';
@@ -13,7 +13,7 @@ import { CardPanel, insertableCards } from './panels/Cards.tsx';
 const TITLE: Record<MainTab, string> = { party: '파티', grow: '성장', gear: '장비', cards: '카드', explore: '탐험', settings: '설정' };
 
 /** pages/tabs that edit one hero show the selector; shared ones (party orders, bag, card book, map, town) don't */
-function wantsHero(page: MainTab, sub: string) {
+export function wantsHero(page: MainTab, sub: string) {
   if (page === 'grow') return true;
   if (page === 'gear') return sub !== 'bag';
   if (page === 'cards') return sub === 'slots';
@@ -29,19 +29,20 @@ export function ManagePage() {
   // scroll position per page / tab / hero, restored on return (first visit starts at the top)
   const key = `${page}/${sub}/${heroRow ? g.selId : ''}`;
   const main = useRef<HTMLDivElement>(null);
-  const scrolls = useRef(new Map<string, number>());
   useEffect(() => {
-    const el = main.current?.querySelector<HTMLElement>('.win-body');
+    // the page's one scroller (the world map scrolls as .wm); offsets live in the game's session view state
+    const el = main.current?.querySelector<HTMLElement>('.wm, .win-body');
     if (!el) return;
-    el.scrollTop = scrolls.current.get(key) ?? 0;
-    const save = () => scrolls.current.set(key, el.scrollTop);
+    el.scrollTop = (g.view.get('scroll:' + key) as number | undefined) ?? 0;
+    const save = () => g.view.set('scroll:' + key, el.scrollTop);
     el.addEventListener('scroll', save, { passive: true });
     return () => el.removeEventListener('scroll', save);
   }, [key]);
 
   const tabBadge = (p: MainTab, id: string) => {
-    if (p === 'grow' && id === 'status' && g.hero && g.hero.statPts > 0 && heroReady(g.hero)) return <i class="sub-dot" />;
-    if (p === 'grow' && id === 'skills' && g.hero && g.hero.skillPts > 0 && heroReady(g.hero)) return <i class="sub-dot" />;
+    // each inner tab only lights for what it can actually do
+    if (p === 'grow' && id === 'status' && g.hero && statReady(g.hero)) return <i class="sub-dot" />;
+    if (p === 'grow' && id === 'skills' && g.hero && skillReady(g.hero)) return <i class="sub-dot" />;
     if (p === 'cards' && id === 'slots' && g.s.totals.cards > (g.s.cardSeen ?? 0) && insertableCards(g.s) > 0) return <i class="sub-dot" />;
     return null;
   };

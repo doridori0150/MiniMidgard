@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'preact/hooks';
 import { game, useGame } from './game.ts';
 import { MONSTERS } from '../game/data/monsters.ts';
 import { zone } from '../game/data/zones.ts';
+import { SUBTABS } from './game.ts';
+import { wantsHero } from './Page.tsx';
 import { QuickBar } from './QuickBar.tsx';
 import { PartyRail } from './Hud.tsx';
 
@@ -91,15 +93,30 @@ export function FieldView() {
   }, []);
   // hunting: the whole field, party kept above the quick bar. Managing: a small live band that frames the party
   const manage = g.page !== null;
-  const closed = manage && g.bandClosed();
+  // short screens (or big text): fold the band while the page body would drop under 240px; the saved choice stays
+  const [, bump] = useState(0);
+  useEffect(() => { const f = () => bump((x) => x + 1); window.addEventListener('resize', f); return () => window.removeEventListener('resize', f); }, []);
+  const squeezed = manage && (() => {
+    const p = g.page!, sub = g.sub[p];
+    const hud = document.querySelector('.hud')?.getBoundingClientRect().height ?? 48;
+    const nav = document.querySelector('.nav')?.getBoundingClientRect().height ?? 56;
+    const rows = 48 + (wantsHero(p, sub) ? 56 : 0) + (SUBTABS[p].length > 1 ? 44 : 0);
+    return window.innerHeight - hud - nav - rows - 150 < 240;
+  })();
+  const closed = manage && (g.bandClosed() || squeezed);
   useEffect(() => {
     const r = game.renderer;
     if (!r) return;
     r.observe = manage;
-    r.insetBottom = manage ? 0 : 84;
+    if (manage) { r.insetBottom = 0; r.snapCamera(); }
+    else {
+      // keep the party above the quick bar as it is actually laid out (safe area, larger text…)
+      const qb = wrap.current?.querySelector<HTMLElement>('.qbar');
+      r.insetBottom = qb && wrap.current ? Math.max(0, wrap.current.clientHeight - qb.offsetTop + 6) : 84;
+    }
     r.resize();
   }, [manage, closed]);
-  if (game.renderer) game.renderer.focusHeroId = g.selId;
+  if (game.renderer) { game.renderer.focusHeroId = g.selId; game.renderer.blockInput = g.modals.length > 0; }
   // the canvas is always the first child of the same wrapper, so the renderer keeps drawing into the same element
   const z = zone(g.s.zone);
   const off = game.renderer?.offscreen ?? 0;
@@ -109,11 +126,12 @@ export function FieldView() {
         <canvas class="main" ref={ref} />
         <button class="band-hit" tabIndex={-1} aria-hidden="true" onClick={() => g.toggleBand()} />
       </div>
-      <button class="band-bar" aria-expanded={!closed} aria-controls="band-canvas" onClick={() => g.toggleBand()}>
+      <button class="band-bar" aria-expanded={!closed} aria-controls="band-canvas" onClick={() => (squeezed ? g.goHunt() : g.toggleBand())}>
         <b>{z.name}</b><span>· {z.id === 'town' ? '마을' : g.world.wipeUntil > 0 ? '재정비 중' : '사냥 진행'}</span>
         {off > 0 && !closed && <small>화면 밖 동료 {off}명</small>}
-        <span class="sp1" /><i class="band-chev" aria-hidden="true">{closed ? '▾' : '▴'}</i>
-        <span class="sr-only">{closed ? '전투 화면 펼치기' : '전투 화면 접기'}</span>
+        <span class="sp1" />
+        {squeezed ? <small class="band-go">사냥 화면에서 보기 ›</small> : <i class="band-chev" aria-hidden="true">{closed ? '▾' : '▴'}</i>}
+        <span class="sr-only">{squeezed ? '사냥 화면으로' : closed ? '전투 화면 펼치기' : '전투 화면 접기'}</span>
       </button>
     </div>
   );

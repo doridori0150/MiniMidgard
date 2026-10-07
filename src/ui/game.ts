@@ -1,5 +1,5 @@
 // Game controller: owns state + world + renderer, runs the loop, and lets Preact subscribe.
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import type { GameState } from '../game/types.ts';
 import { World } from '../game/world.ts';
 import { save, load } from '../game/state.ts';
@@ -204,10 +204,16 @@ class Game {
   }
 
   private ignorePop = false;
-  /** one step back; true if something was closed */
+  /** step-back handlers registered by open sub-screens (shop inside town, a map region, a half-made gear/card pick),
+   *  newest first; each returns true if it stepped back */
+  backHandlers: (() => boolean)[] = [];
+  /** per-session view state that outlives the components (filters, open map region, scroll offsets) */
+  view = new Map<string, unknown>();
+  /** one step back: detail → open sub-screen → settings → page → hunting. true if something was closed */
   back(fromHistory = false): boolean {
     const m = this.modal;
     if (m) { if (m.kind === 'offline') return false; this.popModal(); return true; }
+    for (let i = this.backHandlers.length - 1; i >= 0; i--) if (this.backHandlers[i]()) { this.notify(); return true; }
     if (this.page === 'settings') { this.closeSettings(); return true; }
     if (this.page) { this.page = null; audio.play('close'); if (!fromHistory) this.leaveHistory(); this.notify(); return true; }
     return false;
@@ -226,7 +232,13 @@ class Game {
     if (changed) audio.play(p ? 'open' : 'close');
     this.notify();
   }
-  openSub(p: MainTab, sub: string) { this.sub[p] = sub; if (p === 'explore' && sub === 'town') this.town = 'menu'; audio.play('click'); this.notify(); }
+  openSub(p: MainTab, sub: string) {
+    // re-selecting the open inner tab keeps whatever is going on in it (e.g. an open shop)
+    if (this.sub[p] !== sub && p === 'explore' && sub === 'town') this.town = 'menu';
+    this.sub[p] = sub;
+    audio.play('click');
+    this.notify();
+  }
   closeSettings() { this.openPage(this.beforeSettings); }
   goHunt() { this.openPage(null); }
 
@@ -238,6 +250,7 @@ class Game {
   }
 
   openTown(v: TownView) {
+    if (!this.page) history.pushState({ mm: 'page' }, ''); // an NPC tap from the field is a page entry like any other
     this.page = 'explore';
     this.sub.explore = 'town';
     this.town = v;
@@ -250,8 +263,16 @@ class Game {
   /** drill into a detail from another one; popModal returns to it */
   pushModal(m: Modal) { this.modals.push(m); this.notify(); }
   popModal() { this.modals.pop(); this.notify(); }
+  /** the renderer ignores field taps while a detail is open or a page only watches the band */
+  get inputBlocked() { return this.modals.length > 0; }
 
   // ── UI preferences (not part of the save; QA sessions keep them in memory only)
+  /** a new game starts with fresh UI preferences too */
+  resetUi() {
+    this.ui = { bandClosed: { general: false, party: false } };
+    this.view.clear();
+    if (!this.qa) { try { localStorage.removeItem(UI_KEY); } catch { /* ignore */ } }
+  }
   loadUi() {
     if (this.qa) return;
     try { const v = JSON.parse(localStorage.getItem(UI_KEY) ?? 'null'); if (v?.bandClosed) this.ui = { bandClosed: { general: !!v.bandClosed.general, party: !!v.bandClosed.party } }; } catch { /* storage blocked: keep defaults */ }
@@ -285,4 +306,23 @@ export function useGame() {
   const [, set] = useState(0);
   useEffect(() => game.subscribe(() => set((v) => v + 1)), []);
   return game;
+}
+
+/** state that survives leaving and re-entering a page (filters, the open map region…) for this session */
+export function useViewState<T>(key: string, init: T): [T, (v: T) => void] {
+  const [, set] = useState(0);
+  const v = (game.view.has(key) ? game.view.get(key) : init) as T;
+  return [v, (nv: T) => { game.view.set(key, nv); set((x) => x + 1); }];
+}
+
+/** while `active`, Escape / the back button first runs `fn` (close the shop, leave the map region, drop a pick) */
+export function useBackHandler(active: boolean, fn: () => void) {
+  const ref = useRef(fn);
+  ref.current = fn;
+  useEffect(() => {
+    if (!active) return;
+    const h = () => { ref.current(); return true; };
+    game.backHandlers.push(h);
+    return () => { game.backHandlers = game.backHandlers.filter((x) => x !== h); };
+  }, [active]);
 }

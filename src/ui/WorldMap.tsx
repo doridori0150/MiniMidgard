@@ -1,6 +1,6 @@
 // World map panel: illustrated continent with zone pins, a zone card, and monster cards.
 import { useState } from 'preact/hooks';
-import { useGame } from './game.ts';
+import { useGame, useViewState, useBackHandler } from './game.ts';
 import { HeroCanvas, MobCanvas, ElChip, Win, fmt, nameClass, usePainter } from './widgets.tsx';
 import { useRef } from 'preact/hooks';
 import { ZONES, regions, regionOf, type ZoneDef, type ZoneRole } from '../game/data/zones.ts';
@@ -68,9 +68,10 @@ export function MapPanel() {
   const RG = regions();
   const unlocked = new Set(s.unlocked);
   const avg = s.heroes.reduce((a, h) => a + h.baseLv, 0) / s.heroes.length;
-  const [selR, setSelR] = useState<string>(regionOf(s.zone)?.id ?? RG[0].id);
+  const [selR, setSelR] = useViewState<string>('map.region', regionOf(s.zone)?.id ?? RG[0].id);
   // null = the region's map list; a zone id = that map's detail
-  const [sel, setSel] = useState<string | null>(null);
+  const [sel, setSel] = useViewState<string | null>('map.zone', null);
+  useBackHandler(!!sel, () => setSel(null));
   const r = RG.find((x) => x.id === selR) ?? RG[0];
   const known = r.zones.filter((z) => zoneKnown(s, z));
   const undiscovered = r.zones.length - known.length;
@@ -230,7 +231,7 @@ export function MobModal(props: { id: string }) {
   const zone = ZONES.find((z) => z.mobs.some((e) => e.id === m.id) || z.boss === m.id || z.mvp === m.id);
   return (
     <div class="modal">
-      <div class="win-title"><span>몬스터 정보</span><span class="sp" /><button class="x" onClick={() => g.setModal(null)}>×</button></div>
+      <div class="win-title"><span>몬스터 정보</span><span class="sp" /><button class="x" aria-label="닫기" onClick={() => g.popModal()}>×</button></div>
       <div class="win-body">
         <div class={'mob-hero ' + (zone?.theme ?? '')}>
           <MobCanvas id={m.id} class="mob-big" />
