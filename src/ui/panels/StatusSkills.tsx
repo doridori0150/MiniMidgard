@@ -1,0 +1,232 @@
+import { useRef, useState } from 'preact/hooks';
+import { useGame } from '../game.ts';
+import { Bar, ElChip, HeroCanvas, HeroTabs, Win, fmt } from '../widgets.tsx';
+import { STAT_KEYS, type StatKey } from '../../game/types.ts';
+import { STAT_HELP, STAT_KO, ELEMENT_KO } from '../../game/data/elements.ts';
+import { CLASSES, lineage, SECOND_JOB_LV } from '../../game/data/classes.ts';
+import { SKILLS, skillsOf } from '../../game/data/skills.ts';
+import { raiseStat, autoDistribute, canLearn, learnSkill, canJobChange, skillReqMet, nextJobs } from '../../game/state.ts';
+import { computeDerived } from '../../game/stats.ts';
+import { expNext, jobExpNext, statCost } from '../../game/exp.ts';
+import { skillIconURL } from '../../render/icons.ts';
+
+function useHold(fn: () => void) {
+  const t = useRef<number | null>(null);
+  const stop = () => { if (t.current !== null) { clearInterval(t.current); t.current = null; } };
+  return {
+    onPointerDown: () => { fn(); stop(); let n = 0; t.current = window.setInterval(() => { if (++n > 3) fn(); }, 110); },
+    onPointerUp: stop, onPointerLeave: stop, onPointerCancel: stop,
+  };
+}
+
+const STAT_META: Record<StatKey, { ko: string; color: string }> = {
+  str: { ko: '힘', color: '#e0603a' },
+  agi: { ko: '민첩', color: '#2fa865' },
+  vit: { ko: '체력', color: '#d0882a' },
+  int: { ko: '지능', color: '#8a5ad0' },
+  dex: { ko: '솜씨', color: '#2f86d0' },
+  luk: { ko: '운', color: '#d0508f' },
+};
+
+type D = ReturnType<typeof computeDerived>;
+/** what one more point in `k` would change, biggest effects first */
+function preview(cur: D, next: D): string {
+  const out: [string, number, number][] = [];
+  const add = (label: string, a: number, b: number, dec = 0) => {
+    const v = +(b - a).toFixed(dec);
+    if (Math.abs(v) >= (dec ? 0.05 : 1)) out.push([label, v, dec]);
+  };
+  add('ATK', cur.statusAtk, next.statusAtk);
+  add('MATK', (cur.matkMin + cur.matkMax) / 2, (next.matkMin + next.matkMax) / 2);
+  add('최대HP', cur.maxHp, next.maxHp);
+  add('최대SP', cur.maxSp, next.maxSp);
+  add('ASPD', cur.aspd, next.aspd, 1);
+  add('HIT', cur.hit, next.hit);
+  add('FLEE', cur.flee, next.flee);
+  add('CRIT', cur.crit, next.crit, 1);
+  add('DEF', cur.vitDef, next.vitDef);
+  add('MDEF', cur.intMdef, next.intMdef);
+  add('시전속도', -cur.castMul * 100, -next.castMul * 100, 1);
+  return out.slice(0, 3).map(([l, v, dec]) => `${l} ${v > 0 ? '+' : ''}${dec ? v.toFixed(dec) : v}${l === '시전속도' ? '%' : ''}`).join(' · ');
+}
+
+function StatLine(props: { k: StatKey; base: number; plus: number; pts: number; step: number; prev: string; onUp: () => void; onHelp: () => void }) {
+  const cost = statCost(props.base);
+  const hold = useHold(props.onUp);
+  const m = STAT_META[props.k];
+  const can = props.pts >= cost && props.base < 99;
+  return (
+    <div class={'stat-line' + (can ? '' : ' dim')}>
+      <button class="stat-key" style={{ '--c': m.color } as Record<string, string>} onClick={props.onHelp}>
+        <b>{STAT_KO[props.k]}</b><small>{m.ko}</small>
+      </button>
+      <div class="stat-mid">
+        <div class="stat-val">{props.base}{props.plus ? <em>+{props.plus}</em> : null}</div>
+        <div class="stat-prev">{props.prev ? <>▶ {props.prev}</> : <span class="muted">—</span>}</div>
+      </div>
+      <div class="stat-cost"><small>필요</small><b>{cost}</b></div>
+      <button class="stat-btn" disabled={!can} aria-label={`${STAT_KO[props.k]} ${props.step} 올리기`} {...hold}>+</button>
+    </div>
+  );
+}
+
+export function StatusPanel() {
+  const g = useGame();
+  const h = g.hero;
+  const u = g.heroUnit();
+  const d = u?.d ?? computeDerived(g.s, h);
+  const [help, setHelp] = useState<StatKey | null>(null);
+  const [step, setStep] = useState(1);
+  const cls = CLASSES[h.cls];
+  const jNext = jobExpNext(cls.tier, h.jobLv, cls.jobMax);
+  const atkA = d.statusAtk, atkB = d.watk + d.refineAtk + d.ammoAtk + d.bonusAtk;
+  const aps = 1000 / d.delay;
+  const buffs = u?.buffs ?? [];
+  const base = computeDerived(g.s, h, buffs, g.world.time);
+  const prevOf = (k: StatKey) => {
+    const saved = h.stats[k];
+    h.stats[k] = saved + 1;
+    const nx = computeDerived(g.s, h, buffs, g.world.time);
+    h.stats[k] = saved;
+    return preview(base, nx);
+  };
+  const hpNow = Math.floor(u?.hp ?? d.maxHp), spNow = Math.floor(u?.sp ?? d.maxSp);
+  const tile = (label: string, value: preact.ComponentChildren, sub?: string) => (
+    <div class="dv"><span>{label}</span><b>{value}</b>{sub && <small>{sub}</small>}</div>
+  );
+  return (
+    <Win title="캐릭터 정보" onClose={() => g.openPanel(null)}>
+      <div class="win-body st">
+        <HeroTabs sel={g.sel} onSel={(i) => { g.sel = i; g.notify(); }} />
+        <div class="st-head">
+          <div class="st-portrait"><HeroCanvas hero={h} zoom={1.45} anchor={6} /></div>
+          <div class="st-id">
+            <div class="st-name">{h.name}</div>
+            <div class="row" style={{ gap: '5px' }}>
+              <span class="st-cls" style={{ background: cls.color }}>{cls.name}</span>
+              <span class="st-lv">Lv <b>{h.baseLv}</b></span>
+              <span class="st-lv jl">Job <b>{h.jobLv}</b></span>
+            </div>
+            <div class="st-role">{cls.role}</div>
+          </div>
+        </div>
+        <div class="st-bars">
+          <Bar kind="hp" v={hpNow} max={d.maxHp} label={`HP  ${fmt(hpNow)} / ${fmt(d.maxHp)}`} />
+          <Bar kind="sp" v={spNow} max={d.maxSp} label={`SP  ${fmt(spNow)} / ${fmt(d.maxSp)}`} />
+          <div class="row" style={{ gap: '6px' }}>
+            <div class="sp1"><Bar kind="ex" v={h.baseExp} max={expNext(h.baseLv)} label={`EXP ${(h.baseExp / expNext(h.baseLv) * 100).toFixed(1)}%`} /></div>
+            <div class="sp1"><Bar kind="jx" v={isFinite(jNext) ? h.jobExp : 1} max={isFinite(jNext) ? jNext : 1} label={isFinite(jNext) ? `JOB ${(h.jobExp / jNext * 100).toFixed(1)}%` : 'JOB MAX'} /></div>
+          </div>
+        </div>
+
+        <div class={'pts-banner' + (h.statPts > 0 ? ' has' : '')}>
+          <div>
+            <small>남은 스탯 포인트</small>
+            <b>{h.statPts}</b>
+          </div>
+          <span class="sp1" />
+          <div class="seg step">
+            {[1, 5, 10].map((n) => <button class={step === n ? 'on' : ''} onClick={() => setStep(n)}>+{n}</button>)}
+          </div>
+          <button class="btn sm gold" disabled={h.statPts <= 0} onClick={() => { autoDistribute(h); g.commit('confirm'); }}>추천 분배</button>
+        </div>
+
+        <div class="stat-list">
+          {STAT_KEYS.map((k) => (
+            <StatLine k={k} base={h.stats[k]} plus={d.plus[k]} pts={h.statPts} step={step} prev={prevOf(k)}
+              onUp={() => { if (raiseStat(h, k, step)) g.commit('click'); }} onHelp={() => setHelp(help === k ? null : k)} />
+          ))}
+        </div>
+        {help ? <div class="hint st-help"><b>{STAT_KO[help]} ({STAT_META[help].ko})</b> — {STAT_HELP[help]}</div>
+          : <div class="st-tip">{cls.name} 추천: {cls.hint}</div>}
+
+        <div class="st-sec">공격</div>
+        <div class="dv-grid">
+          {tile('ATK', <>{atkA}<i> + {atkB}</i></>, '스탯 + 장비')}
+          {tile('MATK', `${d.matkMin}~${d.matkMax}`)}
+          {tile('HIT', d.hit)}
+          {tile('CRIT', d.crit.toFixed(1))}
+          {tile('ASPD', d.aspd.toFixed(1), `초당 ${aps.toFixed(2)}회`)}
+          {tile('무기 속성', <ElChip el={d.weaponElement} />, `${ELEMENT_KO[d.weaponElement]}속성 공격`)}
+        </div>
+        <div class="st-sec">방어</div>
+        <div class="dv-grid">
+          {tile('DEF', <>{d.def}<i> + {d.vitDef}</i></>, '장비 + VIT')}
+          {tile('MDEF', <>{d.mdef}<i> + {d.intMdef}</i></>)}
+          {tile('FLEE', d.flee, `완전회피 ${Math.floor(d.pdodge)}`)}
+          {tile('갑옷 속성', <ElChip el={d.armorElement} />)}
+        </div>
+        <div class="st-sec">회복</div>
+        <div class="dv-grid two">
+          {tile('HP 회복', Math.floor(d.hpRegen), '3초마다 · 앉으면 2배')}
+          {tile('SP 회복', Math.floor(d.spRegen), '4초마다 · 앉으면 2배')}
+        </div>
+      </div>
+    </Win>
+  );
+}
+
+export function SkillsPanel() {
+  const g = useGame();
+  const h = g.hero;
+  const [open, setOpen] = useState<string | null>(null);
+  const cls = CLASSES[h.cls];
+  const groups = lineage(h.cls);
+  const list = groups.flatMap((c) => skillsOf(c));
+  const canLearnTier = (c: string) => c !== 'novice' || h.cls === 'novice';
+  const jobErr = canJobChange(h);
+  const reqText = (id: string) => {
+    const sk = SKILLS[id];
+    if (!sk.req) return '';
+    return Object.entries(sk.req).map(([r, lv]) => `${SKILLS[r].name} ${lv}`).join(', ');
+  };
+  return (
+    <Win title={`스킬 — ${h.name}`} onClose={() => g.openPanel(null)} right={<span class="small">포인트 <b style={{ color: '#ffe880' }}>{h.skillPts}</b></span>}>
+      <div class="win-body">
+        <HeroTabs sel={g.sel} onSel={(i) => { g.sel = i; g.notify(); }} />
+        {nextJobs(h).length > 0 && (
+          <div class={jobErr ? 'hint' : 'box'} style={{ marginBottom: '8px' }}>
+            {jobErr ? <>{h.cls === 'novice' ? '전직 조건: 직업 레벨 10 + 기본기 9.' : `2차 전직(${nextJobs(h).map((j) => CLASSES[j].name).join('/')}) 조건: 직업 레벨 ${SECOND_JOB_LV}.`} ({jobErr})</> : (
+              <div class="row"><b>전직할 수 있습니다!</b><span class="sp1" /><button class="btn gold" onClick={() => g.setModal({ kind: 'job', heroIdx: g.sel })}>전직하기</button></div>
+            )}
+          </div>
+        )}
+        {list.map((sk, idx) => {
+          const lv = h.skills[sk.id] ?? 0;
+          const header = idx === 0 || list[idx - 1].cls !== sk.cls ? (
+            <div class="sk-group" style={{ '--c': CLASSES[sk.cls].color } as Record<string, string>}>
+              <b>{CLASSES[sk.cls].name}</b><small>{CLASSES[sk.cls].tier === 2 ? '2차 직업' : CLASSES[sk.cls].tier === 1 ? '1차 직업' : '기본'}</small>
+            </div>
+          ) : null;
+          const can = canLearn(h, sk.id);
+          const locked = !skillReqMet(h, sk.id) && lv === 0;
+          const isActive = sk.kind !== 'passive';
+          const auto = h.auto.skills[sk.id] !== false;
+          return (
+            <>{header}<div class={'skill' + (locked ? ' locked' : '')} key={sk.id}>
+              <img src={skillIconURL(sk.id)} alt="" onClick={() => setOpen(open === sk.id ? null : sk.id)} />
+              <div class="mid" onClick={() => setOpen(open === sk.id ? null : sk.id)}>
+                <div class="nm"><b>{sk.name}</b><span class="lv">Lv {lv}/{sk.maxLv}</span>{!isActive && <span class="chip">패시브</span>}{sk.cls === 'novice' && h.cls !== 'novice' && <span class="chip">초보자</span>}</div>
+                {locked && <div class="small" style={{ color: '#c05050' }}>필요: {reqText(sk.id)}</div>}
+                {open === sk.id && <div class="desc">{sk.desc(Math.max(1, lv))}{lv < sk.maxLv && lv > 0 ? `\n\n▶ 다음 레벨: ${sk.desc(lv + 1).split('\n')[0]}` : ''}</div>}
+              </div>
+              {isActive && lv > 0 && sk.auto !== 'none' && (
+                <button class={'toggle' + (auto ? ' on' : '')} title="자동 사용" onClick={() => { h.auto.skills[sk.id] = !auto; g.commit('click'); }} />
+              )}
+              {canLearnTier(sk.cls) && <button class="btn xs pri" disabled={!can} onClick={() => { if (learnSkill(h, sk.id)) g.commit('confirm'); }}>+</button>}
+            </div></>
+          );
+        })}
+        <div class="sec">자동 사냥 설정</div>
+        <div class="box">
+          {(h.skills.heal ?? 0) > 0 && <div class="row"><span style={{ width: '96px' }}>힐 기준 HP</span><input class="range" type="range" min={20} max={95} step={5} value={h.auto.healPct} onInput={(e) => { h.auto.healPct = +(e.target as HTMLInputElement).value; g.commit(); }} /><span style={{ width: '34px', textAlign: 'right' }}>{h.auto.healPct}%</span></div>}
+          <div class="row" style={{ marginTop: (h.skills.heal ?? 0) > 0 ? '6px' : 0 }}>
+            <span class="small muted" style={{ whiteSpace: 'normal' }}>포션·물약 자동 사용은 사냥 화면 하단 퀵슬롯에서 설정합니다.</span><span class="sp1" />
+            <button class="btn sm" onClick={() => g.setModal({ kind: 'quick', slot: 0 })}>퀵슬롯 설정</button>
+          </div>
+        </div>
+        <div class="small muted" style={{ marginTop: '6px' }}>{cls.desc}</div>
+      </div>
+    </Win>
+  );
+}

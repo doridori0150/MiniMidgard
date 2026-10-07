@@ -1,0 +1,23 @@
+{
+  "name": "mini-midgard",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host --port 4200",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host --port 4201",
+    "typecheck": "tsc --noEmit",
+    "sim": "taskpolicy -b node --experimental-strip-types tools/sim.ts"
+  },
+  "dependencies": {
+    "preact": "^10.26.0"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.0",
+    "@types/node": "^26.6.4",
+    "galmuri": "^2.40.0",
+    "typescript": "^5.8.0",
+    "vite": "^7.0.0"
+  }
+}
