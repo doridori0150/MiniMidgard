@@ -49,9 +49,11 @@ export function LookCanvas(props: { look: HeroLookDraw; state?: string; class?: 
     const ctx = prep(c);
     const dpr = c.width / c.clientWidth;
     const h = c.clientHeight;
-    const s = (props.zoom ?? h / 70) * dpr;
+    const rig = rigSupports(lookRef.current);
+    const s = (props.zoom ?? h / 70) * dpr * (props.face && rig ? 1.2 : 1);
     if (props.face) {
-      ctx.setTransform(s, 0, 0, s, c.width / 2, c.height + 16 * s);
+      // painted heroes carry a bigger head: frame it a little closer so the face fills the portrait
+      ctx.setTransform(s, 0, 0, s, c.width / 2, c.height + (rig ? 30 : 16) * s);
     } else {
       ctx.setTransform(s, 0, 0, s, c.width / 2, c.height - (props.anchor ?? 5) * dpr);
     }
@@ -60,7 +62,7 @@ export function LookCanvas(props: { look: HeroLookDraw; state?: string; class?: 
       ctx.fillStyle = 'rgba(20,30,20,0.28)';
       ctx.beginPath(); ctx.ellipse(0, 0, 11, 3.8, 0, 0, Math.PI * 2); ctx.fill();
     }
-    if (rigSupports(lookRef.current)) drawRigHero(ctx, lookRef.current, pose);
+    if (rig) drawRigHero(ctx, lookRef.current, pose);
     else inked(ctx, 120, 120, 60, 106, 1.25, (c) => drawHero(c, lookRef.current, pose, { shadow: false }));
   };
   if (props.animate === false) {
