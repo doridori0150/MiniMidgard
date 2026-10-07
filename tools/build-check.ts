@@ -61,6 +61,8 @@ for (const sc of scenarios) {
   wrap('falconStrike', () => { falcon++; });
   wrap('runProc', () => { procs++; });
   wrap('curseHero', () => { curses++; });
+  const casts: Record<string, number> = {};
+  wrap('startSkill', (_h, sk) => { casts[(sk as { name: string }).name] = (casts[(sk as { name: string }).name] ?? 0) + 1; });
   const z0 = s.zeny, k0 = s.totals.kills;
   let wasDead = false;
   for (let ms = 0; ms < minutes * 60000; ms += 100) {
@@ -75,5 +77,5 @@ for (const sc of scenarios) {
     (hits ? (crits / hits * 100).toFixed(0) : '-').padStart(7), (hits + misses ? (misses / (hits + misses) * 100).toFixed(0) : '-').padStart(6),
     String(Math.round(falcon / hrs)).padStart(9), String(Math.round(procs / hrs)).padStart(8), String(Math.round(curses / hrs)).padStart(8), String(z0 - s.zeny > 0 ? z0 - s.zeny : 0).padStart(11),
   ];
-  console.log(row.join(' '));
+  console.log(row.join(' ') + '  ' + Object.entries(casts).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([k, v]) => `${k}×${v}`).join(' '));
 }

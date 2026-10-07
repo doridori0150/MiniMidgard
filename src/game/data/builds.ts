@@ -48,8 +48,8 @@ export const BUILDS: BuildDef[] = [
   { id: 'hu_snipe', line: 'archer', name: '저격수', pitch: 'DEX·LUK 원거리 크리 저격, 보스 사냥', weights: { dex: 10, luk: 5 }, skills: ['double_strafe', 'vultures_eye'], items: [], weak: '근접에 약하다' },
   // ── 성직자 → 프리스트
   { id: 'pr_support', line: 'acolyte', name: '수호 사제', pitch: '힐·키리에·마그니피캇 — 파티의 생명줄', weights: { int: 9, vit: 8, dex: 4 }, skills: ['heal', 'kyrie', 'magnificat', 'blessing'], items: [], weak: '혼자서는 느리다 → 파티' },
-  { id: 'pr_battle', line: 'acolyte', name: '철퇴 사제', pitch: '축복·속도 증가 셀프 버프 + 둔기 평타', weights: { str: 7, agi: 8, dex: 5, vit: 2 }, skills: ['blessing', 'increase_agi', 'impositio'], items: [], weak: '물리 스킬이 없다 → 버프로 메운다' },
-  { id: 'pr_crit', line: 'acolyte', name: '광휘 크리 사제', pitch: '영광송 LUK로 크리 필중', weights: { agi: 8, luk: 7, str: 5 }, skills: ['gloria', 'increase_agi', 'blessing'], items: [], weak: '영광송 SP · 크리 저항 몹' },
+  { id: 'pr_battle', line: 'acolyte', name: '철퇴 사제', pitch: '축복·속도 증가 셀프 버프 + 둔기 평타', weights: { str: 7, agi: 8, dex: 5, vit: 2 }, skills: ['holy_strike', 'blessing', 'increase_agi', 'impositio'], items: [], weak: '느린 둔기 → 속도 증가 · 성스러운 일격은 불사·악마가 아니면 평범하다' },
+  { id: 'pr_crit', line: 'acolyte', name: '광휘 크리 사제', pitch: '영광송 LUK로 크리 필중', weights: { agi: 8, luk: 7, str: 5 }, skills: ['gloria', 'holy_strike', 'increase_agi', 'blessing'], items: [], weak: '영광송 SP · 크리 저항 몹' },
   { id: 'pr_exorcist', line: 'acolyte', name: '퇴마 사제', pitch: '대퇴마로 불사·악마를 광역 정화', weights: { int: 9, dex: 8 }, skills: ['magnus', 'holy_light'], items: [], weak: '불사·악마에게만 — 망령 던전이 최고 효율' },
   { id: 'pr_heal', line: 'acolyte', name: '힐 폭격 사제', pitch: '힐이 불사에게는 성 피해', weights: { int: 9, vit: 6 }, skills: ['heal'], items: [], weak: '불사가 아니면 무력' },
   { id: 'pr_wall', line: 'acolyte', name: '방패 사제', pitch: '키리에를 두르고 버티는 탱 사제', weights: { vit: 9, int: 5, dex: 4 }, skills: ['kyrie', 'heal', 'angelus'], items: [], weak: '딜이 없다 → 파티' },

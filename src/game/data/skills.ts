@@ -241,6 +241,13 @@ def({
   buff: { id: 'angelus', name: '천사의 가호', party: true, dur: L((lv) => lv * 30000), bonus: (lv) => ({ def: lv * 2 }) },
   desc: (lv) => `파티 전원 ${lv * 30}초간 DEF +${lv * 2}\nSP ${20 + lv * 3}`,
 });
+// battle priests had no weapon skill (BUILD_TREE.md 2.4: 철퇴 사제 · 광휘 크리 사제) — a holy two-hit swing
+def({
+  id: 'holy_strike', name: '성스러운 일격', cls: 'acolyte', maxLv: 5, kind: 'melee', auto: 'attack', fx: 'bash', element: 'holy',
+  icon: { glyph: 'cross', color: '#ffe680' },
+  sp: L((lv) => 3 + lv), hits: fixed(2), mult: L((lv) => 100 + lv * 25), hitBonus: L((lv) => lv * 4), delay: fixed(450),
+  desc: (lv) => `둔기에 성스러운 힘을 실어 두 번 내려친다. 성속성 ATK ${100 + lv * 25}% ×2, 명중 +${lv * 4}%\n불사·악마에게 특히 강하다. SP ${3 + lv}`,
+});
 def({
   id: 'holy_light', name: '성스러운 빛', cls: 'acolyte', maxLv: 5, kind: 'bolt', auto: 'attack', fx: 'holy', magic: true, element: 'holy',
   icon: { glyph: 'sun', color: '#fff3a0' }, range: 200,
