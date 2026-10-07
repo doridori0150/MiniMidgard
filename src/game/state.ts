@@ -1,4 +1,4 @@
-import type { ClassId, EquipInst, EquipSlot, GameState, Hero, Look, StatKey, CostumeSlot, QuickSlot } from './types.ts';
+import type { ClassId, EquipInst, EquipSlot, GameState, Hero, Look, StatKey, CostumeSlot, QuickSlot, Tactics, PartyOrders } from './types.ts';
 import { STAT_KEYS, QUICK_SLOTS } from './types.ts';
 import { CLASSES, FIRST_JOBS, SECOND_JOB_OF, SECOND_JOB_LV, lineage } from './data/classes.ts';
 import { SKILLS } from './data/skills.ts';
@@ -38,6 +38,23 @@ export function quickTrigger(id: string): 'hp' | 'sp' | 'buff' | 'none' {
   return 'none';
 }
 
+/** class-role defaults for 행동 요령 */
+export function defaultTactics(cls: ClassId): Tactics {
+  switch (lineage(cls).at(-2) ?? cls) { // 1st-job root: knight → swordsman
+    case 'swordsman': return { target: 'protect', position: 'auto', skills: 'normal', chase: 'normal' };
+    case 'mage': return { target: 'assist', position: 'auto', skills: 'normal', chase: 'tight' };
+    case 'archer': return { target: 'assist', position: 'auto', skills: 'normal', chase: 'normal' };
+    case 'acolyte': return { target: 'assist', position: 'auto', skills: 'conserve', chase: 'tight' };
+    case 'thief': return { target: 'weakest', position: 'auto', skills: 'aggressive', chase: 'normal' };
+    case 'merchant': return { target: 'assist', position: 'auto', skills: 'normal', chase: 'normal' };
+  }
+  return { target: 'assist', position: 'auto', skills: 'normal', chase: 'normal' };
+}
+
+export function defaultOrders(): PartyOrders {
+  return { pull: 3, rest: 30 };
+}
+
 export function newHero(s: GameState, name: string, look: Look): Hero {
   return {
     id: s.nextHeroId++,
@@ -48,6 +65,7 @@ export function newHero(s: GameState, name: string, look: Look): Hero {
     skills: { first_aid: 1 }, skillPts: 0,
     equip: {},
     auto: { skills: {}, hpPotPct: 40, spPotPct: 0, healPct: 70 },
+    tactics: defaultTactics('novice'),
   };
 }
 
@@ -62,6 +80,7 @@ export function newGame(name: string, look: Look): GameState {
     rate: { zone: 'meadow', kills: 0, ms: 0, exp: 0, jexp: 0, zeny: 0, deaths: 0 },
     tutorial: {},
     quick: defaultQuick(),
+    orders: defaultOrders(),
   };
   const h = newHero(s, name, look);
   s.heroes.push(h);
@@ -87,6 +106,8 @@ export function load(): GameState | null {
     if (s.v !== 1) return null;
     for (const z of ZONES) s.progress[z.id] ??= { kills: 0, bossGauge: 0, mvpGauge: 0, bossKills: 0, mvpKills: 0 };
     s.settings.autoBoss ??= false;
+    s.orders ??= defaultOrders();
+    for (const h of s.heroes) h.tactics ??= defaultTactics(h.cls);
     if (!s.quick) {
       // migrate the old per-hero potion sliders into quick slots
       const a = s.heroes[0]?.auto;
@@ -271,6 +292,8 @@ export function jobChange(s: GameState, h: Hero, cls: ClassId): string | null {
   if (err) return err;
   if (!nextJobs(h).includes(cls)) return '그 직업으로는 전직할 수 없습니다.';
   const wasNovice = h.cls === 'novice';
+  // tactics the player never touched follow the new class role
+  if (JSON.stringify(h.tactics) === JSON.stringify(defaultTactics(h.cls))) h.tactics = defaultTactics(cls);
   h.cls = cls;
   h.jobLv = 1;
   h.jobExp = 0;

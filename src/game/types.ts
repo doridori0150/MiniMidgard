@@ -113,6 +113,34 @@ export interface AutoConfig {
   healPct: number;
 }
 
+/** 행동 요령 — per-hero party behaviour; defaults come from the class role (defaultTactics) */
+export type TacticTarget =
+  | 'assist'   // 협공: the leader's / tank's target
+  | 'protect'  // 아군 보호: mobs hitting a party member (backline first)
+  | 'nearest'  // 가까운 적
+  | 'weakest'  // 빈사 적 마무리: lowest HP% in reach
+  | 'boss';    // 보스 우선 (falls back to assist)
+export type TacticPosition = 'auto' | 'front' | 'mid' | 'back';
+export type TacticSkills = 'aggressive' | 'normal' | 'conserve';
+export type TacticChase = 'tight' | 'normal' | 'free';
+export interface Tactics {
+  target: TacticTarget;
+  /** auto = class default (melee front, ranged/casters mid/back, healer back) */
+  position: TacticPosition;
+  /** aggressive: spend SP freely · normal · conserve: offensive skills only while SP ≥ 50% (heals/buffs unaffected) */
+  skills: TacticSkills;
+  /** how far from the leader/party center this hero may chase: stay close / normal / free hunting */
+  chase: TacticChase;
+}
+
+/** party-wide orders (파티 작전) */
+export interface PartyOrders {
+  /** the leader stops pulling new mobs while this many are already engaged (99 = no limit) */
+  pull: number;
+  /** after a fight, the party sits to recover when any member's HP or SP % is below this (0 = never) */
+  rest: number;
+}
+
 export interface Hero {
   id: number;
   name: string;
@@ -130,6 +158,7 @@ export interface Hero {
   /** equipped quiver (stack item id); quivers are never consumed */
   ammo?: string;
   auto: AutoConfig;
+  tactics: Tactics;
 }
 
 /** mobile-style quick slot: a registered consumable, whether it fires automatically, and its trigger % */
@@ -181,4 +210,5 @@ export interface GameState {
   rate: { zone: string; kills: number; ms: number; exp: number; jexp: number; zeny: number; deaths: number };
   tutorial: Record<string, boolean>;
   quick: QuickSlot[];
+  orders: PartyOrders;
 }
