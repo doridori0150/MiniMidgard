@@ -495,6 +495,34 @@ function face(ctx: CanvasRenderingContext2D, gender: 'm' | 'f', state: string, t
 export function drawHeadgear(ctx: CanvasRenderingContext2D, look: string, t: number, hairColor: string) {
   ctx.lineJoin = 'round';
   switch (look) {
+    case 'hairpin': {
+      // two crossed hair clips with a little star gem, pinned at the side of the fringe
+      ctx.strokeStyle = '#3a2a10'; ctx.lineWidth = 2.4; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(5.5, -47.5); ctx.lineTo(11.5, -43.5); ctx.moveTo(6, -43); ctx.lineTo(11, -48); ctx.stroke();
+      ctx.strokeStyle = '#ffd25a'; ctx.lineWidth = 1.3;
+      ctx.beginPath(); ctx.moveTo(5.5, -47.5); ctx.lineTo(11.5, -43.5); ctx.moveTo(6, -43); ctx.lineTo(11, -48); ctx.stroke();
+      ctx.fillStyle = '#ff6a8a'; ctx.strokeStyle = '#7a1a3a'; ctx.lineWidth = 0.6;
+      ctx.beginPath();
+      for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? 1.1 : 2.4; ctx.lineTo(8.5 + Math.cos(a) * r, -45.6 + Math.sin(a) * r); }
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+      break;
+    }
+    case 'leaf': {
+      // a sprout growing out of the crown, swaying
+      const sway = Math.sin(t / 420) * 0.12;
+      ctx.save(); ctx.translate(1, -53.5); ctx.rotate(sway);
+      ctx.strokeStyle = '#2f6a1e'; ctx.lineWidth = 1.2; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(0, 2); ctx.quadraticCurveTo(0.5, -2, 0, -4.5); ctx.stroke();
+      for (const s of [-1, 1]) {
+        ctx.beginPath(); ctx.moveTo(0, -4.2);
+        ctx.quadraticCurveTo(s * 3, -9, s * 7.5, -7); ctx.quadraticCurveTo(s * 4, -3.6, 0, -4.2);
+        blob(ctx, s < 0 ? '#7ccf4a' : '#5fb83a', '#2f6a1e', 0.8);
+        ctx.strokeStyle = 'rgba(255,255,255,0.45)'; ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.moveTo(s * 1, -4.8); ctx.quadraticCurveTo(s * 3.5, -6.6, s * 6, -6.8); ctx.stroke();
+      }
+      ctx.restore();
+      break;
+    }
     case 'flower': {
       const cx = 9, cy = -45;
       ctx.fillStyle = '#ffffff';

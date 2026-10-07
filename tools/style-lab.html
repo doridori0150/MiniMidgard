@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Style lab (dev)</title>
+<style>
+  :root { --ink: #2a2622; --mute: #6a645c; --line: #d8d0c4; --card: #fffdf8; --on: #3a5ab4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #ece6dc; font: 13px/1.4 system-ui, 'Apple SD Gothic Neo', sans-serif; color: var(--ink); }
+  main { max-width: 980px; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 18px; margin: 4px 0 2px; }
+  h2 { font-size: 15px; margin: 22px 0 6px; }
+  p.sub { margin: 0 0 10px; color: var(--mute); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .grp { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin: 4px 0; }
+  .grp > b { width: 64px; font-weight: 600; color: var(--mute); font-size: 12px; }
+  button { font: inherit; padding: 5px 10px; border-radius: 16px; border: 1px solid var(--line); background: #fff; cursor: pointer; }
+  button.on { background: var(--on); border-color: var(--on); color: #fff; }
+  .stage { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; }
+  .cell { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .cell small { color: var(--mute); font-size: 11px; }
+  canvas { image-rendering: pixelated; image-rendering: crisp-edges; display: block; }
+  .scene { border-radius: 10px; background: #8cc06a; }
+  .sheet-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 10px; }
+  .missing { color: var(--mute); padding: 20px; text-align: center; border: 1px dashed var(--line); border-radius: 10px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>스타일 랩 — 장비 외형 교체 테스트</h1>
+  <p class="sub">머리 상단·중단·하단 액세서리를 바꿔 끼웠을 때 각 스타일에서 외형이 얼마나 쉽게 바뀌는지 확인합니다. (개발용 페이지)</p>
+
+  <h2>D′ 코드 인형 → 도트 변환 (모든 장비가 자동으로 도트가 됨)</h2>
+  <div class="card">
+    <div class="grp"><b>상단</b><span id="g-top"></span></div>
+    <div class="grp"><b>중단</b><span id="g-mid"></span></div>
+    <div class="grp"><b>하단</b><span id="g-low"></span></div>
+    <div class="grp"><b>도트 크기</b><span id="g-px"></span></div>
+    <div class="grp"><b>외곽선</b><span id="g-ol"></span></div>
+    <div class="stage" id="stage"></div>
+    <div class="stage"><div class="cell"><canvas id="scene" class="scene"></canvas><small>실제 화면 크기 미리보기 (×2)</small></div></div>
+  </div>
+
+  <h2>B·C·D 이미지 부품 합성 (몸 1장 + 액세서리 조각)</h2>
+  <div class="card">
+    <div class="grp"><b>액세서리</b><span id="g-part"></span></div>
+    <div class="sheet-grid" id="sheets"></div>
+  </div>
+</main>
+<script type="module">
+  import { drawHero } from '/src/render/hero.ts';
+
+  // ───── D′: code paper-doll rendered small, then snapped to pixels
+  const TOP = [['없음', ''], ['머리핀', 'hairpin'], ['풀잎', 'leaf'], ['리본', 'ribbon'], ['꽃', 'flower'], ['고양이귀', 'cat'], ['토끼귀', 'bunny'], ['버섯', 'mushroom'], ['티아라', 'tiara'], ['모자', 'cap']];
+  const MID = [['없음', ''], ['안경', 'glasses'], ['선글라스', 'sunglasses'], ['고글', 'goggles'], ['안대', 'eyepatch'], ['홍조', 'blush']];
+  const LOW = [['없음', ''], ['파이프', 'pipe'], ['장미', 'rose'], ['마스크', 'mask'], ['스카프', 'scarf']];
+  const PX = [['48px', 48], ['56px', 56], ['64px', 64], ['원본 벡터', 0]];
+  const OL = [['켜기', true], ['끄기', false]];
+  const st = { top: 'leaf', mid: '', low: '', px: 56, ol: true };
+  const CAST = [
+    { name: '초보자', look: { cls: 'novice', gender: 'f', hair: 2, hairColor: 2, skin: 0, dye: 0, wtype: 'dagger', refine: 0, shield: false } },
+    { name: '검사', look: { cls: 'swordsman', gender: 'm', hair: 1, hairColor: 5, skin: 1, dye: 0, wtype: 'sword', refine: 0, shield: true } },
+    { name: '마법사', look: { cls: 'mage', gender: 'f', hair: 6, hairColor: 6, skin: 0, dye: 0, wtype: 'staff', refine: 0, shield: false } },
+  ];
+
+  function seg(id, opts, key) {
+    const el = document.getElementById(id);
+    el.innerHTML = '';
+    for (const [label, v] of opts) {
+      const b = document.createElement('button');
+      b.textContent = label;
+      if (st[key] === v) b.className = 'on';
+      b.onclick = () => { st[key] = v; seg(id, opts, key); };
+      el.append(b);
+    }
+  }
+  seg('g-top', TOP, 'top'); seg('g-mid', MID, 'mid'); seg('g-low', LOW, 'low'); seg('g-px', PX, 'px'); seg('g-ol', OL, 'ol');
+
+  /** draw the hero at sprite size, threshold alpha, posterize, add a selective dark outline */
+  function sprite(look, state, t, H, outline) {
+    const s = H / 74, W = Math.ceil(H * 0.9), Hh = H + 6;
+    const c = document.createElement('canvas'); c.width = W; c.height = Hh;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    ctx.setTransform(s, 0, 0, s, W / 2, H + 3);
+    drawHero(ctx, look, { state, t, facing: 1 }, { shadow: false });
+    const img = ctx.getImageData(0, 0, W, Hh), d = img.data;
+    const solid = new Uint8Array(W * Hh);
+    for (let i = 0; i < W * Hh; i++) {
+      const a = d[i * 4 + 3];
+      if (a < 110) { d[i * 4 + 3] = 0; continue; }
+      solid[i] = 1; d[i * 4 + 3] = 255;
+      for (let k = 0; k < 3; k++) d[i * 4 + k] = Math.min(255, Math.round(d[i * 4 + k] / 20) * 20);
+    }
+    if (outline) {
+      const out = new Uint8ClampedArray(d);
+      for (let y = 0; y < Hh; y++) for (let x = 0; x < W; x++) {
+        const i = y * W + x;
+        if (solid[i]) continue;
+        let n = -1;
+        for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+          const xx = x + dx, yy = y + dy;
+          if (xx >= 0 && yy >= 0 && xx < W && yy < Hh && solid[yy * W + xx]) { n = yy * W + xx; break; }
+        }
+        if (n < 0) continue;
+        // selective outline: a darkened version of the neighbouring colour instead of flat black
+        out[i * 4] = d[n * 4] * 0.3; out[i * 4 + 1] = d[n * 4 + 1] * 0.28; out[i * 4 + 2] = d[n * 4 + 2] * 0.34; out[i * 4 + 3] = 255;
+      }
+      d.set(out);
+    }
+    ctx.putImageData(img, 0, 0);
+    return c;
+  }
+
+  function looksWith(base) { return { ...base, headTop: st.top || undefined, headMid: st.mid || undefined, headLow: st.low || undefined }; }
+
+  const stage = document.getElementById('stage');
+  const views = CAST.map((c) => {
+    const cell = document.createElement('div'); cell.className = 'cell';
+    const cv = document.createElement('canvas'); cv.width = 240; cv.height = 280;
+    const lab = document.createElement('small'); lab.textContent = c.name;
+    cell.append(cv, lab); stage.append(cell);
+    return cv;
+  });
+  const scene = document.getElementById('scene'); scene.width = 560; scene.height = 150;
+
+  let last = 0;
+  function frame(now) {
+    requestAnimationFrame(frame);
+    if (now - last < 120) return; // sprites tick at ~8 fps, like a classic MMO
+    last = now;
+    const t = Math.floor(now / 125) * 125;
+    CAST.forEach((c, i) => {
+      const cv = views[i], ctx = cv.getContext('2d');
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      const look = looksWith(c.look);
+      if (!st.px) {
+        ctx.imageSmoothingEnabled = true;
+        ctx.setTransform(3.2, 0, 0, 3.2, cv.width / 2, cv.height - 12);
+        drawHero(ctx, look, { state: 'idle', t, facing: 1 }, { shadow: true });
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        return;
+      }
+      const sp = sprite(look, 'idle', t, st.px, st.ol);
+      const k = Math.floor(Math.min(cv.width / sp.width, (cv.height - 8) / sp.height));
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(sp, (cv.width - sp.width * k) / 2, cv.height - sp.height * k - 4, sp.width * k, sp.height * k);
+    });
+    // scene: the three walking/fighting at real size ×2
+    const sc = scene.getContext('2d');
+    sc.clearRect(0, 0, scene.width, scene.height);
+    sc.imageSmoothingEnabled = false;
+    ['walk', 'ready', 'attack'].forEach((state, i) => {
+      const look = looksWith(CAST[i].look);
+      const tt = state === 'attack' ? (now % 900) * 0.5 : t;
+      if (!st.px) {
+        sc.imageSmoothingEnabled = true;
+        sc.setTransform(1.5, 0, 0, 1.5, 110 + i * 170, 138);
+        drawHero(sc, look, { state, t: tt, dur: 420, facing: 1 }, { shadow: true });
+        sc.setTransform(1, 0, 0, 1, 0, 0);
+        return;
+      }
+      const sp = sprite(look, state, tt, st.px, st.ol);
+      sc.drawImage(sp, 110 + i * 170 - sp.width, 140 - sp.height * 2, sp.width * 2, sp.height * 2);
+    });
+  }
+  requestAnimationFrame(frame);
+
+  // ───── B·C·D: image part sheets (3×3 grid on a flat key colour: [0] body, [1..8] accessories)
+  const PARTS = ['없음', '머리핀', '풀잎', '리본', '꽃', '고양이귀', '안경', '풀피리', '베레모'];
+  const ANCHOR = { 1: 'side', 2: 'crown', 3: 'top', 4: 'side', 5: 'top', 6: 'eyes', 7: 'mouth', 8: 'top' };
+  // head box of the body cut-out (fractions of the cut-out size) per style — tuned after looking at each sheet
+  const HEAD = window.__HEAD = {
+    B: { x: 0.5, top: 0.06, eyes: 0.27, mouth: 0.34, w: 0.62 },
+    C: { x: 0.5, top: 0.06, eyes: 0.27, mouth: 0.34, w: 0.62 },
+    D: { x: 0.5, top: 0.06, eyes: 0.27, mouth: 0.34, w: 0.62 },
+  };
+  const ps = { part: 2 };
+  function partSeg() {
+    const el = document.getElementById('g-part'); el.innerHTML = '';
+    PARTS.forEach((label, i) => {
+      const b = document.createElement('button'); b.textContent = label; if (ps.part === i) b.className = 'on';
+      b.onclick = () => { ps.part = i; partSeg(); drawSheets(); }; el.append(b);
+    });
+  }
+  partSeg();
+
+  /** cut one grid cell out: flood-fill the key colour from the cell border, then crop to the opaque box */
+  function cut(img, col, row, cols = 3, rows = 3) {
+    const cw = Math.floor(img.width / cols), ch = Math.floor(img.height / rows);
+    const c = document.createElement('canvas'); c.width = cw; c.height = ch;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(img, col * cw, row * ch, cw, ch, 0, 0, cw, ch);
+    const im = ctx.getImageData(0, 0, cw, ch), d = im.data;
+    const key = [d[0], d[1], d[2]];
+    const near = (i) => Math.abs(d[i] - key[0]) + Math.abs(d[i + 1] - key[1]) + Math.abs(d[i + 2] - key[2]) < 90;
+    const seen = new Uint8Array(cw * ch), stack = [];
+    for (let x = 0; x < cw; x++) stack.push(x, (ch - 1) * cw + x);
+    for (let y = 0; y < ch; y++) stack.push(y * cw, y * cw + cw - 1);
+    while (stack.length) {
+      const p = stack.pop();
+      if (seen[p]) continue; seen[p] = 1;
+      if (!near(p * 4)) continue;
+      d[p * 4 + 3] = 0;
+      const x = p % cw, y = (p / cw) | 0;
+      if (x > 0) stack.push(p - 1); if (x < cw - 1) stack.push(p + 1); if (y > 0) stack.push(p - cw); if (y < ch - 1) stack.push(p + cw);
+    }
+    // soften the fringe left by the key colour
+    for (let p = 0; p < cw * ch; p++) if (d[p * 4 + 3] && near(p * 4)) d[p * 4 + 3] = 90;
+    ctx.putImageData(im, 0, 0);
+    let x0 = cw, y0 = ch, x1 = 0, y1 = 0;
+    for (let y = 0; y < ch; y++) for (let x = 0; x < cw; x++) if (d[(y * cw + x) * 4 + 3] > 40) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+    const o = document.createElement('canvas'); o.width = Math.max(1, x1 - x0 + 1); o.height = Math.max(1, y1 - y0 + 1);
+    o.getContext('2d').drawImage(c, x0, y0, o.width, o.height, 0, 0, o.width, o.height);
+    return o;
+  }
+
+  const sheets = {};
+  const STYLE = [['B', '90년대 셀 애니'], ['C', '만화 펜선 + 수채'], ['D', '도트 스프라이트']];
+  for (const [k] of STYLE) {
+    const img = new Image();
+    img.onload = () => { sheets[k] = { img, parts: [...Array(9)].map((_, i) => cut(img, i % 3, (i / 3) | 0)) }; drawSheets(); };
+    img.onerror = () => { sheets[k] = null; drawSheets(); };
+    img.src = `/docs/art/concepts/round2/parts_${k}.png?v=${Date.now()}`;
+  }
+
+  function drawSheets() {
+    const root = document.getElementById('sheets'); root.innerHTML = '';
+    for (const [k, name] of STYLE) {
+      const cell = document.createElement('div'); cell.className = 'cell';
+      const sh = sheets[k];
+      if (!sh) { const m = document.createElement('div'); m.className = 'missing'; m.textContent = `${k}. ${name} — 부품 시트 생성 대기 중`; cell.append(m); root.append(cell); continue; }
+      const body = sh.parts[0], H = HEAD[k];
+      const cv = document.createElement('canvas'); const scale = 300 / body.height;
+      cv.width = Math.round(body.width * scale) + 80; cv.height = 330;
+      const ctx = cv.getContext('2d'); ctx.imageSmoothingEnabled = k !== 'D';
+      const bx = 40, by = 20, bw = body.width * scale, bh = body.height * scale;
+      ctx.drawImage(body, bx, by, bw, bh);
+      if (ps.part > 0) {
+        const p = sh.parts[ps.part], a = ANCHOR[ps.part];
+        // accessories are drawn at the body's scale on the sheet, so keep their pixel ratio
+        const pw = p.width * scale, ph = p.height * scale;
+        const hx = bx + bw * H.x, hw = bw * H.w;
+        let x = hx - pw / 2, y = by + bh * H.top - ph * 0.55;
+        if (a === 'crown') y = by + bh * H.top - ph * 0.85;
+        if (a === 'side') { x = hx + hw * 0.18 - pw / 2; y = by + bh * H.top + hw * 0.08 - ph / 2; }
+        if (a === 'eyes') y = by + bh * H.eyes - ph / 2;
+        if (a === 'mouth') { x = hx + hw * 0.08 - pw / 2; y = by + bh * H.mouth - ph / 2; }
+        ctx.drawImage(p, x, y, pw, ph);
+      }
+      const lab = document.createElement('small'); lab.textContent = `${k}. ${name}`;
+      cell.append(cv, lab); root.append(cell);
+    }
+  }
+  drawSheets();
+</script>
+</body>
+</html>
