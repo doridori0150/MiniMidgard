@@ -1,4 +1,4 @@
-import { useRef, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { useGame } from '../game.ts';
 import { CardArt, HeroTabs, Win, nameClass } from '../widgets.tsx';
 import { ITEMS } from '../../game/data/items.ts';
@@ -45,6 +45,7 @@ export function CardPanel() {
   const [pickEquip, setPickEquip] = useState<number | null>(null);
   const boardRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  useEffect(() => { if (s.cardSeen !== s.totals.cards) { s.cardSeen = s.totals.cards; g.notify(); } }, []);
 
   const doCompound = (inst: EquipInst, card: string) => {
     g.setModal({

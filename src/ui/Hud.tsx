@@ -84,7 +84,8 @@ export function Nav() {
   const s = g.s;
   const skillPts = s.heroes.reduce((a, h) => a + h.skillPts, 0);
   const job = s.heroes.some((h) => !canJobChange(h));
-  const cardsReady = insertableCards(s);
+  // red-dot discipline: only for cards found since the card tab was last opened, and only if one can go in a slot
+  const cardsReady = s.totals.cards > (s.cardSeen ?? 0) ? insertableCards(s) : 0;
   const items: [PanelId, string, preact.JSX.Element | null][] = [
     ['skills', '스킬', job ? <span class="badge glow">전직</span> : skillPts ? <span class="badge">{skillPts}</span> : null],
     ['equip', '장비', null],

@@ -211,4 +211,6 @@ export interface GameState {
   tutorial: Record<string, boolean>;
   quick: QuickSlot[];
   orders: PartyOrders;
+  /** totals.cards when the card tab was last opened (nav badge only for cards found since) */
+  cardSeen?: number;
 }
