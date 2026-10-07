@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>Art reference lineup (dev)</title>
+<style>
+  body { margin: 0; background: #e9e4da; font: 13px/1.3 system-ui, sans-serif; color: #3a3028; }
+  h2 { margin: 14px 18px 4px; font-size: 15px; }
+  canvas { display: block; margin: 0 8px; }
+</style>
+</head>
+<body>
+<!-- Dev-only: renders the current code-drawn characters/monsters as a reference sheet for art briefs.
+     Open http://localhost:4200/tools/lineup.html while `npm run dev` is running. -->
+<h2>현재 코드 드로잉 캐릭터 (2.5등신, 페이퍼돌 레이어) — 1차/2차 직업</h2>
+<canvas id="heroes"></canvas>
+<h2>현재 몬스터</h2>
+<canvas id="mobs"></canvas>
+<script type="module">
+  import { drawHero } from '/src/render/hero.ts';
+  import { drawMob } from '/src/render/monster.ts';
+  import { MONSTERS } from '/src/game/data/monsters.ts';
+  import { CLASSES } from '/src/game/data/classes.ts';
+
+  const dpr = 2;
+  function setup(id, w, h) {
+    const c = document.getElementById(id);
+    c.width = w * dpr; c.height = h * dpr; c.style.width = w + 'px'; c.style.height = h + 'px';
+    const ctx = c.getContext('2d');
+    return ctx;
+  }
+  const WEAPON = { novice: 'dagger', swordsman: 'sword', mage: 'staff', archer: 'bow', acolyte: 'mace', thief: 'dagger', merchant: 'axe',
+    knight: 'spear', wizard: 'staff', hunter: 'bow', priest: 'staff', assassin: 'katar', blacksmith: 'axe' };
+  const order = ['novice', 'swordsman', 'mage', 'archer', 'acolyte', 'thief', 'merchant', 'knight', 'wizard', 'hunter', 'priest', 'assassin', 'blacksmith'];
+  const Z = 2.3, colW = 72 * Z * 0.62, rowH = 72 * Z + 34;
+  const perRow = 7;
+  const ctx = setup('heroes', perRow * colW + 20, rowH * 4 + 10);
+  ctx.textAlign = 'center';
+  order.forEach((cls, i) => {
+    for (const g of ['f', 'm']) {
+      const row = Math.floor(i / perRow) * 2 + (g === 'm' ? 1 : 0), col = i % perRow;
+      const x = 10 + col * colW + colW / 2, y = row * rowH + 72 * Z + 12;
+      ctx.setTransform(dpr * Z, 0, 0, dpr * Z, x * dpr, y * dpr);
+      drawHero(ctx, { cls, gender: g, hair: (i * 3 + (g === 'm' ? 1 : 0)) % 8, hairColor: (i * 2 + (g === 'm' ? 3 : 0)) % 10, skin: i % 3, dye: 0,
+        wtype: WEAPON[cls], refine: 0, shield: cls === 'swordsman' || cls === 'acolyte', headTop: i === 1 && g === 'f' ? 'ribbon' : undefined }, { state: 'idle', t: 400, facing: 1 });
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = '#3a3028'; ctx.font = '600 12px system-ui';
+      if (g === 'f') ctx.fillText(CLASSES[cls].name, x, row * rowH + 2 * rowH - 6);
+    }
+  });
+
+  const sprites = [];
+  const seen = new Set();
+  for (const m of Object.values(MONSTERS)) if (!seen.has(m.sprite)) { seen.add(m.sprite); sprites.push(m); }
+  const mc = setup('mobs', 9 * 96 + 20, 2 * 130 + 10);
+  mc.textAlign = 'center';
+  sprites.forEach((m, i) => {
+    const x = 10 + (i % 9) * 96 + 48, y = Math.floor(i / 9) * 130 + 104;
+    mc.setTransform(dpr * 1.6, 0, 0, dpr * 1.6, x * dpr, y * dpr);
+    drawMob(mc, m.sprite, m.palette, { state: 'idle', t: 300, facing: -1, hurt: 0, frozen: false, spawn: 1, dead: 0 }, 1);
+    mc.setTransform(dpr, 0, 0, dpr, 0, 0);
+    mc.fillStyle = '#3a3028'; mc.font = '600 12px system-ui';
+    mc.fillText(m.name, x, y + 20);
+  });
+  document.body.dataset.ready = '1';
+</script>
+</body>
+</html>

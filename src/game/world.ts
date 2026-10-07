@@ -1323,7 +1323,9 @@ export class World {
     const d = dist(m, t) - 8;
     if (d > m.m.range) {
       if (m.m.immobile) { m.target = null; return; }
-      this.moveTo(m, t.x, t.y, m.m.speed, dt, m.m.range * 0.8);
+      // stop at body contact (never inside the hero's collision ring, or the crowd shoves the hero around)
+      const contact = this.bodyR(m) + this.bodyR(t) + 5;
+      this.moveTo(m, t.x, t.y, m.m.speed, dt, Math.min(Math.max(m.m.range * 0.8, contact), m.m.range + 6));
       return;
     }
     m.facing = t.x >= m.x ? 1 : -1;
@@ -1679,12 +1681,22 @@ export class World {
         if (d > 0.01 && d < min) {
           const push = (min - d) / 2;
           const ax = dx / d * push, ay = dy / d * push;
-          const aFixed = a.kind === 'mob' && (a.m.immobile || a.m.boss);
-          const bFixed = b.kind === 'mob' && (b.m.immobile || b.m.boss);
-          if (!aFixed) { a.x -= ax * (bFixed ? 2 : 1); a.y -= ay * (bFixed ? 2 : 1); }
-          if (!bFixed) { b.x += ax * (aFixed ? 2 : 1); b.y += ay * (aFixed ? 2 : 1); }
+          // share of the overlap each side absorbs: bosses/immobile don't budge, and mobs never shove heroes (they slide around them)
+          let wa = 1, wb = 1;
+          if (a.kind === 'mob' && (a.m.immobile || a.m.boss)) wa = 0;
+          else if (a.kind === 'hero' && b.kind === 'mob') wa = 0;
+          if (b.kind === 'mob' && (b.m.immobile || b.m.boss)) wb = 0;
+          else if (b.kind === 'hero' && a.kind === 'mob') wb = 0;
+          if (wa + wb === 0) { if (a.kind === 'hero') wa = 1; else if (b.kind === 'hero') wb = 1; else continue; }
+          const sum = wa + wb;
+          a.x -= ax * 2 * wa / sum; a.y -= ay * 2 * wa / sum;
+          b.x += ax * 2 * wb / sum; b.y += ay * 2 * wb / sum;
         }
       }
+    }
+    for (const u of all) {
+      u.x = clamp(u.x, 24, this.zone.w - 24);
+      u.y = clamp(u.y, 70, this.zone.h - 24);
     }
   }
 
