@@ -1,14 +1,14 @@
 // Real-time hunt simulation for one zone. DOM-free: renderer and UI read `events`, `logs` and unit state.
-import type { Element, GameState, Hero } from './types.ts';
+import type { Element, GameState, Hero, Tactics } from './types.ts';
 import { computeDerived, partyPerks, type ActiveBuff, type Derived } from './stats.ts';
 import { elementMod, sizeMod, ELEMENT_KO } from './data/elements.ts';
 import { SKILLS, type SkillDef, type FixedCtx } from './data/skills.ts';
 import { MONSTERS, type MonsterDef, type MobSkill } from './data/monsters.ts';
 import { ITEMS } from './data/items.ts';
 import { zone as zoneDef, ZONES, type ZoneDef } from './data/zones.ts';
-import { CLASSES } from './data/classes.ts';
+import { CLASSES, lineage } from './data/classes.ts';
 import { expNext } from './exp.ts';
-import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger } from './state.ts';
+import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics } from './state.ts';
 
 export type DmgKind = 'normal' | 'crit' | 'taken' | 'heal' | 'sp' | 'miss' | 'lucky' | 'total' | 'zero';
 
@@ -34,7 +34,12 @@ export type FxEvent =
 
 export interface LogLine { id: number; text: string; color: string; t: number }
 
-type UnitState = 'idle' | 'walk' | 'attack' | 'cast' | 'sit' | 'dead' | 'hurt' | 'spawn';
+type UnitState = 'idle' | 'ready' | 'walk' | 'attack' | 'cast' | 'sit' | 'dead' | 'hurt' | 'spawn';
+
+export type PartyRole = 'tank' | 'melee' | 'ranged' | 'caster' | 'healer';
+export type Position = 'front' | 'mid' | 'back';
+/** how far (px) from the leader a follower may chase, per tactics.chase */
+const CHASE_R = { tight: 170, normal: 270, free: Infinity } as const;
 
 export interface CastInfo { sk: SkillDef; lv: number; target: number | null; x: number; y: number; start: number; end: number }
 
@@ -63,6 +68,11 @@ export interface HeroUnit {
   poisonNext: number;
   hurtAt: number;
   sitting: boolean;
+  /** next target re-evaluation */
+  thinkAt: number;
+  /** stepping away from a melee mob (back line) until / not again before */
+  kiteUntil: number;
+  kiteNext: number;
 }
 
 export interface MobUnit {
@@ -163,7 +173,7 @@ export class World {
         kind: 'hero', uid: this.uidSeq++, hero, x: sx - i * 26, y: sy + (i % 2 ? 22 : -10), facing: 1,
         hp: d.maxHp, sp: d.maxSp, d, dAt: 0, state: 'idle', stateT: 0, lockUntil: 0, atkReady: 0,
         target: null, cast: null, buffs: [], cds: {}, deadUntil: 0, hpTickAt: HP_TICK, spTickAt: SP_TICK, potAt: 0,
-        poisonUntil: 0, poisonNext: 0, hurtAt: -9999, sitting: false,
+        poisonUntil: 0, poisonNext: 0, hurtAt: -9999, sitting: false, thinkAt: 0, kiteUntil: 0, kiteNext: 0,
       } satisfies HeroUnit;
     });
   }
@@ -259,6 +269,7 @@ export class World {
     }
     this.spawnTick();
     this.autoItems();
+    this.partyScan();
     for (const h of this.heroes) this.heroTick(h, dt);
     for (const m of this.mobs) this.mobTick(m, dt);
     this.separate();
@@ -392,83 +403,279 @@ export class World {
     if (this.time < h.lockUntil) return;
     if (h.state === 'attack' || h.state === 'hurt') this.setState(h, 'idle');
 
-    // sitting
-    if (h.sitting) {
-      const full = h.hp >= h.d.maxHp && h.sp >= h.d.maxSp;
-      if (this.zone.id === 'town') {
-        if (!full) return;
-        h.sitting = false; this.setState(h, 'idle');
-      } else {
-        const threatened = this.mobs.some((m) => m.target === h.uid && this.alive(m) && dist(m, h) < 160);
-        const hpOk = h.hp >= h.d.maxHp * 0.9;
-        const spOk = h.sp >= h.d.maxSp * 0.75 || !this.usesSp(h);
-        if (!threatened && !(hpOk && spOk)) return;
+    if (this.zone.id === 'town') {
+      if (h.sitting) {
+        if (h.hp < h.d.maxHp || h.sp < h.d.maxSp) return;
         h.sitting = false; this.setState(h, 'idle');
       }
-    }
-    if (this.zone.id === 'town') {
-      if (!h.sitting && (h.hp < h.d.maxHp || h.sp < h.d.maxSp)) { h.sitting = true; this.setState(h, 'sit'); }
-      if (h.sitting) return;
+      if (h.hp < h.d.maxHp || h.sp < h.d.maxSp) { h.sitting = true; this.setState(h, 'sit'); return; }
       this.idleFollow(h, dt);
       return;
     }
 
-    // support: heal & buffs first
+    // support: revive, heal & buffs first
     if (this.trySupport(h)) return;
+    // party rest (orders.rest) and casters sitting for SP
+    if (this.tryRest(h)) return;
 
-    // decide whether to sit
-    const near = this.mobs.some((m) => this.alive(m) && (m.target === h.uid || (m.m.aggressive && dist(m, h) < 120)));
-    const lowHp = h.hp < h.d.maxHp * 0.35;
-    const lowSp = this.usesSp(h) && h.sp < h.d.maxSp * 0.15;
-    if (!near && (lowHp || lowSp) && !this.mobs.some((m) => this.alive(m) && this.heroes.some((x) => m.target === x.uid))) {
-      h.sitting = true;
-      h.target = null;
-      this.setState(h, 'sit');
-      return;
-    }
-
-    // targeting
+    // targeting: player focus > tactics (re-thought twice a second so the party regroups on the shared target)
     let t = this.mob(h.target);
     if (!this.alive(t)) { h.target = null; t = undefined; }
     if (this.focus !== null) {
       const f = this.mob(this.focus);
       if (this.alive(f)) { t = f; h.target = f!.uid; } else this.focus = null;
     }
-    if (!t) {
-      t = this.pickTarget(h);
+    if (this.focus === null && (!t || this.time >= h.thinkAt)) {
+      h.thinkAt = this.time + 450 + this.rng() * 150;
+      t = this.chooseTarget(h);
       h.target = t?.uid ?? null;
     }
     if (!t) { this.idleFollow(h, dt); return; }
 
-    // tank provoke
+    // tank provoke, crowd control
     if (this.tryProvoke(h)) return;
-    // crowd control (ankle snare) on dangerous non-boss targets
-    for (const { sk, lv } of this.enabledSkills(h, ['cc'])) {
-      if (!this.canPay(h, sk, lv) || t.m.boss || t.stunUntil > this.time || t.frozenUntil > this.time) continue;
-      if (!t.m.aggressive && t.target === null) continue;
-      if (dist(h, t) > (sk.range ?? 180)) continue;
-      h.facing = t.x >= h.x ? 1 : -1;
-      this.startSkill(h, sk, lv, t);
-      return;
-    }
+    if (this.tryCc(h, t)) return;
 
-    // offensive skill
+    // offensive skill or normal attack from this hero's position (front / mid / back)
     const act = this.chooseSkill(h, t);
     const range = act ? this.skillRange(h, act.sk) : h.d.range;
-    const dd = dist(h, t) - this.bodyR(t);
-    if (dd > range) {
-      this.moveTo(h, t.x, t.y, h.d.moveSpd, dt, range * 0.85);
-      return;
-    }
+    if (this.position(h, t, range, dt)) return;
     h.facing = t.x >= h.x ? 1 : -1;
     if (act) { this.startSkill(h, act.sk, act.lv, t); return; }
     if (this.time >= h.atkReady) this.normalAttack(h, t);
-    else this.setState(h, 'idle');
+    else this.setState(h, 'ready');
   }
 
-  /** casters rest for SP; melee classes just fall back to normal attacks */
+  // ───────────────────────────── party brain
+  private pc: { engaged: MobUnit[]; target: MobUnit | undefined } = { engaged: [], target: undefined };
+
+  /** once per step: the mobs the party is fighting and the shared (assist) target */
+  private partyScan() {
+    const ids = new Set(this.heroes.map((h) => h.uid));
+    const lead = this.leader();
+    const engaged = this.mobs.filter((m) => this.alive(m) && ((m.target !== null && ids.has(m.target))
+      || (Object.keys(m.dmgBy).length > 0 && !!lead && dist(m, lead) < 320)));
+    let target: MobUnit | undefined;
+    const f = this.mob(this.focus);
+    if (f && this.alive(f)) target = f;
+    if (!target && lead) { const lt = this.mob(lead.target); if (lt && this.alive(lt)) target = lt; }
+    if (!target) {
+      const tank = this.aliveHeroes().find((h) => this.roleOf(h) === 'tank');
+      const tt = tank && this.mob(tank.target);
+      if (tt && this.alive(tt)) target = tt;
+    }
+    if (!target && lead && engaged.length) target = engaged.reduce((a, b) => (dist(a, lead) <= dist(b, lead) ? a : b));
+    this.pc = { engaged, target };
+  }
+
+  tactics(h: HeroUnit): Tactics { return h.hero.tactics ?? defaultTactics(h.hero.cls); }
+
+  roleOf(h: HeroUnit): PartyRole {
+    switch (lineage(h.hero.cls).at(-2)) {
+      case 'swordsman': return 'tank';
+      case 'mage': return 'caster';
+      case 'archer': return 'ranged';
+      case 'acolyte': return 'healer';
+    }
+    return 'melee';
+  }
+
+  posOf(h: HeroUnit): Position {
+    const p = this.tactics(h).position;
+    if (p !== 'auto') return p;
+    switch (this.roleOf(h)) {
+      case 'caster': return 'back';
+      case 'ranged': return 'mid';
+      case 'healer': {
+        // healers join the melee while everyone is healthy and hang back in heal range otherwise
+        const hurt = this.heroes.some((a) => a.state !== 'dead' && a.hp / a.d.maxHp * 100 < h.hero.auto.healPct + 10);
+        const chased = this.mobs.some((m) => m.target === h.uid && this.alive(m));
+        return hurt || chased ? 'mid' : 'front';
+      }
+    }
+    return 'front';
+  }
+
+  private chooseTarget(h: HeroUnit): MobUnit | undefined {
+    const tac = this.tactics(h);
+    const lead = this.leader();
+    const isLead = !lead || lead === h;
+    const anchor = isLead ? h : lead!;
+    const R = isLead ? 340 : CHASE_R[tac.chase];
+    const reach = (m: MobUnit) => m.target === h.uid || dist(m, anchor) <= R;
+    const eng = this.pc.engaged.filter(reach);
+    const cur = this.mob(h.target);
+    const nearest = (list: MobUnit[]) => {
+      let best: MobUnit | undefined; let bs = Infinity;
+      for (const m of list) { const sc = dist(m, h) - (m === cur ? 30 : 0); if (sc < bs) { bs = sc; best = m; } }
+      return best;
+    };
+    let pick: MobUnit | undefined;
+    switch (tac.target) {
+      case 'protect': {
+        // whatever is hitting a party member — the back line and the most hurt first
+        let bs = Infinity;
+        for (const m of eng) {
+          const v = this.heroUnit(m.target);
+          if (!v || v.state === 'dead') continue;
+          let sc = dist(m, h) + v.hp / v.d.maxHp * 120 - (m === cur ? 30 : 0);
+          if (v !== h && this.posOf(v) !== 'front') sc -= 160;
+          if (sc < bs) { bs = sc; pick = m; }
+        }
+        break;
+      }
+      case 'weakest': {
+        let bs = Infinity;
+        for (const m of eng) { const sc = m.hp / m.maxHp * 300 + dist(m, h) * 0.5; if (sc < bs) { bs = sc; pick = m; } }
+        break;
+      }
+      case 'nearest': pick = nearest(eng); break;
+      case 'boss': pick = this.mobs.find((m) => this.alive(m) && !!m.m.boss && dist(m, anchor) <= Math.max(R, 420)); break;
+    }
+    let shared = this.pc.target && reach(this.pc.target) ? this.pc.target : undefined;
+    // joining late on a target that is about to drop? take the next engaged mob instead of overkilling
+    if (shared && shared !== cur && eng.length > 1 && shared.hp < this.estimateNormal(h, shared) * 1.5) {
+      shared = nearest(eng.filter((m) => m !== shared)) ?? shared;
+    }
+    pick ??= shared ?? nearest(eng);
+    // the leader (and free roamers) may tag a fresh mob while fewer than `pull` are engaged
+    const mayPull = this.pc.engaged.length < Math.max(1, this.s.orders?.pull ?? 3)
+      && (isLead || tac.chase === 'free' || tac.target === 'nearest');
+    if (mayPull && (!pick || (isLead && pick !== cur && !this.alive(cur)))) {
+      const fresh = this.pullCandidate(h, isLead ? (pick ? 170 : 300) : Math.min(R, 300));
+      if (fresh && (!pick || dist(fresh, h) + 60 < dist(pick, h))) pick = fresh;
+    }
+    return pick;
+  }
+
+  /** nearest mob nobody fights yet, skipping ones well above the party level */
+  private pullCandidate(h: HeroUnit, radius: number): MobUnit | undefined {
+    const avgLv = this.heroes.reduce((a, x) => a + x.hero.baseLv, 0) / this.heroes.length;
+    let best: MobUnit | undefined; let bd = radius;
+    for (const m of this.mobs) {
+      if (!this.alive(m) || this.pc.engaged.includes(m)) continue;
+      if (!m.m.boss && m.m.lv > avgLv + 3) continue;
+      const d = dist(m, h);
+      if (d < bd) { bd = d; best = m; }
+    }
+    return best;
+  }
+
+  /** the nearest living front-liner other than h (whoever is meant to take the hits) */
+  private frontLiner(h: HeroUnit): HeroUnit | undefined {
+    let best: HeroUnit | undefined; let bd = Infinity;
+    for (const x of this.heroes) {
+      if (x === h || x.state === 'dead' || x.sitting || this.posOf(x) !== 'front') continue;
+      const d = dist(x, h);
+      if (d < bd) { bd = d; best = x; }
+    }
+    return best;
+  }
+
+  /** a spot `want` px from the target on the side of the front line, fanned out per hero */
+  private standSpot(h: HeroUnit, t: MobUnit, front: HeroUnit | undefined, want: number) {
+    const ref = front ?? this.center();
+    let dx = ref.x - t.x, dy = ref.y - t.y;
+    let d = Math.hypot(dx, dy);
+    if (d < 1) { dx = h.x - t.x; dy = h.y - t.y; d = Math.hypot(dx, dy) || 1; }
+    dx /= d; dy /= d;
+    const i = this.heroes.indexOf(h);
+    const side = (i % 2 ? 1 : -1) * 26;
+    return {
+      x: clamp(t.x + dx * want - dy * side, 24, this.zone.w - 24),
+      y: clamp(t.y + dy * want * 0.8 + dx * side * 0.8, 70, this.zone.h - 24),
+    };
+  }
+
+  /** move into this hero's place for the fight; true while it is moving instead of acting */
+  private position(h: HeroUnit, t: MobUnit, reach: number, dt: number): boolean {
+    const pos = this.posOf(h);
+    const front = this.frontLiner(h);
+    const edge = dist(h, t) - this.bodyR(t);
+    const melee = reach < 60;
+
+    // back line: step away from a melee mob on you and bring it to the front-liner
+    if (pos !== 'front' && front) {
+      if (this.time < h.kiteUntil) {
+        const D = { x: front.x + (front.x - t.x) * 0.4, y: front.y + (front.y - t.y) * 0.4 };
+        const chaser = this.mobs.find((m) => m.target === h.uid && this.alive(m));
+        const away = chaser ? { x: h.x + (h.x - chaser.x), y: h.y + (h.y - chaser.y) } : D;
+        this.moveTo(h, (D.x + away.x) / 2, (D.y + away.y) / 2, h.d.moveSpd * 1.1, dt, 4);
+        return true;
+      }
+      const onMe = this.mobs.find((m) => this.alive(m) && m.target === h.uid && m.m.range < 60 && dist(m, h) < this.bodyR(m) + 30);
+      if (onMe && this.time >= h.kiteNext && front.hp > front.d.maxHp * 0.3) {
+        h.kiteUntil = this.time + 600;
+        h.kiteNext = this.time + 2600;
+        return true;
+      }
+    }
+
+    if (pos === 'front' || (melee && !front)) {
+      if (edge > reach) { this.moveTo(h, t.x, t.y, h.d.moveSpd, dt, reach * 0.85); return true; }
+      // melee damage dealers take the far side of the target when the tank already holds it
+      if (this.roleOf(h) === 'melee' && front && this.roleOf(front) === 'tank' && front.target === t.uid && dist(front, t) < 70) {
+        const fx = t.x - front.x, fy = t.y - front.y, fd = Math.hypot(fx, fy) || 1;
+        const off = this.bodyR(t) + 14;
+        const D = { x: t.x + fx / fd * off, y: t.y + fy / fd * off * 0.8 };
+        if (dist(h, D) > 12) { this.moveTo(h, D.x, D.y, h.d.moveSpd, dt, 4); return true; }
+      }
+      return false;
+    }
+
+    if (melee) {
+      // a melee weapon can't reach from the back line: hold a spot behind the front-liner (in heal range)
+      const D = this.standSpot(h, t, front, dist(front!, t) + (pos === 'mid' ? 45 : 85));
+      if (dist(h, D) > 16) { this.moveTo(h, D.x, D.y, h.d.moveSpd, dt, 6); return true; }
+      this.setState(h, 'ready');
+      h.facing = t.x >= h.x ? 1 : -1;
+      return true;
+    }
+
+    // ranged / casters: stand on the line from the target through the front-liner at a comfortable distance
+    const want = Math.min(reach * 0.9, pos === 'mid' ? 115 : 165);
+    if (edge > reach || (front && edge < want * 0.5)) {
+      const D = this.standSpot(h, t, front, want + this.bodyR(t));
+      if (dist(h, D) > 10) { this.moveTo(h, D.x, D.y, h.d.moveSpd, dt, 6); return edge > reach || dist(h, D) > 40; }
+    }
+    return false;
+  }
+
+  /** party rest after fights (orders.rest) and casters sitting for SP; true while sitting */
+  private tryRest(h: HeroUnit): boolean {
+    const threat = this.pc.engaged.some((m) => dist(m, h) < 240);
+    const rest = this.s.orders?.rest ?? 20;
+    if (h.sitting) {
+      const onMe = this.mobs.some((m) => this.alive(m) && m.target === h.uid);
+      // a caster sitting for SP stays down while the front line handles things; everyone else gets up for a fight
+      const casterOk = this.usesSp(h) && h.sp < h.d.maxSp * 0.5 && !!this.frontLiner(h);
+      if (onMe || (threat && !casterOk) || this.restDone()) { h.sitting = false; this.setState(h, 'idle'); return false; }
+      return true;
+    }
+    if (this.pc.engaged.length) {
+      // mid-fight: a caster or healer out of SP sits behind the front line if nothing is on it
+      const front = this.frontLiner(h);
+      if (this.usesSp(h) && h.sp < h.d.maxSp * 0.12 && front && !this.mobs.some((m) => this.alive(m) && m.target === h.uid && dist(m, h) < 180)) {
+        h.sitting = true; h.target = null; this.setState(h, 'sit');
+        return true;
+      }
+      return false;
+    }
+    if (rest > 0 && this.heroes.some((a) => a.state !== 'dead' && (a.hp / a.d.maxHp * 100 < rest || (this.usesSp(a) && a.sp / a.d.maxSp * 100 < rest)))) {
+      h.sitting = true; h.target = null; this.setState(h, 'sit');
+      return true;
+    }
+    return false;
+  }
+
+  private restDone() {
+    return this.heroes.every((a) => a.state === 'dead' || (a.hp >= a.d.maxHp * 0.85 && (!this.usesSp(a) || a.sp >= a.d.maxSp * 0.7)));
+  }
+
+  /** casters and healers rest for SP; everyone else falls back to normal attacks */
   private usesSp(h: HeroUnit) {
-    if (h.hero.cls !== 'mage' && h.hero.cls !== 'acolyte') return false;
+    const role = this.roleOf(h);
+    if (role !== 'caster' && role !== 'healer') return false;
     return Object.entries(h.hero.skills).some(([id, lv]) => lv > 0 && SKILLS[id]?.sp && SKILLS[id].auto !== 'none' && h.hero.auto.skills[id] !== false && id !== 'first_aid');
   }
 
@@ -480,22 +687,19 @@ export class World {
     if (!lead) return;
     if (lead === h) {
       if (resting || this.zone.id === 'town') { this.setState(h, 'idle'); return; }
-      // explore toward nearest mob
-      let best: MobUnit | undefined; let bd = Infinity;
-      const avgLv = this.heroes.reduce((a, x) => a + x.hero.baseLv, 0) / this.heroes.length;
-      for (const m of this.mobs) {
-        if (!this.alive(m) || (m.m.lv > avgLv + 3 && !m.m.boss)) continue;
-        const d = dist(m, h);
-        if (d < bd) { bd = d; best = m; }
-      }
+      // explore toward the nearest huntable mob
+      const best = this.pullCandidate(h, Infinity);
       if (best) this.moveTo(h, best.x, best.y, h.d.moveSpd * 0.85, dt, 60);
       else this.setState(h, 'idle');
       return;
     }
+    // formation behind the leader by position: front beside, mid behind, back further behind
     const i = this.heroes.indexOf(h);
-    const ox = -lead.facing * (22 + (i % 2) * 8) * Math.ceil(i / 2);
-    const oy = (i % 2 ? 18 : -14);
-    this.moveTo(h, lead.x + ox, lead.y + oy, Math.max(h.d.moveSpd, lead.d.moveSpd), dt, 6);
+    const pos = this.posOf(h);
+    const back = pos === 'front' ? 24 : pos === 'mid' ? 48 : 72;
+    const ox = -lead.facing * back;
+    const oy = (i % 2 ? 20 : -16);
+    this.moveTo(h, lead.x + ox, lead.y + oy, Math.max(h.d.moveSpd, lead.d.moveSpd), dt, 8);
   }
 
   private moveTo(u: Unit, tx: number, ty: number, spd: number, dt: number, stop: number) {
@@ -512,25 +716,23 @@ export class World {
     return false;
   }
 
-  private pickTarget(h: HeroUnit): MobUnit | undefined {
-    const c = this.center();
-    let best: MobUnit | undefined; let bs = Infinity;
-    const tank = this.heroes.find((x) => x.state !== 'dead' && (x.hero.skills.provoke ?? 0) > 0);
-    const tankTarget = tank && tank !== h ? this.mob(tank.target) : undefined;
-    if (tankTarget && this.alive(tankTarget) && dist(tankTarget, c) < 320) return tankTarget;
-    const avgLv = this.heroes.reduce((a, x) => a + x.hero.baseLv, 0) / this.heroes.length;
-    for (const m of this.mobs) {
-      if (!this.alive(m)) continue;
-      const dc = dist(m, c);
-      const engaged = this.heroes.some((x) => m.target === x.uid);
-      if (!engaged && dc > 300) continue;
-      if (!engaged && !m.m.boss && m.m.lv > avgLv + 3) continue;
-      let score = dist(m, h);
-      if (engaged) score -= 120;
-      if (m.m.boss) score -= 60;
-      if (score < bs) { bs = score; best = m; }
+  /** ankle snare & co: whatever is chasing the back line first, else a dangerous target */
+  private tryCc(h: HeroUnit, t: MobUnit): boolean {
+    for (const { sk, lv } of this.enabledSkills(h, ['cc'])) {
+      if (!this.canPay(h, sk, lv)) continue;
+      const free = (m: MobUnit) => !m.m.boss && m.stunUntil <= this.time && m.frozenUntil <= this.time && dist(h, m) <= (sk.range ?? 180);
+      const chaser = this.pc.engaged.find((m) => {
+        if (!free(m)) return false;
+        const v = this.heroUnit(m.target);
+        return !!v && (v === h || this.posOf(v) !== 'front');
+      });
+      const pick = chaser ?? (free(t) && (t.m.aggressive || t.target !== null) ? t : undefined);
+      if (!pick) continue;
+      h.facing = pick.x >= h.x ? 1 : -1;
+      this.startSkill(h, sk, lv, pick);
+      return true;
     }
-    return best;
+    return false;
   }
 
   private skillRange(h: HeroUnit, sk: SkillDef) {
@@ -611,11 +813,16 @@ export class World {
   }
 
   private chooseSkill(h: HeroUnit, t: MobUnit): { sk: SkillDef; lv: number } | null {
+    const tac = this.tactics(h).skills;
+    // conserve: offensive skills only while SP ≥ 50% (heals/buffs/CC are separate)
+    if (tac === 'conserve' && h.sp < h.d.maxSp * 0.5) return null;
     const list = this.enabledSkills(h, ['attack', 'aoe']).filter(({ sk, lv }) => this.canPay(h, sk, lv));
     if (!list.length) return null;
     // don't waste skills on nearly-dead targets
     const est = this.estimateNormal(h, t);
-    if (t.hp <= est * 1.1 && !t.m.boss) return null;
+    if (t.hp <= est * 1.1 && !t.m.boss && tac !== 'aggressive') return null;
+    // casters save area spells for real packs unless told to go all out
+    const minAoe = tac === 'aggressive' ? 2 : this.roleOf(h) === 'caster' ? 3 : 2;
     let best: { sk: SkillDef; lv: number } | null = null; let bv = 0;
     for (const e of list) {
       const { sk, lv } = e;
@@ -623,7 +830,7 @@ export class World {
       if (sk.kind === 'aoe' || sk.kind === 'selfAoe') {
         const cx = sk.kind === 'selfAoe' ? h.x : t.x, cy = sk.kind === 'selfAoe' ? h.y : t.y;
         const n = this.mobs.filter((m) => this.alive(m) && Math.hypot(m.x - cx, m.y - cy) < (sk.radius ?? 60)).length;
-        if (n < 2) continue;
+        if (n < minAoe) continue;
         v = this.estimateSkill(h, t, sk, lv) * n;
       } else {
         v = this.estimateSkill(h, t, sk, lv);
@@ -631,7 +838,7 @@ export class World {
       // weigh by sp efficiency so mages don't burn their pool on overkill
       if (v > bv) { bv = v; best = e; }
     }
-    if (best && bv < est * 1.15 && !h.d.ranged && !CLASSES[h.hero.cls].ranged) return null;
+    if (best && bv < est * 1.15 && !h.d.ranged && !CLASSES[h.hero.cls].ranged && tac !== 'aggressive') return null;
     return best;
   }
 

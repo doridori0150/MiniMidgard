@@ -52,7 +52,7 @@ export function defaultTactics(cls: ClassId): Tactics {
 }
 
 export function defaultOrders(): PartyOrders {
-  return { pull: 3, rest: 30 };
+  return { pull: 3, rest: 20 };
 }
 
 export function newHero(s: GameState, name: string, look: Look): Hero {

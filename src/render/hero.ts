@@ -196,6 +196,19 @@ function computePose(p: Pose, wtype: WeaponType): ArmPose {
       }
       break;
     }
+    case 'ready': {
+      // combat stance between swings: weapon levelled at the enemy, knees bent, quick breathing
+      const ph = t * Math.PI * 2 * 1.5;
+      out.bob = Math.sin(ph) * 0.8 + 0.6;
+      out.lean = 5;
+      out.legA = -1.4; out.legB = 1.6;
+      if (wtype === 'bow') { out.front = 86; out.back = 46 + Math.sin(ph) * 3; out.weapon = 180; }
+      else if (wtype === 'staff') { out.front = 62 + Math.sin(ph) * 3; out.weapon = 138; out.back = 4; }
+      else if (wtype === 'spear') { out.front = 64; out.weapon = 112; out.back = 30; }
+      else if (wtype === 'katar') { out.front = 78; out.weapon = 90; out.back = 58; }
+      else { out.front = 56 + Math.sin(ph) * 4; out.weapon = 124 + Math.sin(ph) * 3; out.back = 14; }
+      break;
+    }
     case 'cast': {
       const w = Math.sin(t * 8) * 4;
       out.front = 150 + w;

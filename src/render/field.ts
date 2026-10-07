@@ -840,7 +840,7 @@ export class FieldRenderer {
     ctx.save();
     ctx.translate(sm.x, sm.y);
     const dur = h.state === 'attack' ? Math.min(420, Math.max(220, h.d.delay * 0.8)) : undefined;
-    drawHero(ctx, look, { state: flash > 0.5 && state === 'idle' ? 'hurt' : state, t: state === 'idle' || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing }, { flash, alpha: state === 'dead' ? 0.85 : 1 });
+    drawHero(ctx, look, { state: flash > 0.5 && (state === 'idle' || state === 'ready') ? 'hurt' : state, t: state === 'idle' || state === 'ready' || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing }, { flash, alpha: state === 'dead' ? 0.85 : 1 });
     if (state !== 'dead' && h.buffs.some((b) => b.shield && b.shield > 0 && b.until > w.time)) {
       ctx.save(); ctx.globalCompositeOperation = 'lighter';
       ctx.globalAlpha = 0.28 + Math.sin(now / 300) * 0.08;
