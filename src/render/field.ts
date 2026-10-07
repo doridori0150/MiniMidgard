@@ -1109,7 +1109,8 @@ export class FieldRenderer {
         drawFalcon(ctx, 0, 0, 1.5, now, true);
       } else {
         ctx.globalCompositeOperation = 'lighter';
-        const col = sh.kind === 'shadow' ? '#a060ff' : '#90d050';
+        // magic orbs take their element's colour (a fire book's bolt glows orange); plain shadow stays violet
+        const col = sh.kind === 'shadow' ? (sh.element === 'neutral' || sh.element === 'shadow' ? '#a060ff' : ELEMENT_COLOR[sh.element]) : '#90d050';
         ctx.drawImage(glow(col), -12, -12, 24, 24);
       }
       ctx.restore();

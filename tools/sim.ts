@@ -2,12 +2,15 @@
 // usage: npm run sim -- [minutes=60] [party=swordsman,acolyte,mage] [seed=1] [flags]
 //   flags (comma separated): gear  = equip drops/shop upgrades, compound cards, safe-refine, buy better potions
 //                            quiet = summary only, solo = never recruit party members
+//                            stay=<zone> = hunt only there until the whole party is Lv 15, then stop (beginner-field pace)
 // Map choice (multi-map regions): go for unkilled field bosses that unlock something, try each new map once,
 // then hunt the map with the best measured EXP/h (wipes penalised), spending ~30 of every 120 minutes on the
-// best loot / ore / secret map. Sealed maps open through a local copy of the gate rules (sim clock starts 09:00).
+// best loot / ore / secret map. Sealed maps open through a local copy of the gate rules (sim clock starts 09:00,
+// and the World gets the same clock for time-of-day paths). A boss still standing after 30 minutes counts as a lost fight.
+// The report lists level milestones (party min level), hours per region and per-map EXP/h.
 import { World } from '../src/game/world.ts';
 import { newGame, defaultLook, autoDistribute, learnSkill, jobChange, canJobChange, nextJobs, buy, addEquip, equip, newHero, equipAmmo, sellStack, canEquip, sellEquip, equippedBy, compound, cardFits, refine, refineInfo, removeStack } from '../src/game/state.ts';
-import { ZONES, type ZoneDef, type GateNeed } from '../src/game/data/zones.ts';
+import { ZONES, openers, type ZoneDef, type GateNeed } from '../src/game/data/zones.ts';
 import { MONSTERS, type MonsterDef } from '../src/game/data/monsters.ts';
 import { CLASSES, SECOND_JOB_OF } from '../src/game/data/classes.ts';
 import { SKILLS } from '../src/game/data/skills.ts';
@@ -23,6 +26,8 @@ const flags = new Set((process.argv[5] ?? '').split(',').filter(Boolean));
 const GEARUP = flags.has('gear');
 const QUIET = flags.has('quiet');
 const SOLO = flags.has('solo');
+const STAY = [...flags].find((f) => f.startsWith('stay='))?.slice(5);
+const STAY_LV = 15;
 const rng = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
 
 const SKILL_PLAN: Partial<Record<ClassId, string[]>> = {
@@ -279,6 +284,8 @@ function needOk(n: GateNeed): boolean {
     case 'card': return !!s.book[n.mob]?.card;
     case 'level': return Math.max(...s.heroes.map((h) => h.baseLv)) >= n.lv;
     case 'job': return s.heroes.some((h) => CLASSES[h.cls].tier >= n.tier);
+    // a player who owns the piece puts it on for the gate (the gear policy would not, it only scores power)
+    case 'equip': return s.equips.some((e) => e.id === n.id);
     case 'hours': return inWindow(n);
   }
 }
@@ -329,6 +336,8 @@ function closeVisit() {
 }
 /** the boss / MVP the party came to this map for; two wipes on the way count as a failed attempt */
 let goal: { mob: string; wipes: number } | null = null;
+/** the boss currently up on this map and since when (sim minutes) */
+let bossSince: { id: string; min: number } | null = null;
 function goTo(id: string, why: string) {
   const g = /^(boss|mvp) (\w+)$/.exec(why)?.[2];
   if (g !== goal?.mob) goal = g ? { mob: g, wipes: 0 } : null;
@@ -341,13 +350,26 @@ function goTo(id: string, why: string) {
 function chooseZone(minLv: number) {
   const cur = ZONES.find((z) => z.id === s.zone)!;
   if (visit.zone !== s.zone) { closeVisit(); visit = { zone: s.zone, min: 0, exp: 0, deaths: 0 }; } // the world retreated after wipes
-  if (w.mobs.some((m) => m.m.boss && m.state !== 'dead') && canEnterNow(cur)) return; // finish the boss fight
+  // finish the boss fight — but a boss nobody can dent in 30 minutes (it heals, the healer keeps everyone alive) is a lost fight
+  const boss = w.mobs.find((m) => m.m.boss && m.state !== 'dead');
+  if (!boss) bossSince = null;
+  else if (!bossSince || bossSince.id !== boss.m.id) bossSince = { id: boss.m.id, min: curMin };
+  if (boss && canEnterNow(cur)) {
+    if (curMin - bossSince!.min < 30) return;
+    bossFail[boss.m.id] = minLv; bossFails[boss.m.id] = (bossFails[boss.m.id] ?? 0) + 1;
+    mile(`gave up on ${boss.m.id} (Lv ${minLv})`);
+    bossSince = null; nextPick = 0;
+    if (STAY) return;
+    const back = ZONES.filter((z) => z.id !== cur.id && canEnterNow(z) && zoneScore[z.id] !== undefined).sort((a, b) => (zoneScore[b.id] ?? 0) - (zoneScore[a.id] ?? 0))[0];
+    if (back) return goTo(back.id, 'retreat');
+  }
+  if (STAY) { if (s.zone !== STAY) goTo(STAY, 'stay'); return; }
   if (curMin < nextPick && canEnterNow(cur)) return;
   nextPick = curMin + 10;
   const open = ZONES.filter(canEnterNow);
   // 1. progression: an unkilled field boss that opens new maps, once strong enough
   const prog = open.filter((z) => z.boss && s.progress[z.id].bossKills === 0 && minLv >= Math.max(z.lv[0], MONSTERS[z.boss].lv - 3)
-    && minLv >= waitLv(z.boss) && ZONES.some((n) => n.unlockBy === z.id && !s.unlocked.includes(n.id)))
+    && minLv >= waitLv(z.boss) && ZONES.some((n) => openers(n).includes(z.id) && !s.unlocked.includes(n.id)))
     .sort((a, b) => MONSTERS[a.boss!].lv - MONSTERS[b.boss!].lv)[0];
   if (prog) return goTo(prog.id, 'boss ' + prog.boss);
   // 2. first MVP kill once comfortably over its level
@@ -376,6 +398,8 @@ function chooseZone(minLv: number) {
 const s = newGame('Hero', defaultLook());
 const w = new World(s, rng);
 w.fx = false;
+// time-of-day paths fade by the world's clock: give it the simulated one (09:00 start), not the machine's
+w.clock = () => new Date(2026, 0, 1 + Math.floor((START_HOUR + curMin / 60) / 24), (START_HOUR + Math.floor(curMin / 60)) % 24, curMin % 60);
 const t0 = performance.now();
 let curMin = 0;
 const miles: string[] = [];
@@ -401,8 +425,16 @@ let seenUid = Math.max(0, ...s.equips.map((e) => e.uid));
 let lastDeaths = 0;
 let bossUp = new Set<string>();
 const every = minutes > 400 ? 60 : minutes > 120 ? 15 : 5;
+const LV_MARKS = [5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 84, 90, 95, 99];
+const lvAt: Record<number, number> = {};
+let ran = minutes;
+if (STAY && !ZONES.some((z) => z.id === STAY)) throw new Error('unknown stay zone ' + STAY);
+if (STAY) { s.unlocked.push(STAY); w.setZone(STAY); visit = { zone: STAY, min: 0, exp: 0, deaths: 0 }; }
 for (let min = 1; min <= minutes; min++) {
   curMin = min;
+  const lvNow = Math.min(...s.heroes.map((h) => h.baseLv));
+  for (const L of LV_MARKS) if (lvNow >= L && lvAt[L] === undefined) { lvAt[L] = min; mile(`party Lv ${L}`); }
+  if (STAY && lvNow >= STAY_LV) { ran = min - 1; break; }
   for (let sec = 0; sec < 60; sec++) {
     const zid = s.zone;
     const k0 = s.progress[zid].kills;
@@ -452,7 +484,13 @@ for (let min = 1; min <= minutes; min++) {
     console.log(`${String(min).padStart(5)}m  ${s.zone.padEnd(9)} kills ${String(kills).padStart(5)}  deaths ${s.totals.deaths}  zeny ${s.zeny}  cards ${s.totals.cards}  | ${heroes}`);
   }
 }
-console.log(`\n== sim ${minutes}m party=${party.join(',')} seed=${process.argv[4] ?? 1}${GEARUP ? ' +gear' : ''} (${((performance.now() - t0) / 1000).toFixed(1)}s)`);
+console.log(`\n== sim ${ran}m party=${party.join(',')} seed=${process.argv[4] ?? 1}${GEARUP ? ' +gear' : ''}${STAY ? ' stay=' + STAY : ''} (${((performance.now() - t0) / 1000).toFixed(1)}s)`);
+console.log(`party min level at: ${LV_MARKS.filter((L) => lvAt[L] !== undefined).map((L) => `Lv${L} ${(lvAt[L] / 60).toFixed(1)}h`).join(' · ')}`);
+if (STAY) {
+  const zs = zoneStat[STAY];
+  const expH = Math.round((expByZone[STAY] ?? 0) / Math.max(0.01, (zs?.min ?? 0) / 60));
+  console.log(`stay ${STAY}: Lv ${STAY_LV} at ${lvAt[STAY_LV] !== undefined ? lvAt[STAY_LV] + 'm' : 'not reached'} · exp/h ${expH} · kills ${zs?.kills ?? 0} · wipes ${zs?.deaths ?? 0}`);
+}
 console.log(`final: ${s.heroes.map((h) => `${CLASSES[h.cls].name} ${h.baseLv}/${h.jobLv}`).join(', ')}  deaths ${s.totals.deaths}  zeny ${s.zeny}  cards ${s.totals.cards}`);
 console.log(`2nd job at: ${secondJobAt.map((m) => (m / 60).toFixed(1) + 'h').join(', ') || '-'}`);
 console.log('milestones:\n' + miles.join('\n'));
@@ -462,6 +500,18 @@ for (const z of ZONES) {
   if (!zs) continue;
   const p = s.progress[z.id];
   console.log(`  ${z.id.padEnd(12)} @${String(zs.first).padStart(5)}m Lv${String(zs.minLv).padStart(3)} | ${(zs.min / 60).toFixed(1).padStart(5)}h ${String(zs.kills).padStart(6)} ${String(Math.round(zs.kills / Math.max(0.01, zs.min / 60))).padStart(5)}/h ${String(zs.deaths).padStart(3)}d | ${p.bossKills}/${p.mvpKills} | ${String(Math.round((expByZone[z.id] ?? 0) / Math.max(0.01, zs.min / 60))).padStart(8)} ${String(cardsByZone[z.id] ?? 0).padStart(3)} ${String(Math.round((potByZone[z.id] ?? 0) / Math.max(0.01, zs.min / 60))).padStart(6)}`);
+}
+{
+  // hours per region and first arrival (town and travel excluded)
+  const reg = new Map<string, { h: number; first: number }>();
+  for (const z of ZONES) {
+    const zs = zoneStat[z.id];
+    if (!zs || z.id === 'town') continue;
+    const r = reg.get(z.region ?? z.id) ?? { h: 0, first: Infinity };
+    r.h += zs.min / 60; r.first = Math.min(r.first, zs.first);
+    reg.set(z.region ?? z.id, r);
+  }
+  console.log('regions: ' + [...reg].map(([k, r]) => `${k.replace(/ 지방$/, '')} ${r.h.toFixed(1)}h(@${(r.first / 60).toFixed(1)}h)`).join(' '));
 }
 console.log(`zeny: ${zenyAt.join(' ')}  | etc sold ${earned.etc}, equips sold ${earned.sell}, shop ${spent.shop}, refine ${spent.refine}, pots ${spent.pots}`);
 console.log('cards: ' + Object.entries(cardsFound).map(([k, v]) => `${k}${v > 1 ? '×' + v : ''}`).join(' '));

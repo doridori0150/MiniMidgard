@@ -3,7 +3,7 @@ import { STAT_KEYS, QUICK_SLOTS } from './types.ts';
 import { CLASSES, FIRST_JOBS, SECOND_JOB_OF, SECOND_JOB_LV, lineage } from './data/classes.ts';
 import { SKILLS } from './data/skills.ts';
 import { ITEMS } from './data/items.ts';
-import { ZONES, type ZoneDef, type GateNeed } from './data/zones.ts';
+import { ZONES, openers, type ZoneDef, type GateNeed } from './data/zones.ts';
 import { MONSTERS } from './data/monsters.ts';
 import { START_STAT_POINTS, statCost } from './exp.ts';
 import { ARMOR_SAFE, WEAPON_SAFE, partyPerks } from './stats.ts';
@@ -94,12 +94,17 @@ export function newHero(s: GameState, name: string, look: Look): Hero {
   };
 }
 
+/** town + every beginner field that is open from the start (content v0.4: one per first-job home region) */
+export function startZones(): string[] {
+  return ['town', ...ZONES.filter((z) => z.start).map((z) => z.id)];
+}
+
 export function newGame(name: string, look: Look): GameState {
   const s: GameState = {
     v: 1, created: Date.now(), lastSave: Date.now(),
     heroes: [], partySlots: 1, active: 0,
     zeny: 500, stacks: { u_red: 30 }, equips: [], nextUid: 1, nextHeroId: 1,
-    zone: 'meadow', unlocked: ['town', 'meadow'], progress: {}, book: {},
+    zone: 'meadow', unlocked: startZones(), progress: {}, book: {},
     settings: { bgm: 0.5, sfx: 0.8, muted: false, autoSellEtc: false, autoBoss: false, showDamage: true, lowFx: false },
     totals: { kills: 0, cards: 0, refines: 0, breaks: 0, deaths: 0, playMs: 0 },
     rate: { zone: 'meadow', kills: 0, ms: 0, exp: 0, jexp: 0, zeny: 0, deaths: 0 },
@@ -132,10 +137,12 @@ export function load(): GameState | null {
     for (const z of ZONES) s.progress[z.id] ??= { kills: 0, bossGauge: 0, mvpGauge: 0, bossKills: 0, mvpKills: 0 };
     s.settings.autoBoss ??= false;
     s.orders ??= defaultOrders();
-    // content v0.3 split regions into several maps: open any map whose gate-keeper boss this save already beat
+    // content v0.4: every home region's beginner field is open from the start (old saves keep whatever they had, forest too)
+    for (const id of startZones()) if (!s.unlocked.includes(id)) s.unlocked.push(id);
+    // content v0.3/v0.4 added maps behind bosses: open any map whose gate-keeper boss (any of its openers) this save already beat
     for (const z of ZONES) {
-      if (z.gate || !z.unlockBy || s.unlocked.includes(z.id)) continue;
-      if ((s.progress[z.unlockBy]?.bossKills ?? 0) > 0) s.unlocked.push(z.id);
+      if (z.gate || s.unlocked.includes(z.id)) continue;
+      if (openers(z).some((o) => (s.progress[o]?.bossKills ?? 0) > 0)) s.unlocked.push(z.id);
     }
     for (const h of s.heroes) { h.tactics ??= defaultTactics(h.cls); h.tactics.role ??= 'auto'; }
     if (!s.quick) {
@@ -576,6 +583,7 @@ export function needMet(s: GameState, n: GateNeed, now = new Date()): boolean {
     case 'card': return !!s.book[n.mob]?.card;
     case 'level': return Math.max(...s.heroes.map((h) => h.baseLv)) >= n.lv;
     case 'job': return s.heroes.some((h) => CLASSES[h.cls].tier >= n.tier);
+    case 'equip': return s.heroes.some((h) => Object.values(h.equip).some((uid) => s.equips.find((e) => e.uid === uid)?.id === n.id));
     case 'hours': return inHours(n, now);
   }
 }
@@ -636,6 +644,7 @@ export function gateLines(s: GameState, z: ZoneDef, now = new Date()): { text: s
       case 'card': return { ok, text: `${seen(n.mob) ? MONSTERS[n.mob].name : '???'} 카드 발견` };
       case 'level': return { ok, text: `파티 최고 레벨 ${n.lv} 이상` };
       case 'job': return { ok, text: n.tier === 2 ? '2차 전직한 동료' : '전직한 동료' };
+      case 'equip': return { ok, text: `${ITEMS[n.id].name}을(를) 몸에 지닌 동료` };
       case 'hours': return { ok, text: `${hoursText(n)}에만 열림` };
     }
   });
