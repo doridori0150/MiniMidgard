@@ -855,3 +855,10 @@ input { font-family: inherit; }
 .zc-spec > span { font-family: 'Galmuri9'; font-size: 10px; margin-right: 2px; }
 .zc-spec .spec { display: inline-flex; align-items: center; gap: 3px; padding: 2px 7px 2px 3px; border-radius: 12px; border: 1px solid var(--line2); background: #fff; cursor: pointer; font: inherit; font-size: 11px; }
 .zc-spec .spec img { width: 18px; height: 18px; }
+.stat-val.bump { animation: statBump 0.55s ease-out; }
+@keyframes statBump { 0% { transform: scale(1.35); color: #e08a00; } 100% { transform: none; } }
+.stat-got { font-size: 10.5px; color: #1f7a3a; animation: annIn 0.25s both; }
+/* pressed / focus states everywhere (quality guide: inputs must visibly register) */
+.nav button:active { background: rgba(255,255,255,0.14); }
+button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+.btn:hover:not(:disabled) { filter: brightness(1.05); }

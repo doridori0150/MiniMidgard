@@ -50,7 +50,7 @@ function preview(cur: D, next: D): string {
   return out.slice(0, 3).map(([l, v, dec]) => `${l} ${v > 0 ? '+' : ''}${dec ? v.toFixed(dec) : v}${l === '시전속도' ? '%' : ''}`).join(' · ');
 }
 
-function StatLine(props: { k: StatKey; base: number; plus: number; pts: number; step: number; prev: string; onUp: () => void; onHelp: () => void }) {
+function StatLine(props: { k: StatKey; base: number; plus: number; pts: number; step: number; prev: string; bump: { text: string; n: number } | null; onUp: () => void; onHelp: () => void }) {
   const cost = statCost(props.base);
   const hold = useHold(props.onUp);
   const m = STAT_META[props.k];
@@ -61,7 +61,8 @@ function StatLine(props: { k: StatKey; base: number; plus: number; pts: number; 
         <b>{STAT_KO[props.k]}</b><small>{m.ko}</small>
       </button>
       <div class="stat-mid">
-        <div class="stat-val">{props.base}{props.plus ? <em>+{props.plus}</em> : null}</div>
+        <div class={'stat-val' + (props.bump ? ' bump' : '')} key={props.bump?.n}>{props.base}{props.plus ? <em>+{props.plus}</em> : null}</div>
+        {props.bump && <div class="stat-got" key={'g' + props.bump.n}>✓ {props.bump.text}</div>}
         <div class="stat-prev">{props.prev ? <>▶ {props.prev}</> : <span class="muted">—</span>}</div>
       </div>
       <div class="stat-cost"><small>필요</small><b>{cost}</b></div>
@@ -77,18 +78,22 @@ export function StatusPanel() {
   const d = u?.d ?? computeDerived(g.s, h);
   const [help, setHelp] = useState<StatKey | null>(null);
   const [step, setStep] = useState(1);
+  // the stat just raised flashes and shows what it bought, so the press reads as a result
+  const [bump, setBump] = useState<{ k: StatKey; text: string; n: number } | null>(null);
   const cls = CLASSES[h.cls];
   const jNext = jobExpNext(cls.tier, h.jobLv, cls.jobMax);
   const atkA = d.statusAtk, atkB = d.watk + d.refineAtk + d.ammoAtk + d.bonusAtk;
   const aps = 1000 / d.delay;
   const buffs = u?.buffs ?? [];
   const base = computeDerived(g.s, h, buffs, g.world.time);
+  // preview what the selected step (+1/+5/+10) would actually buy with the points on hand
   const prevOf = (k: StatKey) => {
-    const saved = h.stats[k];
-    h.stats[k] = saved + 1;
-    const nx = computeDerived(g.s, h, buffs, g.world.time);
-    h.stats[k] = saved;
-    return preview(base, nx);
+    const copy = { ...h, stats: { ...h.stats } };
+    const n = raiseStat(copy, k, step);
+    // short on points: still show what the next point buys, so the player knows what they are saving for
+    if (!n) { if (h.stats[k] >= 99) return ''; copy.stats[k]++; }
+    const nx = computeDerived(g.s, copy, buffs, g.world.time);
+    return (step > 1 ? `+${n}: ` : '') + preview(base, nx);
   };
   const hpNow = Math.floor(u?.hp ?? d.maxHp), spNow = Math.floor(u?.sp ?? d.maxSp);
   const tile = (label: string, value: preact.ComponentChildren, sub?: string) => (
@@ -134,7 +139,15 @@ export function StatusPanel() {
         <div class="stat-list">
           {STAT_KEYS.map((k) => (
             <StatLine k={k} base={h.stats[k]} plus={d.plus[k]} pts={h.statPts} step={step} prev={prevOf(k)}
-              onUp={() => { if (raiseStat(h, k, step)) g.commit('click'); }} onHelp={() => setHelp(help === k ? null : k)} />
+              bump={bump?.k === k ? bump : null}
+              onUp={() => {
+                const before = computeDerived(g.s, h, buffs, g.world.time);
+                const n = raiseStat(h, k, step);
+                if (!n) return;
+                const after = computeDerived(g.s, h, buffs, g.world.time);
+                setBump({ k, text: preview(before, after), n: (bump?.k === k ? bump.n : 0) + 1 });
+                g.commit('joblevel');
+              }} onHelp={() => setHelp(help === k ? null : k)} />
           ))}
         </div>
         {help ? <div class="hint st-help"><b>{STAT_KO[help]} ({STAT_META[help].ko})</b> — {STAT_HELP[help]}</div>
