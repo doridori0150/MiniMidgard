@@ -1,9 +1,10 @@
 // Field renderer: camera, y-sorted sprites, skill effects, damage numbers, lighting.
 import type { World, FxEvent, HeroUnit, MobUnit, GroundItem } from '../game/world.ts';
 import type { Element, Hero, GameState } from '../game/types.ts';
-import { buildZoneArt, drawProp, type ZoneArt, type Prop } from './bg.ts';
+import { buildZoneArt, drawProp, kitPropBox, kitVersion, type ZoneArt, type Prop } from './bg.ts';
+import { inked } from './ink.ts';
 import { drawHero, drawFalcon, type HeroLookDraw } from './hero.ts';
-import { drawMob, mobHeight } from './monster.ts';
+import { drawMob, mobHeight, mobShadow } from './monster.ts';
 import { drawNumber, type DmgNum, warmFont } from './dmgfont.ts';
 import { ELEMENT_COLOR } from '../game/data/elements.ts';
 import { ITEMS } from '../game/data/items.ts';
@@ -116,20 +117,28 @@ export class FieldRenderer {
     canvas.addEventListener('pointerdown', (e) => this.onPointer(e));
   }
 
+  /** 도트 모드: render at half a CSS pixel per canvas pixel and let the browser upscale without smoothing */
+  pixelMode = false;
+
   resize() {
     const r = this.canvas.getBoundingClientRect();
-    this.dpr = Math.min(2.5, window.devicePixelRatio || 1);
+    this.dpr = this.pixelMode ? 0.5 : Math.min(2.5, window.devicePixelRatio || 1);
+    this.canvas.style.imageRendering = this.pixelMode ? 'pixelated' : '';
     this.cssW = r.width; this.cssH = r.height;
     this.canvas.width = Math.round(r.width * this.dpr);
     this.canvas.height = Math.round(r.height * this.dpr);
     this.cam.zoom = Math.max(1, Math.min(2.1, Math.min(r.width / 330, r.height / 300)));
   }
 
+  private artKit = -1;
   private ensureArt() {
     const z = this.world.zone;
-    if (this.artZone !== z.id) {
+    if (this.artZone !== z.id || this.artKit !== kitVersion()) {
+      const sameZone = this.artZone === z.id;
       this.art = buildZoneArt(z, this.dpr >= 1.5);
       this.artZone = z.id;
+      this.artKit = kitVersion();
+      if (sameZone) return; // painted kit arrived: swap the art, keep units/effects/camera
       this.particles = []; this.effects = []; this.nums = []; this.shots = []; this.casts.clear(); this.bubbles = [];
       this.smooth.clear(); this.dropVis.clear();
       const c = this.world.center();
@@ -740,7 +749,8 @@ export class FieldRenderer {
       const tall = p.kind === 'tree' || p.kind === 'pine' || p.kind === 'house' || p.kind === 'stalag' || p.kind === 'pillar' || p.kind === 'snowpine' || p.kind === 'palm' || p.kind === 'ruin';
       let fade = false;
       if (tall) {
-        const r = (p.kind === 'house' ? 56 : 30) * p.s, hgt = (p.kind === 'pine' ? 100 : p.kind === 'house' ? 100 : 80) * p.s;
+        const kb = kitPropBox(p);
+        const r = kb ? kb.r : (p.kind === 'house' ? 56 : 30) * p.s, hgt = kb ? kb.h : (p.kind === 'pine' ? 100 : p.kind === 'house' ? 100 : 80) * p.s;
         for (const u of units) {
           const sm = this.smooth.get(u.uid);
           if (sm && Math.abs(sm.x - p.x) < r && sm.y < p.y && sm.y > p.y - hgt) { fade = true; break; }
@@ -840,7 +850,11 @@ export class FieldRenderer {
     ctx.save();
     ctx.translate(sm.x, sm.y);
     const dur = h.state === 'attack' ? Math.min(420, Math.max(220, h.d.delay * 0.8)) : undefined;
-    drawHero(ctx, look, { state: flash > 0.5 && (state === 'idle' || state === 'ready') ? 'hurt' : state, t: state === 'idle' || state === 'ready' || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing }, { flash, alpha: state === 'dead' ? 0.85 : 1 });
+    const pose = { state: flash > 0.5 && (state === 'idle' || state === 'ready') ? 'hurt' : state, t: state === 'idle' || state === 'ready' || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing };
+    ctx.fillStyle = 'rgba(20,30,20,0.28)';
+    ctx.beginPath(); ctx.ellipse(0, 0, state === 'dead' ? 17 : 11, 3.8, 0, 0, Math.PI * 2); ctx.fill();
+    if (this.lowFx) drawHero(ctx, look, pose, { flash, alpha: state === 'dead' ? 0.85 : 1, shadow: false });
+    else inked(ctx, 120, 120, 60, 106, 1.25, (c) => drawHero(c, look, pose, { flash, alpha: state === 'dead' ? 0.85 : 1, shadow: false }));
     if (state !== 'dead' && h.buffs.some((b) => b.shield && b.shield > 0 && b.until > w.time)) {
       ctx.save(); ctx.globalCompositeOperation = 'lighter';
       ctx.globalAlpha = 0.28 + Math.sin(now / 300) * 0.08;
@@ -867,7 +881,13 @@ export class FieldRenderer {
       ctx.drawImage(glow(col), -34 * m.m.scale / 1.6, -10, 68 * m.m.scale / 1.6, 20);
       ctx.restore();
     }
-    drawMob(ctx, m.m.sprite, m.m.palette, { state: m.state === 'spawn' ? 'idle' : m.state, t, facing: m.facing, hurt, frozen: m.frozenUntil > w.time, spawn, dead }, m.m.scale);
+    const mpose = { state: m.state === 'spawn' ? 'idle' : m.state, t, facing: m.facing, hurt, frozen: m.frozenUntil > w.time, spawn, dead };
+    if (this.lowFx) drawMob(ctx, m.m.sprite, m.m.palette, mpose, m.m.scale);
+    else {
+      if (!dead) mobShadow(ctx, m.m.sprite, m.m.scale);
+      const bw = 80 * m.m.scale, bh = (mobHeight(m.m.sprite) + 30) * m.m.scale;
+      inked(ctx, bw, bh, bw / 2, bh - 12 * m.m.scale, 1.2, (c) => drawMob(c, m.m.sprite, m.m.palette, mpose, m.m.scale, false, false));
+    }
     if (m.stunUntil > w.time && !dead) {
       const hh = mobHeight(m.m.sprite) * m.m.scale + 6;
       ctx.fillStyle = '#ffe060';
@@ -1085,7 +1105,8 @@ export class FieldRenderer {
       // name tag
       ctx.font = "10px 'Galmuri9', 'Galmuri11', sans-serif";
       ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(0,0,0,0.75)'; ctx.fillStyle = '#ffffff';
-      ctx.strokeText(h.hero.name, x, y + 24); ctx.fillText(h.hero.name, x, y + 24);
+      // half-resolution pixel mode can't hold Korean glyphs; the party rail shows names anyway
+      if (!this.pixelMode) { ctx.strokeText(h.hero.name, x, y + 24); ctx.fillText(h.hero.name, x, y + 24); }
       if (h.state === 'dead' && !w.wipeUntil) {
         const left = Math.max(0, Math.ceil((h.deadUntil - w.time) / 1000));
         ctx.fillStyle = '#ffb0b0'; ctx.strokeText(`부활 ${left}s`, x, y - 30); ctx.fillText(`부활 ${left}s`, x, y - 30);

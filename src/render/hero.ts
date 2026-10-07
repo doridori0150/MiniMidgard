@@ -2,6 +2,7 @@
 // weapon and hair option shows on the character. Origin = feet, facing right (+x).
 import type { ClassId, WeaponType } from '../game/types.ts';
 import { shade, rgba } from './color.ts';
+import { glow as inkGlow } from './ink.ts';
 import { HAIR_COLORS, SKIN_TONES } from '../game/state.ts';
 
 export interface HeroLookDraw {
@@ -255,14 +256,14 @@ export function drawWeapon(ctx: CanvasRenderingContext2D, wtype: WeaponType, col
   const metal = color ?? '#d8dee8';
   const glow = refine >= 7;
   if (glow) {
-    ctx.save();
-    const g = ctx.createRadialGradient(0, 14, 0, 0, 14, 16);
-    const a = 0.25 + 0.15 * Math.sin(t / 180);
-    g.addColorStop(0, refine >= 10 ? `rgba(255,120,220,${a})` : `rgba(140,200,255,${a})`);
-    g.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = g;
-    ctx.fillRect(-16, -2, 32, 34);
-    ctx.restore();
+    inkGlow(ctx, (c) => {
+      const g = c.createRadialGradient(0, 14, 0, 0, 14, 16);
+      const a = 0.25 + 0.15 * Math.sin(t / 180);
+      g.addColorStop(0, refine >= 10 ? `rgba(255,120,220,${a})` : `rgba(140,200,255,${a})`);
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      c.fillStyle = g;
+      c.fillRect(-16, -2, 32, 34);
+    });
   }
   ctx.lineJoin = 'round';
   switch (wtype) {
@@ -295,10 +296,11 @@ export function drawWeapon(ctx: CanvasRenderingContext2D, wtype: WeaponType, col
       ctx.beginPath(); ctx.arc(0, 24, 3.6, 0, Math.PI * 2);
       blob(ctx, orb, shade(orb.startsWith('#') ? orb : '#7ad0ff', -0.45), 0.9);
       ctx.fillStyle = 'rgba(255,255,255,0.85)'; ctx.beginPath(); ctx.arc(-1, 23, 1.1, 0, Math.PI * 2); ctx.fill();
-      ctx.save();
-      const g = ctx.createRadialGradient(0, 24, 0, 0, 24, 9);
-      g.addColorStop(0, rgba(orb.startsWith('#') ? orb : '#7ad0ff', 0.45 + 0.2 * Math.sin(t / 200))); g.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = g; ctx.fillRect(-9, 15, 18, 18); ctx.restore();
+      inkGlow(ctx, (c) => {
+        const g = c.createRadialGradient(0, 24, 0, 0, 24, 9);
+        g.addColorStop(0, rgba(orb.startsWith('#') ? orb : '#7ad0ff', 0.45 + 0.2 * Math.sin(t / 200))); g.addColorStop(1, 'rgba(0,0,0,0)');
+        c.fillStyle = g; c.fillRect(-9, 15, 18, 18);
+      });
       ctx.strokeStyle = '#e0b850'; ctx.lineWidth = 1.2;
       ctx.beginPath(); ctx.arc(0, 24, 5, Math.PI * 0.15, Math.PI * 0.85, true); ctx.stroke();
       break;
@@ -404,19 +406,19 @@ function hairFront(ctx: CanvasRenderingContext2D, style: number, c: string, line
   ctx.bezierCurveTo(-14.5, -50, 13, -52, 13.4, -35);
   switch (style) {
     case 0: // spiky
-      ctx.lineTo(11, -31); ctx.lineTo(8.5, -36); ctx.lineTo(6, -30); ctx.lineTo(3, -37); ctx.lineTo(0, -31); ctx.lineTo(-3, -37); ctx.lineTo(-6, -32); ctx.lineTo(-9, -36); ctx.lineTo(-12, -31);
+      ctx.lineTo(11.5, -32); ctx.lineTo(8.8, -40); ctx.lineTo(6.2, -36.4); ctx.lineTo(3.2, -41); ctx.lineTo(0.2, -36.8); ctx.lineTo(-2.8, -41); ctx.lineTo(-6, -37.4); ctx.lineTo(-9, -40); ctx.lineTo(-12.2, -31.5);
       break;
     case 1: // bob straight cut
-      ctx.lineTo(13.6, -24); ctx.lineTo(10.5, -24); ctx.lineTo(10, -33); ctx.lineTo(-2, -33); ctx.lineTo(-4, -35); ctx.lineTo(-12, -33); ctx.lineTo(-14, -24);
+      ctx.lineTo(13.6, -24); ctx.lineTo(10.6, -24); ctx.lineTo(10.2, -37.6); ctx.lineTo(-2, -37.8); ctx.lineTo(-4, -39.4); ctx.lineTo(-12, -37); ctx.lineTo(-14, -24);
       break;
     case 2: // long, side swept
-      ctx.lineTo(12.6, -26); ctx.lineTo(10, -30); ctx.quadraticCurveTo(5, -33, 2, -37); ctx.quadraticCurveTo(-4, -32, -11, -34); ctx.lineTo(-13.8, -26);
+      ctx.lineTo(12.6, -26); ctx.lineTo(10.4, -31); ctx.quadraticCurveTo(5.4, -36.4, 2, -40.6); ctx.quadraticCurveTo(-4, -36.2, -11, -37.4); ctx.lineTo(-13.8, -26);
       break;
     case 3: case 4: case 7: // neat bangs
-      ctx.lineTo(12, -30); ctx.lineTo(9.5, -34); ctx.lineTo(7, -31); ctx.lineTo(4, -35); ctx.lineTo(1, -31.5); ctx.lineTo(-2.5, -35); ctx.lineTo(-6, -32); ctx.lineTo(-10, -34); ctx.lineTo(-13, -30);
+      ctx.lineTo(12, -31); ctx.lineTo(9.6, -38.4); ctx.lineTo(7, -35.8); ctx.lineTo(4, -39.4); ctx.lineTo(1, -36.2); ctx.lineTo(-2.5, -39.4); ctx.lineTo(-6, -36.4); ctx.lineTo(-10, -38.6); ctx.lineTo(-13, -31);
       break;
     case 5: // fluffy messy
-      ctx.lineTo(15, -30); ctx.lineTo(11, -31); ctx.lineTo(10, -35); ctx.lineTo(6, -31); ctx.lineTo(4, -36); ctx.lineTo(0, -32); ctx.lineTo(-3, -36.5); ctx.lineTo(-7, -32); ctx.lineTo(-10, -35); ctx.lineTo(-15, -29);
+      ctx.lineTo(15, -30); ctx.lineTo(11.2, -32); ctx.lineTo(10, -39); ctx.lineTo(6.4, -35.8); ctx.lineTo(4, -40.4); ctx.lineTo(0.2, -36.6); ctx.lineTo(-3, -41); ctx.lineTo(-7, -36.8); ctx.lineTo(-10, -39.4); ctx.lineTo(-15, -29);
       break;
     case 6: // long bang covering
       ctx.lineTo(12.4, -28); ctx.quadraticCurveTo(10, -30, 9, -34); ctx.quadraticCurveTo(2, -31, -2, -27); ctx.lineTo(-5, -34); ctx.lineTo(-10, -33); ctx.lineTo(-13.6, -27);
@@ -429,7 +431,7 @@ function hairFront(ctx: CanvasRenderingContext2D, style: number, c: string, line
   ctx.lineWidth = 1.6;
   ctx.lineCap = 'round';
   ctx.beginPath();
-  ctx.arc(-1, -40, 6.5, Math.PI * 1.12, Math.PI * 1.42);
+  ctx.arc(-1, -43, 5.6, Math.PI * 1.12, Math.PI * 1.42);
   ctx.stroke();
   if (style === 0) {
     // crown spikes
@@ -468,16 +470,17 @@ function face(ctx: CanvasRenderingContext2D, gender: 'm' | 'f', state: string, t
       ctx.beginPath(); ctx.moveTo(ex - w, ey + 0.5); ctx.quadraticCurveTo(ex, ey + 1.8, ex + w, ey + 0.5); ctx.stroke();
       continue;
     }
-    const h = gender === 'f' ? 3.3 : 2.9;
-    ctx.fillStyle = '#2e2236';
-    ctx.beginPath(); ctx.ellipse(ex, ey, w, h, 0, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = gender === 'f' ? '#7a4ab0' : '#3a6a9a';
-    ctx.beginPath(); ctx.ellipse(ex, ey + 0.9, w * 0.75, h * 0.55, 0, 0, Math.PI * 2); ctx.fill();
+    // tall dark-navy ovals with a bright lower iris and one highlight (cartoon, not glossy anime)
+    const h = gender === 'f' ? 3.5 : 3.2;
+    ctx.fillStyle = '#1c2448';
+    ctx.beginPath(); ctx.ellipse(ex, ey, w * 0.92, h, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = gender === 'f' ? '#3d78e0' : '#2f66c8';
+    ctx.beginPath(); ctx.ellipse(ex, ey + h * 0.38, w * 0.62, h * 0.42, 0, 0, Math.PI * 2); ctx.fill();
     ctx.fillStyle = '#fff';
-    ctx.beginPath(); ctx.arc(ex + w * 0.3, ey - h * 0.35, 0.95, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(ex + w * 0.28, ey - h * 0.38, 0.8, 1.05, 0, 0, Math.PI * 2); ctx.fill();
     if (gender === 'f') {
-      ctx.strokeStyle = '#2e2236'; ctx.lineWidth = 0.9;
-      ctx.beginPath(); ctx.moveTo(ex - w - 0.4, ey - h + 0.6); ctx.lineTo(ex + w + 0.8, ey - h - 0.2); ctx.stroke();
+      ctx.strokeStyle = '#1c2448'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(ex - w - 0.2, ey - h + 0.9); ctx.lineTo(ex + w + 0.7, ey - h + 0.1); ctx.stroke();
     }
   }
   // mouth
@@ -487,8 +490,23 @@ function face(ctx: CanvasRenderingContext2D, gender: 'm' | 'f', state: string, t
   else if (state === 'attack' || state === 'cast') { ctx.moveTo(3.6, -27); ctx.quadraticCurveTo(5, -25.4, 6.4, -27); ctx.stroke(); }
   else { ctx.moveTo(4, -26.8); ctx.quadraticCurveTo(5, -26, 6, -26.8); ctx.stroke(); }
   // blush
-  ctx.fillStyle = 'rgba(255,120,130,0.28)';
+  ctx.fillStyle = 'rgba(255,120,130,0.18)';
   ctx.beginPath(); ctx.ellipse(8.8, -28.6, 2.1, 1.1, 0, 0, Math.PI * 2); ctx.ellipse(-2.8, -28.6, 1.6, 1, 0, 0, Math.PI * 2); ctx.fill();
+}
+
+/** angled brows drawn over the fringe (manga convention) — they carry the expression */
+function brows(ctx: CanvasRenderingContext2D, gender: 'm' | 'f', state: string, eyeHidden: boolean, line: string) {
+  if (state === 'dead' || state === 'sit') return;
+  const by = -36.4;
+  const tense = state === 'attack' || state === 'cast' || state === 'ready' || state === 'hurt';
+  ctx.strokeStyle = line; ctx.lineCap = 'round';
+  ctx.lineWidth = gender === 'm' ? 1.5 : 1.1;
+  // inner ends dip toward the nose: determined; a little more when fighting
+  const dip = (gender === 'm' ? 1.3 : 0.7) + (tense ? 0.6 : 0);
+  ctx.beginPath();
+  ctx.moveTo(4.4, by + dip); ctx.lineTo(9.4, by - 0.4);
+  if (!eyeHidden) { ctx.moveTo(1.6, by + dip); ctx.lineTo(-2.6, by - 0.2); }
+  ctx.stroke();
 }
 
 // ───────── headgears (drawn in head space; head center ~ (0.5,-35))
@@ -708,37 +726,44 @@ export function drawHeadgear(ctx: CanvasRenderingContext2D, look: string, t: num
 
 // shared with the jelly-hat
 export function drawJellyBody(ctx: CanvasRenderingContext2D, pal: string[], s: number, t: number, sleepy = false) {
-  const [main, dark, light] = pal;
-  ctx.beginPath();
-  ctx.moveTo(-13 * s, 0);
-  ctx.bezierCurveTo(-15 * s, -9 * s, -9 * s, -19 * s, 0, -19 * s);
-  ctx.bezierCurveTo(9 * s, -19 * s, 15 * s, -9 * s, 13 * s, 0);
-  ctx.quadraticCurveTo(0, 2.6 * s, -13 * s, 0);
-  ctx.closePath();
-  const g = ctx.createLinearGradient(0, -19 * s, 0, 2 * s);
-  g.addColorStop(0, light); g.addColorStop(0.35, main); g.addColorStop(1, dark);
-  ctx.fillStyle = g;
-  ctx.fill();
-  ctx.strokeStyle = shade(dark, -0.35);
-  ctx.lineWidth = 1.1;
-  ctx.stroke();
-  ctx.fillStyle = 'rgba(255,255,255,0.75)';
-  ctx.beginPath(); ctx.ellipse(-5 * s, -13 * s, 3.2 * s, 1.8 * s, -0.5, 0, Math.PI * 2); ctx.fill();
-  ctx.beginPath(); ctx.arc(-1.4 * s, -15.4 * s, 0.9 * s, 0, Math.PI * 2); ctx.fill();
-  // face
+  const [main, dark] = pal;
+  const shadeTone = shade(main, -0.16);
+  const line = shade(dark, -0.45);
+  // little feet
+  ctx.fillStyle = shadeTone; ctx.strokeStyle = line; ctx.lineWidth = 1;
+  for (const fx of [-7.4, 7.4]) { ctx.beginPath(); ctx.ellipse(fx * s, -0.6 * s, 3.6 * s, 2.2 * s, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+  // body with a curled tip on top
+  const body = () => {
+    ctx.beginPath();
+    ctx.moveTo(-13 * s, -1 * s);
+    ctx.bezierCurveTo(-15 * s, -10 * s, -9 * s, -19 * s, 0, -19 * s);
+    ctx.quadraticCurveTo(2.6 * s, -19.2 * s, 3.6 * s, -21.4 * s);
+    ctx.quadraticCurveTo(5.8 * s, -25.2 * s, 8.4 * s, -23.6 * s);
+    ctx.quadraticCurveTo(5.6 * s, -23.4 * s, 5.8 * s, -19.4 * s);
+    ctx.bezierCurveTo(12 * s, -17 * s, 15 * s, -9 * s, 13 * s, -1 * s);
+    ctx.quadraticCurveTo(0, 1.8 * s, -13 * s, -1 * s);
+    ctx.closePath();
+  };
+  body(); ctx.fillStyle = main; ctx.fill();
+  // one hard shadow tone along the bottom
+  ctx.save(); body(); ctx.clip();
+  ctx.fillStyle = shadeTone; ctx.beginPath(); ctx.ellipse(1 * s, 2 * s, 17 * s, 7.4 * s, 0, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+  body(); ctx.strokeStyle = line; ctx.lineWidth = 1.1; ctx.stroke();
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.beginPath(); ctx.ellipse(-6 * s, -13.4 * s, 2.6 * s, 1.5 * s, -0.6, 0, Math.PI * 2); ctx.fill();
+  // face: dot eyes and a small mouth
   ctx.fillStyle = '#2a1a22';
   if (sleepy) {
     ctx.strokeStyle = '#2a1a22'; ctx.lineWidth = 0.9;
-    ctx.beginPath(); ctx.moveTo(-5 * s, -8 * s); ctx.lineTo(-2 * s, -8 * s); ctx.moveTo(3 * s, -8 * s); ctx.lineTo(6 * s, -8 * s); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-4.6 * s, -9 * s); ctx.lineTo(-1.8 * s, -9 * s); ctx.moveTo(3.4 * s, -9 * s); ctx.lineTo(6.2 * s, -9 * s); ctx.stroke();
   } else {
-    ctx.beginPath(); ctx.ellipse(-3.4 * s, -8.6 * s, 1.3 * s, 2 * s, 0, 0, Math.PI * 2); ctx.ellipse(4.4 * s, -8.6 * s, 1.3 * s, 2 * s, 0, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = '#fff';
-    ctx.beginPath(); ctx.arc(-3 * s, -9.4 * s, 0.5 * s, 0, Math.PI * 2); ctx.arc(4.8 * s, -9.4 * s, 0.5 * s, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(-3 * s, -9.2 * s, 1.15 * s, 1.75 * s, 0, 0, Math.PI * 2); ctx.ellipse(4.8 * s, -9.2 * s, 1.15 * s, 1.75 * s, 0, 0, Math.PI * 2); ctx.fill();
   }
-  ctx.strokeStyle = '#6a2a3a'; ctx.lineWidth = 0.9;
-  ctx.beginPath(); ctx.moveTo(-0.6 * s, -5.6 * s); ctx.quadraticCurveTo(0.4 * s, -4.4 * s, 1.4 * s, -5.6 * s); ctx.quadraticCurveTo(2.4 * s, -4.4 * s, 3.2 * s, -5.6 * s); ctx.stroke();
-  ctx.fillStyle = 'rgba(255,120,150,0.35)';
-  ctx.beginPath(); ctx.ellipse(-6.6 * s, -5.8 * s, 1.8 * s, 1 * s, 0, 0, Math.PI * 2); ctx.ellipse(7.6 * s, -5.8 * s, 1.8 * s, 1 * s, 0, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = '#5a2232'; ctx.lineWidth = 0.9; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(0.2 * s, -5.6 * s); ctx.quadraticCurveTo(0.9 * s, -4.9 * s, 1.6 * s, -5.6 * s); ctx.stroke();
+  ctx.fillStyle = 'rgba(255,110,140,0.3)';
+  ctx.beginPath(); ctx.ellipse(-6.4 * s, -6 * s, 1.7 * s, 0.9 * s, 0, 0, Math.PI * 2); ctx.ellipse(8 * s, -6 * s, 1.7 * s, 0.9 * s, 0, 0, Math.PI * 2); ctx.fill();
   void t;
 }
 
@@ -1001,6 +1026,7 @@ export function drawHero(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: P
   // headgear: low under hair, mid, then front hair, then top
   if (L.headLow) drawHeadgear(ctx, L.headLow, t, hc);
   hairFront(ctx, L.hair, hc, hLine, hHi);
+  brows(ctx, L.gender, state, L.hair === 6, shade(hc, -0.6));
   if (L.headMid) drawHeadgear(ctx, L.headMid, t, hc);
   if (L.headTop) drawHeadgear(ctx, L.headTop, t, hc);
 

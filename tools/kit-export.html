@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8" /><title>Kit export (dev)</title></head>
+<body>
+<!-- Dev tool: cuts a Codex background kit (2 ground quadrants on top, 4×2 props on a magenta key below)
+     into clean PNG data URLs, printed as JSON into #out. Run headless with --dump-dom and decode the JSON.
+     usage: /tools/kit-export.html?src=/docs/art/concepts/round2/bgkit_A.png -->
+<pre id="out">pending</pre>
+<script type="module">
+  const src = new URLSearchParams(location.search).get('src');
+  const PROPS = ['tree', 'pine', 'bush', 'rock', 'flowers', 'stump', 'fence', 'sign'];
+  const TILE = 384, PROP_MAX = 320;
+
+  /** flood-fill the key colour from the rect border, de-fringe magenta edges, crop to content */
+  function cutRect(img, sx, sy, cw, ch) {
+    cw = Math.floor(cw); ch = Math.floor(ch);
+    const c = document.createElement('canvas'); c.width = cw; c.height = ch;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(img, sx, sy, cw, ch, 0, 0, cw, ch);
+    const im = ctx.getImageData(0, 0, cw, ch), d = im.data;
+    const key = [d[0], d[1], d[2]];
+    const near = (i) => Math.abs(d[i] - key[0]) + Math.abs(d[i + 1] - key[1]) + Math.abs(d[i + 2] - key[2]) < 110;
+    const seen = new Uint8Array(cw * ch), stack = [];
+    for (let x = 0; x < cw; x++) stack.push(x, (ch - 1) * cw + x);
+    for (let y = 0; y < ch; y++) stack.push(y * cw, y * cw + cw - 1);
+    while (stack.length) {
+      const p = stack.pop();
+      if (seen[p]) continue; seen[p] = 1;
+      if (!near(p * 4)) continue;
+      d[p * 4 + 3] = 0;
+      const x = p % cw, y = (p / cw) | 0;
+      if (x > 0) stack.push(p - 1); if (x < cw - 1) stack.push(p + 1); if (y > 0) stack.push(p - cw); if (y < ch - 1) stack.push(p + cw);
+    }
+    for (let p = 0; p < cw * ch; p++) {
+      const i = p * 4;
+      if (!d[i + 3]) continue;
+      const r = d[i], g = d[i + 1], b = d[i + 2], m = Math.min(r, b) - g;
+      if (m > 70) { d[i + 3] = 0; continue; }
+      if (m > 25) { const k = (m - 25) / 45; d[i] = Math.round(r - (r - g) * k * 0.8); d[i + 2] = Math.round(b - (b - g) * k * 0.8); d[i + 3] = Math.round(d[i + 3] * (1 - k * 0.7)); }
+    }
+    ctx.putImageData(im, 0, 0);
+    let x0 = cw, y0 = ch, x1 = 0, y1 = 0;
+    for (let y = 0; y < ch; y++) for (let x = 0; x < cw; x++) if (d[(y * cw + x) * 4 + 3] > 40) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+    const w = x1 - x0 + 1, h = y1 - y0 + 1, k = Math.min(1, PROP_MAX / Math.max(w, h));
+    const o = document.createElement('canvas'); o.width = Math.round(w * k); o.height = Math.round(h * k);
+    const ox = o.getContext('2d'); ox.imageSmoothingQuality = 'high';
+    ox.drawImage(c, x0, y0, w, h, 0, 0, o.width, o.height);
+    return o;
+  }
+  /** a 2×2 mirrored block of the quadrant: tiles without visible seams */
+  function tile(img, sx, sy, sw, sh) {
+    const c = document.createElement('canvas'); c.width = TILE * 2; c.height = TILE * 2;
+    const x = c.getContext('2d'); x.imageSmoothingQuality = 'high';
+    const inset = sw * 0.02; // skip any border the generator painted around the quadrant
+    for (const [fx, fy] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) {
+      x.setTransform(fx, 0, 0, fy, fx < 0 ? TILE * 2 : 0, fy < 0 ? TILE * 2 : 0);
+      x.drawImage(img, sx + inset, sy + inset, sw - inset * 2, sh - inset * 2, 0, 0, TILE, TILE);
+    }
+    return c;
+  }
+  const img = new Image();
+  img.onload = () => {
+    const q = img.width / 2, out = {};
+    out.grass = tile(img, 0, 0, q, q).toDataURL('image/png');
+    out.dirt = tile(img, q, 0, q, q).toDataURL('image/png');
+    PROPS.forEach((name, i) => {
+      out[name] = cutRect(img, (i % 4) * img.width / 4, img.height / 2 + Math.floor(i / 4) * img.height / 4, img.width / 4, img.height / 4).toDataURL('image/png');
+    });
+    document.getElementById('out').textContent = JSON.stringify(out);
+    document.title = 'done';
+  };
+  img.onerror = () => { document.getElementById('out').textContent = 'error'; };
+  img.src = src;
+</script>
+</body>
+</html>

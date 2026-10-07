@@ -1,5 +1,6 @@
 // Code-drawn monsters. Origin = feet, facing right. `s` = monster scale.
 import { shade, rgba } from './color.ts';
+import { glow as inkGlow } from './ink.ts';
 import { drawJellyBody } from './hero.ts';
 
 export interface MobPose { state: string; t: number; facing: 1 | -1; hurt: number; frozen: boolean; spawn: number; dead: number }
@@ -35,17 +36,21 @@ export function mobHeight(sprite: string): number {
   return 30;
 }
 
-export function drawMob(ctx: CanvasRenderingContext2D, sprite: string, pal: string[], p: MobPose, s: number, crown = false) {
+/** ground shadow under a monster (drawn separately when the sprite gets an ink contour) */
+export function mobShadow(ctx: CanvasRenderingContext2D, sprite: string, s: number) {
+  const flying = sprite === 'bee' || sprite === 'bat' || sprite === 'wisp' || sprite === 'wraith';
+  ctx.fillStyle = 'rgba(20,20,30,0.26)';
+  const shw = (sprite === 'wolf' || sprite === 'scorpion' ? 16 : sprite === 'treant' || sprite === 'golem' || sprite === 'yeti' ? 19 : sprite === 'worm' ? 13 : 11) * s;
+  ctx.beginPath(); ctx.ellipse(0, 0, shw * (flying ? 0.7 : 1), 3.6 * s * (flying ? 0.7 : 1), 0, 0, Math.PI * 2); ctx.fill();
+}
+
+export function drawMob(ctx: CanvasRenderingContext2D, sprite: string, pal: string[], p: MobPose, s: number, crown = false, shadow = true) {
   const t = p.t;
   const moving = p.state === 'walk';
   const attacking = p.state === 'attack';
   const casting = p.state === 'cast';
   ctx.save();
-  // shadow
-  const flying = sprite === 'bee' || sprite === 'bat' || sprite === 'wisp' || sprite === 'wraith';
-  ctx.fillStyle = 'rgba(20,20,30,0.26)';
-  const shw = (sprite === 'wolf' || sprite === 'scorpion' ? 16 : sprite === 'treant' || sprite === 'golem' || sprite === 'yeti' ? 19 : sprite === 'worm' ? 13 : 11) * s;
-  ctx.beginPath(); ctx.ellipse(0, 0, shw * (flying ? 0.7 : 1), 3.6 * s * (flying ? 0.7 : 1), 0, 0, Math.PI * 2); ctx.fill();
+  if (shadow) mobShadow(ctx, sprite, s);
 
   if (p.dead > 0) {
     ctx.globalAlpha *= Math.max(0, 1 - p.dead);
@@ -367,12 +372,12 @@ export function drawMob(ctx: CanvasRenderingContext2D, sprite: string, pal: stri
       const [c1, c2, core] = pal;
       const hov = Math.sin(t / 300) * 3;
       ctx.translate(0, -26 + hov);
-      ctx.save();
-      ctx.globalCompositeOperation = 'lighter';
-      const g = ctx.createRadialGradient(0, 0, 2, 0, 0, 22);
-      g.addColorStop(0, rgba(c1, 0.55)); g.addColorStop(1, rgba(c2, 0));
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, 22, 0, Math.PI * 2); ctx.fill();
-      ctx.restore();
+      inkGlow(ctx, (c) => {
+        c.globalCompositeOperation = 'lighter';
+        const g = c.createRadialGradient(0, 0, 2, 0, 0, 22);
+        g.addColorStop(0, rgba(c1, 0.55)); g.addColorStop(1, rgba(c2, 0));
+        c.fillStyle = g; c.beginPath(); c.arc(0, 0, 22, 0, Math.PI * 2); c.fill();
+      });
       ctx.beginPath();
       ctx.moveTo(-9, 2);
       ctx.bezierCurveTo(-10, -12, -2, -16, 2 + Math.sin(t / 120) * 2, -20);
@@ -484,9 +489,11 @@ export function drawMob(ctx: CanvasRenderingContext2D, sprite: string, pal: stri
       ctx.fillStyle = rgba(glow.startsWith('#') ? glow : '#ffe0a0', 0.95);
       ctx.beginPath(); ctx.ellipse(-1.6, -42, 1.8, 1.4, 0, 0, Math.PI * 2); ctx.ellipse(4.6, -42, 1.8, 1.4, 0, 0, Math.PI * 2); ctx.fill();
       // glowing core
-      ctx.save(); ctx.globalCompositeOperation = 'lighter';
-      const cg = ctx.createRadialGradient(1, -26, 0, 1, -26, 7); cg.addColorStop(0, rgba(glow.startsWith('#') ? glow : '#ffe0a0', 0.9)); cg.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = cg; ctx.fillRect(-6, -33, 14, 14); ctx.restore();
+      inkGlow(ctx, (c) => {
+        c.globalCompositeOperation = 'lighter';
+        const cg = c.createRadialGradient(1, -26, 0, 1, -26, 7); cg.addColorStop(0, rgba(glow.startsWith('#') ? glow : '#ffe0a0', 0.9)); cg.addColorStop(1, 'rgba(0,0,0,0)');
+        c.fillStyle = cg; c.fillRect(-6, -33, 14, 14);
+      });
       // fists
       const fy = -24 + k * 10;
       rock(-21, fy - 6 - (attacking ? 0 : Math.sin(t / 400)), 9, 10, 3);
@@ -536,11 +543,12 @@ export function drawMob(ctx: CanvasRenderingContext2D, sprite: string, pal: stri
       const [robe, aura, eyes] = pal;
       const hov = Math.sin(t / 420) * 3;
       ctx.translate(0, -30 + hov);
-      ctx.save(); ctx.globalCompositeOperation = 'lighter';
-      const g = ctx.createRadialGradient(0, -6, 4, 0, -6, 34);
-      g.addColorStop(0, rgba(aura, 0.45)); g.addColorStop(1, rgba(aura, 0));
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, -6, 34, 0, Math.PI * 2); ctx.fill();
-      ctx.restore();
+      inkGlow(ctx, (c) => {
+        c.globalCompositeOperation = 'lighter';
+        const g = c.createRadialGradient(0, -6, 4, 0, -6, 34);
+        g.addColorStop(0, rgba(aura, 0.45)); g.addColorStop(1, rgba(aura, 0));
+        c.fillStyle = g; c.beginPath(); c.arc(0, -6, 34, 0, Math.PI * 2); c.fill();
+      });
       // robe
       ctx.beginPath();
       ctx.moveTo(-8, -22);

@@ -2,7 +2,50 @@
 import type { ZoneDef } from '../game/data/zones.ts';
 import { shade, rgba } from './color.ts';
 
-export interface Prop { x: number; y: number; kind: string; v: number; s: number; label?: string; npc?: string }
+// ───── image kits: painted ground tiles + props per theme (src/assets/kits/<theme>/), used when loaded
+const KIT_FILES = import.meta.glob('../assets/kits/*/*.{png,jpg}', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+interface Kit { tiles: Record<string, HTMLImageElement>; props: Record<string, HTMLImageElement> }
+const kits = new Map<string, Kit>();
+let kitVer = 0;
+/** bumps whenever a kit finishes loading, so the field rebuilds its pre-rendered ground */
+export function kitVersion() { return kitVer; }
+/** world-unit heights of kit props (a hero is ~72 tall) */
+const KIT_PROP_H: Record<string, number> = { tree: 100, pine: 112, bush: 30, rock: 25, flowers: 16, stump: 24, fence: 28, sign: 44 };
+/** painted ground tiles are drawn at this scale so tufts stay small next to the heroes */
+const KIT_TILE_SCALE = 0.55;
+function kitPattern(ctx: CanvasRenderingContext2D, img: HTMLImageElement): CanvasPattern {
+  const p = ctx.createPattern(img, 'repeat')!;
+  p.setTransform(new DOMMatrix().scale(KIT_TILE_SCALE));
+  return p;
+}
+
+/** load every kit under src/assets/kits; resolves when all images are decoded */
+export function loadKits(): Promise<void> {
+  const jobs: Promise<void>[] = [];
+  for (const [path, url] of Object.entries(KIT_FILES)) {
+    const m = path.match(/kits\/([^/]+)\/([^/.]+)\.(png|jpg)$/);
+    if (!m) continue;
+    const [, theme, name] = m;
+    const kit = kits.get(theme) ?? { tiles: {}, props: {} };
+    kits.set(theme, kit);
+    const img = new Image();
+    img.src = url;
+    const bag = name === 'grass' || name === 'dirt' ? kit.tiles : kit.props;
+    jobs.push(img.decode().then(() => { bag[name] = img; }, () => {}));
+  }
+  return Promise.all(jobs).then(() => { kitVer++; });
+}
+export function kitFor(theme: string): Kit | undefined {
+  const k = kits.get(theme);
+  return k && k.tiles.grass ? k : undefined;
+}
+/** occlusion box of a kit-drawn prop (for the see-through fade), or null for code-drawn props */
+export function kitPropBox(p: Prop): { r: number; h: number } | null {
+  const h = p.kit ? KIT_PROP_H[p.kind] : undefined;
+  return h ? { r: h * 0.3 * p.s, h: h * 0.9 * p.s } : null;
+}
+
+export interface Prop { x: number; y: number; kind: string; v: number; s: number; label?: string; npc?: string; /** drawn from this theme's image kit */ kit?: string }
 export interface Light { x: number; y: number; r: number; color: string; flicker: boolean }
 export interface ZoneArt { ground: HTMLCanvasElement; scale: number; props: Prop[]; lights: Light[]; theme: string }
 
@@ -46,15 +89,26 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
     }
   };
 
+  const kit = kitFor(z.theme);
   if (z.theme === 'meadow') {
-    ctx.fillStyle = '#86c45e'; ctx.fillRect(0, 0, W, H);
-    for (let i = 0; i < 160; i++) softBlob(ctx, R() * W, R() * H, 40 + R() * 90, R() < 0.5 ? '#a4d872' : '#679e44', 0.32);
+    if (kit) { ctx.fillStyle = kitPattern(ctx, kit.tiles.grass); ctx.fillRect(0, 0, W, H); }
+    else {
+      ctx.fillStyle = '#86c45e'; ctx.fillRect(0, 0, W, H);
+      for (let i = 0; i < 160; i++) softBlob(ctx, R() * W, R() * H, 40 + R() * 90, R() < 0.5 ? '#a4d872' : '#679e44', 0.32);
+    }
     // pond
     const px = W * 0.74, py = H * 0.28;
     ctx.save(); ctx.translate(px, py);
-    ctx.fillStyle = '#c8b88a'; ctx.beginPath(); ctx.ellipse(0, 0, 84, 46, 0.1, 0, Math.PI * 2); ctx.fill();
-    const pg = ctx.createRadialGradient(-10, -8, 6, 0, 0, 80); pg.addColorStop(0, '#9fe0f4'); pg.addColorStop(1, '#3e9ac8');
-    ctx.fillStyle = pg; ctx.beginPath(); ctx.ellipse(0, 0, 76, 40, 0.1, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = kit ? '#d9c9a0' : '#c8b88a'; ctx.beginPath(); ctx.ellipse(0, 0, 84, 46, 0.1, 0, Math.PI * 2); ctx.fill();
+    if (kit) {
+      // flat cartoon water with an ink outline, like the painted props
+      ctx.fillStyle = '#8fcfe6'; ctx.strokeStyle = '#4a3a2a'; ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.ellipse(0, 0, 76, 40, 0.1, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#b4e2f0'; ctx.beginPath(); ctx.ellipse(-12, -10, 40, 14, 0.1, 0, Math.PI * 2); ctx.fill();
+    } else {
+      const pg = ctx.createRadialGradient(-10, -8, 6, 0, 0, 80); pg.addColorStop(0, '#9fe0f4'); pg.addColorStop(1, '#3e9ac8');
+      ctx.fillStyle = pg; ctx.beginPath(); ctx.ellipse(0, 0, 76, 40, 0.1, 0, Math.PI * 2); ctx.fill();
+    }
     ctx.strokeStyle = 'rgba(255,255,255,0.5)'; ctx.lineWidth = 1.4;
     for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.ellipse(-30 + R() * 60, -15 + R() * 30, 8 + R() * 10, 2, 0.1, 0, Math.PI); ctx.stroke(); }
     ctx.fillStyle = '#5aa04a';
@@ -64,17 +118,22 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
     // dirt road
     const road = () => { ctx.beginPath(); ctx.moveTo(-20, H * 0.62); ctx.bezierCurveTo(W * 0.25, H * 0.45, W * 0.45, H * 0.78, W * 0.62, H * 0.6); ctx.bezierCurveTo(W * 0.78, H * 0.45, W * 0.9, H * 0.7, W + 20, H * 0.55); };
     ctx.lineCap = 'round';
-    road(); ctx.strokeStyle = 'rgba(150,120,70,0.35)'; ctx.lineWidth = 58; ctx.stroke();
-    road(); ctx.strokeStyle = '#d9c38e'; ctx.lineWidth = 44; ctx.stroke();
-    road(); ctx.strokeStyle = 'rgba(240,225,180,0.6)'; ctx.lineWidth = 18; ctx.stroke();
-    for (let i = 0; i < 260; i++) {
+    if (kit) {
+      road(); ctx.strokeStyle = 'rgba(150,120,70,0.25)'; ctx.lineWidth = 54; ctx.stroke();
+      road(); ctx.strokeStyle = kitPattern(ctx, kit.tiles.dirt); ctx.lineWidth = 48; ctx.stroke();
+    } else {
+      road(); ctx.strokeStyle = 'rgba(150,120,70,0.35)'; ctx.lineWidth = 58; ctx.stroke();
+      road(); ctx.strokeStyle = '#d9c38e'; ctx.lineWidth = 44; ctx.stroke();
+      road(); ctx.strokeStyle = 'rgba(240,225,180,0.6)'; ctx.lineWidth = 18; ctx.stroke();
+    }
+    for (let i = 0; i < (kit ? 0 : 260); i++) {
       // texture on everything
       const x = R() * W, y = R() * H;
       ctx.fillStyle = rgba('#3e7a2e', 0.5); ctx.fillRect(x, y, 1.2, 3 + R() * 3);
       ctx.fillRect(x + 2, y + 1, 1.2, 2 + R() * 3);
     }
     const flowers = ['#ffffff', '#ffe060', '#ff9ac0', '#c8a0ff', '#ff7a6a'];
-    for (let i = 0; i < 70; i++) {
+    for (let i = 0; i < (kit ? 0 : 70); i++) {
       const cx = R() * W, cy = R() * H, col = flowers[Math.floor(R() * flowers.length)];
       for (let j = 0; j < 6; j++) {
         const x = cx + (R() - 0.5) * 40, y = cy + (R() - 0.5) * 24;
@@ -82,7 +141,7 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
         ctx.fillStyle = '#f0b030'; ctx.fillRect(x - 0.4, y - 0.4, 0.8, 0.8);
       }
     }
-    for (let i = 0; i < 40; i++) { ctx.fillStyle = rgba('#8a8070', 0.6); ctx.beginPath(); ctx.ellipse(R() * W, R() * H, 2 + R() * 2, 1.4, 0, 0, Math.PI * 2); ctx.fill(); }
+    for (let i = 0; i < (kit ? 0 : 40); i++) { ctx.fillStyle = rgba('#8a8070', 0.6); ctx.beginPath(); ctx.ellipse(R() * W, R() * H, 2 + R() * 2, 1.4, 0, 0, Math.PI * 2); ctx.fill(); }
     edgeProps('tree', 34, 70, 3);
     const roadY = (x: number) => {
       // rough sample of the bezier road so props avoid it
@@ -102,7 +161,13 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
     place(18, 'bush', 3, 0.7, 1.2);
     place(10, 'rock', 3, 0.6, 1.2);
     props.push({ x: 90, y: H * 0.6 - 30, kind: 'sign', v: 0, s: 1 });
-    for (let i = 0; i < 5; i++) props.push({ x: W * 0.3 + i * 22, y: H * 0.2, kind: 'fence', v: 0, s: 1 });
+    if (kit) {
+      // the painted fence piece is a whole section; a few of them and some flower patches
+      for (let i = 0; i < 3; i++) props.push({ x: W * 0.3 + i * 48, y: H * 0.2, kind: 'fence', v: i, s: 1 });
+      place(12, 'flowers', 2, 0.8, 1.2);
+      place(4, 'stump', 2, 0.85, 1.1);
+      place(3, 'pine', 2, 0.85, 1.05, 120);
+    } else for (let i = 0; i < 5; i++) props.push({ x: W * 0.3 + i * 22, y: H * 0.2, kind: 'fence', v: 0, s: 1 });
   } else if (z.theme === 'forest') {
     ctx.fillStyle = '#4f8a3a'; ctx.fillRect(0, 0, W, H);
     for (let i = 0; i < 180; i++) softBlob(ctx, R() * W, R() * H, 40 + R() * 80, R() < 0.5 ? '#6aa64a' : '#3a6a2c', 0.35);
@@ -240,6 +305,7 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
   rim.addColorStop(1, z.theme === 'cave' ? 'rgba(0,0,0,0.6)' : z.theme === 'desert' ? 'rgba(90,50,10,0.3)' : z.theme === 'snow' ? 'rgba(40,70,120,0.25)' : 'rgba(10,30,10,0.35)');
   ctx.fillStyle = rim; ctx.fillRect(0, 0, W, H);
   props.sort((a, b) => a.y - b.y);
+  if (kit) for (const p of props) if (kit.props[p.kind]) p.kit = z.theme;
   return { ground: c, scale, props, lights, theme: z.theme };
 }
 
@@ -293,6 +359,20 @@ function drawPine(ctx: CanvasRenderingContext2D, v: number) {
 }
 
 export function drawProp(ctx: CanvasRenderingContext2D, p: Prop, t: number) {
+  const kimg = p.kit ? kits.get(p.kit)?.props[p.kind] : undefined;
+  if (kimg) {
+    // painted prop: ground contact at the bottom centre, a soft contact shadow, mirrored variants
+    const h = KIT_PROP_H[p.kind] * p.s, w = kimg.width * h / kimg.height;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.fillStyle = 'rgba(40,50,20,0.18)';
+    ctx.beginPath(); ctx.ellipse(0, -1, w * 0.36, Math.max(3, w * 0.09), 0, 0, Math.PI * 2); ctx.fill();
+    if (p.kind === 'tree' || p.kind === 'pine') ctx.rotate(Math.sin(t / 1400 + p.x) * 0.012);
+    if (p.v % 2) ctx.scale(-1, 1);
+    ctx.drawImage(kimg, -w / 2, -h + h * 0.02, w, h);
+    ctx.restore();
+    return;
+  }
   ctx.save();
   ctx.translate(p.x, p.y);
   ctx.scale(p.s, p.s);

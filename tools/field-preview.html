@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Field preview (dev)</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #10141f; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+</style>
+</head>
+<body>
+<!-- Dev-only: the real FieldRenderer + World with a throwaway test party, without touching any save.
+     /tools/field-preview.html?zone=meadow&party=novice,swordsman,mage&lv=12&warm=6000 -->
+<canvas id="c"></canvas>
+<script type="module">
+  import { World } from '/src/game/world.ts';
+  import { FieldRenderer } from '/src/render/field.ts';
+  import { loadKits } from '/src/render/bg.ts';
+  import { newGame, newHero, defaultLook, autoDistribute, learnSkill, addEquip, equip } from '/src/game/state.ts';
+  import { SKILLS } from '/src/game/data/skills.ts';
+
+  const q = new URLSearchParams(location.search);
+  const party = (q.get('party') ?? 'novice,swordsman,mage').split(',');
+  const lv = Number(q.get('lv') ?? 12);
+  const GEAR = { swordsman: ['w_blade', 's_guard'], mage: ['w_wand'], archer: ['w_composite'], acolyte: ['w_mace'], thief: ['w_gauche'], merchant: ['w_battleaxe'], novice: ['w_knife'] };
+  await loadKits();
+  const s = newGame('미리보기', defaultLook('f'));
+  s.heroes = []; s.partySlots = 3; s.stacks.u_red = 99;
+  party.forEach((cls, i) => {
+    const h = newHero(s, ['쿠키', '마루', '보리'][i] ?? 'x', defaultLook(i === 1 ? 'm' : 'f'));
+    h.cls = cls; h.baseLv = lv; h.jobLv = cls === 'novice' ? 9 : 20; h.statPts = 48 + lv * 5; autoDistribute(h);
+    h.skillPts = 30;
+    for (let k = 0; k < 60; k++) { if (!Object.values(SKILLS).find((x) => x.cls === cls && learnSkill(h, x.id))) break; }
+    for (const id of GEAR[cls] ?? []) { const inst = addEquip(s, id); equip(s, h, inst.uid); }
+    s.heroes.push(h);
+  });
+  s.zone = q.get('zone') ?? 'meadow';
+  if (!s.unlocked.includes(s.zone)) s.unlocked.push(s.zone);
+  let seed = Number(q.get('seed') ?? 3);
+  const world = new World(s, () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; });
+  const r = new FieldRenderer(document.getElementById('c'), world);
+  r.pixelMode = q.has('pixel');
+  r.resize();
+  window.__world = world; window.__r = r;
+  // warm up so a fight is on screen, then animate live
+  const warm = Number(q.get('warm') ?? 6000);
+  let t = performance.now();
+  for (let ms = 0; ms < warm; ms += 50) { world.advance(50); r.frame(t + ms); }
+  let last = performance.now();
+  function loop(now) { requestAnimationFrame(loop); world.advance(now - last); last = now; r.frame(now + warm); }
+  requestAnimationFrame(loop);
+  document.title = 'ready';
+</script>
+</body>
+</html>

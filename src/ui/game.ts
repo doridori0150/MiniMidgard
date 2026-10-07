@@ -78,6 +78,7 @@ class Game {
     this.renderer.onAnnounce = (text, kind) => this.announce(text, kind);
     this.renderer.onNpc = (npc) => this.openTown(npc === 'job' ? 'job' : npc === 'stylist' ? 'stylist' : npc as TownView);
     this.renderer.lowFx = this.s.settings.lowFx;
+    this.renderer.pixelMode = !!this.s.settings.pixel;
     this.renderer.showDamage = this.s.settings.showDamage;
     this.renderer.resize();
   }

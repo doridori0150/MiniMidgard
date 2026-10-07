@@ -186,6 +186,8 @@ export interface Settings {
   autoBoss: boolean;
   showDamage: boolean;
   lowFx: boolean;
+  /** retro pixel rendering of the field */
+  pixel?: boolean;
 }
 
 export interface GameState {

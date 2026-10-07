@@ -204,6 +204,7 @@ export function SettingsPanel() {
         <div class="box">
           <div class="row"><span>대미지 숫자 표시</span><span class="sp1" />{T(st.showDamage, () => { st.showDamage = !st.showDamage; })}</div>
           <div class="row" style={{ marginTop: '6px' }}><span>이펙트 간소화 (저사양)</span><span class="sp1" />{T(st.lowFx, () => { st.lowFx = !st.lowFx; })}</div>
+          <div class="row" style={{ marginTop: '6px' }}><span>도트 모드 (레트로 픽셀)</span><span class="sp1" />{T(!!st.pixel, () => { st.pixel = !st.pixel; if (g.renderer) { g.renderer.pixelMode = !!st.pixel; g.renderer.resize(); } })}</div>
           <div class="row" style={{ marginTop: '6px' }}><span>잡템 자동 판매</span><span class="sp1" />{T(st.autoSellEtc, () => { st.autoSellEtc = !st.autoSellEtc; })}</div>
           <div class="row" style={{ marginTop: '6px' }}><span>보스·MVP 자동 소환</span><span class="sp1" />{T(st.autoBoss, () => { st.autoBoss = !st.autoBoss; })}</div>
         </div>

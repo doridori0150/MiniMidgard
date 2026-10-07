@@ -18,6 +18,8 @@
 <canvas id="mobs"></canvas>
 <script type="module">
   import { drawHero } from '/src/render/hero.ts';
+  import { inked } from '/src/render/ink.ts';
+  const INK = new URLSearchParams(location.search).has('ink');
   import { drawMob } from '/src/render/monster.ts';
   import { MONSTERS } from '/src/game/data/monsters.ts';
   import { CLASSES } from '/src/game/data/classes.ts';
@@ -41,8 +43,10 @@
       const row = Math.floor(i / perRow) * 2 + (g === 'm' ? 1 : 0), col = i % perRow;
       const x = 10 + col * colW + colW / 2, y = row * rowH + 72 * Z + 12;
       ctx.setTransform(dpr * Z, 0, 0, dpr * Z, x * dpr, y * dpr);
-      drawHero(ctx, { cls, gender: g, hair: (i * 3 + (g === 'm' ? 1 : 0)) % 8, hairColor: (i * 2 + (g === 'm' ? 3 : 0)) % 10, skin: i % 3, dye: 0,
-        wtype: WEAPON[cls], refine: 0, shield: cls === 'swordsman' || cls === 'acolyte', headTop: i === 1 && g === 'f' ? 'ribbon' : undefined }, { state: 'idle', t: 400, facing: 1 });
+      const L = { cls, gender: g, hair: (i * 3 + (g === 'm' ? 1 : 0)) % 8, hairColor: (i * 2 + (g === 'm' ? 3 : 0)) % 10, skin: i % 3, dye: 0,
+        wtype: WEAPON[cls], refine: 0, shield: cls === 'swordsman' || cls === 'acolyte', headTop: i === 1 && g === 'f' ? 'ribbon' : undefined };
+      if (INK) { ctx.fillStyle = 'rgba(20,30,20,0.25)'; ctx.beginPath(); ctx.ellipse(0, 0, 11, 3.8, 0, 0, Math.PI * 2); ctx.fill(); inked(ctx, 120, 120, 60, 106, 1.25, (c) => drawHero(c, L, { state: 'idle', t: 400, facing: 1 }, { shadow: false })); }
+      else drawHero(ctx, L, { state: 'idle', t: 400, facing: 1 });
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.fillStyle = '#3a3028'; ctx.font = '600 12px system-ui';
       if (g === 'f') ctx.fillText(CLASSES[cls].name, x, row * rowH + 2 * rowH - 6);
@@ -57,7 +61,9 @@
   sprites.forEach((m, i) => {
     const x = 10 + (i % 9) * 96 + 48, y = Math.floor(i / 9) * 130 + 104;
     mc.setTransform(dpr * 1.6, 0, 0, dpr * 1.6, x * dpr, y * dpr);
-    drawMob(mc, m.sprite, m.palette, { state: 'idle', t: 300, facing: -1, hurt: 0, frozen: false, spawn: 1, dead: 0 }, 1);
+    const mp = { state: 'idle', t: 300, facing: -1, hurt: 0, frozen: false, spawn: 1, dead: 0 };
+    if (INK) inked(mc, 80, 90, 40, 78, 1.2, (c) => drawMob(c, m.sprite, m.palette, mp, 1));
+    else drawMob(mc, m.sprite, m.palette, mp, 1);
     mc.setTransform(dpr, 0, 0, dpr, 0, 0);
     mc.fillStyle = '#3a3028'; mc.font = '600 12px system-ui';
     mc.fillText(m.name, x, y + 20);
