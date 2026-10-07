@@ -316,8 +316,19 @@
       const x = p % cw, y = (p / cw) | 0;
       if (x > 0) stack.push(p - 1); if (x < cw - 1) stack.push(p + 1); if (y > 0) stack.push(p - cw); if (y < ch - 1) stack.push(p + cw);
     }
-    // soften the fringe left by the key colour
-    for (let p = 0; p < cw * ch; p++) if (d[p * 4 + 3] && near(p * 4)) d[p * 4 + 3] = 90;
+    // de-fringe: magenta-tinted edge pixels (anti-aliased against the key) lose the key and most of their alpha
+    for (let p = 0; p < cw * ch; p++) {
+      const i = p * 4;
+      if (!d[i + 3]) continue;
+      const r = d[i], g = d[i + 1], b = d[i + 2];
+      const m = Math.min(r, b) - g; // how "magenta" the pixel is
+      if (m > 70) { d[i + 3] = 0; continue; }
+      if (m > 25) {
+        const k = (m - 25) / 45;
+        d[i] = Math.round(r - (r - g) * k * 0.8); d[i + 2] = Math.round(b - (b - g) * k * 0.8);
+        d[i + 3] = Math.round(d[i + 3] * (1 - k * 0.7));
+      }
+    }
     ctx.putImageData(im, 0, 0);
     let x0 = cw, y0 = ch, x1 = 0, y1 = 0;
     for (let y = 0; y < ch; y++) for (let x = 0; x < cw; x++) if (d[(y * cw + x) * 4 + 3] > 40) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
