@@ -239,6 +239,7 @@
   let lastF = 0;
   function fieldLoop(now) {
     requestAnimationFrame(fieldLoop);
+
     if (now - lastF < 125) return;
     lastF = now;
     const t = Math.floor(now / 125) * 125;
@@ -277,6 +278,78 @@
   }
   requestAnimationFrame(fieldLoop);
 
+  // ───── A·C·D background kits (Codex): mirrored ground tiles + keyed props + characters, assembled like the game would
+  const KIT = { A: '종이풍 정제 키트', C: '펜선 + 수채 키트', D: '도트 키트' };
+  // character + slime source per style: A uses the real code-drawn party (that is what A would be built on)
+  const BOARD = { C: 'C_manga_watercolor', D: 'D_pixel_sprite', A: 'A_paper_refined' };
+  const load = (src) => new Promise((ok) => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ok(null); im.src = src + '?v=' + Date.now(); });
+  /** a 2×2 mirrored block hides the seams of a texture that does not tile cleanly */
+  function mirrorTile(img, sx, sy, sw, sh, size) {
+    const c = document.createElement('canvas'); c.width = size * 2; c.height = size * 2;
+    const x = c.getContext('2d');
+    for (const [fx, fy] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) {
+      x.setTransform(fx, 0, 0, fy, fx < 0 ? size * 2 : 0, fy < 0 ? size * 2 : 0);
+      x.drawImage(img, sx, sy, sw, sh, 0, 0, size, size);
+    }
+    return c;
+  }
+  const PROP_H = [1.6, 1.9, 0.55, 0.45, 0.32, 0.45, 0.5, 0.85]; // tree, pine, bush, rock, flowers, stump, fence, sign — × character height
+  const LAYOUT = [ // [prop index, x, y] in a 300×420 view (y = ground contact)
+    [0, 52, 120], [1, 262, 96], [2, 210, 176], [3, 30, 300], [4, 120, 380], [5, 250, 330], [6, 160, 70], [7, 84, 214], [2, 285, 410], [4, 236, 238],
+  ];
+  async function kitField(k) {
+    const kit = await load(`/docs/art/concepts/round2/bgkit_${k}.png`);
+    const cell = document.createElement('div'); cell.className = 'cell';
+    const cv = document.createElement('canvas'); cv.width = FW; cv.height = FH; cv.style.borderRadius = '10px';
+    const lab = document.createElement('small'); lab.textContent = `${k}. ${KIT[k]}`;
+    cell.append(cv, lab); fields.append(cell);
+    const ctx = cv.getContext('2d');
+    if (!kit) { ctx.fillStyle = '#ddd'; ctx.fillRect(0, 0, FW, FH); ctx.fillStyle = '#777'; ctx.font = '13px system-ui'; ctx.fillText('배경 키트 생성 대기 중', 80, 210); return; }
+    const q = kit.width / 2;
+    const grass = mirrorTile(kit, 0, 0, q, q, 150), dirt = mirrorTile(kit, q, 0, q, q, 150);
+    const props = [...Array(8)].map((_, i) => cutRect(kit, (i % 4) * kit.width / 4, kit.height / 2 + Math.floor(i / 4) * kit.height / 4, kit.width / 4, kit.height / 4));
+    const board = await load(`/docs/art/concepts/round2/${BOARD[k]}.png`);
+    const parts = k === 'A' ? null : await load(`/docs/art/concepts/round2/parts_${k}.png`);
+    const body = parts ? cut(parts, 0, 0) : null;
+    const slime = board ? cutRect(board, board.width * 0.77, board.height * 0.42, board.width * 0.23, board.height * 0.33) : null;
+    const CH = 80; // character height on screen
+    const draw = (t) => {
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.imageSmoothingEnabled = k !== 'D';
+      ctx.fillStyle = ctx.createPattern(grass, 'repeat'); ctx.fillRect(0, 0, FW, FH);
+      // a curving dirt path like the meadow's
+      ctx.save(); ctx.beginPath(); ctx.moveTo(-10, 150); ctx.bezierCurveTo(90, 200, 170, 180, 320, 260); ctx.lineTo(320, 316); ctx.bezierCurveTo(170, 236, 90, 256, -10, 210); ctx.closePath(); ctx.clip();
+      ctx.fillStyle = ctx.createPattern(dirt, 'repeat'); ctx.fillRect(0, 0, FW, FH); ctx.restore();
+      const things = LAYOUT.map(([i, x, y]) => ({ y, draw: () => {
+        const p = props[i], h = PROP_H[i] * CH, w = p.width * h / p.height;
+        ctx.fillStyle = 'rgba(0,0,0,0.16)'; ctx.beginPath(); ctx.ellipse(x, y, w * 0.32, w * 0.09, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.drawImage(p, x - w / 2, y - h, w, h);
+      } }));
+      const heroes = [[118, 236], [150, 214], [92, 272]];
+      heroes.forEach(([x, y], i) => things.push({ y, draw: () => {
+        ctx.fillStyle = 'rgba(0,0,0,0.18)'; ctx.beginPath(); ctx.ellipse(x, y, 13, 4, 0, 0, Math.PI * 2); ctx.fill();
+        if (k === 'A') {
+          ctx.setTransform(ZOOM, 0, 0, ZOOM, x, y);
+          drawHero(ctx, CAST[i].look, { state: i === 1 ? 'attack' : 'ready', t: i === 1 ? (t % 900) * 0.5 : t, dur: 420, facing: 1 }, { shadow: false });
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+        } else if (body) {
+          const w = body.width * CH / body.height;
+          ctx.drawImage(body, x - w / 2, y - CH + 2, w, CH);
+        }
+      } }));
+      if (slime) [[190, 226], [212, 262], [176, 284]].forEach(([x, y]) => things.push({ y, draw: () => {
+        const h = CH * 0.42, w = slime.width * h / slime.height;
+        ctx.fillStyle = 'rgba(0,0,0,0.16)'; ctx.beginPath(); ctx.ellipse(x, y, w * 0.4, 4, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.drawImage(slime, x - w / 2, y - h + 2, w, h);
+      } }));
+      things.sort((a, b) => a.y - b.y).forEach((th) => th.draw());
+    };
+    let last = 0;
+    const loop = (now) => { requestAnimationFrame(loop); if (now - last < 125) return; last = now; draw(Math.floor(now / 125) * 125); };
+    requestAnimationFrame(loop);
+  }
+  for (const k of ['A', 'C', 'D']) kitField(k);
+
   // ───── B·C·D: image part sheets (3×3 grid on a flat key colour: [0] body, [1..8] accessories)
   const PARTS = ['없음', '머리핀', '풀잎', '리본', '꽃', '고양이귀', '안경', '풀피리', '베레모'];
   const ANCHOR = { 1: 'side', 2: 'crown', 3: 'top', 4: 'side', 5: 'top', 6: 'eyes', 7: 'mouth', 8: 'top' };
@@ -299,9 +372,14 @@
   /** cut one grid cell out: flood-fill the key colour from the cell border, then crop to the opaque box */
   function cut(img, col, row, cols = 3, rows = 3) {
     const cw = Math.floor(img.width / cols), ch = Math.floor(img.height / rows);
+    return cutRect(img, col * cw, row * ch, cw, ch);
+  }
+  /** cut a rectangle of an image out of its flat background (keyed from the rect's corner colour) */
+  function cutRect(img, sx, sy, cw, ch) {
+    cw = Math.floor(cw); ch = Math.floor(ch);
     const c = document.createElement('canvas'); c.width = cw; c.height = ch;
     const ctx = c.getContext('2d', { willReadFrequently: true });
-    ctx.drawImage(img, col * cw, row * ch, cw, ch, 0, 0, cw, ch);
+    ctx.drawImage(img, sx, sy, cw, ch, 0, 0, cw, ch);
     const im = ctx.getImageData(0, 0, cw, ch), d = im.data;
     const key = [d[0], d[1], d[2]];
     const near = (i) => Math.abs(d[i] - key[0]) + Math.abs(d[i + 1] - key[1]) + Math.abs(d[i + 2] - key[2]) < 90;
