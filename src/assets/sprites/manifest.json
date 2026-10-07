@@ -1,0 +1,972 @@
+{
+  "schema": "minimidgard.sprites/1",
+  "canvas": {
+    "size": [
+      512,
+      400
+    ],
+    "origin": [
+      220,
+      360
+    ],
+    "referenceHeight": 310,
+    "displayHeight": 80,
+    "axes": "x right, y down",
+    "angles": "clockwise degrees"
+  },
+  "animations": {
+    "idle": {
+      "frames": [
+        "idle_0",
+        "idle_1"
+      ],
+      "durations": [
+        800,
+        800
+      ],
+      "duration": 1600,
+      "loop": true
+    },
+    "walk": {
+      "frames": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durations": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "duration": 720,
+      "loop": true
+    },
+    "attack": {
+      "frames": [
+        "attack_0",
+        "attack_1",
+        "attack_2"
+      ],
+      "durations": [
+        100,
+        80,
+        100
+      ],
+      "duration": 280,
+      "loop": false
+    },
+    "cast": {
+      "frames": [
+        "cast_0",
+        "cast_1"
+      ],
+      "durations": [
+        360,
+        360
+      ],
+      "duration": 720,
+      "loop": true
+    },
+    "sit": {
+      "frames": [
+        "sit_0"
+      ],
+      "durations": [
+        1
+      ],
+      "duration": 1,
+      "loop": false
+    },
+    "hurt": {
+      "frames": [
+        "hurt_0"
+      ],
+      "durations": [
+        1
+      ],
+      "duration": 1,
+      "loop": false
+    },
+    "dead": {
+      "frames": [
+        "dead_0"
+      ],
+      "durations": [
+        1
+      ],
+      "duration": 1,
+      "loop": false
+    }
+  },
+  "characters": {
+    "novice_female": {
+      "class": "novice",
+      "gender": "female",
+      "defaultWeapon": "dagger",
+      "defaultHairTint": "cream",
+      "frames": {
+        "idle_0": {
+          "image": "frames/novice/idle_0.png",
+          "hairMask": "masks/novice/idle_0.png",
+          "hand": {
+            "point": [
+              276.307,
+              289.63
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              218.885,
+              83.507
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              273.792,
+              134.187
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/idle_0.png"
+        },
+        "idle_1": {
+          "image": "frames/novice/idle_1.png",
+          "hairMask": "masks/novice/idle_1.png",
+          "hand": {
+            "point": [
+              276.307,
+              289.349
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              218.885,
+              82.401
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              273.792,
+              133.284
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/idle_1.png"
+        },
+        "walk_0": {
+          "image": "frames/novice/walk_0.png",
+          "hairMask": "masks/novice/walk_0.png",
+          "hand": {
+            "point": [
+              280.961,
+              264.513
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              208.196,
+              82.305
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              263.05,
+              132.985
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/walk_0.png"
+        },
+        "walk_1": {
+          "image": "frames/novice/walk_1.png",
+          "hairMask": "masks/novice/walk_1.png",
+          "hand": {
+            "point": [
+              271.789,
+              293.266
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              218.856,
+              87.621
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              272.707,
+              138.301
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/walk_1.png"
+        },
+        "walk_2": {
+          "image": "frames/novice/walk_2.png",
+          "hairMask": "masks/novice/walk_2.png",
+          "hand": {
+            "point": [
+              286.252,
+              279.776
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              210.833,
+              84.836
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              266.05,
+              135.516
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/walk_2.png"
+        },
+        "walk_3": {
+          "image": "frames/novice/walk_3.png",
+          "hairMask": "masks/novice/walk_3.png",
+          "hand": {
+            "point": [
+              274.12,
+              286.504
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              220.066,
+              88.787
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              275.651,
+              139.467
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/walk_3.png"
+        },
+        "attack_0": {
+          "image": "frames/novice/attack_0.png",
+          "hairMask": "masks/novice/attack_0.png",
+          "hand": {
+            "point": [
+              291.75,
+              287.024
+            ],
+            "angle": -78,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              219.568,
+              95.174
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              274.757,
+              145.854
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/attack_0.png"
+        },
+        "attack_1": {
+          "image": "frames/novice/attack_1.png",
+          "hairMask": "masks/novice/attack_1.png",
+          "hand": {
+            "point": [
+              305.195,
+              242.78
+            ],
+            "angle": 0,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              212.077,
+              99.148
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              266.218,
+              149.828
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/attack_1.png"
+        },
+        "attack_2": {
+          "image": "frames/novice/attack_2.png",
+          "hairMask": "masks/novice/attack_2.png",
+          "hand": {
+            "point": [
+              300.189,
+              295.391
+            ],
+            "angle": 42,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              246.306,
+              115.017
+            ],
+            "angle": 12
+          },
+          "side": {
+            "point": [
+              300.866,
+              158.465
+            ],
+            "angle": 12
+          },
+          "gripOverlay": "grips/novice/attack_2.png"
+        },
+        "cast_0": {
+          "image": "frames/novice/cast_0.png",
+          "hairMask": "masks/novice/cast_0.png",
+          "hand": {
+            "point": [
+              282.026,
+              213.165
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              212.263,
+              85.995
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              266.362,
+              136.675
+            ],
+            "angle": 0
+          }
+        },
+        "cast_1": {
+          "image": "frames/novice/cast_1.png",
+          "hairMask": "masks/novice/cast_1.png",
+          "hand": {
+            "point": [
+              308.579,
+              183.057
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              225.303,
+              87.621
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              279.863,
+              138.301
+            ],
+            "angle": 0
+          }
+        },
+        "sit_0": {
+          "image": "frames/novice/sit_0.png",
+          "hairMask": "masks/novice/sit_0.png",
+          "hand": {
+            "point": [
+              262.876,
+              308.99
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              190.416,
+              144.305
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              243.582,
+              194.985
+            ],
+            "angle": 0
+          }
+        },
+        "hurt_0": {
+          "image": "frames/novice/hurt_0.png",
+          "hairMask": "masks/novice/hurt_0.png",
+          "hand": {
+            "point": [
+              256.048,
+              210.506
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              138.786,
+              110.26
+            ],
+            "angle": -22
+          },
+          "side": {
+            "point": [
+              214.466,
+              157.918
+            ],
+            "angle": -22
+          },
+          "gripOverlay": "grips/novice/hurt_0.png"
+        },
+        "dead_0": {
+          "image": "frames/novice/dead_0.png",
+          "hairMask": "masks/novice/dead_0.png",
+          "hand": {
+            "point": [
+              300.709,
+              317.386
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              63.8,
+              272.279
+            ],
+            "angle": -82
+          },
+          "side": {
+            "point": [
+              144.805,
+              335.064
+            ],
+            "angle": -82
+          }
+        }
+      }
+    },
+    "swordsman_male": {
+      "class": "swordsman",
+      "gender": "male",
+      "defaultWeapon": "sword",
+      "defaultHairTint": "blue",
+      "frames": {
+        "idle_0": {
+          "image": "frames/swordsman/idle_0.png",
+          "hairMask": "masks/swordsman/idle_0.png",
+          "hand": {
+            "point": [
+              284.865,
+              282.048
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              227.589,
+              83.524
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              282.216,
+              134.204
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/idle_0.png"
+        },
+        "idle_1": {
+          "image": "frames/swordsman/idle_1.png",
+          "hairMask": "masks/swordsman/idle_1.png",
+          "hand": {
+            "point": [
+              284.865,
+              281.736
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              227.589,
+              82.418
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              282.216,
+              133.301
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/idle_1.png"
+        },
+        "walk_0": {
+          "image": "frames/swordsman/walk_0.png",
+          "hairMask": "masks/swordsman/walk_0.png",
+          "hand": {
+            "point": [
+              289.262,
+              276.425
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              230.889,
+              83.569
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              286.148,
+              134.249
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/walk_0.png"
+        },
+        "walk_1": {
+          "image": "frames/swordsman/walk_1.png",
+          "hairMask": "masks/swordsman/walk_1.png",
+          "hand": {
+            "point": [
+              275.839,
+              296.682
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              229.858,
+              89.569
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              285.45,
+              140.249
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/walk_1.png"
+        },
+        "walk_2": {
+          "image": "frames/swordsman/walk_2.png",
+          "hairMask": "masks/swordsman/walk_2.png",
+          "hand": {
+            "point": [
+              297.333,
+              266.454
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              230.496,
+              84.867
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              287.04,
+              135.547
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/walk_2.png"
+        },
+        "walk_3": {
+          "image": "frames/swordsman/walk_3.png",
+          "hairMask": "masks/swordsman/walk_3.png",
+          "hand": {
+            "point": [
+              279.338,
+              282.823
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              228.18,
+              90.915
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              283.364,
+              141.595
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/walk_3.png"
+        },
+        "attack_0": {
+          "image": "frames/swordsman/attack_0.png",
+          "hairMask": "masks/swordsman/attack_0.png",
+          "hand": {
+            "point": [
+              285.503,
+              284.731
+            ],
+            "angle": -78,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              221.267,
+              85.864
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              276.859,
+              136.544
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/attack_0.png"
+        },
+        "attack_1": {
+          "image": "frames/swordsman/attack_1.png",
+          "hairMask": "masks/swordsman/attack_1.png",
+          "hand": {
+            "point": [
+              316.644,
+              239.076
+            ],
+            "angle": 0,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              221.761,
+              85.864
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              277.02,
+              136.544
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/attack_1.png"
+        },
+        "attack_2": {
+          "image": "frames/swordsman/attack_2.png",
+          "hairMask": "masks/swordsman/attack_2.png",
+          "hand": {
+            "point": [
+              302.119,
+              290.066
+            ],
+            "angle": 42,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              239.391,
+              94.887
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              295.232,
+              146.511
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/attack_2.png"
+        },
+        "cast_0": {
+          "image": "frames/swordsman/cast_0.png",
+          "hairMask": "masks/swordsman/cast_0.png",
+          "hand": {
+            "point": [
+              298.94,
+              206.11
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              224.323,
+              80.034
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              282.464,
+              130.714
+            ],
+            "angle": 0
+          }
+        },
+        "cast_1": {
+          "image": "frames/swordsman/cast_1.png",
+          "hairMask": "masks/swordsman/cast_1.png",
+          "hand": {
+            "point": [
+              308.947,
+              173.871
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              230.611,
+              80.042
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              288.368,
+              130.722
+            ],
+            "angle": 0
+          }
+        },
+        "sit_0": {
+          "image": "frames/swordsman/sit_0.png",
+          "hairMask": "masks/swordsman/sit_0.png",
+          "hand": {
+            "point": [
+              274.765,
+              323.917
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              209.455,
+              155.663
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              265.047,
+              206.343
+            ],
+            "angle": 0
+          }
+        },
+        "hurt_0": {
+          "image": "frames/swordsman/hurt_0.png",
+          "hairMask": "masks/swordsman/hurt_0.png",
+          "hand": {
+            "point": [
+              269.176,
+              257.506
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              142.871,
+              119.781
+            ],
+            "angle": -22
+          },
+          "side": {
+            "point": [
+              218.551,
+              168.719
+            ],
+            "angle": -22
+          },
+          "gripOverlay": "grips/swordsman/hurt_0.png"
+        },
+        "dead_0": {
+          "image": "frames/swordsman/dead_0.png",
+          "hairMask": "masks/swordsman/dead_0.png",
+          "hand": {
+            "point": [
+              297.612,
+              325.179
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              75.833,
+              278.648
+            ],
+            "angle": -82
+          },
+          "side": {
+            "point": [
+              152.693,
+              338.325
+            ],
+            "angle": -82
+          }
+        }
+      }
+    }
+  },
+  "weapons": {
+    "dagger": {
+      "image": "equipment/dagger.png",
+      "pivot": [
+        16.5,
+        16.5
+      ],
+      "tip": [
+        81.5,
+        16.5
+      ]
+    },
+    "sword": {
+      "image": "equipment/sword.png",
+      "pivot": [
+        23.0,
+        18.5
+      ],
+      "tip": [
+        120.5,
+        18.5
+      ]
+    }
+  },
+  "headgear": {
+    "leaf": {
+      "image": "equipment/leaf.png",
+      "anchor": "crown",
+      "pivot": [
+        12.0,
+        20.5
+      ]
+    },
+    "hairpin": {
+      "image": "equipment/hairpin.png",
+      "anchor": "side",
+      "pivot": [
+        17.0,
+        10.0
+      ]
+    }
+  },
+  "hairTints": {
+    "cream": [
+      1,
+      1,
+      1
+    ],
+    "blue": [
+      0.3779527559055118,
+      0.575,
+      0.8590909090909091
+    ],
+    "auburn": [
+      0.62,
+      0.36,
+      0.23
+    ]
+  },
+  "renderContract": {
+    "order": [
+      "weaponBehind",
+      "figure",
+      "weaponFront",
+      "gripOverlay",
+      "headgear"
+    ],
+    "time": "floor milliseconds; negative clamps to zero; looping modulo duration; nonloop holds last frame",
+    "origin": "source pixel (220,360) maps to world feet-centre ground point; mirror entire render about origin.x",
+    "hair": "mask white = tint; mask black = unchanged. Figure hair is cream for both characters. outRGB = round(baseRGB*(1-mask/255+mask/255*tintRGB)); preserve alpha",
+    "noAssembly": "Exactly one figure PNG includes head, hair, face, torso and limbs. No replaceable face, hair shape or body layers.",
+    "equipment": "null weapon and empty headgear list render naked figure; hidden weapon for cast/sit/dead; grip overlay only when visible weapon is front",
+    "attackContact": "attack_1 at [100,180) ms, includes exact 140 ms contact; hand angle 0 makes blade forward",
+    "sampling": "no interpolation between animation frames; bilinear display sampling; round RGB half up"
+  }
+}

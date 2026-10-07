@@ -6,6 +6,7 @@ import type { WeaponType } from '../game/types.ts';
 import { BOW_RELEASE, MELEE_CONTACT } from '../game/world.ts';
 import type { HeroLookDraw, Pose } from './hero.ts';
 import { drawSprite, loadSprites, spriteBounds, spriteSupports } from './sprite.ts';
+import { drawWhole, loadWhole, wholeSupports } from './whole.ts';
 export { spriteBounds as rigBounds };
 
 type V2 = [number, number];
@@ -32,7 +33,7 @@ const HEIGHT = 76;
 export const RIG_METRICS = { height: M?.canvas.referenceHeight ?? 236, sheetToUnits: (M?.canvas.referenceHeight ?? 236) / HEIGHT };
 
 export function loadRig(): Promise<void> {
-  const sprites = loadSprites();
+  const sprites = Promise.all([loadSprites(), loadWhole()]).then(() => {});
   if (!M) return sprites;
   const jobs: Promise<void>[] = [];
   for (const [path, url] of Object.entries(FILES)) {
@@ -54,7 +55,7 @@ const HEADGEAR: Record<string, string> = { leaf: 'leaf', hairpin: 'hairpin' };
 
 /** painted frame sprites (v4) win wherever they exist; the cut-out rig stays as the fallback and for comparison */
 export function rigSupports(L: HeroLookDraw) {
-  return spriteSupports(L) || cutoutSupports(L);
+  return wholeSupports(L) || spriteSupports(L) || cutoutSupports(L);
 }
 export function cutoutSupports(L: HeroLookDraw) {
   return ready && !!M && !!OUTFIT[L.cls] && !!M.outfits[OUTFIT[L.cls]!] && L.wtype in WEAPON;
@@ -141,6 +142,8 @@ function tint(name: string, color: string): CanvasImageSource | undefined {
 }
 
 export function drawRigHero(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {
+  // whole-figure sprites (the lineup art, one painted figure per frame) first, then the assembled sets
+  if (drawWhole(ctx, L, pose)) return true;
   if (drawSprite(ctx, L, pose)) return true;
   return drawCutout(ctx, L, pose);
 }
