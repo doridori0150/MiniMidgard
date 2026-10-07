@@ -21,6 +21,7 @@ import { BuyModal, SellModal } from './Shop.tsx';
 import { BuildModal, PinButton } from './BuildModal.tsx';
 import { TargetsModal } from './Targets.tsx';
 import { RosterModal } from './Roster.tsx';
+import { GRADE_KO, gradeBase, gradeOf, rerollCost, rerollOption } from '../game/gear.ts';
 import { sourcesOf } from '../game/targets.ts';
 import { skillIconURL } from '../render/icons.ts';
 import { RACE_KO } from '../game/data/elements.ts';
@@ -56,15 +57,15 @@ function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
         <div class="item-head">
           <div class="ic"><img src={itemIconURL(id)} /></div>
           <div>
-            <div class={'item-name ' + nameClass(id)}>{inst ? itemName(inst) : d.name}</div>
+            <div class={'item-name ' + (inst?.grade ? 'grade-' + inst.grade : nameClass(id))}>{inst ? itemName(inst) : d.name}</div>
             <div class="small muted">{itemTypeLine(d)}{have ? ` · 보유 ${fmt(have)}개` : ''}{owner ? ` · ${owner.name} 장착 중` : ''}</div>
           </div>
         </div>
         {d.kind === 'card' && <div style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}><CardArt id={id} /></div>}
         <div class="kv">
-          {d.atk !== undefined && d.kind === 'equip' && <><span>공격력</span><span>{d.atk}{inst && inst.refine ? ` (+${inst.refine} 정련)` : ''}</span></>}
+          {d.atk !== undefined && d.kind === 'equip' && <><span>공격력</span><span>{gradeBase(inst) > 0 ? Math.round(d.atk * (1 + gradeBase(inst))) : d.atk}{inst && inst.refine ? ` (+${inst.refine} 정련)` : ''}</span></>}
           {d.matkPct && <><span>마법 공격</span><span>+{d.matkPct}%</span></>}
-          {d.def !== undefined && d.kind === 'equip' && d.loc !== 'weapon' && <><span>방어력</span><span>{d.def}{inst && inst.refine ? ` (+${inst.refine})` : ''}</span></>}
+          {d.def !== undefined && d.kind === 'equip' && d.loc !== 'weapon' && <><span>방어력</span><span>{gradeBase(inst) > 0 ? Math.round(d.def * (1 + gradeBase(inst))) : d.def}{inst && inst.refine ? ` (+${inst.refine})` : ''}</span></>}
           {d.mdef && <><span>마법 방어</span><span>{d.mdef}</span></>}
           {d.wlv && <><span>무기 레벨</span><span>{d.wlv}</span></>}
           {d.element && d.element !== 'neutral' && <><span>속성</span><span>{d.element}</span></>}
@@ -75,6 +76,18 @@ function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
           <span>판매가</span><span>{fmt(sellPrice(s, id, inst?.refine ?? 0))}z</span>
         </div>
         {lines.length > 0 && d.kind !== 'card' && <div class="desc" style={{ color: '#2a5ab0' }}>{lines.join('\n')}</div>}
+        {inst && inst.grade && (
+          <div class={'grade-box g-' + inst.grade}>
+            <div class="gb-head"><b>{GRADE_KO[gradeOf(inst)]}</b> · 아이템 레벨 {inst.ilvl}{gradeBase(inst) > 0 ? ` · 기본치 +${Math.round(gradeBase(inst) * 100)}%` : ''}</div>
+            {(inst.opts ?? []).map((o, i) => (
+              <div class="gb-opt">
+                <span>◆ {bonusLines(o).join(', ')}</span>
+                <button class="btn xs" disabled={s.zeny < rerollCost(inst)} title="이 옵션만 다시 굴린다"
+                  onClick={() => { s.zeny -= rerollCost(inst); rerollOption(inst, d, i, Math.random); g.commit('refine_ok'); }}>재련 {fmt(rerollCost(inst))}z</button>
+              </div>
+            ))}
+          </div>
+        )}
         <div class="desc">{d.desc}</div>
         {inst && inst.slots > 0 && (
           <div class="cards-row">
@@ -98,7 +111,7 @@ function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
             {((inst && fittingCards.length === 0) || (d.kind === 'card' && fittingEquips.length === 0)) && <div class="muted small">{d.kind === 'card' ? '이 카드를 꽂을 수 있는 빈 슬롯 장비가 없습니다.' : '꽂을 수 있는 카드가 없습니다.'}</div>}
           </div>
         )}
-        {sourcesOf(id).length > 0 && <div style={{ marginTop: '8px' }}><PinButton id={id} wide /></div>}
+        {!inst && sourcesOf(id).length > 0 && <div style={{ marginTop: '8px' }}><PinButton id={id} wide /></div>}
         {dropsFrom.length > 0 && !inst && <div class="small muted" style={{ marginTop: '8px' }}>획득처: {dropsFrom.map((m) => `${m.name}(${(m.drops.find((x) => x.id === id)!.rate * 100).toFixed(m.drops.find((x) => x.id === id)!.rate < 0.01 ? 2 : 0)}%)`).join(', ')}</div>}
         {(inst && !owner && d.kind === 'equip') || d.kind === 'ammo' ? <div style={{ marginTop: '8px' }}><HeroTabs sel={heroIdx} onSel={setHeroIdx} /></div> : null}
       </div>

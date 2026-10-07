@@ -1,3 +1,4 @@
+import { gradeBase } from './gear.ts';
 import type { Bonus, Element, EquipInst, EquipSlot, GameState, Hero, StatKey, WeaponType } from './types.ts';
 import { STAT_KEYS } from './types.ts';
 import { CLASSES, jobBonusStats } from './data/classes.ts';
@@ -129,16 +130,18 @@ export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], 
     const d = ITEMS[inst.id];
     addBonus(b, d.bonus);
     for (const c of inst.cards) if (c) addBonus(b, ITEMS[c].bonus);
+    for (const o of inst.opts ?? []) addBonus(b, o);
+    const gb = gradeBase(inst);
     if (slot === 'weapon') {
       wlv = d.wlv ?? 1;
-      watk = d.atk ?? 0;
+      watk = Math.round((d.atk ?? 0) * (1 + gb));
       refineAtk = inst.refine * REFINE_ATK[wlv - 1];
       const safe = WEAPON_SAFE[wlv - 1];
       overRefine = Math.max(0, inst.refine - safe) * OVER_ATK[wlv - 1];
       matkPct += d.matkPct ?? 0;
       if (d.element) weaponElement = d.element;
     } else {
-      def += (d.def ?? 0) + (slot.startsWith('acc') ? 0 : inst.refine);
+      def += Math.round((d.def ?? 0) * (1 + gb)) + (slot.startsWith('acc') ? 0 : inst.refine);
       mdef += d.mdef ?? 0;
     }
   }

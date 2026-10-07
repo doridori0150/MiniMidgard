@@ -156,7 +156,7 @@ export function ItemSlot(props: { id: string; inst?: EquipInst; qty?: number; eq
   const { id, inst } = props;
   const r = rarityOf(id);
   return (
-    <button class={'slot ' + r} onClick={props.onClick} title={inst ? itemName(inst) : ITEMS[id].name}>
+    <button class={'slot ' + r + (inst?.grade ? ' g-' + inst.grade : '')} onClick={props.onClick} title={inst ? itemName(inst) : ITEMS[id].name}>
       <img src={itemIconURL(id)} alt="" draggable={false} />
       {inst && inst.refine > 0 && <span class="r">+{inst.refine}</span>}
       {props.equipped && <span class="eq">E</span>}

@@ -124,6 +124,10 @@ export interface EquipInst {
   refine: number;
   slots: number;
   cards: (string | null)[];
+  /** gear grade (gear.ts; absent = 일반), item level and rolled random options (ENDGAME.md §4) */
+  grade?: string;
+  ilvl?: number;
+  opts?: Bonus[];
 }
 
 export interface Look {

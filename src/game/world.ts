@@ -8,6 +8,7 @@ import { ITEMS, CARD_SKILLS } from './data/items.ts';
 import { zone as zoneDef, ZONES, openers, type ZoneDef } from './data/zones.ts';
 import { CLASSES, lineage } from './data/classes.ts';
 import { expNext } from './exp.ts';
+import { applyGrade, rollGrade } from './gear.ts';
 import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics, heroRole, gateDiscoverable, gateReady, openGate, zoneKnown, inHours, isKeepItem } from './state.ts';
 
 export type DmgKind = 'normal' | 'crit' | 'taken' | 'heal' | 'sp' | 'miss' | 'lucky' | 'total' | 'zero' | 'absorb';
@@ -2034,7 +2035,7 @@ export class World {
       const g: GroundItem = {
         gid: this.gidSeq++, id: d.id, slots: d.slots, x: clamp(gx, 20, this.zone.w - 20), y: clamp(gy, 70, this.zone.h - 20),
         fromX: t.x, fromY: t.y, born: this.time, pickAt: this.time + 900 + n * 120 + (def.kind === 'card' ? 900 : 0), rarity, picked: false,
-        got: this.grant(d.id, d.slots),
+        got: this.grant(d.id, d.slots, t.m),
       };
       this.ground.push(g);
       this.emit({ t: 'drop', gid: g.gid });
@@ -2067,8 +2068,15 @@ export class World {
   }
 
   /** credit a drop to the save (inventory, or zeny when auto-sold) */
-  private grant(id: string, slots?: number): { name: string; zeny: number } {
+  private grant(id: string, slots?: number, from?: MonsterDef): { name: string; zeny: number } {
     const def = ITEMS[id];
+    if (def.kind === 'equip' && from) {
+      // gear grades (ENDGAME.md §4): the drop rolls a grade and options sized by the dropper's level
+      const inst = addItem(this.s, id, 1, slots)!;
+      applyGrade(inst, def, rollGrade(def, { boss: from.boss, legend: def.rarity === 'epic' || def.rarity === 'mvp' }, this.rng), from.lv, this.rng);
+      this.onPersist();
+      return { name: itemName(inst), zeny: 0 };
+    }
     if (def.kind === 'etc' && this.s.settings.autoSellEtc && !isKeepItem(id)) {
       addItem(this.s, id, 1);
       const z = sellStack(this.s, id, 1);
