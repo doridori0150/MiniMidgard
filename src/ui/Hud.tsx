@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
-import { game, useGame, type MainTab } from './game.ts';
+import { game, useGame, type PanelId } from './game.ts';
 import { HeroCanvas, fmt, heroReady } from './widgets.tsx';
 import { CLASSES } from '../game/data/classes.ts';
 import { canJobChange } from '../game/state.ts';
@@ -20,12 +20,12 @@ export function Hud() {
   });
   return (
     <div class="hud">
-      <button class="tb-zone" onClick={() => g.openPage('explore', 'map')} aria-label="사냥터 지도 열기">
+      <button class="tb-zone" onClick={() => g.openPanel('map')} aria-label="지도 열기">
         <b>{z.name}</b><small>{z.id === 'town' ? '휴식' : `Lv ${z.lv[0]}~${z.lv[1]}`}</small>
       </button>
       <span class="sp1" />
       <div class={'zeny' + (pulse ? ' up' : '')} key={pulse}><b>{fmt(s.zeny)}</b> z</div>
-      <button class={'tb-btn' + (g.page === 'settings' ? ' on' : '')} onClick={() => (g.page === 'settings' ? g.closeSettings() : g.openPage('settings'))} aria-label="설정" aria-pressed={g.page === 'settings'}>
+      <button class={'tb-btn' + (g.panel === 'settings' ? ' on' : '')} onClick={() => g.openPanel('settings')} aria-label="설정" aria-pressed={g.panel === 'settings'}>
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.3 2h3.4l.5 2.6c.6.2 1.2.5 1.7.9l2.5-.9 1.7 2.9-2 1.8c.1.6.1 1.2 0 1.8l2 1.8-1.7 2.9-2.5-.9c-.5.4-1.1.7-1.7.9l-.5 2.6h-3.4l-.5-2.6c-.6-.2-1.2-.5-1.7-.9l-2.5.9-1.7-2.9 2-1.8c-.1-.6-.1-1.2 0-1.8l-2-1.8 1.7-2.9 2.5.9c.5-.4 1.1-.7 1.7-.9zM12 8.6a3.4 3.4 0 100 6.8 3.4 3.4 0 000-6.8z" transform="translate(0 1)" /></svg>
       </button>
     </div>
@@ -44,9 +44,10 @@ const BUFF_CHIP: Record<string, [string, string]> = {
 export function PartyRail() {
   const g = useGame();
   const s = g.s;
+  // a companion's portrait opens its popup: status, tactics, order and the party's orders in one place
   const openStatus = (i: number) => {
     g.sel = i;
-    g.openPage('grow', 'status');
+    g.setModal({ kind: 'hero', id: s.heroes[i].id });
   };
   return (
     <div class="prail">
@@ -61,7 +62,7 @@ export function PartyRail() {
         const shield = u ? buffs.reduce((a, b) => a + (b.shield ?? 0), 0) / u.d.maxHp : 0;
         return (
           <button key={h.id} class={'pf' + (g.panel && g.sel === i ? ' sel' : '') + (dead ? ' dead' : '')} style={{ '--cc': cls.color }}
-            aria-label={`${h.name} 스탯 창 열기`} onClick={() => openStatus(i)}>
+            aria-label={`${h.name} 설정 열기`} onClick={() => openStatus(i)}>
             <span class="pf-face"><HeroCanvas hero={h} face zoom={0.74} /><span class="pf-lv">{h.baseLv}</span></span>
             <span class="pf-body">
               <span class="pf-nm"><span>{h.name}</span>
@@ -103,31 +104,27 @@ const ICONS: Record<string, preact.JSX.Element> = {
 export function Nav() {
   const g = useGame();
   const s = g.s;
-  // badges only when there is something the player can actually do (codex_r2 §4-7)
-  const ready = s.heroes.map((h) => heroReady(h));
-  const grow = ready.includes('job') ? <span class="badge glow">전직</span> : ready.includes('grow') ? <span class="badge dot" /> : null;
+  const skillPts = s.heroes.reduce((a, h) => a + h.skillPts, 0);
+  const job = s.heroes.some((h) => !canJobChange(h));
   // red-dot discipline: only for cards found since the card tab was last opened, and only if one can go in a slot
-  const cardsReady = s.totals.cards > (s.cardSeen ?? 0) && insertableCards(s) > 0;
-  const items: [MainTab | null, string, preact.JSX.Element | null, string][] = [
-    [null, '사냥', null, '사냥 화면'],
-    ['party', '파티', null, '파티 작전'],
-    ['grow', '성장', grow, ready.includes('job') ? '성장 (전직 가능)' : ready.includes('grow') ? '성장 (포인트 사용 가능)' : '성장'],
-    ['gear', '장비', null, '장비와 가방'],
-    ['cards', '카드', cardsReady ? <span class="badge dot" /> : null, cardsReady ? '카드 (꽂을 수 있는 새 카드)' : '카드'],
-    ['explore', '탐험', null, '지도와 마을'],
+  const cardsReady = s.totals.cards > (s.cardSeen ?? 0) ? insertableCards(s) : 0;
+  const items: [PanelId, string, preact.JSX.Element | null][] = [
+    ['skills', '스킬', job ? <span class="badge glow">전직</span> : skillPts ? <span class="badge">{skillPts}</span> : null],
+    ['equip', '장비', null],
+    ['cards', '카드', cardsReady ? <span class="badge glow">{cardsReady}</span> : null],
+    ['bag', '가방', null],
+    ['map', '지도', null],
+    ['town', '마을', null],
   ];
   return (
     <nav class="nav">
-      {items.map(([id, label, badge, aria]) => {
-        const on = id === null ? g.page === null : g.page === id;
-        return (
-          <button class={on ? 'on' : ''} aria-current={on ? 'page' : undefined} aria-label={aria} onClick={() => g.openPage(id)}>
-            {ICONS[id ?? 'hunt']}
-            <span>{label}</span>
-            {badge}
-          </button>
-        );
-      })}
+      {items.map(([id, label, badge]) => (
+        <button class={g.panel === id ? 'on' : ''} aria-current={g.panel === id ? 'page' : undefined} onClick={() => game.openPanel(id)}>
+          {ICONS[id]}
+          <span>{label}</span>
+          {badge}
+        </button>
+      ))}
     </nav>
   );
 }

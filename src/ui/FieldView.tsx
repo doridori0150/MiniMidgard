@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from 'preact/hooks';
 import { game, useGame } from './game.ts';
 import { MONSTERS } from '../game/data/monsters.ts';
 import { zone } from '../game/data/zones.ts';
-import { SUBTABS } from './game.ts';
-import { wantsHero } from './Page.tsx';
 import { QuickBar } from './QuickBar.tsx';
 import { PartyRail } from './Hud.tsx';
 
@@ -91,58 +89,28 @@ export function FieldView() {
     ro.observe(ref.current);
     return () => ro.disconnect();
   }, []);
-  // hunting: the whole field, party kept above the quick bar. Managing: a small live band that frames the party
-  const manage = g.page !== null;
-  // short screens (or big text): fold the band while the page body would drop under 240px; the saved choice stays
-  const [, bump] = useState(0);
-  useEffect(() => { const f = () => bump((x) => x + 1); window.addEventListener('resize', f); return () => window.removeEventListener('resize', f); }, []);
-  const squeezed = manage && (() => {
-    const p = g.page!, sub = g.sub[p];
-    const h = (sel: string, fallback: number) => document.querySelector(sel)?.getBoundingClientRect().height ?? fallback;
-    // measured where the rows exist (larger text grows them), the spec heights before the page has rendered
-    const rows = h('.page-title', 48) + (wantsHero(p, sub) ? h('.hero-sel', 56) : 0) + (SUBTABS[p].length > 1 ? h('.subnav', 44) : 0);
-    const hud = h('.hud', 48), nav = h('.nav', 56);
-    return window.innerHeight - hud - nav - rows - 150 < 240;
-  })();
-  const closed = manage && (g.bandClosed() || squeezed);
+  // keep the party visible above an open sheet, or above the quick bar while hunting
   useEffect(() => {
     const r = game.renderer;
-    if (!r) return;
-    r.observe = manage;
-    if (manage) { r.insetBottom = 0; r.snapCamera(); r.resize(); return; }
-    // keep the party above the quick bar as it is actually laid out (safe area, larger text, resizes…)
-    const qb = wrap.current?.querySelector<HTMLElement>('.qbar');
-    const measure = () => { if (qb && wrap.current) r.insetBottom = Math.max(0, wrap.current.clientHeight - qb.offsetTop + 6); };
-    measure(); r.resize();
+    if (!r || !wrap.current) return;
+    r.observe = false;
+    const measure = () => {
+      if (!wrap.current) return;
+      const fieldH = wrap.current.clientHeight;
+      const sheet = wrap.current.parentElement?.querySelector<HTMLElement>('.sheet.open');
+      const qb = wrap.current.querySelector<HTMLElement>('.qbar');
+      r.insetBottom = sheet ? Math.max(0, Math.min(fieldH - 90, sheet.getBoundingClientRect().height))
+        : qb ? Math.max(0, fieldH - qb.offsetTop + 6) : 84;
+    };
+    measure();
     const ro = new ResizeObserver(measure);
-    if (qb) ro.observe(qb);
-    if (wrap.current) ro.observe(wrap.current);
+    ro.observe(wrap.current);
     return () => ro.disconnect();
-  }, [manage, closed]);
-  if (game.renderer) { game.renderer.focusHeroId = g.selId; game.renderer.blockInput = g.modals.length > 0; }
-  // the canvas is always the first child of the same wrapper, so the renderer keeps drawing into the same element
-  const z = zone(g.s.zone);
-  const off = game.renderer?.offscreen ?? 0;
-  if (manage) return (
-    <div class={'field band' + (closed ? ' closed' : '')} ref={wrap}>
-      <div class="band-view" id="band-canvas">
-        <canvas class="main" ref={ref} />
-        <button class="band-hit" tabIndex={-1} aria-hidden="true" onClick={() => g.toggleBand()} />
-      </div>
-      <button class="band-bar" aria-expanded={!closed} aria-controls="band-canvas" onClick={() => (squeezed ? g.goHunt() : g.toggleBand())}>
-        <b>{z.name}</b><span>· {z.id === 'town' ? '마을' : g.world.wipeUntil > 0 ? '재정비 중' : '사냥 진행'}</span>
-        {off > 0 && !closed && <small>화면 밖 동료 {off}명</small>}
-        <span class="sp1" />
-        {squeezed ? <small class="band-go">사냥 화면에서 보기 ›</small> : <i class="band-chev" aria-hidden="true">{closed ? '▾' : '▴'}</i>}
-        <span class="sr-only">{squeezed ? '사냥 화면으로' : closed ? '전투 화면 펼치기' : '전투 화면 접기'}</span>
-      </button>
-    </div>
-  );
+  }, [g.panel]);
+  if (game.renderer) game.renderer.blockInput = g.modals.length > 0;
   return (
     <div class="field" ref={wrap}>
-      <div class="band-view">
-        <canvas class="main" ref={ref} />
-      </div>
+      <canvas class="main" ref={ref} />
       <PartyRail />
       <Minimap />
       <Gauges />

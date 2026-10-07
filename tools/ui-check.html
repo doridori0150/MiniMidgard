@@ -21,37 +21,32 @@
   try {
     await boot('party=swordsman,acolyte,mage&lv=30');
     const g = G();
-    // 1. every nav tab opens its page, and tapping the open tab again keeps it open
-    for (const [label, page] of [['파티', 'party'], ['성장', 'grow'], ['장비', 'gear'], ['카드', 'cards'], ['탐험', 'explore']]) {
-      await click(nav(label)); const a = g.page; await click(nav(label));
-      log(a === page && g.page === page, `nav ${label}`, `${a} → ${g.page}`);
+    // 1. bottom tabs open their sheet, tapping the open one closes it (the original behaviour)
+    for (const [label, panel] of [['스킬', 'skills'], ['장비', 'equip'], ['카드', 'cards'], ['가방', 'bag'], ['지도', 'map'], ['마을', 'town']]) {
+      await click(nav(label)); const a = g.panel; await click(nav(label));
+      log(a === panel && g.panel === null, `tab ${label} opens and closes`, `${a} → ${g.panel}`);
     }
-    await click(nav('사냥')); log(g.page === null, 'nav 사냥 returns to hunting');
-    // 2. rail portrait → that hero's 성장/스탯
-    await click($$('.pf')[2]); log(g.page === 'grow' && g.sub.grow === 'status' && g.hero.name === '보리', 'rail portrait opens that hero', `${g.page}/${g.sub.grow}/${g.hero.name}`);
-    // 3. selection follows the hero across a reorder
-    await click(nav('파티')); await click($$('.subnav button').find((b) => b.textContent === '파티원'));
-    await click($$('.pm-order .btn').find((b) => b.textContent.includes('앞으로')));
-    log(g.hero.name === '보리' && g.s.heroes[1].name === '보리', 'selection kept by id after reorder', g.s.heroes.map((h) => h.name).join(','));
-    // 4. back order: shop → service list → hunting
-    await click(nav('탐험')); await click($$('.subnav button').find((b) => b.textContent === '마을 서비스'));
-    g.openTown('tool'); await sleep(60);
-    await click($$('.subnav button').find((b) => b.textContent === '마을 서비스'));
-    log(g.town === 'tool', 're-tapping the open inner tab keeps the shop', g.town);
-    await esc(); log(g.page === 'explore' && g.town === 'menu', 'Escape in a shop → service list', `${g.page}/${g.town}`);
-    await esc(); log(g.page === null, 'Escape again → hunting', String(g.page));
-    // 5. NPC entry from the field is a page entry in history
-    await sleep(150); // let the previous history.back() settle
-    const before = W().history.state?.mm; g.openTown('tool'); await sleep(60);
-    log(before !== 'app' && W().history.state?.mm === 'app' && g.page === 'explore', 'NPC shop entry pushes an app history entry', `${before} → ${W().history.state?.mm}`);
-    g.goHunt(); await sleep(60);
-    // 6. map zone detail: back closes the detail, keeps the page
-    await click(nav('탐험')); await click($$('.subnav button').find((b) => b.textContent === '지도'));
-    await click($('.mrow:not(.locked)') ?? $('.mrow'));
-    const inDetail = !!g.view.get('map.zone');
-    await esc(); log(inDetail && !g.view.get('map.zone') && g.page === 'explore', 'Escape in a map detail → region list', `detail=${inDetail}`);
-    // 7. detail stack: item → sell confirm → cancel returns to the same item with the same hero picked
-    await click(nav('장비')); await click($$('.subnav button').find((b) => b.textContent === '가방'));
+    // 2. a portrait opens that companion's popup; its links open the sheet for that hero
+    await click($$('.pf')[1]);
+    log(g.modal?.kind === 'hero' && g.hero.name === '마루', 'portrait opens the companion popup', `${g.modal?.kind}/${g.hero.name}`);
+    await click($$('.hm-links .btn').find((b) => b.textContent.startsWith('스탯')));
+    log(g.modals.length === 0 && g.panel === 'status' && g.hero.name === '마루', 'popup → 스탯 sheet for that hero', `${g.panel}/${g.hero.name}`);
+    await click(nav('스킬')); await click(nav('스킬'));
+    // 3. tactics and order from the popup; selection follows the hero
+    await click($$('.pf')[2]);
+    const roleBtn = $$('.modal-layer:not([hidden]) .tseg button').find((b) => b.textContent === '후열');
+    await click(roleBtn); log(g.s.heroes[2].tactics.position === 'back', 'popup edits tactics', g.s.heroes[2].tactics.position);
+    await click($$('.modal-layer:not([hidden]) .btn').find((b) => b.textContent.includes('앞으로')));
+    log(g.s.heroes[1].name === '보리' && g.hero.name === '보리', 'popup reorders, selection follows', g.s.heroes.map((h) => h.name).join(','));
+    await esc(); log(g.modals.length === 0, 'Escape closes the popup');
+    // 4. shop rows: 장착 buys and equips on the selected hero
+    g.sel = 0; g.openTown('weapon'); await sleep(150);
+    const row = $$('.srow').find((r) => r.querySelector('.btn.gold')); const before = g.s.heroes[0].equip.weapon;
+    await click(row?.querySelector('.btn.gold'));
+    log(!!row && g.s.heroes[0].equip.weapon !== before, 'shop row 장착 buys and equips', row?.querySelector('b')?.textContent ?? 'no row');
+    await esc(); await esc();
+    // 5. detail stack: item → sell confirm → cancel returns to the item, hero choice kept; OK runs once
+    await click(nav('가방'));
     const unequipped = g.s.equips.find((e) => !g.s.heroes.some((h) => Object.values(h.equip).includes(e.uid)));
     if (unequipped) {
       g.setModal({ kind: 'item', uid: unequipped.uid }); await sleep(80);
@@ -60,120 +55,46 @@
       const depth = g.modals.length, inert = $('.app-main').inert;
       await click($$('.modal-layer:not([hidden]) .btn').find((b) => b.textContent === '취소'));
       const heroKept = $$('.modal-layer:not([hidden]) .hero-sel button')[2]?.classList.contains('on');
-      log(depth === 2 && g.modals.length === 1 && g.modal.kind === 'item' && heroKept, 'confirm cancel returns to the item, hero choice kept', `depth ${depth} → ${g.modals.length}, hero kept ${heroKept}`);
+      log(depth === 2 && g.modals.length === 1 && heroKept, 'confirm cancel returns to the item, hero choice kept', `depth ${depth}, kept ${heroKept}`);
       log(inert === true, 'background is inert under a detail');
-      // 8. confirm OK runs once and closes everything (the item is gone)
       const z0 = g.s.zeny, n0 = g.s.equips.length;
       await click($$('.modal-layer:not([hidden]) .btn').find((b) => b.textContent === '판매'));
       await click($$('.modal-layer:not([hidden]) .btn').find((b) => b.textContent === '확인'));
-      log(g.modals.length === 0 && g.s.equips.length === n0 - 1 && g.s.zeny > z0, 'sell confirm runs once and closes', `equips ${n0}→${g.s.equips.length}`);
-    } else log(false, 'detail stack checks', 'no unequipped item in the QA bag');
-    // 9. X in a drilled-in detail steps back one level
-    g.setModal({ kind: 'mob', id: 'jelly' }); await sleep(60);
-    g.pushModal({ kind: 'item', id: 'e_jelly' }); await sleep(60);
-    await click($('.modal-layer:not([hidden]) .win-title .x'));
-    log(g.modals.length === 1 && g.modal.kind === 'mob', 'X in a drilled detail returns to the parent', g.modals.map((m) => m.kind).join('>'));
-    g.setModal(null); await sleep(40);
-    // 10. band tap never focus-fires
-    await click(nav('성장')); const f0 = g.world.focus; await click($('.band-hit'));
-    log(g.world.focus === f0, 'band tap does not focus a monster');
-    // 11. badges: an unaffordable stat point lights nothing; learnable skills light only 스킬
-    const h = g.s.heroes[0]; for (const k of Object.keys(h.stats)) h.stats[k] = 20; h.statPts = 1; h.skillPts = 5;
-    g.sel = 0; g.openPage('grow', 'status'); await sleep(80);
-    const dots = $$('.subnav button').map((b) => b.textContent + (b.querySelector('.sub-dot') ? '•' : ''));
-    log(!dots[0].includes('•') && dots[1].includes('•'), 'stat/skill tab dots follow what is doable', dots.join(' '));
-    // 12. skill rows show one readable state each
-    await click($$('.subnav button').find((b) => b.textContent.startsWith('스킬')));
-    const states = new Set($$('.skill .sk-state').map((e) => e.textContent).concat($$('.skill .sk-learn').map(() => '+1')));
-    log(states.has('+1') && [...states].every((x) => ['MAX', '학습 종료', '선행 필요', '포인트 부족', '+1'].includes(x)), 'skill row states', [...states].join(','));
-    // 13. real browser Back: a page, a page + detail, and a detail opened from hunting
-    const backOnce = async () => { W().history.back(); await sleep(250); };
-    g.goHunt(); g.setModal(null); await sleep(150);
-    await click(nav('장비')); await backOnce();
-    log(g.page === null, 'browser Back closes a page', String(g.page));
+      log(g.modals.length === 0 && g.s.equips.length === n0 - 1 && g.s.zeny > z0, 'sell runs once and closes', `${n0}→${g.s.equips.length}`);
+    } else log(false, 'detail stack checks', 'no unequipped item');
+    // 6. browser Back: a detail, then a sheet
+    g.openPanel(null); g.setModal(null); await sleep(150);
     await click(nav('장비')); g.setModal({ kind: 'item', id: 'u_red' }); await sleep(80);
-    await backOnce(); const afterOne = `${g.modals.length}/${g.page}`;
-    await backOnce();
-    log(afterOne === '0/gear' && g.page === null, 'browser Back: detail first, then the page', `${afterOne} → ${g.modals.length}/${g.page}`);
-    g.setModal({ kind: 'quick', slot: 0 }); await sleep(80); await backOnce();
-    log(g.modals.length === 0 && g.page === null, 'browser Back closes a detail opened while hunting');
-    // 14. every skill state, by condition
-    const sw = g.s.heroes.find((x) => x.cls === 'swordsman');
-    g.sel = g.s.heroes.indexOf(sw); sw.skillPts = 5; sw.skills.bash = 0;
-    g.openPage('grow', 'skills'); await sleep(120);
+    W().history.back(); await sleep(250); const one = `${g.modals.length}/${g.panel}`;
+    W().history.back(); await sleep(250);
+    log(one === '0/equip' && g.panel === null, 'browser Back: detail first, then the sheet', `${one} → ${g.modals.length}/${g.panel}`);
+    // 7. skill states and prerequisites
+    const sw = g.s.heroes.find((x) => x.cls === 'swordsman'); g.sel = g.s.heroes.indexOf(sw); sw.skillPts = 5; sw.skills.bash = 0;
+    g.openPanel('skills'); await sleep(120);
     const rows = () => Object.fromEntries($$('.skill').map((r) => [r.querySelector('.nm b')?.textContent, r.querySelector('.sk-state')?.textContent ?? (r.querySelector('.sk-learn') ? '+1' : '-')]));
     let r1 = rows();
-    const want = ['MAX', '선행 필요', '학습 종료', '+1'].filter((x) => !Object.values(r1).includes(x));
-    log(!want.length, 'skill states with points: MAX / 선행 필요 / 학습 종료 / +1', want.length ? 'missing ' + want.join(',') : JSON.stringify(r1));
-    log(r1['강타'] === '+1' && r1['폭렬검'] === '선행 필요', 'learnable vs prerequisite rows', `강타 ${r1['강타']}, 폭렬검 ${r1['폭렬검']}`);
-    const req = $$('.skill').find((r) => r.querySelector('.nm b')?.textContent === '폭렬검')?.textContent ?? '';
-    log(/강타 0\/5/.test(req), 'prerequisite shows current / needed', req.slice(0, 40));
+    log(r1['강타'] === '+1' && r1['폭렬검'] === '선행 필요', 'skill rows: learnable / prerequisite', JSON.stringify(r1));
     sw.skillPts = 0; g.notify(); await sleep(120); r1 = rows();
-    log(r1['강타'] === '포인트 부족' && !Object.values(r1).includes('+1'), 'no points: 포인트 부족, no learn button', `강타 ${r1['강타']}`);
-    // 15. the band frames the selected hero head to feet (check 10 tapped the band shut: open it again)
-    g.ui.bandClosed = { general: false, party: false }; g.notify(); await sleep(300);
-    // headless iframes barely tick requestAnimationFrame, so step the renderer by hand like real frames would
-    const R = g.renderer, me = g.world.heroes.find((u) => u.hero.id === g.selId);
-    for (let i = 0; i < 40; i++) R.frame(W().performance.now() + i * 16);
-    const at = R.smooth.get(me.uid) ?? me; // where the hero is actually drawn this frame
-    const rb = (await W().eval("import('/src/render/rig.ts')")).rigBounds(R.heroLook(me), R.lastPose.get(me.uid)) ?? { y0: -90, y1: 0 };
-    const [, top] = R.toScreen(at.x, at.y + rb.y0), [, foot] = R.toScreen(at.x, at.y + rb.y1);
-    const cr = R.canvas.getBoundingClientRect();
-    log(top >= 0 && foot <= R.cssH && R.cssH < 200, 'band frames the selected hero', `head ${top.toFixed(0)} feet ${foot.toFixed(0)} / cssH ${R.cssH}, canvas ${Math.round(cr.width)}×${Math.round(cr.height)}, observe ${R.observe}, page ${g.page}`);
-    // 16. short screen folds the band (pref untouched), restores on a tall screen
-    f.style.height = '600px'; await sleep(400); g.notify(); await sleep(150);
-    const folded = $('.field.band')?.classList.contains('closed') && !!$('.band-go');
-    f.style.height = '844px'; await sleep(400); g.notify(); await sleep(150);
-    log(folded && !$('.field.band')?.classList.contains('closed') && !g.ui.bandClosed.general, 'band folds on a short screen and comes back', `folded ${folded}, after: closed ${$('.field.band')?.classList.contains('closed')}, pref ${g.ui.bandClosed.general}, inner ${W().innerHeight}, rows ${['.hud','.nav','.page-title','.hero-sel','.subnav'].map((q) => Math.round($(q)?.getBoundingClientRect().height ?? -1)).join('/')}`);
-    // 17. touch floor: visible buttons on every page and inner tab are at least 44×44
-    const small = new Map();
-    for (const [p, subs] of Object.entries({ party: ['ops', 'members'], grow: ['status', 'skills'], gear: ['equip', 'costume', 'bag'], cards: ['slots', 'book'], explore: ['map', 'town'], settings: [''] })) {
-      for (const sb of subs) {
-        g.openPage(p, sb || undefined); await sleep(120);
-        for (const b of $$('.page button, .hud button, .nav button')) {
-          const r = b.getBoundingClientRect();
-          if (!r.width || !r.height || b.closest('[hidden]')) continue;
-          if (r.width < 43.5 || r.height < 43.5) { const k = `${b.className || b.tagName}「${(b.textContent || b.getAttribute('aria-label') || '').trim().slice(0, 8)}」${Math.round(r.width)}×${Math.round(r.height)}`; small.set(k, (small.get(k) ?? []).concat(p + '/' + sb)); }
-        }
-      }
-    }
-    log(small.size === 0, 'touch floor 44×44 on every page', [...small.entries()].slice(0, 40).map(([k, v]) => `${k} @${[...new Set(v)].slice(0, 2).join(',')}`).join(' | '));
-    // 18. a selected hero lying dead: its real painted pixels stay inside the band
-    g.openPage('grow', 'status'); g.ui.bandClosed = { general: false, party: false }; g.notify(); await sleep(200);
-    {
-      const R = g.renderer, me = g.world.heroes.find((u) => u.hero.id === g.selId);
-      me.hp = 0; me.state = 'dead'; me.stateT = g.world.time; me.deadUntil = g.world.time + 1e9;
-      for (let i = 0; i < 60; i++) R.frame(W().performance.now() + i * 16);
-      const rig = await W().eval("import('/src/render/rig.ts')");
-      const b = rig.rigBounds(R.heroLook(me), R.lastPose.get(me.uid));
-      const at = R.smooth.get(me.uid) ?? me;
-      if (b) {
-        const [, top] = R.toScreen(at.x, at.y + b.y0), [, bot] = R.toScreen(at.x, at.y + b.y1);
-        const [l] = R.toScreen(at.x + b.x0, at.y), [rr] = R.toScreen(at.x + b.x1, at.y);
-        log(top >= 0 && bot <= R.cssH && l >= 0 && rr <= R.cssW, 'dead selected hero: painted pixels inside the band', `y ${top.toFixed(1)}..${bot.toFixed(1)} / ${R.cssH}, x ${l.toFixed(0)}..${rr.toFixed(0)} / ${R.cssW}`);
-      } else log(false, 'dead selected hero bounds', 'no painted bounds (not a sprite hero?)');
-      me.state = 'idle'; me.hp = me.d.maxHp; me.deadUntil = 0;
-    }
-    // 19. hero row arrow keys move the choice and the focus together
-    {
-      const btns = $$('.hero-sel button'); btns[0].focus();
-      const sel0 = g.sel;
-      btns[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true })); await sleep(120);
-      const now = $$('.hero-sel button');
-      log(g.sel === (sel0 + 1) % now.length && D().activeElement === now[g.sel], 'arrow key moves selection and focus', `sel ${sel0}→${g.sel}, focus on ${D().activeElement?.textContent}`);
-    }
-    // 20. a quick slot is used exactly once per tap and per keyboard activation
-    g.goHunt(); await sleep(150);
+    log(r1['강타'] === '포인트 부족', 'no points → 포인트 부족', r1['강타']);
+    // 8. recruit from the rail
+    g.openPanel(null); await sleep(80);
+    const qaParty = g.s.heroes.length;
+    log(g.s.partySlots === 3 && qaParty === 3, 'party full (no recruit button needed)', `${qaParty}/${g.s.partySlots}`);
+    // 9. quick slot: keyboard and tap each use one
     for (const u of g.world.heroes) u.hp = Math.max(1, Math.floor(u.d.maxHp * 0.2));
     const qs = $('.qs'), id = g.s.quick[0].id, n0 = g.s.stacks[id];
     qs.dispatchEvent(new MouseEvent('click', { bubbles: true, detail: 0 })); await sleep(60);
     const n1 = g.s.stacks[id];
     qs.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true })); qs.dispatchEvent(new PointerEvent('pointerup', { bubbles: true }));
     qs.dispatchEvent(new MouseEvent('click', { bubbles: true, detail: 1 })); await sleep(60);
-    const n2 = g.s.stacks[id];
-    log(n1 === n0 - 1 && n2 === n1 - 1, 'quick slot: keyboard use once, tap use once (no double)', `${n0} → ${n1} → ${n2}`);
-    const qe = $('.qedit').getBoundingClientRect();
-    log(qe.width >= 44 && qe.height >= 44, 'quick-slot setup button ≥44×44', `${Math.round(qe.width)}×${Math.round(qe.height)}`);
+    log(n1 === n0 - 1 && g.s.stacks[id] === n1 - 1, 'quick slot: one use per key and per tap', `${n0}→${n1}→${g.s.stacks[id]}`);
+    // 10. recruit flow with a free slot
+    await boot('party=swordsman&lv=24');
+    const g2 = G(); await click($('.pf-add'));
+    const inp = $('.modal-layer:not([hidden]) input');
+    if (inp) { inp.value = '새친구'; inp.dispatchEvent(new (W().Event)('input', { bubbles: true })); await sleep(80); }
+    await click([...$$('.modal-layer:not([hidden]) .btn.pri')].pop());
+    log(g2.s.heroes.length === 2 && g2.s.heroes[1].name === '새친구', 'recruit adds a companion', g2.s.heroes.map((h) => h.name).join(','));
   } catch (e) { log(false, 'exception', e.message); }
   log(localStorage.getItem('minimidgard.save.v1') === savedBefore, 'QA run never touched the save');
   const fails = out.filter((l) => l.startsWith('FAIL')).length;

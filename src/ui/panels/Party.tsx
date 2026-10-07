@@ -74,78 +74,52 @@ function Seg<K extends string | number>(props: { opts: [K, string][]; value: K; 
   );
 }
 
-export function PartyPanel(props: { view?: 'ops' | 'members' } = {}) {
+/** one hero's role + tactics editor (the companion popup and the party sheet share it) */
+export function HeroTactics(props: { h: Hero }) {
+  const g = useGame();
+  const h = props.h;
+  const u = g.world.heroes.find((x) => x.hero.id === h.id);
+  const role = u ? g.world.roleOf(u) : 'melee';
+  const tac = h.tactics;
+  const custom = !same(tac, defaultTactics(h.cls));
+  const setTac = (t: Partial<Tactics>) => { h.tactics = { ...h.tactics, ...t }; g.commit('click'); };
+  return (
+    <div class="tac">
+      {roleOptions(h.cls).length > 1 && (
+        <div class="tac-row">
+          <div class="tac-l">역할</div>
+          <Seg opts={[['auto', `자동·${roleName(h.cls, autoRole(h))}`] as [string, string], ...roleOptions(h.cls).map((r) => [r, roleName(h.cls, r)] as [string, string])]}
+            value={tac.role ?? 'auto'} onPick={(v) => setTac({ role: v as Tactics['role'] })} />
+          <div class="tac-d">{roleDesc(h.cls, role)}{(tac.role ?? 'auto') === 'auto' && isAco(h.cls) ? ' (자동: STR이 INT보다 높으면 전투)' : ''}</div>
+        </div>
+      )}
+      {([['공격 대상', TARGET, 'target'], ['위치', POSITION, 'position'], ['스킬 사용', SKILLS, 'skills'], ['추격 범위', CHASE, 'chase']] as const).map(([label, opts, key]) => {
+        const cur = (opts as readonly Opt<string>[]).find((o) => o[0] === tac[key])!;
+        return (
+          <div class="tac-row">
+            <div class="tac-l">{label}</div>
+            <Seg opts={(opts as readonly Opt<string>[]).map((o) => [o[0], o[1]] as [string, string])} value={tac[key]} onPick={(v) => setTac({ [key]: v } as Partial<Tactics>)} />
+            <div class="tac-d">{key === 'position' && tac.position === 'auto' ? `직업에 맞게: ${AUTO_POS[role]}` : cur[2]}</div>
+          </div>
+        );
+      })}
+      <div class="row" style={{ marginTop: '4px' }}>
+        <span class="small muted">힐 기준은 스킬 창, 포션은 퀵슬롯에서 설정합니다.</span>
+        <span class="sp1" />
+        <button class="btn sm" disabled={!custom} onClick={() => { h.tactics = defaultTactics(h.cls); g.commit('click'); }}>직업 추천값</button>
+      </div>
+    </div>
+  );
+}
+
+/** the party-wide orders: one-tap presets + pull / rest */
+export function PartyOps() {
   const g = useGame();
   const s = g.s;
-  const [open, setOpen] = useState<number | null>(s.heroes.length === 1 ? 0 : null);
-  const move = (i: number, d: number) => {
-    const j = i + d;
-    if (j < 0 || j >= s.heroes.length) return;
-    const keep = g.selId;
-    [s.heroes[i], s.heroes[j]] = [s.heroes[j], s.heroes[i]];
-    g.world.syncParty();
-    g.selId = keep; // the selection follows the hero, not the slot
-    if (open === i) setOpen(j); else if (open === j) setOpen(i);
-    g.commit('click');
-  };
   const setOrders = (o: Partial<PartyOrders>) => { s.orders = { ...s.orders, ...o }; g.commit('click'); };
-  const setTac = (h: Hero, t: Partial<Tactics>) => { h.tactics = { ...h.tactics, ...t }; g.commit('click'); };
   const active = PRESETS.find((p) => same(p.orders, s.orders) && s.heroes.every((h) => same(p.tac(h), h.tactics)));
-
-  const info = (h: Hero) => {
-    const u = g.world.heroes.find((x) => x.hero.id === h.id);
-    const role = u ? g.world.roleOf(u) : 'melee';
-    const tac = h.tactics;
-    const line = `${TARGET.find((o) => o[0] === tac.target)![1]} · ${tac.position === 'auto' ? AUTO_POS[role] : POSITION.find((o) => o[0] === tac.position)![1]} · 스킬 ${SKILLS.find((o) => o[0] === tac.skills)![1]} · ${CHASE.find((o) => o[0] === tac.chase)![1]}`;
-    return { u, role, tac, line, custom: !same(tac, defaultTactics(h.cls)) };
-  };
-  const ident = (h: Hero, i: number) => {
-    const { u, role, line, custom } = info(h);
-    return (
-      <>
-        <span class="pmem-face"><HeroCanvas hero={h} face zoom={0.74} animate={false} /></span>
-        <span class="pmem-txt">
-          <span class="pmem-nm"><b>{h.name}</b>{i === 0 && <i class="lead">리더</i>}<i class="role" style={{ background: ROLE[role][1] }}>{roleName(h.cls, role)}</i></span>
-          <span class="pmem-sub"><span style={{ color: CLASSES[h.cls].color }}>{CLASSES[h.cls].name}</span> Lv {h.baseLv}</span>
-          <span class="pmem-tac">{line}{custom && <i class="cust">사용자</i>}</span>
-          {u?.doing && <span class="pmem-doing" aria-live="off">지금: {u.doing}</span>}
-        </span>
-      </>
-    );
-  };
-  const editor = (h: Hero) => {
-    const { role, tac, custom } = info(h);
-    return (
-      <div class="tac">
-        {roleOptions(h.cls).length > 1 && (
-          <div class="tac-row">
-            <div class="tac-l">역할</div>
-            <Seg opts={[['auto', `자동·${roleName(h.cls, autoRole(h))}`] as [string, string], ...roleOptions(h.cls).map((r) => [r, roleName(h.cls, r)] as [string, string])]}
-              value={tac.role ?? 'auto'} onPick={(v) => setTac(h, { role: v as Tactics['role'] })} />
-            <div class="tac-d">{roleDesc(h.cls, role)}{(tac.role ?? 'auto') === 'auto' && isAco(h.cls) ? ' (자동: STR이 INT보다 높으면 전투)' : ''}</div>
-          </div>
-        )}
-        {([['공격 대상', TARGET, 'target'], ['위치', POSITION, 'position'], ['스킬 사용', SKILLS, 'skills'], ['추격 범위', CHASE, 'chase']] as const).map(([label, opts, key]) => {
-          const cur = (opts as readonly Opt<string>[]).find((o) => o[0] === tac[key])!;
-          return (
-            <div class="tac-row">
-              <div class="tac-l">{label}</div>
-              <Seg opts={(opts as readonly Opt<string>[]).map((o) => [o[0], o[1]] as [string, string])} value={tac[key]} onPick={(v) => setTac(h, { [key]: v } as Partial<Tactics>)} />
-              <div class="tac-d">{key === 'position' && tac.position === 'auto' ? `직업에 맞게: ${AUTO_POS[role]}` : cur[2]}</div>
-            </div>
-          );
-        })}
-        <div class="row" style={{ marginTop: '4px' }}>
-          <span class="small muted">힐·포션 기준은 성장 › 스킬과 퀵슬롯에서 설정합니다.</span>
-          <span class="sp1" />
-          <button class="btn sm" disabled={!custom} onClick={() => { h.tactics = defaultTactics(h.cls); g.commit('click'); }}>직업 추천값</button>
-        </div>
-      </div>
-    );
-  };
-  const ops = (
+  return (
     <>
-      <div class="pt-sec">작전</div>
       <div class="presets">
         {PRESETS.map((p) => (
           <button class={'preset' + (active?.id === p.id ? ' on' : '')} aria-pressed={active?.id === p.id} onClick={() => {
@@ -158,7 +132,7 @@ export function PartyPanel(props: { view?: 'ops' | 'members' } = {}) {
           </button>
         ))}
       </div>
-      {!active && <div class="small muted" style={{ margin: '-2px 2px 6px' }}>지금은 사용자 작전입니다 (개별 설정이 프리셋과 다름).</div>}
+      {!active && <div class="small muted" style={{ margin: '4px 2px 6px' }}>지금은 사용자 작전입니다 (개별 설정이 프리셋과 다름).</div>}
       <div class="orders">
         <div class="ord-row">
           <span class="ord-l">동시 교전<small>리더가 끌어올 최대 몹 수</small></span>
@@ -171,76 +145,21 @@ export function PartyPanel(props: { view?: 'ops' | 'members' } = {}) {
       </div>
     </>
   );
-  const footer = (
-    <>
-      {s.heroes.length < s.partySlots && <button class="btn pri block" style={{ marginTop: '8px' }} onClick={() => g.setModal({ kind: 'recruit' })}>+ 새 동료 영입</button>}
-      <div class="hint" style={{ marginTop: '8px' }}>
-        파티 슬롯은 Lv 10, Lv 22에 열립니다. 경험치는 파티원끼리 나누고(인원당 +15%), 레벨이 낮은 동료는 2.5배로 따라옵니다.
-        탱커를 맨 앞(리더)에 두면 몹을 끌어오고, 후열은 탱커 뒤에서 싸웁니다.
-      </div>
-    </>
-  );
+}
 
-  // page shell: 작전 = shared orders + a summary row per member (tap to edit), 파티원 = the selected hero's tactics
-  if (props.view === 'ops') return (
-    <Win title="파티">
-      <div class="win-body party-body">
-        {ops}
-        <div class="pt-sec">파티원 <span class="muted small">눌러서 역할·전술 편집</span></div>
-        {s.heroes.map((h, i) => (
-          <div class="pmem" key={h.id}>
-            <div class="pmem-head">
-              <button class="pmem-main" onClick={() => { g.sel = i; g.openSub('party', 'members'); }}>{ident(h, i)}<span class="pmem-chev">›</span></button>
-            </div>
-          </div>
-        ))}
-        {footer}
-      </div>
-    </Win>
-  );
-  if (props.view === 'members') {
-    const h = g.hero, i = g.sel;
-    return (
-      <Win title={`파티원 — ${h.name}`}>
-        <div class="win-body party-body">
-          <div class="pmem open">
-            <div class="pmem-head"><div class="pmem-main static">{ident(h, i)}</div></div>
-            <div class="pm-order">
-              <span class="small muted">{i === 0 ? '맨 앞 = 리더: 사냥터를 돌며 몹을 끌어옵니다' : `파티 순서 ${i + 1}번째`}</span>
-              <span class="sp1" />
-              <button class="btn" aria-label={`${h.name} 앞으로`} disabled={i === 0} onClick={() => move(i, -1)}>▲ 앞으로</button>
-              <button class="btn" aria-label={`${h.name} 뒤로`} disabled={i === s.heroes.length - 1} onClick={() => move(i, 1)}>▼ 뒤로</button>
-            </div>
-            {editor(h)}
-          </div>
-          {footer}
-        </div>
-      </Win>
-    );
-  }
+/** reorder within the party (the first hero leads and pulls) */
+export function moveHero(g: ReturnType<typeof useGame>, i: number, d: number) {
+  const s = g.s, j = i + d;
+  if (j < 0 || j >= s.heroes.length) return;
+  const keep = g.selId;
+  [s.heroes[i], s.heroes[j]] = [s.heroes[j], s.heroes[i]];
+  g.world.syncParty();
+  g.selId = keep; // the selection follows the hero, not the slot
+  g.commit('click');
+}
 
-  return (
-    <Win title="파티" onClose={() => g.openPanel(null)}>
-      <div class="win-body party-body">
-        {ops}
-        <div class="pt-sec">파티원 <span class="muted small">맨 위가 리더 — 사냥터를 돌며 몹을 끌어옵니다</span></div>
-        {s.heroes.map((h, i) => {
-          const isOpen = open === i;
-          return (
-            <div class={'pmem' + (isOpen ? ' open' : '')} key={h.id}>
-              <div class="pmem-head">
-                <button class="pmem-main" onClick={() => setOpen(isOpen ? null : i)} aria-expanded={isOpen}>{ident(h, i)}<span class="pmem-chev">{isOpen ? '▲' : '▼'}</span></button>
-                <div class="pmem-order">
-                  <button class="btn xs" aria-label="위로" disabled={i === 0} onClick={() => move(i, -1)}>▲</button>
-                  <button class="btn xs" aria-label="아래로" disabled={i === s.heroes.length - 1} onClick={() => move(i, 1)}>▼</button>
-                </div>
-              </div>
-              {isOpen && editor(h)}
-            </div>
-          );
-        })}
-        {footer}
-      </div>
-    </Win>
-  );
+export function roleLabel(g: ReturnType<typeof useGame>, h: Hero) {
+  const u = g.world.heroes.find((x) => x.hero.id === h.id);
+  const role = u ? g.world.roleOf(u) : 'melee';
+  return { name: roleName(h.cls, role), color: ROLE[role][1] };
 }

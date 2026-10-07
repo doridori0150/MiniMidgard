@@ -37,6 +37,7 @@ export type Modal =
   | { kind: 'job'; heroIdx: number }
   | { kind: 'confirm'; text: string; ok: () => void; danger?: boolean; /** the parent detail stops making sense afterwards (e.g. sold) */ closeAll?: boolean }
   | { kind: 'recruit' }
+  | { kind: 'hero'; id: number }
   | { kind: 'credits' }
   | { kind: 'card'; id: string }
   | { kind: 'quick'; slot: number }
@@ -253,7 +254,7 @@ class Game {
 
   /** legacy adapter: every old openPanel(id) call lands on the matching page/tab; null = back to hunting */
   openPanel(p: PanelId | null) {
-    if (!p) { this.goHunt(); return; }
+    if (!p || this.panel === p) { this.goHunt(); return; } // tapping the open tab closes it, as before
     const [page, sub] = PANEL_TO[p];
     this.openPage(page, page === 'settings' ? undefined : sub);
   }

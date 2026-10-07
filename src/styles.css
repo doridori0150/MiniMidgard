@@ -988,3 +988,15 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .qedit { width: var(--touch-min) !important; height: var(--touch-min) !important; }
 .page .fchip, .page .crow-fx, .page .preset small { font-size: var(--text-caption); }
 .modal .win-title { font-size: var(--text-title); }
+/* companion popup */
+.hero-modal { max-width: 400px; }
+.hm-head { display: flex; gap: 10px; align-items: flex-start; }
+.hm-face { width: 96px; height: 112px; flex: none; border-radius: 10px; background: linear-gradient(#dbe5ff, #b8c8ee); overflow: hidden; }
+.hm-face canvas { width: 96px; height: 112px; display: block; }
+.hm-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.hm-nm { display: flex; align-items: center; gap: 5px; font-size: 15px; }
+.hm-nm .lead, .hm-nm .role { font-style: normal; font-size: 10px; padding: 1px 6px; border-radius: 8px; color: #fff; }
+.hm-nm .lead { background: #e0a020; }
+.hm-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 10px 0 2px; }
+.hm-links .btn { position: relative; min-height: 40px; }
+.hm-pts { position: absolute; top: -6px; right: -4px; font-style: normal; font-size: 10px; background: var(--gold); color: #4a2a00; border-radius: 8px; padding: 0 5px; border: 1px solid #b07a10; }

@@ -96,6 +96,19 @@ function quickBuy(g: ReturnType<typeof useGame>, d: ItemDef, n: number) {
   g.commit('zeny');
 }
 
+/** buy one and put it straight on the selected hero */
+function quickBuyEquip(g: ReturnType<typeof useGame>, d: ItemDef, h: Hero) {
+  const e = buy(g.s, d.id, 1);
+  if (e) { g.toast(e, 'bad'); audio.play('error'); return; }
+  if (d.kind === 'ammo') equipAmmo(g.s, h, d.id);
+  else {
+    const r = equip(g.s, h, g.s.equips[g.s.equips.length - 1].uid);
+    if (r) { g.toast(r, 'bad'); g.commit('zeny'); return; }
+  }
+  g.toast(`${h.name}: ${d.name} 장착!`, 'good');
+  g.commit('zeny');
+}
+
 /** one-line row: tap the row for details, tap the button to buy right away */
 function ShopRow(props: { d: ItemDef; h: Hero; onOpen: () => void }) {
   const g = useGame();
@@ -120,6 +133,7 @@ function ShopRow(props: { d: ItemDef; h: Hero; onOpen: () => void }) {
       <div class="sr-right" onClick={(e) => e.stopPropagation()}>
         <span class={'sr-price' + (g.s.zeny >= price ? '' : ' poor')}>{fmt(price)}z</span>
         <div class="sr-btns">
+          {(d.kind === 'equip' || d.kind === 'ammo') && !err && <button class="btn sm gold" disabled={g.s.zeny < price} onClick={() => quickBuyEquip(g, d, h)}>장착</button>}
           <button class="btn sm pri" disabled={g.s.zeny < price} onClick={() => quickBuy(g, d, 1)}>구매</button>
           {stack && <button class="btn sm" disabled={g.s.zeny < price * 10} onClick={() => quickBuy(g, d, 10)}>×10</button>}
         </div>

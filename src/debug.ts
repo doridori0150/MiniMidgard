@@ -56,5 +56,8 @@ export async function qaBoot(): Promise<boolean> {
   if (page) game.openPage(page as never, q.get('sub') ?? undefined);
   if (q.has('sel')) game.sel = Number(q.get('sel'));
   if (q.get('band') === 'closed') game.ui.bandClosed = { general: true, party: true };
+  const shop = q.get('town'); if (shop) game.openTown(shop as never);
+  const buy = q.get('buy'); if (buy) game.setModal({ kind: 'buy', id: buy });
+  if (q.has('hero')) game.setModal({ kind: 'hero', id: s.heroes[Number(q.get('hero'))]?.id ?? s.heroes[0].id });
   return true;
 }

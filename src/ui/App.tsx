@@ -3,7 +3,11 @@ import { game, useGame } from './game.ts';
 import { Hud, Nav } from './Hud.tsx';
 import { FieldView } from './FieldView.tsx';
 import { Modals } from './Modals.tsx';
-import { ManagePage } from './Page.tsx';
+import { StatusPanel, SkillsPanel } from './panels/StatusSkills.tsx';
+import { EquipPanel, BagPanel } from './panels/EquipBag.tsx';
+import { TownPanel, SettingsPanel } from './panels/World.tsx';
+import { MapPanel } from './WorldMap.tsx';
+import { CardPanel } from './panels/Cards.tsx';
 import { FeaturePicker, LookCanvas } from './widgets.tsx';
 import { newGame, load, defaultLook, HAIR_COLORS, HAIR_STYLES, SKIN_TONES, autoDistribute } from '../game/state.ts';
 import type { Look } from '../game/types.ts';
@@ -16,15 +20,25 @@ function Toasts() {
 
 function GameScreen() {
   const g = useGame();
-  // hunting: HUD → full field → nav. Managing: HUD → live field band → page (title, hero, tabs, body) → nav
-  const manage = g.page !== null;
+  const p = g.panel;
+  // panels slide up over the field like before; the party stays visible above them
+  const tall = p === 'equip' || p === 'town' || p === 'map' || p === 'cards';
   return (
-    <div class={'app' + (manage ? ' manage' : '')}>
+    <div class="app">
       {/* while a detail is open nothing behind it can be tapped, tabbed to or read out */}
       <div class="app-main" inert={g.modals.length > 0}>
         <Hud />
         <FieldView />
-        {manage && <ManagePage />}
+        <div class={'sheet' + (p ? ' open' : '') + (tall ? ' tall' : '')}>
+          {p === 'status' && <StatusPanel />}
+          {p === 'skills' && <SkillsPanel />}
+          {p === 'equip' && <EquipPanel />}
+          {p === 'cards' && <CardPanel />}
+          {p === 'bag' && <BagPanel />}
+          {p === 'map' && <MapPanel />}
+          {p === 'town' && <TownPanel />}
+          {p === 'settings' && <SettingsPanel />}
+        </div>
         <Nav />
       </div>
       <Modals />

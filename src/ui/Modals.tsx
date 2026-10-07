@@ -15,6 +15,7 @@ import { itemIconURL } from '../render/icons.ts';
 import { bonusLines, itemTypeLine, jobsLine } from './format.ts';
 import { audio } from '../audio/audio.ts';
 import { QuickSetupModal } from './QuickBar.tsx';
+import { HeroModal } from './HeroModal.tsx';
 import { MobModal } from './WorldMap.tsx';
 import { BuyModal, SellModal } from './Shop.tsx';
 import { skillIconURL } from '../render/icons.ts';
@@ -314,6 +315,7 @@ function ModalBody(props: { m: Modal }) {
     case 'offline': return <OfflineModal report={m.report} />;
     case 'job': return <JobModal heroIdx={m.heroIdx} />;
     case 'recruit': return <RecruitModal />;
+    case 'hero': return <HeroModal id={m.id} />;
     case 'quick': return <QuickSetupModal slot={m.slot} />;
     case 'mob': return <MobModal id={m.id} />;
     case 'buy': return <BuyModal id={m.id} />;

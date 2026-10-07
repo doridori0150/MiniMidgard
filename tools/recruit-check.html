@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><title>recruit-check</title></head><body>
+<pre id="out">running</pre><iframe id="f" style="width:390px;height:844px;border:0"></iframe>
+<script type="module">
+  const out = []; const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const f = document.getElementById('f');
+  await new Promise((res) => { f.onload = () => setTimeout(res, 1500); f.src = '/?qa&party=swordsman&lv=24'; });
+  const W = f.contentWindow, D = f.contentDocument, g = W.__game;
+  try {
+    out.push('heroes ' + g.s.heroes.length + ' slots ' + g.s.partySlots + ' page ' + g.page);
+    const add = D.querySelector('.pf-add'); out.push('add button: ' + (add ? add.textContent + ' ' + JSON.stringify(add.getBoundingClientRect().toJSON()) : 'none'));
+    add?.click(); await sleep(150);
+    out.push('modal: ' + g.modal?.kind + ', layers ' + D.querySelectorAll('.modal-layer').length + ', input ' + !!D.querySelector('.modal-layer:not([hidden]) input'));
+    const inp = D.querySelector('.modal-layer:not([hidden]) input');
+    if (inp) { inp.focus(); inp.value = '새친구'; inp.dispatchEvent(new W.Event('input', { bubbles: true })); await sleep(120); }
+    const ok = [...D.querySelectorAll('.modal-layer:not([hidden]) .btn')].map((b) => b.textContent + (b.disabled ? '(disabled)' : ''));
+    out.push('buttons: ' + ok.join(' | '));
+    [...D.querySelectorAll('.modal-layer:not([hidden]) .btn.pri')].pop()?.click(); await sleep(300);
+    out.push('after: heroes ' + g.s.heroes.map((h) => h.name).join(',') + ' modal ' + (g.modal?.kind ?? 'none'));
+  } catch (e) { out.push('EXCEPTION ' + e.message + '\n' + e.stack); }
+  const errs = W.__errs ?? [];
+  document.getElementById('out').textContent = out.join('\n') + '\ndone';
+  document.title = 'done';
+</script></body></html>
