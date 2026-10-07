@@ -22,6 +22,79 @@ export interface BuildDef {
   weak: string;
 }
 
+/** ENDGAME.md §1: where a build shines and where it struggles (damage kind, how it lands hits, reach, how it survives) */
+export interface BuildProfile {
+  dmg: 'phys' | 'magic' | 'fixed';
+  hit: 'dex' | 'crit' | 'sure';
+  area: 'single' | 'aoe';
+  survive: 'dodge' | 'hp' | 'heal';
+  /** extra matchups: undead/demon specialist, poison (no effect on undead/formless), weak to large, element swapping */
+  tags?: ('holy' | 'poison' | 'smallOnly' | 'element')[];
+}
+export const PROFILES: Record<string, BuildProfile> = {
+  kn_crit: { dmg: 'phys', hit: 'crit', area: 'single', survive: 'dodge' },
+  kn_agi: { dmg: 'phys', hit: 'dex', area: 'single', survive: 'dodge' },
+  kn_vit: { dmg: 'phys', hit: 'dex', area: 'single', survive: 'hp' },
+  kn_bowl: { dmg: 'phys', hit: 'dex', area: 'aoe', survive: 'hp' },
+  kn_counter: { dmg: 'phys', hit: 'crit', area: 'single', survive: 'hp' },
+  kn_ele: { dmg: 'phys', hit: 'dex', area: 'single', survive: 'hp', tags: ['element'] },
+  kn_spell: { dmg: 'magic', hit: 'dex', area: 'single', survive: 'hp' },
+  wz_intdex: { dmg: 'magic', hit: 'sure', area: 'single', survive: 'hp' },
+  wz_storm: { dmg: 'magic', hit: 'sure', area: 'aoe', survive: 'hp' },
+  wz_freeze: { dmg: 'magic', hit: 'sure', area: 'single', survive: 'hp', tags: ['element'] },
+  wz_vit: { dmg: 'magic', hit: 'sure', area: 'single', survive: 'hp' },
+  wz_soul: { dmg: 'magic', hit: 'sure', area: 'single', survive: 'hp', tags: ['holy'] },
+  wz_elem: { dmg: 'magic', hit: 'sure', area: 'single', survive: 'hp', tags: ['element'] },
+  hu_dex: { dmg: 'phys', hit: 'dex', area: 'single', survive: 'dodge', tags: ['element'] },
+  hu_intblitz: { dmg: 'fixed', hit: 'sure', area: 'single', survive: 'dodge' },
+  hu_fist: { dmg: 'fixed', hit: 'sure', area: 'single', survive: 'dodge' },
+  hu_mob: { dmg: 'fixed', hit: 'sure', area: 'aoe', survive: 'hp' },
+  hu_trap: { dmg: 'fixed', hit: 'sure', area: 'aoe', survive: 'hp' },
+  hu_shower: { dmg: 'phys', hit: 'dex', area: 'aoe', survive: 'hp' },
+  hu_snipe: { dmg: 'phys', hit: 'crit', area: 'single', survive: 'dodge' },
+  pr_support: { dmg: 'magic', hit: 'sure', area: 'single', survive: 'heal' },
+  pr_battle: { dmg: 'phys', hit: 'dex', area: 'single', survive: 'heal', tags: ['holy'] },
+  pr_crit: { dmg: 'phys', hit: 'crit', area: 'single', survive: 'heal', tags: ['holy'] },
+  pr_exorcist: { dmg: 'magic', hit: 'sure', area: 'aoe', survive: 'heal', tags: ['holy'] },
+  pr_heal: { dmg: 'magic', hit: 'sure', area: 'single', survive: 'heal', tags: ['holy'] },
+  pr_wall: { dmg: 'magic', hit: 'sure', area: 'single', survive: 'heal' },
+  as_crit: { dmg: 'phys', hit: 'crit', area: 'single', survive: 'dodge' },
+  as_sonic: { dmg: 'phys', hit: 'dex', area: 'single', survive: 'dodge' },
+  as_dagger: { dmg: 'phys', hit: 'dex', area: 'single', survive: 'dodge', tags: ['smallOnly'] },
+  as_dodge: { dmg: 'phys', hit: 'dex', area: 'single', survive: 'dodge' },
+  as_poison: { dmg: 'fixed', hit: 'dex', area: 'single', survive: 'dodge', tags: ['poison'] },
+  as_grim: { dmg: 'phys', hit: 'dex', area: 'aoe', survive: 'dodge' },
+  as_steal: { dmg: 'phys', hit: 'dex', area: 'single', survive: 'dodge' },
+  bs_battle: { dmg: 'phys', hit: 'dex', area: 'single', survive: 'hp' },
+  bs_cart: { dmg: 'phys', hit: 'dex', area: 'aoe', survive: 'hp' },
+  bs_zeny: { dmg: 'fixed', hit: 'dex', area: 'single', survive: 'hp' },
+  bs_hammer: { dmg: 'phys', hit: 'dex', area: 'aoe', survive: 'hp' },
+  bs_ore: { dmg: 'phys', hit: 'dex', area: 'single', survive: 'hp' },
+};
+
+/** the strong / weak matchups a profile implies, in player words (ENDGAME.md §1) */
+export function matchups(p: BuildProfile | undefined): { strong: string[]; weak: string[] } {
+  if (!p) return { strong: [], weak: [] };
+  const strong: string[] = [], weak: string[] = [];
+  if (p.dmg === 'phys') weak.push('고방어');
+  if (p.dmg === 'magic') { strong.push('고방어'); weak.push('마법 방어·반사'); }
+  if (p.dmg === 'fixed') strong.push('고방어', '고회피');
+  if (p.hit === 'dex') weak.push('날쌘 몹');
+  if (p.hit === 'crit') { strong.push('날쌘 몹'); weak.push('보스(크리 저항)'); }
+  if (p.hit === 'sure' && p.dmg !== 'fixed') strong.push('날쌘 몹');
+  if (p.area === 'aoe') { strong.push('떼'); weak.push('단단한 보스'); } else { strong.push('보스'); weak.push('떼'); }
+  if (p.survive === 'dodge') weak.push('포위');
+  if (p.survive === 'hp') strong.push('포위');
+  if (p.survive === 'heal') strong.push('지구전');
+  for (const t of p.tags ?? []) {
+    if (t === 'holy') strong.push('불사·악마');
+    if (t === 'poison') weak.push('불사·무형(독 무효)');
+    if (t === 'smallOnly') weak.push('대형');
+    if (t === 'element') strong.push('속성 편중');
+  }
+  return { strong: [...new Set(strong)], weak: [...new Set(weak)] };
+}
+
 export const BUILDS: BuildDef[] = [
   // ── 검사 → 기사
   { id: 'kn_crit', line: 'swordsman', name: '광월 크리 기사', pitch: 'DEX를 버리고 크리로 명중을 해결한다. 크리는 회피를 무시한다', weights: { agi: 9, str: 8, luk: 6 }, skills: ['twohand_quicken', 'twohand_mastery'], items: ['w_bloodmoon', 'x_purify'], weak: '요도의 저주 → 정화의 부적 · HP가 낮다 → HP 카드 · 보스는 크리를 덜 맞는다' },

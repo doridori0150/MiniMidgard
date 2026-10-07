@@ -62,6 +62,7 @@ export function HeroModal(props: { id: number }) {
         <div class="sec">파티 작전 (모두에게 적용)</div>
         <PartyOps />
         {s.heroes.length < s.partySlots && <button class="btn pri block" style={{ marginTop: '8px' }} onClick={() => g.setModal({ kind: 'recruit' })}>+ 새 동료 영입</button>}
+        {s.partySlots >= 3 && <button class="btn block" style={{ marginTop: '8px' }} onClick={() => g.pushModal({ kind: 'roster' })}>동료 명단 ({s.bench?.length ?? 0}명 대기)</button>}
       </div>
     </div>
   );

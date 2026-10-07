@@ -237,6 +237,8 @@ export interface GameState {
   lastSave: number;
   heroes: Hero[];
   partySlots: number;
+  /** 동료 명단: recruited heroes waiting on the bench (ENDGAME.md §2); 3 go out, the rest train at 25% EXP */
+  bench?: Hero[];
   active: number;
   zeny: number;
   stacks: Record<string, number>;

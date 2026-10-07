@@ -8,7 +8,7 @@ import { zone } from '../game/data/zones.ts';
 import type { ClassId, CostumeSlot, Look } from '../game/types.ts';
 import {
   addEquip, canEquip, cardFits, compound, defaultLook, equip, equippedBy, itemName, jobChange, newHero, removeStack, nextJobs,
-  sellEquip, sellPrice, sellStack, setCostume, unequipUid, refineInfo, HAIR_COLORS, HAIR_STYLES, equipAmmo, buy, setQuick,
+  sellEquip, sellPrice, sellStack, setCostume, unequipUid, refineInfo, HAIR_COLORS, HAIR_STYLES, equipAmmo, buy, setQuick, rosterRoom,
 } from '../game/state.ts';
 import { heroLookDraw } from '../render/field.ts';
 import { itemIconURL } from '../render/icons.ts';
@@ -20,6 +20,7 @@ import { MobModal } from './WorldMap.tsx';
 import { BuyModal, SellModal } from './Shop.tsx';
 import { BuildModal, PinButton } from './BuildModal.tsx';
 import { TargetsModal } from './Targets.tsx';
+import { RosterModal } from './Roster.tsx';
 import { sourcesOf } from '../game/targets.ts';
 import { skillIconURL } from '../render/icons.ts';
 import { RACE_KO } from '../game/data/elements.ts';
@@ -270,13 +271,16 @@ function RecruitModal() {
       <div class="foot"><button class="btn pri" disabled={!ok} onClick={() => {
         const s = g.s;
         const h = newHero(s, name.trim(), look);
-        s.heroes.push(h);
+        // a free party seat first; with a full party the new recruit waits on the bench (동료 명단)
+        const where = rosterRoom(s);
+        if (!where) { g.toast('동료 자리가 없어요.', 'bad'); return; }
+        if (where === 'party') s.heroes.push(h); else (s.bench ??= []).push(h);
         const k = addEquip(s, 'w_knife'); equip(s, h, k.uid);
         const c = addEquip(s, 'a_cotton'); equip(s, h, c.uid);
-        g.sel = s.heroes.length - 1;
+        if (where === 'party') g.sel = s.heroes.length - 1;
         g.setModal(null);
         g.commit('levelup');
-        g.announce(`${h.name}이(가) 파티에 합류했습니다!`, 'unlock');
+        g.announce(where === 'party' ? `${h.name}이(가) 파티에 합류했습니다!` : `${h.name}이(가) 동료 명단에 들어왔습니다!`, 'unlock');
       }}>영입하기</button></div>
     </div>
   );
@@ -326,6 +330,7 @@ function ModalBody(props: { m: Modal }) {
     case 'sell': return <SellModal id={m.id} uid={m.uid} />;
     case 'build': return <BuildModal heroId={m.heroId} />;
     case 'targets': return <TargetsModal />;
+    case 'roster': return <RosterModal />;
     case 'confirm': return <ConfirmModal text={m.text} ok={m.ok} danger={m.danger} closeAll={m.closeAll} />;
     case 'card': return null;
     case 'credits': return (

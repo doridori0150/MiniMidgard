@@ -2,7 +2,7 @@
 // follow its stat axis; each card shows the skills it leans on, its identity items and where they drop, and the
 // weakness that becomes the next thing to farm.
 import { useGame } from './game.ts';
-import { buildsFor, type BuildDef } from '../game/data/builds.ts';
+import { buildsFor, matchups, PROFILES, type BuildDef } from '../game/data/builds.ts';
 import { ITEMS } from '../game/data/items.ts';
 import { MONSTERS } from '../game/data/monsters.ts';
 import { SKILLS } from '../game/data/skills.ts';
@@ -37,6 +37,15 @@ function BuildCard(props: { b: BuildDef; on: boolean; pick: () => void }) {
     <div class={'bd-card' + (on ? ' on' : '')}>
       <div class="bd-head"><b>{b.name}</b>{on && <i class="bd-on">선택됨</i>}</div>
       <div class="bd-pitch">{b.pitch}</div>
+      {(() => {
+        const mu = matchups(PROFILES[b.id]);
+        return (
+          <div class="bd-mu">
+            {mu.strong.map((x) => <span class="mu good">강 · {x}</span>)}
+            {mu.weak.map((x) => <span class="mu bad">약 · {x}</span>)}
+          </div>
+        );
+      })()}
       <div class="bd-stats">{stats.map(([k, w]) => <span class="bd-stat"><b>{STAT_KO[k]}</b><i style={{ width: w * 6 + 'px' }} /></span>)}</div>
       {b.skills.length > 0 && <div class="bd-line"><span>핵심 스킬</span>{b.skills.map((id) => SKILLS[id]?.name).filter(Boolean).join(' · ')}</div>}
       {items.map((id) => {

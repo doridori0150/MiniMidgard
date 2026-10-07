@@ -1103,3 +1103,15 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .bd-item .pin-btn { align-self: center; }
 /* the name keeps at least ~3 letters next to the buff chips */
 .pf-nm > span:first-child { min-width: 3.2em; }
+.bd-mu { display: flex; flex-wrap: wrap; gap: 3px; }
+.mu { font-family: 'Galmuri9'; font-size: 10px; padding: 1px 6px; border-radius: 8px; border: 1px solid; }
+.mu.good { color: #1f7a30; border-color: #9fd8a8; background: #effaf1; }
+.mu.bad { color: #a83a2a; border-color: #f0b8a8; background: #fff2ee; }
+
+/* ───── 동료 명단 */
+.roster-modal .win-body { max-height: min(74vh, 640px); overflow-y: auto; }
+.ro-row { display: flex; align-items: center; gap: 8px; padding: 6px 4px; border-bottom: 1px dashed #d8deec; }
+.ro-face canvas { width: 40px; height: 40px; border-radius: 8px; background: #e8edf8; display: block; }
+.ro-mid { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; }
+.ro-act { flex: none; }
+.pf-add.roster { border-style: solid; }

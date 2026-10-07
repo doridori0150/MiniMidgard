@@ -192,8 +192,44 @@ export function removeStack(s: GameState, id: string, qty = 1): boolean {
   return true;
 }
 
+/** everyone recruited: the party out hunting and the bench */
+export function allHeroes(s: GameState): Hero[] { return s.bench?.length ? [...s.heroes, ...s.bench] : s.heroes; }
+
 export function equippedBy(s: GameState, uid: number): Hero | undefined {
-  return s.heroes.find((h) => Object.values(h.equip).includes(uid));
+  return allHeroes(s).find((h) => Object.values(h.equip).includes(uid));
+}
+
+// ───────── 동료 명단 (ENDGAME.md §2)
+/** bench seats: one more every 10 levels from Lv 30 (the highest hero), up to 6 */
+export function benchSlots(s: GameState): number {
+  const top = Math.max(0, ...allHeroes(s).map((h) => h.baseLv));
+  return Math.max(0, Math.min(6, Math.floor((top - 20) / 10)));
+}
+/** room for a new recruit: a free party seat, or a free bench seat once the party is full */
+export function rosterRoom(s: GameState): 'party' | 'bench' | null {
+  if (s.heroes.length < s.partySlots) return 'party';
+  if ((s.bench?.length ?? 0) < benchSlots(s)) return 'bench';
+  return null;
+}
+/** send a benched hero out; with a full party they swap places with `outIdx` */
+export function sendOut(s: GameState, benchIdx: number, outIdx?: number): string | null {
+  const bench = (s.bench ??= []);
+  const h = bench[benchIdx];
+  if (!h) return '없는 동료';
+  if (s.heroes.length < s.partySlots) { bench.splice(benchIdx, 1); s.heroes.push(h); return null; }
+  if (outIdx === undefined || !s.heroes[outIdx]) return '교체할 동료를 고르세요.';
+  const out = s.heroes[outIdx];
+  s.heroes[outIdx] = h;
+  bench[benchIdx] = out;
+  return null;
+}
+/** take a party member to the bench (the party keeps at least one) */
+export function sendToBench(s: GameState, idx: number): string | null {
+  if (s.heroes.length <= 1) return '파티에는 최소 한 명이 있어야 해요.';
+  if ((s.bench?.length ?? 0) >= benchSlots(s)) return '명단에 빈자리가 없어요.';
+  const [h] = s.heroes.splice(idx, 1);
+  (s.bench ??= []).push(h);
+  return null;
 }
 
 export function itemName(inst: EquipInst): string {
@@ -416,7 +452,7 @@ export function sellEquip(s: GameState, uid: number): number {
   const i = s.equips.findIndex((e) => e.uid === uid);
   if (i < 0) return 0;
   const inst = s.equips[i];
-  for (const h of s.heroes) for (const k of Object.keys(h.look.costume) as CostumeSlot[]) if (h.look.costume[k] === uid) return 0;
+  for (const h of allHeroes(s)) for (const k of Object.keys(h.look.costume) as CostumeSlot[]) if (h.look.costume[k] === uid) return 0;
   s.equips.splice(i, 1);
   let z = sellPrice(s, inst.id, inst.refine);
   for (const c of inst.cards) if (c) z += sellPrice(s, c);
@@ -498,7 +534,7 @@ export function refine(s: GameState, uid: number, rng = Math.random): RefineResu
     return { ok: true, level: inst.refine };
   }
   const name = itemName(inst);
-  for (const h of s.heroes) {
+  for (const h of allHeroes(s)) {
     unequipUid(s, h, inst.uid);
     for (const k of Object.keys(h.look.costume) as CostumeSlot[]) if (h.look.costume[k] === inst.uid) delete h.look.costume[k];
   }

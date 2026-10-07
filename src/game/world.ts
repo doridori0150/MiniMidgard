@@ -2088,6 +2088,12 @@ export class World {
       const catchup = h.hero.baseLv < maxLv - 5 ? 2.5 : 1;
       this.giveExpTo(h, base * bonus / n * catchup, job * bonus / n * catchup);
     }
+    // the bench trains on a quarter share (ENDGAME.md §2), so swapping someone in doesn't start from nothing
+    for (const hero of this.s.bench ?? []) {
+      const before = hero.baseLv;
+      applyExp(hero, base * bonus / n * 0.25, job * bonus / n * 0.25);
+      if (hero.baseLv > before) this.log(`명단의 ${hero.name} 레벨 업! (Lv ${hero.baseLv})`, '#d8e8a0');
+    }
     this.s.rate.exp += base;
     this.s.rate.jexp += job;
   }

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'preact/hooks';
 import { game, useGame, type PanelId } from './game.ts';
 import { HeroCanvas, fmt, heroReady } from './widgets.tsx';
 import { CLASSES } from '../game/data/classes.ts';
-import { canJobChange } from '../game/state.ts';
+import { canJobChange, benchSlots, rosterRoom } from '../game/state.ts';
 import { expNext, jobExpNext } from '../game/exp.ts';
 import { zone } from '../game/data/zones.ts';
 import { insertableCards } from './panels/Cards.tsx';
@@ -100,6 +100,9 @@ export function PartyRail() {
       })}
       {s.heroes.length < s.partySlots && <button class="pf-add" onClick={() => g.setModal({ kind: 'recruit' })}>+ 동료 영입</button>}
       {s.heroes.length >= s.partySlots && s.partySlots < 3 && <div class="pf-add lock">🔒 Lv {s.partySlots === 1 ? 10 : 22} 동료</div>}
+      {s.partySlots >= 3 && (benchSlots(s) > 0 || (s.bench?.length ?? 0) > 0) && (
+        <button class="pf-add roster" onClick={() => g.setModal({ kind: 'roster' })}>명단 {s.bench?.length ?? 0}/{benchSlots(s)}{rosterRoom(s) ? ' · 영입' : ''}</button>
+      )}
     </div>
   );
 }
