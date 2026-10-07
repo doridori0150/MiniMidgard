@@ -35,6 +35,8 @@ class Game {
   panel: PanelId | null = null;
   town: TownView = 'menu';
   sel = 0;
+  /** dev QA session (?qa): never touches the real save */
+  qa = false;
   modal: Modal | null = null;
   toasts: Toast[] = [];
   announces: Announce[] = [];
@@ -68,7 +70,7 @@ class Game {
     this.lastSave = performance.now();
     this.loop(performance.now());
     document.addEventListener('visibilitychange', () => this.onVisibility());
-    window.addEventListener('pagehide', () => save(this.s));
+    window.addEventListener('pagehide', () => { if (!this.qa) save(this.s); });
     this.notify();
   }
 
@@ -85,7 +87,7 @@ class Game {
 
   private onVisibility() {
     if (document.hidden) {
-      save(this.s);
+      if (!this.qa) save(this.s);
       audio.pauseAll(true);
       cancelAnimationFrame(this.raf);
       this.raf = 0;
@@ -96,7 +98,7 @@ class Game {
         const rep = applyOffline(this.s, away);
         if (rep) { this.modal = { kind: 'offline', report: rep }; this.world.syncParty(); this.renderer && (this.renderer.stateVersion++); }
       }
-      save(this.s);
+      if (!this.qa) save(this.s);
       this.lastT = 0;
       if (!this.raf) this.loop(performance.now());
       this.notify();
@@ -119,7 +121,7 @@ class Game {
       this.dirty = true;
     }
     if (t - this.lastNotify > 180) { this.lastNotify = t; this.notify(); }
-    if (t - this.lastSave > 10_000) { this.lastSave = t; save(this.s); this.dirty = false; }
+    if (t - this.lastSave > 10_000) { this.lastSave = t; if (!this.qa) save(this.s); this.dirty = false; }
   };
 
   subscribe(f: () => void) { this.subs.add(f); return () => { this.subs.delete(f); }; }
@@ -131,7 +133,7 @@ class Game {
     if (this.renderer) this.renderer.stateVersion++;
     if (sound) audio.play(sound);
     this.dirty = true;
-    save(this.s);
+    if (!this.qa) save(this.s);
     this.notify();
   }
 

@@ -296,6 +296,10 @@ export function regions(): RegionInfo[] {
   for (const r of out) {
     r.x = r.zones.reduce((a, z) => a + z.map[0], 0) / r.zones.length;
     r.y = r.zones.reduce((a, z) => a + z.map[1], 0) / r.zones.length;
+    // the region looks like most of its maps (a desert-themed quarry shouldn't paint the mine region sandy)
+    const count = new Map<ZoneTheme, number>();
+    for (const z of r.zones) count.set(z.theme, (count.get(z.theme) ?? 0) + 1);
+    r.theme = [...count].sort((a, b) => b[1] - a[1])[0][0];
   }
   return out;
 }

@@ -102,7 +102,7 @@ function Create(props: { onDone: (name: string, look: Look) => void; onBack: () 
 }
 
 export function App() {
-  const [screen, setScreen] = useState<'title' | 'create' | 'game'>('title');
+  const [screen, setScreen] = useState<'title' | 'create' | 'game'>(game.started ? 'game' : 'title');
   const canLoad = game.hasSave();
   if (screen === 'game') return <GameScreen />;
   if (screen === 'create') return (
