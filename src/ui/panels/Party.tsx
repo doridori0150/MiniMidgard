@@ -136,6 +136,7 @@ export function PartyPanel() {
                     <span class="pmem-nm"><b>{h.name}</b>{i === 0 && <i class="lead">리더</i>}<i class="role" style={{ background: rcolor }}>{rname}</i></span>
                     <span class="pmem-sub"><span style={{ color: CLASSES[h.cls].color }}>{CLASSES[h.cls].name}</span> Lv {h.baseLv}</span>
                     <span class="pmem-tac">{line}{custom && <i class="cust">사용자</i>}</span>
+                    {u?.doing && <span class="pmem-doing" aria-live="off">지금: {u.doing}</span>}
                   </span>
                   <span class="pmem-chev">{isOpen ? '▲' : '▼'}</span>
                 </button>
