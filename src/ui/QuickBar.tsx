@@ -63,7 +63,9 @@ function QSlot(props: { i: number }) {
   return (
     <button class={cls} style={buffOn ? { '--p': (left / d.buff!.dur) * 100 } as Record<string, number> : undefined}
       aria-label={`${d.name} ${have}개${q.auto ? ', 자동 사용 중' : ''}`}
-      onPointerDown={down} onPointerUp={up} onPointerLeave={cancel} onPointerCancel={cancel} onContextMenu={(e) => e.preventDefault()}>
+      onPointerDown={down} onPointerUp={up} onPointerLeave={cancel} onPointerCancel={cancel} onContextMenu={(e) => e.preventDefault()}
+      // Enter / Space / assistive "click" (no pointer, detail 0) use the item through the same path as a tap
+      onClick={(e) => { if (e.detail === 0) { long.current = false; up(); } }}>
       <span class="ring" />
       <span class="inner">
         <img src={itemIconURL(id)} alt="" draggable={false} />
@@ -158,7 +160,7 @@ export function QuickSetupModal(props: { slot: number }) {
           })}
           {owned.length === 0 && <div class="muted small">소비 아이템이 없습니다. 도구 상점에서 포션을 사세요.</div>}
         </div>
-        <div class="small muted" style={{ marginTop: '8px' }}>퀵슬롯을 누르면 바로 사용, 길게 누르면 이 설정 창이 열립니다. 슬롯 위 AUTO 표시를 눌러 자동 사용을 켜고 끌 수 있어요.</div>
+        <div class="small muted" style={{ marginTop: '8px' }}>퀵슬롯을 누르면 바로 사용, 길게 누르면 이 설정 창이 열립니다. 자동 사용은 위의 '자동 사용' 줄에서 켜고 끕니다(슬롯의 AUTO는 표시만 해요).</div>
       </div>
     </div>
   );

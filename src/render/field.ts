@@ -3,10 +3,10 @@ import type { World, FxEvent, HeroUnit, MobUnit, GroundItem } from '../game/worl
 import type { Element, Hero, GameState } from '../game/types.ts';
 import { buildZoneArt, drawProp, kitPropBox, kitVersion, type ZoneArt, type Prop } from './bg.ts';
 import { inked } from './ink.ts';
-import { drawRigHero, rigSupports } from './rig.ts';
+import { drawRigHero, rigBounds, rigSupports } from './rig.ts';
 
 const REDUCED_MOTION = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
-import { drawHero, drawFalcon, type HeroLookDraw } from './hero.ts';
+import { drawHero, drawFalcon, type HeroLookDraw, type Pose } from './hero.ts';
 import { drawMob, mobHeight, mobShadow } from './monster.ts';
 import { MELEE_CONTACT, BOW_RELEASE } from '../game/world.ts';
 import { drawNumber, type DmgNum, warmFont } from './dmgfont.ts';
@@ -733,6 +733,8 @@ export class FieldRenderer {
   // ───────── frame
   private snapNext = true;
   private lastFocus = -1;
+  /** each hero's pose as last drawn, so the observe camera can ask for the real painted bounds */
+  private lastPose = new Map<number, Pose>();
   private deadSeen = new Set<number>();
   /** jump the observe camera to its target on the next frame (entering a page, switching hero) */
   snapCamera() { this.snapNext = true; }
@@ -747,10 +749,14 @@ export class FieldRenderer {
       let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
       for (const h of list) {
         const sm = this.smooth.get(h.uid) ?? h;
+        // painted heroes: the pixels this pose really covers (lying body, ponytail, raised sword); the code-drawn hero:
+        // a conservative figure box. Either way the name tag and bars below the feet are kept in view
+        const pose = this.lastPose.get(h.uid);
+        const r = pose ? rigBounds(this.heroLook(h), pose) : null;
         const lying = h.state === 'dead';
-        // weapon reach to the sides, hair + headgear above, name tag and bars below the feet
-        x0 = Math.min(x0, sm.x - (lying ? 40 : 26)); x1 = Math.max(x1, sm.x + (lying ? 40 : 26));
-        y0 = Math.min(y0, sm.y - (lying ? 36 : 96)); y1 = Math.max(y1, sm.y + 24);
+        const b = r ?? { x0: lying ? -40 : -26, x1: lying ? 40 : 26, y0: lying ? -36 : -96, y1: 0 };
+        x0 = Math.min(x0, sm.x + b.x0 - 2); x1 = Math.max(x1, sm.x + b.x1 + 2);
+        y0 = Math.min(y0, sm.y + b.y0 - 2); y1 = Math.max(y1, sm.y + Math.max(b.y1, 24));
       }
       return { x0, y0, x1, y1 };
     };
@@ -968,6 +974,7 @@ export class FieldRenderer {
     // swing length chosen so the blade/spear/katar passes straight ahead at MELEE_CONTACT and the bow releases at BOW_RELEASE
     const dur = h.state === 'attack' ? (h.d.wtype === 'bow' ? BOW_RELEASE / 0.6 : h.d.wtype === 'spear' ? MELEE_CONTACT / 0.47 : MELEE_CONTACT / 0.5) : undefined;
     const pose = { state: flash > 0.5 && (state === 'idle' || state === 'ready') ? 'hurt' : state, t: state === 'idle' || state === 'ready' || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing };
+    this.lastPose.set(h.uid, pose);
     ctx.fillStyle = 'rgba(20,30,20,0.28)';
     ctx.beginPath(); ctx.ellipse(0, 0, state === 'dead' ? 17 : 11, 3.8, 0, 0, Math.PI * 2); ctx.fill();
     if (rigSupports(look)) {

@@ -5,7 +5,8 @@
 import type { WeaponType } from '../game/types.ts';
 import { BOW_RELEASE, MELEE_CONTACT } from '../game/world.ts';
 import type { HeroLookDraw, Pose } from './hero.ts';
-import { drawSprite, loadSprites, spriteSupports } from './sprite.ts';
+import { drawSprite, loadSprites, spriteBounds, spriteSupports } from './sprite.ts';
+export { spriteBounds as rigBounds };
 
 type V2 = [number, number];
 interface PartDef { file: string; size: V2; pivot: V2; anchors: Record<string, V2>; z: number }

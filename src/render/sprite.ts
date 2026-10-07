@@ -117,18 +117,19 @@ export function featureTypes(gender: 'm' | 'f'): Record<FeatureKind, number> {
 /** game hair style index → this gender's painted styles (until all eight exist) */
 const HAIR_IDS: Record<string, string[]> = { female: ['01', '05'], male: ['02', '03'] };
 
-export function drawSprite(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {
-  if (!spriteSupports(L) || !M) return false;
+/** player.py assembly: the ordered draw list (image + matrix in manifest canvas pixels), or null if unsupported */
+function assemble(L: HeroLookDraw, pose: Pose): [CanvasImageSource | undefined, Mat][] | null {
+  if (!spriteSupports(L) || !M) return null;
   const cfg = M.classes[CLASS[L.cls]!];
   const [state, t] = clip(pose);
   const f = cfg.frames[selectFrame(M, state, t)];
-  if (!f) return false;
+  if (!f) return null;
   const h = M.head;
   const gender = L.gender === 'm' ? 'male' : 'female';
   const ids = HAIR_IDS[gender].filter((id) => M.hairStyles[gender]?.[id]);
   const style = M.hairStyles[gender]?.[ids[L.hair % Math.max(1, ids.length)] ?? cfg.defaultHair[gender]];
   const base = h.bases[gender];
-  if (!style || !base) return false;
+  if (!style || !base) return null;
   const weapon = WEAPON[L.wtype] ?? null;
   const tint = HAIR_TINT[L.hairColor % HAIR_TINT.length];
   const gear = [L.headTop, L.headMid, L.headLow].map((x) => (x ? HEADGEAR[x] : undefined)).filter((x): x is string => !!x && !!M.headgear[x]);
@@ -168,6 +169,12 @@ export function drawSprite(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose:
     if (weapon && f.weaponVisible && f.gripOverlay) add(imgs.get(key(f.gripOverlay.file)), matrix(f.gripOverlay.position));
   }
 
+  return draws;
+}
+
+export function drawSprite(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {
+  const draws = assemble(L, pose);
+  if (!draws || !M) return false;
   const k = HEIGHT / M.canvas.referenceHeight;
   ctx.save();
   ctx.scale(pose.facing * k, k); // mirror the whole assembly around the origin for facing left
@@ -178,4 +185,42 @@ export function drawSprite(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose:
   }
   ctx.restore();
   return true;
+}
+
+// opaque pixel rectangle of each image (alpha > 16), measured once
+const opaque = new Map<CanvasImageSource, [number, number, number, number]>();
+function opaqueRect(src: CanvasImageSource): [number, number, number, number] {
+  let r = opaque.get(src);
+  if (r) return r;
+  const w = (src as HTMLImageElement).width, h = (src as HTMLImageElement).height;
+  r = [0, 0, w, h];
+  try {
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const x = c.getContext('2d', { willReadFrequently: true })!;
+    x.drawImage(src, 0, 0);
+    const d = x.getImageData(0, 0, w, h).data;
+    let x0 = w, y0 = h, x1 = -1, y1 = -1;
+    for (let y = 0; y < h; y++) for (let xx = 0; xx < w; xx++) if (d[(y * w + xx) * 4 + 3] > 16) { if (xx < x0) x0 = xx; if (xx > x1) x1 = xx; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    if (x1 >= 0) r = [x0, y0, x1 + 1, y1 + 1];
+  } catch { /* keep the full rectangle */ }
+  opaque.set(src, r);
+  return r;
+}
+
+/** where this pose's painted pixels actually are, in field units relative to the hero's feet (the same assembly the
+ *  frame draws), so cameras can frame the real figure — a lying body, a ponytail, a raised sword */
+export function spriteBounds(L: HeroLookDraw, pose: Pose): { x0: number; y0: number; x1: number; y1: number } | null {
+  const draws = assemble(L, pose);
+  if (!draws || !M) return null;
+  const k = HEIGHT / M.canvas.referenceHeight, [ox, oy] = M.canvas.origin;
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const [src, m] of draws) {
+    if (!src) continue;
+    const [a, b, c, d] = opaqueRect(src);
+    for (const [u, v] of [[a, b], [c, b], [a, d], [c, d]]) {
+      const X = (m[0] * u + m[2] * v + m[4] - ox) * k * pose.facing, Y = (m[1] * u + m[3] * v + m[5] - oy) * k;
+      if (X < x0) x0 = X; if (X > x1) x1 = X; if (Y < y0) y0 = Y; if (Y > y1) y1 = Y;
+    }
+  }
+  return x0 <= x1 ? { x0, y0, x1, y1 } : null;
 }

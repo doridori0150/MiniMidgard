@@ -116,7 +116,8 @@
     const R = g.renderer, me = g.world.heroes.find((u) => u.hero.id === g.selId);
     for (let i = 0; i < 40; i++) R.frame(W().performance.now() + i * 16);
     const at = R.smooth.get(me.uid) ?? me; // where the hero is actually drawn this frame
-    const [, top] = R.toScreen(at.x, at.y - 90), [, foot] = R.toScreen(at.x, at.y + 8);
+    const rb = (await W().eval("import('/src/render/rig.ts')")).rigBounds(R.heroLook(me), R.lastPose.get(me.uid)) ?? { y0: -90, y1: 0 };
+    const [, top] = R.toScreen(at.x, at.y + rb.y0), [, foot] = R.toScreen(at.x, at.y + rb.y1);
     const cr = R.canvas.getBoundingClientRect();
     log(top >= 0 && foot <= R.cssH && R.cssH < 200, 'band frames the selected hero', `head ${top.toFixed(0)} feet ${foot.toFixed(0)} / cssH ${R.cssH}, canvas ${Math.round(cr.width)}×${Math.round(cr.height)}, observe ${R.observe}, page ${g.page}`);
     // 16. short screen folds the band (pref untouched), restores on a tall screen
@@ -137,6 +138,42 @@
       }
     }
     log(small.size === 0, 'touch floor 44×44 on every page', [...small.entries()].slice(0, 40).map(([k, v]) => `${k} @${[...new Set(v)].slice(0, 2).join(',')}`).join(' | '));
+    // 18. a selected hero lying dead: its real painted pixels stay inside the band
+    g.openPage('grow', 'status'); g.ui.bandClosed = { general: false, party: false }; g.notify(); await sleep(200);
+    {
+      const R = g.renderer, me = g.world.heroes.find((u) => u.hero.id === g.selId);
+      me.hp = 0; me.state = 'dead'; me.stateT = g.world.time; me.deadUntil = g.world.time + 1e9;
+      for (let i = 0; i < 60; i++) R.frame(W().performance.now() + i * 16);
+      const rig = await W().eval("import('/src/render/rig.ts')");
+      const b = rig.rigBounds(R.heroLook(me), R.lastPose.get(me.uid));
+      const at = R.smooth.get(me.uid) ?? me;
+      if (b) {
+        const [, top] = R.toScreen(at.x, at.y + b.y0), [, bot] = R.toScreen(at.x, at.y + b.y1);
+        const [l] = R.toScreen(at.x + b.x0, at.y), [rr] = R.toScreen(at.x + b.x1, at.y);
+        log(top >= 0 && bot <= R.cssH && l >= 0 && rr <= R.cssW, 'dead selected hero: painted pixels inside the band', `y ${top.toFixed(1)}..${bot.toFixed(1)} / ${R.cssH}, x ${l.toFixed(0)}..${rr.toFixed(0)} / ${R.cssW}`);
+      } else log(false, 'dead selected hero bounds', 'no painted bounds (not a sprite hero?)');
+      me.state = 'idle'; me.hp = me.d.maxHp; me.deadUntil = 0;
+    }
+    // 19. hero row arrow keys move the choice and the focus together
+    {
+      const btns = $$('.hero-sel button'); btns[0].focus();
+      const sel0 = g.sel;
+      btns[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true })); await sleep(120);
+      const now = $$('.hero-sel button');
+      log(g.sel === (sel0 + 1) % now.length && D().activeElement === now[g.sel], 'arrow key moves selection and focus', `sel ${sel0}→${g.sel}, focus on ${D().activeElement?.textContent}`);
+    }
+    // 20. a quick slot is used exactly once per tap and per keyboard activation
+    g.goHunt(); await sleep(150);
+    for (const u of g.world.heroes) u.hp = Math.max(1, Math.floor(u.d.maxHp * 0.2));
+    const qs = $('.qs'), id = g.s.quick[0].id, n0 = g.s.stacks[id];
+    qs.dispatchEvent(new MouseEvent('click', { bubbles: true, detail: 0 })); await sleep(60);
+    const n1 = g.s.stacks[id];
+    qs.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true })); qs.dispatchEvent(new PointerEvent('pointerup', { bubbles: true }));
+    qs.dispatchEvent(new MouseEvent('click', { bubbles: true, detail: 1 })); await sleep(60);
+    const n2 = g.s.stacks[id];
+    log(n1 === n0 - 1 && n2 === n1 - 1, 'quick slot: keyboard use once, tap use once (no double)', `${n0} → ${n1} → ${n2}`);
+    const qe = $('.qedit').getBoundingClientRect();
+    log(qe.width >= 44 && qe.height >= 44, 'quick-slot setup button ≥44×44', `${Math.round(qe.width)}×${Math.round(qe.height)}`);
   } catch (e) { log(false, 'exception', e.message); }
   log(localStorage.getItem('minimidgard.save.v1') === savedBefore, 'QA run never touched the save');
   const fails = out.filter((l) => l.startsWith('FAIL')).length;

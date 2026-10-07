@@ -25,9 +25,13 @@ PASS  skill states with points: MAX / 선행 필요 / 학습 종료 / +1  — {"
 PASS  learnable vs prerequisite rows  — 강타 +1, 폭렬검 선행 필요
 PASS  prerequisite shows current / needed  — 폭렬검Lv 0/10필요: 강타 0/5선행 필요
 PASS  no points: 포인트 부족, no learn button  — 강타 포인트 부족
-PASS  band frames the selected hero  — head 13 feet 86 / cssH 106, canvas 390×106, observe true, page grow
+PASS  band frames the selected hero  — head 10 feet 77 / cssH 106, canvas 390×106, observe true, page grow
 PASS  band folds on a short screen and comes back  — folded true, after: closed false, pref false, inner 844, rows 48/56/48/56/45
 PASS  touch floor 44×44 on every page
+PASS  dead selected hero: painted pixels inside the band  — y 10.7..72.7 / 106, x 144..246 / 390
+PASS  arrow key moves selection and focus  — sel 0→1, focus on 보리
+PASS  quick slot: keyboard use once, tap use once (no double)  — 99 → 98 → 97
+PASS  quick-slot setup button ≥44×44  — 44×44
 PASS  QA run never touched the save
 
-31/31 passed
+35/35 passed

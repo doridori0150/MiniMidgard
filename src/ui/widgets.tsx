@@ -191,9 +191,10 @@ export function HeroSelector(props: { sel: number; onSel: (i: number) => void })
       const d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
       if (!d || !s.heroes.length) return;
       e.preventDefault();
+      const group = e.currentTarget as HTMLElement; // currentTarget is gone once the event finishes
       const n = (props.sel + d + s.heroes.length) % s.heroes.length;
       props.onSel(n);
-      requestAnimationFrame(() => (e.currentTarget as HTMLElement | null)?.querySelectorAll<HTMLElement>('button')[n]?.focus());
+      setTimeout(() => group.querySelectorAll<HTMLElement>('button')[n]?.focus(), 0); // after the re-render
     }}>
       {s.heroes.map((h, i) => {
         const ready = heroReady(h);

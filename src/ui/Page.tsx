@@ -74,7 +74,7 @@ export function ManagePage() {
           e.preventDefault();
           const n = (i + d + tabs.length) % tabs.length;
           g.openSub(page, tabs[n][0]);
-          requestAnimationFrame(() => document.getElementById(`tab-${page}-${tabs[n][0]}`)?.focus());
+          setTimeout(() => document.getElementById(`tab-${page}-${tabs[n][0]}`)?.focus(), 0); // after the re-render
         }}>
           {SUBTABS[page].map(([id, label]) => (
             <button role="tab" id={`tab-${page}-${id}`} aria-selected={sub === id} aria-controls="page-panel" tabIndex={sub === id ? 0 : -1}

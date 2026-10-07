@@ -985,3 +985,6 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .page .tabs button { min-height: var(--touch-min); }
 .page .fchip { min-height: var(--touch-min); }
 .page .cb-item { min-height: var(--touch-min); }
+.qedit { width: var(--touch-min) !important; height: var(--touch-min) !important; }
+.page .fchip, .page .crow-fx, .page .preset small { font-size: var(--text-caption); }
+.modal .win-title { font-size: var(--text-title); }
