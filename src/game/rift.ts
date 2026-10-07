@@ -309,7 +309,8 @@ export type LootSource = 'trash' | 'elite' | 'guardian';
 export function rollRiftGrade(tier: number, src: LootSource, legend: boolean, rng: Rng): Grade {
   const x = rng();
   const primal = tier >= 70 ? (src === 'guardian' ? Math.min(0.08, 0.02 + (tier - 70) * 0.001) : src === 'elite' ? 0.005 : 0.002) : 0;
-  const ancient = src === 'guardian' ? Math.min(0.75, 0.35 + tier * 0.004) : src === 'elite' ? Math.min(0.45, 0.15 + tier * 0.003) : Math.min(0.2, 0.05 + tier * 0.001);
+  // 고대 stays a find, not a given: the climb should take weeks of better and better pieces (Diablo's rhythm)
+  const ancient = src === 'guardian' ? Math.min(0.55, 0.18 + tier * 0.004) : src === 'elite' ? Math.min(0.3, 0.06 + tier * 0.0025) : Math.min(0.08, 0.015 + tier * 0.0006);
   if (x < primal) return 'primal';
   if (x < primal + ancient) return 'ancient';
   if (legend) return 'legend';
