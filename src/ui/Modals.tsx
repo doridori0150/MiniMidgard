@@ -18,6 +18,7 @@ import { QuickSetupModal } from './QuickBar.tsx';
 import { HeroModal } from './HeroModal.tsx';
 import { MobModal } from './WorldMap.tsx';
 import { BuyModal, SellModal } from './Shop.tsx';
+import { BuildModal } from './BuildModal.tsx';
 import { skillIconURL } from '../render/icons.ts';
 import { RACE_KO } from '../game/data/elements.ts';
 import { skillsOf } from '../game/data/skills.ts';
@@ -320,6 +321,7 @@ function ModalBody(props: { m: Modal }) {
     case 'mob': return <MobModal id={m.id} />;
     case 'buy': return <BuyModal id={m.id} />;
     case 'sell': return <SellModal id={m.id} uid={m.uid} />;
+    case 'build': return <BuildModal heroId={m.heroId} />;
     case 'confirm': return <ConfirmModal text={m.text} ok={m.ok} danger={m.danger} closeAll={m.closeAll} />;
     case 'card': return null;
     case 'credits': return (

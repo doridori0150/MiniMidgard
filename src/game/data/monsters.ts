@@ -60,13 +60,31 @@ type M = Omit<MonsterDef, 'exp' | 'jexp' | 'luk' | 'scale'> & { expMul?: number;
  */
 const EXP_RATE = 0.9;
 const JOB_RATE = 0.66;
-function mob(m: M) {
+/**
+ * Base EXP comes faster than job EXP up to Lv 40 (RO's rhythm: a level every few minutes, the job is the long road).
+ * Job EXP keeps the old curve so the 2nd job stays ≈13 h; base EXP gets this multiplier on top.
+ */
+const baseBoost = (lv: number) => (lv <= 8 ? 1.8 : lv <= 22 ? 2.2 : lv <= 40 ? 2.2 - (lv - 22) * (1.2 / 18) : 1);
+/**
+ * Early monsters had about twice RO's AGI per level, so a Lv 10 hero hit same-level mobs ~55–65% (the user's "hit wall").
+ * Up to Lv 40, ordinary monsters keep AGI ≈ 1.1 × Lv and DEX ≈ 1.2 × Lv; the naturally quick ones (they were ≥ 2.4 × Lv)
+ * stay quick at 1.7 × Lv — those are the walls that hit patches (cards, gear) are for. Bosses a little above.
+ */
+function tame(m: M): M {
+  if (m.lv > 40) return m;
+  const quick = m.agi >= m.lv * 2.4;
+  const agiCap = Math.round(m.lv * (m.boss ? 1.5 : quick ? 1.7 : 1.1) + 3);
+  const dexCap = Math.round(m.lv * (m.boss ? 1.4 : 1.2) + 4);
+  return { ...m, agi: Math.min(m.agi, agiCap), dex: Math.min(m.dex, dexCap) };
+}
+function mob(src: M) {
+  const m = tame(src);
   // kills per level grow slower after Lv 15 so the idle loop keeps moving toward the 2nd job
   const div = m.lv <= 15 ? 8 + m.lv * 2.4 : 44 + (m.lv - 15) * 1.8 + Math.max(0, m.lv - 45) * 4;
   const raw = (expNext(m.lv) / div) * (m.expMul ?? 1);
   // mid/late monsters were spongy for idle pacing: trim HP by tier (bosses a little less)
   const hpMul = m.lv >= 45 ? (m.boss ? 0.85 : 0.75) : m.lv >= 28 ? (m.boss ? 0.8 : 0.65) : m.lv >= 14 ? (m.boss ? 0.9 : 0.8) : 1;
-  MONSTERS[m.id] = { luk: 0, scale: 1, ...m, hp: Math.round(m.hp * hpMul), exp: Math.max(1, Math.round(raw * EXP_RATE)), jexp: Math.max(1, Math.round(raw * JOB_RATE)) };
+  MONSTERS[m.id] = { luk: 0, scale: 1, ...m, hp: Math.round(m.hp * hpMul), exp: Math.max(1, Math.round(raw * EXP_RATE * baseBoost(m.lv))), jexp: Math.max(1, Math.round(raw * JOB_RATE)) };
 }
 
 /**

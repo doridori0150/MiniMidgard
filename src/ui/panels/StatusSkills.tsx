@@ -7,6 +7,7 @@ import { CLASSES, lineage, SECOND_JOB_LV } from '../../game/data/classes.ts';
 import { SKILLS, skillsOf } from '../../game/data/skills.ts';
 import { raiseStat, autoDistribute, canLearn, learnSkill, canJobChange, skillReqMet, nextJobs } from '../../game/state.ts';
 import { computeDerived } from '../../game/stats.ts';
+import { buildOf, buildsFor } from '../../game/data/builds.ts';
 import { expNext, jobExpNext, statCost } from '../../game/exp.ts';
 import { skillIconURL } from '../../render/icons.ts';
 
@@ -143,6 +144,11 @@ export function StatusPanel() {
             {[1, 5, 10].map((n) => <button class={step === n ? 'on' : ''} onClick={() => setStep(n)}>+{n}</button>)}
           </div>
           <button class="btn sm gold" disabled={h.statPts <= 0} onClick={() => { autoDistribute(h); g.commit('confirm'); }}>추천 분배</button>
+        </div>
+        <div class="row build-row">
+          <button class="btn sm build-pick" onClick={() => g.pushModal({ kind: 'build', heroId: h.id })}>
+            빌드 <b>{buildOf(h.cls, h.build)?.name ?? (buildsFor(h.cls).length ? '고르기' : '1차 전직 후')}</b> ▸
+          </button>
         </div>
 
         <div class="stat-list">

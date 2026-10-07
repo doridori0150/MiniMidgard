@@ -1045,3 +1045,32 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .xs-bar.base i { background: linear-gradient(#fff2a0, var(--exp)); }
 .xs-bar.job i { background: linear-gradient(#c8f0ff, #5ab0f0); }
 .hm-exp { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 3px; }
+
+/* ───── builds: picker row in the stat view + the build list */
+.build-row { margin: -2px 0 8px; }
+.build-pick { flex: 1; min-height: 36px; justify-content: flex-start; text-align: left; }
+.build-pick b { color: var(--title2); margin: 0 4px; }
+.build-modal .win-body { max-height: min(74vh, 640px); overflow-y: auto; }
+.bd-card { border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px; margin-bottom: 8px; background: #fff; display: flex; flex-direction: column; gap: 5px; }
+.bd-card.on { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(255,204,74,0.6); background: #fffaf0; }
+.bd-head { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+.bd-on { font-style: normal; font-size: 10px; padding: 1px 6px; border-radius: 8px; background: var(--gold); color: #5a3a00; }
+.bd-pitch { font-size: 12px; color: #4a5470; }
+.bd-stats { display: flex; flex-wrap: wrap; gap: 4px 10px; }
+.bd-stat { display: flex; align-items: center; gap: 4px; font-family: 'Galmuri9'; font-size: 10px; }
+.bd-stat i { display: block; height: 5px; border-radius: 3px; background: linear-gradient(90deg, #8eb4ff, #4a6ad0); }
+.bd-line { font-size: 11.5px; color: #3a4460; }
+.bd-line span { display: inline-block; min-width: 52px; margin-right: 6px; font-size: 10.5px; color: var(--title2); }
+.bd-line.weak { color: #8a4a3a; }
+.bd-item { display: flex; align-items: center; gap: 7px; padding: 4px 6px; border-radius: 6px; background: #f2f4fa; }
+.bd-item img { width: 26px; height: 26px; }
+.bd-item div { display: flex; flex-direction: column; font-size: 12px; }
+.bd-item small { font-size: 10.5px; color: #6a7490; }
+.bd-card .btn { align-self: flex-end; }
+/* monster detail: the party's own odds against it */
+.mob-odds { margin-top: 8px; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; background: #f6f8fd; display: flex; flex-direction: column; gap: 3px; }
+.mo-row { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: baseline; font-size: 12px; }
+.mo-row span { font-family: 'Galmuri9'; font-size: 11px; }
+.mo-row small { font-size: 9.5px; color: #7a84a0; }
+.mo-row .good { color: #2a8a3a; } .mo-row .ok { color: #b07a10; } .mo-row .bad { color: #c03a3a; }
+.mo-need { font-family: 'Galmuri9'; font-size: 10px; color: #7a84a0; margin-top: 2px; }

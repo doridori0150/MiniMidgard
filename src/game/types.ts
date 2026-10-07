@@ -194,6 +194,8 @@ export interface Hero {
   ammo?: string;
   auto: AutoConfig;
   tactics: Tactics;
+  /** chosen build (data/builds.ts): 추천 분배 follows its stat axis */
+  build?: string;
 }
 
 /** mobile-style quick slot: a registered consumable, whether it fires automatically, and its trigger % */

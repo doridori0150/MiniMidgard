@@ -24,7 +24,7 @@ export interface BuildDef {
 
 export const BUILDS: BuildDef[] = [
   // ── 검사 → 기사
-  { id: 'kn_crit', line: 'swordsman', name: '광월 크리 기사', pitch: 'DEX를 버리고 크리로 명중을 해결한다. 크리는 회피를 무시한다', weights: { agi: 9, luk: 6, str: 5 }, skills: ['twohand_quicken', 'twohand_mastery'], items: ['w_bloodmoon', 'x_purify'], weak: '요도의 저주 → 정화의 부적 · HP가 낮다 → HP 카드 · 보스는 크리를 덜 맞는다' },
+  { id: 'kn_crit', line: 'swordsman', name: '광월 크리 기사', pitch: 'DEX를 버리고 크리로 명중을 해결한다. 크리는 회피를 무시한다', weights: { agi: 9, str: 8, luk: 6 }, skills: ['twohand_quicken', 'twohand_mastery'], items: ['w_bloodmoon', 'x_purify'], weak: '요도의 저주 → 정화의 부적 · HP가 낮다 → HP 카드 · 보스는 크리를 덜 맞는다' },
   { id: 'kn_agi', line: 'swordsman', name: '질풍 양손검', pitch: '공속과 회피로 한 마리씩 빠르게', weights: { agi: 8, str: 8, dex: 4, vit: 2 }, skills: ['twohand_quicken', 'bash'], items: [], weak: '세 마리 이상에 둘러싸이면 회피가 무너진다 → 작전 "한 마리씩"' },
   { id: 'kn_vit', line: 'swordsman', name: '철벽 창기사', pitch: '꿰뚫기의 명중 보너스로 명중을 메우는 단단한 창', weights: { str: 8, vit: 7, dex: 5, int: 2 }, skills: ['pierce', 'spear_mastery'], items: [], weak: '느리다 → 공속 물약 · 종족 → 방패 카드' },
   { id: 'kn_bowl', line: 'swordsman', name: '회전 몰이 기사', pitch: '몰아서 회전 강타로 한꺼번에', weights: { str: 8, vit: 6, agi: 4, dex: 4 }, skills: ['bowling_bash', 'magnum_break', 'endure'], items: ['x_whirlglove'], weak: 'SP가 모자란다 → SP 카드 · 받는 피해 → 흡혈' },

@@ -44,7 +44,8 @@ export type Modal =
   | { kind: 'quick'; slot: number }
   | { kind: 'mob'; id: string }
   | { kind: 'buy'; id: string }
-  | { kind: 'sell'; id?: string; uid?: number };
+  | { kind: 'sell'; id?: string; uid?: number }
+  | { kind: 'build'; heroId: number };
 
 class Game {
   s!: GameState;

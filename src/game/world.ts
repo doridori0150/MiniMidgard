@@ -1158,7 +1158,7 @@ export class World {
     this.lastCrit = crit;
     const frozen = t.frozenUntil > this.time;
     if (!crit && !frozen) {
-      const rate = clamp(80 + d.hit - mobFlee, 5, 95) + hitBonus;
+      const rate = clamp(80 + d.hit - mobFlee, 5, 100) + hitBonus; // RO: enough HIT is a sure hit
       if (this.rng() * 100 >= rate) {
         this.emit({ t: 'dmg', uid: t.uid, n: 0, kind: 'miss', i: idx });
         this.sound('miss');
@@ -1674,7 +1674,7 @@ export class World {
     this.s.totals.deaths++;
     this.s.rate.deaths++;
     for (const h of this.heroes) {
-      const loss = Math.floor(expNext(h.hero.baseLv) * 0.01);
+      const loss = h.hero.cls === 'novice' ? 0 : Math.floor(expNext(h.hero.baseLv) * 0.01); // RO: novices lose nothing
       h.hero.baseExp = Math.max(0, h.hero.baseExp - loss);
     }
     this.emit({ t: 'announce', text: '파티 전멸... 경험치 1%를 잃었습니다', kind: 'wipe' });

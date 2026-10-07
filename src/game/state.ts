@@ -5,6 +5,7 @@ import { SKILLS } from './data/skills.ts';
 import { ITEMS } from './data/items.ts';
 import { ZONES, openers, type ZoneDef, type GateNeed } from './data/zones.ts';
 import { MONSTERS } from './data/monsters.ts';
+import { buildOf } from './data/builds.ts'; // also registers the build identity items and their drops
 import { START_STAT_POINTS, statCost } from './exp.ts';
 import { ARMOR_SAFE, WEAPON_SAFE, partyPerks } from './stats.ts';
 
@@ -362,7 +363,7 @@ export const BUILD_PRESETS: Record<ClassId, Partial<Record<StatKey, number>>> = 
 };
 
 export function autoDistribute(h: Hero) {
-  const w = BUILD_PRESETS[h.cls];
+  const w = buildOf(h.cls, h.build)?.weights ?? BUILD_PRESETS[h.cls];
   const keys = STAT_KEYS.filter((k) => (w[k] ?? 0) > 0);
   let guard = 0;
   while (h.statPts > 0 && guard++ < 500) {

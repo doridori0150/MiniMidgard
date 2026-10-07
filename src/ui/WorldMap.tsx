@@ -11,6 +11,7 @@ import { drawWorldMap } from '../render/worldmap.ts';
 import { itemIconURL } from '../render/icons.ts';
 import { audio } from '../audio/audio.ts';
 import { zoneKnown, gateLines, gateReady, openGate, canEnter } from '../game/state.ts';
+import { computeDerived } from '../game/stats.ts';
 
 type Fit = { label: string; cls: string };
 export function zoneFit(z: ZoneDef, avgLv: number): Fit {
@@ -258,9 +259,26 @@ export function MobModal(props: { id: string }) {
           <div class="dv"><span>HP</span><b>{fmt(m.hp)}</b></div>
           <div class="dv"><span>ATK</span><b>{m.atk[0]}~{m.atk[1]}</b></div>
           <div class="dv"><span>DEF / MDEF</span><b>{m.def} / {m.mdef}</b></div>
-          <div class="dv"><span>필요 HIT</span><b>{m.lv + m.agi + 15}</b><small>95% 명중 기준</small></div>
-          <div class="dv"><span>필요 FLEE</span><b>{m.lv + m.dex + 75}</b><small>95% 회피 기준</small></div>
           <div class="dv"><span>경험치</span><b>{fmt(m.exp)}</b><small>Job {fmt(m.jexp)}</small></div>
+        </div>
+        {/* what the party actually does against it (RO formulas), instead of a far-off 95% requirement */}
+        <div class="mob-odds">
+          {g.s.heroes.map((h, i) => {
+            const d = g.world.heroes[i]?.d ?? computeDerived(g.s, h);
+            const hit = Math.max(5, Math.min(100, 80 + d.hit - (m.lv + m.agi)));
+            const crit = Math.max(0, d.crit - m.luk * 0.2) * (1 - (m.critRes ?? (m.boss === 'mvp' ? 0.5 : m.boss ? 0.25 : 0)));
+            const sure = Math.min(100, hit + (100 - hit) * crit / 100);
+            const dodge = 100 - Math.max(5, Math.min(95, 80 + m.lv + m.dex - d.flee));
+            const tone = (v: number, good: number, ok: number) => (v >= good ? 'good' : v >= ok ? 'ok' : 'bad');
+            return (
+              <div class="mo-row">
+                <b>{h.name}</b>
+                <span class={tone(sure, 85, 65)}>명중 {Math.round(sure)}%{crit >= 5 && hit < 100 ? <small> (크리 포함)</small> : null}</span>
+                <span class={tone(dodge, 50, 20)}>회피 {Math.round(dodge)}%</span>
+              </div>
+            );
+          })}
+          <div class="mo-need">100% 명중: HIT {m.lv + m.agi + 20} · 95% 회피: FLEE {m.lv + m.dex + 75}</div>
         </div>
         <div class="weak-box">
           <div><b class="good">약점</b> {w.weak.length ? w.weak.map((x) => <span class="wchip"><ElChip el={x.e} /> {x.v}%</span>) : <span class="muted">없음</span>}</div>

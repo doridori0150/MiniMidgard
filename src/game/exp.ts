@@ -11,7 +11,9 @@ export function jobExpNext(tier: 0 | 1 | 2, jlv: number, jobMax: number): number
   if (jlv >= jobMax) return Infinity;
   if (tier === 0) return Math.round(8 + jlv * jlv * 9);
   const t1 = 7 * jlv * jlv + 0.5 * Math.pow(jlv + 4, 3.3);
-  return Math.round(tier === 2 ? 40000 + t1 * 5.5 : t1);
+  if (tier === 2) return Math.round(40000 + t1 * 5.5);
+  // RO's rhythm: base levels come fast, the 1st job's last stretch is the long road (keeps the 2nd job ≈ 13 h)
+  return Math.round(t1 * (jlv >= 25 ? 1 + (jlv - 25) * 0.07 : 1));
 }
 
 /** stat points granted when reaching `lv` (from lv-1). */
