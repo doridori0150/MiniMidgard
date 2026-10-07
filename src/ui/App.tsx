@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks';
 import { game, useGame } from './game.ts';
-import { Hud, Nav } from './Hud.tsx';
+import { ExpStrip, Hud, Nav } from './Hud.tsx';
 import { FieldView } from './FieldView.tsx';
 import { Modals } from './Modals.tsx';
 import { StatusPanel, SkillsPanel } from './panels/StatusSkills.tsx';
@@ -28,6 +28,7 @@ function GameScreen() {
       {/* while a detail is open nothing behind it can be tapped, tabbed to or read out */}
       <div class="app-main" inert={g.modals.length > 0}>
         <Hud />
+        <ExpStrip />
         <FieldView />
         <div class={'sheet' + (p ? ' open' : '') + (tall ? ' tall' : '')}>
           {p === 'status' && <StatusPanel />}

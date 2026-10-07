@@ -51,29 +51,28 @@ function QSlot(props: { i: number }) {
       g.setModal({ kind: 'quick', slot: i });
     }, 450);
   };
+  // a tap switches this slot's auto use on/off (items are only ever used automatically); long-press = setup
   const up = () => {
     if (timer.current !== null) { clearTimeout(timer.current); timer.current = null; }
     if (long.current) return;
-    const err = g.world.useQuick(i);
-    if (err) { g.toast(err, 'bad'); audio.play('error'); }
-    g.notify();
+    q.auto = !q.auto;
+    g.toast(`${d.name} 자동 사용 ${q.auto ? '켬' : '끔'}`, q.auto ? 'good' : 'info');
+    g.commit('click');
   };
   const cancel = () => { if (timer.current !== null) { clearTimeout(timer.current); timer.current = null; } };
-  const cls = ['qs', running && !(trig === 'buff' && buffOn) ? 'run' : '', buffOn ? 'buffing' : '', have <= 0 ? 'out' : '', recent ? 'hot' : ''].join(' ');
+  const cls = ['qs', running && !(trig === 'buff' && buffOn) ? 'run' : '', q.auto ? '' : 'off', buffOn ? 'buffing' : '', have <= 0 ? 'out' : '', recent ? 'hot' : ''].join(' ');
   return (
     <button class={cls} style={buffOn ? { '--p': (left / d.buff!.dur) * 100 } as Record<string, number> : undefined}
-      aria-label={`${d.name} ${have}개${q.auto ? ', 자동 사용 중' : ''}`}
+      role="switch" aria-checked={q.auto} aria-label={`${d.name} ${have}개, 자동 사용 ${q.auto ? '켬' : '끔'}`}
       onPointerDown={down} onPointerUp={up} onPointerLeave={cancel} onPointerCancel={cancel} onContextMenu={(e) => e.preventDefault()}
-      // Enter / Space / assistive "click" (no pointer, detail 0) use the item through the same path as a tap
+      // Enter / Space / assistive "click" (no pointer, detail 0) toggle through the same path as a tap
       onClick={(e) => { if (e.detail === 0) { long.current = false; up(); } }}>
       <span class="ring" />
       <span class="inner">
         <img src={itemIconURL(id)} alt="" draggable={false} />
         <span class="cnt">{have > 999 ? '999+' : have}</span>
       </span>
-      {/* a label, not a control: nested inside the use button it could not be a real target. Auto on/off is in the
-          quick-slot setup (long-press a slot or the ⚙ button) */}
-      <span class={'auto' + (q.auto ? '' : ' off')} aria-hidden="true">{q.auto ? 'AUTO' : '수동'}</span>
+      <span class={'auto' + (q.auto ? '' : ' off')} aria-hidden="true">{q.auto ? 'AUTO' : 'OFF'}</span>
       <span class={'cap ' + (buffOn ? 'buff on' : cond.cls)}>{buffOn ? mmss(left) : cond.text}</span>
       {used !== undefined && <span key={used} class="pop" />}
     </button>
@@ -160,7 +159,7 @@ export function QuickSetupModal(props: { slot: number }) {
           })}
           {owned.length === 0 && <div class="muted small">소비 아이템이 없습니다. 도구 상점에서 포션을 사세요.</div>}
         </div>
-        <div class="small muted" style={{ marginTop: '8px' }}>퀵슬롯을 누르면 바로 사용, 길게 누르면 이 설정 창이 열립니다. 자동 사용은 위의 '자동 사용' 줄에서 켜고 끕니다(슬롯의 AUTO는 표시만 해요).</div>
+        <div class="small muted" style={{ marginTop: '8px' }}>퀵슬롯을 누를 때마다 그 슬롯의 자동 사용이 켜지고 꺼집니다(AUTO / OFF). 길게 누르면 이 설정 창이 열립니다.</div>
       </div>
     </div>
   );

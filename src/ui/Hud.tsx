@@ -3,7 +3,7 @@ import { game, useGame, type PanelId } from './game.ts';
 import { HeroCanvas, fmt, heroReady } from './widgets.tsx';
 import { CLASSES } from '../game/data/classes.ts';
 import { canJobChange } from '../game/state.ts';
-import { expNext } from '../game/exp.ts';
+import { expNext, jobExpNext } from '../game/exp.ts';
 import { zone } from '../game/data/zones.ts';
 import { insertableCards } from './panels/Cards.tsx';
 
@@ -29,6 +29,24 @@ export function Hud() {
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.3 2h3.4l.5 2.6c.6.2 1.2.5 1.7.9l2.5-.9 1.7 2.9-2 1.8c.1.6.1 1.2 0 1.8l2 1.8-1.7 2.9-2.5-.9c-.5.4-1.1.7-1.7.9l-.5 2.6h-3.4l-.5-2.6c-.6-.2-1.2-.5-1.7-.9l-2.5.9-1.7-2.9 2-1.8c-.1-.6-.1-1.2 0-1.8l-2-1.8 1.7-2.9 2.5.9c.5-.4 1.1-.7 1.7-.9zM12 8.6a3.4 3.4 0 100 6.8 3.4 3.4 0 000-6.8z" transform="translate(0 1)" /></svg>
       </button>
     </div>
+  );
+}
+
+/** RO's basic-info EXP line for the leader ("me"): base and job EXP toward the next level, always in view */
+export function ExpStrip() {
+  const g = useGame();
+  const h = g.s.heroes[0];
+  if (!h) return null;
+  const cls = CLASSES[h.cls];
+  const bNext = expNext(h.baseLv), jNext = jobExpNext(cls.tier, h.jobLv, cls.jobMax);
+  const pct = (a: number, b: number) => (Number.isFinite(b) ? Math.min(100, (a / b) * 100) : 100);
+  const label = (a: number, b: number) => (Number.isFinite(b) ? pct(a, b).toFixed(1) + '%' : 'MAX');
+  return (
+    <button class="xstrip" aria-label={`${h.name} 경험치 — 베이스 ${label(h.baseExp, bNext)}, 잡 ${label(h.jobExp, jNext)}`}
+      onClick={() => { g.sel = 0; g.openPanel('status'); }}>
+      <span class="xs-item"><b>Lv {h.baseLv}</b><span class="xs-bar base"><i style={{ width: pct(h.baseExp, bNext) + '%' }} /></span><small>{label(h.baseExp, bNext)}</small></span>
+      <span class="xs-item"><b>Job {h.jobLv}</b><span class="xs-bar job"><i style={{ width: pct(h.jobExp, jNext) + '%' }} /></span><small>{label(h.jobExp, jNext)}</small></span>
+    </button>
   );
 }
 
@@ -93,6 +111,7 @@ const ICONS: Record<string, preact.JSX.Element> = {
   gear: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 3l6.5.5-.5 6.5-9 9-3-3z" /><path d="M3 18l3 3 2-2-3-3z" /><path d="M7 14l3 3-1.5 1.5-3-3z" /></svg>,
   explore: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5l6-2 6 2 6-2v16l-6 2-6-2-6 2zm6 0v12l6 2V7z" /></svg>,
   status: <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4" /><path d="M4 21c0-5 3.6-8 8-8s8 3 8 8z" /></svg>,
+  character: <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4" /><path d="M4 21c0-5 3.6-8 8-8s8 3 8 8z" /></svg>,
   skills: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z" /></svg>,
   equip: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 3l6.5.5-.5 6.5-9 9-3-3z" /><path d="M3 18l3 3 2-2-3-3z" /><path d="M7 14l3 3-1.5 1.5-3-3z" /></svg>,
   cards: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.2 3.6l9.6 1.7c.9.2 1.5 1 1.3 1.9l-2.3 12.9c-.2.9-1 1.5-1.9 1.3l-9.6-1.7c-.9-.2-1.5-1-1.3-1.9L6.3 4.9c.2-.9 1-1.5 1.9-1.3zm3.3 5.3l-1 2.8-2.9.4 2.2 1.9-.6 2.9 2.6-1.4 2.5 1.6-.4-2.9 2.3-1.8-2.9-.6z" /></svg>,
@@ -101,15 +120,26 @@ const ICONS: Record<string, preact.JSX.Element> = {
   town: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 7h-3v10h-5v-6h-2v6H6V10H3z" /></svg>,
 };
 
+/** 캐릭터 tab: toggles like the others; opens on whatever is waiting (stat points → 스탯, skill points / job → 스킬) */
+function openCharacter() {
+  const g = game;
+  if (g.page === 'grow') { g.goHunt(); return; }
+  const h = g.hero;
+  const sub = h.statPts > 0 ? 'status' : h.skillPts > 0 || !canJobChange(h) ? 'skills' : g.sub.grow || 'status';
+  g.openPage('grow', sub);
+}
+
 export function Nav() {
   const g = useGame();
   const s = g.s;
   const skillPts = s.heroes.reduce((a, h) => a + h.skillPts, 0);
+  const statPts = s.heroes.reduce((a, h) => a + h.statPts, 0);
   const job = s.heroes.some((h) => !canJobChange(h));
   // red-dot discipline: only for cards found since the card tab was last opened, and only if one can go in a slot
   const cardsReady = s.totals.cards > (s.cardSeen ?? 0) ? insertableCards(s) : 0;
-  const items: [PanelId, string, preact.JSX.Element | null][] = [
-    ['skills', '스킬', job ? <span class="badge glow">전직</span> : skillPts ? <span class="badge">{skillPts}</span> : null],
+  // 캐릭터 = stats and skills together (one place to spend points after a level up)
+  const items: [PanelId | 'character', string, preact.JSX.Element | null][] = [
+    ['character', '캐릭터', job ? <span class="badge glow">전직</span> : statPts || skillPts ? <span class="badge">{statPts ? `+${statPts}` : skillPts}</span> : null],
     ['equip', '장비', null],
     ['cards', '카드', cardsReady ? <span class="badge glow">{cardsReady}</span> : null],
     ['bag', '가방', null],
@@ -118,13 +148,16 @@ export function Nav() {
   ];
   return (
     <nav class="nav">
-      {items.map(([id, label, badge]) => (
-        <button class={g.panel === id ? 'on' : ''} aria-current={g.panel === id ? 'page' : undefined} onClick={() => game.openPanel(id)}>
+      {items.map(([id, label, badge]) => {
+        const on = id === 'character' ? g.page === 'grow' : g.panel === id;
+        return (
+        <button class={on ? 'on' : ''} aria-current={on ? 'page' : undefined} onClick={() => (id === 'character' ? openCharacter() : game.openPanel(id))}>
           {ICONS[id]}
           <span>{label}</span>
           {badge}
         </button>
-      ))}
+        );
+      })}
     </nav>
   );
 }

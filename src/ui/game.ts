@@ -7,6 +7,7 @@ import { applyOffline, type OfflineReport } from '../game/offline.ts';
 import { FieldRenderer } from '../render/field.ts';
 import { audio } from '../audio/audio.ts';
 import { zone } from '../game/data/zones.ts';
+import { Notifier } from './notify.ts';
 
 export type PanelId = 'status' | 'skills' | 'equip' | 'cards' | 'bag' | 'map' | 'town' | 'party' | 'settings';
 /** bottom-nav pages (UX debate phase A, docs/ux/codex_r2.md §4): hunting is page null */
@@ -71,6 +72,11 @@ class Game {
   private subs = new Set<() => void>();
   private seq = 1;
   private raf = 0;
+  /** desktop play: notifications for the big moments while the player is in another window */
+  readonly notifier = new Notifier();
+  /** a hidden tab keeps hunting on a worker clock (rAF stops when hidden) */
+  private bgWorker: Worker | null = null;
+  private bgLast = 0;
   private lastT = 0;
   private lastNotify = 0;
   private lastSave = 0;
@@ -99,6 +105,7 @@ class Game {
     this.lastSave = performance.now();
     this.loop(performance.now());
     document.addEventListener('visibilitychange', () => this.onVisibility());
+    window.addEventListener('focus', () => this.notifier.seen());
     // Escape and the browser/Android back button step back: detail → settings → page → hunting
     window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.back()) e.preventDefault(); });
     // one history entry stands for "the app is off its hunting root" (a page or a detail is open); the browser/Android
@@ -131,7 +138,11 @@ class Game {
       audio.pauseAll(true);
       cancelAnimationFrame(this.raf);
       this.raf = 0;
+      this.startBackground();
     } else {
+      this.stopBackground();
+      this.notifier.seen();
+      if (this.renderer) this.renderer.stateVersion++;
       audio.pauseAll(false);
       const away = Date.now() - this.s.lastSave;
       if (away > 60_000) {
@@ -145,12 +156,46 @@ class Game {
     }
   }
 
+  // ── background play: worker timers are not throttled like a hidden page's, so the hunt keeps going at full speed
+  // while the player works in another window; a long gap (the machine slept) is counted like time away
+  private startBackground() {
+    if (this.bgWorker || typeof Worker === 'undefined') return;
+    const src = 'const id = setInterval(() => postMessage(0), 1000); onmessage = () => { clearInterval(id); close(); };';
+    try { this.bgWorker = new Worker(URL.createObjectURL(new Blob([src], { type: 'text/javascript' }))); } catch { return; }
+    this.bgLast = performance.now();
+    this.bgWorker.onmessage = () => this.bgTick();
+  }
+  private stopBackground() {
+    if (!this.bgWorker) return;
+    this.bgWorker.postMessage('stop');
+    this.bgWorker = null;
+  }
+  private bgTick() {
+    const now = performance.now();
+    const dt = now - this.bgLast;
+    this.bgLast = now;
+    if (dt > 10 * 60_000) {
+      const rep = applyOffline(this.s, dt);
+      if (rep) { this.modal = { kind: 'offline', report: rep }; this.world.syncParty(); }
+    } else {
+      for (let left = dt; left > 0; left -= 5000) this.world.advance(Math.min(left, 5000));
+    }
+    this.notifier.watch(this.world, this.world.events, this.world.notices);
+    this.notifier.flush(!!this.s.settings.notify, now);
+    this.world.events.length = 0; // nothing draws them while hidden
+    for (const n of this.world.notices.splice(0)) this.toast(n.text, n.kind === 'job' ? 'level' : 'good');
+    if (now - this.lastSave > 10_000) { this.lastSave = now; if (!this.qa) save(this.s); this.dirty = false; }
+  }
+
   private loop = (t: number) => {
     this.raf = requestAnimationFrame(this.loop);
     const dt = this.lastT ? t - this.lastT : 16;
     this.lastT = t;
     // climax hit-stop: hold the sim for a beat (the frame still renders; no catch-up afterwards)
     if (!this.renderer || t >= this.renderer.hitstopUntil) this.world.advance(Math.min(dt, 1000));
+    // visible but unfocused (another window on top): still tell the player about the big moments
+    this.notifier.watch(this.world, this.world.events, this.world.notices);
+    this.notifier.flush(!!this.s.settings.notify, t);
     // boss music
     const bossOn = this.world.mobs.some((m) => m.m.boss && m.state !== 'dead');
     if (bossOn !== this.bossMusic) { this.bossMusic = bossOn; audio.playBgm(bossOn ? 'boss' : this.world.zone.bgm); }

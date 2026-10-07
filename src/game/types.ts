@@ -196,6 +196,8 @@ export interface Settings {
   pixel?: boolean;
   /** CRT monitor look over the whole game screen (scanlines, aperture grille, vignette); absent = on */
   crt?: boolean;
+  /** desktop notifications for level ups, cards, rare gear, MVPs while the player is in another window */
+  notify?: boolean;
 }
 
 export interface GameState {

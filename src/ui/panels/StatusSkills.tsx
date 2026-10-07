@@ -61,6 +61,24 @@ function StatLine(props: { k: StatKey; base: number; plus: number; pts: number; 
   );
 }
 
+/** the 캐릭터 tab holds both growth views: stats and skills, one switch at the top (badges show what is waiting) */
+function GrowTabs() {
+  const g = useGame();
+  const h = g.hero;
+  const on = g.panel;
+  const job = !canJobChange(h);
+  return (
+    <div class="seg grow-tabs" role="tablist" aria-label="캐릭터">
+      <button role="tab" aria-selected={on === 'status'} class={on === 'status' ? 'on' : ''} onClick={() => g.openSub('grow', 'status')}>
+        스탯{h.statPts > 0 && <i class="gt-badge">+{h.statPts}</i>}
+      </button>
+      <button role="tab" aria-selected={on === 'skills'} class={on === 'skills' ? 'on' : ''} onClick={() => g.openSub('grow', 'skills')}>
+        스킬{job ? <i class="gt-badge job">전직</i> : h.skillPts > 0 && <i class="gt-badge">{h.skillPts}</i>}
+      </button>
+    </div>
+  );
+}
+
 export function StatusPanel() {
   const g = useGame();
   const h = g.hero;
@@ -90,9 +108,10 @@ export function StatusPanel() {
     <div class="dv"><span>{label}</span><b>{value}</b>{sub && <small>{sub}</small>}</div>
   );
   return (
-    <Win title={`스탯 — ${h.name}`} onClose={() => g.openPanel(null)}>
+    <Win title={`캐릭터 — ${h.name}`} onClose={() => g.openPanel(null)}>
       <div class="win-body st">
         <HeroTabs sel={g.sel} onSel={(i) => { g.sel = i; g.notify(); }} />
+        <GrowTabs />
         <div class="st-head">
           <div class="st-portrait"><HeroCanvas hero={h} zoom={1.45} anchor={6} /></div>
           <div class="st-id">
@@ -184,9 +203,10 @@ export function SkillsPanel() {
     return Object.entries(sk.req).map(([r, lv]) => `${SKILLS[r].name} ${h.skills[r] ?? 0}/${lv}`).join(', ');
   };
   return (
-    <Win title={`스킬 — ${h.name}`} onClose={() => g.openPanel(null)} right={<span class="small">포인트 <b style={{ color: '#ffe880' }}>{h.skillPts}</b></span>}>
+    <Win title={`캐릭터 — ${h.name}`} onClose={() => g.openPanel(null)} right={<span class="small">포인트 <b style={{ color: '#ffe880' }}>{h.skillPts}</b></span>}>
       <div class="win-body">
         <HeroTabs sel={g.sel} onSel={(i) => { g.sel = i; g.notify(); }} />
+        <GrowTabs />
         {nextJobs(h).length > 0 && (
           <div class={jobErr ? 'hint' : 'box'} style={{ marginBottom: '8px' }}>
             {jobErr ? <><b>{h.cls === 'novice' ? '1차 전직' : `2차 전직(${nextJobs(h).map((j) => CLASSES[j].name).join('/')})`}</b> — {h.cls === 'novice' ? `직업 레벨 10 · 기본기 9 (지금 Job ${h.jobLv}, 기본기 ${h.skills.basic ?? 0})` : `직업 레벨 ${SECOND_JOB_LV} 필요 (지금 ${h.jobLv})`}</> : (

@@ -79,7 +79,8 @@ input { font-family: inherit; }
 .mini-bar.ex i { background: linear-gradient(#fff2a0, var(--exp)); }
 
 /* ───── party rail (left edge of the field) */
-.prail { position: absolute; left: 6px; top: 6px; z-index: 3; display: flex; flex-direction: column; gap: 6px; width: 132px; }
+/* bottom-left, just above the quick bar (the player's own frame sits low, like RO's party window by the chat) */
+.prail { position: absolute; left: 6px; bottom: 98px; z-index: 3; display: flex; flex-direction: column; gap: 6px; width: 132px; }
 .pf {
   --cc: #8eaaea;
   position: relative; display: flex; align-items: center; gap: 7px; padding: 5px 7px 7px 5px; text-align: left; font: inherit;
@@ -147,14 +148,14 @@ input { font-family: inherit; }
 .gauge.mvp button { background: linear-gradient(#ffe070, #e0a020); text-shadow: 0 1px 0 #6a4a00; }
 @keyframes pulse { 50% { box-shadow: 0 0 10px 2px rgba(255,200,80,0.8); } }
 .chat {
-  position: absolute; left: 6px; bottom: 90px; z-index: 2; width: min(66%, 300px); max-height: 82px; overflow: hidden;
+  position: absolute; left: 6px; top: 6px; z-index: 2; width: min(58%, 260px); max-height: 82px; overflow: hidden;
   background: rgba(8,12,26,0.5); border-radius: 4px; padding: 3px 6px; font-size: 10.5px; line-height: 1.38;
   -webkit-mask-image: linear-gradient(transparent, #000 30%);
   mask-image: linear-gradient(transparent, #000 30%);
   pointer-events: none; text-shadow: 0 1px 0 rgba(0,0,0,0.9);
 }
 .chat.open { max-height: 50%; overflow-y: auto; pointer-events: auto; -webkit-mask-image: none; mask-image: none; background: rgba(8,12,26,0.82); }
-.chat-toggle { position: absolute; left: 6px; bottom: 90px; z-index: 3; width: min(66%, 300px); height: 82px; background: none; border: 0; cursor: pointer; }
+.chat-toggle { position: absolute; left: 6px; top: 6px; z-index: 3; width: min(58%, 260px); height: 82px; background: none; border: 0; cursor: pointer; }
 .announce-wrap { position: absolute; left: 0; right: 0; top: 13%; z-index: 4; display: flex; flex-direction: column; align-items: center; gap: 6px; pointer-events: none; }
 .announce {
   padding: 6px 18px; border-radius: 20px; font-size: 14px; color: #fff; text-shadow: 0 2px 0 rgba(0,0,0,0.6);
@@ -1023,3 +1024,24 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 @media (prefers-reduced-motion: reduce) { .crt-fx::before { display: none; } }
 @keyframes crtFlicker { 0%, 100% { opacity: 1; } 47% { opacity: 0.94; } 48% { opacity: 1; } 81% { opacity: 0.97; } 82% { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .crt-fx { animation: none; } }
+
+/* ───── 캐릭터 tab: stat / skill switch */
+.grow-tabs { margin: 0 0 8px; }
+.grow-tabs button { flex: 1; min-height: 36px; display: flex; align-items: center; justify-content: center; gap: 5px; font: inherit; font-size: 13px; }
+.gt-badge { font-style: normal; font-family: 'Galmuri9'; font-size: 10px; line-height: 14px; padding: 0 5px; border-radius: 7px; background: #e03a3a; color: #fff; }
+.gt-badge.job { background: linear-gradient(#ffb0d8, #ff6aa8); }
+/* a switched-off quick slot reads as resting */
+.qs.off .inner img { filter: grayscale(0.75) brightness(0.8); }
+.qs.off .cap { opacity: 0.5; }
+
+/* ───── leader EXP strip under the HUD (RO basic info: base / job EXP %) */
+.xstrip { flex: none; display: flex; gap: 10px; align-items: center; height: 20px; padding: 0 8px; border: 0; border-bottom: 1px solid #0c1222;
+  background: #141c36; color: #dfe8ff; font: inherit; cursor: pointer; position: relative; z-index: 5; }
+.xs-item { flex: 1; min-width: 0; display: flex; align-items: center; gap: 5px; font-family: 'Galmuri9'; font-size: 10px; }
+.xs-item b { font-weight: normal; color: #fff; white-space: nowrap; }
+.xs-item small { font-size: 10px; color: #c8d4f4; width: 40px; text-align: right; }
+.xs-bar { flex: 1; height: 6px; border-radius: 3px; background: #0b1020; border: 1px solid #060912; overflow: hidden; }
+.xs-bar i { display: block; height: 100%; transition: width 0.3s; }
+.xs-bar.base i { background: linear-gradient(#fff2a0, var(--exp)); }
+.xs-bar.job i { background: linear-gradient(#c8f0ff, #5ab0f0); }
+.hm-exp { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 3px; }

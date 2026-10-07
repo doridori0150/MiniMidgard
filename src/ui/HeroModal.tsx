@@ -3,6 +3,7 @@
 import { useGame } from './game.ts';
 import { Bar, HeroCanvas } from './widgets.tsx';
 import { CLASSES } from '../game/data/classes.ts';
+import { expNext, jobExpNext } from '../game/exp.ts';
 import { HeroTactics, PartyOps, moveHero, roleLabel } from './panels/Party.tsx';
 import type { PanelId } from './game.ts';
 
@@ -27,6 +28,16 @@ export function HeroModal(props: { id: number }) {
             <div class="small"><span style={{ color: cls.color }}>{cls.name}</span> · Lv {h.baseLv} · Job {h.jobLv}</div>
             {u && <Bar kind="hp" v={u.hp} max={u.d.maxHp} />}
             {u && <Bar kind="sp" v={u.sp} max={u.d.maxSp} />}
+            <div class="hm-exp">
+              {(() => {
+                const bn = expNext(h.baseLv), jn = jobExpNext(cls.tier, h.jobLv, cls.jobMax);
+                const pct = (a: number, b: number) => (Number.isFinite(b) ? `${Math.min(100, (a / b) * 100).toFixed(1)}%` : 'MAX');
+                return <>
+                  <Bar kind="ex" v={h.baseExp} max={bn} label={`EXP ${pct(h.baseExp, bn)}`} />
+                  <Bar kind="jx" v={h.jobExp} max={jn} label={`JOB ${pct(h.jobExp, jn)}`} />
+                </>;
+              })()}
+            </div>
             {u?.doing && <div class="pmem-doing">지금: {u.doing}</div>}
           </div>
         </div>

@@ -22,16 +22,22 @@
     await boot('party=swordsman,acolyte,mage&lv=30');
     const g = G();
     // 1. bottom tabs open their sheet, tapping the open one closes it (the original behaviour)
-    for (const [label, panel] of [['스킬', 'skills'], ['장비', 'equip'], ['카드', 'cards'], ['가방', 'bag'], ['지도', 'map'], ['마을', 'town']]) {
-      await click(nav(label)); const a = g.panel; await click(nav(label));
+    for (const [label, panel] of [['캐릭터', 'grow'], ['장비', 'equip'], ['카드', 'cards'], ['가방', 'bag'], ['지도', 'map'], ['마을', 'town']]) {
+      await click(nav(label)); const a = panel === 'grow' ? g.page : g.panel; await click(nav(label));
       log(a === panel && g.panel === null, `tab ${label} opens and closes`, `${a} → ${g.panel}`);
     }
+    // 캐릭터 holds both growth views behind one switch
+    await click(nav('캐릭터'));
+    await click($$('.grow-tabs button').find((b) => b.textContent.startsWith('스킬'))); const p1 = g.panel;
+    await click($$('.grow-tabs button').find((b) => b.textContent.startsWith('스탯'))); const p2 = g.panel;
+    log(p1 === 'skills' && p2 === 'status', '캐릭터: 스탯 / 스킬 switch', `${p1} → ${p2}`);
+    await click(nav('캐릭터'));
     // 2. a portrait opens that companion's popup; its links open the sheet for that hero
     await click($$('.pf')[1]);
     log(g.modal?.kind === 'hero' && g.hero.name === '마루', 'portrait opens the companion popup', `${g.modal?.kind}/${g.hero.name}`);
     await click($$('.hm-links .btn').find((b) => b.textContent.startsWith('스탯')));
     log(g.modals.length === 0 && g.panel === 'status' && g.hero.name === '마루', 'popup → 스탯 sheet for that hero', `${g.panel}/${g.hero.name}`);
-    await click(nav('스킬')); await click(nav('스킬'));
+    g.openPanel(null); await sleep(60);
     // 3. tactics and order from the popup; selection follows the hero
     await click($$('.pf')[2]);
     const roleBtn = $$('.modal-layer:not([hidden]) .tseg button').find((b) => b.textContent === '후열');
@@ -84,15 +90,14 @@
     g.openPanel(null); await sleep(80);
     const qaParty = g.s.heroes.length;
     log(g.s.partySlots === 3 && qaParty === 3, 'party full (no recruit button needed)', `${qaParty}/${g.s.partySlots}`);
-    // 9. quick slot: keyboard and tap each use one
-    for (const u of g.world.heroes) u.hp = Math.max(1, Math.floor(u.d.maxHp * 0.2));
-    g.s.quick[0].auto = false; // the live game would also drink one automatically mid-test
-    const qs = $('.qs'), id = g.s.quick[0].id, n0 = g.s.stacks[id];
+    // 9. quick slot: a key press or a tap switches that slot's auto use (once each); items are never used by hand
+    const qs = $('.qs'), id = g.s.quick[0].id, n0 = g.s.stacks[id], a0 = g.s.quick[0].auto;
+    for (const u of g.world.heroes) u.hp = u.d.maxHp; // nobody needs a potion during the check
     qs.dispatchEvent(new MouseEvent('click', { bubbles: true, detail: 0 })); await sleep(60);
-    const n1 = g.s.stacks[id];
+    const a1 = g.s.quick[0].auto;
     qs.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true })); qs.dispatchEvent(new PointerEvent('pointerup', { bubbles: true }));
     qs.dispatchEvent(new MouseEvent('click', { bubbles: true, detail: 1 })); await sleep(60);
-    log(n1 === n0 - 1 && g.s.stacks[id] === n1 - 1, 'quick slot: one use per key and per tap', `${n0}→${n1}→${g.s.stacks[id]}`);
+    log(a1 === !a0 && g.s.quick[0].auto === a0 && g.s.stacks[id] === n0, 'quick slot: key / tap toggle auto once each, nothing used', `${a0}→${a1}→${g.s.quick[0].auto}, ${n0}→${g.s.stacks[id]}`);
     // 10. recruit flow with a free slot
     await boot('party=swordsman&lv=24');
     const g2 = G(); await click($('.pf-add'));

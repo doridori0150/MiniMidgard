@@ -16,6 +16,7 @@ import {
   HAIR_COLORS, HAIR_STYLES, SKIN_TONES, DYE_COUNT, wipeSave, nextJobs, refineInfoFor,
 } from '../../game/state.ts';
 import { partyPerks } from '../../game/stats.ts';
+import { requestNotify } from '../notify.ts';
 
 // ───────── town
 const NPCS: { id: TownView; npc: string; name: string; who: string; sub: string; roof: string; icon: string }[] = [
@@ -215,6 +216,18 @@ export function SettingsPanel() {
           {Sw('도트 모드 (레트로 픽셀)', !!st.pixel, () => { st.pixel = !st.pixel; if (g.renderer) { g.renderer.pixelMode = !!st.pixel; g.renderer.resize(); } })}
           {Sw('잡템 자동 판매', st.autoSellEtc, () => { st.autoSellEtc = !st.autoSellEtc; })}
           {Sw('보스·MVP 자동 소환', st.autoBoss, () => { st.autoBoss = !st.autoBoss; })}
+        </div>
+        <div class="box">
+          <button class="set-row" role="switch" aria-checked={!!st.notify} onClick={async () => {
+            if (!st.notify) {
+              const ok = await requestNotify();
+              if (!ok) { g.toast('브라우저에서 알림이 막혀 있어요. 주소창의 사이트 설정에서 알림을 허용해 주세요.', 'bad'); return; }
+            }
+            set(() => { st.notify = !st.notify; });
+          }}>
+            <span>PC 알림 (레벨업·카드·득템)</span><span class="sp1" /><small>{st.notify ? '켬' : '끔'}</small><span class={'toggle' + (st.notify ? ' on' : '')} aria-hidden="true" />
+          </button>
+          <div class="small muted" style={{ marginTop: '4px' }}>다른 창에서 일하는 동안에도 사냥은 계속됩니다. 레벨업, 전직 가능, 카드, 슬롯 장비, MVP 처치, 전멸이 생기면 알림이 뜨고 탭 제목에 개수가 표시됩니다.</div>
         </div>
         <div class="sec">기록</div>
         <div class="derived">
