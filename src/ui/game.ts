@@ -94,7 +94,7 @@ class Game {
     this.loadUi();
     audio.setVolumes(s.settings.sfx, s.settings.bgm, s.settings.muted);
     audio.playBgm(zone(s.zone).bgm);
-    save(s);
+    if (!this.qa) save(s); // a QA boot must never touch the real save
     this.lastSave = performance.now();
     this.loop(performance.now());
     document.addEventListener('visibilitychange', () => this.onVisibility());
