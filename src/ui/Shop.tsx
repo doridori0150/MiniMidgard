@@ -77,23 +77,71 @@ export function upgradeScore(s: import('../game/types.ts').GameState, h: Hero, d
   return (d.def ?? 0) + (d.mdef ?? 0) * 0.3 - ((c.def ?? 0) + cur.refine + (c.mdef ?? 0) * 0.3);
 }
 
-function ShopCard(props: { d: ItemDef; h: Hero; onOpen: () => void }) {
+type ShopLayout = 'list' | 'grid';
+const LAYOUT_KEY = 'minimidgard.shopLayout';
+function loadLayout(): ShopLayout {
+  try { return localStorage.getItem(LAYOUT_KEY) === 'grid' ? 'grid' : 'list'; } catch { return 'list'; }
+}
+
+function fitText(d: ItemDef, h: Hero, err: string | null) {
+  if (d.kind === 'equip' || d.kind === 'ammo') return err ? (d.reqLv && h.baseLv < d.reqLv ? `Lv ${d.reqLv} 필요` : '장착 불가') : '장착 가능';
+  if (d.kind === 'use') return quickTrigger(d.id) === 'buff' ? '파티 버프' : '회복';
+  return '재료';
+}
+
+function quickBuy(g: ReturnType<typeof useGame>, d: ItemDef, n: number) {
+  const e = buy(g.s, d.id, n);
+  if (e) { g.toast(e, 'bad'); audio.play('error'); return; }
+  g.toast(`${d.name}${n > 1 ? ` ×${n}` : ''} 구매 (-${fmt(buyPrice(g.s, d.id) * n)}z)`, 'good');
+  g.commit('zeny');
+}
+
+/** one-line row: tap the row for details, tap the button to buy right away */
+function ShopRow(props: { d: ItemDef; h: Hero; onOpen: () => void }) {
   const g = useGame();
   const { d, h } = props;
   const price = buyPrice(g.s, d.id);
   const err = d.kind === 'equip' || d.kind === 'ammo' ? canEquip(h, d.id) : null;
   const up = upgradeScore(g.s, h, d);
   const have = d.kind !== 'equip' ? g.s.stacks[d.id] ?? 0 : g.s.equips.filter((e) => e.id === d.id).length;
-  const afford = g.s.zeny >= price;
+  const stack = d.kind === 'use';
   return (
-    <button class={'scard ' + (d.kind === 'equip' ? 'eq-' + (d.loc ?? '') : d.kind) + (err ? ' cant' : '')} onClick={props.onOpen}>
-      {up !== null && up > 0 && <span class="badge-up">추천 ▲</span>}
-      {have > 0 && <span class="badge-have">보유 {have}</span>}
-      <span class="sc-icon"><img src={itemIconURL(d.id)} alt="" /></span>
-      <b class={'sc-name ' + nameClass(d.id)}>{d.name}</b>
-      <span class="sc-stat">{mainStat(d)}</span>
-      <span class={'sc-fit ' + (err ? 'no' : 'ok')}>{d.kind === 'equip' || d.kind === 'ammo' ? (err ? (d.reqLv && h.baseLv < d.reqLv ? `Lv ${d.reqLv} 필요` : '장착 불가') : '✓ 장착 가능') : d.kind === 'use' ? (quickTrigger(d.id) === 'buff' ? '파티 버프' : '회복') : '재료'}</span>
-      <span class={'sc-price' + (afford ? '' : ' poor')}>{fmt(price)} z</span>
+    <div class={'srow ' + (d.kind === 'equip' ? 'eq-' + (d.loc ?? '') : d.kind) + (err ? ' cant' : '')} onClick={props.onOpen}>
+      <span class="sr-icon"><img src={itemIconURL(d.id)} alt="" /></span>
+      <div class="sr-mid">
+        <div class="sr-name">
+          <b class={nameClass(d.id)}>{d.name}</b>
+          {up !== null && up > 0 && <i class="sr-up">추천▲</i>}
+          {have > 0 && <i class="sr-have">보유 {have}</i>}
+        </div>
+        <div class="sr-stat">{mainStat(d)}</div>
+        <span class={'sr-fit ' + (err ? 'no' : 'ok')}>{fitText(d, h, err)}</span>
+      </div>
+      <div class="sr-right" onClick={(e) => e.stopPropagation()}>
+        <span class={'sr-price' + (g.s.zeny >= price ? '' : ' poor')}>{fmt(price)}z</span>
+        <div class="sr-btns">
+          <button class="btn sm pri" disabled={g.s.zeny < price} onClick={() => quickBuy(g, d, 1)}>구매</button>
+          {stack && <button class="btn sm" disabled={g.s.zeny < price * 10} onClick={() => quickBuy(g, d, 10)}>×10</button>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** compact 3-column tile (tap = details/buy) */
+function ShopTile(props: { d: ItemDef; h: Hero; onOpen: () => void }) {
+  const g = useGame();
+  const { d, h } = props;
+  const price = buyPrice(g.s, d.id);
+  const err = d.kind === 'equip' || d.kind === 'ammo' ? canEquip(h, d.id) : null;
+  const up = upgradeScore(g.s, h, d);
+  return (
+    <button class={'stile ' + (d.kind === 'equip' ? 'eq-' + (d.loc ?? '') : d.kind) + (err ? ' cant' : '')} onClick={props.onOpen}>
+      {up !== null && up > 0 && <span class="st-up">▲</span>}
+      <span class="st-icon"><img src={itemIconURL(d.id)} alt="" /></span>
+      <span class={'st-name ' + nameClass(d.id)}>{d.name}</span>
+      <span class="st-stat">{mainStat(d)}</span>
+      <span class={'st-price' + (g.s.zeny >= price ? '' : ' poor')}>{fmt(price)}z</span>
     </button>
   );
 }
@@ -104,6 +152,8 @@ export function ShopView(props: { shop: ShopId; noHeader?: boolean }) {
   const h = g.hero;
   const [mode, setMode] = useState<'buy' | 'sell'>('buy');
   const [cat, setCat] = useState('all');
+  const [layout, setLayoutState] = useState<ShopLayout>(loadLayout);
+  const setLayout = (l: ShopLayout) => { setLayoutState(l); try { localStorage.setItem(LAYOUT_KEY, l); } catch { /* ignore */ } };
   const shop = SHOPS[props.shop];
   const cats = CATS[props.shop];
   const test = cats.find((c) => c.id === cat)?.test ?? (() => true);
@@ -115,14 +165,18 @@ export function ShopView(props: { shop: ShopId; noHeader?: boolean }) {
     <div class="shop">
       {!props.noHeader && (
         <div class="shop-head">
-          <LookCanvas look={NPC_LOOKS[npc.npc]} zoom={1.15} anchor={3} class="shop-npc" />
-          <div class="shop-bubble"><b>{npc.name}</b><span>{npc.line}</span></div>
+          <LookCanvas look={NPC_LOOKS[npc.npc]} face class="shop-npc" />
+          <div class="shop-bubble"><b>{npc.name}</b> <span>{npc.line}</span></div>
         </div>
       )}
-      <div class="row" style={{ margin: '8px 0 6px' }}>
+      <div class="row" style={{ margin: '6px 0' }}>
         <div class="seg"><button class={mode === 'buy' ? 'on' : ''} onClick={() => setMode('buy')}>구매</button><button class={mode === 'sell' ? 'on' : ''} onClick={() => setMode('sell')}>판매</button></div>
-        <span class="sp1" />
         {(perks.discount > 0 || perks.overcharge > 0) && <span class="perk">{mode === 'buy' ? (perks.discount ? `할인 -${perks.discount}%` : '') : (perks.overcharge ? `바가지 +${perks.overcharge}%` : '')}</span>}
+        <span class="sp1" />
+        <div class="seg view" role="group" aria-label="보기 방식">
+          <button class={layout === 'list' ? 'on' : ''} aria-label="목록으로 보기" onClick={() => setLayout('list')}>☰</button>
+          <button class={layout === 'grid' ? 'on' : ''} aria-label="카드로 보기" onClick={() => setLayout('grid')}>▦</button>
+        </div>
       </div>
       {mode === 'buy' && (
         <>
@@ -132,23 +186,31 @@ export function ShopView(props: { shop: ShopId; noHeader?: boolean }) {
               {usedCats.map((c) => <button class={cat === c.id ? 'on' : ''} onClick={() => { setCat(c.id); audio.play('click'); }}>{c.label}</button>)}
             </div>
           )}
-          <div class="scards">
-            {items.map((d) => <ShopCard d={d} h={h} onOpen={() => { audio.play('open'); g.setModal({ kind: 'buy', id: d.id }); }} />)}
-          </div>
+          {layout === 'list' ? (
+            <div class="srows">
+              {items.map((d) => <ShopRow d={d} h={h} onOpen={() => { audio.play('open'); g.setModal({ kind: 'buy', id: d.id }); }} />)}
+            </div>
+          ) : (
+            <div class="stiles">
+              {items.map((d) => <ShopTile d={d} h={h} onOpen={() => { audio.play('open'); g.setModal({ kind: 'buy', id: d.id }); }} />)}
+            </div>
+          )}
         </>
       )}
-      {mode === 'sell' && <SellGrid />}
+      {mode === 'sell' && <SellGrid layout={layout} />}
     </div>
   );
 }
 
-function SellGrid() {
+function SellGrid(props: { layout: ShopLayout }) {
   const g = useGame();
   const s = g.s;
   const stacks = Object.entries(s.stacks).filter(([id, n]) => n > 0 && ITEMS[id] && ITEMS[id].kind !== 'ammo').sort((a, b) => ITEMS[a[0]].kind.localeCompare(ITEMS[b[0]].kind) || sellPrice(s, b[0]) - sellPrice(s, a[0]));
   const eqs = s.equips.filter((e) => !equippedBy(s, e.uid));
   const junk = stacks.filter(([id]) => ITEMS[id].kind === 'etc' && !id.startsWith('r_') && !ITEMS[id].rarity);
   const junkZ = junk.reduce((a, [id, n]) => a + sellPrice(s, id) * n, 0);
+  const precious = (id: string) => ITEMS[id].kind === 'card' || !!ITEMS[id].rarity || id.startsWith('r_');
+  const sellNow = (id: string, n: number) => { const z = sellStack(s, id, n); if (z) g.toast(`+${fmt(z)} 제니`, 'good'); g.commit('zeny'); };
   return (
     <>
       <div class="sell-bar">
@@ -156,26 +218,51 @@ function SellGrid() {
         <span class="sp1" />
         <button class="btn gold" disabled={junkZ === 0} onClick={() => { const r = sellAllEtc(s); g.toast(`잡템 ${r.count}개 판매 +${fmt(r.zeny)}z`, 'good'); g.commit('zeny'); }}>일괄 판매 {fmt(junkZ)}z</button>
       </div>
-      <div class="scards">
-        {eqs.map((e) => (
-          <button class={'scard eq-' + (ITEMS[e.id].loc ?? '')} onClick={() => g.setModal({ kind: 'sell', uid: e.uid })}>
-            {e.refine > 0 && <span class="badge-have">+{e.refine}</span>}
-            <span class="sc-icon"><img src={itemIconURL(e.id)} alt="" /></span>
-            <b class={'sc-name ' + nameClass(e.id)}>{itemName(e)}</b>
-            <span class="sc-stat">{mainStat(ITEMS[e.id])}</span>
-            <span class="sc-price sell">{fmt(sellPrice(s, e.id, e.refine))} z</span>
-          </button>
-        ))}
-        {stacks.map(([id, n]) => (
-          <button class={'scard ' + ITEMS[id].kind} onClick={() => g.setModal({ kind: 'sell', id })}>
-            <span class="badge-have">×{fmt(n)}</span>
-            <span class="sc-icon"><img src={itemIconURL(id)} alt="" /></span>
-            <b class={'sc-name ' + nameClass(id)}>{ITEMS[id].name}</b>
-            <span class="sc-stat">개당</span>
-            <span class="sc-price sell">{fmt(sellPrice(s, id))} z</span>
-          </button>
-        ))}
-      </div>
+      {props.layout === 'grid' ? (
+        <div class="stiles">
+          {eqs.map((e) => (
+            <button class={'stile eq-' + (ITEMS[e.id].loc ?? '')} onClick={() => g.setModal({ kind: 'sell', uid: e.uid })}>
+              <span class="st-icon"><img src={itemIconURL(e.id)} alt="" /></span>
+              <span class={'st-name ' + nameClass(e.id)}>{itemName(e)}</span>
+              <span class="st-price sell">{fmt(sellPrice(s, e.id, e.refine))}z</span>
+            </button>
+          ))}
+          {stacks.map(([id, n]) => (
+            <button class={'stile ' + ITEMS[id].kind} onClick={() => g.setModal({ kind: 'sell', id })}>
+              <span class="st-qty">×{fmt(n)}</span>
+              <span class="st-icon"><img src={itemIconURL(id)} alt="" /></span>
+              <span class={'st-name ' + nameClass(id)}>{ITEMS[id].name}</span>
+              <span class="st-price sell">{fmt(sellPrice(s, id))}z</span>
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div class="srows">
+          {eqs.map((e) => (
+            <div class={'srow eq-' + (ITEMS[e.id].loc ?? '')} onClick={() => g.setModal({ kind: 'sell', uid: e.uid })}>
+              <span class="sr-icon"><img src={itemIconURL(e.id)} alt="" /></span>
+              <div class="sr-mid"><div class="sr-name"><b class={nameClass(e.id)}>{itemName(e)}</b></div><div class="sr-stat">{mainStat(ITEMS[e.id])}</div></div>
+              <div class="sr-right" onClick={(ev) => ev.stopPropagation()}>
+                <span class="sr-price">{fmt(sellPrice(s, e.id, e.refine))}z</span>
+                <div class="sr-btns"><button class="btn sm gold" onClick={() => g.setModal({ kind: 'sell', uid: e.uid })}>판매</button></div>
+              </div>
+            </div>
+          ))}
+          {stacks.map(([id, n]) => (
+            <div class={'srow ' + ITEMS[id].kind} onClick={() => g.setModal({ kind: 'sell', id })}>
+              <span class="sr-icon"><img src={itemIconURL(id)} alt="" /></span>
+              <div class="sr-mid"><div class="sr-name"><b class={nameClass(id)}>{ITEMS[id].name}</b><i class="sr-have">×{fmt(n)}</i></div><div class="sr-stat">개당 {fmt(sellPrice(s, id))}z</div></div>
+              <div class="sr-right" onClick={(ev) => ev.stopPropagation()}>
+                <span class="sr-price">{fmt(sellPrice(s, id) * n)}z</span>
+                <div class="sr-btns">
+                  <button class="btn sm" onClick={() => (precious(id) ? g.setModal({ kind: 'sell', id }) : sellNow(id, 1))}>1개</button>
+                  <button class="btn sm gold" onClick={() => (precious(id) ? g.setModal({ kind: 'sell', id }) : sellNow(id, n))}>모두</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       {eqs.length + stacks.length === 0 && <div class="hint">팔 물건이 없습니다.</div>}
     </>
   );
