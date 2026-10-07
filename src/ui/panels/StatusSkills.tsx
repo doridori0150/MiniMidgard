@@ -181,7 +181,7 @@ export function SkillsPanel() {
   const reqText = (id: string) => {
     const sk = SKILLS[id];
     if (!sk.req) return '';
-    return Object.entries(sk.req).map(([r, lv]) => `${SKILLS[r].name} ${lv}`).join(', ');
+    return Object.entries(sk.req).map(([r, lv]) => `${SKILLS[r].name} ${h.skills[r] ?? 0}/${lv}`).join(', ');
   };
   return (
     <Win title={`스킬 — ${h.name}`} onClose={() => g.openPanel(null)} right={<span class="small">포인트 <b style={{ color: '#ffe880' }}>{h.skillPts}</b></span>}>
@@ -208,12 +208,15 @@ export function SkillsPanel() {
           const auto = h.auto.skills[sk.id] !== false;
           return (
             <>{header}<div class={'skill' + (locked ? ' locked' : '')} key={sk.id}>
-              <img src={skillIconURL(sk.id)} alt="" onClick={() => setOpen(open === sk.id ? null : sk.id)} />
-              <div class="mid" onClick={() => setOpen(open === sk.id ? null : sk.id)}>
+              {/* the icon + name is one button that opens the details (reachable by keyboard, separate from learn/auto) */}
+              <button class="sk-mid" aria-expanded={open === sk.id} onClick={() => setOpen(open === sk.id ? null : sk.id)}>
+              <img src={skillIconURL(sk.id)} alt="" />
+              <div class="mid">
                 <div class="nm"><b>{sk.name}</b><span class="lv">Lv {lv}/{sk.maxLv}</span>{!isActive && <span class="chip">패시브</span>}{sk.cls === 'novice' && h.cls !== 'novice' && <span class="chip">초보자</span>}</div>
                 {locked && <div class="small" style={{ color: '#c05050' }}>필요: {reqText(sk.id)}</div>}
                 {open === sk.id && <div class="desc">{sk.desc(Math.max(1, lv))}{lv < sk.maxLv && lv > 0 ? `\n\n▶ 다음 레벨: ${sk.desc(lv + 1).split('\n')[0]}` : ''}</div>}
               </div>
+              </button>
               {isActive && lv > 0 && sk.auto !== 'none' && (
                 <button class="sk-auto" role="switch" aria-checked={auto} aria-label={`${sk.name} 자동 사용`} onClick={() => { h.auto.skills[sk.id] = !auto; g.commit('click'); }}>
                   <span class={'toggle' + (auto ? ' on' : '')} /><small>{auto ? '자동' : '수동'}</small>

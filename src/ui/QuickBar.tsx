@@ -69,11 +69,9 @@ function QSlot(props: { i: number }) {
         <img src={itemIconURL(id)} alt="" draggable={false} />
         <span class="cnt">{have > 999 ? '999+' : have}</span>
       </span>
-      <span class={'auto' + (q.auto ? '' : ' off')}
-        onPointerDown={(e) => e.stopPropagation()}
-        onPointerUp={(e) => { e.stopPropagation(); q.auto = !q.auto; g.commit('click'); }}>
-        {q.auto ? 'AUTO' : '수동'}
-      </span>
+      {/* a label, not a control: nested inside the use button it could not be a real target. Auto on/off is in the
+          quick-slot setup (long-press a slot or the ⚙ button) */}
+      <span class={'auto' + (q.auto ? '' : ' off')} aria-hidden="true">{q.auto ? 'AUTO' : '수동'}</span>
       <span class={'cap ' + (buffOn ? 'buff on' : cond.cls)}>{buffOn ? mmss(left) : cond.text}</span>
       {used !== undefined && <span key={used} class="pop" />}
     </button>
@@ -122,10 +120,9 @@ export function QuickSetupModal(props: { slot: number }) {
                 <div class="small muted">{d.desc}</div>
               </div>
             </div>
-            <div class="row" style={{ marginTop: '8px' }}>
-              <span>자동 사용</span><span class="sp1" />
-              <button class={'toggle' + (q.auto ? ' on' : '')} onClick={() => { q.auto = !q.auto; g.commit('click'); }} />
-            </div>
+            <button class="set-row" role="switch" aria-checked={q.auto} style={{ marginTop: '8px' }} onClick={() => { q.auto = !q.auto; g.commit('click'); }}>
+              <span>자동 사용</span><span class="sp1" /><small>{q.auto ? '켬' : '끔'}</small><span class={'toggle' + (q.auto ? ' on' : '')} aria-hidden="true" />
+            </button>
             {(trig === 'hp' || trig === 'sp') && (
               <div class="row" style={{ marginTop: '6px', opacity: q.auto ? 1 : 0.45 }}>
                 <span style={{ whiteSpace: 'nowrap' }}>{trig === 'hp' ? 'HP' : 'SP'}가</span>

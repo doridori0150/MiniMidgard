@@ -98,9 +98,10 @@ export function FieldView() {
   useEffect(() => { const f = () => bump((x) => x + 1); window.addEventListener('resize', f); return () => window.removeEventListener('resize', f); }, []);
   const squeezed = manage && (() => {
     const p = g.page!, sub = g.sub[p];
-    const hud = document.querySelector('.hud')?.getBoundingClientRect().height ?? 48;
-    const nav = document.querySelector('.nav')?.getBoundingClientRect().height ?? 56;
-    const rows = 48 + (wantsHero(p, sub) ? 56 : 0) + (SUBTABS[p].length > 1 ? 44 : 0);
+    const h = (sel: string, fallback: number) => document.querySelector(sel)?.getBoundingClientRect().height ?? fallback;
+    // measured where the rows exist (larger text grows them), the spec heights before the page has rendered
+    const rows = h('.page-title', 48) + (wantsHero(p, sub) ? h('.hero-sel', 56) : 0) + (SUBTABS[p].length > 1 ? h('.subnav', 44) : 0);
+    const hud = h('.hud', 48), nav = h('.nav', 56);
     return window.innerHeight - hud - nav - rows - 150 < 240;
   })();
   const closed = manage && (g.bandClosed() || squeezed);
@@ -108,13 +109,15 @@ export function FieldView() {
     const r = game.renderer;
     if (!r) return;
     r.observe = manage;
-    if (manage) { r.insetBottom = 0; r.snapCamera(); }
-    else {
-      // keep the party above the quick bar as it is actually laid out (safe area, larger text…)
-      const qb = wrap.current?.querySelector<HTMLElement>('.qbar');
-      r.insetBottom = qb && wrap.current ? Math.max(0, wrap.current.clientHeight - qb.offsetTop + 6) : 84;
-    }
-    r.resize();
+    if (manage) { r.insetBottom = 0; r.snapCamera(); r.resize(); return; }
+    // keep the party above the quick bar as it is actually laid out (safe area, larger text, resizes…)
+    const qb = wrap.current?.querySelector<HTMLElement>('.qbar');
+    const measure = () => { if (qb && wrap.current) r.insetBottom = Math.max(0, wrap.current.clientHeight - qb.offsetTop + 6); };
+    measure(); r.resize();
+    const ro = new ResizeObserver(measure);
+    if (qb) ro.observe(qb);
+    if (wrap.current) ro.observe(wrap.current);
+    return () => ro.disconnect();
   }, [manage, closed]);
   if (game.renderer) { game.renderer.focusHeroId = g.selId; game.renderer.blockInput = g.modals.length > 0; }
   // the canvas is always the first child of the same wrapper, so the renderer keeps drawing into the same element

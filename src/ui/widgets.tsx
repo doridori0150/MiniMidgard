@@ -184,11 +184,19 @@ export function heroReady(h: Hero): 'job' | 'grow' | null {
 export function HeroSelector(props: { sel: number; onSel: (i: number) => void }) {
   const s = game.s;
   return (
-    <div class="hero-sel" role="radiogroup" aria-label="편집할 캐릭터">
+    <div class="hero-sel" role="radiogroup" aria-label="편집할 캐릭터" onKeyDown={(e) => {
+      // arrow keys move the choice like a radio group; Tab enters on the chosen hero only
+      const d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+      if (!d || !s.heroes.length) return;
+      e.preventDefault();
+      const n = (props.sel + d + s.heroes.length) % s.heroes.length;
+      props.onSel(n);
+      requestAnimationFrame(() => (e.currentTarget as HTMLElement | null)?.querySelectorAll<HTMLElement>('button')[n]?.focus());
+    }}>
       {s.heroes.map((h, i) => {
         const ready = heroReady(h);
         return (
-          <button role="radio" aria-checked={i === props.sel} class={i === props.sel ? 'on' : ''} key={h.id}
+          <button role="radio" aria-checked={i === props.sel} tabIndex={i === props.sel ? 0 : -1} class={i === props.sel ? 'on' : ''} key={h.id}
             aria-label={h.name + (ready === 'job' ? ' (전직 가능)' : ready ? ' (포인트 사용 가능)' : '')} onClick={() => props.onSel(i)}>
             <span class="hs-face"><HeroCanvas hero={h} face zoom={0.62} animate={false} /></span>
             <span class="hs-nm">{h.name}</span>

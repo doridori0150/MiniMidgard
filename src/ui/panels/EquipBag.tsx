@@ -186,15 +186,17 @@ export function BagPanel() {
               <span>잡템 일괄 판매</span><span class="sp1" />
               <button class="btn sm gold" disabled={etcValue === 0} onClick={() => { const r = sellAllEtc(s); g.toast(`잡템 ${r.count}개 판매: +${fmt(r.zeny)} 제니`, 'good'); g.commit('zeny'); }}>판매 (약 {fmt(etcValue)}z~)</button>
             </div>
-            <div class="row" style={{ marginTop: '6px' }}>
-              <span class="small">줍는 즉시 잡템 자동 판매</span><span class="sp1" />
-              <button class={'toggle' + (s.settings.autoSellEtc ? ' on' : '')} onClick={() => { s.settings.autoSellEtc = !s.settings.autoSellEtc; g.commit('click'); }} />
-            </div>
+            <button class="set-row" role="switch" aria-checked={s.settings.autoSellEtc} style={{ marginTop: '6px' }} onClick={() => { s.settings.autoSellEtc = !s.settings.autoSellEtc; g.commit('click'); }}>
+              <span>줍는 즉시 잡템 자동 판매</span><span class="sp1" /><small>{s.settings.autoSellEtc ? '켬' : '끔'}</small><span class={'toggle' + (s.settings.autoSellEtc ? ' on' : '')} aria-hidden="true" />
+            </button>
             <div class="small muted" style={{ marginTop: '4px' }}>정련석·보석처럼 귀한 것은 팔지 않습니다. 파티에 상인이 있으면 바가지로 더 비싸게 팔려요.</div>
           </div>
         )}
         {tab === 'card' && counts.card === 0 && <div class="hint">카드는 몬스터가 아주 낮은 확률(약 0.1%)로 떨어뜨립니다. 사냥터 도감에서 확률을 확인하세요!</div>}
-        {tab === 'card' && counts.card > 0 && <div class="small muted" style={{ marginTop: '6px' }}>카드를 눌러 슬롯이 있는 장비에 꽂을 수 있습니다. 한 번 꽂으면 뺄 수 없어요.</div>}
+        {tab === 'card' && counts.card > 0 && (
+          // cards are managed in one place: the 카드 page's owned list and slot board
+          <button class="btn pri block" style={{ marginTop: '8px' }} onClick={() => g.openPage('cards', 'slots')}>카드 관리에서 꽂기 ›</button>
+        )}
       </div>
     </Win>
   );

@@ -66,7 +66,7 @@ input { font-family: inherit; }
 .tb-zone { display: flex; align-items: baseline; gap: 6px; min-width: 0; background: none; border: 0; color: #fff; cursor: pointer; padding: 4px 2px; font-size: 13.5px; text-shadow: 0 1px 0 rgba(0,0,0,0.5); }
 .tb-zone b { font-weight: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tb-zone small { font-family: 'Galmuri9'; font-size: 10px; color: #9fb4e6; white-space: nowrap; }
-.tb-btn { width: var(--touch-min); height: 40px; flex: none; display: flex; align-items: center; justify-content: center; padding: 0; border-radius: 7px; border: 1px solid #6a80c0; background: linear-gradient(#4a5e98, #33447a); color: #e8eeff; cursor: pointer; }
+.tb-btn { width: var(--touch-min); height: var(--touch-min); flex: none; display: flex; align-items: center; justify-content: center; padding: 0; border-radius: 7px; border: 1px solid #6a80c0; background: linear-gradient(#4a5e98, #33447a); color: #e8eeff; cursor: pointer; }
 .tb-btn svg { width: 17px; height: 17px; }
 .tb-btn:active { transform: translateY(1px); }
 .zeny { font-family: 'Galmuri9'; font-size: 11px; color: #ffe8a0; background: rgba(0,0,0,0.35); border: 1px solid #56689c; border-radius: 12px; padding: 4px 9px; white-space: nowrap; }
@@ -198,7 +198,7 @@ input { font-family: inherit; }
   background: linear-gradient(var(--title1), var(--title2)); border-bottom: 1px solid #2e4180;
 }
 .win-title .sp { flex: 1; }
-.win-title .x { width: var(--touch-min); height: 36px; margin: -6px -6px -6px 0; font-size: 18px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.6); background: rgba(255,255,255,0.15); color: #fff; cursor: pointer; line-height: 14px; padding: 0; }
+.win-title .x { width: var(--touch-min); height: var(--touch-min); margin: 0 -4px 0 0; font-size: 18px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.6); background: rgba(255,255,255,0.15); color: #fff; cursor: pointer; line-height: 14px; padding: 0; }
 .win-body { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 8px; }
 .tabs { display: flex; gap: 2px; padding: 4px 6px 0; background: var(--paper2); border-bottom: 1px solid var(--line2); flex: none; overflow-x: auto; }
 .tabs button { padding: 5px 10px 4px; border: 1px solid var(--line2); border-bottom: 0; border-radius: 5px 5px 0 0; background: #dfe5f2; cursor: pointer; color: var(--ink2); white-space: nowrap; }
@@ -928,10 +928,11 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .subnav button.on { color: var(--ink); border-bottom-color: var(--title2); font-weight: bold; }
 .sub-dot { position: absolute; top: 9px; right: calc(50% - 30px); width: 8px; height: 8px; border-radius: 4px; background: #ff4a5a; }
 .page-main { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
-.page-win { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
-.page-win > .win-body { padding: var(--space-page); }
+/* the page body scrolls as one column, its "장비 — 쿠키" line included, so no fixed row eats the body height */
+.page-win { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.page-win > .win-body { padding: var(--space-page); flex: none; overflow: visible; min-height: auto; }
 .page-info { flex: none; display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 4px var(--space-page); font-size: var(--text-caption); color: var(--ink2); background: #fff; border-bottom: 1px solid var(--line2); }
-.page-info .x { width: auto; min-height: 32px; padding: 0 10px; border-radius: 6px; border: 1px solid var(--line2); background: var(--paper2); color: var(--ink); cursor: pointer; }
+.page-info .x { width: auto; min-height: var(--touch-min); padding: 0 10px; border-radius: 6px; border: 1px solid var(--line2); background: var(--paper2); color: var(--ink); cursor: pointer; }
 .nav .badge.dot { min-width: 10px; width: 10px; height: 10px; padding: 0; top: 7px; right: calc(50% - 15px); border-radius: 5px; }
 .pm-order { display: flex; align-items: center; gap: 8px; padding: 6px 2px 8px; }
 .pm-order .btn { min-height: var(--touch-min); min-width: 88px; }
@@ -939,17 +940,17 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 
 /* touch & type floors on management pages and modals */
 .page .btn, .modal .btn { min-height: var(--touch-min); }
-.page .btn.sm, .page .btn.xs, .modal .btn.sm, .modal .btn.xs { min-height: 36px; min-width: 44px; font-size: var(--text-caption); }
+.page .btn.sm, .page .btn.xs, .modal .btn.sm, .modal .btn.xs { min-height: var(--touch-min); min-width: var(--touch-min); font-size: var(--text-caption); }
 .page .small { font-size: var(--text-caption); }
 .page .hint { font-size: var(--text-caption); }
-.page .tseg button { min-height: 40px; font-size: var(--text-caption); }
+.page .tseg button { min-height: var(--touch-min); font-size: var(--text-caption); }
 .page .preset small { font-size: 11px; }
 .page .preset b { font-size: var(--text-body); }
 .modal-back { position: absolute; top: max(10px, env(safe-area-inset-top)); left: 10px; z-index: 2; min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid #8d9cc0; background: #f5f7fc; color: var(--ink); font-size: var(--text-body); cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
 .page-info [style] { color: var(--ink) !important; }
 .page-info b { color: var(--title2); }
 /* the world map page scrolls as one column: map picture, then the region / map card (no nested scroller) */
-.page .wm { flex: 1 1 auto; min-height: 0; overflow-y: auto; display: block; }
+.page .wm { flex: none; overflow: visible; display: block; }
 .page .wm-map { height: 250px; min-height: 0; }
 .page .zcard { display: block; }
 .page .zc-body { overflow: visible; }
@@ -960,3 +961,27 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .set-row:last-child { border-bottom: 0; }
 .set-row small { font-size: var(--text-caption); color: var(--ink2); min-width: 20px; text-align: right; }
 .modal .small, .modal .desc { font-size: var(--text-caption); }
+/* phase A floors: modal titles, skill rows, required captions */
+.modal .win-title { min-height: var(--touch-min); font-size: var(--text-body); }
+.skill .lv, .skill .desc, .sk-auto small { font-size: var(--text-caption); }
+.sk-mid { flex: 1; min-width: 0; display: flex; align-items: center; gap: 7px; padding: 0; border: 0; background: none; color: inherit; text-align: left; cursor: pointer; font: inherit; min-height: var(--touch-min); }
+.qs .auto { pointer-events: none; }
+/* 360px and below: tighter page gutter, two-column presets, wrapping 5-way choices, slots in rows */
+@media (max-width: 360px) {
+  :root { --space-page: 8px; }
+  .presets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tseg { flex-wrap: wrap; }
+  .tseg button { flex: 1 0 30%; }
+  .cb-boxes { flex-wrap: wrap; }
+  .cb-row { flex-wrap: wrap; }
+}
+/* touch floor fixes found by tools/ui-check.html (44×44 on every page) */
+.subnav { height: auto; min-height: var(--subnav-h); }
+.subnav button { min-height: var(--touch-min); }
+.tb-zone { min-height: var(--touch-min); }
+.page .seg button { min-height: var(--touch-min); min-width: var(--touch-min); }
+.stat-key { min-height: var(--touch-min); }
+.eslot { min-height: var(--touch-min); }
+.page .tabs button { min-height: var(--touch-min); }
+.page .fchip { min-height: var(--touch-min); }
+.page .cb-item { min-height: var(--touch-min); }

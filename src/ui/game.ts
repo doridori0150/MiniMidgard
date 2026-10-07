@@ -100,12 +100,16 @@ class Game {
     document.addEventListener('visibilitychange', () => this.onVisibility());
     // Escape and the browser/Android back button step back: detail → settings → page → hunting
     window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.back()) e.preventDefault(); });
+    // one history entry stands for "the app is off its hunting root" (a page or a detail is open); the browser/Android
+    // back button steps back once and, while something is still open, the entry is put back
     window.addEventListener('popstate', () => {
       if (this.ignorePop) { this.ignorePop = false; return; }
-      const had = this.page !== null;
-      if (this.back(true) && had && this.page !== null) history.pushState({ mm: 'page' }, '');
+      this.hasEntry = false;
+      this.back(true);
+      this.syncHistory();
     });
     window.addEventListener('pagehide', () => { if (!this.qa) save(this.s); });
+    this.syncHistory(); // e.g. the offline report shown on arrival gets its own back step
     this.notify();
   }
 
@@ -215,21 +219,26 @@ class Game {
     if (m) { if (m.kind === 'offline') return false; this.popModal(); return true; }
     for (let i = this.backHandlers.length - 1; i >= 0; i--) if (this.backHandlers[i]()) { this.notify(); return true; }
     if (this.page === 'settings') { this.closeSettings(); return true; }
-    if (this.page) { this.page = null; audio.play('close'); if (!fromHistory) this.leaveHistory(); this.notify(); return true; }
+    if (this.page) { this.page = null; audio.play('close'); if (!fromHistory) this.syncHistory(); this.notify(); return true; }
     return false;
   }
-  private leaveHistory() { if (history.state?.mm === 'page') { this.ignorePop = true; history.back(); } }
+  private hasEntry = false;
+  /** keep exactly one app history entry while off the root (page or detail open), none at the root */
+  private syncHistory() {
+    const off = this.page !== null || this.modals.length > 0;
+    if (off && !this.hasEntry) { history.pushState({ mm: 'app' }, ''); this.hasEntry = true; }
+    else if (!off && this.hasEntry) { this.hasEntry = false; if (history.state?.mm === 'app') { this.ignorePop = true; history.back(); } }
+  }
 
   /** open a page (and inner tab). Re-selecting the open page never closes it; null returns to hunting */
   openPage(p: MainTab | null, sub?: string) {
     if (p === 'settings' && this.page !== 'settings') this.beforeSettings = this.page;
-    if (!this.page && p) history.pushState({ mm: 'page' }, '');
-    else if (this.page && !p) this.leaveHistory();
     const changed = p !== this.page;
     this.page = p;
     if (p && sub !== undefined) this.sub[p] = sub;
     if (p === 'explore' && sub === 'town') this.town = 'menu';
     if (changed) audio.play(p ? 'open' : 'close');
+    this.syncHistory();
     this.notify();
   }
   openSub(p: MainTab, sub: string) {
@@ -250,19 +259,19 @@ class Game {
   }
 
   openTown(v: TownView) {
-    if (!this.page) history.pushState({ mm: 'page' }, ''); // an NPC tap from the field is a page entry like any other
-    this.page = 'explore';
+    this.page = 'explore'; // an NPC tap from the field is a page entry like any other
     this.sub.explore = 'town';
     this.town = v;
     audio.play('open');
+    this.syncHistory();
     this.notify();
   }
 
   /** replace the whole detail stack (null closes every detail) */
-  setModal(m: Modal | null) { this.modal = m; this.notify(); }
+  setModal(m: Modal | null) { this.modal = m; this.syncHistory(); this.notify(); }
   /** drill into a detail from another one; popModal returns to it */
-  pushModal(m: Modal) { this.modals.push(m); this.notify(); }
-  popModal() { this.modals.pop(); this.notify(); }
+  pushModal(m: Modal) { this.modals.push(m); this.syncHistory(); this.notify(); }
+  popModal() { this.modals.pop(); this.syncHistory(); this.notify(); }
   /** the renderer ignores field taps while a detail is open or a page only watches the band */
   get inputBlocked() { return this.modals.length > 0; }
 

@@ -43,7 +43,7 @@
     // 5. NPC entry from the field is a page entry in history
     await sleep(150); // let the previous history.back() settle
     const before = W().history.state?.mm; g.openTown('tool'); await sleep(60);
-    log(before !== 'page' && W().history.state?.mm === 'page' && g.page === 'explore', 'NPC shop entry pushes a page entry', `${before} → ${W().history.state?.mm}`);
+    log(before !== 'app' && W().history.state?.mm === 'app' && g.page === 'explore', 'NPC shop entry pushes an app history entry', `${before} → ${W().history.state?.mm}`);
     g.goHunt(); await sleep(60);
     // 6. map zone detail: back closes the detail, keeps the page
     await click(nav('탐험')); await click($$('.subnav button').find((b) => b.textContent === '지도'));
@@ -86,6 +86,57 @@
     await click($$('.subnav button').find((b) => b.textContent.startsWith('스킬')));
     const states = new Set($$('.skill .sk-state').map((e) => e.textContent).concat($$('.skill .sk-learn').map(() => '+1')));
     log(states.has('+1') && [...states].every((x) => ['MAX', '학습 종료', '선행 필요', '포인트 부족', '+1'].includes(x)), 'skill row states', [...states].join(','));
+    // 13. real browser Back: a page, a page + detail, and a detail opened from hunting
+    const backOnce = async () => { W().history.back(); await sleep(250); };
+    g.goHunt(); g.setModal(null); await sleep(150);
+    await click(nav('장비')); await backOnce();
+    log(g.page === null, 'browser Back closes a page', String(g.page));
+    await click(nav('장비')); g.setModal({ kind: 'item', id: 'u_red' }); await sleep(80);
+    await backOnce(); const afterOne = `${g.modals.length}/${g.page}`;
+    await backOnce();
+    log(afterOne === '0/gear' && g.page === null, 'browser Back: detail first, then the page', `${afterOne} → ${g.modals.length}/${g.page}`);
+    g.setModal({ kind: 'quick', slot: 0 }); await sleep(80); await backOnce();
+    log(g.modals.length === 0 && g.page === null, 'browser Back closes a detail opened while hunting');
+    // 14. every skill state, by condition
+    const sw = g.s.heroes.find((x) => x.cls === 'swordsman');
+    g.sel = g.s.heroes.indexOf(sw); sw.skillPts = 5; sw.skills.bash = 0;
+    g.openPage('grow', 'skills'); await sleep(120);
+    const rows = () => Object.fromEntries($$('.skill').map((r) => [r.querySelector('.nm b')?.textContent, r.querySelector('.sk-state')?.textContent ?? (r.querySelector('.sk-learn') ? '+1' : '-')]));
+    let r1 = rows();
+    const want = ['MAX', '선행 필요', '학습 종료', '+1'].filter((x) => !Object.values(r1).includes(x));
+    log(!want.length, 'skill states with points: MAX / 선행 필요 / 학습 종료 / +1', want.length ? 'missing ' + want.join(',') : JSON.stringify(r1));
+    log(r1['강타'] === '+1' && r1['폭렬검'] === '선행 필요', 'learnable vs prerequisite rows', `강타 ${r1['강타']}, 폭렬검 ${r1['폭렬검']}`);
+    const req = $$('.skill').find((r) => r.querySelector('.nm b')?.textContent === '폭렬검')?.textContent ?? '';
+    log(/강타 0\/5/.test(req), 'prerequisite shows current / needed', req.slice(0, 40));
+    sw.skillPts = 0; g.notify(); await sleep(120); r1 = rows();
+    log(r1['강타'] === '포인트 부족' && !Object.values(r1).includes('+1'), 'no points: 포인트 부족, no learn button', `강타 ${r1['강타']}`);
+    // 15. the band frames the selected hero head to feet (check 10 tapped the band shut: open it again)
+    g.ui.bandClosed = { general: false, party: false }; g.notify(); await sleep(300);
+    // headless iframes barely tick requestAnimationFrame, so step the renderer by hand like real frames would
+    const R = g.renderer, me = g.world.heroes.find((u) => u.hero.id === g.selId);
+    for (let i = 0; i < 40; i++) R.frame(W().performance.now() + i * 16);
+    const at = R.smooth.get(me.uid) ?? me; // where the hero is actually drawn this frame
+    const [, top] = R.toScreen(at.x, at.y - 90), [, foot] = R.toScreen(at.x, at.y + 8);
+    const cr = R.canvas.getBoundingClientRect();
+    log(top >= 0 && foot <= R.cssH && R.cssH < 200, 'band frames the selected hero', `head ${top.toFixed(0)} feet ${foot.toFixed(0)} / cssH ${R.cssH}, canvas ${Math.round(cr.width)}×${Math.round(cr.height)}, observe ${R.observe}, page ${g.page}`);
+    // 16. short screen folds the band (pref untouched), restores on a tall screen
+    f.style.height = '600px'; await sleep(400); g.notify(); await sleep(150);
+    const folded = $('.field.band')?.classList.contains('closed') && !!$('.band-go');
+    f.style.height = '844px'; await sleep(400); g.notify(); await sleep(150);
+    log(folded && !$('.field.band')?.classList.contains('closed') && !g.ui.bandClosed.general, 'band folds on a short screen and comes back', `folded ${folded}, after: closed ${$('.field.band')?.classList.contains('closed')}, pref ${g.ui.bandClosed.general}, inner ${W().innerHeight}, rows ${['.hud','.nav','.page-title','.hero-sel','.subnav'].map((q) => Math.round($(q)?.getBoundingClientRect().height ?? -1)).join('/')}`);
+    // 17. touch floor: visible buttons on every page and inner tab are at least 44×44
+    const small = new Map();
+    for (const [p, subs] of Object.entries({ party: ['ops', 'members'], grow: ['status', 'skills'], gear: ['equip', 'costume', 'bag'], cards: ['slots', 'book'], explore: ['map', 'town'], settings: [''] })) {
+      for (const sb of subs) {
+        g.openPage(p, sb || undefined); await sleep(120);
+        for (const b of $$('.page button, .hud button, .nav button')) {
+          const r = b.getBoundingClientRect();
+          if (!r.width || !r.height || b.closest('[hidden]')) continue;
+          if (r.width < 43.5 || r.height < 43.5) { const k = `${b.className || b.tagName}「${(b.textContent || b.getAttribute('aria-label') || '').trim().slice(0, 8)}」${Math.round(r.width)}×${Math.round(r.height)}`; small.set(k, (small.get(k) ?? []).concat(p + '/' + sb)); }
+        }
+      }
+    }
+    log(small.size === 0, 'touch floor 44×44 on every page', [...small.entries()].slice(0, 40).map(([k, v]) => `${k} @${[...new Set(v)].slice(0, 2).join(',')}`).join(' | '));
   } catch (e) { log(false, 'exception', e.message); }
   log(localStorage.getItem('minimidgard.save.v1') === savedBefore, 'QA run never touched the save');
   const fails = out.filter((l) => l.startsWith('FAIL')).length;

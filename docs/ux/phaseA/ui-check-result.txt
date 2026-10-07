@@ -1,0 +1,33 @@
+PASS  nav 파티  — party → party
+PASS  nav 성장  — grow → grow
+PASS  nav 장비  — gear → gear
+PASS  nav 카드  — cards → cards
+PASS  nav 탐험  — explore → explore
+PASS  nav 사냥 returns to hunting
+PASS  rail portrait opens that hero  — grow/status/보리
+PASS  selection kept by id after reorder  — 쿠키,보리,마루
+PASS  re-tapping the open inner tab keeps the shop  — tool
+PASS  Escape in a shop → service list  — explore/menu
+PASS  Escape again → hunting  — null
+PASS  NPC shop entry pushes an app history entry  — undefined → app
+PASS  Escape in a map detail → region list  — detail=true
+PASS  confirm cancel returns to the item, hero choice kept  — depth 2 → 1, hero kept true
+PASS  background is inert under a detail
+PASS  sell confirm runs once and closes  — equips 2→1
+PASS  X in a drilled detail returns to the parent  — mob
+PASS  band tap does not focus a monster
+PASS  stat/skill tab dots follow what is doable  — 스탯 스킬•
+PASS  skill row states  — MAX,선행 필요,학습 종료,+1
+PASS  browser Back closes a page  — null
+PASS  browser Back: detail first, then the page  — 0/gear → 0/null
+PASS  browser Back closes a detail opened while hunting
+PASS  skill states with points: MAX / 선행 필요 / 학습 종료 / +1  — {"한손검 수련":"MAX","양손검 수련":"MAX","HP 회복력 향상":"MAX","강타":"+1","폭렬검":"선행 필요","도발":"+1","인내":"선행 필요","기본기":"학습 종료","응급처치":"MAX"}
+PASS  learnable vs prerequisite rows  — 강타 +1, 폭렬검 선행 필요
+PASS  prerequisite shows current / needed  — 폭렬검Lv 0/10필요: 강타 0/5선행 필요
+PASS  no points: 포인트 부족, no learn button  — 강타 포인트 부족
+PASS  band frames the selected hero  — head 13 feet 86 / cssH 106, canvas 390×106, observe true, page grow
+PASS  band folds on a short screen and comes back  — folded true, after: closed false, pref false, inner 844, rows 48/56/48/56/45
+PASS  touch floor 44×44 on every page
+PASS  QA run never touched the save
+
+31/31 passed

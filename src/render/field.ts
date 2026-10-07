@@ -768,13 +768,19 @@ export class FieldRenderer {
     this.snapNext = false;
     const k = snap ? 1 : 1 - Math.exp(-dt / 220);
     const cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
-    this.cam.zoom += (z - this.cam.zoom) * k;
+    // ease in, but never closer than the fit and never so far off that the framed box leaves the band
+    this.cam.zoom = Math.min(z, this.cam.zoom + (z - this.cam.zoom) * k);
     this.cam.x += (cx - this.cam.x) * k;
     this.cam.y += (cy - this.cam.y) * k;
-    // who is outside the band as it is actually drawn this frame
-    const hw = this.cssW / this.cam.zoom / 2, hh = this.cssH / this.cam.zoom / 2;
-    this.offscreen = w.heroes.filter((h) => h !== me && h.state !== 'dead'
-      && (Math.abs(h.x - this.cam.x) > hw + 10 || h.y < this.cam.y - hh || h.y - 80 > this.cam.y + hh)).length; // wholly out of view
+    const m = 8 / this.cam.zoom, hw = this.cssW / this.cam.zoom / 2, hh = this.cssH / this.cam.zoom / 2;
+    this.cam.x = Math.min(Math.max(this.cam.x, b.x1 - hw + m), b.x0 + hw - m);
+    this.cam.y = Math.min(Math.max(this.cam.y, b.y1 - hh + m), b.y0 + hh - m);
+    // who is wholly outside the band as drawn this frame (same boxes and rendered positions as the framing)
+    this.offscreen = w.heroes.filter((h) => {
+      if (h === me || h.state === 'dead') return false;
+      const o = box([h]);
+      return o.x1 < this.cam.x - hw || o.x0 > this.cam.x + hw || o.y1 < this.cam.y - hh || o.y0 > this.cam.y + hh;
+    }).length;
   }
 
   frame(nowMs: number) {

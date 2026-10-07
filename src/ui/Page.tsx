@@ -30,8 +30,8 @@ export function ManagePage() {
   const key = `${page}/${sub}/${heroRow ? g.selId : ''}`;
   const main = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    // the page's one scroller (the world map scrolls as .wm); offsets live in the game's session view state
-    const el = main.current?.querySelector<HTMLElement>('.wm, .win-body');
+    // the page's one scroller (title line + body scroll together); offsets live in the game's session view state
+    const el = main.current?.querySelector<HTMLElement>('.page-win');
     if (!el) return;
     el.scrollTop = (g.view.get('scroll:' + key) as number | undefined) ?? 0;
     const save = () => g.view.set('scroll:' + key, el.scrollTop);
@@ -67,15 +67,25 @@ export function ManagePage() {
       </div>
       {heroRow && <HeroSelector sel={g.sel} onSel={(i) => { g.sel = i; g.notify(); }} />}
       {SUBTABS[page].length > 1 && (
-        <div class="subnav" role="tablist">
+        <div class="subnav" role="tablist" aria-label={`${TITLE[page]} 하위 메뉴`} onKeyDown={(e) => {
+          const tabs = SUBTABS[page], i = tabs.findIndex(([id]) => id === sub);
+          const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+          if (!d) return;
+          e.preventDefault();
+          const n = (i + d + tabs.length) % tabs.length;
+          g.openSub(page, tabs[n][0]);
+          requestAnimationFrame(() => document.getElementById(`tab-${page}-${tabs[n][0]}`)?.focus());
+        }}>
           {SUBTABS[page].map(([id, label]) => (
-            <button role="tab" aria-selected={sub === id} class={sub === id ? 'on' : ''} onClick={() => g.openSub(page, id)}>{label}{tabBadge(page, id)}</button>
+            <button role="tab" id={`tab-${page}-${id}`} aria-selected={sub === id} aria-controls="page-panel" tabIndex={sub === id ? 0 : -1}
+              class={sub === id ? 'on' : ''} onClick={() => g.openSub(page, id)}>{label}{tabBadge(page, id)}</button>
           ))}
         </div>
       )}
       <PageCtx.Provider value={{ heroRow }}>
         {/* remount per hero so a half-made choice (gear pick, card pick) never carries over to someone else */}
-        <div class="page-main" ref={main} key={page + sub + (heroRow ? g.selId : '')}>{body}</div>
+        <div class="page-main" id="page-panel" role={SUBTABS[page].length > 1 ? 'tabpanel' : undefined}
+          aria-labelledby={SUBTABS[page].length > 1 ? `tab-${page}-${sub}` : undefined} ref={main} key={page + sub + (heroRow ? g.selId : '')}>{body}</div>
       </PageCtx.Provider>
     </section>
   );

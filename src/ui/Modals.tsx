@@ -24,7 +24,10 @@ import { skillsOf } from '../game/data/skills.ts';
 function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
   const g = useGame();
   const s = g.s;
-  const [heroIdx, setHeroIdx] = useState(props.heroIdx ?? g.sel);
+  // the equip target is remembered by hero id, so a reorder behind the detail can't swap who gets the item
+  const [heroId, setHeroId] = useState(g.s.heroes[props.heroIdx ?? g.sel]?.id ?? g.selId);
+  const heroIdx = Math.max(0, g.s.heroes.findIndex((x) => x.id === heroId));
+  const setHeroIdx = (i: number) => setHeroId(g.s.heroes[i]?.id ?? heroId);
   const [cardPick, setCardPick] = useState(false);
   const inst = props.uid !== undefined ? s.equips.find((e) => e.uid === props.uid) : undefined;
   const id = inst?.id ?? props.id!;
