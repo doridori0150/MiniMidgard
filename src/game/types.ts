@@ -194,6 +194,8 @@ export interface Settings {
   lowFx: boolean;
   /** retro pixel rendering of the field */
   pixel?: boolean;
+  /** CRT monitor look over the whole game screen (scanlines, aperture grille, vignette); absent = on */
+  crt?: boolean;
 }
 
 export interface GameState {

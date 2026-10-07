@@ -24,7 +24,7 @@ function GameScreen() {
   // panels slide up over the field like before; the party stays visible above them
   const tall = p === 'equip' || p === 'town' || p === 'map' || p === 'cards';
   return (
-    <div class="app">
+    <div class={'app' + (g.s.settings.crt !== false ? ' crt' : '')}>
       {/* while a detail is open nothing behind it can be tapped, tabbed to or read out */}
       <div class="app-main" inert={g.modals.length > 0}>
         <Hud />
@@ -43,6 +43,7 @@ function GameScreen() {
       </div>
       <Modals />
       <Toasts />
+      {g.s.settings.crt !== false && <div class="crt-fx" aria-hidden="true" />}
     </div>
   );
 }

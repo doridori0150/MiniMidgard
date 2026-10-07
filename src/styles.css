@@ -1000,3 +1000,26 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .hm-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 10px 0 2px; }
 .hm-links .btn { position: relative; min-height: 40px; }
 .hm-pts { position: absolute; top: -6px; right: -4px; font-style: normal; font-size: 10px; background: var(--gold); color: #4a2a00; border-radius: 8px; padding: 0 5px; border: 1px solid #b07a10; }
+
+/* ───── CRT monitor look (settings → CRT 모니터 필터). Pure overlay: never takes input, costs one composited layer */
+.app.crt .field canvas.main { filter: contrast(1.08) saturate(1.12) brightness(1.04); }
+.crt-fx { position: absolute; inset: 0; z-index: 90; pointer-events: none; border-radius: 14px / 12px;
+  background:
+    /* scanlines: a dark line every 3px */
+    repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,0.2) 2px, rgba(0,0,0,0.2) 3px),
+    /* aperture grille: faint R/G/B columns */
+    repeating-linear-gradient(to right, rgba(255,40,40,0.045) 0, rgba(255,40,40,0.045) 1px, rgba(40,255,90,0.035) 1px, rgba(40,255,90,0.035) 2px, rgba(60,90,255,0.045) 2px, rgba(60,90,255,0.045) 3px),
+    /* tube vignette */
+    radial-gradient(ellipse 118% 100% at 50% 50%, rgba(0,0,0,0) 58%, rgba(0,0,0,0.26) 84%, rgba(0,0,0,0.58) 100%);
+  box-shadow: inset 0 0 24px rgba(0,0,0,0.55), inset 0 0 3px rgba(0,0,0,0.6);
+  animation: crtFlicker 5s infinite steps(1);
+}
+/* a soft phosphor glow on the light parts of the screen */
+.crt-fx::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(ellipse at 50% 40%, rgba(255,250,235,0.05), rgba(0,0,0,0) 60%); mix-blend-mode: screen; }
+/* the slow bright band rolling down an old tube */
+.crt-fx::before { content: ''; position: absolute; left: 0; right: 0; top: -20%; height: 16%; border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.045), rgba(255,255,255,0)); animation: crtRoll 9s linear infinite; }
+@keyframes crtRoll { from { transform: translateY(0); } to { transform: translateY(760%); } }
+@media (prefers-reduced-motion: reduce) { .crt-fx::before { display: none; } }
+@keyframes crtFlicker { 0%, 100% { opacity: 1; } 47% { opacity: 0.94; } 48% { opacity: 1; } 81% { opacity: 0.97; } 82% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .crt-fx { animation: none; } }
