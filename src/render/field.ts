@@ -908,11 +908,17 @@ export class FieldRenderer {
       ctx.restore();
     } else if (this.lowFx) drawHero(ctx, look, pose, { flash, alpha: state === 'dead' ? 0.85 : 1, shadow: false });
     else inked(ctx, 120, 120, 60, 106, 1.25, (c) => drawHero(c, look, pose, { flash, alpha: state === 'dead' ? 0.85 : 1, shadow: false }));
-    if (state !== 'dead' && h.buffs.some((b) => b.shield && b.shield > 0 && b.until > w.time)) {
+    const sh = state === 'dead' ? [] : h.buffs.filter((b) => b.shield && b.shield > 0 && b.until > w.time);
+    if (sh.length) {
+      // the barrier thins as it soaks hits: fill fades and the bright rim shrinks to what is left
+      const left = sh.reduce((a, b) => a + b.shield!, 0), max = sh.reduce((a, b) => a + (b.shieldMax ?? b.shield!), 0);
+      const r = Math.max(0.08, Math.min(1, left / max));
       ctx.save(); ctx.globalCompositeOperation = 'lighter';
-      ctx.globalAlpha = 0.28 + Math.sin(now / 300) * 0.08;
-      ctx.strokeStyle = '#bfe8ff'; ctx.lineWidth = 1.4; ctx.fillStyle = 'rgba(150,210,255,0.12)';
+      ctx.globalAlpha = 0.22 + Math.sin(now / 300) * 0.06;
+      ctx.strokeStyle = '#bfe8ff'; ctx.lineWidth = 1; ctx.fillStyle = `rgba(150,210,255,${0.04 + 0.1 * r})`;
       ctx.beginPath(); ctx.ellipse(0, -24, 19, 28, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.globalAlpha = 0.3 + 0.25 * r; ctx.lineWidth = 1 + 0.6 * r;
+      ctx.beginPath(); ctx.ellipse(0, -24, 19, 28, 0, -Math.PI / 2 - Math.PI * r, -Math.PI / 2 + Math.PI * r); ctx.stroke();
       ctx.restore();
     }
     ctx.restore();

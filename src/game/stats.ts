@@ -13,6 +13,8 @@ export interface ActiveBuff {
   statPct?: Partial<Record<'agi' | 'dex', number>>;
   /** remaining damage this barrier can absorb */
   shield?: number;
+  /** what the barrier started with, so the ring and the HP bar can show how much is left */
+  shieldMax?: number;
 }
 
 export interface Derived {

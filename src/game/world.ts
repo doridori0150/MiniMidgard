@@ -1337,7 +1337,8 @@ export class World {
   private applyBuff(a: HeroUnit, sk: SkillDef, lv: number) {
     const bs = sk.buff!;
     a.buffs = a.buffs.filter((b) => b.id !== bs.id);
-    a.buffs.push({ id: bs.id, name: bs.name, lv, until: this.time + bs.dur(lv), bonus: bs.bonus(lv), statPct: bs.statPct?.(lv), shield: bs.shieldPct ? Math.floor(a.d.maxHp * bs.shieldPct(lv) / 100) : undefined });
+    const shield = bs.shieldPct ? Math.floor(a.d.maxHp * bs.shieldPct(lv) / 100) : undefined;
+    a.buffs.push({ id: bs.id, name: bs.name, lv, until: this.time + bs.dur(lv), bonus: bs.bonus(lv), statPct: bs.statPct?.(lv), shield, shieldMax: shield });
     this.refresh(a);
     this.emit({ t: 'buff', uid: a.uid, name: bs.name });
   }

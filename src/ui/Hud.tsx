@@ -36,6 +36,14 @@ export function Hud() {
 }
 
 /** party frames on the left edge of the field: portrait + bars; tap → stat window for that hero */
+/** chip glyph + colour per buff (colour matches the aura each one draws on the field) */
+const BUFF_CHIP: Record<string, [string, string]> = {
+  blessing: ['축', '#ffd84a'], agi_up: ['속', '#7ee0f0'], angelus: ['천', '#9fd0ff'], kyrie: ['막', '#9fe0ff'], endure: ['인', '#ffcf60'],
+  conc: ['집', '#90ff90'], magnum: ['폭', '#ff7a4a'], quicken: ['가', '#ffd84a'], amp: ['증', '#d080ff'], magnificat: ['찬', '#80b0ff'],
+  gloria: ['광', '#ffe080'], impositio: ['손', '#ffd0a0'], edp: ['독', '#b060e0'], adrenaline: ['아', '#ff6a3a'], perfection: ['완', '#e8e8e8'],
+  overthrust: ['과', '#ff7070'],
+};
+
 export function PartyRail() {
   const g = useGame();
   const s = g.s;
@@ -55,14 +63,20 @@ export function PartyRail() {
         const dead = u?.state === 'dead';
         const cls = CLASSES[h.cls];
         const jobReady = !canJobChange(h);
+        const buffs = u && !dead ? u.buffs.filter((b) => b.until > g.world.time) : [];
+        const shield = u ? buffs.reduce((a, b) => a + (b.shield ?? 0), 0) / u.d.maxHp : 0;
         return (
           <button key={h.id} class={'pf' + (g.panel && g.sel === i ? ' sel' : '') + (dead ? ' dead' : '')} style={{ '--cc': cls.color }}
             aria-label={`${h.name} 스탯 창 열기`} onClick={() => openStatus(i)}>
             <span class="pf-face"><HeroCanvas hero={h} face zoom={0.74} /><span class="pf-lv">{h.baseLv}</span></span>
             <span class="pf-body">
-              <span class="pf-nm">{h.name}</span>
+              <span class="pf-nm"><span>{h.name}</span>
+                {buffs.length > 0 && <span class="pf-buffs">{buffs.slice(0, 4).map((b) => (
+                  <i key={b.id} class={b.until - g.world.time < 3000 ? 'end' : ''} style={{ '--bc': BUFF_CHIP[b.id]?.[1] ?? '#9fb4e6' }} title={b.name}>{BUFF_CHIP[b.id]?.[0] ?? b.name[0]}</i>
+                ))}</span>}
+              </span>
               <span class="pf-cl">{cls.name}<i>J{h.jobLv}</i></span>
-              <span class={'pf-bar hp' + (hp < 0.3 ? ' low' : '')}><i style={{ width: hp * 100 + '%' }} /></span>
+              <span class={'pf-bar hp' + (hp < 0.3 ? ' low' : '')}><i style={{ width: hp * 100 + '%' }} />{shield > 0 && <b class="pf-shield" style={{ width: Math.min(100, shield * 100) + '%' }} />}</span>
               <span class="pf-bar sp"><i style={{ width: sp * 100 + '%' }} /></span>
             </span>
             <span class="pf-ex"><i style={{ width: Math.min(100, h.baseExp / expNext(h.baseLv) * 100) + '%' }} /></span>
