@@ -17,6 +17,7 @@
   import { World } from '/src/game/world.ts';
   import { FieldRenderer } from '/src/render/field.ts';
   import { loadKits } from '/src/render/bg.ts';
+  import { loadRig } from '/src/render/rig.ts';
   import { newGame, newHero, defaultLook, autoDistribute, learnSkill, addEquip, equip } from '/src/game/state.ts';
   import { SKILLS } from '/src/game/data/skills.ts';
 
@@ -25,6 +26,7 @@
   const lv = Number(q.get('lv') ?? 12);
   const GEAR = { swordsman: ['w_blade', 's_guard'], mage: ['w_wand'], archer: ['w_composite'], acolyte: ['w_mace'], thief: ['w_gauche'], merchant: ['w_battleaxe'], novice: ['w_knife'] };
   await loadKits();
+  await loadRig();
   const s = newGame('미리보기', defaultLook('f'));
   s.heroes = []; s.partySlots = 3; s.stacks.u_red = 99;
   party.forEach((cls, i) => {

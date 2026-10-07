@@ -7,12 +7,15 @@
      usage: /tools/kit-export.html?src=/docs/art/concepts/round2/bgkit_A.png -->
 <pre id="out">pending</pre>
 <script type="module">
-  const src = new URLSearchParams(location.search).get('src');
+  const q = new URLSearchParams(location.search);
+  const src = q.get('src');
+  // ?grid=4&names=a,b,c… cuts an N×N part sheet (rig parts) instead of the background-kit layout
+  const GRID = Number(q.get('grid') ?? 0), NAMES = (q.get('names') ?? '').split(',');
   const PROPS = ['tree', 'pine', 'bush', 'rock', 'flowers', 'stump', 'fence', 'sign'];
-  const TILE = 384, PROP_MAX = 320;
+  const TILE = 384, PROP_MAX = Number(new URLSearchParams(location.search).get('max') ?? 320);
 
   /** flood-fill the key colour from the rect border, de-fringe magenta edges, crop to content */
-  function cutRect(img, sx, sy, cw, ch) {
+  function cutRect(img, sx, sy, cw, ch, solo = false) {
     cw = Math.floor(cw); ch = Math.floor(ch);
     const c = document.createElement('canvas'); c.width = cw; c.height = ch;
     const ctx = c.getContext('2d', { willReadFrequently: true });
@@ -38,6 +41,24 @@
       if (m > 70) { d[i + 3] = 0; continue; }
       if (m > 25) { const k = (m - 25) / 45; d[i] = Math.round(r - (r - g) * k * 0.8); d[i + 2] = Math.round(b - (b - g) * k * 0.8); d[i + 3] = Math.round(d[i + 3] * (1 - k * 0.7)); }
     }
+    if (solo) {
+      // keep only the largest connected opaque blob (drops neighbours that spilled into this cell)
+      const lab = new Int32Array(cw * ch).fill(-1); let best = -1, bestN = 0, id = 0;
+      for (let p0 = 0; p0 < cw * ch; p0++) {
+        if (lab[p0] >= 0 || d[p0 * 4 + 3] < 40) continue;
+        let n = 0; const st = [p0]; lab[p0] = id;
+        while (st.length) {
+          const p = st.pop(); n++;
+          const x = p % cw, y = (p / cw) | 0;
+          for (const q of [x > 0 ? p - 1 : -1, x < cw - 1 ? p + 1 : -1, y > 0 ? p - cw : -1, y < ch - 1 ? p + cw : -1]) {
+            if (q >= 0 && lab[q] < 0 && d[q * 4 + 3] >= 40) { lab[q] = id; st.push(q); }
+          }
+        }
+        if (n > bestN) { bestN = n; best = id; }
+        id++;
+      }
+      for (let p = 0; p < cw * ch; p++) if (lab[p] !== best) d[p * 4 + 3] = 0;
+    }
     ctx.putImageData(im, 0, 0);
     let x0 = cw, y0 = ch, x1 = 0, y1 = 0;
     for (let y = 0; y < ch; y++) for (let x = 0; x < cw; x++) if (d[(y * cw + x) * 4 + 3] > 40) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
@@ -60,6 +81,22 @@
   }
   const img = new Image();
   img.onload = () => {
+    if (GRID) {
+      // names: "head" (its own cell), "sword:10-11" (bounding box of cells 10..11), trailing "!" keeps only the largest blob
+      const out = {}, cw = img.width / GRID;
+      NAMES.forEach((spec, i) => {
+        if (!spec) return;
+        const solo = spec.endsWith('!');
+        const [name, span] = spec.replace('!', '').split(':');
+        const [c0, c1] = span ? span.split('-').map(Number) : [i, i];
+        const x0 = Math.min(c0 % GRID, c1 % GRID) * cw, y0 = Math.min(Math.floor(c0 / GRID), Math.floor(c1 / GRID)) * cw;
+        const x1 = (Math.max(c0 % GRID, c1 % GRID) + 1) * cw, y1 = (Math.max(Math.floor(c0 / GRID), Math.floor(c1 / GRID)) + 1) * cw;
+        out[name] = cutRect(img, x0, y0, x1 - x0, y1 - y0, solo).toDataURL('image/png');
+      });
+      document.getElementById('out').textContent = JSON.stringify(out);
+      document.title = 'done';
+      return;
+    }
     const q = img.width / 2, out = {};
     out.grass = tile(img, 0, 0, q, q).toDataURL('image/png');
     out.dirt = tile(img, q, 0, q, q).toDataURL('image/png');

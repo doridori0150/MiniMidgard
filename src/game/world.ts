@@ -4,7 +4,7 @@ import { computeDerived, partyPerks, type ActiveBuff, type Derived } from './sta
 import { elementMod, sizeMod, ELEMENT_KO } from './data/elements.ts';
 import { SKILLS, type SkillDef, type FixedCtx } from './data/skills.ts';
 import { MONSTERS, type MonsterDef, type MobSkill } from './data/monsters.ts';
-import { ITEMS } from './data/items.ts';
+import { ITEMS, CARD_SKILLS } from './data/items.ts';
 import { zone as zoneDef, ZONES, type ZoneDef } from './data/zones.ts';
 import { CLASSES, lineage } from './data/classes.ts';
 import { expNext } from './exp.ts';
@@ -824,7 +824,16 @@ export class World {
 
   private enabledSkills(h: HeroUnit, roles: string[]) {
     const out: { sk: SkillDef; lv: number }[] = [];
-    for (const [id, lv] of Object.entries(h.hero.skills)) {
+    const levels = { ...h.hero.skills };
+    // skills granted by equipped accessory cards (e.g. a heal Lv1 card) — the hero's own level wins
+    for (const uid of Object.values(h.hero.equip)) {
+      const inst = this.s.equips.find((e) => e.uid === uid);
+      for (const c of inst?.cards ?? []) {
+        const g = c ? CARD_SKILLS[c] : undefined;
+        if (g && (levels[g.skill] ?? 0) < g.lv) levels[g.skill] = g.lv;
+      }
+    }
+    for (const [id, lv] of Object.entries(levels)) {
       const sk = SKILLS[id];
       if (!sk || lv <= 0 || !roles.includes(sk.auto)) continue;
       if (h.hero.auto.skills[id] === false) continue;
@@ -1535,8 +1544,11 @@ export class World {
   private recoverWipe() {
     this.wipeUntil = 0;
     if (this.wipeTimes.length >= 3) {
-      const idx = ZONES.findIndex((z) => z.id === this.zone.id);
-      const prev = ZONES.slice(0, idx).reverse().find((z) => z.id !== 'town' && this.s.unlocked.includes(z.id));
+      // fall back to the strongest easier map the party has open — same region first, never into a secret place
+      const cur = this.zone;
+      const easier = ZONES.filter((z) => z.id !== 'town' && z.id !== cur.id && !z.gate && this.s.unlocked.includes(z.id) && z.lv[0] < cur.lv[0])
+        .sort((a, b) => (b.region === cur.region ? 1 : 0) - (a.region === cur.region ? 1 : 0) || b.lv[0] - a.lv[0]);
+      const prev = easier[0];
       this.wipeTimes = [];
       if (prev) {
         this.log(`너무 위험합니다! 「${prev.name}」(으)로 후퇴합니다.`, '#ff9a6a');

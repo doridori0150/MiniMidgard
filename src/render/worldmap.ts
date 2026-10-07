@@ -1,5 +1,5 @@
 // Illustrated world map (continent, regions, roads, fog over locked zones).
-import { ZONES, type ZoneDef } from '../game/data/zones.ts';
+import { ZONES, regions, regionOf, type ZoneDef, type RegionInfo } from '../game/data/zones.ts';
 import { shade, rgba } from './color.ts';
 
 function rng(seed: number) {
@@ -34,7 +34,10 @@ export function drawWorldMap(c: HTMLCanvasElement, unlocked: Set<string>, t: num
   const ctx = c.getContext('2d')!;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   const R = rng(1234);
-  const P = (z: ZoneDef) => ({ x: z.map[0] / 100 * W, y: z.map[1] / 100 * H });
+  // one blob per region (its maps' pins averaged), so a region of many maps reads as one land
+  const RG = regions();
+  const P = (z: ZoneDef | RegionInfo) => { const r = 'zones' in z ? z : regionOf(z.id) ?? { x: z.map[0], y: z.map[1] }; return { x: r.x / 100 * W, y: r.y / 100 * H }; };
+  const regionOpen = (r: RegionInfo) => r.zones.some((z) => unlocked.has(z.id));
   const S = Math.min(W, H);
 
   // sea
@@ -67,7 +70,7 @@ export function drawWorldMap(c: HTMLCanvasElement, unlocked: Set<string>, t: num
   ctx.fillStyle = '#a8cc78'; ctx.fillRect(0, 0, W, H);
 
   // regions
-  for (const z of ZONES) {
+  for (const z of RG) {
     const p = P(z);
     const reg = REGION[z.theme] ?? REGION.meadow;
     const rr = reg.r * S * 1.6;
@@ -76,7 +79,7 @@ export function drawWorldMap(c: HTMLCanvasElement, unlocked: Set<string>, t: num
     ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, rr, 0, Math.PI * 2); ctx.fill();
   }
   // decorations per region
-  for (const z of ZONES) {
+  for (const z of RG) {
     const p = P(z);
     const rr = (REGION[z.theme]?.r ?? 0.15) * S;
     const n = z.theme === 'town' ? 0 : 14;
@@ -127,7 +130,8 @@ export function drawWorldMap(c: HTMLCanvasElement, unlocked: Set<string>, t: num
     const za = ZONES.find((z) => z.id === a)!, zb = ZONES.find((z) => z.id === b)!;
     const pa = P(za), pb = P(zb);
     const mx = (pa.x + pb.x) / 2 + (pb.y - pa.y) * 0.12, my = (pa.y + pb.y) / 2 - (pb.x - pa.x) * 0.12;
-    const open = unlocked.has(a) && unlocked.has(b);
+    const ra = regionOf(a), rb = regionOf(b);
+    const open = !!ra && !!rb && regionOpen(ra) && regionOpen(rb);
     ctx.strokeStyle = open ? 'rgba(120,80,40,0.85)' : 'rgba(120,100,80,0.35)';
     ctx.lineWidth = open ? 3 : 2;
     ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.quadraticCurveTo(mx, my, pb.x, pb.y); ctx.stroke();
@@ -147,9 +151,9 @@ export function drawWorldMap(c: HTMLCanvasElement, unlocked: Set<string>, t: num
   ctx.fillStyle = '#8a5a34'; ctx.fillRect(-3, 4, 6, 8);
   ctx.restore();
 
-  // fog over locked regions
-  for (const z of ZONES) {
-    if (unlocked.has(z.id)) continue;
+  // fog over regions with no open map yet
+  for (const z of RG) {
+    if (regionOpen(z)) continue;
     const p = P(z);
     const rr = (REGION[z.theme]?.r ?? 0.15) * S * 1.35;
     for (let k = 0; k < 6; k++) {

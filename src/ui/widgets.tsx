@@ -2,6 +2,7 @@ import type { ComponentChildren } from 'preact';
 import { useEffect, useRef } from 'preact/hooks';
 import type { Element, EquipInst, Hero } from '../game/types.ts';
 import { inked } from '../render/ink.ts';
+import { drawRigHero, rigSupports } from '../render/rig.ts';
 import { drawHero, type HeroLookDraw } from '../render/hero.ts';
 import { drawMob, mobHeight } from '../render/monster.ts';
 import { itemIconURL, drawCardArt } from '../render/icons.ts';
@@ -59,7 +60,8 @@ export function LookCanvas(props: { look: HeroLookDraw; state?: string; class?: 
       ctx.fillStyle = 'rgba(20,30,20,0.28)';
       ctx.beginPath(); ctx.ellipse(0, 0, 11, 3.8, 0, 0, Math.PI * 2); ctx.fill();
     }
-    inked(ctx, 120, 120, 60, 106, 1.25, (c) => drawHero(c, lookRef.current, pose, { shadow: false }));
+    if (rigSupports(lookRef.current)) drawRigHero(ctx, lookRef.current, pose);
+    else inked(ctx, 120, 120, 60, 106, 1.25, (c) => drawHero(c, lookRef.current, pose, { shadow: false }));
   };
   if (props.animate === false) {
     useEffect(() => { draw(800); });

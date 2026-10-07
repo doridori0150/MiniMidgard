@@ -3,6 +3,7 @@ import type { World, FxEvent, HeroUnit, MobUnit, GroundItem } from '../game/worl
 import type { Element, Hero, GameState } from '../game/types.ts';
 import { buildZoneArt, drawProp, kitPropBox, kitVersion, type ZoneArt, type Prop } from './bg.ts';
 import { inked } from './ink.ts';
+import { drawRigHero, rigSupports } from './rig.ts';
 
 const REDUCED_MOTION = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 import { drawHero, drawFalcon, type HeroLookDraw } from './hero.ts';
@@ -898,7 +899,13 @@ export class FieldRenderer {
     const pose = { state: flash > 0.5 && (state === 'idle' || state === 'ready') ? 'hurt' : state, t: state === 'idle' || state === 'ready' || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing };
     ctx.fillStyle = 'rgba(20,30,20,0.28)';
     ctx.beginPath(); ctx.ellipse(0, 0, state === 'dead' ? 17 : 11, 3.8, 0, 0, Math.PI * 2); ctx.fill();
-    if (this.lowFx) drawHero(ctx, look, pose, { flash, alpha: state === 'dead' ? 0.85 : 1, shadow: false });
+    if (rigSupports(look)) {
+      // painted cut-out rig (already inked by the painter)
+      ctx.save();
+      if (state === 'dead') ctx.globalAlpha *= 0.85;
+      drawRigHero(ctx, look, pose);
+      ctx.restore();
+    } else if (this.lowFx) drawHero(ctx, look, pose, { flash, alpha: state === 'dead' ? 0.85 : 1, shadow: false });
     else inked(ctx, 120, 120, 60, 106, 1.25, (c) => drawHero(c, look, pose, { flash, alpha: state === 'dead' ? 0.85 : 1, shadow: false }));
     if (state !== 'dead' && h.buffs.some((b) => b.shield && b.shield > 0 && b.until > w.time)) {
       ctx.save(); ctx.globalCompositeOperation = 'lighter';

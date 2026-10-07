@@ -40,18 +40,18 @@ function Minimap() {
 function Gauges() {
   const g = useGame();
   const z = g.world.zone;
-  if (!z.boss) return null;
+  if ((!z.boss || !z.bossGauge) && (!z.mvp || !z.mvpGauge)) return null;
   const p = g.s.progress[z.id];
   const ready = g.world.bossReady();
   const bossAlive = g.world.mobs.some((m) => m.m.boss && m.state !== 'dead');
   return (
     <div class="gauges">
-      <div class="gauge boss">
+      {z.boss && z.bossGauge > 0 && <div class="gauge boss">
         보스 {p.bossGauge}/{z.bossGauge}
         <div class="mini-bar"><i style={{ width: p.bossGauge / z.bossGauge * 100 + '%' }} /></div>
         {ready.boss && <button onClick={() => { g.world.summonBoss('boss'); g.notify(); }}>{MONSTERS[z.boss].name} 소환</button>}
-      </div>
-      {z.mvp && <div class="gauge mvp">
+      </div>}
+      {z.mvp && z.mvpGauge > 0 && <div class="gauge mvp">
         MVP {p.mvpGauge}/{z.mvpGauge}
         <div class="mini-bar"><i style={{ width: p.mvpGauge / z.mvpGauge * 100 + '%' }} /></div>
         {ready.mvp && <button onClick={() => { g.world.summonBoss('mvp'); g.notify(); }}>MVP 소환</button>}

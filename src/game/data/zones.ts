@@ -282,3 +282,23 @@ export function zone(id: string): ZoneDef {
   if (!z) throw new Error('unknown zone ' + id);
   return z;
 }
+
+export interface RegionInfo { id: string; name: string; theme: ZoneTheme; x: number; y: number; zones: ZoneDef[] }
+/** maps grouped by region for the world map: centre = mean of the maps' pins, theme = the region's first map */
+export function regions(): RegionInfo[] {
+  const out: RegionInfo[] = [];
+  for (const z of ZONES) {
+    const id = z.region ?? z.id;
+    let r = out.find((x) => x.id === id);
+    if (!r) { r = { id, name: z.region ?? z.name, theme: z.theme, x: 0, y: 0, zones: [] }; out.push(r); }
+    r.zones.push(z);
+  }
+  for (const r of out) {
+    r.x = r.zones.reduce((a, z) => a + z.map[0], 0) / r.zones.length;
+    r.y = r.zones.reduce((a, z) => a + z.map[1], 0) / r.zones.length;
+  }
+  return out;
+}
+export function regionOf(zoneId: string): RegionInfo | undefined {
+  return regions().find((r) => r.zones.some((z) => z.id === zoneId));
+}

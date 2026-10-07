@@ -829,3 +829,29 @@ input { font-family: inherit; }
 .zc-needs li.unk { color: #8a80a8; font-style: italic; }
 .zeny.up { animation: zenyUp 0.45s ease-out; }
 @keyframes zenyUp { 0% { transform: scale(1.12); border-color: var(--gold); box-shadow: 0 0 10px rgba(255,204,74,0.7); } 100% { transform: none; } }
+
+/* ───── world map: region card map list */
+.mrows { display: flex; flex-direction: column; gap: 5px; }
+.mrow { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 10px; border: 1px solid var(--line2); background: #fff; cursor: pointer; font: inherit; color: var(--ink); text-align: left; }
+.mrow.here { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold) inset; background: #fffaf0; }
+.mrow.locked { background: #f2f4f8; color: var(--ink2); }
+.mrow.sealed { background: linear-gradient(#f6f2ff, #efe8ff); border-color: #c8b8ec; }
+.mrow.secret:not(.locked) { border-color: #c8b8ec; }
+.mr-kind { flex: none; width: 26px; text-align: center; font-size: 16px; }
+.mr-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.mr-main b { font-weight: normal; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mr-main small { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-family: 'Galmuri9'; font-size: 10px; color: var(--ink2); }
+.mr-role { font-style: normal; padding: 0 5px; border-radius: 6px; line-height: 14px; background: #eef2fa; border: 1px solid var(--line2); color: var(--ink2); }
+.mr-role.exp { background: #e6f0ff; color: #2a5ab0; border-color: #b8cdf0; }
+.mr-role.loot { background: #fff2d8; color: #8a5a10; border-color: #ecd09a; }
+.mr-role.ore { background: #eceef2; color: #4a5060; }
+.mr-role.zeny { background: #fff6c8; color: #7a6000; border-color: #e8d880; }
+.mr-role.mvp { background: #ffe8d8; color: #a0400a; border-color: #f0b890; }
+.mr-state { flex: none; }
+.mr-state i { font-style: normal; }
+.mr-seal { font-family: 'Galmuri9'; font-size: 10px; color: #6a4aa8; padding: 1px 6px; border-radius: 8px; background: #fff; border: 1px solid #c8b8ec; }
+.mrow-unknown { padding: 8px 10px; border-radius: 10px; border: 1px dashed #c8b8ec; color: #6a4aa8; font-size: 11px; font-style: italic; background: #faf8ff; }
+.zc-spec { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin: 6px 0; font-size: 11px; color: var(--ink2); }
+.zc-spec > span { font-family: 'Galmuri9'; font-size: 10px; margin-right: 2px; }
+.zc-spec .spec { display: inline-flex; align-items: center; gap: 3px; padding: 2px 7px 2px 3px; border-radius: 12px; border: 1px solid var(--line2); background: #fff; cursor: pointer; font: inherit; font-size: 11px; }
+.zc-spec .spec img { width: 18px; height: 18px; }

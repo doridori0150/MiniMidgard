@@ -108,6 +108,11 @@ export function load(): GameState | null {
     for (const z of ZONES) s.progress[z.id] ??= { kills: 0, bossGauge: 0, mvpGauge: 0, bossKills: 0, mvpKills: 0 };
     s.settings.autoBoss ??= false;
     s.orders ??= defaultOrders();
+    // content v0.3 split regions into several maps: open any map whose gate-keeper boss this save already beat
+    for (const z of ZONES) {
+      if (z.gate || !z.unlockBy || s.unlocked.includes(z.id)) continue;
+      if ((s.progress[z.unlockBy]?.bossKills ?? 0) > 0) s.unlocked.push(z.id);
+    }
     for (const h of s.heroes) h.tactics ??= defaultTactics(h.cls);
     if (!s.quick) {
       // migrate the old per-hero potion sliders into quick slots

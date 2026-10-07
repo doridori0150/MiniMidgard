@@ -145,9 +145,9 @@ const DEG = Math.PI / 180;
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const ease = (t: number) => t * t * (3 - 2 * t);
 
-interface ArmPose { front: number; back: number; weapon: number; lean: number; bob: number; legA: number; legB: number; lift: number }
+export interface ArmPose { front: number; back: number; weapon: number; lean: number; bob: number; legA: number; legB: number; lift: number }
 
-function computePose(p: Pose, wtype: WeaponType): ArmPose {
+export function computePose(p: Pose, wtype: WeaponType): ArmPose {
   const t = p.t / 1000;
   const out: ArmPose = { front: 22, back: -12, weapon: 160, lean: 0, bob: Math.sin(t * Math.PI * 2 * 0.9) * 0.6, legA: 0, legB: 0, lift: 0 };
   if (wtype === 'bow') { out.front = 80; out.weapon = 180; }

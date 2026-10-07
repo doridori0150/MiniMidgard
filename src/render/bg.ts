@@ -306,6 +306,8 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
   ctx.fillStyle = rim; ctx.fillRect(0, 0, W, H);
   props.sort((a, b) => a.y - b.y);
   if (kit) for (const p of props) if (kit.props[p.kind]) p.kit = z.theme;
+  // a map's own mood over the shared theme (e.g. a grey quarry on desert sand, a darker lower floor)
+  if (z.tint) { ctx.setTransform(scale, 0, 0, scale, 0, 0); ctx.globalAlpha = 0.28; ctx.fillStyle = z.tint; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1; }
   return { ground: c, scale, props, lights, theme: z.theme };
 }
 
