@@ -1,29 +1,43 @@
-<!doctype html><html><body style="margin:0;background:#cfe3b8;font:12px system-ui">
+<!doctype html><html><body style="margin:0;background:#dce6c4;font:12px system-ui">
 <canvas id="c"></canvas>
 <script type="module">
-  // Dev-only: painted rig vs the painter's assembled reference, in several poses/outfits/hair colours.
-  import { loadRig, drawRigHero } from '/src/render/rig.ts';
+  // Dev-only: the engine's cut-out rig (src/render/rig.ts) in every state, outfit swaps, hair colours and facing,
+  // above Codex's own manifest assembly (docs/art/rig-codex/preview_assembled.png) for side-by-side checks.
+  import { loadRig, drawRigHero, rigSupports } from '/src/render/rig.ts';
   await loadRig();
-  const ref = new Image(); ref.src = '/src/assets/rig/novice/ref.png'; await ref.decode();
-  const c = document.getElementById('c'); const dpr = 2, W = 1000, H = 560;
+  const ref = new Image(); ref.src = '/docs/art/rig-codex/preview_assembled.png'; await ref.decode().catch(() => {});
+  const c = document.getElementById('c'); const dpr = 2, W = 1200, H = 920;
   c.width = W * dpr; c.height = H * dpr; c.style.width = W + 'px';
   const ctx = c.getContext('2d');
   const base = { cls: 'novice', gender: 'f', hair: 1, hairColor: 3, skin: 0, dye: 0, wtype: 'dagger', refine: 0, shield: false };
-  const cells = [
-    ['참고(Codex)', null],
-    ['idle', { ...base }, 'idle', 400],
-    ['walk', { ...base }, 'walk', 150],
-    ['attack 140ms', { ...base }, 'attack', 140],
-    ['검사·검', { ...base, cls: 'swordsman', wtype: 'sword', hairColor: 5 }, 'ready', 300],
-    ['풀잎', { ...base, headTop: 'leaf', hairColor: 1 }, 'idle', 400],
-    ['머리핀+베레', { ...base, headTop: 'cap', headMid: 'hairpin', hairColor: 4 }, 'idle', 400],
-  ];
-  const S = 0.6;
-  cells.forEach(([label, L, state, t], i) => {
-    const x = 70 + i * 140, y = 470;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillStyle = '#333'; ctx.fillText(label, x - 30, 530);
-    if (!L) { const h = 640 * S * 76 / 640 * 5.2; ctx.drawImage(ref, x - ref.width * h / ref.height / 2, y - h, ref.width * h / ref.height, h); return; }
-    ctx.setTransform(dpr * S * 5.2, 0, 0, dpr * S * 5.2, x * dpr, y * dpr);
-    drawRigHero(ctx, L, { state, t, dur: 280, facing: 1 });
-  });
+  const rows = [[
+    ['idle', base, 'idle', 600],
+    ['walk', base, 'walk', 320],
+    ['wind-up 70ms', base, 'attack', 70],
+    ['contact 140ms', base, 'attack', 140],
+    ['follow 200ms', base, 'attack', 200],
+    ['cast', base, 'cast', 0],
+    ['sit', base, 'sit', 0],
+    ['hurt', base, 'hurt', 0],
+  ], [
+    ['dead', base, 'dead', 900],
+    ['검사·검·파랑', { ...base, cls: 'swordsman', wtype: 'sword', hairColor: 5 }, 'idle', 0],
+    ['기사·양손검 contact', { ...base, cls: 'knight', wtype: 'sword2h', hairColor: 0 }, 'attack', 140],
+    ['풀잎+머리핀', { ...base, headTop: 'leaf', headMid: 'hairpin', hairColor: 1 }, 'idle', 0],
+    ['빨강·맨손', { ...base, wtype: 'none', hairColor: 4 }, 'walk', 160],
+    ['왼쪽 보기', { ...base, hairColor: 8 }, 'idle', 0],
+    ['검정', { ...base, hairColor: 9 }, 'idle', 0],
+    ['창(미지원)', { ...base, cls: 'knight', wtype: 'spear' }, 'idle', 0],
+  ]];
+  const S = 2.2;
+  rows.forEach((row, r) => row.forEach(([label, L, state, t], i) => {
+    const x = 75 + i * 145, y = 200 + r * 240;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillStyle = '#333'; ctx.fillText(label, x - 40, y + 22);
+    if (!rigSupports(L)) { ctx.fillText('(코드 캐릭터로 대체)', x - 40, y - 60); return; }
+    ctx.setTransform(dpr * S, 0, 0, dpr * S, x * dpr, y * dpr);
+    drawRigHero(ctx, L, { state, t, dur: 280, facing: label === '왼쪽 보기' ? -1 : 1 });
+  }));
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  if (ref.width) { const w = W - 20, h = ref.height * w / ref.width; ctx.drawImage(ref, 10, H - h - 4, w, h); }
+  document.title = 'done';
 </script></body></html>

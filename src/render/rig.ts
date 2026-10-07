@@ -1,270 +1,191 @@
-// Painted cut-out rig: heroes assembled from Codex-painted parts (src/assets/rig/<set>/*.png) and animated
-// with the same pose curves as the code-drawn hero. Headgear and weapons hang off fixed joints, so any
-// accessory works for every class and every frame once its anchor is set here.
+// Painted cut-out rig: heroes assembled from Codex-painted parts by the manifest Codex designed with them
+// (docs/art/rig-codex: PLAN.md, manifest.json, schema minimidgard.cutout/1). A node tree with slots, pivots and
+// anchors, keyed animations per state. This is a port of the reference assembler docs/art/rig-codex/verify.py —
+// keep the two in step, so what Codex verified is what the game draws.
 import type { WeaponType } from '../game/types.ts';
-import { HAIR_COLORS } from '../game/state.ts';
-import { computePose, type HeroLookDraw, type Pose } from './hero.ts';
-import { J } from './rigTemplate.ts';
+import { BOW_RELEASE, MELEE_CONTACT } from '../game/world.ts';
+import type { HeroLookDraw, Pose } from './hero.ts';
 
-const FILES = import.meta.glob('../assets/rig/*/*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
-const parts = new Map<string, HTMLImageElement>();
+type V2 = [number, number];
+interface PartDef { file: string; size: V2; pivot: V2; anchors: Record<string, V2>; z: number }
+interface NodeDef { parent: string | null; offset?: V2; part?: string; slot?: string; anchor?: string; angle?: number; worldAngle?: number; scale?: V2; visible?: boolean; z?: number }
+interface Anim { duration: number; loop: boolean; keys: { time: number; nodes: Record<string, Partial<NodeDef>> }[]; events?: { time: number; name: string }[] }
+interface Manifest {
+  canvas: { origin: V2; referenceHeight: number };
+  parts: Record<string, PartDef>;
+  nodes: Record<string, NodeDef>;
+  outfits: Record<string, Record<string, string>>;
+  animations: Record<string, Anim>;
+}
+
+const MAN = import.meta.glob('../assets/cutout/manifest.json', { eager: true, import: 'default' }) as Record<string, Manifest>;
+const FILES = import.meta.glob('../assets/cutout/parts/*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+const M: Manifest | undefined = Object.values(MAN)[0];
+const imgs = new Map<string, HTMLImageElement>();
 let ready = false;
 
-// v2: parts cut from one template-aligned painting (tools/rig-cut.html) — offsets in template pixels
-const R2_FILES = import.meta.glob('../assets/rig2/*/*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
-const R2_META = import.meta.glob('../assets/rig2/*/parts.json', { eager: true, import: 'default' }) as Record<string, Record<string, { x: number; y: number }>>;
-interface Piece { img: HTMLImageElement; x: number; y: number }
-const sets2 = new Map<string, Record<string, Piece>>();
-const SET2: Partial<Record<string, string>> = { novice: 'novice', swordsman: 'swordsman', knight: 'swordsman' };
+/** field units the assembled hero stands (the code-drawn hero is ~74) */
+const HEIGHT = 76;
+/** for dev tools: assembled height in manifest px and the manifest→field-unit factor drawRigHero applies */
+export const RIG_METRICS = { height: M?.canvas.referenceHeight ?? 236, sheetToUnits: (M?.canvas.referenceHeight ?? 236) / HEIGHT };
 
 export function loadRig(): Promise<void> {
-  const v2: Promise<void>[] = [];
-  for (const [path, url] of Object.entries(R2_FILES)) {
-    const m = path.match(/rig2\/([^/]+)\/([^/.]+)\.png$/);
-    if (!m) continue;
-    const [, set, name] = m;
-    const meta = R2_META[`../assets/rig2/${set}/parts.json`]?.[name];
-    if (!meta) continue;
-    const img = new Image(); img.src = url;
-    v2.push(img.decode().then(() => {
-      const bag = sets2.get(set) ?? {};
-      bag[name] = { img, x: meta.x, y: meta.y };
-      sets2.set(set, bag);
-    }, () => {}));
-  }
-  return Promise.all([loadRigV1(), ...v2]).then(() => {});
-}
-
-function loadRigV1(): Promise<void> {
+  if (!M) return Promise.resolve();
   const jobs: Promise<void>[] = [];
   for (const [path, url] of Object.entries(FILES)) {
-    const m = path.match(/rig\/([^/]+)\/([^/.]+)\.png$/);
-    if (!m) continue;
-    const img = new Image();
-    img.src = url;
-    jobs.push(img.decode().then(() => { parts.set(m[2], img); }, () => {}));
+    const name = path.match(/parts\/([^/]+)\.png$/)?.[1];
+    if (!name) continue;
+    const img = new Image(); img.src = url;
+    jobs.push(img.decode().then(() => { imgs.set(name, img); }, () => {}));
   }
-  return Promise.all(jobs).then(() => { ready = parts.has('head'); });
+  return Promise.all(jobs).then(() => { ready = Object.values(M.parts).every((p) => imgs.has(partName(p))); });
 }
-export function rigReady() { return ready; }
+const partName = (p: PartDef) => p.file.replace(/^parts\//, '').replace(/\.png$/, '');
 
-/** classes that have painted outfit parts so far */
-const OUTFIT: Partial<Record<string, { torso: string; armF: string; armB: string }>> = {
-  novice: { torso: 'torso', armF: 'armF', armB: 'armB' },
-  swordsman: { torso: 'torso_sw', armF: 'arm_sw', armB: 'arm_sw' },
-  knight: { torso: 'torso_sw', armF: 'arm_sw', armB: 'arm_sw' },
-};
+/** game class → manifest outfit (classes without painted outfits keep the code-drawn hero) */
+const OUTFIT: Partial<Record<string, string>> = { novice: 'novice', swordsman: 'swordsman', knight: 'swordsman' };
+/** game weapon → painted weapon part; null = empty-handed. Missing = no art yet, so the code hero is used */
+const WEAPON: Partial<Record<WeaponType, string | null>> = { none: null, dagger: 'dagger', katar: 'dagger', sword: 'sword', sword2h: 'sword' };
+/** game headgear looks with painted parts */
+const HEADGEAR: Record<string, string> = { leaf: 'leaf', hairpin: 'hairpin' };
+
 export function rigSupports(L: HeroLookDraw) {
-  const s2 = SET2[L.cls];
-  return (!!s2 && !!sets2.get(s2)?.torso) || (ready && !!OUTFIT[L.cls]);
+  return ready && !!M && !!OUTFIT[L.cls] && !!M.outfits[OUTFIT[L.cls]!] && L.wtype in WEAPON;
 }
 
-const WEAPON: Partial<Record<WeaponType, string>> = { dagger: 'dagger', sword: 'sword', sword2h: 'sword', katar: 'dagger' };
-/** headgear looks with painted parts: [part, joint, x, y, width] in sheet px relative to the head centre-top */
-const HEADGEAR: Record<string, [string, number, number, number]> = {
-  leaf: ['leaf', 4, -8, 120],
-  hairpin: ['hairpin', 70, 70, 110],
-  cap: ['beret', 6, 18, 250],
+// ── 2D affine matrices [a, b, c, d, e, f], angles clockwise degrees with y down (the canvas convention)
+type Mat = [number, number, number, number, number, number];
+const mul = (p: Mat, q: Mat): Mat => [
+  p[0] * q[0] + p[2] * q[1], p[1] * q[0] + p[3] * q[1],
+  p[0] * q[2] + p[2] * q[3], p[1] * q[2] + p[3] * q[3],
+  p[0] * q[4] + p[2] * q[5] + p[4], p[1] * q[4] + p[3] * q[5] + p[5],
+];
+const mat = (x = 0, y = 0, angle = 0, sx = 1, sy = 1): Mat => {
+  const r = angle * Math.PI / 180, c = Math.cos(r), s = Math.sin(r);
+  return [c * sx, s * sx, -s * sy, c * sy, x, y];
 };
 
-// ── tinting & shading caches (hair colour by multiply, back limbs one shade darker)
-const cache = new Map<string, HTMLCanvasElement>();
-function variant(name: string, key: string, paint: (c: CanvasRenderingContext2D, img: HTMLImageElement) => void): CanvasImageSource | undefined {
-  const img = parts.get(name);
-  if (!img) return undefined;
-  const k = name + '|' + key;
-  let c = cache.get(k);
-  if (!c) {
-    c = document.createElement('canvas');
-    c.width = img.width; c.height = img.height;
-    const x = c.getContext('2d')!;
-    x.drawImage(img, 0, 0);
-    paint(x, img);
-    cache.set(k, c);
+/** the node table at time t of an animation: linear numbers, slot/visible step at the key (verify.py `sample`) */
+function sample(m: Manifest, state: string, t: number): Record<string, NodeDef> {
+  const a = m.animations[state] ?? m.animations.idle;
+  t = a.loop ? ((t % a.duration) + a.duration) % a.duration : Math.min(Math.max(0, t), a.duration);
+  let lo = a.keys[0], hi = a.keys[a.keys.length - 1];
+  for (let i = 0; i + 1 < a.keys.length; i++) if (a.keys[i].time <= t && t <= a.keys[i + 1].time) { lo = a.keys[i]; hi = a.keys[i + 1]; break; }
+  const u = (t - lo.time) / Math.max(1, hi.time - lo.time);
+  const out: Record<string, NodeDef> = {};
+  for (const [name, rest] of Object.entries(m.nodes)) {
+    const A = { ...rest, ...lo.nodes[name] }, B = { ...rest, ...hi.nodes[name] };
+    if (u >= 1) { out[name] = B; continue; }
+    const o: NodeDef = { ...A };
+    const v2 = (k: 'offset' | 'scale', d: V2) => { const p = A[k] ?? d, q = B[k] ?? d; o[k] = [p[0] + (q[0] - p[0]) * u, p[1] + (q[1] - p[1]) * u]; };
+    v2('offset', [0, 0]); v2('scale', [1, 1]);
+    o.angle = (A.angle ?? 0) + ((B.angle ?? 0) - (A.angle ?? 0)) * u;
+    if (A.worldAngle !== undefined && B.worldAngle !== undefined) o.worldAngle = A.worldAngle + (B.worldAngle - A.worldAngle) * u;
+    out[name] = o;
   }
-  return c;
-}
-const hair = (name: string, color: string) => variant(name, color, (x, img) => {
-  x.globalCompositeOperation = 'multiply'; x.fillStyle = color; x.fillRect(0, 0, img.width, img.height);
-  x.globalCompositeOperation = 'destination-in'; x.drawImage(img, 0, 0);
-});
-const shaded = (name: string) => variant(name, 'shade', (x, img) => {
-  x.globalCompositeOperation = 'source-atop'; x.fillStyle = 'rgba(30,20,50,0.22)'; x.fillRect(0, 0, img.width, img.height);
-});
-
-// ── skeleton, in sheet pixels with the origin at the feet
-/** per-part scale fixes: the painter drew parts at slightly different scales (matched against its own reference) */
-const PART_SCALE: Record<string, number> = { head: 1.3, hairF: 1.3, hairB: 1.3, torso: 1.12, torso_sw: 1.04, armF: 0.9, armB: 0.9, arm_sw: 0.9, legF: 0.92, legB: 0.92 };
-const SHEET_H = 640;                      // assembled height used for the field-unit factor
-const HAND = [0.44, 0.84];                // fist position inside an arm part (fraction of w, h)
-const DEG = Math.PI / 180;
-/** for dev tools: assembled height in sheet px and the sheet→field-unit factor drawRigHero applies */
-export const RIG_METRICS = { height: 640, sheetToUnits: 640 / 76 };
-
-function at(ctx: CanvasRenderingContext2D, img: CanvasImageSource | undefined, w: number, h: number, ax: number, ay: number) {
-  if (img) ctx.drawImage(img, -w * ax, -h * ay, w, h);
-}
-function size(name: string): [number, number] {
-  const p = parts.get(name);
-  const k = PART_SCALE[name] ?? 1;
-  return p ? [p.width * k, p.height * k] : [0, 0];
+  return out;
 }
 
-export function drawRigHero(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {
-  const s2 = SET2[L.cls];
-  const set = s2 ? sets2.get(s2) : undefined;
-  if (set?.torso) { drawRig2(ctx, L, pose, set); return true; }
-  const o = OUTFIT[L.cls];
-  if (!ready || !o) return false;
-  const P = computePose(pose, L.wtype);
-  const k = 76 / SHEET_H;
-  const U = SHEET_H / 74;                 // code-pose units → sheet px
-  const hc = HAIR_COLORS[L.hairColor % HAIR_COLORS.length];
-  ctx.save();
-  ctx.scale(pose.facing * k, k);
-  if (pose.state === 'dead') { ctx.translate(-30, -40); ctx.rotate(-Math.PI / 2 + 0.05); ctx.translate(0, 200); }
-  ctx.translate(0, P.bob * U);
-  ctx.rotate(P.lean * DEG);
-  const sit = pose.state === 'sit';
-
-  // layout from the (scaled) part sizes: short sturdy legs in an A-stance, the chin sunk into the collar
-  const [lw, lh] = size('legF');
-  const hipY = -lh * 0.8;
-  const [tw, th] = size(o.torso);
-  const torsoBottom = hipY + lh * 0.2;
-  const torsoTop = torsoBottom - th;
-  const [hw, hh] = size('head');
-  const neckY = torsoTop + hh * 0.2;
-  const headTop = neckY - hh;
-  const shoulders = [[tw * 0.27, torsoTop + th * 0.17], [-tw * 0.3, torsoTop + th * 0.17]] as const;
-  const relaxed = pose.state !== 'attack' && pose.state !== 'cast';
-  const front = P.front + (relaxed ? 10 : 0), back = P.back - (relaxed ? 16 : 0); // weapon a bit forward, free hand out on the hip
-  void lw;
-
-  const limb = (name: string, img: CanvasImageSource | undefined, x: number, y: number, ang: number) => {
-    const [w, h] = size(name);
-    ctx.save(); ctx.translate(x, y); ctx.rotate(-ang * DEG); at(ctx, img, w, h, 0.5, 0.06); ctx.restore();
-  };
-  const leg = (isFront: boolean) => {
-    const name = isFront ? 'legF' : 'legB';
-    const stance = isFront ? 7 : -7;
-    const swing = (isFront ? P.legA : P.legB) * 5 + stance - (sit ? 70 : 0);
-    const lift = pose.state === 'walk' ? Math.max(0, P.lift * (isFront ? 1 : -1)) * 14 : 0;
-    const [w, h] = size(name);
-    ctx.save(); ctx.translate(isFront ? 26 : -26, hipY - lift + (sit ? 90 : 0)); ctx.rotate(-swing * DEG);
-    at(ctx, isFront ? parts.get(name) : shaded(name), w, h, 0.5, 0.02); ctx.restore();
-  };
-  const hand = (shoulder: readonly [number, number], ang: number, name: string): [number, number] => {
-    const [w, h] = size(name);
-    const lx = (HAND[0] - 0.5) * w, ly = HAND[1] * h - 0.06 * h;
-    const a = -ang * DEG;
-    return [shoulder[0] + lx * Math.cos(a) - ly * Math.sin(a), shoulder[1] + lx * Math.sin(a) + ly * Math.cos(a)];
-  };
-
-  // back layer
-  limb(o.armB, shaded(o.armB), shoulders[1][0], shoulders[1][1], back);
-  leg(false);
-  const [hbw, hbh] = size('hairB');
-  ctx.save(); ctx.translate(4, headTop - hbh * 0.1); at(ctx, hair('hairB', hc), hbw, hbh, 0.5, 0); ctx.restore();
-  // body
-  leg(true);
-  ctx.save(); ctx.translate(0, torsoBottom); at(ctx, parts.get(o.torso), tw, th, 0.5, 1); ctx.restore();
-  // head + hair + headgear
-  ctx.save(); ctx.translate(8, neckY); at(ctx, parts.get('head'), hw, hh, 0.5, 1); ctx.restore();
-  const [hfw, hfh] = size('hairF');
-  ctx.save(); ctx.translate(12, headTop - hfh * 0.24); at(ctx, hair('hairF', hc), hfw, hfh, 0.5, 0); ctx.restore();
-  for (const look of [L.headMid, L.headTop]) {
-    const g = look ? HEADGEAR[look] : undefined;
-    if (!g) continue;
-    const [name, gx, gy, gw] = g;
-    const [pw, ph] = size(name);
-    const s = gw * 1.3 / pw;
-    ctx.save(); ctx.translate(8 + gx * 1.3, headTop + gy * 1.3); at(ctx, parts.get(name), pw * s, ph * s, 0.5, 1); ctx.restore();
+/** game pose → manifest animation and time, lining the painted contact/release keys up with the sim's hit moment */
+function clip(m: Manifest, pose: Pose, wtype: WeaponType): [string, number] {
+  switch (pose.state) {
+    case 'walk': return ['walk', pose.t];
+    case 'attack': {
+      const name = wtype === 'bow' ? 'bow' : 'melee';
+      const a = m.animations[name];
+      const ev = a.events?.[0]?.time ?? a.duration / 2;
+      const hit = wtype === 'bow' ? BOW_RELEASE : MELEE_CONTACT;
+      const dur = Math.max(hit + 1, pose.dur ?? hit * 2);
+      const t = pose.t;
+      return [name, t < hit ? t / hit * ev : ev + (t - hit) / (dur - hit) * (a.duration - ev)];
+    }
+    case 'cast': {
+      // hold the channelling pose, swaying between the raise and release keys
+      const ks = m.animations.cast.keys;
+      return ['cast', (ks[1].time + ks[2].time) / 2 + Math.sin(pose.t / 220) * (ks[2].time - ks[1].time) / 2];
+    }
+    case 'sit': return ['sit', m.animations.sit.duration];
+    case 'hurt': return ['hurt', m.animations.hurt.keys[1]?.time ?? 100];
+    case 'dead': return ['dead', pose.t];
+    default: return ['idle', pose.t];
   }
-  // front arm, then the weapon over the fist (an extended arm would otherwise hide a forward-pointing blade)
-  limb(o.armF, parts.get(o.armF), shoulders[0][0], shoulders[0][1], front);
-  const wname = WEAPON[L.wtype];
-  if (wname && pose.state !== 'dead') {
-    const [hx, hy] = hand(shoulders[0], front, o.armF);
-    const [ww, wh] = size(wname);
-    const ws = (wname === 'sword' ? 300 : 200) / ww;
-    ctx.save(); ctx.translate(hx, hy); ctx.rotate(Math.PI / 2 - P.weapon * DEG);
-    at(ctx, parts.get(wname), ww * ws, wh * ws, 0.1, 0.5);
-    ctx.restore();
-  }
-  ctx.restore();
-  return true;
 }
 
-// ── v2: template-space assembly (joints from rigTemplate.ts; every piece keeps its painted position)
+/** multiply tints over the cream hair per game hair colour (state.ts HAIR_COLORS order), lifted a step so the
+ *  painted shading and outline survive the multiply; null = the painted cream as is */
+const HAIR_TINT: (string | null)[] = ['#6a5048', '#a8643c', '#edbb60', null, '#d95250', '#5986d0', '#85af6c', '#aa6bc5', '#e886a4', '#59535d'];
+
+// hair colour by multiply over the cream base, alpha restored (manifest renderRules.tint)
 const tinted = new Map<string, HTMLCanvasElement>();
-function tint(p: Piece, color: string): CanvasImageSource {
-  const k = p.img.src + '|' + color;
+function tint(name: string, color: string): CanvasImageSource | undefined {
+  const img = imgs.get(name);
+  if (!img) return undefined;
+  const k = name + color;
   let c = tinted.get(k);
   if (!c) {
-    c = document.createElement('canvas'); c.width = p.img.width; c.height = p.img.height;
+    c = document.createElement('canvas'); c.width = img.width; c.height = img.height;
     const x = c.getContext('2d')!;
-    x.drawImage(p.img, 0, 0);
+    x.drawImage(img, 0, 0);
     x.globalCompositeOperation = 'multiply'; x.fillStyle = color; x.fillRect(0, 0, c.width, c.height);
-    x.globalCompositeOperation = 'destination-in'; x.drawImage(p.img, 0, 0);
+    x.globalCompositeOperation = 'destination-in'; x.drawImage(img, 0, 0);
     tinted.set(k, c);
   }
   return c;
 }
-const HEADGEAR2: Record<string, [string, number, number, number, number]> = {
-  // part, x, y (template px, anchor point), width, anchorY (0 top … 1 bottom)
-  leaf: ['leaf', J.head.cx - 6, J.head.cy - J.head.ry + 16, 150, 1],
-  hairpin: ['hairpin', J.head.cx + 118, J.head.cy - 96, 140, 0.5],
-  cap: ['beret', J.head.cx + 14, J.head.cy - J.head.ry + 96, 330, 1],
-};
 
-function drawRig2(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose, set: Record<string, Piece>) {
-  const P = computePose(pose, L.wtype);
-  const top = J.head.cy - J.head.ry;
-  const k = 80 / (J.ground - top);                // ≈ 900 template px → 80 field units
-  const hc = HAIR_COLORS[L.hairColor % HAIR_COLORS.length];
-  ctx.save();
-  ctx.scale(pose.facing * k, k);
-  if (pose.state === 'dead') { ctx.translate(-40, -50); ctx.rotate(-Math.PI / 2 + 0.05); ctx.translate(0, 300); }
-  ctx.translate(0, P.bob / k);
-  ctx.rotate(P.lean * DEG);
-  ctx.translate(-J.originX, -J.ground);
-  const sit = pose.state === 'sit';
-  const piece = (name: string, pivot?: readonly [number, number], ang = 0, img?: CanvasImageSource) => {
-    const p = set[name];
-    if (!p) return;
-    if (pivot && ang) { ctx.save(); ctx.translate(pivot[0], pivot[1]); ctx.rotate(-ang * DEG); ctx.translate(-pivot[0], -pivot[1]); }
-    ctx.drawImage(img ?? p.img, p.x, p.y);
-    if (pivot && ang) ctx.restore();
+export function drawRigHero(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {
+  if (!rigSupports(L) || !M) return false;
+  const outfit = M.outfits[OUTFIT[L.cls]!];
+  const look: Record<string, string | null> = {
+    weapon: WEAPON[L.wtype] ?? null,
+    head_top: L.headTop && HEADGEAR[L.headTop] || null,
+    head_mid: L.headMid && HEADGEAR[L.headMid] || null,
+    head_low: L.headLow && HEADGEAR[L.headLow] || null,
   };
-  // code-pose angles are relative to its own rest (front 22°, back −12°): apply the difference to the painted rest
-  const dF = P.front - 22, dB = P.back + 12;
-  const legF = P.legA * 5 - (sit ? 70 : 0), legB = P.legB * 5 - (sit ? 70 : 0);
-  if (sit) ctx.translate(0, 120);
-  piece('armB', J.shoulderB, dB);
-  piece('legB', J.hipB, legB);
-  piece('legF', J.hipF, legF);
-  piece('torso');
-  piece('head');
-  if (set.hair) piece('hair', undefined, 0, tint(set.hair, hc));
-  for (const look of [L.headMid, L.headTop]) {
-    const g = look ? HEADGEAR2[look] : undefined;
-    const img = g ? parts.get(g[0]) : undefined;
-    if (!g || !img) continue;
-    const w = g[3], h = img.height * w / img.width;
-    ctx.drawImage(img, g[1] - w / 2, g[2] - h * g[4], w, h);
-  }
-  piece('armF', J.shoulderF, dF);
-  // weapon in the front fist (fist follows the arm's rotation about the shoulder)
-  const wname = WEAPON[L.wtype];
-  const wimg = wname ? parts.get(wname) : undefined;
-  if (wimg && pose.state !== 'dead') {
-    const a = -dF * DEG, sx = J.shoulderF[0], sy = J.shoulderF[1], hx = J.handF[0] - sx, hy = J.handF[1] - sy;
-    const fx = sx + hx * Math.cos(a) - hy * Math.sin(a), fy = sy + hx * Math.sin(a) + hy * Math.cos(a);
-    const len = wname === 'sword' ? 340 : 240, h = wimg.height * len / wimg.width;
-    ctx.save(); ctx.translate(fx, fy); ctx.rotate(Math.PI / 2 - P.weapon * DEG);
-    ctx.drawImage(wimg, -len * 0.1, -h / 2, len, h);
+  const [state, t] = clip(M, pose, L.wtype);
+  const nodes = sample(M, state, t);
+  const mats = new Map<string, Mat>(), chosen = new Map<string, string | null>();
+  const draws: { part: string; m: Mat; z: number; node: string }[] = [];
+  const visit = (name: string): Mat => {
+    const done = mats.get(name);
+    if (done) return done;
+    const n = nodes[name];
+    const pm = n.parent ? visit(n.parent) : mat();
+    const pid = n.parent ? chosen.get(n.parent) : null;
+    const id = n.slot ? (n.slot in outfit ? outfit[n.slot] : look[n.slot] ?? null) : n.part ?? null;
+    chosen.set(name, id);
+    let [x, y] = n.offset ?? [0, 0];
+    if (n.anchor && pid) {
+      const pp = M.parts[pid], a = pp.anchors[n.anchor];
+      if (a) { x += a[0] - pp.pivot[0]; y += a[1] - pp.pivot[1]; }
+    }
+    const [sx, sy] = n.scale ?? [1, 1];
+    let m = mul(pm, mat(x, y, n.angle ?? 0, sx, sy));
+    if (n.worldAngle !== undefined) m = mat(m[4], m[5], n.worldAngle, Math.hypot(m[0], m[1]), Math.hypot(m[2], m[3]));
+    mats.set(name, m);
+    if (id && n.visible !== false && M.parts[id]) {
+      const p = M.parts[id];
+      draws.push({ part: id, m: mul(m, mat(-p.pivot[0], -p.pivot[1])), z: n.z ?? p.z, node: name });
+    }
+    return m;
+  };
+  for (const name of Object.keys(nodes)) visit(name);
+  draws.sort((a, b) => a.z - b.z || (a.node < b.node ? -1 : a.node > b.node ? 1 : 0));
+
+  const hc = HAIR_TINT[L.hairColor % HAIR_TINT.length];
+  const k = HEIGHT / M.canvas.referenceHeight;
+  ctx.save();
+  ctx.scale(pose.facing * k, k);                // the art faces right; mirror the whole figure for facing left
+  ctx.translate(-M.canvas.origin[0], -M.canvas.origin[1]);
+  for (const d of draws) {
+    const p = M.parts[d.part];
+    const src = hc && d.node.startsWith('hair_') ? tint(partName(p), hc) : imgs.get(partName(p));
+    if (!src) continue;
+    ctx.save();
+    ctx.transform(...d.m);
+    ctx.drawImage(src, 0, 0, p.size[0], p.size[1]);
     ctx.restore();
   }
   ctx.restore();
+  return true;
 }
