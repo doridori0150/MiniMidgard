@@ -1,0 +1,115 @@
+<!doctype html><html><head><meta charset="utf-8" /><title>Rig cut (dev)</title></head><body>
+<!-- Dev tool: cuts a template-aligned full-body painting (docs/art/rig-template/<set>.png) into rig parts along the
+     joints in src/render/rigTemplate.ts. Prints JSON {part: {x, y, url}} into #out; run headless with --dump-dom.
+     usage: /tools/rig-cut.html?src=/docs/art/rig-template/novice.png -->
+<pre id="out">pending</pre>
+<canvas id="view"></canvas>
+<script type="module">
+  import { J } from '/src/render/rigTemplate.ts';
+  const src = new URLSearchParams(location.search).get('src');
+  const img = new Image(); img.src = src; await img.decode();
+  const N = J.size;
+  const c = document.createElement('canvas'); c.width = N; c.height = N;
+  const ctx = c.getContext('2d', { willReadFrequently: true });
+  ctx.drawImage(img, 0, 0, N, N);
+  const im = ctx.getImageData(0, 0, N, N), d = im.data;
+
+  // 1. key out the magenta background (flood from the border) and de-fringe
+  const key = [d[0], d[1], d[2]];
+  const near = (i) => Math.abs(d[i] - key[0]) + Math.abs(d[i + 1] - key[1]) + Math.abs(d[i + 2] - key[2]) < 120;
+  const seen = new Uint8Array(N * N), st = [];
+  for (let x = 0; x < N; x++) st.push(x, (N - 1) * N + x);
+  for (let y = 0; y < N; y++) st.push(y * N, y * N + N - 1);
+  while (st.length) {
+    const p = st.pop(); if (seen[p]) continue; seen[p] = 1;
+    if (!near(p * 4)) continue;
+    d[p * 4 + 3] = 0;
+    const x = p % N, y = (p / N) | 0;
+    if (x > 0) st.push(p - 1); if (x < N - 1) st.push(p + 1); if (y > 0) st.push(p - N); if (y < N - 1) st.push(p + N);
+  }
+  for (let p = 0; p < N * N; p++) {
+    const i = p * 4; if (!d[i + 3]) continue;
+    const m = Math.min(d[i], d[i + 2]) - d[i + 1];
+    if (m > 70) { d[i + 3] = 0; continue; }
+    if (m > 25) { const k = (m - 25) / 45; d[i] -= (d[i] - d[i + 1]) * k * 0.8; d[i + 2] -= (d[i + 2] - d[i + 1]) * k * 0.8; d[i + 3] *= 1 - k * 0.7; }
+  }
+
+  // 2. regions from the template joints
+  const seg = (px, py, a, b) => {
+    const vx = b[0] - a[0], vy = b[1] - a[1], t = Math.max(0, Math.min(1, ((px - a[0]) * vx + (py - a[1]) * vy) / (vx * vx + vy * vy)));
+    return Math.hypot(px - a[0] - vx * t, py - a[1] - vy * t);
+  };
+  const ext = (a, b, e) => { const vx = b[0] - a[0], vy = b[1] - a[1], L = Math.hypot(vx, vy); return [b[0] + vx / L * e, b[1] + vy / L * e]; };
+  const inQuad = (px, py, q, grow) => {
+    // point in convex quad, grown by `grow` px (approximate via edge distances)
+    let inside = true;
+    for (let i = 0; i < 4; i++) {
+      const a = q[i], b = q[(i + 1) % 4];
+      const cross = (b[0] - a[0]) * (py - a[1]) - (b[1] - a[1]) * (px - a[0]);
+      const len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+      if (cross / len < -grow) inside = false;
+    }
+    return inside;
+  };
+  const armF = (x, y) => seg(x, y, J.shoulderF, ext(J.shoulderF, J.handF, 40)) < 66 && (!inQuad(x, y, J.torso, -8) || Math.hypot(x - J.shoulderF[0], y - J.shoulderF[1]) < 46);
+  const armB = (x, y) => seg(x, y, J.shoulderB, ext(J.shoulderB, J.handB, 40)) < 64 && (!inQuad(x, y, J.torso, -8) || Math.hypot(x - J.shoulderB[0], y - J.shoulderB[1]) < 44);
+  const legF = (x, y) => y > J.hipF[1] - 24 && seg(x, y, J.hipF, ext(J.hipF, J.footF, 30)) < 66 && x >= (J.hipF[0] + J.hipB[0]) / 2 - 4;
+  const legB = (x, y) => y > J.hipB[1] - 24 && seg(x, y, J.hipB, ext(J.hipB, J.footB, 30)) < 64 && x < (J.hipF[0] + J.hipB[0]) / 2 + 4;
+  const head = (x, y) => y < J.neck[1] + 6 && !armF(x, y) && !armB(x, y);
+
+  const parts = { head: [], armF: [], armB: [], legF: [], legB: [], torso: [] };
+  const owner = new Int8Array(N * N).fill(-1); // for the debug view
+  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+    const p = y * N + x; if (d[p * 4 + 3] < 8) continue;
+    // order matters: limbs first (they may include a little torso, which the torso layer covers at rest)
+    if (head(x, y)) { parts.head.push(p); owner[p] = 0; continue; }
+    let took = false;
+    if (armF(x, y)) { parts.armF.push(p); owner[p] = 1; took = true; }
+    if (armB(x, y)) { parts.armB.push(p); owner[p] = 2; took = true; }
+    if (legF(x, y)) { parts.legF.push(p); owner[p] = 3; }
+    if (legB(x, y)) { parts.legB.push(p); owner[p] = 4; }
+    // torso keeps everything inside its (grown) quad and anything no limb claimed
+    if (inQuad(x, y, J.torso, 22) || (!took && !legF(x, y) && !legB(x, y))) { parts.torso.push(p); if (owner[p] < 0) owner[p] = 5; }
+  }
+
+  // 3. hair inside the head: large connected areas of the hair colour (sampled at the crown)
+  const hs = ((J.head.cy - J.head.ry * 0.78) | 0) * N + J.head.cx;
+  const hc = [d[hs * 4], d[hs * 4 + 1], d[hs * 4 + 2]];
+  const hairLike = (p) => { const i = p * 4; return d[i + 3] > 100 && Math.abs(d[i] - hc[0]) + Math.abs(d[i + 1] - hc[1]) + Math.abs(d[i + 2] - hc[2]) < 95 && (d[i] - d[i + 1]) < (hc[0] - hc[1]) + 18; };
+  const headSet = new Uint8Array(N * N); for (const p of parts.head) headSet[p] = 1;
+  const lab = new Int32Array(N * N).fill(-1), comps = [];
+  for (const p0 of parts.head) {
+    if (lab[p0] >= 0 || !hairLike(p0)) continue;
+    const id = comps.length, list = [p0]; lab[p0] = id;
+    for (let k = 0; k < list.length; k++) {
+      const p = list[k], x = p % N, y = (p / N) | 0;
+      for (const q of [x > 0 ? p - 1 : -1, x < N - 1 ? p + 1 : -1, y > 0 ? p - N : -1, y < N - 1 ? p + N : -1]) if (q >= 0 && headSet[q] && lab[q] < 0 && hairLike(q)) { lab[q] = id; list.push(q); }
+    }
+    comps.push(list);
+  }
+  const hair = new Set(); for (const list of comps) if (list.length > 400) for (const p of list) hair.add(p);
+  parts.hair = [...hair];
+  parts.head = parts.head.filter((p) => !hair.has(p));
+
+  // 4. crop each part and print
+  const out = {};
+  for (const [name, list] of Object.entries(parts)) {
+    if (!list.length) continue;
+    let x0 = N, y0 = N, x1 = 0, y1 = 0;
+    for (const p of list) { const x = p % N, y = (p / N) | 0; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    const w = x1 - x0 + 1, h = y1 - y0 + 1;
+    const pc = document.createElement('canvas'); pc.width = w; pc.height = h;
+    const px = pc.getContext('2d'), pd = px.createImageData(w, h);
+    for (const p of list) { const x = p % N - x0, y = ((p / N) | 0) - y0, i = (y * w + x) * 4; pd.data.set(d.subarray(p * 4, p * 4 + 4), i); }
+    px.putImageData(pd, 0, 0);
+    out[name] = { x: x0, y: y0, url: pc.toDataURL('image/png') };
+  }
+  document.getElementById('out').textContent = JSON.stringify(out);
+  // debug view: parts coloured by owner
+  const v = document.getElementById('view'); v.width = N; v.height = N; v.style.width = '512px';
+  const vx = v.getContext('2d'), vd = vx.createImageData(N, N);
+  const COL = [[255, 120, 120], [80, 160, 255], [60, 90, 200], [80, 200, 90], [40, 130, 60], [230, 200, 80]];
+  for (let p = 0; p < N * N; p++) if (owner[p] >= 0) { const cc = hair.has(p) ? [250, 250, 250] : COL[owner[p]]; vd.data.set([...cc, 255], p * 4); }
+  vx.putImageData(vd, 0, 0);
+  document.title = 'done';
+</script></body></html>

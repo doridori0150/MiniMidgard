@@ -10,8 +10,10 @@ const STYLES: Record<string, Style> = {
   sp: { top: '#d0e4ff', bottom: '#3a70ff', stroke: '#040c2a', size: 22 },
   total: { top: '#fff0a0', bottom: '#ffc020', stroke: '#3a2000', size: 30 },
   zero: { top: '#a8a8b0', bottom: '#78787e', stroke: '#141018', size: 22 },
+  absorb: { top: '#e6f8ff', bottom: '#5ab8f0', stroke: '#06202e', size: 21 },
 };
-const GLYPHS = '0123456789';
+const GLYPHS = '0123456789+';
+const glyph = (ch: string) => (ch === '+' ? 10 : ch.charCodeAt(0) - 48);
 
 interface Atlas { canvas: HTMLCanvasElement; x: number[]; w: number[]; h: number; text: Map<string, HTMLCanvasElement> }
 const atlases = new Map<string, Atlas>();
@@ -93,9 +95,10 @@ export function drawNumber(ctx: CanvasRenderingContext2D, d: DmgNum, sx: number,
   }
   const key = d.kind === 'normal' ? 'normal' : d.kind;
   const a = atlas(key);
-  const str = String(d.n);
+  // recoveries read as gains, not hits: a leading "+" (the colour alone isn't the only cue)
+  const str = (d.kind === 'heal' || d.kind === 'sp' ? '+' : '') + String(d.n);
   let total = 0;
-  for (const ch of str) total += a.w[ch.charCodeAt(0) - 48] - 8 * K;
+  for (const ch of str) total += a.w[glyph(ch)] - 8 * K;
   let x = sx - (total * s) / 2;
   const y = sy - a.h * s;
   if (d.kind === 'crit') {
@@ -119,7 +122,7 @@ export function drawNumber(ctx: CanvasRenderingContext2D, d: DmgNum, sx: number,
     ctx.restore();
   }
   for (const ch of str) {
-    const i = ch.charCodeAt(0) - 48;
+    const i = glyph(ch);
     ctx.drawImage(a.canvas, a.x[i], 0, a.w[i], a.h, x - 4 * K * s, y, a.w[i] * s, a.h * s);
     x += (a.w[i] - 8 * K) * s;
   }

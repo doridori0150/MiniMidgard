@@ -1,0 +1,29 @@
+<!doctype html><html><body style="margin:0;background:#cfe3b8;font:12px system-ui">
+<canvas id="c"></canvas>
+<script type="module">
+  // Dev-only: painter's reference vs assembled rig at the same height — side by side and overlaid.
+  import { loadRig, drawRigHero, RIG_METRICS } from '/src/render/rig.ts';
+  await loadRig();
+  const ref = new Image(); ref.src = '/src/assets/rig/novice/ref.png'; await ref.decode();
+  const c = document.getElementById('c'); const dpr = 2, W = 900, H = 520;
+  c.width = W * dpr; c.height = H * dpr; c.style.width = W + 'px';
+  const ctx = c.getContext('2d');
+  const L = { cls: 'novice', gender: 'f', hair: 1, hairColor: 3, skin: 0, dye: 0, wtype: 'dagger', refine: 0, shield: false };
+  const FOOT = 470, HPX = 420; // on-screen height of the character
+  // reference
+  const rw = ref.width * HPX / ref.height;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.drawImage(ref, 150 - rw / 2, FOOT - HPX, rw, HPX);
+  ctx.fillText('참고 (Codex)', 120, 500);
+  // assembled, scaled so its total height matches HPX
+  const k = HPX / RIG_METRICS.height;
+  const draw = (x, alpha) => {
+    ctx.setTransform(dpr * k * RIG_METRICS.sheetToUnits, 0, 0, dpr * k * RIG_METRICS.sheetToUnits, x * dpr, FOOT * dpr);
+    ctx.globalAlpha = alpha; drawRigHero(ctx, L, { state: 'idle', t: 0, facing: 1 }); ctx.globalAlpha = 1;
+  };
+  draw(450, 1);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillText('조립', 435, 500);
+  ctx.globalAlpha = 0.55; ctx.drawImage(ref, 750 - rw / 2, FOOT - HPX, rw, HPX); ctx.globalAlpha = 1;
+  draw(750, 0.55);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillText('겹침', 735, 500);
+</script></body></html>

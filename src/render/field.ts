@@ -299,8 +299,9 @@ export class FieldRenderer {
       case 'buff': break;
       case 'status': this.bubbles.push({ uid: e.uid, text: e.text, color: e.color, t0: now }); break;
       case 'heal': {
+        // potions heal: rising green, never the red of a hit
         const p = this.pos(e.uid);
-        if (p) this.burst(p.x, p.y - 20, 6, '#ff8080', 'glow', 26, 0.6, -40);
+        if (p) this.burst(p.x, p.y - 20, 6, '#8cff9a', 'glow', 26, 0.6, -40);
         break;
       }
     }

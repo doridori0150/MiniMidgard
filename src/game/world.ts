@@ -10,7 +10,7 @@ import { CLASSES, lineage } from './data/classes.ts';
 import { expNext } from './exp.ts';
 import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics, gateDiscoverable, gateReady, openGate, zoneKnown, inHours, isKeepItem } from './state.ts';
 
-export type DmgKind = 'normal' | 'crit' | 'taken' | 'heal' | 'sp' | 'miss' | 'lucky' | 'total' | 'zero';
+export type DmgKind = 'normal' | 'crit' | 'taken' | 'heal' | 'sp' | 'miss' | 'lucky' | 'total' | 'zero' | 'absorb';
 
 export type FxEvent =
   | { t: 'dmg'; uid: number; n: number; kind: DmgKind; i?: number }
@@ -1483,7 +1483,9 @@ export class World {
       sh.shield! -= absorbed;
       n -= absorbed;
       if (sh.shield! <= 0) { h.buffs = h.buffs.filter((b) => b !== sh); this.emit({ t: 'status', uid: h.uid, text: '보호막 파괴', color: '#bfe8ff' }); }
-      if (n <= 0) { this.emit({ t: 'dmg', uid: h.uid, n: absorbed, kind: 'zero' }); return; }
+      // a block reads as a block: sky-blue absorbed amount, and no hurt flash when nothing got through
+      if (absorbed > 0) this.emit({ t: 'dmg', uid: h.uid, n: absorbed, kind: 'absorb' });
+      if (n <= 0) return;
     }
     h.hp -= n;
     h.hurtAt = this.time;
