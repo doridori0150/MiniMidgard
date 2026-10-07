@@ -17,6 +17,8 @@ import {
 } from '../../game/state.ts';
 import { partyPerks } from '../../game/stats.ts';
 import { requestNotify } from '../notify.ts';
+import { RiftView } from '../Rift.tsx';
+import { riftSave, riftUnlocked } from '../../game/rift.ts';
 
 // ───────── town
 const NPCS: { id: TownView; npc: string; name: string; who: string; sub: string; roof: string; icon: string }[] = [
@@ -26,6 +28,7 @@ const NPCS: { id: TownView; npc: string; name: string; who: string; sub: string;
   { id: 'refine', npc: 'refine', name: '정련소', who: '바르크', sub: '+10까지 강화 · 운명의 망치', roof: '#6a5a8a', icon: '⚒️' },
   { id: 'stylist', npc: 'stylist', name: '미용실 · 의상실', who: '루루', sub: '헤어 · 염색 · 외형 아이템', roof: '#e07aa0', icon: '💇' },
   { id: 'job', npc: 'job', name: '전직 교관', who: '레온', sub: '1차 · 2차 전직', roof: '#c8a040', icon: '📜' },
+  { id: 'rift', npc: 'rift', name: '균열 관리인', who: '시엘', sub: '끝없는 균열 · 2차 직업 Lv 60', roof: '#5a3a9a', icon: '🌀' },
 ];
 
 function RefineView() {
@@ -155,7 +158,7 @@ export function TownPanel() {
   const g = useGame();
   const v = g.town;
   useBackHandler(v !== 'menu', () => { g.town = 'menu'; });
-  const titles: Record<TownView, string> = { menu: '마을 서비스', tool: '도구 상점', weapon: '무기 상점', armor: '방어구 상점', costume: '의상실', refine: '정련소', stylist: '미용실·의상실', job: '전직 교관' };
+  const titles: Record<TownView, string> = { menu: '마을 서비스', tool: '도구 상점', weapon: '무기 상점', armor: '방어구 상점', costume: '의상실', refine: '정련소', stylist: '미용실·의상실', job: '전직 교관', rift: '균열' };
   return (
     <Win title={titles[v]} onClose={() => g.openPanel(null)} right={<>{v !== 'menu' && <button class="x" style={{ width: 'auto', padding: '0 6px' }} onClick={() => { g.town = 'menu'; g.notify(); }}>◀ 목록</button>}<span class="small" style={{ color: '#ffe8a0' }}>{fmt(g.s.zeny)}z</span></>}>
       <div class="win-body">
@@ -167,13 +170,15 @@ export function TownPanel() {
             <div class="tcards">
               {NPCS.map((n) => {
                 const jobReady = n.id === 'job' && g.s.heroes.some((h) => !canJobChange(h));
+                const rift = n.id === 'rift' && riftUnlocked(g.s);
                 return (
-                  <button class={'tcard' + (jobReady ? ' glow' : '')} style={{ '--roof': n.roof } as Record<string, string>} onClick={() => { g.town = n.id; g.notify(); audio.play('open'); }}>
+                  <button class={'tcard' + (jobReady || (rift && !g.s.rift?.runs) ? ' glow' : '') + (n.id === 'rift' ? ' wide' : '') + (n.id === 'rift' && !rift ? ' dim' : '')} style={{ '--roof': n.roof } as Record<string, string>} onClick={() => { g.town = n.id; g.notify(); audio.play('open'); }}>
                     <span class="tc-roof" />
                     <span class="tc-ic">{n.icon}</span>
                     <LookCanvas look={NPC_LOOKS[n.npc]} zoom={1.25} anchor={2} class="tc-npc" />
                     <span class="tc-text"><b>{n.name}</b><small>{n.who} · {n.sub}</small></span>
                     {jobReady && <span class="tc-badge">전직 가능!</span>}
+                    {n.id === 'rift' && (rift ? <span class="tc-badge rift">{g.s.rift?.runs ? `최고 ${riftSave(g.s).best}단계` : '열림!'}</span> : <span class="tc-badge lock">🔒</span>)}
                   </button>
                 );
               })}
@@ -185,6 +190,7 @@ export function TownPanel() {
         {v === 'refine' && <RefineView />}
         {v === 'stylist' && <StylistView />}
         {v === 'job' && <JobView />}
+        {v === 'rift' && <RiftView />}
       </div>
     </Win>
   );

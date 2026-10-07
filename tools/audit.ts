@@ -1,11 +1,15 @@
 // Content audit: drop tables, cards, item sources, weapon ladders, map economy.
 // usage: node --experimental-strip-types tools/audit.ts [section]
-//   sections: all (default) · errors · ladder · acc · head · cards · maps · econ · patches · curve · expedition
+//   sections: all (default) · errors · ladder · acc · head · cards · maps · econ · patches · curve · expedition · rift
 import { MONSTERS, type MonsterDef } from '../src/game/data/monsters.ts';
 import { ITEMS, SHOPS } from '../src/game/data/items.ts';
 import { ZONES, REGION_INFO, openers, isExpedition } from '../src/game/data/zones.ts';
 import { sellPrice } from '../src/game/state.ts';
 import type { GameState, WeaponType } from '../src/game/types.ts';
+import {
+  ESSENCE, FIXED_ORDER, MECHS, RIFT_MAX, RULES, RULE_IDS, bandPool, bandRange, essenceForClear, firstClearReward, guardianPool, planRift,
+  riftIlvl, riftLevel, riftMonster, rollRiftGrade, tierAtk, tierHp, type RiftRuleId,
+} from '../src/game/rift.ts';
 
 const want = process.argv[2] ?? 'all';
 const on = (s: string) => want === 'all' || want === s;
@@ -56,7 +60,7 @@ for (const it of Object.values(ITEMS)) {
     if (!it.cardLoc) errors.push(`${it.id}: no cardLoc`);
   }
   if (it.kind === 'equip' && !it.loc) errors.push(`${it.id}: equip without loc`);
-  if (it.kind !== 'card' && !dropsOf[it.id] && !chestOf[it.id] && !shopItems.has(it.id)) warn.push(`dead item (no drop, no shop): ${it.id} ${it.name}`);
+  if (it.kind !== 'card' && it.id !== ESSENCE && !dropsOf[it.id] && !chestOf[it.id] && !shopItems.has(it.id)) warn.push(`dead item (no drop, no shop): ${it.id} ${it.name}`);
 }
 for (const z of ZONES) {
   for (const e of z.mobs) if (!MONSTERS[e.id]) errors.push(`${z.id}: unknown mob ${e.id}`);
@@ -142,6 +146,34 @@ for (const [name, info] of Object.entries(REGION_INFO)) {
     }
   }
   for (const z of ZONES) if (!open.has(z.id)) errors.push(`${z.id}: not reachable from the start fields`);
+}
+
+// 균열 (rift.ts): rules, fixed rules, bands with enough monsters and guardians, plans that respect the rule groups, the currency
+{
+  for (const id of RULE_IDS) {
+    const r = RULES[id];
+    if (r.id !== id || !r.name || !r.text || !r.good || !r.bad || !r.icon) errors.push(`rift rule ${id}: incomplete`);
+  }
+  for (const id of FIXED_ORDER) if (!RULES[id]) errors.push(`rift fixed rule ${id}: unknown`);
+  if (!ITEMS[ESSENCE] || !ITEMS[ESSENCE].rarity) errors.push(`${ESSENCE}: missing or without rarity (would be auto-sold)`);
+  for (let t = 1; t <= RIFT_MAX; t += 10) {
+    if (bandPool(t).length < 5) errors.push(`rift tier ${t}: band ${bandRange(t).join('-')} has ${bandPool(t).length} species (< 5)`);
+    if (guardianPool(t).length < 3) errors.push(`rift tier ${t}: ${guardianPool(t).length} guardians (< 3)`);
+  }
+  let seed = 7;
+  const rng = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+  for (let t = 1; t <= RIFT_MAX; t++) for (let week = 0; week < 2; week++) {
+    const p = planRift(t, rng, week);
+    const groups = p.rules.map((r) => RULES[r as RiftRuleId].group).filter(Boolean);
+    if (new Set(groups).size !== groups.length) errors.push(`rift tier ${t}: rules ${p.rules.join('+')} repeat a group`);
+    if (new Set(p.rules).size !== p.rules.length) errors.push(`rift tier ${t}: rule twice ${p.rules.join('+')}`);
+    if (t >= 10 && !p.fixed) errors.push(`rift tier ${t}: no fixed rule`);
+    if (p.rules.length - (p.fixed ? 1 : 0) < 1 || p.rules.length - (p.fixed ? 1 : 0) > 2) errors.push(`rift tier ${t}: ${p.rules.length} rules`);
+    if (p.rules.includes('element') && !p.element) errors.push(`rift tier ${t}: 원소 편중 without an element`);
+    if (!MECHS[p.mech as keyof typeof MECHS] || !MONSTERS[p.guardian]?.boss) errors.push(`rift tier ${t}: bad guardian ${p.guardian}/${p.mech}`);
+    const g = riftMonster(MONSTERS[p.guardian], p, 'guardian');
+    if (!(g.hp > 0) || !Number.isFinite(g.hp) || g.atk[0] > g.atk[1]) errors.push(`rift tier ${t}: guardian stats ${g.hp} ${g.atk}`);
+  }
 }
 
 if (on('errors') || want === 'all') {
@@ -262,5 +294,27 @@ if (on('curve')) {
     const hr = m.hp / Math.max(30, hpC), ar = (m.atk[0] + m.atk[1]) / 2 / atkC;
     const flag = hr > 1.6 || hr < 0.6 || ar > 1.3 || ar < 0.75 ? '  <<' : '';
     console.log(`  Lv${String(m.lv).padStart(2)} ${m.id.padEnd(13)} hp ${String(m.hp).padStart(6)} (${hr.toFixed(2)})  atk ${(m.atk[0] + m.atk[1]) / 2} (${ar.toFixed(2)})  def ${m.def} flee ${m.lv + m.agi} exp ${m.exp}${flag}`);
+  }
+}
+
+// ── 균열 (rift.ts): bands, scaling, rewards
+if (on('rift')) {
+  console.log('\n== rift (균열): monster bands · guardians');
+  for (let b = 1; b <= 5; b++) {
+    const t = b * 10 - 9;
+    console.log(`  tiers ${t}-${b === 5 ? RIFT_MAX : t + 9}: Lv ${bandRange(t).join('-')} · ${bandPool(t).length} species · guardians ${guardianPool(t).map((m) => m.name).join(', ')}`);
+  }
+  console.log('  rules: ' + RULE_IDS.map((id) => `${RULES[id].icon}${RULES[id].name}(${RULES[id].axis}${RULES[id].group ? '/' + RULES[id].group : ''})`).join(' '));
+  console.log('  fixed by decade (week 0): ' + FIXED_ORDER.map((id, i) => `${(i + 1) * 10}+ ${RULES[id].name}`).join(' · ') + ' — turns one step a week');
+  console.log('\n  tier  mobLv  HP×    ATK×   normal HP/ATK      guardian HP  ilvl  정수/clear  고대 guardian/elite/trash  태초 guardian  first clear');
+  let seed = 3;
+  const rng = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+  const rate = (t: number, src: 'guardian' | 'elite' | 'trash', g: string) => { let n = 0; for (let i = 0; i < 4000; i++) if (rollRiftGrade(t, src, false, rng) === g) n++; return (n / 40).toFixed(1) + '%'; };
+  for (const t of [1, 5, 10, 15, 20, 25, 30, 40, 50, 70, 80, 100]) {
+    const p = planRift(t, rng, 0); p.rules = [];
+    const base = MONSTERS['frostwolf'];
+    const n = riftMonster(base, p, 'normal'), g = riftMonster(MONSTERS[p.guardian], p, 'guardian');
+    const fc = firstClearReward(t);
+    console.log(`  ${String(t).padStart(4)}  ${String(riftLevel(t)).padStart(5)}  ${tierHp(t).toFixed(1).padStart(6)} ${tierAtk(t).toFixed(1).padStart(6)}   ${String(n.hp).padStart(7)}/${String(Math.round((n.atk[0] + n.atk[1]) / 2)).padStart(5)}  ${String(g.hp).padStart(12)}  ${String(riftIlvl(t)).padStart(4)}  ${String(essenceForClear(t)).padStart(10)}  ${[rate(t, 'guardian', 'ancient'), rate(t, 'elite', 'ancient'), rate(t, 'trash', 'ancient')].join(' / ').padStart(24)}  ${rate(t, 'guardian', 'primal').padStart(12)}  ${fc.zeny}z + 정수 ${fc.essence}${fc.gear ? ' + ' + fc.gear : ''}`);
   }
 }

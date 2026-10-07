@@ -21,7 +21,8 @@ import { BuyModal, SellModal } from './Shop.tsx';
 import { BuildModal, PinButton } from './BuildModal.tsx';
 import { TargetsModal } from './Targets.tsx';
 import { RosterModal } from './Roster.tsx';
-import { GRADE_KO, gradeBase, gradeOf, rerollCost, rerollOption } from '../game/gear.ts';
+import { GRADE_KO, gradeBase, gradeOf, rerollCost, rerollEssence, rerollOption, rerollZenyOk } from '../game/gear.ts';
+import { ESSENCE, awakenCardEssence, awakenEssence, essence } from '../game/rift.ts';
 import { awakenCost, nextStarId } from '../game/data/cardstars.ts';
 import { sourcesOf } from '../game/targets.ts';
 import { skillIconURL } from '../render/icons.ts';
@@ -79,12 +80,15 @@ function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
         {lines.length > 0 && d.kind !== 'card' && <div class="desc" style={{ color: '#2a5ab0' }}>{lines.join('\n')}</div>}
         {inst && inst.grade && (
           <div class={'grade-box g-' + inst.grade}>
-            <div class="gb-head"><b>{GRADE_KO[gradeOf(inst)]}</b> · 아이템 레벨 {inst.ilvl}{gradeBase(inst) > 0 ? ` · 기본치 +${Math.round(gradeBase(inst) * 100)}%` : ''}</div>
+            <div class="gb-head"><b>{GRADE_KO[gradeOf(inst)]}</b> · 아이템 레벨 {inst.ilvl}{inst.rift ? ` · 균열 ${inst.rift}단계` : ''}{gradeBase(inst) > 0 ? ` · 기본치 +${Math.round(gradeBase(inst) * 100)}%` : ''}</div>
             {(inst.opts ?? []).map((o, i) => (
               <div class="gb-opt">
                 <span>◆ {bonusLines(o).join(', ')}</span>
-                <button class="btn xs" disabled={s.zeny < rerollCost(inst)} title="이 옵션만 다시 굴린다"
-                  onClick={() => { s.zeny -= rerollCost(inst); rerollOption(inst, d, i, Math.random); g.commit('refine_ok'); }}>재련 {fmt(rerollCost(inst))}z</button>
+                {/* 재련: zeny or 균열 정수; 고대·태초 (rift gear) take 정수 only */}
+                {rerollZenyOk(inst) && <button class="btn xs" disabled={s.zeny < rerollCost(inst)} title="이 옵션만 다시 굴린다 (제니)"
+                  onClick={() => { s.zeny -= rerollCost(inst); rerollOption(inst, d, i, Math.random); g.commit('refine_ok'); }}>재련 {fmt(rerollCost(inst))}z</button>}
+                {(essence(s) > 0 || !rerollZenyOk(inst)) && <button class="btn xs rift" disabled={essence(s) < rerollEssence(inst)} title="이 옵션만 다시 굴린다 (균열 정수)"
+                  onClick={() => { removeStack(s, ESSENCE, rerollEssence(inst)); rerollOption(inst, d, i, Math.random); g.commit('refine_ok'); }}>재련 정수 {rerollEssence(inst)}</button>}
               </div>
             ))}
           </div>
@@ -126,6 +130,12 @@ function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
           <button class="btn" disabled={have < 3 || s.zeny < awakenCost(id)} title="같은 카드 3장 → 다음 별"
             onClick={() => { const e = awakenCard(s, id); if (e) { g.toast(e, 'bad'); return; } g.toast(`각성! ${ITEMS[nextStarId(id)!]?.name ?? ''}`, 'card'); g.commit('refine_ok'); g.setModal({ kind: 'item', id: nextStarId(id)! }); }}>
             각성 {have}/3 · {fmt(awakenCost(id))}z
+          </button>
+        )}
+        {d.kind === 'card' && nextStarId(id) && essence(s) > 0 && (
+          <button class="btn rift" disabled={have < 3 || essence(s) < awakenEssence(id)} title="같은 카드 3장 + 균열 정수 → 다음 별"
+            onClick={() => { const e = awakenCardEssence(s, id); if (e) { g.toast(e, 'bad'); return; } g.toast(`각성! ${ITEMS[nextStarId(id)!]?.name ?? ''}`, 'card'); g.commit('refine_ok'); g.setModal({ kind: 'item', id: nextStarId(id)! }); }}>
+            각성 · 정수 {awakenEssence(id)}
           </button>
         )}
         {isCostumable && <button class="btn" onClick={() => { setCostume(s, h, d.loc as CostumeSlot, inst!.uid); g.toast(`${h.name}의 의상으로 표시합니다`, 'good'); g.commit('equip'); close(); }}>의상으로</button>}

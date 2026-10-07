@@ -130,6 +130,47 @@ export interface EquipInst {
   grade?: string;
   ilvl?: number;
   opts?: Bonus[];
+  /** dropped in the rift at this tier (rift.ts): its item level also lifts the base ATK / DEF */
+  rift?: number;
+}
+
+/** 균열 (rift.ts, ENDGAME.md §3): one planned run — its rules are rolled before entering so the line-up can be picked */
+export interface RiftPlan {
+  tier: number;
+  seed: number;
+  /** random rules plus, from tier 10, the decade's fixed rule */
+  rules: string[];
+  fixed?: string;
+  /** 원소 편중: the element every monster takes */
+  element?: Element;
+  theme: string;
+  tint: string;
+  /** monster species of this run (drawn from the whole bestiary by tier band) */
+  pool: string[];
+  /** the boss the guardian is modelled on, and its rift mechanic */
+  guardian: string;
+  mech: string;
+}
+
+export interface RiftSave {
+  /** best tier cleared, how fast, when, and the 3-hero line-up that did it */
+  best: number;
+  bestMs?: number;
+  bestAt?: number;
+  bestParty?: { name: string; cls: ClassId; lv: number; build?: string }[];
+  /** highest tier that may be started (clears open +1/+2/+3) */
+  open: number;
+  /** tier picked on the entry screen (auto-retry off) */
+  pick?: number;
+  /** tiers already cleared once (first-clear rewards) */
+  firsts: number[];
+  /** auto-retry: off = back to town after a run · push = always the highest open tier · farm = one below the best */
+  auto: 'off' | 'push' | 'farm';
+  /** the next run, rolled ahead so the entry screen can show its rules */
+  next?: RiftPlan;
+  runs: number;
+  clears: number;
+  last?: { tier: number; ok: boolean; ms: number; adv: number; why: string };
 }
 
 export interface Look {
@@ -270,4 +311,8 @@ export interface GameState {
   discovered?: string[];
   /** 목표 핀: items being chased (have0 = owned when pinned, kills0 = source kills when pinned) */
   targets?: { id: string; since: number; have0: number; kills0: number }[];
+  /** 균열 records, auto-retry and the next planned run (rift.ts) */
+  rift?: RiftSave;
+  /** the last ordinary hunting map: a rift entered from town hands its offline time back to it */
+  lastHunt?: string;
 }

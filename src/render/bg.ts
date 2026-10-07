@@ -298,6 +298,7 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
       [W / 2 + 200, H * 0.48, 'refine', '정련사 바르크'],
       [W / 2 - 150, H * 0.78, 'stylist', '미용사 루루'],
       [W / 2 + 150, H * 0.78, 'job', '전직 교관 레온'],
+      [W / 2, H * 0.31, 'rift', '균열 관리인 시엘'],
     ];
     for (const [x, y, npc, label] of npcs) props.push({ x, y, kind: 'npc', v: 0, s: 1, npc, label });
     for (const [x, y] of [[180, 300], [W - 180, 300], [180, H - 120], [W - 180, H - 120]]) props.push({ x, y, kind: 'lamp', v: 0, s: 1 });

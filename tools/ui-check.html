@@ -111,6 +111,18 @@
     if (inp) { inp.value = '새친구'; inp.dispatchEvent(new (W().Event)('input', { bubbles: true })); await sleep(80); }
     await click([...$$('.modal-layer:not([hidden]) .btn.pri')].pop());
     log(g2.s.heroes.length === 2 && g2.s.heroes[1].name === '새친구', 'recruit adds a companion', g2.s.heroes.map((h) => h.name).join(','));
+    // 11. 균열: the town view shows the run's rules, 균열 입장 starts it (HUD + gauge), the gauge reopens the view, 나가기 → town
+    await boot('party=knight,priest,wizard&lv=62&rift=3');
+    const g3 = G();
+    g3.openTown('rift'); await sleep(150);
+    const rules = $$('.rf-rule').length;
+    await click($('.rf-go')); await sleep(200);
+    const inRift = !!g3.world.rift && ($('.tb-zone')?.textContent ?? '').includes('균열') && !!$('.gauge.rift');
+    log(rules >= 2 && inRift && g3.panel === null, '균열: entry screen → run, HUD and gauge show it', `rules ${rules}, rift ${!!g3.world.rift}, panel ${g3.panel}`);
+    await click($('.gauge.rift button')); await sleep(120);
+    await click($$('.rf-live .btn').find((b) => b.textContent === '나가기'));
+    await click($$('.modal-layer:not([hidden]) .btn').find((b) => b.textContent === '확인')); await sleep(120);
+    log(!g3.world.rift && g3.s.zone === 'town' && g3.s.rift?.last?.why === '포기', '균열: 나가기 gives the run up and returns to town', `${g3.s.zone}, ${g3.s.rift?.last?.why}`);
   } catch (e) { log(false, 'exception', e.message); }
   log(localStorage.getItem('minimidgard.save.v1') === savedBefore, 'QA run never touched the save');
   const fails = out.filter((l) => l.startsWith('FAIL')).length;

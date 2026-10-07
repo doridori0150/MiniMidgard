@@ -58,6 +58,17 @@ export async function qaBoot(): Promise<boolean> {
   if (q.get('band') === 'closed') game.ui.bandClosed = { general: true, party: true };
   const shop = q.get('town'); if (shop) game.openTown(shop as never);
   const buy = q.get('buy'); if (buy) game.setModal({ kind: 'buy', id: buy });
+  // 균열: ?rift=<open tier> unlocks it at that tier (the QA party needs a 2nd job and Lv 60 — or it is lifted to that),
+  // &riftauto=push|farm, &riftgo enters at once
+  if (q.has('rift')) {
+    const rift = await import('./game/rift.ts');
+    if (!rift.riftUnlocked(s)) { const h = s.heroes[0]; if (h.cls === 'novice' || !['knight', 'wizard', 'hunter', 'priest', 'assassin', 'blacksmith'].includes(h.cls)) h.cls = 'knight'; h.baseLv = Math.max(h.baseLv, 60); }
+    const rs = rift.riftSave(s);
+    rs.open = Math.max(1, Number(q.get('rift')) || 1); rs.best = Math.max(0, rs.open - 1); rs.pick = rs.open;
+    const auto = q.get('riftauto'); if (auto === 'push' || auto === 'farm') rs.auto = auto;
+    game.world.syncParty();
+    if (q.has('riftgo')) game.enterRift();
+  }
   if (q.has('hero')) game.setModal({ kind: 'hero', id: s.heroes[Number(q.get('hero'))]?.id ?? s.heroes[0].id });
   return true;
 }

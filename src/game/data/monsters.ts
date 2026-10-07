@@ -81,14 +81,18 @@ function tame(m: M): M {
   const dexCap = Math.round(m.lv * (m.boss ? 1.4 : 1.2) + 4);
   return { ...m, agi: Math.min(m.agi, agiCap), dex: Math.min(m.dex, dexCap) };
 }
+/** base / job EXP of an ordinary monster of this level (expMul 1); the rift (rift.ts) pays its monsters on the same curve */
+export function mobExpAt(lv: number, expMul = 1): { exp: number; jexp: number } {
+  // kills per level grow slower after Lv 15 so the idle loop keeps moving toward the 2nd job
+  const div = lv <= 15 ? 8 + lv * 2.4 : 44 + (lv - 15) * 1.8 + Math.max(0, lv - 45) * 4;
+  const raw = (expNext(Math.min(lv, 98)) / div) * expMul;
+  return { exp: Math.max(1, Math.round(raw * EXP_RATE * baseBoost(lv))), jexp: Math.max(1, Math.round(raw * JOB_RATE)) };
+}
 function mob(src: M) {
   const m = tame(src);
-  // kills per level grow slower after Lv 15 so the idle loop keeps moving toward the 2nd job
-  const div = m.lv <= 15 ? 8 + m.lv * 2.4 : 44 + (m.lv - 15) * 1.8 + Math.max(0, m.lv - 45) * 4;
-  const raw = (expNext(m.lv) / div) * (m.expMul ?? 1);
   // mid/late monsters were spongy for idle pacing: trim HP by tier (bosses a little less)
   const hpMul = m.lv >= 45 ? (m.boss ? 0.85 : 0.75) : m.lv >= 28 ? (m.boss ? 0.8 : 0.65) : m.lv >= 14 ? (m.boss ? 0.9 : 0.8) : 1;
-  MONSTERS[m.id] = { luk: 0, scale: 1, ...m, hp: Math.round(m.hp * hpMul), exp: Math.max(1, Math.round(raw * EXP_RATE * baseBoost(m.lv))), jexp: Math.max(1, Math.round(raw * JOB_RATE)) };
+  MONSTERS[m.id] = { luk: 0, scale: 1, ...m, hp: Math.round(m.hp * hpMul), ...mobExpAt(m.lv, m.expMul) };
 }
 
 /**

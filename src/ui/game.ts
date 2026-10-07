@@ -29,7 +29,7 @@ const PANEL_TO: Record<PanelId, [MainTab, string]> = {
 };
 const UI_KEY = 'minimidgard.ui.v1';
 interface UiPrefs { bandClosed: { general: boolean; party: boolean } }
-export type TownView = 'menu' | 'tool' | 'weapon' | 'armor' | 'costume' | 'refine' | 'stylist' | 'job';
+export type TownView = 'menu' | 'tool' | 'weapon' | 'armor' | 'costume' | 'refine' | 'stylist' | 'job' | 'rift';
 
 export interface Toast { id: number; text: string; kind: 'info' | 'good' | 'bad' | 'card' | 'level' }
 export interface Announce { id: number; text: string; kind: string; t: number }
@@ -151,6 +151,7 @@ class Game {
       audio.pauseAll(false);
       const away = Date.now() - this.s.lastSave;
       if (away > 60_000) {
+        this.world.dropRift(); // offline time never advances a rift: the party is back on its hunting map
         const rep = applyOffline(this.s, away);
         if (rep) { this.modal = { kind: 'offline', report: rep }; this.world.syncParty(); this.renderer && (this.renderer.stateVersion++); }
       }
@@ -180,6 +181,7 @@ class Game {
     const dt = now - this.bgLast;
     this.bgLast = now;
     if (dt > 10 * 60_000) {
+      this.world.dropRift();
       const rep = applyOffline(this.s, dt);
       if (rep) { this.modal = { kind: 'offline', report: rep }; this.world.syncParty(); }
     } else {
@@ -363,6 +365,22 @@ class Game {
     if (!this.qa) { try { localStorage.setItem(UI_KEY, JSON.stringify(this.ui)); } catch { /* ignore */ } }
     audio.play('click');
     this.notify();
+  }
+
+  /** 균열: start the planned run from the entry screen; the sheet closes onto the field */
+  enterRift() {
+    const e = this.world.startRift();
+    if (e) { this.toast(e, 'bad'); return; }
+    this.bossMusic = false;
+    audio.playBgm('dungeon');
+    this.page = null;
+    this.syncHistory();
+    this.announce(this.world.zone.name, 'zone');
+    this.commit('confirm');
+  }
+  leaveRift() {
+    this.world.leaveRift();
+    this.commit('confirm');
   }
 
   travel(id: string) {

@@ -11,7 +11,10 @@ const GRADE_OPTS: Record<Grade, number> = { normal: 0, magic: 1, rare: 2, legend
 const GRADE_BASE: Record<Grade, number> = { normal: 0, magic: 0, rare: 0.05, legend: 0.1, ancient: 0.3, primal: 0.5 };
 
 export function gradeOf(inst: EquipInst | undefined): Grade { return (inst?.grade as Grade | undefined) ?? 'normal'; }
-export function gradeBase(inst: EquipInst | undefined): number { return GRADE_BASE[gradeOf(inst)]; }
+/** rift gear (rift.ts): its item level lifts the base ATK / DEF as well, +0.5% per item level over 60 */
+export function ilvlBase(inst: EquipInst | undefined): number { return inst?.rift && inst.ilvl ? Math.max(0, inst.ilvl - 60) * 0.005 : 0; }
+export function gradeBase(inst: EquipInst | undefined): number { return GRADE_BASE[gradeOf(inst)] + ilvlBase(inst); }
+export const GRADE_ORDER: Grade[] = ['normal', 'magic', 'rare', 'legend', 'ancient', 'primal'];
 
 type Rng = () => number;
 const pick = <T,>(rng: Rng, a: readonly T[]) => a[Math.floor(rng() * a.length)];
@@ -87,8 +90,10 @@ export function applyGrade(inst: EquipInst, d: ItemDef, grade: Grade, ilvl: numb
   inst.opts = Array.from({ length: GRADE_OPTS[grade] }, () => rollOne(d, inst.ilvl!, grade, rng, taken));
 }
 
-/** 재련: re-roll option i (zeny for now; the rift's essence later) */
+/** 재련: re-roll option i — zeny, or 균열 정수 (rift.ts). 고대·태초 are rift gear and take 정수 only */
 export function rerollCost(inst: EquipInst) { return 500 + (inst.ilvl ?? 1) * 200; }
+export function rerollEssence(inst: EquipInst) { return 2 + Math.floor((inst.ilvl ?? 1) / 25); }
+export function rerollZenyOk(inst: EquipInst) { const g = gradeOf(inst); return g !== 'ancient' && g !== 'primal'; }
 export function rerollOption(inst: EquipInst, d: ItemDef, i: number, rng: Rng) {
   if (!inst.opts?.[i]) return;
   const taken = inst.opts.filter((_, j) => j !== i).map((b) => JSON.stringify(Object.keys(b)) + JSON.stringify(Object.values(b).map((v) => (typeof v === 'object' ? Object.keys(v as object) : ''))));

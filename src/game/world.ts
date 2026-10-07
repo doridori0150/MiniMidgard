@@ -8,8 +8,14 @@ import { ITEMS, CARD_SKILLS } from './data/items.ts';
 import { zone as zoneDef, ZONES, openers, isExpedition, type ZoneDef, type DangerDef } from './data/zones.ts';
 import { CLASSES, lineage } from './data/classes.ts';
 import { expNext } from './exp.ts';
-import { applyGrade, rollGrade } from './gear.ts';
+import { applyGrade, rollGrade, gradeOf, GRADE_KO, type Grade } from './gear.ts';
 import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics, heroRole, gateDiscoverable, gateReady, openGate, zoneKnown, inHours, isKeepItem } from './state.ts';
+import {
+  AFFIXES, AFFIX_IDS, ESSENCE, MECHS, RIFT_MAX, RIFT_MS, clearAdvance, ensurePlan, essenceForClear, essenceForElite, firstClearReward,
+  fmtClock, makeRiftGear, progressOf, recordParty, riftMods, riftMonster, riftSave, riftUnlocked, riftWeek, riftZone, ruleName,
+  type EliteAffix, type GuardianMech, type LootSource, type RiftMods, type RiftRole,
+} from './rift.ts';
+import type { RiftPlan } from './types.ts';
 
 export type DmgKind = 'normal' | 'crit' | 'taken' | 'heal' | 'sp' | 'miss' | 'lucky' | 'total' | 'zero' | 'absorb';
 
@@ -25,7 +31,7 @@ export type FxEvent =
   | { t: 'levelup'; uid: number; job: boolean }
   | { t: 'die'; uid: number }
   | { t: 'spawn'; uid: number }
-  | { t: 'announce'; text: string; kind: 'boss' | 'mvp' | 'card' | 'info' | 'wipe' | 'unlock' | 'danger' }
+  | { t: 'announce'; text: string; kind: 'boss' | 'mvp' | 'card' | 'info' | 'wipe' | 'unlock' | 'danger' | 'rift' }
   | { t: 'sound'; key: string }
   | { t: 'telegraph'; x: number; y: number; r: number; dur: number; color: string }
   | { t: 'shake'; power: number }
@@ -118,6 +124,38 @@ export interface MobUnit {
   boredUntil: number;
   /** left the map (fades out instead of collapsing; no rewards) */
   vanish: boolean;
+  /** 균열: an elite pack member (its affix; the leader is the big one) */
+  elite: { affix: EliteAffix; leader: boolean } | null;
+  /** 균열: share of the progress bar this kill fills (%) */
+  prog: number;
+}
+
+/** a rift run in progress (rift.ts): the clock, the progress bar, the guardian and its mechanic */
+export interface RiftRun {
+  plan: RiftPlan;
+  zone: ZoneDef;
+  mods: RiftMods;
+  /** the hunting map the party came from: offline time (the game closed mid-run) goes there */
+  back: string;
+  start: number;
+  end: number;
+  progress: number;
+  phase: 'run' | 'guardian' | 'done' | 'fail';
+  guardian: number | null;
+  /** world time the run ended (the rift closes a few seconds later) */
+  endedAt: number;
+  eliteAt: number;
+  kills: number;
+  elites: number;
+  essence: number;
+  loot: string[];
+  /** guardian mechanic state */
+  burstAt: number;
+  enraged: boolean;
+  barrier: { until: number; adds: number[] } | null;
+  barrierSteps: number[];
+  toxicAt: number;
+  result?: { ok: boolean; adv: number; ms: number; first: boolean; record: boolean; why: string };
 }
 
 /** M10: a treasure chest lying on an expedition map; the party walks over and opens it */
@@ -205,6 +243,10 @@ export class World {
   run: { from: number; x: number; y: number; until: number; at: number } | null = null;
   /** counters for tools (expedition-check) */
   dangerStats = { spawns: 0, kills: 0, left: 0, traps: 0, chests: 0, evadeMs: 0, runs: 0 };
+  /** 균열: the run in progress (null = an ordinary map) */
+  rift: RiftRun | null = null;
+  /** a rift run just ended (tools listen; the UI reads world.rift.result) */
+  onRiftEnd: (r: RiftRun) => void = () => {};
 
   constructor(s: GameState, rng: () => number = Math.random) {
     this.s = s;
@@ -240,8 +282,11 @@ export class World {
   }
 
   setZone(id: string) {
+    // travelling anywhere while a rift is open walks out of it (the run is given up)
+    if (this.rift) { this.rift = null; this.wipeUntil = 0; this.log('균열을 떠났습니다.', '#d0a0ff'); }
     this.s.zone = id;
     this.zone = zoneDef(id);
+    if (id !== 'town') this.s.lastHunt = id;
     this.mobs = [];
     this.ground = [];
     this.timers = [];
@@ -304,7 +349,8 @@ export class World {
 
   step(dt: number) {
     this.time += dt;
-    if (this.zone.id !== 'town') {
+    // the hunt rate (offline rewards) belongs to the hunting map, never to the rift
+    if (this.zone.id !== 'town' && !this.rift) {
       this.s.rate.ms += dt;
       if (this.s.rate.ms > 30 * 60 * 1000) {
         const r = this.s.rate;
@@ -320,6 +366,7 @@ export class World {
         for (const t of due) t.fn();
       }
     }
+    if (this.rift) this.riftTick(dt);
     if (this.wipeUntil) {
       if (this.time >= this.wipeUntil) this.recoverWipe();
       return;
@@ -392,6 +439,7 @@ export class World {
   // ───────────────────────────── spawning
   private spawnTick() {
     const z = this.zone;
+    if (this.rift) { this.riftSpawnTick(); return; }
     if (!z.mobs.length) return;
     const normal = this.mobs.filter((m) => !m.summoned && !m.m.boss && !m.danger && m.state !== 'dead').length;
     if (normal < z.maxMobs && this.time >= this.spawnAt) {
@@ -453,8 +501,9 @@ export class World {
     this.emit({ t: 'shake', power: 6 });
   }
 
-  spawnMob(id: string, summoned: boolean, x?: number, y?: number): MobUnit {
-    const m = MONSTERS[id];
+  /** `def`: a per-unit copy (the rift's scaled monsters); inside a rift, summons are scaled as the guardian's adds */
+  spawnMob(id: string, summoned: boolean, x?: number, y?: number, def?: MonsterDef): MobUnit {
+    const m = def ?? (this.rift && summoned ? riftMonster(MONSTERS[id], this.rift.plan, 'add') : MONSTERS[id]);
     const z = this.zone;
     let px = x ?? 0, py = y ?? 0;
     if (x === undefined) {
@@ -476,6 +525,7 @@ export class World {
       skillCd: (m.skills ?? []).map((sk) => this.time + sk.cd * (0.4 + this.rng() * 0.4)),
       summoned, deadAt: 0, hurtAt: -9999, dmgBy: {}, charge: null,
       danger: m.danger ? { stay: 60000 } : null, bornAt: this.time, dmgAt: -99999, chaseSince: 0, boredUntil: 0, vanish: false,
+      elite: null, prog: 0,
     };
     this.mobs.push(u);
     this.emit({ t: 'spawn', uid: u.uid });
@@ -663,6 +713,333 @@ export class World {
     this.log(`보물 상자를 열었다! ${zeny.toLocaleString()}z${got.length ? ' · ' + got.join(', ') : ''}`, '#ffe080');
     this.sound('drop');
     this.onPersist();
+  }
+
+  // ───────────────────────────── 균열 (rift.ts, docs/design/ENDGAME.md §3)
+  /** start the planned run (s.rift.next, else a fresh plan for the wanted tier); null = in, otherwise why not */
+  startRift(): string | null {
+    const s = this.s;
+    if (!riftUnlocked(s)) return '2차 직업 · Lv 60 동료가 있어야 균열이 열립니다.';
+    if (!s.heroes.length) return '출전할 동료가 없습니다.';
+    const rs = riftSave(s);
+    const plan = ensurePlan(s, this.rng, riftWeek(this.clock()));
+    rs.next = undefined;
+    rs.runs++;
+    // the hunting map behind the rift: offline time goes there if the game closes mid-run
+    const back = this.rift?.back ?? (this.zone.id !== 'town' ? this.zone.id : s.lastHunt ?? 'town');
+    const zone = riftZone(plan);
+    this.zone = zone;
+    s.zone = back; // the save never points into a rift
+    this.mobs = []; this.ground = []; this.timers = []; this.focus = null; this.chests = []; this.run = null;
+    this.dangerAt = Infinity; this.chestAt = Infinity; this.wipeUntil = 0; this.fadeAt = 0;
+    this.rift = {
+      plan, zone, mods: riftMods(plan), back, start: this.time, end: this.time + RIFT_MS, progress: 0, phase: 'run', guardian: null,
+      endedAt: 0, eliteAt: this.time + 15000 + this.rng() * 12000, kills: 0, elites: 0, essence: 0, loot: [],
+      burstAt: 0, enraged: false, barrier: null, barrierSteps: [0.7, 0.35], toxicAt: this.time + 2000,
+    };
+    this.restParty();
+    this.spawnAt = this.time + 300;
+    for (let i = 0; i < Math.round(zone.maxMobs * 0.6); i++) this.spawnRiftMob();
+    const rules = plan.rules.map((id) => ruleName(plan, id)).join(' · ');
+    this.emit({ t: 'announce', text: `균열 ${plan.tier}단계 입장`, kind: 'rift' });
+    this.log(`[균열] ${plan.tier}단계 — 규칙: ${rules}. 10분 안에 진행 바를 채우고 수호자를 쓰러뜨리세요.`, '#d0a0ff');
+    this.sound('boss');
+    this.version++;
+    this.onPersist();
+    return null;
+  }
+
+  /** leave the rift for town (a run in progress counts as given up) */
+  leaveRift() {
+    const r = this.rift;
+    if (!r) return;
+    if (r.phase === 'run' || r.phase === 'guardian') this.riftEnd(false, '포기');
+    this.setZone('town');
+    this.onTravel('town');
+    this.onPersist();
+  }
+
+  /** the game was away for long (the machine slept): no rift survives that — back to its hunting map, no result */
+  dropRift() {
+    const r = this.rift;
+    if (!r) return;
+    this.setZone(r.back);
+    this.onTravel(r.back);
+  }
+
+  /** everyone up, healed and together in the middle of the map */
+  private restParty() {
+    const sx = this.zone.w * 0.5, sy = this.zone.h * 0.55;
+    this.heroes.forEach((h, i) => {
+      h.state = 'idle'; h.stateT = this.time; h.deadUntil = 0;
+      h.hp = h.d.maxHp; h.sp = h.d.maxSp;
+      h.x = sx - i * 26; h.y = sy + (i % 2 ? 22 : -10);
+      h.target = null; h.cast = null; h.sitting = false; h.poisonUntil = 0;
+    });
+  }
+
+  /** a spot between `min` and `max` from the party, inside the map */
+  private ringPoint(min: number, max: number) {
+    const z = this.zone, c = this.center();
+    for (let i = 0; i < 16; i++) {
+      const a = this.rng() * Math.PI * 2, d = min + this.rng() * (max - min);
+      const p = { x: c.x + Math.cos(a) * d, y: c.y + Math.sin(a) * d * 0.8 };
+      if (p.x > 50 && p.x < z.w - 50 && p.y > 100 && p.y < z.h - 50) return p;
+    }
+    return { x: 50 + this.rng() * (z.w - 100), y: 100 + this.rng() * (z.h - 150) };
+  }
+
+  private spawnRiftMob() {
+    const r = this.rift!;
+    const id = r.plan.pool[Math.floor(this.rng() * r.plan.pool.length)];
+    const p = this.ringPoint(220, 520);
+    const u = this.spawnMob(id, false, p.x, p.y, riftMonster(MONSTERS[id], r.plan, 'normal'));
+    u.prog = progressOf(r.plan, 'normal');
+  }
+
+  private riftSpawnTick() {
+    const r = this.rift!;
+    if (r.phase !== 'run' || this.wipeUntil) return;
+    const live = this.mobs.filter((m) => !m.summoned && !m.elite && m.state !== 'dead').length;
+    if (live < r.zone.maxMobs && this.time >= this.spawnAt) {
+      this.spawnAt = this.time + 300 + this.rng() * 500;
+      this.spawnRiftMob();
+    }
+    if (this.time >= r.eliteAt && !this.mobs.some((m) => m.elite && this.alive(m))) {
+      r.eliteAt = Infinity; // timed again once this pack is gone
+      this.spawnElitePack();
+    }
+  }
+
+  /** an elite pack: a big leader and three of its kind, all with the same affix */
+  private spawnElitePack() {
+    const r = this.rift!;
+    const id = r.plan.pool[Math.floor(this.rng() * r.plan.pool.length)];
+    const affix = AFFIX_IDS[Math.floor(this.rng() * AFFIX_IDS.length)];
+    const p = this.ringPoint(280, 460);
+    const role = (x: RiftRole) => riftMonster(MONSTERS[id], r.plan, x, affix);
+    const lead = this.spawnMob(id, false, p.x, p.y, role('leader'));
+    lead.elite = { affix, leader: true }; lead.prog = progressOf(r.plan, 'leader');
+    for (let i = 0; i < 3; i++) {
+      const a = (i / 3) * Math.PI * 2;
+      const u = this.spawnMob(id, false, p.x + Math.cos(a) * 42, p.y + Math.sin(a) * 30, role('minion'));
+      u.elite = { affix, leader: false }; u.prog = progressOf(r.plan, 'minion');
+    }
+    this.emit({ t: 'announce', text: `◆ 정예 「${AFFIXES[affix].name}」 ${lead.m.name}`, kind: 'info' });
+    this.log(`[균열] 정예 무리 — ${AFFIXES[affix].name} ${lead.m.name} (${AFFIXES[affix].text})`, '#80c8ff');
+  }
+
+  private spawnGuardian() {
+    const r = this.rift!;
+    r.phase = 'guardian';
+    const base = MONSTERS[r.plan.guardian];
+    const c = this.center(), a = this.rng() * Math.PI * 2;
+    const u = this.spawnMob(base.id, false, c.x + Math.cos(a) * 190, c.y + Math.sin(a) * 130, riftMonster(base, r.plan, 'guardian'));
+    u.target = this.leader()?.uid ?? null; u.chaseSince = this.time;
+    r.guardian = u.uid;
+    r.burstAt = this.time + 9000;
+    const mech = MECHS[r.plan.mech as GuardianMech];
+    this.emit({ t: 'announce', text: `균열 수호자 「${u.m.name}」 출현!`, kind: 'mvp' });
+    this.log(`[균열] 진행 바가 가득 찼다! 수호자 ${u.m.name} — ${mech.name}: ${mech.text}`, '#d0a0ff');
+    this.sound('boss');
+    this.emit({ t: 'shake', power: 6 });
+  }
+
+  /** the guardian's rift mechanic (per step while it stands) */
+  private guardianTick(m: MobUnit) {
+    const r = this.rift!;
+    if (r.phase !== 'guardian' || !this.alive(m)) return;
+    const mech = r.plan.mech as GuardianMech;
+    const ratio = m.hp / m.maxHp;
+    if (mech === 'burst' && this.time >= r.burstAt) {
+      r.burstAt = this.time + 14000;
+      const R = 130;
+      this.emit({ t: 'telegraph', x: m.x, y: m.y, r: R, dur: 1200, color: '#b060ff' });
+      this.emit({ t: 'status', uid: m.uid, text: '균열 폭발!', color: '#e0b0ff' });
+      this.after(1200, () => {
+        if (!this.rift || !this.alive(m)) return;
+        this.emit({ t: 'skill', fx: 'darkslam', from: m.uid, x: m.x, y: m.y, lv: 1, radius: R });
+        this.emit({ t: 'shake', power: 5 });
+        this.sound('hit_heavy');
+        for (const h of this.heroes) if (h.state !== 'dead' && dist(h, m) <= R) this.mobHit(m, h, 2.2, 'shadow', true, true);
+      });
+    }
+    if (mech === 'enrage' && !r.enraged && ratio < 0.3) {
+      r.enraged = true;
+      // the guardian's def is its own copy: it can be changed in place
+      m.m.atk = [Math.round(m.m.atk[0] * 1.6), Math.round(m.m.atk[1] * 1.6)];
+      m.m.delay = Math.round(m.m.delay * 0.6);
+      m.m.speed *= 1.3;
+      this.emit({ t: 'status', uid: m.uid, text: '광폭화!', color: '#ff6a6a' });
+      this.emit({ t: 'shake', power: 4 });
+      this.log(`[균열] ${m.m.name}이(가) 광폭해졌다!`, '#ff8a8a');
+      this.sound('boss');
+    }
+    if (mech === 'barrier') {
+      if (r.barrier && (this.time >= r.barrier.until || !r.barrier.adds.some((u) => this.alive(this.mob(u))))) {
+        r.barrier = null;
+        this.emit({ t: 'status', uid: m.uid, text: '수호막 해제', color: '#d0c0ff' });
+      }
+      const step = r.barrierSteps[0];
+      if (!r.barrier && step !== undefined && ratio < step) {
+        r.barrierSteps.shift();
+        const adds: number[] = [];
+        for (let i = 0; i < 4; i++) {
+          const a = (i / 4) * Math.PI * 2;
+          const u = this.spawnMob(r.plan.pool[i % r.plan.pool.length], true, m.x + Math.cos(a) * 70, m.y + Math.sin(a) * 50);
+          u.target = this.leader()?.uid ?? null; u.chaseSince = this.time;
+          adds.push(u.uid);
+        }
+        r.barrier = { until: this.time + 25000, adds };
+        this.emit({ t: 'status', uid: m.uid, text: '수호막!', color: '#c0a0ff' });
+        this.emit({ t: 'skill', fx: 'summon', from: m.uid, x: m.x, y: m.y, lv: 1 });
+        this.log(`[균열] ${m.m.name}이(가) 수호막을 둘렀다 — 하수인을 먼저 쓰러뜨리세요.`, '#c8b0ff');
+        this.sound('boss');
+      }
+    }
+  }
+
+  /** a rift kill: the progress bar, elite rewards, the odd piece of gear, the guardian's fall */
+  private riftKill(t: MobUnit) {
+    const r = this.rift!;
+    if (r.phase === 'done' || r.phase === 'fail') return;
+    if (t.uid === r.guardian) { this.riftClear(t); return; }
+    if (t.summoned) return;
+    r.kills++;
+    if (r.phase === 'run' && t.prog > 0) {
+      r.progress = Math.min(100, r.progress + t.prog);
+      if (r.progress >= 100) this.spawnGuardian();
+    }
+    if (t.elite) {
+      if (t.elite.affix === 'exploding') this.eliteBlast(t);
+      if (t.elite.leader) {
+        r.elites++;
+        this.giveEssence(t.x, t.y, essenceForElite(r.plan.tier, this.rng));
+        this.riftGear(t.x, t.y, 'elite', 1);
+      } else if (this.rng() < 0.08) this.riftGear(t.x, t.y, 'elite', 1);
+      if (!this.mobs.some((m) => m !== t && m.elite && this.alive(m))) r.eliteAt = this.time + 30000 + this.rng() * 25000;
+    } else if (this.rng() < 0.006) this.riftGear(t.x, t.y, 'trash', 1);
+  }
+
+  /** 정예 「폭발」: a second after it falls, the spot bursts */
+  private eliteBlast(m: MobUnit) {
+    const x = m.x, y = m.y, R = 80;
+    this.emit({ t: 'telegraph', x, y, r: R, dur: 1000, color: '#ff8040' });
+    this.after(1000, () => {
+      if (!this.rift) return;
+      this.emit({ t: 'skill', fx: 'slam', from: m.uid, x, y, lv: 1, radius: R });
+      this.sound('hit_heavy');
+      for (const h of this.heroes) if (h.state !== 'dead' && Math.hypot(h.x - x, h.y - y) <= R) this.mobHit(m, h, 1.6, 'fire', false, true, true);
+    });
+  }
+
+  private giveEssence(x: number, y: number, n: number) {
+    if (n <= 0) return;
+    addItem(this.s, ESSENCE, n);
+    if (this.rift) this.rift.essence += n;
+    this.dropAt(x, y, ESSENCE, undefined, 0, undefined, { name: `균열 정수 ×${n}`, zeny: 0 });
+  }
+
+  /** rift gear (rift.ts makeRiftGear): straight into the bag, thrown on the ground for the show */
+  private riftGear(x: number, y: number, src: LootSource, n: number, force?: Grade) {
+    const r = this.rift;
+    if (!r) return;
+    for (let i = 0; i < n; i++) {
+      const inst = makeRiftGear(this.s, r.plan.tier, src, this.rng, force);
+      if (!inst) continue;
+      const g = gradeOf(inst);
+      const name = `${GRADE_KO[g]} · ${itemName(inst)}`;
+      r.loot.push(g);
+      this.dropAt(x, y, inst.id, inst.slots, i + 1, undefined, { name, zeny: 0 });
+      if (g === 'ancient' || g === 'primal') this.emit({ t: 'announce', text: `${GRADE_KO[g]} 장비 — ${itemName(inst)}`, kind: 'rift' });
+    }
+    this.onPersist();
+  }
+
+  private riftClear(g: MobUnit) {
+    const r = this.rift!, s = this.s, rs = riftSave(s), tier = r.plan.tier;
+    const ms = this.time - r.start;
+    const adv = clearAdvance(r.end - this.time);
+    rs.clears++;
+    rs.open = Math.min(RIFT_MAX, Math.max(rs.open, tier + adv));
+    rs.pick = rs.open;
+    const first = !rs.firsts.includes(tier);
+    const newBest = tier > rs.best;
+    if (newBest || (tier === rs.best && ms < (rs.bestMs ?? Infinity))) {
+      rs.best = tier; rs.bestMs = ms; rs.bestAt = this.clock().getTime(); rs.bestParty = recordParty(s);
+    }
+    this.giveEssence(g.x, g.y, essenceForClear(tier));
+    this.riftGear(g.x, g.y, 'guardian', Math.min(5, 2 + Math.floor(tier / 20)));
+    if (first) {
+      rs.firsts.push(tier);
+      const fc = firstClearReward(tier);
+      s.zeny += fc.zeny;
+      this.giveEssence(g.x, g.y, fc.essence);
+      if (fc.gear) this.riftGear(g.x, g.y, 'guardian', 1, fc.gear);
+      this.log(`[첫 정복] ${tier}단계 — ${fc.zeny.toLocaleString()}z · 균열 정수 ${fc.essence}${fc.gear ? ` · ${GRADE_KO[fc.gear]} 장비` : ''}`, '#ffe080');
+    }
+    this.emit({ t: 'announce', text: `균열 ${tier}단계 정복! ${fmtClock(ms)} · +${adv}단계`, kind: 'rift' });
+    if (newBest) this.emit({ t: 'announce', text: `최고 기록 ${tier}단계!`, kind: 'rift' });
+    this.log(`[균열] ${tier}단계 정복 (${fmtClock(ms)}) — ${tier + adv > tier ? `${Math.min(RIFT_MAX, tier + adv)}단계까지 열림` : ''}${newBest ? ' · 최고 기록!' : ''}`, '#ffd84a');
+    this.sound('mvp');
+    this.riftEnd(true, '수호자 처치', adv, first, newBest);
+  }
+
+  private riftFail(why: string) {
+    const r = this.rift!;
+    this.emit({ t: 'announce', text: `균열 ${r.plan.tier}단계 실패 — ${why}`, kind: 'rift' });
+    this.log(`[균열] ${r.plan.tier}단계 실패 — ${why}. 다음 판은 같은 단계에서 다시 도전합니다.`, '#ff9a8a');
+    this.sound('player_die');
+    this.riftEnd(false, why);
+  }
+
+  private riftEnd(ok: boolean, why: string, adv = 0, first = false, record = false) {
+    const r = this.rift!;
+    r.phase = ok ? 'done' : 'fail';
+    r.endedAt = this.time;
+    r.barrier = null;
+    const ms = this.time - r.start;
+    r.result = { ok, adv, ms, first, record, why };
+    const rs = riftSave(this.s);
+    rs.last = { tier: r.plan.tier, ok, ms, adv, why };
+    // the rift closes: whatever is still standing fades away
+    for (const m of this.mobs) if (m.state !== 'dead') { m.vanish = true; m.target = null; m.charge = null; this.setState(m, 'dead'); m.deadAt = this.time; }
+    for (const h of this.heroes) { h.target = null; h.cast = null; }
+    this.focus = null;
+    // roll the next run now: the entry screen shows its rules, auto-retry takes it
+    ensurePlan(this.s, this.rng, riftWeek(this.clock()));
+    this.onRiftEnd(r);
+    this.onPersist();
+  }
+
+  private riftWipe() {
+    this.wipeUntil = this.time + 3500;
+    this.s.totals.deaths++;
+    this.emit({ t: 'announce', text: '파티 전멸... 균열이 닫힙니다', kind: 'wipe' });
+    this.log('파티가 전멸했습니다. (균열에서는 경험치를 잃지 않습니다)', '#ff6060');
+    const r = this.rift!;
+    if (r.phase === 'run' || r.phase === 'guardian') this.riftFail('파티 전멸');
+    this.onPersist();
+  }
+
+  /** per step: the clock, 맹독 안개, and after a run the pause before the next one (auto-retry) or town */
+  private riftTick(_dt: number) {
+    const r = this.rift!;
+    if (r.phase === 'run' || r.phase === 'guardian') {
+      if (this.time >= r.end) { this.riftFail('시간 초과'); return; }
+      if (r.mods.toxic > 0 && this.time >= r.toxicAt) {
+        r.toxicAt = this.time + 2000;
+        for (const h of this.heroes) {
+          if (h.state === 'dead') continue;
+          const n = Math.min(h.hp - 1, Math.max(1, Math.floor(h.d.maxHp * r.mods.toxic / 100)));
+          if (n > 0) { h.hp -= n; this.emit({ t: 'dmg', uid: h.uid, n, kind: 'taken' }); }
+        }
+      }
+      return;
+    }
+    if (this.wipeUntil || this.time - r.endedAt < 6000) return;
+    if (riftSave(this.s).auto !== 'off' && riftUnlocked(this.s)) { this.startRift(); return; }
+    this.leaveRift();
   }
 
   // ───────────────────────────── heroes
@@ -946,7 +1323,7 @@ export class World {
     for (const m of this.mobs) {
       if (!this.alive(m) || this.pc.engaged.includes(m)) continue;
       if (m.danger) { if (this.shunned(m)) continue; } // 맞서기: hunted like a boss, whatever its level
-      else if (!m.m.boss && m.m.lv > avgLv + 3) continue;
+      else if (!m.m.boss && m.m.lv > avgLv + 3 && !this.rift) continue; // the rift is cleared whatever the level
       if (this.pc.dangers.length && this.pc.dangers.some((d) => dist(d, m) < 230)) continue;
       const d = dist(m, h);
       if (d < bd) { bd = d; best = m; }
@@ -1168,7 +1545,9 @@ export class World {
 
   /** M12: a skill's damage % with the hero's per-skill gear bonuses */
   private skMult(h: HeroUnit, sk: SkillDef, lv: number) {
-    return (sk.mult ? sk.mult(lv) : 100) * (1 + (h.d.b.skillDmg?.[sk.id] ?? 0) / 100);
+    // 균열 결계 also halves 금화 강타 (the build tree counts it as fixed damage)
+    const ward = sk.id === 'mammonite' ? this.rift?.mods.fixedMul ?? 1 : 1;
+    return (sk.mult ? sk.mult(lv) : 100) * (1 + (h.d.b.skillDmg?.[sk.id] ?? 0) / 100) * ward;
   }
   private zenyCost(h: HeroUnit, sk: SkillDef, lv: number) {
     return Math.round(sk.zeny!(lv) * (1 + (h.d.b.zenyCostPct ?? 0) / 100));
@@ -1455,7 +1834,7 @@ export class World {
   private dealFixed(h: HeroUnit, t: MobUnit, base: number, el: Element, idx: number, style: 'claw' | 'magic' = 'magic'): number {
     if (!this.alive(t)) return 0;
     const em = elementMod(el, this.mobElement(t));
-    const n = em <= 0 ? 0 : Math.max(1, Math.floor(base * em * (0.9 + this.rng() * 0.2)));
+    const n = em <= 0 ? 0 : Math.max(1, Math.floor(base * em * (0.9 + this.rng() * 0.2) * (this.rift?.mods.fixedMul ?? 1)));
     this.dealToMob(h, t, n, 'normal', idx);
     this.emit({ t: 'hit', uid: t.uid, style, element: el });
     return n;
@@ -1484,7 +1863,7 @@ export class World {
     this.lastCrit = crit;
     const frozen = t.frozenUntil > this.time;
     if (!crit && !frozen) {
-      const rate = clamp(80 + d.hit - mobFlee, 5, 100) + hitBonus; // RO: enough HIT is a sure hit
+      const rate = clamp(80 + d.hit + (this.rift?.mods.heroHit ?? 0) - mobFlee, 5, 100) + hitBonus; // RO: enough HIT is a sure hit
       if (this.rng() * 100 >= rate) {
         this.emit({ t: 'dmg', uid: t.uid, n: 0, kind: 'miss', i: idx });
         this.sound('miss');
@@ -1546,10 +1925,19 @@ export class World {
     if (em <= 0) n = 0; else n = Math.max(1, n);
     this.dealToMob(h, t, n, 'normal', idx);
     this.emit({ t: 'hit', uid: t.uid, style: 'magic', element: el });
+    // 균열 반사: part of the spell comes back at the caster (never more than 8% of max HP a hit)
+    const rf = this.rift?.mods.reflect ?? 0;
+    if (rf > 0 && n > 0 && h.state !== 'dead') {
+      const back = Math.max(1, Math.floor(Math.min(n * rf, h.d.maxHp * 0.08)));
+      this.emit({ t: 'status', uid: h.uid, text: '반사', color: '#d0a0ff' });
+      this.damageHero(h, back, null, true);
+    }
     return n;
   }
 
   private dealToMob(h: HeroUnit, t: MobUnit, n: number, kind: DmgKind, idx: number) {
+    // 균열 수호막: the guardian shrugs off 90% while its adds stand
+    if (n > 0 && this.rift?.barrier && t.uid === this.rift.guardian) n = Math.max(1, Math.floor(n * 0.1));
     this.emit({ t: 'dmg', uid: t.uid, n, kind: n === 0 ? 'zero' : kind, i: idx });
     t.hurtAt = this.time;
     t.dmgBy[h.uid] = (t.dmgBy[h.uid] ?? 0) + n;
@@ -1810,6 +2198,7 @@ export class World {
 
   healHero(h: HeroUnit, n: number, show: boolean) {
     if (h.state === 'dead' || n <= 0) return;
+    if (this.rift) n = Math.max(1, Math.floor(n * this.rift.mods.healMul)); // 저주받은 땅
     const before = h.hp;
     h.hp = Math.min(h.d.maxHp, h.hp + n);
     if (show) this.emit({ t: 'dmg', uid: h.uid, n: Math.max(n, h.hp - before), kind: 'heal' });
@@ -1820,7 +2209,7 @@ export class World {
     const mul = town ? 6 : h.sitting ? 2 : 1;
     if (this.time >= h.hpTickAt) {
       h.hpTickAt = this.time + HP_TICK / (h.sitting || town ? 2 : 1);
-      if (h.poisonUntil < this.time && h.hp < h.d.maxHp) h.hp = Math.min(h.d.maxHp, h.hp + Math.floor(h.d.hpRegen * mul));
+      if (h.poisonUntil < this.time && h.hp < h.d.maxHp) h.hp = Math.min(h.d.maxHp, h.hp + Math.floor(h.d.hpRegen * mul * (this.rift?.mods.healMul ?? 1)));
     }
     if (this.time >= h.spTickAt) {
       h.spTickAt = this.time + SP_TICK / (h.sitting || town ? 2 : 1);
@@ -1985,6 +2374,7 @@ export class World {
   bossRetryAt = 0;
 
   private wipe() {
+    if (this.rift) { this.riftWipe(); return; }
     this.wipeUntil = this.time + 3500;
     this.wipeTimes = this.wipeTimes.filter((t) => this.time - t < 6 * 60_000);
     this.wipeTimes.push(this.time);
@@ -2013,6 +2403,7 @@ export class World {
 
   private recoverWipe() {
     this.wipeUntil = 0;
+    if (this.rift) { this.restParty(); return; }
     if (this.wipeTimes.length >= 3) {
       // fall back to the strongest easier map the party has open — same region first, never into a secret place
       const cur = this.zone;
@@ -2053,9 +2444,10 @@ export class World {
       if (this.time >= m.lockUntil) this.setState(m, 'idle');
       else return;
     }
+    if (this.rift && m.uid === this.rift.guardian) this.guardianTick(m);
     if (m.poisonUntil > this.time && this.time >= m.poisonNext) {
       m.poisonNext = this.time + 1000;
-      const n = Math.min(m.poisonDmg, m.hp - 1);
+      const n = Math.min(Math.floor(m.poisonDmg * (this.rift?.mods.fixedMul ?? 1)), m.hp - 1);
       if (n > 0) { m.hp -= n; this.emit({ t: 'dmg', uid: m.uid, n, kind: 'normal' }); }
     }
     if (m.frozenUntil > this.time || m.stunUntil > this.time) return;
@@ -2132,8 +2524,9 @@ export class World {
     }
   }
 
-  private mobHit(m: MobUnit, t: HeroUnit, mult: number, el: Element, magic: boolean, sure = false) {
-    if (m.state === 'dead' || t.state === 'dead') return;
+  /** `posthumous`: the blow lands even though the monster just fell (정예 「폭발」) */
+  private mobHit(m: MobUnit, t: HeroUnit, mult: number, el: Element, magic: boolean, sure = false, posthumous = false) {
+    if ((m.state === 'dead' && !posthumous) || t.state === 'dead') return;
     const d = t.d;
     if (!magic && !sure) {
       if (this.rng() * 100 < d.pdodge) {
@@ -2141,7 +2534,7 @@ export class World {
         return;
       }
       const crowd = this.mobs.reduce((a, x) => a + (x.state !== 'dead' && x.target === t.uid && dist(x, t) <= x.m.range + 40 ? 1 : 0), 0);
-      const flee = d.flee * Math.max(0, 1 - 0.1 * Math.max(0, crowd - 2));
+      const flee = d.flee * Math.max(0, 1 - 0.1 * (this.rift?.mods.crowdK ?? 1) * Math.max(0, crowd - 2)); // 균열 포위: ×2
       let rate = clamp(80 + m.m.lv + m.m.dex - flee, 5, 95);
       if (m.blindUntil > this.time) rate -= 25;
       if (this.rng() * 100 >= rate) {
@@ -2171,6 +2564,8 @@ export class World {
     }
     if (d.b.procs) for (const p of d.b.procs) if (p.on === 'hit' && this.rng() * 100 < p.chance) this.runProc(t, m, p);
     this.damageHero(t, n, m);
+    // 균열 정예 「흡혈」: a quarter of the hit heals the monster
+    if (m.elite?.affix === 'vampiric' && m.state !== 'dead') m.hp = Math.min(m.maxHp, m.hp + Math.floor(n * 0.25));
     // M7: the monster's own status on hit (핏빛 기사 = curse, 종 치는 유령 = blind)
     const oh = m.m.onHit;
     if (oh && (t.state as string) !== 'dead' && this.rng() * 100 < oh.chance) {
@@ -2307,19 +2702,24 @@ export class World {
     const expMul = t.summoned ? 0.3 : 1;
     this.gainExp(m.exp * expMul, m.jexp * expMul);
     s.totals.kills++;
-    s.rate.kills++;
-    const book = (s.book[m.id] ??= { kills: 0 });
+    if (!this.rift) s.rate.kills++;
+    // a rift guardian is only a shadow of its boss: it never counts as beating the real one (sealed maps ask for those)
+    const shadow = !!this.rift && this.rift.guardian === t.uid;
+    const book = shadow ? { kills: 0 } : (s.book[m.id] ??= { kills: 0 });
     book.kills++;
     if (!t.summoned) {
-      const prog = s.progress[z.id];
-      prog.kills++;
-      if (!m.boss) {
-        if (z.boss) prog.bossGauge = Math.min(z.bossGauge, prog.bossGauge + 1);
-        if (z.mvp) prog.mvpGauge = Math.min(z.mvpGauge, prog.mvpGauge + 1);
+      const prog = s.progress[z.id]; // (a rift map has no progress entry: its bar is world.rift)
+      if (prog) {
+        prog.kills++;
+        if (!m.boss) {
+          if (z.boss) prog.bossGauge = Math.min(z.bossGauge, prog.bossGauge + 1);
+          if (z.mvp) prog.mvpGauge = Math.min(z.mvpGauge, prog.mvpGauge + 1);
+        }
       }
       this.rollDrops(t, killer);
     }
-    if (m.boss) {
+    if (this.rift) this.riftKill(t);
+    else if (m.boss) {
       const prog = s.progress[z.id];
       if (m.boss === 'mvp') {
         prog.mvpKills++;
@@ -2387,7 +2787,7 @@ export class World {
 
   /** credit a drop and show it flying out of (x, y); n = its place in the pile */
   /** `from`: the monster that dropped it (gear grade and item level roll from it; chests roll plain) */
-  private dropAt(x: number, y: number, id: string, slots: number | undefined, n: number, from?: MonsterDef): GroundItem {
+  private dropAt(x: number, y: number, id: string, slots: number | undefined, n: number, from?: MonsterDef, got?: { name: string; zeny: number }): GroundItem {
     const def = ITEMS[id];
     const a = (n * 2.1) + this.rng();
     const gx = x + Math.cos(a) * (14 + (n + 1) * 6);
@@ -2397,7 +2797,7 @@ export class World {
     const g: GroundItem = {
       gid: this.gidSeq++, id, slots, x: clamp(gx, 20, this.zone.w - 20), y: clamp(gy, 70, this.zone.h - 20),
       fromX: x, fromY: y, born: this.time, pickAt: this.time + 900 + (n + 1) * 120 + (def.kind === 'card' ? 900 : 0), rarity, picked: false,
-      got: this.grant(id, slots, from),
+      got: got ?? this.grant(id, slots, from),
     };
     this.ground.push(g);
     this.emit({ t: 'drop', gid: g.gid });
@@ -2458,8 +2858,7 @@ export class World {
       applyExp(hero, base * bonus / n * 0.25, job * bonus / n * 0.25);
       if (hero.baseLv > before) this.log(`명단의 ${hero.name} 레벨 업! (Lv ${hero.baseLv})`, '#d8e8a0');
     }
-    this.s.rate.exp += base;
-    this.s.rate.jexp += job;
+    if (!this.rift) { this.s.rate.exp += base; this.s.rate.jexp += job; }
   }
 
   giveExpTo(h: HeroUnit, base: number, job: number) {

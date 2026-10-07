@@ -4,6 +4,7 @@ import { MONSTERS } from '../game/data/monsters.ts';
 import { zone } from '../game/data/zones.ts';
 import { QuickBar } from './QuickBar.tsx';
 import { PartyRail } from './Hud.tsx';
+import { RiftGauge, RiftResult } from './Rift.tsx';
 
 function Minimap() {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -54,6 +55,8 @@ function Minimap() {
 function Gauges() {
   const g = useGame();
   const z = g.world.zone;
+  // inside a rift its own gauge takes the column (a rift map has no boss gauges)
+  if (g.world.rift) return <div class="gauges"><RiftGauge /></div>;
   if ((!z.boss || !z.bossGauge) && (!z.mvp || !z.mvpGauge)) return null;
   const p = g.s.progress[z.id];
   const ready = g.world.bossReady();
@@ -132,7 +135,8 @@ export function FieldView() {
       <div class="announce-wrap">
         {g.announces.map((a) => <div key={a.id} class={'announce ' + a.kind}>{a.text}</div>)}
       </div>
-      {g.world.wipeUntil > 0 && <div class="wipe-veil">파티 전멸... 재정비 중</div>}
+      {g.world.wipeUntil > 0 && <div class="wipe-veil">{g.world.rift ? '파티 전멸... 균열이 닫힙니다' : '파티 전멸... 재정비 중'}</div>}
+      <RiftResult />
     </div>
   );
 }

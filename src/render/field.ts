@@ -1,5 +1,6 @@
 // Field renderer: camera, y-sorted sprites, skill effects, damage numbers, lighting.
 import type { World, FxEvent, HeroUnit, MobUnit, GroundItem, FieldChest } from '../game/world.ts';
+import { AFFIXES } from '../game/rift.ts';
 import type { Element, Hero, GameState } from '../game/types.ts';
 import { buildZoneArt, drawProp, kitPropBox, kitVersion, type ZoneArt, type Prop } from './bg.ts';
 import { inked } from './ink.ts';
@@ -54,6 +55,7 @@ export const NPC_LOOKS: Record<string, HeroLookDraw> = {
   refine: { cls: 'merchant', gender: 'm', hair: 5, hairColor: 3, skin: 3, dye: 0, wtype: 'mace', refine: 10, shield: false, headMid: 'goggles', headLow: 'pipe' },
   stylist: { cls: 'acolyte', gender: 'f', hair: 3, hairColor: 8, skin: 0, dye: 3, wtype: 'none', refine: 0, shield: false, headTop: 'ribbon', headMid: 'blush' },
   job: { cls: 'mage', gender: 'm', hair: 6, hairColor: 3, skin: 1, dye: 3, wtype: 'staff', refine: 0, shield: false, headTop: 'witch', headMid: 'glasses' },
+  rift: { cls: 'wizard', gender: 'f', hair: 7, hairColor: 9, skin: 1, dye: 2, wtype: 'staff', refine: 0, shield: false },
 };
 
 export function heroLookDraw(s: GameState, h: Hero): HeroLookDraw {
@@ -1013,12 +1015,22 @@ export class FieldRenderer {
     let dead = m.state === 'dead' ? Math.min(1, (rt - m.deadAt) / (m.m.boss ? 1600 : 900)) : 0;
     ctx.save();
     ctx.translate(sm.x, sm.y);
-    if ((m.m.boss || m.danger) && !dead) {
+    const guardian = !!w.rift && w.rift.guardian === m.uid;
+    if ((m.m.boss || m.danger || m.elite?.leader) && !dead) {
       ctx.save(); ctx.globalCompositeOperation = 'lighter';
-      // a danger monster (M10) burns red and pulses faster than a boss
-      const col = m.danger ? '#ff2a3a' : m.m.boss === 'mvp' ? '#ffcc4a' : '#ff7050';
+      // a danger monster (M10) burns red and pulses faster than a boss; the rift's guardian violet, its elites blue
+      const col = m.danger ? '#ff2a3a' : guardian ? '#b070ff' : m.elite ? '#5aa8ff' : m.m.boss === 'mvp' ? '#ffcc4a' : '#ff7050';
       ctx.globalAlpha = m.danger ? 0.45 + Math.sin(now / 120) * 0.18 : 0.35 + Math.sin(now / 200) * 0.12;
       ctx.drawImage(glow(col), -34 * m.m.scale / 1.6, -10, 68 * m.m.scale / 1.6, 20);
+      ctx.restore();
+    }
+    // the guardian's 수호막: a violet shell while its adds stand
+    if (guardian && w.rift!.barrier && !dead) {
+      const hh = mobHeight(m.m.sprite) * m.m.scale;
+      ctx.save();
+      ctx.strokeStyle = `rgba(190,140,255,${0.55 + Math.sin(now / 160) * 0.25})`; ctx.lineWidth = 2.4;
+      ctx.fillStyle = 'rgba(170,120,255,0.12)';
+      ctx.beginPath(); ctx.ellipse(0, -hh * 0.45, 30 * m.m.scale, hh * 0.62, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
       ctx.restore();
     }
     // a danger monster leaving the map fades where it stands instead of collapsing
@@ -1305,15 +1317,17 @@ export class FieldRenderer {
       const sm = this.smooth.get(m.uid); if (!sm) continue;
       const [x, y] = this.toScreen(sm.x, sm.y);
       if (x < -40 || x > this.cssW + 40) continue;
-      const big = !!m.m.boss || !!m.danger;
+      const guardian = !!w.rift && w.rift.guardian === m.uid;
+      const big = !!m.m.boss || !!m.danger || !!m.elite?.leader;
       const showBar = m.hp < m.maxHp || big || w.focus === m.uid;
-      if (showBar) this.hpBar(ctx, x, y + 5, big ? 46 : 26, m.hp / m.maxHp, m.danger ? '#ff2a3a' : m.m.boss ? '#ff6a3a' : '#ff4a6a');
+      if (showBar) this.hpBar(ctx, x, y + 5, big ? 46 : 26, m.hp / m.maxHp, m.danger ? '#ff2a3a' : guardian ? '#a060ff' : m.elite ? '#4a90ff' : m.m.boss ? '#ff6a3a' : '#ff4a6a');
       if (big) {
         const top = y - mobHeight(m.m.sprite) * m.m.scale * this.cam.zoom - 8;
         ctx.font = "bold 11px 'Galmuri11', sans-serif";
         ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(0,0,0,0.8)';
-        ctx.fillStyle = m.danger ? '#ff6a78' : m.m.boss === 'mvp' ? '#ffd84a' : '#ffa07a';
-        const label = m.danger ? `⚠ ${m.m.name} Lv ${m.m.lv}` : `${m.m.boss === 'mvp' ? '[MVP] ' : '[BOSS] '}${m.m.name}`;
+        ctx.fillStyle = m.danger ? '#ff6a78' : guardian ? '#d8b0ff' : m.elite ? '#8ac8ff' : m.m.boss === 'mvp' ? '#ffd84a' : '#ffa07a';
+        const label = m.danger ? `⚠ ${m.m.name} Lv ${m.m.lv}` : guardian ? `[수호자] ${m.m.name}` : m.elite ? `◆ ${AFFIXES[m.elite.affix].name} ${m.m.name}`
+          : `${m.m.boss === 'mvp' ? '[MVP] ' : '[BOSS] '}${m.m.name}`;
         ctx.strokeText(label, x, top); ctx.fillText(label, x, top);
       }
     }

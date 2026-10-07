@@ -6,11 +6,13 @@ import { canJobChange, benchSlots, rosterRoom } from '../game/state.ts';
 import { expNext, jobExpNext } from '../game/exp.ts';
 import { zone } from '../game/data/zones.ts';
 import { insertableCards } from './panels/Cards.tsx';
+import { fmtClock } from '../game/rift.ts';
 
 export function Hud() {
   const g = useGame();
   const s = g.s;
   const z = zone(s.zone);
+  const rift = g.world.rift;
   // the wallet reacts when zeny comes in (auto-sold loot, sales, quests)
   const prev = useRef(s.zeny);
   const [pulse, setPulse] = useState(0);
@@ -20,9 +22,15 @@ export function Hud() {
   });
   return (
     <div class="hud">
-      <button class="tb-zone" onClick={() => g.openPanel('map')} aria-label="지도 열기">
-        <b>{z.name}</b><small>{z.id === 'town' ? '휴식' : `Lv ${z.lv[0]}~${z.lv[1]}`}</small>
-      </button>
+      {rift ? (
+        <button class="tb-zone rift" onClick={() => g.openTown('rift')} aria-label="균열 정보 열기">
+          <b>균열 {rift.plan.tier}단계</b><small>{rift.phase === 'run' || rift.phase === 'guardian' ? fmtClock(rift.end - g.world.time) : rift.result?.ok ? '정복' : '실패'}</small>
+        </button>
+      ) : (
+        <button class="tb-zone" onClick={() => g.openPanel('map')} aria-label="지도 열기">
+          <b>{z.name}</b><small>{z.id === 'town' ? '휴식' : `Lv ${z.lv[0]}~${z.lv[1]}`}</small>
+        </button>
+      )}
       <span class="sp1" />
       <div class={'zeny' + (pulse ? ' up' : '')} key={pulse}><b>{fmt(s.zeny)}</b> z</div>
       <button class={'tb-btn' + (g.panel === 'settings' ? ' on' : '')} onClick={() => g.openPanel('settings')} aria-label="설정" aria-pressed={g.panel === 'settings'}>
