@@ -3,6 +3,8 @@ import type { World, FxEvent, HeroUnit, MobUnit, GroundItem } from '../game/worl
 import type { Element, Hero, GameState } from '../game/types.ts';
 import { buildZoneArt, drawProp, kitPropBox, kitVersion, type ZoneArt, type Prop } from './bg.ts';
 import { inked } from './ink.ts';
+
+const REDUCED_MOTION = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 import { drawHero, drawFalcon, type HeroLookDraw } from './hero.ts';
 import { drawMob, mobHeight, mobShadow } from './monster.ts';
 import { MELEE_CONTACT, BOW_RELEASE } from '../game/world.ts';
@@ -91,6 +93,27 @@ export class FieldRenderer {
   shake = 0;
   flash = 0;
   flashColor = '#ffffff';
+  /** climax hit-stop: the game loop holds the sim until then (ms, renderer clock) */
+  hitstopUntil = 0;
+  private kickAt = 0;
+
+  /**
+   * The one place for screen shake / flash / hit-stop, scaled to how often the event happens (quality guide §4):
+   * decision = small capped shake with a cooldown, no flash; climax = shake + flash + a short freeze.
+   * Frequent events (normal hits, crits, plain skills) stay local and never call this.
+   */
+  kick(tier: 'decision' | 'climax', shake: number, flash = 0, color = '#ffffff', stop = 0) {
+    if (this.lowFx || REDUCED_MOTION) return;
+    if (tier === 'decision') {
+      if (this.now - this.kickAt < 600) return;
+      this.kickAt = this.now;
+      this.shake = Math.max(this.shake, Math.min(5, shake));
+      return;
+    }
+    this.shake = Math.max(this.shake, shake);
+    if (flash) { this.flash = Math.max(this.flash, flash); this.flashColor = color; }
+    if (stop) this.hitstopUntil = Math.max(this.hitstopUntil, this.now + stop);
+  }
   particles: Particle[] = [];
   effects: Effect[] = [];
   nums: (DmgNum & { uid: number; ox: number; oy: number })[] = [];
@@ -244,7 +267,7 @@ export class FieldRenderer {
         const u = this.world.unit(e.uid);
         if (u?.kind === 'mob') {
           this.burst(p.x, p.y - p.h * 0.4, 10, u.m.palette[0], 'smoke', 60, 0.8);
-          if (u.m.boss) { this.shake = Math.max(this.shake, 10); this.flash = 0.6; this.flashColor = '#ffffff'; this.burst(p.x, p.y - p.h * 0.5, 40, '#ffe080', 'star', 200, 1.4); }
+          if (u.m.boss) { this.kick('climax', 8, 0.3, '#ffffff', 120); this.burst(p.x, p.y - p.h * 0.5, 40, '#ffe080', 'star', 200, 1.4); }
         }
         break;
       }
@@ -254,7 +277,7 @@ export class FieldRenderer {
         break;
       }
       case 'announce': this.onAnnounce(e.text, e.kind); break;
-      case 'shake': this.shake = Math.max(this.shake, e.power); break;
+      case 'shake': this.kick(e.power >= 6 ? 'climax' : 'decision', e.power); break;
       case 'telegraph': {
         const { x, y, r, dur, color } = e;
         this.effects.push({
@@ -329,11 +352,8 @@ export class FieldRenderer {
     const x = p.x + (Math.random() - 0.5) * 6, y = p.y - p.h * 0.5 + (Math.random() - 0.5) * 6;
     const now = this.now;
     const col = style === 'magic' ? ELEMENT_COLOR[element] : style === 'claw' ? '#ff5050' : element !== 'neutral' ? ELEMENT_COLOR[element] : '#ffffff';
-    if (crit) {
-      this.shake = Math.max(this.shake, 4);
-      this.flash = Math.max(this.flash, 0.18); this.flashColor = '#fff0c0';
-      this.burst(x, y, 16, '#ffd060', 'spark', 220, 0.45);
-    }
+    // crits are frequent: a local burst only (the crit star number carries the rest)
+    if (crit) this.burst(x, y, 16, '#ffd060', 'spark', 220, 0.45);
     if (style === 'slash') {
       const ang = -0.6 + Math.random() * 0.4;
       this.effects.push({ t0: now, dur: 180, layer: 'top', draw: (ctx, q) => {
@@ -411,7 +431,6 @@ export class FieldRenderer {
     const add = (dur: number, layer: Effect['layer'], draw: Effect['draw']) => this.effects.push({ t0: now, dur, layer, draw });
     switch (e.fx) {
       case 'bash': {
-        this.shake = Math.max(this.shake, 3);
         add(260, 'top', (ctx, q) => {
           ctx.save(); ctx.translate(x, ty); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 1 - q;
           ctx.drawImage(glow('#ffb040'), -30 - q * 20, -30 - q * 20, 60 + q * 40, 60 + q * 40);
@@ -507,7 +526,7 @@ export class FieldRenderer {
             ctx.restore();
           } });
         }
-        if (e.fx === 'lightning') { this.flash = Math.max(this.flash, 0.15); this.flashColor = '#fffbd0'; }
+
         if (tgt) this.burst(tgt.x, ty, 10, col, e.fx === 'coldbolt' ? 'shard' : 'glow', 100, 0.6);
         break;
       }
@@ -559,7 +578,7 @@ export class FieldRenderer {
               }
               ctx.restore();
             } });
-            this.later(i * 180 + 230, () => { this.burst(bx, by - 8, 14, '#ff7a3a', 'glow', 150, 0.6, -40); this.shake = Math.max(this.shake, 5); this.onSound('fire'); });
+            this.later(i * 180 + 230, () => { this.burst(bx, by - 8, 14, '#ff7a3a', 'glow', 150, 0.6, -40); this.kick('decision', 4); this.onSound('fire'); });
           }
         } else if (e.fx === 'gust') {
           for (let i = 0; i < (this.lowFx ? 14 : 40); i++) {
@@ -593,7 +612,7 @@ export class FieldRenderer {
               ctx.restore();
             } });
           }
-          this.flash = Math.max(this.flash, e.fx === 'lov' ? 0.3 : 0.2); this.flashColor = '#fffbd0';
+
         } else if (e.fx === 'grimtooth') {
           for (let i = 0; i < 7; i++) {
             const a = i / 7 * Math.PI * 2, rr = r * (0.2 + Math.random() * 0.6);
@@ -634,7 +653,7 @@ export class FieldRenderer {
           ctx.strokeStyle = rgba(c2, 1 - q); ctx.lineWidth = 3; ctx.beginPath(); ctx.ellipse(x, y, r * q, r * 0.6 * q, 0, 0, Math.PI * 2); ctx.stroke();
           ctx.restore();
         });
-        if (e.fx === 'fireball') { this.burst(x, y - 10, 24, '#ff7030', 'glow', 160, 0.6, -40); this.shake = Math.max(this.shake, 3); }
+        if (e.fx === 'fireball') { this.burst(x, y - 10, 24, '#ff7030', 'glow', 160, 0.6, -40); this.kick('decision', 2); }
         if (e.fx === 'cart') this.burst(x, y, 16, '#c8b090', 'smoke', 120, 0.6);
         if (e.fx === 'slam' || e.fx === 'darkslam') this.burst(x, y, 20, e.fx === 'darkslam' ? '#a060ff' : '#c0a080', 'smoke', 160, 0.7);
         break;

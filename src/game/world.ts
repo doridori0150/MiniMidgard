@@ -1250,7 +1250,7 @@ export class World {
         const hits = sk.hits ? sk.hits(lv) : 1;
         this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm?.uid, x: cx, y: cy, lv, radius: r, hits, element: el });
         this.sound(el === 'fire' ? 'fire' : el === 'wind' ? 'thunder' : el === 'water' ? 'ice' : el === 'holy' ? 'heal' : sk.fx === 'shower' ? 'arrow' : 'hit_heavy');
-        if (sk.kind === 'selfAoe' || sk.fx === 'meteor' || sk.fx === 'hammer' || sk.fx === 'bowling') this.emit({ t: 'shake', power: sk.fx === 'meteor' ? 6 : 3 });
+        if (sk.kind === 'selfAoe' || sk.fx === 'hammer' || sk.fx === 'bowling') this.emit({ t: 'shake', power: 2 });
         for (let i = 0; i < hits; i++) {
           this.after(150 + i * 180, () => {
             for (const m of this.mobs) {
@@ -1709,7 +1709,7 @@ export class World {
           if (m.state === 'dead') return;
           this.setState(m, 'attack');
           this.emit({ t: 'skill', fx: el === 'shadow' ? 'darkslam' : 'slam', from: m.uid, x: m.x, y: m.y, lv: 1, radius: r });
-          this.emit({ t: 'shake', power: 8 });
+          this.emit({ t: 'shake', power: 5 });
           this.sound('hit_heavy');
           for (const h of this.heroes) if (h.state !== 'dead' && dist(h, m) <= r) this.mobHit(m, h, sk.mult ?? 1.5, el === 'water' ? 'neutral' : el, el === 'shadow', true);
         });
@@ -1724,7 +1724,7 @@ export class World {
         this.after(900, () => {
           if (m.state === 'dead') return;
           this.emit({ t: 'skill', fx: 'roots', from: m.uid, x: tx, y: ty, lv: 1, radius: r });
-          this.emit({ t: 'shake', power: 5 });
+          this.emit({ t: 'shake', power: 3 });
           this.sound('hit_heavy');
           for (const h of this.heroes) if (h.state !== 'dead' && Math.hypot(h.x - tx, h.y - ty) <= r) this.mobHit(m, h, sk.mult ?? 1.5, 'earth', false, true);
         });
@@ -1786,7 +1786,7 @@ export class World {
       const t = this.heroUnit(c.target);
       if (t && t.state !== 'dead' && dist(t, m) < 50) {
         this.mobHit(m, t, c.mult, 'neutral', false);
-        this.emit({ t: 'shake', power: 4 });
+        this.emit({ t: 'shake', power: 3 });
         const dx = t.x - m.x, dy = t.y - m.y, d = Math.hypot(dx, dy) || 1;
         t.x = clamp(t.x + dx / d * 30, 24, this.zone.w - 24);
         t.y = clamp(t.y + dy / d * 20, 70, this.zone.h - 24);

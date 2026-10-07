@@ -107,7 +107,8 @@ class Game {
     this.raf = requestAnimationFrame(this.loop);
     const dt = this.lastT ? t - this.lastT : 16;
     this.lastT = t;
-    this.world.advance(Math.min(dt, 1000));
+    // climax hit-stop: hold the sim for a beat (the frame still renders; no catch-up afterwards)
+    if (!this.renderer || t >= this.renderer.hitstopUntil) this.world.advance(Math.min(dt, 1000));
     // boss music
     const bossOn = this.world.mobs.some((m) => m.m.boss && m.state !== 'dead');
     if (bossOn !== this.bossMusic) { this.bossMusic = bossOn; audio.playBgm(bossOn ? 'boss' : this.world.zone.bgm); }
