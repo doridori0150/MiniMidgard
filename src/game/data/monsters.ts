@@ -45,6 +45,8 @@ export interface MonsterDef {
   atkElement?: Element;
   immobile?: boolean;
   flying?: boolean;
+  /** M1: share of critical chance this monster shrugs off (bosses default to 0.25 / MVPs 0.5) */
+  critRes?: number;
   desc: string;
 }
 

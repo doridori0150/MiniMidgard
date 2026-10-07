@@ -45,6 +45,35 @@ export interface Bonus {
   weaponElement?: Element; armorElement?: Element;
   dropPct?: number; zenyPct?: number; expPct?: number;
   range?: number;
+  // ── build mechanics (docs/design/BUILD_TREE.md §1)
+  /** M5: effects that fire on a normal hit / a critical / being hit */
+  procs?: Proc[];
+  /** M6: % chance per normal attack to curse yourself (10 s: LUK 0, move −30%) */
+  selfCurse?: number;
+  /** M7: status resistance %, 100 = immune */
+  statusRes?: Partial<Record<StatusKind, number>>;
+  /** M12: % damage per skill id */
+  skillDmg?: Record<string, number>;
+  /** hunter falcon: extra auto-blitz chance %, extra hits, splash radius (world units) */
+  autoBlitzPct?: number; blitzHits?: number; blitzRadius?: number;
+  /** M3: % attack speed while bare-handed */
+  unarmedAspdPct?: number;
+  /** % more zeny spent by zeny-costing skills */
+  zenyCostPct?: number;
+}
+
+export type StatusKind = 'stun' | 'freeze' | 'poison' | 'blind' | 'curse';
+/** M5: an item/card effect that fires by chance */
+export interface Proc {
+  on: 'attack' | 'crit' | 'hit';
+  /** % per trigger */
+  chance: number;
+  /** cast this skill for free at this level (on the target, or on yourself for heals/buffs) */
+  cast?: { skill: string; lv: number };
+  /** put a status on the target */
+  status?: { kind: Exclude<StatusKind, 'curse'>; dur: number };
+  /** heal yourself by this % of max HP */
+  healPct?: number;
 }
 
 export interface IconSpec {

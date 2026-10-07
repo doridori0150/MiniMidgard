@@ -1,5 +1,5 @@
 // Real-time hunt simulation for one zone. DOM-free: renderer and UI read `events`, `logs` and unit state.
-import type { Element, GameState, Hero, HeroRole, Tactics } from './types.ts';
+import type { Element, GameState, Hero, HeroRole, Proc, StatusKind, Tactics } from './types.ts';
 import { computeDerived, partyPerks, type ActiveBuff, type Derived } from './stats.ts';
 import { elementMod, sizeMod, ELEMENT_KO } from './data/elements.ts';
 import { SKILLS, type SkillDef, type FixedCtx } from './data/skills.ts';
@@ -548,7 +548,10 @@ export class World {
   tactics(h: HeroUnit): Tactics { return h.hero.tactics ?? defaultTactics(h.hero.cls); }
 
   /** the role from the hero's tactics (auto = class role; STR acolytes fight as battle priests) */
-  roleOf(h: HeroUnit): PartyRole { return heroRole(h.hero); }
+  roleOf(h: HeroUnit): PartyRole {
+    const r = heroRole(h.hero);
+    return r === 'ranged' && !h.d.ranged ? 'melee' : r; // a bare-handed falconer (M3) fights up close
+  }
 
   posOf(h: HeroUnit): Position {
     const p = this.tactics(h).position;
@@ -845,8 +848,16 @@ export class World {
   private canAfford(h: HeroUnit, sk: SkillDef, lv: number) {
     if (sk.sp && h.sp < sk.sp(lv)) return false;
     if (sk.hpCost && h.hp <= sk.hpCost(lv) + 5) return false;
-    if (sk.zeny && this.s.zeny < sk.zeny(lv)) return false;
+    if (sk.zeny && this.s.zeny < this.zenyCost(h, sk, lv)) return false;
     return true;
+  }
+
+  /** M12: a skill's damage % with the hero's per-skill gear bonuses */
+  private skMult(h: HeroUnit, sk: SkillDef, lv: number) {
+    return (sk.mult ? sk.mult(lv) : 100) * (1 + (h.d.b.skillDmg?.[sk.id] ?? 0) / 100);
+  }
+  private zenyCost(h: HeroUnit, sk: SkillDef, lv: number) {
+    return Math.round(sk.zeny!(lv) * (1 + (h.d.b.zenyCostPct ?? 0) / 100));
   }
 
   private canPay(h: HeroUnit, sk: SkillDef, lv: number) {
@@ -984,7 +995,7 @@ export class World {
     if (sk.kind === 'heal') return this.healDamage(h, t, lv);
     const hits = sk.bySize ? (t.m.size === 'small' ? 1 : t.m.size === 'medium' ? 2 : 3) : sk.hits ? sk.hits(lv) : 1;
     if (sk.fixed) return sk.fixed(lv, this.fixedCtx(h)) * hits * elementMod(sk.element ?? 'neutral', this.mobElement(t));
-    const mult = (sk.mult ? sk.mult(lv) : 100) / 100;
+    const mult = (this.skMult(h, sk, lv)) / 100;
     const el = sk.element ?? h.d.weaponElement;
     const em = elementMod(el, this.mobElement(t));
     if (sk.magic) {
@@ -1015,7 +1026,7 @@ export class World {
         this.sound('arrow');
         this.after(fly, () => {
           const hit = this.resolvePhys(h, t, 100, d.weaponElement, 0, true, 'pierce');
-          this.autoBlitz(h, t, hit);
+          this.afterNormalHit(h, t, hit);
         });
       });
       return;
@@ -1023,6 +1034,7 @@ export class World {
     this.sound('swing');
     this.after(MELEE_CONTACT, () => {
       const r = this.resolvePhys(h, t, 100, d.weaponElement, 0, true, d.wtype === 'mace' || d.wtype === 'staff' || d.wtype === 'none' ? 'blunt' : 'slash');
+      this.afterNormalHit(h, t, r); // M3: a bare-handed falconer's fists call the falcon too
       // double attack
       const da = h.hero.skills.double_attack ?? 0;
       if (r && da && d.wtype === 'dagger' && this.rng() < da * 0.05 && this.alive(t)) {
@@ -1031,14 +1043,61 @@ export class World {
     });
   }
 
-  /** hunter falcon proc on normal bow attacks (chance LUK/3 + falcon_eyes%) */
-  private autoBlitz(h: HeroUnit, t: MobUnit, hit: boolean) {
+  /** after any normal attack: the falcon, item procs (M5) and a cursed weapon's price (M6) */
+  private afterNormalHit(h: HeroUnit, t: MobUnit, hit: boolean) {
+    if (!hit) return;
+    const b = h.d.b;
+    this.autoBlitz(h, t);
+    if (b.procs) for (const p of b.procs) if ((p.on === 'attack' || (p.on === 'crit' && this.lastCrit)) && this.rng() * 100 < p.chance) this.runProc(h, t, p);
+    if (b.selfCurse && this.rng() * 100 < b.selfCurse) this.curseHero(h);
+  }
+
+  /** hunter falcon proc on normal attacks, any weapon or none (chance LUK/3 + falcon_eyes% + gear) */
+  private autoBlitz(h: HeroUnit, t: MobUnit) {
     const eyes = h.hero.skills.falcon_eyes ?? 0, blitz = h.hero.skills.blitz_beat ?? 0;
-    if (!eyes || !blitz || !hit || !this.alive(t)) return;
-    if (this.rng() * 100 >= h.d.total.luk / 3 + eyes) return;
+    if (!eyes || !blitz || !this.alive(t)) return;
+    if (this.rng() * 100 >= h.d.total.luk / 3 + eyes + (h.d.b.autoBlitzPct ?? 0)) return;
     const sk = SKILLS.blitz_beat;
-    const hits = Math.min(blitz, Math.floor((h.hero.jobLv + 9) / 10));
+    const hits = Math.min(blitz, Math.floor((h.hero.jobLv + 9) / 10)) + (h.d.b.blitzHits ?? 0);
     this.falconStrike(h, t, sk, blitz, hits);
+  }
+
+  /** M5: one item/card effect */
+  private runProc(h: HeroUnit, t: MobUnit | null, p: Proc) {
+    if (p.healPct) this.healHero(h, Math.floor(h.d.maxHp * p.healPct / 100), true);
+    if (p.status && t && this.alive(t) && !t.m.boss) this.inflict(t, p.status.kind, p.status.dur);
+    if (p.cast) {
+      const sk = SKILLS[p.cast.skill];
+      if (!sk) return;
+      const self = sk.kind === 'heal' || sk.kind === 'buff' || sk.kind === 'selfBuff';
+      const target: HeroUnit | MobUnit | null = self ? h : t;
+      if (!target || (target.kind === 'mob' && !this.alive(target))) return;
+      this.releaseCast(h, { sk, lv: p.cast.lv, target: target.uid, x: target.x, y: target.y, start: this.time, end: this.time }, true);
+    }
+  }
+
+  /** a status from gear (no skill roll: the proc already rolled) */
+  private inflict(t: MobUnit, kind: Exclude<StatusKind, 'curse'>, dur: number) {
+    if (kind === 'stun') { t.stunUntil = this.time + dur; this.emit({ t: 'status', uid: t.uid, text: '기절!', color: '#ffe080' }); }
+    else if (kind === 'freeze') { if (t.m.element === 'undead') return; t.frozenUntil = this.time + dur; this.emit({ t: 'status', uid: t.uid, text: '빙결!', color: '#9fe8ff' }); }
+    else if (kind === 'blind') { t.blindUntil = this.time + dur; this.emit({ t: 'status', uid: t.uid, text: '실명', color: '#d8c080' }); }
+    else if (t.m.element !== 'undead' && t.m.race !== 'formless') {
+      t.poisonUntil = this.time + dur; t.poisonNext = this.time + 1000;
+      t.poisonDmg = Math.max(2, Math.floor(t.maxHp * 0.015));
+      this.emit({ t: 'status', uid: t.uid, text: '중독', color: '#c080ff' });
+    }
+  }
+
+  /** M6: a cursed weapon bites back — 10 s of LUK 0 and slow feet, unless something wards it off (M7) */
+  curseHero(h: HeroUnit) {
+    if ((h.d.b.statusRes?.curse ?? 0) >= 100 || this.rng() * 100 < (h.d.b.statusRes?.curse ?? 0)) {
+      this.emit({ t: 'status', uid: h.uid, text: '저주 무효', color: '#d0c0ff' });
+      return;
+    }
+    h.buffs = h.buffs.filter((b) => b.id !== 'curse');
+    h.buffs.push({ id: 'curse', name: '저주', lv: 1, until: this.time + 10000, bonus: { luk: -999, moveSpd: -30 } });
+    this.refresh(h);
+    this.emit({ t: 'status', uid: h.uid, text: '저주!', color: '#b070e0' });
   }
 
   private fixedCtx(h: HeroUnit): FixedCtx {
@@ -1050,11 +1109,15 @@ export class World {
     this.emit({ t: 'shot', from: h.uid, to: t.uid, kind: 'falcon', dur: fly, element: 'neutral' });
     this.emit({ t: 'status', uid: h.uid, text: '블리츠 비트!', color: '#ffd080' });
     let total = 0;
-    const per = sk.fixed!(lv, this.fixedCtx(h)) + (h.hero.skills.steel_crow ?? 0) * 12;
+    const per = (sk.fixed!(lv, this.fixedCtx(h)) + (h.hero.skills.steel_crow ?? 0) * 12) * (1 + (h.d.b.skillDmg?.blitz_beat ?? 0) / 100);
+    // M4: the falcon's dive hits everything around the target (RO's 3×3)
+    const r = 60 + (h.d.b.blitzRadius ?? 0);
     for (let i = 0; i < hits; i++) {
       this.after(fly + i * 120, () => {
         if (!this.alive(t)) return;
+        const cx = t.x, cy = t.y;
         total += this.dealFixed(h, t, per, 'neutral', i, 'claw');
+        for (const m of this.mobs) if (m !== t && this.alive(m) && Math.hypot(m.x - cx, m.y - cy) <= r) this.dealFixed(h, m, per, 'neutral', i, 'claw');
         if (i === hits - 1 && hits > 1 && total > 0) this.emit({ t: 'dmg', uid: t.uid, n: total, kind: 'total' });
       });
     }
@@ -1079,13 +1142,18 @@ export class World {
     else { t.blindUntil = this.time + st.dur; this.emit({ t: 'status', uid: t.uid, text: '실명', color: '#d8c080' }); }
   }
 
+  /** whether the last resolvePhys was a critical (crit procs) */
+  private lastCrit = false;
+
   /** returns true when it hit */
   private resolvePhys(h: HeroUnit, t: MobUnit, mult: number, el: Element, hitBonus: number, canCrit: boolean, style: 'slash' | 'blunt' | 'pierce' | 'claw', idx = 0, flat = 0): boolean {
     if (!this.alive(t) || h.state === 'dead') return false;
     const d = h.d;
     const mobFlee = t.m.lv + t.m.agi;
-    const critChance = canCrit ? Math.max(0, d.crit - t.m.luk * 0.2) : 0;
+    const critRes = t.m.critRes ?? (t.m.boss === 'mvp' ? 0.5 : t.m.boss ? 0.25 : 0);
+    const critChance = canCrit ? Math.max(0, d.crit - t.m.luk * 0.2) * (1 - critRes) : 0;
     const crit = this.rng() * 100 < critChance;
+    this.lastCrit = crit;
     const frozen = t.frozenUntil > this.time;
     if (!crit && !frozen) {
       const rate = clamp(80 + d.hit - mobFlee, 5, 95) + hitBonus;
@@ -1206,24 +1274,26 @@ export class World {
     }
   }
 
-  private releaseCast(h: HeroUnit) {
-    const c = h.cast!;
-    h.cast = null;
-    this.emit({ t: 'castEnd', uid: h.uid });
+  /** fire a skill. `free` = an item proc (M5): no cost, cooldown, cast animation or lock */
+  private releaseCast(h: HeroUnit, info?: CastInfo, free = false) {
+    const c = info ?? h.cast!;
+    if (!info) { h.cast = null; this.emit({ t: 'castEnd', uid: h.uid }); }
     const { sk, lv } = c;
-    if (!this.canAfford(h, sk, lv)) {
-      this.setState(h, 'idle');
-      return;
+    if (!free) {
+      if (!this.canAfford(h, sk, lv)) {
+        this.setState(h, 'idle');
+        return;
+      }
+      if (sk.sp) h.sp -= sk.sp(lv);
+      if (sk.hpCost) h.hp -= sk.hpCost(lv);
+      if (sk.zeny) { this.s.zeny -= this.zenyCost(h, sk, lv); this.onPersist(); }
+      if (sk.cd) h.cds[sk.id] = this.time + sk.cd(lv);
+      const delay = sk.delay ? sk.delay(lv) : 300;
+      h.lockUntil = this.time + delay;
+      h.atkReady = Math.max(h.atkReady, this.time + Math.min(delay, h.d.delay));
+      this.setState(h, sk.magic || sk.kind === 'heal' || sk.kind === 'buff' || sk.kind === 'selfBuff' ? 'cast' : 'attack');
+      this.stateHold(h, Math.min(delay, 450));
     }
-    if (sk.sp) h.sp -= sk.sp(lv);
-    if (sk.hpCost) h.hp -= sk.hpCost(lv);
-    if (sk.zeny) { this.s.zeny -= sk.zeny(lv); this.onPersist(); }
-    if (sk.cd) h.cds[sk.id] = this.time + sk.cd(lv);
-    const delay = sk.delay ? sk.delay(lv) : 300;
-    h.lockUntil = this.time + delay;
-    h.atkReady = Math.max(h.atkReady, this.time + Math.min(delay, h.d.delay));
-    this.setState(h, sk.magic || sk.kind === 'heal' || sk.kind === 'buff' || sk.kind === 'selfBuff' ? 'cast' : 'attack');
-    this.stateHold(h, Math.min(delay, 450));
     this.emit({ t: 'status', uid: h.uid, text: sk.name + '!', color: '#fff6c0' });
     const tu = this.unit(c.target);
     const tm = tu?.kind === 'mob' ? tu : undefined;
@@ -1240,7 +1310,7 @@ export class World {
           for (let i = 0; i < mhits; i++) {
             this.after(SKILL_CONTACT + i * (sk.id === 'sonic_blow' ? 70 : 120), () => {
               const before = tm.hp;
-              this.resolvePhys(h, tm, sk.mult ? sk.mult(lv) : 100, el, sk.hitBonus ? sk.hitBonus(lv) : 0, false, sk.id === 'pierce' ? 'pierce' : 'slash', i);
+              this.resolvePhys(h, tm, this.skMult(h, sk, lv), el, sk.hitBonus ? sk.hitBonus(lv) : 0, false, sk.id === 'pierce' ? 'pierce' : 'slash', i);
               total += Math.max(0, before - Math.max(0, tm.hp));
               if (i === mhits - 1 && total > 0) {
                 this.emit({ t: 'dmg', uid: tm.uid, n: total, kind: 'total' });
@@ -1253,7 +1323,7 @@ export class World {
         }
         this.after(SKILL_CONTACT, () => {
           const flat = sk.id === 'envenom' ? lv * 15 : 0;
-          const hit = this.resolvePhys(h, tm, sk.mult ? sk.mult(lv) : 100, el, sk.hitBonus ? sk.hitBonus(lv) : 0, false, 'slash', 0, flat);
+          const hit = this.resolvePhys(h, tm, this.skMult(h, sk, lv), el, sk.hitBonus ? sk.hitBonus(lv) : 0, false, 'slash', 0, flat);
           if (!hit || !this.alive(tm)) return;
           this.applyStatus(tm, sk, lv);
           if (sk.id === 'envenom' && this.rng() * 100 < 10 + lv * 4 && !tm.m.boss && tm.m.element !== 'undead') {
@@ -1279,7 +1349,7 @@ export class World {
           this.after(BOW_RELEASE + i * 110, () => this.emit({ t: 'shot', from: h.uid, to: tm.uid, kind: 'arrow', dur: fly, element: el }));
           this.after(BOW_RELEASE + i * 110 + fly, () => {
             const before = tm.hp;
-            this.resolvePhys(h, tm, sk.mult ? sk.mult(lv) : 100, el, 0, false, 'pierce', i);
+            this.resolvePhys(h, tm, this.skMult(h, sk, lv), el, 0, false, 'pierce', i);
             total += Math.max(0, before - Math.max(0, tm.hp));
             if (i === hits - 1 && total > 0 && hits > 1) this.emit({ t: 'dmg', uid: tm.uid, n: total, kind: 'total' });
           });
@@ -1295,7 +1365,7 @@ export class World {
         let total = 0;
         for (let i = 0; i < hits; i++) {
           this.after(160 + i * 150, () => {
-            const n = this.resolveMagic(h, tm, sk.mult ? sk.mult(lv) : 100, el, i, sk, lv);
+            const n = this.resolveMagic(h, tm, this.skMult(h, sk, lv), el, i, sk, lv);
             total += n;
             if (n > 0) this.applyStatus(tm, sk, lv);
             if (i === hits - 1 && hits > 1 && total > 0) this.emit({ t: 'dmg', uid: tm.uid, n: total, kind: 'total' });
@@ -1321,8 +1391,8 @@ export class World {
             for (const m of this.mobs) {
               if (!this.alive(m) || Math.hypot(m.x - cx, m.y - cy) > r) continue;
               if (sk.fixed) this.dealFixed(h, m, sk.fixed(lv, this.fixedCtx(h)), el, i);
-              else if (sk.magic) this.resolveMagic(h, m, sk.mult ? sk.mult(lv) : 100, el, i, sk, lv);
-              else this.resolvePhys(h, m, sk.mult ? sk.mult(lv) : 100, el, 20, false, sk.fx === 'shower' ? 'pierce' : 'blunt', i);
+              else if (sk.magic) this.resolveMagic(h, m, this.skMult(h, sk, lv), el, i, sk, lv);
+              else this.resolvePhys(h, m, this.skMult(h, sk, lv), el, 20, false, sk.fx === 'shower' ? 'pierce' : 'blunt', i);
               this.applyStatus(m, sk, lv);
             }
           });
@@ -1733,7 +1803,9 @@ export class World {
         this.emit({ t: 'dmg', uid: t.uid, n: 0, kind: 'lucky' });
         return;
       }
-      let rate = clamp(80 + m.m.lv + m.m.dex - d.flee, 5, 95);
+      const crowd = this.mobs.reduce((a, x) => a + (x.state !== 'dead' && x.target === t.uid && dist(x, t) <= x.m.range + 40 ? 1 : 0), 0);
+      const flee = d.flee * Math.max(0, 1 - 0.1 * Math.max(0, crowd - 2));
+      let rate = clamp(80 + m.m.lv + m.m.dex - flee, 5, 95);
       if (m.blindUntil > this.time) rate -= 25;
       if (this.rng() * 100 >= rate) {
         this.emit({ t: 'dmg', uid: t.uid, n: 0, kind: 'miss' });
@@ -1756,10 +1828,11 @@ export class World {
       this.emit({ t: 'status', uid: t.uid, text: '반격!', color: '#ffb0a0' });
       this.after(80, () => this.resolvePhys(t, m, 100, t.d.weaponElement, 100, true, 'slash'));
     }
-    if (el === 'poison' && !magic && this.rng() < 0.08) {
+    if (el === 'poison' && !magic && this.rng() * 100 < 8 * (1 - (d.b.statusRes?.poison ?? 0) / 100)) {
       t.poisonUntil = this.time + 8000; t.poisonNext = this.time + 1000;
       this.emit({ t: 'status', uid: t.uid, text: '중독', color: '#c080ff' });
     }
+    if (d.b.procs) for (const p of d.b.procs) if (p.on === 'hit' && this.rng() * 100 < p.chance) this.runProc(t, m, p);
     this.damageHero(t, n, m);
   }
 

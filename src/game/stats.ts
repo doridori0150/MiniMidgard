@@ -66,7 +66,9 @@ export function addBonus(t: Bonus, s: Bonus | undefined, mul = 1) {
   for (const k of Object.keys(s) as (keyof Bonus)[]) {
     const v = s[k];
     if (v === undefined) continue;
-    if (typeof v === 'number') {
+    if (Array.isArray(v)) { // procs add up as a list
+      ((t as Record<string, unknown[]>)[k] ??= []).push(...v);
+    } else if (typeof v === 'number') {
       (t as Record<string, number>)[k] = ((t as Record<string, number>)[k] ?? 0) + v * mul;
     } else if (typeof v === 'string') {
       (t as Record<string, string>)[k] = v;
@@ -192,7 +194,7 @@ export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], 
 
   const baseAspd = cls.aspd[wtype] ?? cls.aspd.none ?? 150;
   let aspd = 200 - (200 - baseAspd) * (1 - (4 * agi + dex) / 1000);
-  let delay = (200 - aspd) * 20 * (1 - (b.aspdPct ?? 0) / 100);
+  let delay = (200 - aspd) * 20 * (1 - ((b.aspdPct ?? 0) + (wtype === 'none' ? b.unarmedAspdPct ?? 0 : 0)) / 100);
   delay = Math.max(200, delay);
   aspd = 200 - delay / 20;
 
