@@ -21,6 +21,8 @@ export interface HeroLookDraw {
   shield: boolean;
   garment?: string;
   ammoColor?: string;
+  /** painted-sprite face features picked in character creation (index into each gender's types) */
+  eyes?: number; brows?: number; nose?: number; mouth?: number;
   /** hunters carry a falcon unless it is out hunting */
   noFalcon?: boolean;
 }

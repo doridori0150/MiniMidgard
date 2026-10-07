@@ -1,5 +1,5 @@
 {
-  "schema": "minimidgard.frames/1",
+  "schema": "minimidgard.frames/2",
   "canvas": {
     "size": [
       1024,
@@ -432,7 +432,21 @@
         }
       },
       "defaultWeapon": "dagger",
-      "defaultHairColor": "cream"
+      "defaultHairColor": "cream",
+      "bodySets": {
+        "female": {
+          "sharedFrames": true,
+          "framesRef": "classes.novice.frames"
+        },
+        "male": {
+          "sharedFrames": true,
+          "framesRef": "classes.novice.frames"
+        }
+      },
+      "defaultHair": {
+        "female": "01",
+        "male": "02"
+      }
     },
     "swordsman": {
       "frames": {
@@ -851,7 +865,21 @@
         }
       },
       "defaultWeapon": "sword",
-      "defaultHairColor": "blue"
+      "defaultHairColor": "blue",
+      "bodySets": {
+        "female": {
+          "sharedFrames": true,
+          "framesRef": "classes.swordsman.frames"
+        },
+        "male": {
+          "sharedFrames": true,
+          "framesRef": "classes.swordsman.frames"
+        }
+      },
+      "defaultHair": {
+        "female": "01",
+        "male": "02"
+      }
     }
   },
   "animations": {
@@ -955,72 +983,97 @@
   },
   "head": {
     "size": [
-      380,
-      380
+      440,
+      460
     ],
     "neck": [
-      210,
-      356
+      230,
+      376
     ],
-    "base": "assets/head_base.png",
-    "skullAnchors": {
-      "crown": [
-        194,
-        80
-      ],
-      "brow": [
-        274,
-        223
-      ],
+    "neckLayer": "assets/head/neck.png",
+    "bases": {
+      "female": "assets/head/female.png",
+      "male": "assets/head/male.png"
+    },
+    "featureAnchors": {
       "eyes": [
-        230,
-        266
+        250,
+        282
+      ],
+      "brows": [
+        250,
+        251
+      ],
+      "nose": [
+        269,
+        310
       ],
       "mouth": [
-        220,
-        308
+        252,
+        333
       ]
     },
-    "faces": {
+    "skullAnchors": {
+      "crown": [
+        214,
+        100
+      ],
+      "brow": [
+        294,
+        243
+      ]
+    },
+    "expressionMap": {
       "normal": {
-        "file": "assets/faces/normal.png",
-        "position": [
-          0,
-          0
-        ]
+        "eyes": "normal",
+        "brows": "normal",
+        "nose": "normal",
+        "mouth": "normal"
       },
       "hurt": {
-        "file": "assets/faces/hurt.png",
-        "position": [
-          145,
-          228
-        ]
+        "eyes": "hurt",
+        "brows": "hurt",
+        "nose": "normal",
+        "mouth": "hurt"
       },
       "ko": {
-        "file": "assets/faces/ko.png",
-        "position": [
-          145,
-          228
-        ]
+        "eyes": "closed",
+        "brows": "hurt",
+        "nose": "normal",
+        "mouth": "ko"
+      },
+      "blink": {
+        "eyes": "closed",
+        "brows": "normal",
+        "nose": "normal",
+        "mouth": "normal"
       }
     }
   },
   "hairStyles": {
-    "01": {
-      "front": "assets/hair/01_front.png",
-      "back": "assets/hair/01_back.png",
-      "position": [
-        0,
-        0
-      ]
+    "female": {
+      "01": {
+        "name": "bob with ahoge",
+        "front": "assets/hair/female01.png",
+        "back": "assets/hair/female01_back.png"
+      },
+      "05": {
+        "name": "high ponytail",
+        "front": "assets/hair/female05.png",
+        "back": "assets/hair/female05_back.png"
+      }
     },
-    "02": {
-      "front": "assets/hair/02_front.png",
-      "back": "assets/hair/02_back.png",
-      "position": [
-        -33,
-        26
-      ]
+    "male": {
+      "02": {
+        "name": "short spiky",
+        "front": "assets/hair/male02.png",
+        "back": "assets/hair/male02_back.png"
+      },
+      "03": {
+        "name": "short side part",
+        "front": "assets/hair/male03.png",
+        "back": "assets/hair/male03_back.png"
+      }
     }
   },
   "hairColors": {
@@ -1102,24 +1155,324 @@
   "renderContract": {
     "order": [
       "weaponBehind",
+      "neck",
+      "hairBack",
       "body",
-      "headUnit",
+      "headBase",
+      "eyes",
+      "brows",
+      "nose",
+      "mouth",
+      "hair",
+      "headgear",
       "weaponFront",
       "gripOverlay"
     ],
     "headUnitOrder": [
-      "hairBack",
       "headBase",
-      "face",
-      "hairFront",
+      "eyes",
+      "brows",
+      "nose",
+      "mouth",
+      "hair",
       "headgear"
     ],
     "mirror": "mirror completed assembly around canvas.origin.x",
     "time": "integer milliseconds; negative clamps to zero; loops modulo duration; nonloop holds last",
-    "head": "compose once per equipment/expression selection; rigid rotation about head.neck only",
+    "head": "neck uses the same rigid head matrix but renders before body; rear hair is a complete closed silhouette before body; front fringe is a complete closed contour",
     "tint": "multiply only hair RGB with red > 127; preserve dark outline and alpha",
     "nullEquipment": "weapon=null skips weapon; headgear=[] skips decorations",
-    "unknownIds": "error",
-    "units": "source pixels; world scale = desired character height / referenceHeight"
+    "unknownIds": "error, including unsupported gender/hair pairs; no silent fallback",
+    "units": "source pixels; world scale = desired character height / referenceHeight",
+    "features": "selected types are independent; body expression resolves variant through head.expressionMap; blink explicitly overrides expression",
+    "gender": "female and male bases, hair and features; bodySets intentionally resolve to shared class frames"
+  },
+  "features": {
+    "female": {
+      "eyes": {
+        "01": {
+          "pivot": [
+            80,
+            30
+          ],
+          "variants": {
+            "normal": "assets/features/female/eyes/01_normal.png",
+            "hurt": "assets/features/female/eyes/01_hurt.png",
+            "closed": "assets/features/female/eyes/01_closed.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            80,
+            30
+          ],
+          "variants": {
+            "normal": "assets/features/female/eyes/02_normal.png",
+            "hurt": "assets/features/female/eyes/02_hurt.png",
+            "closed": "assets/features/female/eyes/02_closed.png"
+          }
+        },
+        "03": {
+          "pivot": [
+            80,
+            30
+          ],
+          "variants": {
+            "normal": "assets/features/female/eyes/03_normal.png",
+            "hurt": "assets/features/female/eyes/03_hurt.png",
+            "closed": "assets/features/female/eyes/03_closed.png"
+          }
+        }
+      },
+      "brows": {
+        "01": {
+          "pivot": [
+            80,
+            20
+          ],
+          "variants": {
+            "normal": "assets/features/female/brows/01_normal.png",
+            "hurt": "assets/features/female/brows/01_hurt.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            80,
+            20
+          ],
+          "variants": {
+            "normal": "assets/features/female/brows/02_normal.png",
+            "hurt": "assets/features/female/brows/02_hurt.png"
+          }
+        },
+        "03": {
+          "pivot": [
+            80,
+            20
+          ],
+          "variants": {
+            "normal": "assets/features/female/brows/03_normal.png",
+            "hurt": "assets/features/female/brows/03_hurt.png"
+          }
+        }
+      },
+      "nose": {
+        "01": {
+          "pivot": [
+            17,
+            17
+          ],
+          "variants": {
+            "normal": "assets/features/female/nose/01_normal.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            17,
+            17
+          ],
+          "variants": {
+            "normal": "assets/features/female/nose/02_normal.png"
+          }
+        }
+      },
+      "mouth": {
+        "01": {
+          "pivot": [
+            33,
+            23
+          ],
+          "variants": {
+            "normal": "assets/features/female/mouth/01_normal.png",
+            "hurt": "assets/features/female/mouth/01_hurt.png",
+            "ko": "assets/features/female/mouth/01_ko.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            33,
+            23
+          ],
+          "variants": {
+            "normal": "assets/features/female/mouth/02_normal.png",
+            "hurt": "assets/features/female/mouth/02_hurt.png",
+            "ko": "assets/features/female/mouth/02_ko.png"
+          }
+        },
+        "03": {
+          "pivot": [
+            33,
+            23
+          ],
+          "variants": {
+            "normal": "assets/features/female/mouth/03_normal.png",
+            "hurt": "assets/features/female/mouth/03_hurt.png",
+            "ko": "assets/features/female/mouth/03_ko.png"
+          }
+        }
+      }
+    },
+    "male": {
+      "eyes": {
+        "01": {
+          "pivot": [
+            80,
+            30
+          ],
+          "variants": {
+            "normal": "assets/features/male/eyes/01_normal.png",
+            "hurt": "assets/features/male/eyes/01_hurt.png",
+            "closed": "assets/features/male/eyes/01_closed.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            80,
+            30
+          ],
+          "variants": {
+            "normal": "assets/features/male/eyes/02_normal.png",
+            "hurt": "assets/features/male/eyes/02_hurt.png",
+            "closed": "assets/features/male/eyes/02_closed.png"
+          }
+        },
+        "03": {
+          "pivot": [
+            80,
+            30
+          ],
+          "variants": {
+            "normal": "assets/features/male/eyes/03_normal.png",
+            "hurt": "assets/features/male/eyes/03_hurt.png",
+            "closed": "assets/features/male/eyes/03_closed.png"
+          }
+        }
+      },
+      "brows": {
+        "01": {
+          "pivot": [
+            80,
+            20
+          ],
+          "variants": {
+            "normal": "assets/features/male/brows/01_normal.png",
+            "hurt": "assets/features/male/brows/01_hurt.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            80,
+            20
+          ],
+          "variants": {
+            "normal": "assets/features/male/brows/02_normal.png",
+            "hurt": "assets/features/male/brows/02_hurt.png"
+          }
+        },
+        "03": {
+          "pivot": [
+            80,
+            20
+          ],
+          "variants": {
+            "normal": "assets/features/male/brows/03_normal.png",
+            "hurt": "assets/features/male/brows/03_hurt.png"
+          }
+        }
+      },
+      "nose": {
+        "01": {
+          "pivot": [
+            17,
+            17
+          ],
+          "variants": {
+            "normal": "assets/features/male/nose/01_normal.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            17,
+            17
+          ],
+          "variants": {
+            "normal": "assets/features/male/nose/02_normal.png"
+          }
+        }
+      },
+      "mouth": {
+        "01": {
+          "pivot": [
+            33,
+            23
+          ],
+          "variants": {
+            "normal": "assets/features/male/mouth/01_normal.png",
+            "hurt": "assets/features/male/mouth/01_hurt.png",
+            "ko": "assets/features/male/mouth/01_ko.png"
+          }
+        },
+        "02": {
+          "pivot": [
+            33,
+            23
+          ],
+          "variants": {
+            "normal": "assets/features/male/mouth/02_normal.png",
+            "hurt": "assets/features/male/mouth/02_hurt.png",
+            "ko": "assets/features/male/mouth/02_ko.png"
+          }
+        },
+        "03": {
+          "pivot": [
+            33,
+            23
+          ],
+          "variants": {
+            "normal": "assets/features/male/mouth/03_normal.png",
+            "hurt": "assets/features/male/mouth/03_hurt.png",
+            "ko": "assets/features/male/mouth/03_ko.png"
+          }
+        }
+      }
+    }
+  },
+  "defaultFeatures": {
+    "female": {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01"
+    },
+    "male": {
+      "eyes": "01",
+      "brows": "01",
+      "nose": "01",
+      "mouth": "01"
+    }
+  },
+  "verification": {
+    "joinRegion": {
+      "space": "head",
+      "polygon": [
+        [
+          208,
+          355
+        ],
+        [
+          247,
+          355
+        ],
+        [
+          246,
+          399
+        ],
+        [
+          208,
+          399
+        ]
+      ],
+      "note": "Independent chin-to-collar interior corridor; includes overlap with chin and collar. Not derived from assembled alpha."
+    }
   }
 }

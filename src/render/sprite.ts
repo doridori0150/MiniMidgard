@@ -1,7 +1,8 @@
 // Painted frame sprites (character animation v4): per-class body frames painted per pose, one rigid head unit (hair back,
 // head base, face expression, hair front, headgear on skull anchors) attached at each frame's neck, weapons at its hand.
-// Codex designed the contract (docs/art/rig-frames: PLAN.md, manifest.json `minimidgard.frames/1`); this is a line-by-line
-// port of its reference player docs/art/rig-frames/player.py — keep the two in step.
+// Codex designed the contract (docs/art/rig-frames2: PLAN.md, manifest.json); this is a line-by-line
+// port of its reference player docs/art/rig-frames2/player.py (minimidgard.frames/2: genders, a neck layer behind the
+// collar, and eyes / brows / nose / mouth as separate pickable features) — keep the two in step.
 import type { WeaponType } from '../game/types.ts';
 import type { HeroLookDraw, Pose } from './hero.ts';
 
@@ -12,10 +13,15 @@ interface Frame {
 }
 interface Manifest {
   canvas: { origin: V2; referenceHeight: number };
-  classes: Record<string, { frames: Record<string, Frame>; defaultWeapon: string | null; defaultHairColor: string }>;
+  classes: Record<string, { frames: Record<string, Frame>; defaultWeapon: string | null; defaultHairColor: string; defaultHair: Record<string, string> }>;
   animations: Record<string, { frames: string[]; durations: number[]; duration: number; loop: boolean }>;
-  head: { neck: V2; base: string; skullAnchors: Record<string, V2>; faces: Record<string, { file: string; position: V2 }> };
-  hairStyles: Record<string, { front: string; back: string; position: V2 }>;
+  head: {
+    neck: V2; neckLayer: string; bases: Record<string, string>; featureAnchors: Record<string, V2>; skullAnchors: Record<string, V2>;
+    expressionMap: Record<string, Record<string, string>>;
+  };
+  hairStyles: Record<string, Record<string, { front: string; back: string }>>;
+  features: Record<string, Record<string, Record<string, { pivot: V2; variants: Record<string, string> }>>>;
+  defaultFeatures: Record<string, Record<string, string>>;
   headgear: Record<string, { file: string; anchor: string; offset: V2; pivot: V2 }>;
   weapons: Record<string, { file: string; grip: V2 }>;
 }
@@ -101,31 +107,52 @@ function hair(file: string, tint: number[] | null): CanvasImageSource | undefine
   return c;
 }
 
+const FEATURES = ['eyes', 'brows', 'nose', 'mouth'] as const;
+/** game hair style index → this gender's painted styles (until all eight exist) */
+const HAIR_IDS: Record<string, string[]> = { female: ['01', '05'], male: ['02', '03'] };
+
 export function drawSprite(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {
   if (!spriteSupports(L) || !M) return false;
   const cfg = M.classes[CLASS[L.cls]!];
   const [state, t] = clip(pose);
   const f = cfg.frames[selectFrame(M, state, t)];
   if (!f) return false;
+  const h = M.head;
+  const gender = L.gender === 'm' ? 'male' : 'female';
+  const ids = HAIR_IDS[gender].filter((id) => M.hairStyles[gender]?.[id]);
+  const style = M.hairStyles[gender]?.[ids[L.hair % Math.max(1, ids.length)] ?? cfg.defaultHair[gender]];
+  const base = h.bases[gender];
+  if (!style || !base) return false;
   const weapon = WEAPON[L.wtype] ?? null;
   const tint = HAIR_TINT[L.hairColor % HAIR_TINT.length];
-  const style = M.hairStyles[L.hair % 2 === 0 ? '01' : '02'] ?? Object.values(M.hairStyles)[0];
   const gear = [L.headTop, L.headMid, L.headLow].map((x) => (x ? HEADGEAR[x] : undefined)).filter((x): x is string => !!x && !!M.headgear[x]);
+  // idle blinks for a beat every few seconds
+  const phase = (L.hairColor * 977 + L.hair * 613 + (L.gender === 'm' ? 1500 : 0) + (L.eyes ?? 0) * 211) % 3700; // party members blink out of step
+  const expression = f.expression === 'normal' && state === 'idle' && (pose.t + phase) % 3700 < 130 ? 'blink' : f.expression;
+  const variants = h.expressionMap[expression] ?? h.expressionMap.normal;
   const draws: [CanvasImageSource | undefined, Mat][] = [];
   const add = (src: CanvasImageSource | undefined, m: Mat) => draws.push([src, m]);
   const weaponDraw = () => {
     if (weapon && f.weaponVisible) { const w = M.weapons[weapon]; add(imgs.get(key(w.file)), matrix(f.hand.point, f.hand.angle, w.grip)); }
   };
-  if (f.weaponZ === 'behind') weaponDraw();
-  add(imgs.get(key(f.body)), matrix(f.bodyPosition));
-  const h = M.head;
   const headmat = matrix(f.neck.point, f.neck.angle, h.neck);
   const head = (src: CanvasImageSource | undefined, p: V2 = [0, 0]) => add(src, multiply(headmat, matrix(p)));
-  head(hair(style.back, tint), style.position);
-  head(imgs.get(key(h.base)));
-  const face = h.faces[f.expression] ?? h.faces.normal;
-  head(imgs.get(key(face.file)), face.position);
-  head(hair(style.front, tint), style.position);
+  if (f.weaponZ === 'behind') weaponDraw();
+  head(imgs.get(key(h.neckLayer)));          // the neck tucks under the collar
+  head(hair(style.back, tint));
+  add(imgs.get(key(f.body)), matrix(f.bodyPosition));
+  head(imgs.get(key(base)));
+  const pick: Record<string, number | undefined> = { eyes: L.eyes, brows: L.brows, nose: L.nose, mouth: L.mouth };
+  for (const kind of FEATURES) {
+    const types = M.features[gender]?.[kind] ?? {};
+    const keys = Object.keys(types);
+    const typ = pick[kind] !== undefined && keys.length ? keys[pick[kind]! % keys.length] : M.defaultFeatures[gender][kind];
+    const feature = types[typ];
+    if (!feature) continue;
+    const a = h.featureAnchors[kind];
+    head(imgs.get(key(feature.variants[variants[kind]] ?? feature.variants.normal)), [a[0] - feature.pivot[0], a[1] - feature.pivot[1]]);
+  }
+  head(hair(style.front, tint));
   for (const id of gear) {
     const item = M.headgear[id], a = h.skullAnchors[item.anchor];
     head(imgs.get(key(item.file)), [a[0] + item.offset[0] - item.pivot[0], a[1] + item.offset[1] - item.pivot[1]]);
