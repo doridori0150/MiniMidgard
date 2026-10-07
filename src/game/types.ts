@@ -213,4 +213,6 @@ export interface GameState {
   orders: PartyOrders;
   /** totals.cards when the card tab was last opened (nav badge only for cards found since) */
   cardSeen?: number;
+  /** hidden maps whose existence the player has discovered (gate.hidden) */
+  discovered?: string[];
 }

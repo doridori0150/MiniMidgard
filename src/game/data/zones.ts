@@ -19,7 +19,43 @@ export interface ZoneDef {
   desc: string;
   /** position on the world map, % of map width/height */
   map: [number, number];
+  /** region this map belongs to (world-map grouping), e.g. '햇살 평원 지방' */
+  region?: string;
+  kind?: 'field' | 'dungeon';
+  /** optional colour tint over the theme (e.g. a darker dungeon floor) */
+  tint?: string;
+  /** sealed / hidden maps: conditions instead of (or on top of) unlockBy */
+  gate?: ZoneGate;
 }
+
+/** what it takes to find and open a sealed or hidden map; every `need` must hold */
+export interface ZoneGate {
+  /** cryptic rumour shown on the world map before it opens ("…라는 소문이 있다") */
+  hint: string;
+  /** not on the map at all until discovered (clue item obtained, or the first need is met) */
+  hidden?: boolean;
+  /** item whose first pickup reveals the map (an old map scrap, a strange key…) */
+  clue?: string;
+  need: GateNeed[];
+  /** log/announce line when the seal opens */
+  openText?: string;
+}
+
+export type GateNeed =
+  /** carry N of an item; consume = offered once to break the seal for good */
+  | { kind: 'item'; id: string; qty: number; consume?: boolean }
+  /** cumulative kills of a monster (monster book) */
+  | { kind: 'kills'; mob: string; n: number }
+  /** this boss / MVP defeated at least once */
+  | { kind: 'boss'; mob: string }
+  /** this monster's card found at least once */
+  | { kind: 'card'; mob: string }
+  /** highest party base level */
+  | { kind: 'level'; lv: number }
+  /** someone in the party has reached this job tier (1 = first job, 2 = second job) */
+  | { kind: 'job'; tier: 1 | 2 }
+  /** only open during these local-clock hours (from → to, may wrap past midnight: 22 → 4) */
+  | { kind: 'hours'; from: number; to: number };
 
 export const ZONES: ZoneDef[] = [
   {
