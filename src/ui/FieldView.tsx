@@ -22,9 +22,22 @@ function Minimap() {
       const sx = (cw - 6) / z.w, sy = (ch - 6) / z.h;
       ctx.fillStyle = z.theme === 'cave' ? 'rgba(90,70,80,0.5)' : z.theme === 'forest' ? 'rgba(60,110,50,0.5)' : z.theme === 'town' ? 'rgba(180,170,150,0.5)' : 'rgba(110,170,80,0.5)';
       ctx.fillRect(3, 3, z.w * sx, z.h * sy);
+      // expedition maps (M10): treasure chests in gold
+      for (const c of w.chests) {
+        if (c.opened) continue;
+        ctx.fillStyle = '#ffd040'; ctx.strokeStyle = '#6a4a10'; ctx.lineWidth = 1;
+        ctx.fillRect(1.5 + c.x * sx, 1.5 + c.y * sy, 3, 3); ctx.strokeRect(1.5 + c.x * sx, 1.5 + c.y * sy, 3, 3);
+      }
       for (const m of w.mobs) {
         if (m.state === 'dead') continue;
-        if (m.m.boss) { ctx.fillStyle = m.m.boss === 'mvp' ? '#ffd040' : '#ff8040'; ctx.beginPath(); ctx.arc(3 + m.x * sx, 3 + m.y * sy, 3.2, 0, Math.PI * 2); ctx.fill(); }
+        if (m.danger) {
+          // a danger monster: a red mark with a pulsing ring
+          const px = 3 + m.x * sx, py = 3 + m.y * sy, k = (performance.now() / 900) % 1;
+          ctx.strokeStyle = `rgba(255,40,50,${(1 - k) * 0.9})`; ctx.lineWidth = 1.4;
+          ctx.beginPath(); ctx.arc(px, py, 3.5 + k * 6, 0, Math.PI * 2); ctx.stroke();
+          ctx.fillStyle = '#ff2030'; ctx.strokeStyle = '#3a0000'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.arc(px, py, 3.6, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        } else if (m.m.boss) { ctx.fillStyle = m.m.boss === 'mvp' ? '#ffd040' : '#ff8040'; ctx.beginPath(); ctx.arc(3 + m.x * sx, 3 + m.y * sy, 3.2, 0, Math.PI * 2); ctx.fill(); }
         else { ctx.fillStyle = m.m.aggressive ? '#ff5a5a' : '#ffb0b0'; ctx.fillRect(2 + m.x * sx, 2 + m.y * sy, 2, 2); }
       }
       for (const h of w.heroes) {

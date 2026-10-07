@@ -1,4 +1,5 @@
-// Desktop play: the big moments (level ups, a job change ready, cards, slotted/rare gear, MVP kills, a wipe, a new map)
+// Desktop play: the big moments (level ups, a job change ready, cards, slotted/rare gear, MVP kills, a wipe, a new map,
+// a danger monster on an expedition map)
 // become one system notification while the player is in another window or tab, and a count in the tab title.
 // game.ts feeds it the sim's events every frame (or every background tick) before anything consumes them.
 import type { FxEvent, World } from '../game/world.ts';
@@ -37,6 +38,7 @@ export class Notifier {
         else if (e.kind === 'mvp' && e.text.startsWith('MVP!')) this.lines.push(`${e.text} — MVP 처치`);
         else if (e.kind === 'wipe' && e.text.startsWith('파티 전멸')) this.lines.push('파티 전멸… 재정비 중');
         else if (e.kind === 'unlock' && (e.text.includes('열렸다') || e.text.includes('개방'))) this.lines.push(e.text);
+        else if (e.kind === 'danger') this.lines.push(e.text); // M10: a danger monster appeared / woke / fell
       } else if (e.t === 'pickup' && e.id) {
         const d = ITEMS[e.id];
         if (d?.kind === 'equip' && (d.rarity || e.name.includes('['))) this.lines.push(`득템 — ${e.name}${name(e.to) ? ` (${name(e.to)})` : ''}`);

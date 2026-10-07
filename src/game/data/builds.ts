@@ -107,7 +107,7 @@ add({ id: 'w_spellhilt', name: '마력 깃든 칼자루', loc: 'weapon', wtype: 
   bonus: { int: 2, procs: [{ on: 'attack', chance: 15, cast: { skill: 'fire_bolt', lv: 3 } }] }, icon: { glyph: 'sword', color: '#d0a0ff' },
   desc: '고목 정령의 마력이 스민 칼자루.\nINT +2, 평타 시 15% 확률로 파이어 볼트 Lv 3 자동 시전\n빌드: 마검 기사' });
 add({ id: 'g_shadowcape', name: '그림자 망토', loc: 'garment', def: 1, slots: 1, reqLv: 40, price: 50000, bonus: { flee: 20, eleRes: { holy: -50 } },
-  icon: { glyph: 'cape', color: '#5a4a7a' }, desc: '망령 군주의 그림자를 잘라 만든 망토.\nFLEE +20, 받는 성속성 피해 +50%\n빌드: 그림자 회피' });
+  icon: { glyph: 'cape', color: '#5a4a7a' }, desc: '망자의 성 지하에 드리운 그림자를 잘라 만든 망토.\nFLEE +20, 받는 성속성 피해 +50%\n빌드: 그림자 회피' });
 add({ id: 'x_whirlglove', name: '회오리 장갑', loc: 'acc', def: 0, slots: 1, reqLv: 34, price: 34000, bonus: { skillDmg: { bowling_bash: 20 }, str: 1 },
   icon: { glyph: 'glove', color: '#a0b0c0' }, desc: '채석장 거인이 바위를 굴리던 장갑.\n회전 강타 피해 +20%, STR +1\n빌드: 회전 몰이 기사' });
 add({ id: 'w_viperfang', name: '독사의 송곳니', loc: 'weapon', wtype: 'dagger', wlv: 3, atk: 92, slots: 2, reqLv: 30, price: 42000, jobs: ['novice', 'swordsman', 'mage', 'archer', 'thief', 'merchant'], look: 'dagger',
@@ -118,18 +118,25 @@ add({ id: 'x_manaspring', name: '마나 샘 반지', loc: 'acc', def: 0, slots: 
 add({ id: 'w_sagestaff', name: '현자의 지팡이', loc: 'weapon', wtype: 'staff', wlv: 3, atk: 35, matkPct: 10, slots: 4, reqLv: 30, price: 60000, jobs: ['novice', 'mage', 'acolyte'], look: 'staff',
   icon: { glyph: 'staff', color: '#c0a0ff' }, desc: '네 개의 홈이 파인 오래된 지팡이. 카드를 넷 품는다.\nMATK +10%\n빌드: 인덱 학자' });
 
-/** where batch-1 identity items drop: [monster, item, rate] (bosses higher, a rare regular source for farming) */
+/**
+ * where batch-1 identity items drop: [monster, item, rate] (bosses higher, a rare regular source for farming).
+ * The expedition maps (M10, zones.ts) are the main source of three of them — their danger monster carries it and the
+ * map's own regular monster a trickle, so a party that avoids the danger still finds one eventually:
+ * 핏빛 달 요도 · 그림자 망토 = 핏빛 기사 (망자의 성 지하 감옥), 매잡이 너클 = 탐욕 상자 + the warehouse's real chests,
+ * 정화의 부적 = 종 치는 유령 (가라앉은 수도원, at night). The old sources stay at a lower rate.
+ */
 const DROPS: [string, string, number][] = [
-  ['boneknight', 'w_bloodmoon', 0.03], ['wraith', 'w_bloodmoon', 0.08], ['phantom', 'w_bloodmoon', 0.0003],
-  ['wisp', 'x_purify', 0.0025], ['phantom', 'x_purify', 0.003],
+  ['bloodknight', 'w_bloodmoon', 0.04], ['jailer', 'w_bloodmoon', 0.0002],
+  ['boneknight', 'w_bloodmoon', 0.012], ['wraith', 'w_bloodmoon', 0.03], ['phantom', 'w_bloodmoon', 0.0003],
+  ['bellghost', 'x_purify', 0.04], ['drownedmonk', 'x_purify', 0.0004], ['wisp', 'x_purify', 0.0025], ['phantom', 'x_purify', 0.003],
   ['silverfang', 'x_falconglove', 0.04], ['firefly', 'x_falconglove', 0.0008],
-  ['bunchief', 'x_falconknuckle', 0.03], ['hornbun', 'x_falconknuckle', 0.0003], ['moonbun', 'x_falconknuckle', 0.0015],
+  ['trapchest', 'x_falconknuckle', 0.08], ['bunchief', 'x_falconknuckle', 0.005], ['hornbun', 'x_falconknuckle', 0.0003], ['moonbun', 'x_falconknuckle', 0.0015],
   ['moonfox', 'x_falconbell', 0.06], ['nightmoth', 'x_falconbell', 0.001],
   ['scorpking', 'w_fangkatar', 0.05], ['jackal', 'w_fangkatar', 0.0012],
   ['ratking', 'x_greedpouch', 0.04], ['coinbug', 'x_greedpouch', 0.0006],
   ['mummylord', 'x_sonicband', 0.05], ['mummy', 'x_sonicband', 0.0012],
   ['treant', 'w_spellhilt', 0.1], ['dryad', 'w_spellhilt', 0.0015],
-  ['wraith', 'g_shadowcape', 0.08], ['phantom', 'g_shadowcape', 0.0008],
+  ['bloodknight', 'g_shadowcape', 0.04], ['jailer', 'g_shadowcape', 0.0003], ['wraith', 'g_shadowcape', 0.03], ['phantom', 'g_shadowcape', 0.0008],
   ['quarrygolem', 'x_whirlglove', 0.05], ['rockworm', 'x_whirlglove', 0.001],
   ['cobra', 'w_viperfang', 0.0015], ['toxjelly', 'w_viperfang', 0.0003],
   ['sprout', 'x_manaspring', 0.001], ['puffball', 'x_manaspring', 0.0008],

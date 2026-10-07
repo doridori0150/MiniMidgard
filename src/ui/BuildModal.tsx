@@ -18,7 +18,7 @@ export function dropSources(id: string): { mob: string; rate: number; maps: stri
   for (const m of Object.values(MONSTERS)) {
     const d = m.drops.find((x) => x.id === id);
     if (!d) continue;
-    const maps = ZONES.filter((z) => z.mobs.some((x) => x.id === m.id) || z.boss === m.id || z.mvp === m.id).map((z) => z.name);
+    const maps = ZONES.filter((z) => z.mobs.some((x) => x.id === m.id) || z.boss === m.id || z.mvp === m.id || z.danger?.some((x) => x.id === m.id) || z.chest?.trap === m.id).map((z) => z.name);
     out.push({ mob: m.id, rate: d.rate, maps });
   }
   return out.sort((a, b) => b.rate - a.rate);

@@ -34,6 +34,38 @@ export interface ZoneDef {
   role?: ZoneRole[];
   /** item ids the map is known for (특산품) — shown on the map card */
   specialty?: string[];
+  /** M10 expedition map: roaming danger monsters (map level +20~30), one at a time, rare */
+  danger?: DangerDef[];
+  /** M10 expedition map: treasure chests that appear on the field; some wake up as a trap monster */
+  chest?: ChestDef;
+}
+
+/** M10: a danger monster an expedition map can field (MonsterDef.danger) */
+export interface DangerDef {
+  id: string;
+  /** mean hunting time (ms) between one leaving and the next appearing */
+  every: number;
+  /** how long (ms) it roams before it leaves, unless someone is fighting it */
+  stay: number;
+  /** only awake during these local-clock hours (from → to, may wrap past midnight) */
+  hours?: { from: number; to: number };
+}
+
+/** M10: treasure chests on an expedition map (one on the field at a time; the party walks over and opens it) */
+export interface ChestDef {
+  /** mean hunting time (ms) until the next chest appears */
+  every: number;
+  /** the danger monster a trap chest wakes up as, and the share of chests that are traps */
+  trap: string;
+  trapRate: number;
+  /** a real chest: each line rolls on its own, plus zeny in this range */
+  drops: { id: string; rate: number; slots?: number }[];
+  zeny: [number, number];
+}
+
+/** an expedition map: dangerous on purpose (⚠ 원정 on the world map), never a place to fall back to */
+export function isExpedition(z: ZoneDef): boolean {
+  return !!(z.danger?.length || z.chest);
 }
 
 export type ZoneRole = 'exp' | 'loot' | 'ore' | 'zeny' | 'mvp';
@@ -207,6 +239,30 @@ export const ZONES: ZoneDef[] = [
     specialty: ['w_cutlass', 'm_piratepatch', 'e_doubloon'],
     desc: '암초에 걸려 반쯤 가라앉은 해적선. 해골 해적이 아직도 금화를 세고 있다. 유령 선장을 쓰러뜨리면 산호 동굴과 채석장으로 가는 물길이 열린다.', map: [22, 80],
   },
+  // ── 원정 맵 (M10): dangerous on purpose, entered for one item — ⚠ 원정 on the world map, never a wipe-retreat target
+  {
+    id: 'warehouse', name: '버려진 상인의 창고', theme: 'cave', tint: '#8a6a48', lv: [18, 28], bgm: 'dungeon', region: '푸른 항구 지방', kind: 'dungeon', role: ['loot'],
+    mobs: [{ id: 'ledger', w: 32 }, { id: 'piratebones', w: 26 }, { id: 'parrot', w: 18 }, { id: 'coinbug', w: 14 }],
+    maxMobs: 11, bossGauge: 0, mvpGauge: 0, unlockBy: 'beach', w: 940, h: 800,
+    chest: {
+      every: 100000, trap: 'trapchest', trapRate: 0.15, zeny: [200, 1200],
+      drops: [
+        { id: 'e_coin', rate: 0.35 }, { id: 'e_doubloon', rate: 0.25 }, { id: 'e_pearl', rate: 0.1 }, { id: 'u_orange', rate: 0.3 }, { id: 'u_blue', rate: 0.05 },
+        { id: 'x_falconknuckle', rate: 0.02 }, { id: 'x_glove', rate: 0.006, slots: 1 }, { id: 'x_brooch', rate: 0.006, slots: 1 }, { id: 'x_ring', rate: 0.006, slots: 1 },
+        { id: 'r_ori', rate: 0.03 }, { id: 'r_elu', rate: 0.03 },
+      ],
+    },
+    specialty: ['x_falconknuckle', 'e_chestfang', 'e_ledgerpage'],
+    desc: '빚더미에 앉은 상인이 버리고 간 항구 창고. 곳곳에 보물 상자가 굴러다니지만, 열 개 중 하나쯤은 이빨이 달린 탐욕 상자다. 깨어나면 일단 도망칠 것 — 강해진 뒤에 일부러 깨워 잡는 것이 목표다.', map: [26, 77],
+  },
+  {
+    id: 'sunkenabbey', name: '가라앉은 수도원', theme: 'cave', tint: '#3a6a78', lv: [22, 32], bgm: 'dungeon', region: '햇살 평원 지방', kind: 'dungeon', role: ['loot'],
+    mobs: [{ id: 'drownedmonk', w: 38 }, { id: 'eel', w: 20 }, { id: 'coralcrab', w: 16 }, { id: 'mossjelly', w: 14 }, { id: 'candlewisp', w: 12 }],
+    maxMobs: 11, bossGauge: 0, mvpGauge: 0, unlockBy: 'culvert', w: 940, h: 800,
+    danger: [{ id: 'bellghost', every: 150000, stay: 180000, hours: { from: 20, to: 4 } }],
+    specialty: ['x_purify', 'a_saint', 'x_rosary'],
+    desc: '수로 끝에서 물에 잠긴 옛 수도원. 낮에는 수도사들이 느릿느릿 기도할 뿐이지만, 밤 8시부터 새벽 4시까지는 종 치는 유령이 깨어난다. 맞으면 눈앞이 캄캄해진다. 정화의 부적은 밤의 유령이 지니고 있다.', map: [45, 84],
+  },
   {
     id: 'deepforest', name: '깊은 숲', theme: 'forest', tint: '#2a4a2a', lv: [23, 32], bgm: 'forest', region: '속삭이는 숲 지방', kind: 'field', role: ['loot', 'ore'],
     mobs: [{ id: 'firefly', w: 24 }, { id: 'bear', w: 22 }, { id: 'stump', w: 20 }, { id: 'wolf', w: 16 }, { id: 'mossjelly', w: 10 }],
@@ -281,6 +337,14 @@ export const ZONES: ZoneDef[] = [
     maxMobs: 11, bossGauge: 0, mvpGauge: 0, unlockBy: 'thiefden', w: 960, h: 800,
     specialty: ['w_hawktalon', 'x_hawkfeather', 'f_boots'],
     desc: '붉은 절벽 사이로 매가 맴도는 협곡. 붉은 매(바람)·사슴벌레(땅)·송곳니 박쥐(암흑)가 섞여 있다. 매발톱 카타르와 명중 부적이 나온다.', map: [70, 50],
+  },
+  {
+    id: 'castlejail', name: '망자의 성 지하 감옥', theme: 'cave', tint: '#5a2a38', lv: [30, 42], bgm: 'dungeon', region: '잿빛 광산 지방', kind: 'dungeon', role: ['loot'],
+    mobs: [{ id: 'jailer', w: 32 }, { id: 'skeleton', w: 22 }, { id: 'shambler', w: 18 }, { id: 'bonearcher', w: 14 }, { id: 'wisp', w: 14 }],
+    maxMobs: 11, bossGauge: 0, mvpGauge: 0, unlockBy: 'mine1', w: 980, h: 820,
+    danger: [{ id: 'bloodknight', every: 200000, stay: 150000 }],
+    specialty: ['w_bloodmoon', 'g_shadowcape', 'e_jailkeys'],
+    desc: '광산 갱도가 뚫고 들어간 옛 성의 지하 감옥. 간수 해골이 순찰을 돌고, 가끔 핏빛 기사가 감옥을 헤맨다(Lv 65, 맞으면 저주). 보이면 반대편으로 피하자. 핏빛 달 요도와 그림자 망토는 그 기사가 지니고 있다.', map: [21, 24],
   },
   {
     id: 'mirrorlake', name: '거울 호수', theme: 'snow', tint: '#8ab0e0', lv: [32, 42], bgm: 'title', region: '안개 호수 지방', kind: 'field', role: ['loot'],

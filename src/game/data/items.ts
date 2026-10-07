@@ -468,6 +468,13 @@ etc('e_skypetal', '천상화 꽃잎', 740, 'petal', '#fff8ff', '땅에 떨어지
 etc('e_goldfeather', '금빛 깃털', 780, 'fur', '#ffe080', '깃털 말랑에게서 빠진 깃털.');
 etc('e_skyemblem', '천공 기사단 문장', 820, 'gem', '#d8c070', '날개와 별이 새겨진 문장.');
 etc('e_skyheart', '천공의 심장', 60000, 'gem', '#fff8d0', '파수신의 가슴에서 빛나던 하늘빛 보석.', 'rare');
+// 원정 맵 (M10) — 위험 몹의 전리품은 자동 판매되지 않는다 (rare)
+etc('e_ledgerpage', '찢어진 장부 쪽', 90, 'scroll', '#e8dcb8', '받지 못한 외상값이 빼곡하다. 빚쟁이 이름만 번져 있다.');
+etc('e_chestfang', '상자 이빨', 1500, 'claw', '#fff4d8', '탐욕 상자의 뚜껑에 박혀 있던 이빨. 아직도 딸깍거린다.', 'rare');
+etc('e_jailkeys', '녹슨 열쇠 꾸러미', 220, 'ore', '#a08a5a', '어느 감방 열쇠인지 아무도 모른다.');
+etc('e_bloodcrest', '핏빛 문장', 4000, 'cloth', '#c01830', '핏빛 기사의 망토에 수놓인 문장. 만지면 손끝이 차가워진다.', 'rare');
+etc('e_wetprayer', '젖은 기도서', 140, 'scroll', '#a8c0c8', '물에 불어 글씨가 번졌지만 기도문은 끝까지 읽힌다.');
+etc('e_bellclapper', '녹슨 종추', 2500, 'ore', '#d0b060', '가라앉은 종탑의 종 안에 매달려 있던 추. 흔들면 귀가 먹먹해진다.', 'rare');
 etc('e_goldshell', '금빛 게딱지', 260, 'shell', '#ffd040', '금화가 눌어붙어 금빛이 된 게딱지.');
 etc('e_rustyhook', '녹슨 갈고리', 280, 'claw', '#a8906a', '해골 갑판장의 의수.');
 etc('e_kingcoin', '해적왕의 금화', 20000, 'coin', '#ffe060', '해적왕의 얼굴이 새겨진 커다란 금화.', 'rare');
@@ -660,6 +667,13 @@ card('snowowl', '눈올빼미', 'head', '눈올빼미의', { dex: 2, luk: 1, hit
 card('owlchief', '부엉이 대장', 'head', '부엉이 대장의', { hit: 12, dex: 2 }, 'HIT +12, DEX +2\n[머리]', 'epic');
 card('magephantom', '수석 마도사의 환영', 'head', '환영의', { hit: 20, castPct: -15 }, 'HIT +20\n대신 시전 시간 +15%\n[머리]', 'epic');
 card('swanqueen', '백조 여왕', 'head', '백조 여왕의', { int: 3, maxSpPct: 10, castPct: 5 }, 'INT +3, 최대 SP +10%, 시전 시간 -5%\n[머리]', 'epic');
+// 원정 맵 (M10)
+card('ledger', '떠도는 장부', 'acc', '셈 빠른', { dex: 2, hit: 4 }, 'DEX +2, HIT +4\n[액세서리]');
+card('trapchest', '탐욕 상자', 'acc', '탐욕스러운', { dropPct: 10, luk: 1 }, '잡템·소비 아이템 드롭률 +10% (파티 전체, 가장 높은 하나만)\nLUK +1\n[액세서리]', 'epic');
+card('jailer', '감옥 간수', 'head', '간수의', { vit: 1, statusRes: { curse: 30 } }, 'VIT +1, 저주 저항 +30%\n[머리]');
+card('bloodknight', '핏빛 기사', 'weapon', '핏빛', { crit: 8, critDmgPct: 10, selfCurse: 1 }, '크리티컬 +8, 크리티컬 피해 +10%\n대신 평타 시 1% 확률로 자신에게 저주\n[무기]', 'epic');
+card('drownedmonk', '물에 잠긴 수도사', 'armor', '수도사의', { vit: 1, hpRegenPct: 20 }, 'VIT +1, HP 회복 +20%\n[갑옷]');
+card('bellghost', '종 치는 유령', 'acc', '종소리의', { healPct: 10, statusRes: { blind: 50, curse: 50 } }, '힐 회복량 +10%\n실명·저주 저항 +50%\n[액세서리]', 'epic');
 
 /** accessory cards that teach a skill (needs engine support: world.ts enabledSkills should add these while the card is equipped) */
 export const CARD_SKILLS: Record<string, { skill: string; lv: number }> = {

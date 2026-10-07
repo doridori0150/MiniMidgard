@@ -1,9 +1,9 @@
 // Content audit: drop tables, cards, item sources, weapon ladders, map economy.
 // usage: node --experimental-strip-types tools/audit.ts [section]
-//   sections: all (default) · errors · ladder · acc · head · cards · maps · econ · patches · curve
+//   sections: all (default) · errors · ladder · acc · head · cards · maps · econ · patches · curve · expedition
 import { MONSTERS, type MonsterDef } from '../src/game/data/monsters.ts';
 import { ITEMS, SHOPS } from '../src/game/data/items.ts';
-import { ZONES, REGION_INFO, openers } from '../src/game/data/zones.ts';
+import { ZONES, REGION_INFO, openers, isExpedition } from '../src/game/data/zones.ts';
 import { sellPrice } from '../src/game/state.ts';
 import type { GameState, WeaponType } from '../src/game/types.ts';
 
@@ -16,21 +16,28 @@ const warn: string[] = [];
 const shopItems = new Set(Object.values(SHOPS).flatMap((s) => s.items));
 const dropsOf: Record<string, { mob: string; rate: number; slots?: number }[]> = {};
 for (const m of Object.values(MONSTERS)) for (const d of m.drops) (dropsOf[d.id] ??= []).push({ mob: m.id, rate: d.rate, slots: d.slots });
+/** treasure chests of expedition maps (M10) are item sources too: zone id → its chest loot */
+const chestOf: Record<string, { zone: string; rate: number; slots?: number }[]> = {};
+for (const z of ZONES) for (const d of z.chest?.drops ?? []) (chestOf[d.id] ??= []).push({ zone: z.id, rate: d.rate, slots: d.slots });
 const mobZones: Record<string, string[]> = {};
 for (const z of ZONES) {
   for (const e of z.mobs) (mobZones[e.id] ??= []).push(z.id);
   if (z.boss) (mobZones[z.boss] ??= []).push(z.id + '(B)');
   if (z.mvp) (mobZones[z.mvp] ??= []).push(z.id + '(MVP)');
+  for (const d of z.danger ?? []) (mobZones[d.id] ??= []).push(z.id + '(⚠)');
+  if (z.chest) (mobZones[z.chest.trap] ??= []).push(z.id + '(⚠상자)');
 }
 const summoned = new Set(Object.values(MONSTERS).flatMap((m) => (m.skills ?? []).map((s) => s.summon).filter(Boolean) as string[]));
 const fmtRate = (r: number) => (r >= 0.01 ? (r * 100).toFixed(r >= 0.1 ? 0 : 1) + '%' : (r * 100).toFixed(r >= 0.001 ? 2 : 3) + '%');
 const srcText = (id: string) => [
   ...(dropsOf[id] ?? []).map((d) => `${MONSTERS[d.mob].name}${d.slots ? `[${d.slots}]` : ''} ${fmtRate(d.rate)}`),
+  ...(chestOf[id] ?? []).map((d) => `${ZONES.find((z) => z.id === d.zone)!.name} 보물 상자${d.slots ? `[${d.slots}]` : ''} ${fmtRate(d.rate)}`),
   ...(shopItems.has(id) ? ['상점'] : []),
 ].join(', ');
 
 // ── integrity
 for (const m of Object.values(MONSTERS)) {
+  if (m.danger && !ZONES.some((z) => z.danger?.some((d) => d.id === m.id) || z.chest?.trap === m.id)) errors.push(`${m.id}: danger monster on no expedition map`);
   const cards = m.drops.filter((d) => ITEMS[d.id]?.kind === 'card');
   if (cards.length !== 1 || cards[0].id !== 'c_' + m.id) errors.push(`${m.id}: card drops = ${cards.map((c) => c.id).join(',') || 'none'}`);
   for (const d of m.drops) if (!ITEMS[d.id]) errors.push(`${m.id}: unknown drop ${d.id}`);
@@ -49,7 +56,7 @@ for (const it of Object.values(ITEMS)) {
     if (!it.cardLoc) errors.push(`${it.id}: no cardLoc`);
   }
   if (it.kind === 'equip' && !it.loc) errors.push(`${it.id}: equip without loc`);
-  if (it.kind !== 'card' && !dropsOf[it.id] && !shopItems.has(it.id)) warn.push(`dead item (no drop, no shop): ${it.id} ${it.name}`);
+  if (it.kind !== 'card' && !dropsOf[it.id] && !chestOf[it.id] && !shopItems.has(it.id)) warn.push(`dead item (no drop, no shop): ${it.id} ${it.name}`);
 }
 for (const z of ZONES) {
   for (const e of z.mobs) if (!MONSTERS[e.id]) errors.push(`${z.id}: unknown mob ${e.id}`);
@@ -77,7 +84,33 @@ for (const z of ZONES) {
     }
     if (g.hidden && !g.clue && g.need[0]?.kind === 'hours') errors.push(`${z.id}: hidden map whose first need is hours`);
   }
-  for (const id of z.specialty ?? []) if (!ITEMS[id] || !dropsOf[id]) errors.push(`${z.id}: specialty ${id} unknown or not dropped`);
+  for (const id of z.specialty ?? []) if (!ITEMS[id] || !(dropsOf[id] || chestOf[id])) errors.push(`${z.id}: specialty ${id} unknown or not dropped`);
+  // M10 expedition maps: danger monsters 20–30 levels over the map, flagged, not also ordinary residents; sane chests
+  const mid = (z.lv[0] + z.lv[1]) / 2;
+  for (const d of z.danger ?? []) {
+    const m = MONSTERS[d.id];
+    if (!m) { errors.push(`${z.id}: unknown danger monster ${d.id}`); continue; }
+    if (!m.danger) errors.push(`${z.id}: danger ${d.id} lacks danger: true`);
+    if (m.boss) errors.push(`${z.id}: danger ${d.id} is a boss`);
+    if (m.lv - mid < 20 || m.lv - mid > 30) errors.push(`${z.id}: danger ${d.id} Lv ${m.lv} is not map level (${mid}) +20~30`);
+    if (z.mobs.some((e) => e.id === d.id)) errors.push(`${z.id}: danger ${d.id} also listed as a resident`);
+    if (d.every < 60000 || d.stay < 30000) errors.push(`${z.id}: danger ${d.id} too frequent / too brief`);
+    if (d.hours && ((d.hours.to - d.hours.from + 24) % 24) < 4) errors.push(`${z.id}: danger ${d.id} awake < 4h`);
+  }
+  if (z.chest) {
+    const t = MONSTERS[z.chest.trap];
+    if (!t) errors.push(`${z.id}: unknown chest trap ${z.chest.trap}`);
+    else {
+      if (!t.danger) errors.push(`${z.id}: chest trap ${t.id} lacks danger: true`);
+      if (t.lv - mid < 20 || t.lv - mid > 30) errors.push(`${z.id}: chest trap Lv ${t.lv} is not map level (${mid}) +20~30`);
+    }
+    if (!(z.chest.trapRate > 0 && z.chest.trapRate < 0.5)) errors.push(`${z.id}: chest trapRate ${z.chest.trapRate}`);
+    for (const d of z.chest.drops) {
+      if (!ITEMS[d.id]) errors.push(`${z.id}: chest drop ${d.id} unknown`);
+      else if (d.slots && ITEMS[d.id].kind !== 'equip') errors.push(`${z.id}: chest slots on non-equip ${d.id}`);
+    }
+  }
+  if (isExpedition(z) && z.gate) errors.push(`${z.id}: an expedition map should not also be a sealed map`);
   if (z.boss === undefined && z.bossGauge) warn.push(`${z.id}: bossGauge without boss`);
 }
 // regions: ≥1 field boss and ≥1 MVP
@@ -202,11 +235,29 @@ if (on('patches')) {
   }
   for (const r of rows.sort((a, b) => a.lv - b.lv)) console.log(r.line);
 }
+// ── expedition maps (M10): what each is for, its danger, and where its target items come from
+if (on('expedition')) {
+  console.log('\n== expedition maps (⚠ 원정): danger monsters · chests · target items and every source');
+  for (const z of ZONES.filter(isExpedition)) {
+    const mid = (z.lv[0] + z.lv[1]) / 2;
+    console.log(`  ${z.id} ${z.name} Lv ${z.lv[0]}-${z.lv[1]} (${z.region}) ← ${openers(z).join(',')}`);
+    for (const d of z.danger ?? []) {
+      const m = MONSTERS[d.id];
+      console.log(`    ⚠ ${m.name} Lv ${m.lv} (+${Math.round(m.lv - mid)}) HP ${m.hp} atk ${m.atk.join('-')} spd ${m.speed} · every ~${Math.round(d.every / 60000 * 10) / 10}min, stays ${Math.round(d.stay / 1000)}s${d.hours ? ` · awake ${d.hours.from}→${d.hours.to}h` : ''}${m.onHit ? ` · on hit ${m.onHit.status} ${m.onHit.chance}%` : ''}`);
+    }
+    if (z.chest) {
+      const t = MONSTERS[z.chest.trap];
+      console.log(`    상자 every ~${Math.round(z.chest.every / 60000 * 10) / 10}min · trap ${Math.round(z.chest.trapRate * 100)}% → ${t.name} Lv ${t.lv} (+${Math.round(t.lv - mid)}) HP ${t.hp} spd ${t.speed} · ${z.chest.zeny.join('-')}z + ${z.chest.drops.map((d) => `${ITEMS[d.id].name}${d.slots ? `[${d.slots}]` : ''} ${fmtRate(d.rate)}`).join(', ')}`);
+    }
+    for (const id of z.specialty ?? []) console.log(`    · ${ITEMS[id].name}: ${srcText(id)}`);
+  }
+}
 // ── stat curve outliers (normal mobs): HP and ATK vs a smooth curve by level
 if (on('curve')) {
   console.log('\n== normal mob HP / ATK vs curve (pre-trim HP ≈ 1.6·lv², atk ≈ lv·(1.6+0.045·lv))');
   const trim = (lv: number) => (lv >= 45 ? 0.75 : lv >= 28 ? 0.65 : lv >= 14 ? 0.8 : 1);
-  for (const m of Object.values(MONSTERS).filter((m) => !m.boss).sort((a, b) => a.lv - b.lv)) {
+  // (danger monsters of expedition maps are deliberate elites, ~3× HP: left out)
+  for (const m of Object.values(MONSTERS).filter((m) => !m.boss && !m.danger).sort((a, b) => a.lv - b.lv)) {
     const hpC = 1.6 * m.lv * m.lv * trim(m.lv), atkC = m.lv * (1.6 + 0.045 * m.lv);
     const hr = m.hp / Math.max(30, hpC), ar = (m.atk[0] + m.atk[1]) / 2 / atkC;
     const flag = hr > 1.6 || hr < 0.6 || ar > 1.3 || ar < 0.75 ? '  <<' : '';

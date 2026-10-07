@@ -53,6 +53,8 @@ const CHASE: Opt<Tactics['chase']>[] = [
 ];
 const PULL: [number, string][] = [[1, '하나씩'], [2, '2'], [3, '3'], [5, '5'], [99, '무제한']];
 const REST: [number, string][] = [[0, '안 쉼'], [10, '10%'], [20, '20%'], [35, '35%'], [50, '50%']];
+/** M10: 원정 맵의 위험 몹 — absent = 피하기 */
+const DANGER: [NonNullable<PartyOrders['danger']>, string][] = [['avoid', '피하기'], ['fight', '맞서기']];
 
 /** one-tap 작전 presets (DQ-style): orders + per-hero tactics */
 const PRESETS: { id: string; name: string; desc: string; orders: PartyOrders; tac: (h: Hero) => Tactics }[] = [
@@ -117,13 +119,13 @@ export function PartyOps() {
   const g = useGame();
   const s = g.s;
   const setOrders = (o: Partial<PartyOrders>) => { s.orders = { ...s.orders, ...o }; g.commit('click'); };
-  const active = PRESETS.find((p) => same(p.orders, s.orders) && s.heroes.every((h) => same(p.tac(h), h.tactics)));
+  const active = PRESETS.find((p) => same({ ...p.orders, danger: s.orders.danger }, s.orders) && s.heroes.every((h) => same(p.tac(h), h.tactics)));
   return (
     <>
       <div class="presets">
         {PRESETS.map((p) => (
           <button class={'preset' + (active?.id === p.id ? ' on' : '')} aria-pressed={active?.id === p.id} onClick={() => {
-            s.orders = { ...p.orders };
+            s.orders = { ...p.orders, danger: s.orders.danger };
             for (const h of s.heroes) h.tactics = p.tac(h);
             g.commit('click');
             g.toast(`작전: ${p.name}`, 'info');
@@ -141,6 +143,10 @@ export function PartyOps() {
         <div class="ord-row">
           <span class="ord-l">휴식 기준<small>전투 후 HP·SP가 이 아래면 다 같이 휴식</small></span>
           <Seg opts={REST} value={s.orders.rest} onPick={(v) => setOrders({ rest: v })} />
+        </div>
+        <div class="ord-row">
+          <span class="ord-l">위험 몹<small>{(s.orders.danger ?? 'avoid') === 'avoid' ? '원정 맵: 치지 않고 다가오면 물러남' : '원정 맵: 찾아가서 싸움'}</small></span>
+          <Seg opts={DANGER} value={s.orders.danger ?? 'avoid'} onPick={(v) => setOrders({ danger: v })} />
         </div>
       </div>
     </>

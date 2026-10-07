@@ -174,6 +174,8 @@ export interface PartyOrders {
   pull: number;
   /** after a fight, the party sits to recover when any member's HP or SP % is below this (0 = never) */
   rest: number;
+  /** M10: what the party does about a roaming danger monster on an expedition map (absent = avoid) */
+  danger?: 'avoid' | 'fight';
 }
 
 export interface Hero {
