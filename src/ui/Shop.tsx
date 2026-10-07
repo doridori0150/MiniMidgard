@@ -4,7 +4,7 @@ import { useGame } from './game.ts';
 import { HeroTabs, LookCanvas, fmt, nameClass } from './widgets.tsx';
 import { ITEMS, SHOPS } from '../game/data/items.ts';
 import type { ItemDef, EquipInst, Hero } from '../game/types.ts';
-import { buy, buyPrice, canEquip, equip, equippedBy, itemName, sellEquip, sellPrice, sellStack, sellAllEtc, addEquip, slotsFor, equipAmmo, quickTrigger } from '../game/state.ts';
+import { buy, buyPrice, canEquip, equip, equippedBy, itemName, sellEquip, sellPrice, sellStack, sellAllEtc, addEquip, slotsFor, equipAmmo, quickTrigger, isKeepItem } from '../game/state.ts';
 import { findEquip, partyPerks } from '../game/stats.ts';
 import { NPC_LOOKS } from '../render/field.ts';
 import { itemIconURL } from '../render/icons.ts';
@@ -207,9 +207,9 @@ function SellGrid(props: { layout: ShopLayout }) {
   const s = g.s;
   const stacks = Object.entries(s.stacks).filter(([id, n]) => n > 0 && ITEMS[id] && ITEMS[id].kind !== 'ammo').sort((a, b) => ITEMS[a[0]].kind.localeCompare(ITEMS[b[0]].kind) || sellPrice(s, b[0]) - sellPrice(s, a[0]));
   const eqs = s.equips.filter((e) => !equippedBy(s, e.uid));
-  const junk = stacks.filter(([id]) => ITEMS[id].kind === 'etc' && !id.startsWith('r_') && !ITEMS[id].rarity);
+  const junk = stacks.filter(([id]) => ITEMS[id].kind === 'etc' && !isKeepItem(id));
   const junkZ = junk.reduce((a, [id, n]) => a + sellPrice(s, id) * n, 0);
-  const precious = (id: string) => ITEMS[id].kind === 'card' || !!ITEMS[id].rarity || id.startsWith('r_');
+  const precious = (id: string) => ITEMS[id].kind === 'card' || isKeepItem(id);
   const sellNow = (id: string, n: number) => { const z = sellStack(s, id, n); if (z) g.toast(`+${fmt(z)} 제니`, 'good'); g.commit('zeny'); };
   return (
     <>

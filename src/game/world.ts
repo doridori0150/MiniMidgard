@@ -8,7 +8,7 @@ import { ITEMS } from './data/items.ts';
 import { zone as zoneDef, ZONES, type ZoneDef } from './data/zones.ts';
 import { CLASSES, lineage } from './data/classes.ts';
 import { expNext } from './exp.ts';
-import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics, gateDiscoverable, gateReady, openGate, zoneKnown, inHours } from './state.ts';
+import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics, gateDiscoverable, gateReady, openGate, zoneKnown, inHours, isKeepItem } from './state.ts';
 
 export type DmgKind = 'normal' | 'crit' | 'taken' | 'heal' | 'sp' | 'miss' | 'lucky' | 'total' | 'zero';
 
@@ -1882,7 +1882,7 @@ export class World {
       for (const h of this.heroes) { if (h.state === 'dead') continue; const d = dist(h, g); if (d < bd) { bd = d; best = h; } }
       this.emit({ t: 'pickup', gid: g.gid, to: best?.uid ?? 0 });
       const def = ITEMS[g.id];
-      if (def.kind === 'etc' && this.s.settings.autoSellEtc && !g.id.startsWith('r_') && !def.rarity) {
+      if (def.kind === 'etc' && this.s.settings.autoSellEtc && !isKeepItem(g.id)) {
         addItem(this.s, g.id, 1);
         const z = sellStack(this.s, g.id, 1);
         this.s.rate.zeny += z;

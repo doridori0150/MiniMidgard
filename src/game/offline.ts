@@ -2,7 +2,7 @@ import type { GameState } from './types.ts';
 import { zone } from './data/zones.ts';
 import { MONSTERS } from './data/monsters.ts';
 import { ITEMS } from './data/items.ts';
-import { addItem, applyExp, sellStack } from './state.ts';
+import { addItem, applyExp, sellStack, isKeepItem, inHours } from './state.ts';
 import { partyPerks } from './stats.ts';
 
 export const OFFLINE_CAP_MS = 12 * 3600 * 1000;
@@ -18,6 +18,8 @@ export interface OfflineReport {
   cards: string[];
   zeny: number;
   levels: { name: string; base: number; job: number }[];
+  /** a night-only map closed while away: the party walked back here */
+  faded?: { from: string; to: string };
 }
 
 function poisson(lambda: number, rng: () => number): number {
@@ -32,9 +34,49 @@ function gauss(rng: () => number) {
   return Math.sqrt(-2 * Math.log(Math.max(1e-9, rng()))) * Math.cos(2 * Math.PI * rng());
 }
 
+/** ms from `start` until a local-clock window [from, to) closes; 0 if it is closed at `start` */
+function msUntilClose(h: { from: number; to: number }, start: Date): number {
+  if (!inHours(h, start)) return 0;
+  const end = new Date(start);
+  end.setHours(h.to % 24, 0, 0, 0);
+  if (end <= start) end.setDate(end.getDate() + 1);
+  return end.getTime() - start.getTime();
+}
+
 export function applyOffline(s: GameState, elapsed: number, rng: () => number = Math.random): OfflineReport | null {
   const ms = Math.min(OFFLINE_CAP_MS, elapsed);
   if (ms < 60_000) return null;
+  // a night-only path stays open only until dawn: hunt there until it closes, then back on the previous map
+  const z = zone(s.zone);
+  const h = z.gate?.need.find((n) => n.kind === 'hours');
+  if (h && h.kind === 'hours') {
+    const open = msUntilClose(h, new Date(Date.now() - elapsed));
+    if (open < ms) {
+      const first = open >= 60_000 ? huntOffline(s, open, rng) : null;
+      const back = z.unlockBy && s.unlocked.includes(z.unlockBy) ? z.unlockBy : 'town';
+      s.zone = back;
+      const second = huntOffline(s, ms - open, rng);
+      const r = merge(first, second);
+      if (r) r.faded = { from: z.id, to: back };
+      return r ?? { ms, zone: back, kills: 0, exp: 0, items: {}, equips: [], cards: [], zeny: 0, levels: [], faded: { from: z.id, to: back } };
+    }
+  }
+  return huntOffline(s, ms, rng);
+}
+
+function merge(a: OfflineReport | null, b: OfflineReport | null): OfflineReport | null {
+  if (!a || !b) return a ?? b;
+  const items = { ...a.items };
+  for (const [id, n] of Object.entries(b.items)) items[id] = (items[id] ?? 0) + n;
+  const levels = [...a.levels];
+  for (const l of b.levels) {
+    const x = levels.find((y) => y.name === l.name);
+    if (x) { x.base += l.base; x.job += l.job; } else levels.push({ ...l });
+  }
+  return { ms: a.ms + b.ms, zone: a.zone, kills: a.kills + b.kills, exp: a.exp + b.exp, items, equips: [...a.equips, ...b.equips], cards: [...a.cards, ...b.cards], zeny: a.zeny + b.zeny, levels };
+}
+
+function huntOffline(s: GameState, ms: number, rng: () => number): OfflineReport | null {
   const z = zone(s.zone);
   if (!z.mobs.length) return null;
   const r = s.rate;
@@ -67,7 +109,7 @@ export function applyOffline(s: GameState, elapsed: number, rng: () => number = 
         for (let i = 0; i < n; i++) { addItem(s, d.id, 1, d.slots); report.equips.push(d.id); }
       } else {
         if (def.kind === 'card') { for (let i = 0; i < n; i++) report.cards.push(d.id); book.card = true; s.totals.cards += n; }
-        if (def.kind === 'etc' && s.settings.autoSellEtc && !d.id.startsWith('r_') && !def.rarity) {
+        if (def.kind === 'etc' && s.settings.autoSellEtc && !isKeepItem(d.id)) {
           addItem(s, d.id, n);
           report.zeny += sellStack(s, d.id, n);
         } else {

@@ -134,6 +134,7 @@ function OfflineModal(props: { report: import('../game/offline.ts').OfflineRepor
       <div class="win-title"><span>자리를 비운 동안</span><span class="sp" /></div>
       <div class="win-body">
         <div style={{ fontSize: '13px' }}><b>{dur(r.ms)}</b> 동안 {zone(r.zone).name}에서 사냥했습니다.</div>
+        {r.faded && <div class="small" style={{ color: '#6a4aa8', marginTop: '4px' }}>날이 밝아 「{zone(r.faded.from).name}」의 길이 흐려졌고, 파티는 「{zone(r.faded.to).name}」(으)로 돌아왔습니다.</div>}
         <div class="kv">
           <span>처치</span><span>{fmt(r.kills)}마리</span>
           <span>획득 경험치</span><span>{fmt(r.exp)}</span>

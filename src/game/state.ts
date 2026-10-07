@@ -387,11 +387,24 @@ export function sellEquip(s: GameState, uid: number): number {
   return z;
 }
 
+/** etc items that are never auto-sold: ores, anything rare, and every clue / key / offering a sealed map asks for */
+let gateItems: Set<string> | null = null;
+export function isKeepItem(id: string): boolean {
+  if (!gateItems) {
+    gateItems = new Set();
+    for (const z of ZONES) {
+      if (z.gate?.clue) gateItems.add(z.gate.clue);
+      for (const n of z.gate?.need ?? []) if (n.kind === 'item') gateItems.add(n.id);
+    }
+  }
+  return id.startsWith('r_') || !!ITEMS[id]?.rarity || gateItems.has(id);
+}
+
 export function sellAllEtc(s: GameState): { count: number; zeny: number } {
   let count = 0, zeny = 0;
   for (const [id, n] of Object.entries(s.stacks)) {
     const d = ITEMS[id];
-    if (d.kind !== 'etc' || id.startsWith('r_')) continue;
+    if (d.kind !== 'etc' || isKeepItem(id)) continue;
     count += n;
     zeny += sellStack(s, id, n);
   }

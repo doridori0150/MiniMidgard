@@ -117,9 +117,19 @@ export function MapPanel() {
             {z.gate && (locked || blocked) ? (
               <div class="zc-gate">
                 <div class="zc-rumor">“{z.gate.hint}”</div>
-                <ul class="zc-needs">
-                  {gateLines(s, z).map((l) => <li class={l.ok ? 'ok' : ''}><i>{l.ok ? '✓' : '·'}</i>{l.text}</li>)}
-                </ul>
+                {(() => {
+                  // conditions surface one at a time: everything met so far, plus the next one
+                  const lines = gateLines(s, z);
+                  const next = lines.findIndex((l) => !l.ok);
+                  const shown = next < 0 ? lines : lines.slice(0, next + 1);
+                  const unknown = lines.length - shown.length;
+                  return (
+                    <ul class="zc-needs">
+                      {shown.map((l) => <li class={l.ok ? 'ok' : ''}><i>{l.ok ? '✓' : '·'}</i>{l.text}</li>)}
+                      {unknown > 0 && <li class="unk"><i>?</i>아직 알 수 없는 조건 {unknown}개</li>}
+                    </ul>
+                  );
+                })()}
                 {locked && gateReady(s, z) && z.gate.need.some((n) => n.kind === 'item' && n.consume) && (
                   <button class="btn gold block" onClick={() => {
                     g.setModal({ kind: 'confirm', text: `${z.name}의 봉인에 물건을 바칠까요?\n바친 물건은 돌아오지 않습니다.`, ok: () => {

@@ -826,3 +826,4 @@ input { font-family: inherit; }
 .zc-needs li i { width: 16px; height: 16px; flex: none; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-style: normal; font-size: 10px; background: #e8e4f2; color: #8a80a8; }
 .zc-needs li.ok { color: var(--ink); }
 .zc-needs li.ok i { background: #5ac06a; color: #fff; }
+.zc-needs li.unk { color: #8a80a8; font-style: italic; }
