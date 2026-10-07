@@ -3,7 +3,7 @@ import { useState } from 'preact/hooks';
 import { useGame, useViewState, useBackHandler } from './game.ts';
 import { HeroCanvas, MobCanvas, ElChip, Win, fmt, nameClass, usePainter } from './widgets.tsx';
 import { useRef } from 'preact/hooks';
-import { ZONES, regions, regionOf, type ZoneDef, type ZoneRole } from '../game/data/zones.ts';
+import { ZONES, REGION_INFO, regions, regionOf, openers, type ZoneDef, type ZoneRole } from '../game/data/zones.ts';
 import { MONSTERS, type MonsterDef } from '../game/data/monsters.ts';
 import { ITEMS } from '../game/data/items.ts';
 import { ELEMENTS, ELEMENT_KO, RACE_KO, SIZE_KO, elementMod } from '../game/data/elements.ts';
@@ -62,6 +62,12 @@ function MobCard(props: { id: string; onOpen: () => void }) {
 
 const ROLE_KO: Record<ZoneRole, string> = { exp: '경험치', loot: '득템', ore: '광석', zeny: '제니', mvp: 'MVP' };
 
+/** how a locked (non-secret) map opens: one opener, or any one of several roads */
+function lockedText(z: ZoneDef): string {
+  const names = openers(z).map((id) => ZONES.find((x) => x.id === id)?.name).filter(Boolean);
+  return names.length > 1 ? `🔒 ${names.join(' · ')} 중 한 곳의 필드 보스를 처치하면 길이 열립니다.` : `🔒 ${names[0]}의 필드 보스를 처치하면 길이 열립니다.`;
+}
+
 export function MapPanel() {
   const g = useGame();
   const s = g.s;
@@ -98,7 +104,7 @@ export function MapPanel() {
                 style={{ left: rr.x + '%', top: rr.y + '%' }}
                 onClick={() => { setSelR(rr.id); setSel(null); audio.play('click'); }}>
                 {here && <span class="pin-hero"><HeroCanvas hero={s.heroes[0]} face /></span>}
-                <span class="pin-dot">{open ? THEME_ICON[rr.theme] : '🔒'}</span>
+                <span class="pin-dot">{open ? REGION_INFO[rr.name]?.icon ?? THEME_ICON[rr.theme] : '🔒'}</span>
                 <span class="pin-label">
                   <b>{rr.name.replace(/ 지방$/, '')}</b>
                   <span class="pin-lv">{town ? '마을' : lvSpan(kz)}{open && f && <i class={'fit ' + f.cls}>{f.label}</i>}</span>
@@ -114,10 +120,11 @@ export function MapPanel() {
         {!z ? (
           <div class={'zcard ' + r.theme}>
             <div class="zc-head">
-              <span class="zc-icon">{THEME_ICON[r.theme]}</span>
+              <span class="zc-icon">{REGION_INFO[r.name]?.icon ?? THEME_ICON[r.theme]}</span>
               <div class="sp1">
                 <div class="zc-name">{r.name}</div>
                 <div class="zc-sub">{r.zones[0].id === 'town' ? '안전 지대' : `${lvSpan(known)} · 개방 ${known.filter((x) => unlocked.has(x.id)).length}/${known.length}`}</div>
+                {REGION_INFO[r.name]?.home && <div class="zc-sub">{REGION_INFO[r.name].home}의 고향</div>}
               </div>
             </div>
             <div class="zc-body">
@@ -194,7 +201,7 @@ export function MapPanel() {
                     {!locked && blocked && <div class="small muted">{blocked}</div>}
                   </div>
                 ) : (
-                  <div class="zc-desc">{locked ? `🔒 ${ZONES.find((x) => x.id === z.unlockBy)?.name}의 필드 보스를 처치하면 길이 열립니다.` : z.desc}</div>
+                  <div class="zc-desc">{locked ? lockedText(z) : z.desc}</div>
                 )}
                 {!locked && z.specialty && z.specialty.length > 0 && (
                   <div class="zc-spec"><span>특산</span>{z.specialty.filter((id) => ITEMS[id]).map((id) => <button class="spec" onClick={() => g.setModal({ kind: 'item', id })}><img src={itemIconURL(id)} alt="" />{ITEMS[id].name}</button>)}</div>

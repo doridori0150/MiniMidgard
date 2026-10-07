@@ -357,6 +357,126 @@ etc('q_moonfur', '달빛 묻은 늑대털', 10, 'fur', '#e0e8ff', '달빛을 받
 etc('q_runeshard', '룬 문양 조각', 10, 'gem', '#c8a8ff', '해골 광부들이 주워 모으던 돌 조각. 광산 1층 막다른 갱도의 석문에 난 홈과 모양이 꼭 맞는다. 홈은 다섯 개였다.', 'rare');
 etc('q_mapscrap', '낡은 지도 조각', 10, 'scroll', '#e0c890', '모래바람에 날려 온 양피지 귀퉁이. 사막 한가운데 X 표시와 집게발 그림이 있다. 네 조각을 맞추면 길이 보일 것 같다.', 'rare');
 
+// ═══════════════════════════ v0.4 — 직업별 고향과 초보존 (사냥으로만 얻는다)
+// ── 무기: 고향마다 그 직업이 원하는 것 (도리깨·버들 롯드·모래바람 단검·선원의 손도끼 → 소굴·탑·난파선·산호 동굴 → 하늘 유적)
+weapon('w_flail', '도리깨', 'mace', 1, 42, 1300, { desc: '밀을 털던 도리깨. 휘두르기 쉽다.' });
+weapon('w_willowrod', '버들 롯드', 'staff', 1, 18, 1200, { matkPct: 15, bonus: { int: 1, maxSp: 20 }, icon: { glyph: 'staff', color: '#a8e0a0' }, desc: '호숫가 버드나무 가지. MATK +15%, INT +1, 최대 SP +20' });
+weapon('w_dunedagger', '모래바람 단검', 'dagger', 1, 36, 1600, { bonus: { agi: 1 }, icon: { glyph: 'dagger', color: '#f0d8a0' }, desc: '사막여우 두목이 숨겨 둔 단검. AGI +1' });
+weapon('w_shipaxe', '선원의 손도끼', 'axe', 1, 55, 1800, { icon: { glyph: 'axe', color: '#c8a070' }, desc: '밧줄도 끊고 게딱지도 쪼개는 뱃사람의 도끼.' });
+weapon('w_dirk', '도적의 단도', 'dagger', 2, 58, 9000, { reqLv: 12, bonus: { crit: 3 }, icon: { glyph: 'dagger', color: '#c0a060' }, desc: '도적 소굴에서 쓰던 날렵한 단도. 크리티컬 +3' });
+weapon('w_cutlass', '커틀러스', 'sword', 2, 76, 11000, { reqLv: 16, bonus: { crit: 2 }, icon: { glyph: 'sword', color: '#e0e0c8' }, desc: '해적들이 즐겨 쓰던 휜 칼. 크리티컬 +2' });
+weapon('w_runestaff', '룬 지팡이', 'staff', 3, 52, 30000, { matkPct: 18, bonus: { int: 2, castPct: 3 }, reqLv: 28, icon: { glyph: 'staff', color: '#80c0ff' }, desc: '마도탑 견습생의 졸업 지팡이. MATK +18%, INT +2, 시전 -3%', rarity: 'rare' });
+weapon('w_mistrod', '안개의 지팡이', 'staff', 4, 80, 90000, { matkPct: 22, bonus: { int: 4, maxSpPct: 8 }, reqLv: 40, icon: { glyph: 'staff', color: '#c8e8ff' }, desc: '대현자가 안개를 부리던 지팡이. MATK +22%, INT +4, 최대 SP +8%', rarity: 'epic' });
+weapon('w_hawktalon', '매발톱 카타르', 'katar', 3, 118, 60000, { reqLv: 40, twoHand: true, bonus: { agi: 2, hit: 5 }, icon: { glyph: 'katar', color: '#e08050' }, desc: '붉은 매의 발톱을 벼린 카타르. AGI +2, HIT +5', rarity: 'rare' });
+weapon('w_anchor', '닻', 'axe', 3, 158, 65000, { reqLv: 32, twoHand: true, bonus: { str: 2 }, icon: { glyph: 'axe', color: '#9ab0c8' }, desc: '산호가 엉겨 붙은 배의 닻. 휘두르면 파도 소리가 난다. STR +2', rarity: 'rare' });
+weapon('w_trident', '삼지창', 'spear', 3, 140, 60000, { reqLv: 36, bonus: { raceDmg: { fish: 15 } }, icon: { glyph: 'spear', color: '#80e0d0' }, desc: '심해에서 건진 세 갈래 창. 어패형 몬스터에게 주는 피해 +15%', rarity: 'rare' });
+weapon('w_lakewand', '호수의 지팡이', 'staff', 3, 60, 60000, { matkPct: 18, bonus: { int: 3, maxSpPct: 5 }, reqLv: 32, icon: { glyph: 'staff', color: '#d8f0ff' }, desc: '거울 호수의 물빛을 머금은 지팡이. MATK +18%, INT +3, 최대 SP +5%', rarity: 'rare' });
+weapon('w_seasaber', '바다의 사브르', 'sword', 4, 150, 180000, { reqLv: 48, bonus: { crit: 5, luk: 2 }, icon: { glyph: 'sword', color: '#a0e0ff' }, desc: '해적왕이 바다를 호령하던 칼. 크리티컬 +5, LUK +2', rarity: 'epic' });
+// 하늘 유적 (Lv 80~): 무기 종류마다 하나씩
+weapon('w_galeblade', '질풍검', 'sword', 4, 195, 380000, { reqLv: 82, element: 'wind', bonus: { agi: 2 }, icon: { glyph: 'sword', color: '#c8fff0' }, desc: '바람이 칼날이 된 검. 바람속성, AGI +2', rarity: 'epic' });
+weapon('w_skybreaker', '천공 대검', 'sword2h', 4, 275, 420000, { reqLv: 88, bonus: { str: 3 }, icon: { glyph: 'sword2h', color: '#fff0c0' }, desc: '구름을 가른다는 거대한 대검. STR +3', rarity: 'epic' });
+weapon('w_skylance', '천공창', 'spear', 4, 245, 450000, { reqLv: 90, twoHand: true, bonus: { str: 2, sizeDmg: { large: 10 } }, icon: { glyph: 'spear', color: '#fff8d0' }, desc: '천공 기사단의 기병창. STR +2, 대형 몬스터에게 주는 피해 +10%', rarity: 'mvp' });
+weapon('w_windkatar', '회오리 카타르', 'katar', 4, 190, 400000, { reqLv: 86, twoHand: true, bonus: { crit: 6, aspdPct: 3 }, icon: { glyph: 'katar', color: '#a0ffe0' }, desc: '회오리를 감은 카타르. 크리티컬 +6, 공격 속도 +3%', rarity: 'epic' });
+weapon('w_skyfang', '하늘 송곳니', 'dagger', 4, 150, 360000, { reqLv: 86, bonus: { crit: 6, agi: 2 }, icon: { glyph: 'dagger', color: '#fff4c8' }, desc: '금빛 깃털을 벼린 단검. 크리티컬 +6, AGI +2', rarity: 'epic' });
+weapon('w_skybow', '구름 장궁', 'bow', 4, 185, 420000, { reqLv: 84, bonus: { dex: 3, crit: 2 }, icon: { glyph: 'bow', color: '#e8f0ff' }, desc: '구름을 꼬아 시위를 건 장궁. DEX +3, 크리티컬 +2', rarity: 'epic' });
+weapon('w_skyrod', '천공의 지팡이', 'staff', 4, 90, 500000, { matkPct: 28, bonus: { int: 5, castPct: 5 }, reqLv: 88, icon: { glyph: 'staff', color: '#fff0a0' }, desc: '파수신의 빛이 깃든 지팡이. MATK +28%, INT +5, 시전 -5%', rarity: 'mvp' });
+weapon('w_halomace', '후광 철퇴', 'mace', 4, 190, 400000, { reqLv: 88, element: 'holy', bonus: { int: 3 }, icon: { glyph: 'mace', color: '#fffbe0' }, desc: '머리 위에 후광이 뜨는 철퇴. 성속성, INT +3', rarity: 'epic' });
+weapon('w_thunderaxe', '천둥 도끼', 'axe', 4, 250, 420000, { reqLv: 84, twoHand: true, bonus: { str: 3, vit: 1 }, icon: { glyph: 'axe', color: '#d8d0ff' }, desc: '구름 거인이 천둥을 내리치던 도끼. STR +3, VIT +1', rarity: 'epic' });
+
+// ── 방어구
+armor('g_sailcloth', '돛천 망토', 'garment', 2, 4000, { reqLv: 10, bonus: { flee: 3 }, icon: { glyph: 'cape', color: '#f0ecd8' }, desc: '찢어진 돛으로 만든 망토. 바람을 잘 탄다. FLEE +3' });
+armor('g_mageshawl', '마도사의 숄', 'garment', 2, 25000, { reqLv: 26, mdef: 6, bonus: { int: 1 }, icon: { glyph: 'cape', color: '#8a70d0' }, desc: '마도탑 연구원의 숄. INT +1, MDEF +6', rarity: 'rare' });
+armor('s_coralshield', '산호 방패', 'shield', 5, 35000, { jobs: SHIELD_JOBS, reqLv: 30, mdef: 3, bonus: { maxHp: 120 }, icon: { glyph: 'shield', color: '#ff8aa8' }, desc: '산호가 자라 굳은 방패. 최대 HP +120, MDEF +3', rarity: 'rare' });
+armor('g_windbreak', '바람막이 망토', 'garment', 4, 70000, { reqLv: 60, bonus: { flee: 3, eleRes: { wind: 15 } }, icon: { glyph: 'cape', color: '#d8e8f0' }, desc: '빙하 협곡의 눈보라를 막던 두꺼운 망토. 하늘 유적의 바람 앞에서 빛난다. FLEE +3, 받는 바람속성 피해 -15%', rarity: 'rare' });
+armor('g_cloudcape', '구름 망토', 'garment', 6, 150000, { reqLv: 80, bonus: { agi: 2, flee: 5 }, icon: { glyph: 'cape', color: '#f6f8ff' }, desc: '구름을 걸친 듯 가벼운 망토. AGI +2, FLEE +5', rarity: 'epic' });
+armor('f_windboots', '바람 장화', 'shoes', 6, 140000, { reqLv: 82, bonus: { agi: 1, maxHpPct: 4, moveSpd: 5 }, icon: { glyph: 'shoes', color: '#c8f0ff' }, desc: '구름 계단을 뛰어오르는 장화. AGI +1, 최대 HP +4%, 이동 속도 +5%', rarity: 'epic' });
+
+// ── 장신구 (맵 특산, [1] 슬롯 변종이 더 드물게 떨어진다)
+armor('x_workglove', '밭일 장갑', 'acc', 0, 8000, { bonus: { dex: 1, hit: 5 }, icon: { glyph: 'glove', color: '#d8b070' }, desc: '밀밭 일꾼이 잃어버린 장갑. 손에 착 감겨 공격이 잘 맞는다. DEX +1, HIT +5', rarity: 'rare' });
+armor('x_mushcharm', '버섯 부적', 'acc', 0, 12000, { bonus: { vit: 1, hpRegenPct: 10 }, icon: { glyph: 'brooch', color: '#a070d0' }, desc: '버섯 골짜기의 포자를 담은 부적. VIT +1, HP 회복 +10%', rarity: 'rare' });
+armor('x_mistmirror', '안개 거울', 'acc', 0, 20000, { mdef: 3, bonus: { int: 1 }, icon: { glyph: 'necklace', color: '#d0e8f0' }, desc: '안개 정령이 품고 있던 손거울. 목에 걸고 새벽 호숫가에 서면 물에 비친 길이 보인다고 한다. INT +1, MDEF +3', rarity: 'rare' });
+armor('x_hawkfeather', '매 깃털 부적', 'acc', 0, 30000, { bonus: { agi: 1, hit: 6 }, icon: { glyph: 'brooch', color: '#e07040' }, desc: '붉은 매의 깃털을 엮은 부적. 표적이 또렷이 보인다. AGI +1, HIT +6', rarity: 'rare' });
+armor('x_seaglass', '바다 유리 펜던트', 'acc', 0, 15000, { mdef: 2, bonus: { dex: 1, luk: 1 }, icon: { glyph: 'necklace', color: '#80e0d0' }, desc: '파도에 깎인 유리 조각. DEX +1, LUK +1, MDEF +2', rarity: 'rare' });
+armor('x_coralring', '산호 반지', 'acc', 0, 35000, { bonus: { str: 1, vit: 1 }, icon: { glyph: 'ring', color: '#ff7aa0' }, desc: '분홍 산호를 깎은 반지. STR +1, VIT +1', rarity: 'rare' });
+armor('x_pirate', '해적왕의 반지', 'acc', 0, 60000, { bonus: { str: 1, luk: 2, crit: 3 }, icon: { glyph: 'ring', color: '#ffd040' }, desc: '해골 모양 금반지. STR +1, LUK +2, 크리티컬 +3', rarity: 'epic' });
+armor('x_skyring', '천공의 반지', 'acc', 0, 250000, { bonus: { allStats: 2 }, icon: { glyph: 'ring', color: '#fff8d0' }, desc: '하늘 왕좌의 빛을 담은 반지. 모든 스탯 +2', rarity: 'mvp' });
+
+// ── 머리 (외형은 기존 모양을 그대로 쓴다)
+head('h_owlwing', '부엉이 깃 머리띠', 'headTop', 'angel', 1, 15000, { mdef: 2, bonus: { agi: 1, dex: 1 }, desc: '부엉이 대장의 갈색 깃을 단 머리띠. AGI +1, DEX +1, MDEF +2', rarity: 'rare' });
+head('h_lilypad', '연잎', 'headTop', 'leaf', 1, 12000, { bonus: { int: 1, spRegenPct: 10 }, desc: '호숫가 연잎을 머리에 얹었다. INT +1, SP 회복 +10%', rarity: 'rare' });
+head('h_foxears', '사막여우 귀', 'headTop', 'cat', 2, 15000, { mdef: 3, bonus: { agi: 1, luk: 1 }, desc: '커다란 사막여우 귀 머리띠. AGI +1, LUK +1, MDEF +3', rarity: 'rare' });
+head('h_sailor', '수병 모자', 'headTop', 'cap', 2, 12000, { bonus: { dex: 1, hit: 3 }, desc: '항구 수병들의 모자. 갑판 위에서도 겨냥이 흔들리지 않는다. DEX +1, HIT +3', rarity: 'rare' });
+head('l_bandit', '도적 복면', 'headLow', 'mask', 1, 12000, { bonus: { agi: 1, flee: 2 }, desc: '도적 소굴 두목의 졸개들이 쓰던 복면. AGI +1, FLEE +2', rarity: 'rare' });
+head('h_sagehat', '대현자의 고깔', 'headTop', 'witch', 2, 150000, { mdef: 6, bonus: { int: 3, maxSpPct: 5 }, jobs: ['mage'], desc: '안개의 대현자가 쓰던 고깔. INT +3, 최대 SP +5%, MDEF +6', rarity: 'mvp' });
+head('h_coralcrown', '산호 왕관', 'headTop', 'crown', 3, 150000, { mdef: 4, bonus: { vit: 2, int: 1, eleRes: { water: 10 } }, desc: '심연의 해룡이 지키던 산호 왕관. VIT +2, INT +1, 받는 물속성 피해 -10%', rarity: 'mvp' });
+head('h_piratehat', '해적 두건', 'headTop', 'bandana', 2, 40000, { bonus: { str: 1, luk: 2 }, desc: '해적왕의 해골 무늬 두건. STR +1, LUK +2', rarity: 'epic' });
+head('h_swanwing', '백조 깃 머리띠', 'headTop', 'angel', 2, 120000, { mdef: 4, bonus: { int: 2, agi: 1 }, desc: '백조 여왕의 하얀 깃 머리띠. INT +2, AGI +1, MDEF +4', rarity: 'epic' });
+head('h_windwing', '바람 날개 머리띠', 'headTop', 'angel', 3, 250000, { mdef: 4, bonus: { agi: 2, dex: 2 }, desc: '폭풍 수리왕의 금빛 깃. AGI +2, DEX +2, MDEF +4', rarity: 'epic' });
+head('h_skycrown', '천공의 관', 'headTop', 'tiara', 3, 300000, { mdef: 8, bonus: { allStats: 2 }, desc: '하늘 왕좌의 주인이 쓰던 관. 모든 스탯 +2, MDEF +8', rarity: 'mvp' });
+
+// ── 잡템 (v0.4) — 몬스터마다 고유 잡템 하나
+etc('e_hopleg', '메뚜기 뒷다리', 25, 'stinger', '#9ad04a', '튼튼하게 휜 뒷다리. 한 번에 멀리 뛴다.');
+etc('e_smallbone', '작은 뼈', 40, 'bone', '#f4f0e0', '꼬마 해골의 손가락뼈. 묘지 냄새가 난다.');
+etc('e_wax', '녹은 촛농', 55, 'drop', '#ffe0a0', '굳으면서도 아직 따뜻하다.');
+etc('e_downfeather', '솜깃털', 30, 'fur', '#e8d8b8', '아기 부엉이의 보송한 깃털.');
+etc('e_owlplume', '부엉이 대장의 깃', 800, 'fur', '#c8a070', '숲 어귀를 내려다보던 대장의 깃. 밤눈이 밝아질 것 같다.', 'rare');
+etc('e_toadcap', '독버섯 갓', 40, 'spore', '#8a4ad0', '먹으면 안 된다. 정말로.');
+etc('e_dragonwing', '잠자리 날개', 20, 'batwing', '#c8f0ff', '유리처럼 얇고 투명하다.');
+etc('e_scale', '은빛 비늘', 35, 'shell', '#c8d8e8', '햇빛에 반짝이는 작은 비늘.');
+etc('e_whisker', '메기 수염', 800, 'root', '#6a7a5a', '물속의 안개를 읽는다는 길고 질긴 수염.', 'rare');
+etc('e_mist', '안개 방울', 45, 'drop', '#e0eef0', '병에 담아도 금방 흐려진다.');
+etc('e_page', '찢어진 책장', 70, 'scroll', '#f0e8d0', '읽다 만 주문이 반쯤 남아 있다.');
+etc('e_runestone', '룬 돌', 120, 'gem', '#80c0ff', '푸른 룬이 새겨진 돌. 손바닥이 찌릿하다.');
+etc('e_forbiddenpage', '금서의 낱장', 2000, 'scroll', '#3a2a4a', '쇠사슬 자국이 남은 검은 종이. 함부로 읽지 말 것.', 'rare');
+etc('e_burntpage', '그을린 책장', 130, 'scroll', '#c05030', '가장자리가 아직도 타고 있다.');
+etc('e_frostpage', '얼어붙은 책장', 140, 'scroll', '#a0d0ff', '서리가 앉아 글씨가 반짝인다.');
+etc('e_stonewing', '돌날개 조각', 150, 'batwing', '#9a9a90', '가고일의 날개에서 떨어진 돌판.');
+etc('e_phantomlens', '환영의 외알 안경', 4000, 'gem', '#a090ff', '수석 마도사가 끼던 외알 안경. 렌즈 너머가 흔들린다.', 'rare');
+etc('e_sageorb', '대현자의 수정구', 15000, 'gem', '#c8e0ff', '안의 안개 속에 별자리가 떠 있다.', 'rare');
+etc('e_cactspine', '꼬마 가시', 22, 'stinger', '#5aa848', '아직 말랑한 선인장 가시.');
+etc('e_fennecfur', '사막여우 털', 35, 'fur', '#f0d8a8', '모래 빛깔의 부드러운 털.');
+etc('e_foxtail', '두목 여우의 꼬리', 800, 'fur', '#ffd8a0', '사막여우 두목의 풍성한 꼬리털.', 'rare');
+etc('e_stolencoin', '훔친 금화', 180, 'coin', '#d0b060', '좀도둑 벌레가 굴리던 금화. 상점에서 그냥 받아 준다.');
+etc('e_dustwing', '먼지 날개', 60, 'batwing', '#a08a6a', '털면 모래가 한 줌 나온다.');
+etc('e_bossmask', '두목의 가면', 1500, 'cloth', '#4a3a2a', '그림자 두목의 얼굴을 가리던 가면. 안쪽은 텅 비어 있다.', 'rare');
+etc('e_hawkfeather', '붉은 매 깃털', 130, 'fur', '#c0603a', '바람을 가르던 붉은 깃털.');
+etc('e_conch', '소라 껍데기', 20, 'shell', '#ff9a6a', '귀에 대면 파도 소리가 난다.');
+etc('e_pearl', '진주', 300, 'gem', '#f8f4ff', '바다가 키운 동그란 구슬. 상점에서 값을 잘 쳐준다.');
+etc('e_gullfeather', '갈매기 깃털', 25, 'fur', '#ffffff', '바닷바람 냄새가 밴 하얀 깃털.');
+etc('e_kingclaw', '대왕 집게발', 800, 'claw', '#e04a3a', '대왕 집게의 큰 집게발. 껍질이 갑옷처럼 두껍다.', 'rare');
+etc('e_lampoil', '등대 기름', 45, 'drop', '#fff080', '불을 붙이면 아주 오래 탄다.');
+etc('e_doubloon', '해적 금화', 160, 'coin', '#ffd040', '바닷물에 녹슬지 않은 옛 금화.');
+etc('e_parrotfeather', '앵무새 깃털', 80, 'fur', '#4ad04a', '알록달록한 꼬리깃.');
+etc('e_epaulet', '선장의 견장', 2000, 'cloth', '#3aa0a0', '유령 선장의 어깨에 달려 있던 금실 견장.', 'rare');
+etc('e_coral', '산호 조각', 130, 'gem', '#ff7aa0', '분홍빛 산호 가지.');
+etc('e_puffspine', '복어 가시', 140, 'stinger', '#f0e070', '끝에 독이 맺혀 있다. 조심.');
+etc('e_tentacle', '말미잘 촉수', 150, 'root', '#ff5a8a', '꿈틀거리며 손가락에 감긴다.');
+etc('e_coralheart', '산호 심장', 5000, 'gem', '#ff8aa8', '산호 골렘의 가슴에서 고동치던 붉은 산호.', 'rare');
+etc('e_lure', '아귀 초롱', 170, 'gem', '#a0ffe0', '꺼지지 않고 은은하게 빛난다.');
+etc('e_abysspearl', '해룡의 진주', 15000, 'gem', '#80ffe0', '심연의 해룡이 삼키고 있던 커다란 진주.', 'rare');
+etc('e_ironhorn', '쇠뿔', 150, 'horn', '#b8b8c0', '철갑 뿔토끼의 강철 뿔.');
+etc('e_ironore', '철광석', 180, 'ore', '#7a7a80', '무쇠 골렘의 몸에서 떨어진 광석. 무겁다.');
+etc('e_owlfeather', '눈올빼미 깃털', 260, 'fur', '#f4f8ff', '눈송이처럼 가벼운 하얀 깃털.');
+etc('e_cloudfluff', '구름 솜', 600, 'fur', '#f6f8ff', '손에 쥐면 차갑고 폭신하다.');
+etc('e_stormfeather', '폭풍 깃털', 640, 'fur', '#a0b0e0', '쥐고 있으면 머리카락이 날린다.');
+etc('e_marble', '대리석 조각', 680, 'gem', '#f0ecd8', '석상 파수병의 매끈한 돌.');
+etc('e_cloudcore', '응결된 구름', 30000, 'gem', '#e8f0ff', '구름 거인을 이루던 구름이 돌처럼 굳었다.', 'rare');
+etc('e_galeheart', '질풍 결정', 700, 'gem', '#d0fff0', '안에서 작은 회오리가 돈다.');
+etc('e_holypage', '빛나는 경전 낱장', 720, 'scroll', '#fff0a0', '바람이 읽던 기도문 한 장.');
+etc('e_stormplume', '수리왕의 깃', 40000, 'fur', '#e0b860', '폭풍 수리왕의 금빛 깃털.', 'rare');
+etc('e_skypetal', '천상화 꽃잎', 740, 'petal', '#fff8ff', '땅에 떨어지지 않고 둥실 떠 있다.');
+etc('e_goldfeather', '금빛 깃털', 780, 'fur', '#ffe080', '깃털 말랑에게서 빠진 깃털.');
+etc('e_skyemblem', '천공 기사단 문장', 820, 'gem', '#d8c070', '날개와 별이 새겨진 문장.');
+etc('e_skyheart', '천공의 심장', 60000, 'gem', '#fff8d0', '파수신의 가슴에서 빛나던 하늘빛 보석.', 'rare');
+etc('e_goldshell', '금빛 게딱지', 260, 'shell', '#ffd040', '금화가 눌어붙어 금빛이 된 게딱지.');
+etc('e_rustyhook', '녹슨 갈고리', 280, 'claw', '#a8906a', '해골 갑판장의 의수.');
+etc('e_kingcoin', '해적왕의 금화', 20000, 'coin', '#ffe060', '해적왕의 얼굴이 새겨진 커다란 금화.', 'rare');
+etc('e_mirrorjelly', '거울 젤리', 160, 'jelly', '#e0e8f0', '들여다보면 내 얼굴이 비친다.');
+etc('e_whitefeather', '하얀 깃털', 170, 'fur', '#ffffff', '물에 젖지 않는 백조 깃털.');
+etc('e_swanfeather', '백조 여왕의 깃', 6000, 'fur', '#fffaf0', '달빛처럼 은은한 깃털.', 'rare');
+// 단서 (숨겨진 장소)
+etc('q_compass', '선장의 나침반', 10, 'gem', '#3aa0a0', '바늘이 북쪽이 아니라 남쪽 바다 어딘가를 가리킨다. 풋내기 선원들끼리는 그곳에 닿을 수 없다고 선장의 일지에 적혀 있다.', 'rare');
+
 // ── 카드 (몬스터 하나에 카드 하나)
 // 슬롯별 규칙: 무기 = 종족·크기·속성 % / ATK / 크리 / 속성 부여, 갑옷 = HP·VIT·갑옷 속성, 방패 = 종족 피해 감소,
 // 걸치기 = 속성 저항·FLEE·무속성 감소, 신발 = AGI·HP·SP, 액세서리 = 스탯·회복·스킬, 머리 = INT·DEX 등.
@@ -473,6 +593,73 @@ card('frostknight', '얼어붙은 기사', 'head', '서리 투구의', { vit: 2,
 card('sunpriest', '태양의 신관', 'head', '태양 신관의', { healPct: 20, int: 2 }, '힐 회복량 +20%, INT +2\n[머리]', 'epic');
 card('wraith', '망령 군주', 'head', '망령왕의', { matkPct: 10, castPct: 10, raceDmg: { undead: 10 } }, 'MATK +10%, 시전 시간 -10%\n불사형에게 주는 피해 +10%\n[머리]', 'mvp');
 card('pharaoh', '모래의 파라오', 'head', '파라오의', { aspdPct: 10, int: 3 }, '공격 속도 +10%, INT +3\n[머리]', 'mvp');
+
+// ── 카드 (v0.4) — 초보 필드 카드는 초반 벽(명중·회피·HP·SP)을 메우는 패치, 그 위로는 빌드의 빈칸(인간형·천사형·성 부여…)
+// 무기
+card('fennec', '사막여우', 'weapon', '날쌘 발톱의', { crit: 6 }, '크리티컬 +6\n[무기]');
+card('piratebones', '해골 해적', 'weapon', '약탈자의', { raceDmg: { demihuman: 20 } }, '인간형 몬스터에게 주는 피해 +20%\n[무기]');
+card('cherub', '깃털 말랑', 'weapon', '천사 사냥의', { raceDmg: { angel: 20 } }, '천사형 몬스터에게 주는 피해 +20%\n[무기]');
+card('canyonhawk', '붉은 매', 'weapon', '매사냥의', { eleDmg: { fire: 20 } }, '불속성 몬스터에게 주는 피해 +20%\n[무기]');
+card('lamplight', '등대 불빛', 'weapon', '등불의', { eleDmg: { shadow: 20 } }, '암흑속성 몬스터에게 주는 피해 +20%\n[무기]');
+card('irongolem', '무쇠 골렘', 'weapon', '무쇠의', { atk: 10, raceDmg: { formless: 10 } }, 'ATK +10\n무형 몬스터에게 주는 피해 +10%\n[무기]');
+card('scripture', '바람의 경전', 'weapon', '성스러운', { weaponElement: 'holy', atk: 5 }, '무기에 성속성 부여, ATK +5\n(암흑·불사에 강함, 성에 무효)\n[무기]');
+card('pirateking', '해적왕의 망령', 'weapon', '해적왕의', { raceDmg: { demihuman: 15 }, crit: 5 }, '인간형 몬스터에게 주는 피해 +15%, 크리티컬 +5\n[무기]', 'epic');
+card('abyssdragon', '심연의 해룡', 'weapon', '해룡의', { atkPct: 12, lifeStealPct: 2 }, '물리 피해 +12%\n물리 피해의 2%만큼 HP 흡수\n[무기]', 'mvp');
+// 갑옷
+card('cactling', '꼬마 선인장', 'armor', '가시 돋은', { vit: 1, def: 2 }, 'VIT +1, DEF +2\n[갑옷]');
+card('runegolem', '룬 골렘', 'armor', '룬 새긴', { vit: 1, mdef: 5 }, 'VIT +1, MDEF +5\n[갑옷]');
+card('coralcrab', '산호게', 'armor', '산호 껍질의', { vit: 2, def: 1 }, 'VIT +2, DEF +1\n[갑옷]');
+card('ironbun', '철갑 뿔토끼', 'armor', '철갑의', { def: 2, maxHp: 300 }, 'DEF +2, 최대 HP +300\n[갑옷]');
+card('treasurecrab', '보물게', 'armor', '보물 껍질의', { luk: 2, def: 2 }, 'LUK +2, DEF +2\n[갑옷]');
+card('skyflower', '천상화', 'armor', '천상의', { maxHpPct: 8, hpRegenPct: 25 }, '최대 HP +8%, HP 회복 +25%\n[갑옷]');
+card('catfish', '수염 메기', 'armor', '메기의', { maxHpPct: 8, maxSpPct: 8 }, '최대 HP +8%, 최대 SP +8%\n[갑옷]', 'epic');
+card('coralgolem', '산호 골렘', 'armor', '산호 거인의', { maxHpPct: 15, vit: 2, eleRes: { wind: -20 } }, '최대 HP +15%, VIT +2\n대신 받는 바람속성 피해 +20%\n[갑옷]', 'epic');
+card('cloudgiant', '구름 거인', 'armor', '구름 거인의', { maxHpPct: 18, def: 4, aspdPct: -5 }, '최대 HP +18%, DEF +4\n대신 공격 속도 -5%\n[갑옷]', 'epic');
+// 방패
+card('gargoyle', '석상 가고일', 'shield', '석상의', { raceRes: { undead: 20 }, def: 1 }, '불사형에게 받는 피해 -20%, DEF +1\n[방패]');
+card('sentinel', '석상 파수병', 'shield', '파수병의', { raceRes: { angel: 30 } }, '천사형에게 받는 피해 -30%\n[방패]');
+card('skyknight', '천공 기사', 'shield', '천공 기사의', { dmgReducePct: 6, def: 2 }, '받는 피해 -6%, DEF +2\n[방패]');
+card('kingcrab', '대왕 집게', 'shield', '대왕 집게의', { def: 3, maxHpPct: 5, eleRes: { water: 15 } }, 'DEF +3, 최대 HP +5%\n받는 물속성 피해 -15%\n[방패]', 'epic');
+// 걸치기
+card('gull', '갈매기', 'acc', '바닷바람의', { str: 1, dex: 1 }, 'STR +1, DEX +1\n[액세서리]');
+card('toadstool', '독버섯', 'garment', '독버섯의', { eleRes: { poison: 30 }, flee: 3 }, '받는 독속성 피해 -30%, FLEE +3\n[걸치기]');
+card('candlewisp', '촛불 망령', 'garment', '촛불의', { eleRes: { ghost: 25, fire: 10 } }, '받는 염속성 피해 -25%, 불속성 피해 -10%\n[걸치기]');
+card('firebook', '불꽃 마법서', 'garment', '불꽃 책의', { eleRes: { fire: 30 }, flee: 3 }, '받는 불속성 피해 -30%, FLEE +3\n[걸치기]');
+card('mirrorjelly', '거울 말랑', 'garment', '거울의', { mdef: 8, flee: 3 }, 'MDEF +8, FLEE +3\n[걸치기]');
+card('cloudjelly', '구름 말랑', 'garment', '구름의', { eleRes: { wind: 25 }, flee: 6 }, '받는 바람속성 피해 -25%, FLEE +6\n[걸치기]');
+card('shadowboss', '그림자 두목', 'garment', '그림자의', { flee: 15, eleRes: { holy: -25 } }, 'FLEE +15\n대신 받는 성속성 피해 +25%\n[걸치기]', 'epic');
+card('stormking', '폭풍 수리왕', 'garment', '수리왕의', { flee: 15, agi: 3 }, 'FLEE +15, AGI +3\n[걸치기]', 'epic');
+// 신발
+card('grasshopper', '메뚜기', 'shoes', '도약하는', { agi: 1, flee: 4 }, 'AGI +1, FLEE +4\n[신발]');
+card('hermit', '소라게', 'shoes', '소라의', { maxHp: 150, def: 1 }, '최대 HP +150, DEF +1\n[신발]');
+card('dustbat', '먼지 박쥐', 'shoes', '먼지 날개의', { flee: 5, maxSp: 20 }, 'FLEE +5, 최대 SP +20\n[신발]');
+card('pufferfish', '가시복어', 'shoes', '부풀어 오른', { maxHpPct: 8 }, '최대 HP +8%\n[신발]');
+card('swan', '백조', 'shoes', '백조의', { agi: 2, maxSpPct: 8 }, 'AGI +2, 최대 SP +8%\n[신발]');
+card('windbird', '폭풍 매', 'shoes', '폭풍 날개의', { agi: 3, flee: 5 }, 'AGI +3, FLEE +5\n[신발]');
+card('galespirit', '질풍 정령', 'shoes', '질풍의', { agi: 2, moveSpd: 8 }, 'AGI +2, 이동 속도 +8%\n[신발]');
+// 액세서리
+card('owlet', '아기 부엉이', 'acc', '올빼미 눈의', { hit: 8, dex: 1 }, 'HIT +8, DEX +1\n[액세서리]');
+card('dragonfly', '실잠자리', 'acc', '맑은 물의', { int: 1, spRegenPct: 15 }, 'INT +1, SP 회복 +15%\n[액세서리]');
+card('minnow', '은빛 피라미', 'acc', '은비늘의', { dex: 2 }, 'DEX +2\n[액세서리]');
+card('boneling', '꼬마 해골', 'acc', '꼬마 해골의', { int: 1, healPct: 5 }, 'INT +1, 힐 회복량 +5%\n[액세서리]');
+card('parrot', '해적 앵무새', 'head', '앵무새 눈의', { dex: 2, hit: 8 }, 'DEX +2, HIT +8\n[머리]');
+card('icebook', '얼음 마법서', 'acc', '얼음 책의', { int: 2, maxSp: 40 }, 'INT +2, 최대 SP +40\n[액세서리]');
+card('anemone', '말미잘', 'weapon', '파도의', { weaponElement: 'water' }, '무기에 물속성 부여\n(불에 강함, 물·바람에 약함)\n[무기]');
+card('foxchief', '사막여우 두목', 'acc', '여우 두목의', { agi: 3, luk: 2 }, 'AGI +3, LUK +2\n[액세서리]', 'epic');
+card('grimoire', '금서', 'acc', '금서의', { int: 3, spRegenPct: 20 }, 'INT +3, SP 회복 +20%\n[액세서리]', 'epic');
+card('ghostcaptain', '유령 선장', 'acc', '선장의', { str: 2, vit: 2, luk: 1 }, 'STR +2, VIT +2, LUK +1\n[액세서리]', 'epic');
+card('towerlord', '안개의 대현자', 'acc', '대현자의', { int: 3, castPct: 10, maxSpPct: 10 }, 'INT +3, 시전 시간 -10%, 최대 SP +10%\n[액세서리]', 'mvp');
+card('skykeeper', '천공의 파수신', 'acc', '파수신의', { allStats: 3, maxHpPct: 5, maxSpPct: 5 }, '모든 스탯 +3, 최대 HP +5%, 최대 SP +5%\n[액세서리]', 'mvp');
+// 머리
+card('mistwisp', '안개 정령', 'head', '안개의', { int: 1, mdef: 3, maxSpPct: 5 }, 'INT +1, MDEF +3, 최대 SP +5%\n[머리]');
+card('spellbook', '떠도는 마법서', 'head', '책벌레의', { int: 2, castPct: 3 }, 'INT +2, 시전 시간 -3%\n[머리]');
+card('thiefbug', '좀도둑 벌레', 'head', '좀도둑의', { luk: 2, crit: 2 }, 'LUK +2, 크리티컬 +2\n[머리]');
+card('deepfish', '초롱아귀', 'head', '초롱의', { dex: 2, int: 1 }, 'DEX +2, INT +1\n[머리]');
+card('seadog', '해골 갑판장', 'shield', '갑판장의', { raceRes: { demihuman: 30 } }, '인간형에게 받는 피해 -30%\n[방패]');
+card('snowowl', '눈올빼미', 'head', '눈올빼미의', { dex: 2, luk: 1, hit: 4 }, 'DEX +2, LUK +1, HIT +4\n[머리]');
+card('owlchief', '부엉이 대장', 'head', '부엉이 대장의', { hit: 12, dex: 2 }, 'HIT +12, DEX +2\n[머리]', 'epic');
+card('magephantom', '수석 마도사의 환영', 'head', '환영의', { hit: 20, castPct: -15 }, 'HIT +20\n대신 시전 시간 +15%\n[머리]', 'epic');
+card('swanqueen', '백조 여왕', 'head', '백조 여왕의', { int: 3, maxSpPct: 10, castPct: 5 }, 'INT +3, 최대 SP +10%, 시전 시간 -5%\n[머리]', 'epic');
 
 /** accessory cards that teach a skill (needs engine support: world.ts enabledSkills should add these while the card is equipped) */
 export const CARD_SKILLS: Record<string, { skill: string; lv: number }> = {

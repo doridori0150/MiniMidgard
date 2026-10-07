@@ -5,7 +5,7 @@ import { elementMod, sizeMod, ELEMENT_KO } from './data/elements.ts';
 import { SKILLS, type SkillDef, type FixedCtx } from './data/skills.ts';
 import { MONSTERS, type MonsterDef, type MobSkill } from './data/monsters.ts';
 import { ITEMS, CARD_SKILLS } from './data/items.ts';
-import { zone as zoneDef, ZONES, type ZoneDef } from './data/zones.ts';
+import { zone as zoneDef, ZONES, openers, type ZoneDef } from './data/zones.ts';
 import { CLASSES, lineage } from './data/classes.ts';
 import { expNext } from './exp.ts';
 import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics, heroRole, gateDiscoverable, gateReady, openGate, zoneKnown, inHours, isKeepItem } from './state.ts';
@@ -166,6 +166,8 @@ export class World {
   /** the world moved the party by itself (e.g. a night-only path faded at dawn) */
   onTravel: (id: string) => void = () => {};
   private gateAt = 0;
+  /** wall clock for time-of-day paths (tools/sim.ts swaps in its simulated clock) */
+  clock: () => Date = () => new Date();
   /** when a night-only path closes under the party's feet */
   private fadeAt = 0;
 
@@ -333,7 +335,7 @@ export class World {
     }
     // a night-only path fades at dawn: leave once the fight is over
     const hz = this.zone.gate?.need.find((n) => n.kind === 'hours');
-    if (!hz || hz.kind !== 'hours' || inHours(hz)) { this.fadeAt = 0; return; }
+    if (!hz || hz.kind !== 'hours' || inHours(hz, this.clock())) { this.fadeAt = 0; return; }
     if (!this.fadeAt) {
       this.fadeAt = this.time + 20000;
       this.log(`주위가 밝아온다. 「${this.zone.name}」의 길이 흐려지기 시작했다…`, '#d8b8ff');
@@ -1788,7 +1790,7 @@ export class World {
     m.lockUntil = this.time + 380;
     if (m.m.range > 60) {
       const fly = Math.max(140, dist(m, t) / 0.6);
-      this.emit({ t: 'shot', from: m.uid, to: t.uid, kind: m.m.sprite === 'flower' ? 'bone' : 'arrow', dur: fly, element: m.m.atkElement ?? 'neutral' });
+      this.emit({ t: 'shot', from: m.uid, to: t.uid, kind: m.m.sprite === 'flower' ? 'bone' : m.m.sprite.startsWith('book') ? 'shadow' : 'arrow', dur: fly, element: m.m.atkElement ?? 'neutral' });
       this.after(fly, () => this.mobHit(m, t, 1, m.m.atkElement ?? 'neutral', false));
     } else {
       this.after(220, () => this.mobHit(m, t, 1, m.m.atkElement ?? 'neutral', false));
@@ -1995,7 +1997,7 @@ export class World {
       }
       // unlocks
       for (const nz of ZONES) {
-        if (nz.unlockBy === z.id && !nz.gate && !s.unlocked.includes(nz.id) && m.boss === 'field') {
+        if (openers(nz).includes(z.id) && !nz.gate && !s.unlocked.includes(nz.id) && m.boss === 'field') {
           s.unlocked.push(nz.id);
           this.emit({ t: 'announce', text: `새 사냥터 「${nz.name}」 개방!`, kind: 'unlock' });
           this.log(`새 사냥터 「${nz.name}」이(가) 열렸습니다.`, '#9fe0ff');

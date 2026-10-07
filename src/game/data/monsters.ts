@@ -597,7 +597,7 @@ mob({
   id: 'blizzard', name: '눈보라 정령', lv: 68, hp: 6200, atk: [285, 345], def: 10, mdef: 55, agi: 80, dex: 110, expMul: 0.85,
   element: 'wind', race: 'formless', size: 'small', range: 100, delay: 1400, speed: 85, aggressive: true, flying: true, atkElement: 'wind',
   sprite: 'wisp', palette: ['#e8f0ff', '#9ab0d0', '#ffffff'],
-  drops: [{ id: 'e_galecore', rate: 0.4 }, { id: 'u_blue', rate: 0.04 }, { id: 'u_conv_earth', rate: 0.01 }, { id: 'w_stormbow', rate: 0.0006 }, { id: 'g_feather', rate: 0.0006, slots: 1 }, { id: 'c_blizzard', rate: CARD.loot }],
+  drops: [{ id: 'e_galecore', rate: 0.4 }, { id: 'u_blue', rate: 0.04 }, { id: 'u_conv_earth', rate: 0.01 }, { id: 'w_stormbow', rate: 0.0006 }, { id: 'g_feather', rate: 0.0006, slots: 1 }, { id: 'g_windbreak', rate: 0.0008 }, { id: 'g_windbreak', rate: 0.0001, slots: 1 }, { id: 'c_blizzard', rate: CARD.loot }],
   desc: '협곡을 휘감는 눈보라. 바람속성이라 바람 무기가 통하지 않는다.',
 });
 
@@ -796,6 +796,484 @@ mob({
   skills: [{ kind: 'slam', cd: 8000, mult: 2.0, radius: 110 }, { kind: 'bolt', cd: 4500, mult: 1.5, element: 'holy' }, { kind: 'summon', cd: 16000, summon: 'starjelly', count: 2 }, { kind: 'heal', cd: 26000, below: 0.3 }],
   drops: [{ id: 'e_lakepearl', rate: 1 }, { id: 'h_aurora', rate: 0.1 }, { id: 'x_starring', rate: 0.06, slots: 1 }, { id: 'w_starmace', rate: 0.05 }, { id: 'w_aurorabow', rate: 0.05, slots: 1 }, { id: 'r_ori', rate: 1 }, { id: 'r_elu', rate: 1 }, { id: 'c_lakeguardian', rate: CARD.sboss }],
   desc: '별빛을 지키는 밤하늘색 거인. 성속성이라 암흑 무기가 잘 든다. [필드 보스]',
+});
+
+// ═══════════════════════════ v0.4 — 직업별 고향과 초보존
+// Beginner fields (open from the start) mix the old low monsters with one or two regional variants whose stats sit
+// next to the meadow monster of the same level (so every home levels 1→15 at about the same pace), and each drops
+// a small "patch" for an early wall: HIT (밭일 장갑 · 아기 부엉이 · 사막여우), FLEE (메뚜기 · 갈매기), HP (소라게 · 꼬마 선인장),
+// SP/INT/DEX for casters (피라미 · 실잠자리).
+
+// ── 황금 밀밭 (햇살 평원, 시작 필드)
+mob({
+  id: 'grasshopper', name: '메뚜기', lv: 7, hp: 140, atk: [12, 17], def: 2, mdef: 4, agi: 12, dex: 12,
+  element: 'wind', race: 'insect', size: 'small', range: 24, delay: 1400, speed: 60, aggressive: false, flying: true, scale: 0.8,
+  sprite: 'bee', palette: ['#9ad04a', '#3a6a1a', '#e8ffd0'],
+  drops: [{ id: 'e_hopleg', rate: 0.55 }, { id: 'u_apple', rate: 0.1 }, { id: 'h_bandana', rate: 0.003 }, { id: 'w_flail', rate: 0.004, slots: 2 }, { id: 'x_workglove', rate: 0.0015 }, { id: 'x_workglove', rate: 0.0002, slots: 1 }, { id: 'c_grasshopper', rate: CARD.exp }],
+  desc: '밀 이삭 사이를 뛰어다니는 메뚜기. 밭일꾼들이 잃어버린 장갑을 깔고 앉아 있곤 한다.',
+});
+
+// ── 수도원 묘지 (햇살 평원, 성직자의 숙제: 불사·염)
+mob({
+  id: 'boneling', name: '꼬마 해골', lv: 15, hp: 380, atk: [30, 38], def: 8, mdef: 5, agi: 14, dex: 24,
+  element: 'undead', race: 'undead', size: 'small', range: 26, delay: 1300, speed: 55, aggressive: false, scale: 0.72,
+  sprite: 'skeleton', palette: ['#f4f0e0', '#c0b898', '#8a7a5a'],
+  drops: [{ id: 'e_smallbone', rate: 0.55 }, { id: 'u_red', rate: 0.04 }, { id: 'am_silver', rate: 0.01 }, { id: 'a_saint', rate: 0.0015 }, { id: 'a_saint', rate: 0.0003, slots: 1 }, { id: 'c_boneling', rate: CARD.exp }],
+  desc: '수도원 묘지에서 깨어난 작은 해골. 성수 냄새를 맡으면 달그락거리며 도망친다.',
+});
+mob({
+  id: 'candlewisp', name: '촛불 망령', lv: 18, hp: 400, atk: [38, 48], def: 0, mdef: 30, agi: 28, dex: 30,
+  element: 'ghost', race: 'demon', size: 'small', range: 26, delay: 1300, speed: 65, aggressive: false, flying: true, atkElement: 'ghost', scale: 0.8,
+  sprite: 'wisp', palette: ['#ffe0a0', '#ff9a40', '#fffbe0'],
+  drops: [{ id: 'e_wax', rate: 0.5 }, { id: 'u_blue', rate: 0.01 }, { id: 'x_rosary', rate: 0.0012 }, { id: 'x_rosary', rate: 0.0002, slots: 1 }, { id: 'c_candlewisp', rate: CARD.exp }],
+  desc: '꺼진 촛불에 남은 넋. 무속성 공격은 거의 통하지 않는다 — 성스러운 힘이나 속성 무기로.',
+});
+
+// ── 숲 어귀 (속삭이는 숲, 시작 필드)
+mob({
+  id: 'owlet', name: '아기 부엉이', lv: 8, hp: 155, atk: [13, 18], def: 3, mdef: 8, agi: 9, dex: 16,
+  element: 'wind', race: 'brute', size: 'small', range: 24, delay: 1400, speed: 55, aggressive: false, flying: true, scale: 0.8,
+  sprite: 'bird:owl', palette: ['#b08a5a', '#6a4a2a', '#fff0c8'],
+  drops: [{ id: 'e_downfeather', rate: 0.55 }, { id: 'u_berry', rate: 0.08 }, { id: 'am_wind', rate: 0.008 }, { id: 'g_hood', rate: 0.003, slots: 1 }, { id: 'h_owlwing', rate: 0.0004 }, { id: 'c_owlet', rate: CARD.exp }],
+  desc: '숲 어귀 나뭇가지에서 꾸벅꾸벅 조는 아기 부엉이. 눈이 아주 좋다.',
+});
+mob({
+  id: 'owlchief', name: '부엉이 대장', lv: 13, hp: 2200, atk: [32, 44], def: 8, mdef: 15, agi: 34, dex: 32, luk: 20,
+  element: 'wind', race: 'brute', size: 'medium', range: 30, delay: 1100, speed: 85, aggressive: true, boss: 'field', scale: 1.8, expMul: 22, flying: true,
+  sprite: 'bird:owl', palette: ['#c8a070', '#7a5030', '#ffe080'],
+  skills: [{ kind: 'charge', cd: 7000, mult: 1.6 }, { kind: 'summon', cd: 14000, summon: 'owlet', count: 3, below: 0.7 }],
+  drops: [{ id: 'e_owlplume', rate: 1 }, { id: 'h_owlwing', rate: 0.12 }, { id: 'w_composite', rate: 0.08, slots: 2 }, { id: 'u_orange', rate: 0.6 }, { id: 'r_elu', rate: 0.08 }, { id: 'r_ori', rate: 0.06 }, { id: 'c_owlchief', rate: CARD.boss }],
+  desc: '숲 어귀를 내려다보는 커다란 부엉이. 이 대장을 넘어야 속삭이는 숲에 들어갈 수 있다. [필드 보스]',
+});
+
+// ── 버섯 골짜기 (속삭이는 숲, LOOT)
+mob({
+  id: 'toadstool', name: '독버섯', lv: 13, hp: 270, atk: [24, 32], def: 4, mdef: 12, agi: 6, dex: 18, expMul: 0.85,
+  element: 'poison', race: 'plant', size: 'small', range: 24, delay: 1500, speed: 38, aggressive: false, atkElement: 'poison',
+  sprite: 'mushroom', palette: ['#8a4ad0', '#f0f0d0', '#c8ff70'],
+  drops: [{ id: 'e_toadcap', rate: 0.5 }, { id: 'e_spore', rate: 0.2 }, { id: 'h_mushroom', rate: 0.006 }, { id: 'x_mushcharm', rate: 0.0012 }, { id: 'x_mushcharm', rate: 0.0002, slots: 1 }, { id: 'c_toadstool', rate: CARD.loot }],
+  desc: '보랏빛 갓에 연두 점박이. 포자를 뿜어 독을 옮긴다. 갓 밑에 작은 부적을 품고 있기도 하다.',
+});
+
+// ── 호숫가 풀밭 (안개 호수, 시작 필드)
+mob({
+  id: 'dragonfly', name: '실잠자리', lv: 5, hp: 95, atk: [10, 14], def: 1, mdef: 3, agi: 12, dex: 10,
+  element: 'wind', race: 'insect', size: 'small', range: 24, delay: 1400, speed: 60, aggressive: false, flying: true, scale: 0.75,
+  sprite: 'bee', palette: ['#60c0ff', '#1a3a6a', '#e0f8ff'],
+  drops: [{ id: 'e_dragonwing', rate: 0.55 }, { id: 'u_apple', rate: 0.08 }, { id: 'w_willowrod', rate: 0.003, slots: 2 }, { id: 'h_lilypad', rate: 0.0005 }, { id: 'c_dragonfly', rate: CARD.exp }],
+  desc: '호숫가 갈대 끝에 앉아 있는 파란 실잠자리. 날개가 유리처럼 투명하다.',
+});
+mob({
+  id: 'minnow', name: '은빛 피라미', lv: 10, hp: 210, atk: [17, 24], def: 3, mdef: 5, agi: 14, dex: 17,
+  element: 'water', race: 'fish', size: 'small', range: 24, delay: 1300, speed: 60, aggressive: false,
+  sprite: 'fish', palette: ['#c8d8e8', '#6a88a8', '#fff8e0'],
+  drops: [{ id: 'e_scale', rate: 0.5 }, { id: 'u_meat', rate: 0.1 }, { id: 'x_earring', rate: 0.0008 }, { id: 'c_minnow', rate: CARD.exp }],
+  desc: '물가로 펄떡 튀어 올라 지느러미로 걸어 다니는 피라미. 호수 물이 몸속에 출렁인다.',
+});
+mob({
+  id: 'catfish', name: '수염 메기', lv: 13, hp: 2400, atk: [32, 44], def: 12, mdef: 10, agi: 22, dex: 30, luk: 20,
+  element: 'water', race: 'fish', size: 'large', range: 32, delay: 1300, speed: 60, aggressive: true, boss: 'field', scale: 1.7, expMul: 22,
+  sprite: 'fish:catfish', palette: ['#6a7a5a', '#3a4a2a', '#e8e0b0'],
+  skills: [{ kind: 'slam', cd: 7500, mult: 1.6, radius: 80 }, { kind: 'summon', cd: 14000, summon: 'minnow', count: 3, below: 0.7 }],
+  drops: [{ id: 'e_whisker', rate: 1 }, { id: 'h_lilypad', rate: 0.12 }, { id: 'w_willowrod', rate: 0.08, slots: 2 }, { id: 'x_mistmirror', rate: 0.1 }, { id: 'u_orange', rate: 0.6 }, { id: 'r_elu', rate: 0.08 }, { id: 'r_ori', rate: 0.06 }, { id: 'c_catfish', rate: CARD.boss }],
+  desc: '호수 바닥의 진흙을 지키는 늙은 메기. 수염으로 안개를 읽는다고 한다. [필드 보스]',
+});
+
+// ── 안개 늪 (안개 호수, LOOT)
+mob({
+  id: 'mistwisp', name: '안개 정령', lv: 14, hp: 330, atk: [26, 34], def: 0, mdef: 25, agi: 22, dex: 24, expMul: 0.85,
+  element: 'water', race: 'formless', size: 'small', range: 26, delay: 1400, speed: 60, aggressive: true, flying: true, atkElement: 'water', scale: 0.85,
+  sprite: 'wisp', palette: ['#e0eef0', '#90b0b8', '#ffffff'],
+  drops: [{ id: 'e_mist', rate: 0.45 }, { id: 'u_blue', rate: 0.008 }, { id: 'x_mistmirror', rate: 0.003 }, { id: 'x_mistmirror', rate: 0.0003, slots: 1 }, { id: 'a_silk', rate: 0.002, slots: 1 }, { id: 'c_mistwisp', rate: CARD.loot }],
+  desc: '늪의 안개가 뭉쳐 생긴 정령. 가슴께에 작은 거울 조각이 반짝인다.',
+});
+
+// ── 마도탑 1층 (안개 호수, 던전 EXP)
+mob({
+  id: 'spellbook', name: '떠도는 마법서', lv: 20, hp: 600, atk: [44, 56], def: 6, mdef: 30, agi: 16, dex: 40,
+  element: 'neutral', race: 'formless', size: 'small', range: 26, delay: 1500, speed: 45, aggressive: false, flying: true,
+  sprite: 'book', palette: ['#8a5a3a', '#f0e8d0', '#6a4aff'],
+  drops: [{ id: 'e_page', rate: 0.55 }, { id: 'u_blue', rate: 0.01 }, { id: 'w_staff', rate: 0.002, slots: 2 }, { id: 'h_wizard', rate: 0.0015 }, { id: 'x_earring', rate: 0.001 }, { id: 'c_spellbook', rate: CARD.dng }],
+  desc: '주인을 잃고 서고를 떠도는 마법서. 책장을 펄럭이며 부딪쳐 온다.',
+});
+mob({
+  id: 'runegolem', name: '룬 골렘', lv: 25, hp: 1200, atk: [62, 78], def: 28, mdef: 20, agi: 6, dex: 40, expMul: 1.1,
+  element: 'neutral', race: 'formless', size: 'medium', range: 26, delay: 1600, speed: 34, aggressive: false, scale: 0.75,
+  sprite: 'golem', palette: ['#8a90b0', '#4a5070', '#80c0ff'],
+  drops: [{ id: 'e_runestone', rate: 0.5 }, { id: 'r_emver', rate: 0.03 }, { id: 'r_elu', rate: 0.003 }, { id: 'x_earring', rate: 0.0002, slots: 1 }, { id: 'c_runegolem', rate: CARD.dng }],
+  desc: '견습생들의 연습 상대로 만든 돌 인형. 몸에 새긴 룬이 푸르게 빛난다.',
+});
+mob({
+  id: 'grimoire', name: '금서', lv: 29, hp: 13000, atk: [85, 110], def: 15, mdef: 45, agi: 25, dex: 70, luk: 25,
+  element: 'shadow', race: 'formless', size: 'large', range: 110, delay: 1400, speed: 40, aggressive: true, boss: 'field', scale: 1.8, expMul: 22, flying: true, atkElement: 'shadow',
+  sprite: 'book:chained', palette: ['#3a2a4a', '#e0d8c0', '#ff4a8a'],
+  skills: [{ kind: 'bolt', cd: 4000, mult: 1.4, element: 'shadow' }, { kind: 'summon', cd: 15000, summon: 'spellbook', count: 3, below: 0.8 }],
+  drops: [{ id: 'e_forbiddenpage', rate: 1 }, { id: 'h_wizard', rate: 0.12 }, { id: 'w_staff', rate: 0.08, slots: 2 }, { id: 'x_earring', rate: 0.06, slots: 1 }, { id: 'u_blue', rate: 0.6 }, { id: 'r_ori', rate: 0.2 }, { id: 'r_elu', rate: 0.2 }, { id: 'c_grimoire', rate: CARD.boss }],
+  desc: '쇠사슬로 묶여 있던 금지된 책. 펼쳐지는 순간 어둠의 주문이 쏟아진다. [필드 보스]',
+});
+
+// ── 마도탑 2층 (안개 호수, 던전 LOOT)
+mob({
+  id: 'firebook', name: '불꽃 마법서', lv: 29, hp: 1300, atk: [74, 90], def: 8, mdef: 40, agi: 22, dex: 55, expMul: 0.9,
+  element: 'fire', race: 'formless', size: 'small', range: 100, delay: 1500, speed: 45, aggressive: true, flying: true, atkElement: 'fire',
+  sprite: 'book', palette: ['#c03a1a', '#ffe8c0', '#ffb020'],
+  drops: [{ id: 'e_burntpage', rate: 0.45 }, { id: 'u_blue', rate: 0.02 }, { id: 'u_conv_fire', rate: 0.008 }, { id: 'g_mageshawl', rate: 0.002 }, { id: 'w_runestaff', rate: 0.001 }, { id: 'c_firebook', rate: CARD.dng }],
+  desc: '불의 주문만 적힌 마법서. 멀리서 불씨를 쏘아 보낸다. 물에 약하다.',
+});
+mob({
+  id: 'icebook', name: '얼음 마법서', lv: 31, hp: 1450, atk: [86, 106], def: 8, mdef: 40, agi: 22, dex: 58, expMul: 0.9,
+  element: 'water', race: 'formless', size: 'small', range: 100, delay: 1500, speed: 45, aggressive: false, flying: true, atkElement: 'water',
+  sprite: 'book', palette: ['#2a6ab0', '#e8f4ff', '#80e0ff'],
+  drops: [{ id: 'e_frostpage', rate: 0.45 }, { id: 'u_blue', rate: 0.02 }, { id: 'u_conv_water', rate: 0.008 }, { id: 'a_silk', rate: 0.002, slots: 1 }, { id: 'w_runestaff', rate: 0.001 }, { id: 'c_icebook', rate: CARD.dng }],
+  desc: '서리가 낀 마법서. 얼음 화살을 쏜다. 바람에 약하다.',
+});
+mob({
+  id: 'gargoyle', name: '석상 가고일', lv: 34, hp: 1900, atk: [100, 125], def: 32, mdef: 15, agi: 32, dex: 60, expMul: 0.9,
+  element: 'earth', race: 'demon', size: 'medium', range: 26, delay: 1300, speed: 70, aggressive: true, flying: true, scale: 1.3,
+  sprite: 'bat', palette: ['#9a9a90', '#5a5a54', '#ff6a3a'],
+  drops: [{ id: 'e_stonewing', rate: 0.45 }, { id: 'u_yellow', rate: 0.04 }, { id: 's_buckler', rate: 0.0015, slots: 1 }, { id: 'r_ori', rate: 0.003 }, { id: 'g_mageshawl', rate: 0.0003, slots: 1 }, { id: 'c_gargoyle', rate: CARD.dng }],
+  desc: '탑의 처마를 지키던 돌 괴물. 침입자를 보면 날개를 펴고 내려온다.',
+});
+mob({
+  id: 'magephantom', name: '수석 마도사의 환영', lv: 37, hp: 22000, atk: [140, 180], def: 20, mdef: 50, agi: 45, dex: 90, luk: 30,
+  element: 'shadow', race: 'demihuman', size: 'medium', range: 130, delay: 1300, speed: 55, aggressive: true, boss: 'field', scale: 1.6, expMul: 22, flying: true, atkElement: 'shadow',
+  sprite: 'wraith', palette: ['#5a4ab0', '#a090ff', '#e0ffff'],
+  skills: [{ kind: 'bolt', cd: 3800, mult: 1.5, element: 'fire' }, { kind: 'slam', cd: 8000, mult: 1.8, radius: 95, element: 'water' }, { kind: 'summon', cd: 15000, summon: 'firebook', count: 2, below: 0.7 }],
+  drops: [{ id: 'e_phantomlens', rate: 1 }, { id: 'w_runestaff', rate: 0.08, slots: 1 }, { id: 'g_mageshawl', rate: 0.08, slots: 1 }, { id: 'h_wizard', rate: 0.1 }, { id: 'u_blue', rate: 1 }, { id: 'r_ori', rate: 0.4 }, { id: 'r_elu', rate: 0.3 }, { id: 'c_magephantom', rate: CARD.boss }],
+  desc: '실험 중 사라진 수석 마도사가 남긴 환영. 불과 얼음을 번갈아 쓴다. 암흑속성이라 성스러운 힘이 잘 든다. [필드 보스]',
+});
+
+// ── 마도탑 꼭대기 (안개 호수, 던전 MVP)
+mob({
+  id: 'towerlord', name: '안개의 대현자', lv: 44, hp: 95000, atk: [250, 340], def: 35, mdef: 70, agi: 50, dex: 120, luk: 50,
+  element: 'neutral', race: 'demihuman', size: 'large', range: 140, delay: 1300, speed: 50, aggressive: true, boss: 'mvp', scale: 2.1, expMul: 70, flying: true,
+  sprite: 'wraith', palette: ['#d0d8e8', '#80a0ff', '#ffe060'],
+  skills: [{ kind: 'bolt', cd: 3000, mult: 1.6, element: 'wind' }, { kind: 'slam', cd: 7500, mult: 2.1, radius: 115, element: 'fire' }, { kind: 'summon', cd: 14000, summon: 'icebook', count: 3 }, { kind: 'heal', cd: 24000, below: 0.3 }],
+  drops: [{ id: 'e_sageorb', rate: 1 }, { id: 'w_mistrod', rate: 0.08, slots: 1 }, { id: 'h_sagehat', rate: 0.06 }, { id: 'w_arcwand', rate: 0.1, slots: 2 }, { id: 'x_earring', rate: 0.15, slots: 1 }, { id: 'r_ori', rate: 1 }, { id: 'r_elu', rate: 0.6 }, { id: 'c_towerlord', rate: CARD.mvp }],
+  desc: '호수의 안개로 탑을 감춘 대현자. 백 년째 별을 읽고 있다. [MVP]',
+});
+
+// ── 모래 언덕 변두리 (작열하는 사막, 시작 필드)
+mob({
+  id: 'cactling', name: '꼬마 선인장', lv: 6, hp: 125, atk: [11, 16], def: 3, mdef: 6, agi: 4, dex: 10,
+  element: 'earth', race: 'plant', size: 'small', range: 24, delay: 1500, speed: 34, aggressive: false, scale: 0.65,
+  sprite: 'flower', palette: ['#ffd84a', '#5aa848', '#ff8a5a'],
+  drops: [{ id: 'e_cactspine', rate: 0.55 }, { id: 'u_cactus', rate: 0.04 }, { id: 'a_cotton', rate: 0.006, slots: 1 }, { id: 'c_cactling', rate: CARD.exp }],
+  desc: '머리에 노란 꽃을 피운 아기 선인장. 뒤뚱뒤뚱 걷다가 가시로 찌른다.',
+});
+mob({
+  id: 'fennec', name: '사막여우', lv: 8, hp: 160, atk: [13, 18], def: 3, mdef: 2, agi: 12, dex: 16,
+  element: 'fire', race: 'brute', size: 'small', range: 24, delay: 1300, speed: 75, aggressive: false, scale: 0.7,
+  sprite: 'wolf', palette: ['#f0d8a8', '#c8a070', '#fff8ec'],
+  drops: [{ id: 'e_fennecfur', rate: 0.5 }, { id: 'u_meat', rate: 0.08 }, { id: 'm_sunglasses', rate: 0.002 }, { id: 'w_dunedagger', rate: 0.003, slots: 2 }, { id: 'h_foxears', rate: 0.0005 }, { id: 'c_fennec', rate: CARD.exp }],
+  desc: '귀가 커다란 사막여우. 모래 속 발소리까지 듣고 정확히 물어 온다.',
+});
+mob({
+  id: 'foxchief', name: '사막여우 두목', lv: 13, hp: 2200, atk: [34, 46], def: 8, mdef: 10, agi: 38, dex: 34, luk: 25,
+  element: 'fire', race: 'brute', size: 'medium', range: 30, delay: 1050, speed: 95, aggressive: true, boss: 'field', scale: 1.5, expMul: 22,
+  sprite: 'wolf', palette: ['#ffd8a0', '#d09050', '#fff4e0'],
+  skills: [{ kind: 'charge', cd: 7000, mult: 1.6 }, { kind: 'summon', cd: 14000, summon: 'fennec', count: 3, below: 0.7 }],
+  drops: [{ id: 'e_foxtail', rate: 1 }, { id: 'h_foxears', rate: 0.12 }, { id: 'w_dunedagger', rate: 0.08, slots: 2 }, { id: 'x_brooch', rate: 0.06 }, { id: 'u_orange', rate: 0.6 }, { id: 'r_elu', rate: 0.08 }, { id: 'r_ori', rate: 0.06 }, { id: 'c_foxchief', rate: CARD.boss }],
+  desc: '모래 언덕의 사막여우들을 거느리는 두목. 도적들에게 소굴 가는 길을 알려 주고 고기를 얻어먹는다. [필드 보스]',
+});
+
+// ── 도적 소굴 (작열하는 사막, 던전 EXP·제니)
+mob({
+  id: 'thiefbug', name: '좀도둑 벌레', lv: 15, hp: 400, atk: [30, 39], def: 14, mdef: 4, agi: 24, dex: 26,
+  element: 'shadow', race: 'insect', size: 'small', range: 24, delay: 1150, speed: 85, aggressive: false, scale: 0.7,
+  sprite: 'scorpion', palette: ['#3a3040', '#16101e', '#c0a050'],
+  drops: [{ id: 'e_stolencoin', rate: 0.45 }, { id: 'u_orange', rate: 0.03 }, { id: 'w_dirk', rate: 0.0025, slots: 2 }, { id: 'l_bandit', rate: 0.002 }, { id: 'a_thief', rate: 0.002, slots: 1 }, { id: 'c_thiefbug', rate: CARD.dng }],
+  desc: '도적들이 흘린 금화를 등에 지고 다니는 검은 벌레. 잡으면 짤랑 소리가 난다.',
+});
+mob({
+  id: 'dustbat', name: '먼지 박쥐', lv: 18, hp: 400, atk: [38, 48], def: 4, mdef: 4, agi: 44, dex: 34,
+  element: 'neutral', race: 'brute', size: 'small', range: 24, delay: 1000, speed: 100, aggressive: true, flying: true, scale: 0.85,
+  sprite: 'bat', palette: ['#a08a6a', '#6a5a40', '#ffcc40'],
+  drops: [{ id: 'e_dustwing', rate: 0.5 }, { id: 'u_orange', rate: 0.04 }, { id: 'f_shoes', rate: 0.003, slots: 1 }, { id: 'c_dustbat', rate: CARD.dng }],
+  desc: '먼지 낀 굴 천장에 매달려 사는 박쥐. 날갯짓에 모래가 쏟아진다.',
+});
+mob({
+  id: 'shadowboss', name: '그림자 두목', lv: 25, hp: 10000, atk: [75, 98], def: 15, mdef: 20, agi: 55, dex: 60, luk: 30,
+  element: 'shadow', race: 'demihuman', size: 'medium', range: 30, delay: 950, speed: 110, aggressive: true, boss: 'field', scale: 1.3, expMul: 22, flying: true,
+  sprite: 'wraith', palette: ['#4a3a2a', '#c8a060', '#ffd040'],
+  skills: [{ kind: 'charge', cd: 6500, mult: 1.6 }, { kind: 'summon', cd: 15000, summon: 'thiefbug', count: 3, below: 0.8 }],
+  drops: [{ id: 'e_bossmask', rate: 1 }, { id: 'l_bandit', rate: 0.15 }, { id: 'w_dirk', rate: 0.08, slots: 2 }, { id: 'a_thief', rate: 0.1, slots: 1 }, { id: 'w_hawktalon', rate: 0.02 }, { id: 'u_orange', rate: 0.6 }, { id: 'r_ori', rate: 0.15 }, { id: 'r_elu', rate: 0.15 }, { id: 'c_shadowboss', rate: CARD.boss }],
+  desc: '얼굴을 본 사람이 없다는 도적단 두목. 두건 아래 눈만 번뜩인다. 소굴 뒤편 협곡과 채석장으로 빠지는 길을 안다. [필드 보스]',
+});
+
+// ── 붉은 바위 협곡 (작열하는 사막, LOOT)
+mob({
+  id: 'canyonhawk', name: '붉은 매', lv: 33, hp: 1300, atk: [88, 108], def: 6, mdef: 8, agi: 55, dex: 60, expMul: 0.85,
+  element: 'wind', race: 'brute', size: 'small', range: 26, delay: 950, speed: 115, aggressive: true, flying: true,
+  sprite: 'bird', palette: ['#c0603a', '#6a2a1a', '#ffe0b0'],
+  drops: [{ id: 'e_hawkfeather', rate: 0.45 }, { id: 'u_meat', rate: 0.12 }, { id: 'x_hawkfeather', rate: 0.0012 }, { id: 'x_hawkfeather', rate: 0.0002, slots: 1 }, { id: 'w_hawktalon', rate: 0.0006 }, { id: 'w_hawktalon', rate: 0.0001, slots: 1 }, { id: 'c_canyonhawk', rate: CARD.loot }],
+  desc: '붉은 절벽 위를 맴돌다 내리꽂히는 매. 발톱은 칼날처럼 날카롭다.',
+});
+
+// ── 파도 해변 (푸른 항구, 시작 필드)
+mob({
+  id: 'hermit', name: '소라게', lv: 4, hp: 80, atk: [7, 11], def: 4, mdef: 2, agi: 4, dex: 8,
+  element: 'water', race: 'fish', size: 'small', range: 22, delay: 1500, speed: 40, aggressive: false, scale: 0.75,
+  sprite: 'crab:hermit', palette: ['#ff8a5a', '#a04a2a', '#f0d8b0'],
+  drops: [{ id: 'e_conch', rate: 0.55 }, { id: 'u_apple', rate: 0.08 }, { id: 'e_pearl', rate: 0.01 }, { id: 'f_sandals', rate: 0.004, slots: 1 }, { id: 'w_shipaxe', rate: 0.003, slots: 2 }, { id: 'c_hermit', rate: CARD.exp }],
+  desc: '빌린 소라 껍데기를 지고 다니는 게. 껍데기 속에 진주를 숨겨 두기도 한다.',
+});
+mob({
+  id: 'gull', name: '갈매기', lv: 7, hp: 130, atk: [12, 17], def: 1, mdef: 3, agi: 14, dex: 14,
+  element: 'wind', race: 'brute', size: 'small', range: 24, delay: 1300, speed: 70, aggressive: false, flying: true, scale: 0.8,
+  sprite: 'bird', palette: ['#ffffff', '#a8b8c8', '#ffb040'],
+  drops: [{ id: 'e_gullfeather', rate: 0.55 }, { id: 'u_meat', rate: 0.06 }, { id: 'x_seaglass', rate: 0.0006 }, { id: 'h_sailor', rate: 0.0005 }, { id: 'c_gull', rate: CARD.exp }],
+  desc: '항구의 생선을 노리는 갈매기. 휙 피하는 솜씨가 일품이다.',
+});
+mob({
+  id: 'kingcrab', name: '대왕 집게', lv: 13, hp: 2300, atk: [32, 44], def: 18, mdef: 8, agi: 18, dex: 30, luk: 20,
+  element: 'water', race: 'fish', size: 'large', range: 30, delay: 1300, speed: 55, aggressive: true, boss: 'field', scale: 1.8, expMul: 22,
+  sprite: 'crab', palette: ['#e04a3a', '#802018', '#ffe0c0'],
+  skills: [{ kind: 'slam', cd: 7000, mult: 1.6, radius: 80 }, { kind: 'summon', cd: 14000, summon: 'hermit', count: 3, below: 0.7 }],
+  drops: [{ id: 'e_kingclaw', rate: 1 }, { id: 'h_sailor', rate: 0.12 }, { id: 'w_shipaxe', rate: 0.08, slots: 2 }, { id: 'e_pearl', rate: 0.3 }, { id: 'u_orange', rate: 0.6 }, { id: 'r_elu', rate: 0.08 }, { id: 'r_ori', rate: 0.06 }, { id: 'c_kingcrab', rate: CARD.boss }],
+  desc: '해변의 바위만 한 게. 집게 한쪽이 유난히 크다. 등대와 난파선 가는 길목을 막고 있다. [필드 보스]',
+});
+
+// ── 등대 곶 (푸른 항구, LOOT)
+mob({
+  id: 'lamplight', name: '등대 불빛', lv: 15, hp: 360, atk: [30, 40], def: 0, mdef: 25, agi: 26, dex: 28, expMul: 0.85,
+  element: 'fire', race: 'formless', size: 'small', range: 26, delay: 1300, speed: 65, aggressive: true, flying: true, atkElement: 'fire', scale: 0.85,
+  sprite: 'wisp', palette: ['#fff080', '#ffa020', '#ffffff'],
+  drops: [{ id: 'e_lampoil', rate: 0.5 }, { id: 'am_fire', rate: 0.01 }, { id: 'g_sailcloth', rate: 0.003 }, { id: 'g_sailcloth', rate: 0.0005, slots: 1 }, { id: 'x_seaglass', rate: 0.001 }, { id: 'x_seaglass', rate: 0.00015, slots: 1 }, { id: 'c_lamplight', rate: CARD.loot }],
+  desc: '등대 램프에서 떨어져 나온 불씨. 밤바다를 비추려고 곶을 빙빙 돈다.',
+});
+
+// ── 난파선 (푸른 항구, 던전 EXP·제니)
+mob({
+  id: 'piratebones', name: '해골 해적', lv: 21, hp: 720, atk: [50, 64], def: 10, mdef: 8, agi: 20, dex: 36,
+  element: 'undead', race: 'undead', size: 'medium', range: 28, delay: 1300, speed: 58, aggressive: false,
+  sprite: 'skeleton', palette: ['#ece4d0', '#b0a088', '#c8302a'],
+  drops: [{ id: 'e_doubloon', rate: 0.45 }, { id: 'u_orange', rate: 0.04 }, { id: 'w_cutlass', rate: 0.0025, slots: 2 }, { id: 'm_piratepatch', rate: 0.002 }, { id: 'q_compass', rate: 0.003 }, { id: 'c_piratebones', rate: CARD.dng }],
+  desc: '가라앉은 배에서 아직도 금화를 세는 해골. 반짝이는 건 절대 놓지 않는다.',
+});
+mob({
+  id: 'parrot', name: '해적 앵무새', lv: 23, hp: 640, atk: [56, 70], def: 4, mdef: 8, agi: 50, dex: 46,
+  element: 'wind', race: 'brute', size: 'small', range: 26, delay: 1050, speed: 100, aggressive: true, flying: true,
+  sprite: 'bird', palette: ['#4ad04a', '#d03030', '#ffd040'],
+  drops: [{ id: 'e_parrotfeather', rate: 0.5 }, { id: 'u_apple', rate: 0.1 }, { id: 'h_bandana', rate: 0.003 }, { id: 'x_glove', rate: 0.0012 }, { id: 'c_parrot', rate: CARD.dng }],
+  desc: '"보물! 보물!" 선장의 말버릇을 따라 하며 덤벼드는 앵무새.',
+});
+mob({
+  id: 'ghostcaptain', name: '유령 선장', lv: 29, hp: 13000, atk: [90, 118], def: 20, mdef: 25, agi: 40, dex: 70, luk: 30,
+  element: 'undead', race: 'undead', size: 'large', range: 34, delay: 1200, speed: 70, aggressive: true, boss: 'field', scale: 1.5, expMul: 22,
+  sprite: 'skeleton_knight', palette: ['#e8e0c8', '#2a4a5a', '#3aa0a0'],
+  skills: [{ kind: 'slam', cd: 7500, mult: 1.8, radius: 85 }, { kind: 'charge', cd: 9000, mult: 1.6 }, { kind: 'summon', cd: 15000, summon: 'piratebones', count: 2 }],
+  drops: [{ id: 'e_epaulet', rate: 1 }, { id: 'q_compass', rate: 0.3 }, { id: 'w_cutlass', rate: 0.08, slots: 2 }, { id: 'm_piratepatch', rate: 0.15 }, { id: 'e_doubloon', rate: 0.4 }, { id: 'u_orange', rate: 0.6 }, { id: 'r_ori', rate: 0.2 }, { id: 'r_elu', rate: 0.2 }, { id: 'c_ghostcaptain', rate: CARD.boss }],
+  desc: '배와 함께 가라앉은 해적선 선장. 품속의 나침반은 아직도 어딘가를 가리킨다. [필드 보스]',
+});
+
+// ── 산호 동굴 (푸른 항구, 던전 LOOT)
+mob({
+  id: 'coralcrab', name: '산호게', lv: 30, hp: 1500, atk: [86, 104], def: 35, mdef: 10, agi: 15, dex: 50, expMul: 0.9,
+  element: 'water', race: 'fish', size: 'small', range: 24, delay: 1300, speed: 50, aggressive: false, scale: 0.9,
+  sprite: 'crab', palette: ['#ff7aa0', '#b03a5a', '#ffe0e8'],
+  drops: [{ id: 'e_coral', rate: 0.45 }, { id: 'u_yellow', rate: 0.04 }, { id: 'x_coralring', rate: 0.001 }, { id: 's_coralshield', rate: 0.0008 }, { id: 'w_anchor', rate: 0.0004 }, { id: 'c_coralcrab', rate: CARD.dng }],
+  desc: '등에 산호를 키우는 게. 껍질이 산호처럼 단단하다.',
+});
+mob({
+  id: 'pufferfish', name: '가시복어', lv: 33, hp: 1700, atk: [98, 120], def: 12, mdef: 15, agi: 28, dex: 55, expMul: 0.9,
+  element: 'poison', race: 'fish', size: 'small', range: 24, delay: 1300, speed: 55, aggressive: false, atkElement: 'poison',
+  sprite: 'fish:puffer', palette: ['#f0e070', '#a08a30', '#ffffff'],
+  drops: [{ id: 'e_puffspine', rate: 0.45 }, { id: 'u_yellow', rate: 0.04 }, { id: 'e_pearl', rate: 0.01 }, { id: 'x_coralring', rate: 0.0005 }, { id: 'c_pufferfish', rate: CARD.dng }],
+  desc: '건드리면 가시공처럼 부풀어 오르는 복어. 가시에 독이 있다.',
+});
+mob({
+  id: 'anemone', name: '말미잘', lv: 35, hp: 2000, atk: [92, 114], def: 10, mdef: 30, agi: 1, dex: 70, expMul: 0.9,
+  element: 'water', race: 'plant', size: 'medium', range: 70, delay: 1400, speed: 0, aggressive: true, immobile: true, atkElement: 'water',
+  sprite: 'flower', palette: ['#ff5a8a', '#a03a6a', '#ffe070'],
+  drops: [{ id: 'e_tentacle', rate: 0.45 }, { id: 'u_blue', rate: 0.02 }, { id: 'x_coralring', rate: 0.0002, slots: 1 }, { id: 'w_trident', rate: 0.0003 }, { id: 'c_anemone', rate: CARD.dng }],
+  desc: '바위에 뿌리박은 말미잘. 촉수를 뻗어 멀리 있는 것도 쏜다. 움직이지 않는다.',
+});
+mob({
+  id: 'coralgolem', name: '산호 골렘', lv: 39, hp: 24000, atk: [150, 195], def: 45, mdef: 25, agi: 15, dex: 70, luk: 20,
+  element: 'water', race: 'formless', size: 'large', range: 34, delay: 1600, speed: 40, aggressive: true, boss: 'field', scale: 1.6, expMul: 22,
+  sprite: 'golem', palette: ['#ff8aa8', '#a04a6a', '#80f0ff'],
+  skills: [{ kind: 'slam', cd: 7500, mult: 1.8, radius: 90, element: 'water' }, { kind: 'summon', cd: 16000, summon: 'coralcrab', count: 2, below: 0.6 }],
+  drops: [{ id: 'e_coralheart', rate: 1 }, { id: 'w_anchor', rate: 0.08, slots: 1 }, { id: 's_coralshield', rate: 0.08, slots: 1 }, { id: 'x_coralring', rate: 0.08, slots: 1 }, { id: 'u_white', rate: 0.6 }, { id: 'r_ori', rate: 0.4 }, { id: 'r_elu', rate: 0.3 }, { id: 'c_coralgolem', rate: CARD.boss }],
+  desc: '천 년 동안 자란 산호초가 일어섰다. 심층으로 내려가는 물길을 막고 있다. [필드 보스]',
+});
+
+// ── 산호 동굴 심층 (푸른 항구, 던전 MVP)
+mob({
+  id: 'deepfish', name: '초롱아귀', lv: 40, hp: 2600, atk: [128, 158], def: 20, mdef: 20, agi: 30, dex: 70,
+  element: 'water', race: 'fish', size: 'medium', range: 26, delay: 1300, speed: 50, aggressive: true, scale: 1.2,
+  sprite: 'fish:angler', palette: ['#3a3a5a', '#1a1a30', '#a0ffe0'],
+  drops: [{ id: 'e_lure', rate: 0.45 }, { id: 'u_yellow', rate: 0.04 }, { id: 'e_pearl', rate: 0.015 }, { id: 'w_trident', rate: 0.0005 }, { id: 'c_deepfish', rate: CARD.dng }],
+  desc: '머리 위 초롱으로 먹이를 꾀는 심해어. 불빛을 따라가면 이빨이 기다린다.',
+});
+mob({
+  id: 'abyssdragon', name: '심연의 해룡', lv: 46, hp: 120000, atk: [280, 370], def: 45, mdef: 50, agi: 50, dex: 120, luk: 40,
+  element: 'water', race: 'dragon', size: 'large', range: 40, delay: 1300, speed: 60, aggressive: true, boss: 'mvp', scale: 2.4, expMul: 70,
+  sprite: 'worm', palette: ['#2a5a8a', '#0a2a4a', '#80ffe0'],
+  skills: [{ kind: 'bolt', cd: 3500, mult: 1.5, element: 'water' }, { kind: 'slam', cd: 8000, mult: 2.2, radius: 115, element: 'water' }, { kind: 'summon', cd: 14000, summon: 'deepfish', count: 3 }, { kind: 'heal', cd: 25000, below: 0.3 }],
+  drops: [{ id: 'e_abysspearl', rate: 1 }, { id: 'w_trident', rate: 0.08, slots: 1 }, { id: 'h_coralcrown', rate: 0.06 }, { id: 'x_coralring', rate: 0.1, slots: 1 }, { id: 'w_anchor', rate: 0.06, slots: 2 }, { id: 'r_ori', rate: 1 }, { id: 'r_elu', rate: 1 }, { id: 'c_abyssdragon', rate: CARD.mvp }],
+  desc: '바다 밑바닥에 똬리를 튼 해룡. 항구의 배들이 사라지는 이유라고들 한다. [MVP]',
+});
+
+// ── 철광 능선 (잿빛 광산, EXP: 땅 → 불속성)
+mob({
+  id: 'ironbun', name: '철갑 뿔토끼', lv: 37, hp: 2200, atk: [112, 138], def: 30, mdef: 10, agi: 36, dex: 55,
+  element: 'earth', race: 'brute', size: 'small', range: 24, delay: 1200, speed: 75, aggressive: false, scale: 1.15,
+  sprite: 'bunny', palette: ['#b8b8c0', '#6a6a78', '#ff9aa8'],
+  drops: [{ id: 'e_ironhorn', rate: 0.5 }, { id: 'u_yellow', rate: 0.04 }, { id: 'r_emver', rate: 0.03 }, { id: 'f_boots', rate: 0.0015, slots: 1 }, { id: 'h_bunny', rate: 0.0005 }, { id: 'c_ironbun', rate: CARD.exp }],
+  desc: '쇳가루를 먹고 자라 털이 강철처럼 된 뿔토끼. 뿔토끼 시절의 버릇은 그대로다.',
+});
+mob({
+  id: 'irongolem', name: '무쇠 골렘', lv: 41, hp: 3200, atk: [134, 162], def: 45, mdef: 15, agi: 8, dex: 60, expMul: 1.1,
+  element: 'earth', race: 'formless', size: 'medium', range: 26, delay: 1600, speed: 34, aggressive: false, scale: 0.85,
+  sprite: 'golem', palette: ['#7a7a80', '#3a3a40', '#ff9a3a'],
+  drops: [{ id: 'e_ironore', rate: 0.5 }, { id: 'r_emver', rate: 0.04 }, { id: 'r_ori', rate: 0.004 }, { id: 'w_hammer', rate: 0.001 }, { id: 'h_helm', rate: 0.0008 }, { id: 'c_irongolem', rate: CARD.exp }],
+  desc: '철광석이 뭉쳐 걷는다. 단단하지만 불에 달구면 금방 물러진다.',
+});
+
+// ── 침엽수 눈길 (얼어붙은 설원, EXP)
+mob({
+  id: 'snowowl', name: '눈올빼미', lv: 54, hp: 3700, atk: [205, 250], def: 15, mdef: 20, agi: 70, dex: 85,
+  element: 'water', race: 'brute', size: 'small', range: 24, delay: 1100, speed: 95, aggressive: false, flying: true,
+  sprite: 'bird:owl', palette: ['#f4f8ff', '#a8b8d0', '#ffd040'],
+  drops: [{ id: 'e_owlfeather', rate: 0.5 }, { id: 'u_white', rate: 0.04 }, { id: 'g_feather', rate: 0.0012 }, { id: 'g_feather', rate: 0.0002, slots: 1 }, { id: 'a_hunter', rate: 0.0006, slots: 1 }, { id: 'x_brooch', rate: 0.001 }, { id: 'c_snowowl', rate: CARD.exp }],
+  desc: '눈 덮인 소나무 가지에 앉은 하얀 올빼미. 깃털 하나하나가 눈송이처럼 가볍다.',
+});
+
+// ── 구름 계단 (하늘 유적, EXP: 바람 → 땅속성)
+mob({
+  id: 'cloudjelly', name: '구름 말랑', lv: 82, hp: 11000, atk: [400, 480], def: 30, mdef: 40, agi: 50, dex: 120, luk: 30,
+  element: 'wind', race: 'plant', size: 'medium', range: 26, delay: 1300, speed: 50, aggressive: false,
+  sprite: 'jelly', palette: ['#f6f8ff', '#c8d8f0', '#fff8e0'],
+  drops: [{ id: 'e_cloudfluff', rate: 0.5 }, { id: 'e_jelly', rate: 0.3 }, { id: 'u_white', rate: 0.06 }, { id: 'g_cloudcape', rate: 0.0005 }, { id: 'c_cloudjelly', rate: CARD.exp }],
+  desc: '구름을 뭉쳐 만든 것 같은 말랑. 밟으면 폭신하게 꺼진다.',
+});
+mob({
+  id: 'windbird', name: '폭풍 매', lv: 85, hp: 9500, atk: [430, 520], def: 25, mdef: 30, agi: 90, dex: 140,
+  element: 'wind', race: 'brute', size: 'medium', range: 26, delay: 1000, speed: 115, aggressive: false, flying: true, scale: 1.2,
+  sprite: 'bird', palette: ['#a0b0e0', '#4a5a9a', '#ffe060'],
+  drops: [{ id: 'e_stormfeather', rate: 0.45 }, { id: 'u_white', rate: 0.06 }, { id: 'f_windboots', rate: 0.0006 }, { id: 'w_skybow', rate: 0.0004 }, { id: 'c_windbird', rate: CARD.exp }],
+  desc: '구름 계단을 오르내리며 바람을 타는 매. 날갯짓 한 번에 돌풍이 인다.',
+});
+mob({
+  id: 'sentinel', name: '석상 파수병', lv: 87, hp: 15500, atk: [470, 560], def: 60, mdef: 30, agi: 15, dex: 120, expMul: 1.1,
+  element: 'neutral', race: 'formless', size: 'large', range: 30, delay: 1700, speed: 30, aggressive: false,
+  sprite: 'golem', palette: ['#f0ecd8', '#b8a888', '#ffd060'],
+  drops: [{ id: 'e_marble', rate: 0.5 }, { id: 'r_ori', rate: 0.008 }, { id: 'r_elu', rate: 0.008 }, { id: 'w_thunderaxe', rate: 0.0003 }, { id: 'w_skybreaker', rate: 0.0003 }, { id: 'c_sentinel', rate: CARD.exp }],
+  desc: '하늘 유적의 계단을 지키는 하얀 석상. 금빛 눈이 켜지면 움직인다.',
+});
+mob({
+  id: 'cloudgiant', name: '구름 거인', lv: 90, hp: 220000, atk: [860, 1060], def: 60, mdef: 50, agi: 50, dex: 180, luk: 50,
+  element: 'wind', race: 'brute', size: 'large', range: 38, delay: 1300, speed: 60, aggressive: true, boss: 'field', scale: 2.0, expMul: 22,
+  sprite: 'yeti', palette: ['#f8f8ff', '#c8d0f0', '#8a7ab0'],
+  skills: [{ kind: 'slam', cd: 7500, mult: 2.0, radius: 105, element: 'wind' }, { kind: 'charge', cd: 9000, mult: 1.8 }, { kind: 'summon', cd: 16000, summon: 'cloudjelly', count: 2, below: 0.7 }],
+  drops: [{ id: 'e_cloudcore', rate: 1 }, { id: 'g_cloudcape', rate: 0.08, slots: 1 }, { id: 'w_thunderaxe', rate: 0.06 }, { id: 'w_skybreaker', rate: 0.05, slots: 1 }, { id: 'u_white', rate: 1 }, { id: 'r_ori', rate: 1 }, { id: 'r_elu', rate: 1 }, { id: 'c_cloudgiant', rate: CARD.boss }],
+  desc: '구름 계단 꼭대기에 버티고 선 거인. 발을 구르면 천둥이 친다. [필드 보스]',
+});
+
+// ── 바람의 신전 (하늘 유적, 던전 EXP·LOOT)
+mob({
+  id: 'galespirit', name: '질풍 정령', lv: 88, hp: 9900, atk: [470, 565], def: 10, mdef: 60, agi: 85, dex: 150,
+  element: 'wind', race: 'formless', size: 'small', range: 100, delay: 1400, speed: 85, aggressive: true, flying: true, atkElement: 'wind',
+  sprite: 'wisp', palette: ['#d0fff0', '#60d0b0', '#ffffff'],
+  drops: [{ id: 'e_galeheart', rate: 0.4 }, { id: 'u_blue', rate: 0.05 }, { id: 'w_windkatar', rate: 0.0004 }, { id: 'w_galeblade', rate: 0.0003 }, { id: 'f_windboots', rate: 0.0002, slots: 1 }, { id: 'c_galespirit', rate: CARD.dng }],
+  desc: '신전 회랑을 휘몰아치는 바람의 정령. 멀리서 칼바람을 날린다.',
+});
+mob({
+  id: 'scripture', name: '바람의 경전', lv: 90, hp: 12000, atk: [490, 585], def: 20, mdef: 60, agi: 45, dex: 150,
+  element: 'holy', race: 'formless', size: 'small', range: 110, delay: 1500, speed: 45, aggressive: true, flying: true, atkElement: 'holy',
+  sprite: 'book', palette: ['#f0f0ff', '#d0c080', '#fff0a0'],
+  drops: [{ id: 'e_holypage', rate: 0.4 }, { id: 'u_blue', rate: 0.05 }, { id: 'w_halomace', rate: 0.0004 }, { id: 'w_skyrod', rate: 0.0002 }, { id: 'x_rosary', rate: 0.0005, slots: 1 }, { id: 'c_scripture', rate: CARD.dng }],
+  desc: '바람이 넘기는 하얀 경전. 기도문이 빛의 화살이 되어 날아온다. 성속성이라 암흑 무기가 잘 든다.',
+});
+mob({
+  id: 'stormking', name: '폭풍 수리왕', lv: 95, hp: 250000, atk: [900, 1120], def: 55, mdef: 50, agi: 90, dex: 200, luk: 60,
+  element: 'wind', race: 'brute', size: 'large', range: 36, delay: 1100, speed: 110, aggressive: true, boss: 'field', scale: 2.2, expMul: 22, flying: true,
+  sprite: 'bird', palette: ['#e0b860', '#8a6a2a', '#ffffff'],
+  skills: [{ kind: 'charge', cd: 7000, mult: 1.9 }, { kind: 'slam', cd: 8000, mult: 2.1, radius: 110, element: 'wind' }, { kind: 'bolt', cd: 4500, mult: 1.5, element: 'wind' }],
+  drops: [{ id: 'e_stormplume', rate: 1 }, { id: 'h_windwing', rate: 0.08 }, { id: 'w_galeblade', rate: 0.06, slots: 1 }, { id: 'w_windkatar', rate: 0.04 }, { id: 'w_skybow', rate: 0.05, slots: 1 }, { id: 'r_ori', rate: 1 }, { id: 'r_elu', rate: 1 }, { id: 'c_stormking', rate: CARD.boss }],
+  desc: '신전 지붕에 둥지를 튼 거대한 금빛 수리. 성소로 가는 문을 지킨다. [필드 보스]',
+});
+
+// ── 하늘 정원 (하늘 유적, LOOT)
+mob({
+  id: 'skyflower', name: '천상화', lv: 91, hp: 13000, atk: [500, 600], def: 30, mdef: 40, agi: 1, dex: 160, expMul: 0.85,
+  element: 'earth', race: 'plant', size: 'medium', range: 80, delay: 1400, speed: 0, aggressive: true, immobile: true, atkElement: 'earth',
+  sprite: 'flower', palette: ['#fff8ff', '#6ac080', '#ffd040'],
+  drops: [{ id: 'e_skypetal', rate: 0.45 }, { id: 'u_royal', rate: 0.03 }, { id: 'f_windboots', rate: 0.0005 }, { id: 'w_halomace', rate: 0.0004 }, { id: 'c_skyflower', rate: CARD.loot }],
+  desc: '구름 위에서만 피는 하얀 꽃. 꽃가루가 돌멩이처럼 날아온다. 움직이지 않는다.',
+});
+mob({
+  id: 'cherub', name: '깃털 말랑', lv: 93, hp: 13800, atk: [520, 620], def: 30, mdef: 60, agi: 65, dex: 160, luk: 60, expMul: 0.85,
+  element: 'holy', race: 'angel', size: 'medium', range: 26, delay: 1300, speed: 70, aggressive: true, flying: true,
+  sprite: 'jelly', palette: ['#fff4c8', '#e8c870', '#ffffff'],
+  drops: [{ id: 'e_goldfeather', rate: 0.45 }, { id: 'u_royal', rate: 0.03 }, { id: 'w_skyfang', rate: 0.0004 }, { id: 'w_skybow', rate: 0.0003 }, { id: 'x_skyring', rate: 0.0001 }, { id: 'c_cherub', rate: CARD.loot }],
+  desc: '금빛 깃털이 돋은 말랑. 날개 말랑이 하늘까지 날아오르면 이렇게 된다는 이야기가 있다.',
+});
+
+// ── 천공 성소 (하늘 유적, 던전 MVP)
+mob({
+  id: 'skyknight', name: '천공 기사', lv: 96, hp: 16500, atk: [560, 670], def: 50, mdef: 50, agi: 55, dex: 180,
+  element: 'holy', race: 'demihuman', size: 'medium', range: 30, delay: 1200, speed: 70, aggressive: true,
+  sprite: 'skeleton_knight', palette: ['#f4f0e0', '#d8c070', '#4a80d0'],
+  drops: [{ id: 'e_skyemblem', rate: 0.4 }, { id: 'u_white', rate: 0.06 }, { id: 'w_skylance', rate: 0.0003 }, { id: 'w_halomace', rate: 0.0003 }, { id: 's_mirror', rate: 0.0005, slots: 1 }, { id: 'c_skyknight', rate: CARD.dng }],
+  desc: '투구 속은 텅 비고 빛만 남은 천공 기사단. 왕좌를 지키는 맹세만은 잊지 않았다.',
+});
+mob({
+  id: 'skykeeper', name: '천공의 파수신', lv: 98, hp: 600000, atk: [1150, 1450], def: 60, mdef: 70, agi: 90, dex: 220, luk: 80,
+  element: 'holy', race: 'angel', size: 'large', range: 40, delay: 1150, speed: 65, aggressive: true, boss: 'mvp', scale: 2.3, expMul: 70, flying: true,
+  sprite: 'wraith', palette: ['#fff8e8', '#ffd860', '#60c0ff'],
+  skills: [{ kind: 'bolt', cd: 2800, mult: 1.8, element: 'holy' }, { kind: 'slam', cd: 7000, mult: 2.5, radius: 125, element: 'wind' }, { kind: 'summon', cd: 14000, summon: 'skyknight', count: 3 }, { kind: 'heal', cd: 25000, below: 0.3 }],
+  drops: [{ id: 'e_skyheart', rate: 1 }, { id: 'w_skyrod', rate: 0.06, slots: 2 }, { id: 'w_skylance', rate: 0.06, slots: 1 }, { id: 'w_halomace', rate: 0.06, slots: 1 }, { id: 'h_skycrown', rate: 0.05 }, { id: 'x_skyring', rate: 0.08, slots: 1 }, { id: 'r_ori', rate: 1 }, { id: 'r_elu', rate: 1 }, { id: 'c_skykeeper', rate: CARD.mvp }],
+  desc: '하늘 유적의 왕좌를 지키는 빛의 파수신. 날개 한 쌍이 성소를 다 덮는다. [MVP]',
+});
+
+// ── 해적의 보물섬 (푸른 항구, 숨김: 선장의 나침반 + 2차 전직한 동료)
+mob({
+  id: 'treasurecrab', name: '보물게', lv: 49, hp: 3800, atk: [175, 215], def: 45, mdef: 15, agi: 22, dex: 70, luk: 40,
+  element: 'neutral', race: 'fish', size: 'small', range: 24, delay: 1300, speed: 50, aggressive: false, scale: 0.9,
+  sprite: 'crab', palette: ['#ffd040', '#a07010', '#fff8c0'],
+  drops: [{ id: 'e_goldshell', rate: 0.45 }, { id: 'e_doubloon', rate: 0.3 }, { id: 'e_pearl', rate: 0.04 }, { id: 'x_pirate', rate: 0.0006 }, { id: 'c_treasurecrab', rate: CARD.secret }],
+  desc: '해적들이 묻은 금화를 껍데기 삼아 짊어진 게. 잡으면 금화가 쏟아진다.',
+});
+mob({
+  id: 'seadog', name: '해골 갑판장', lv: 53, hp: 4500, atk: [200, 245], def: 25, mdef: 15, agi: 45, dex: 80,
+  element: 'undead', race: 'undead', size: 'medium', range: 28, delay: 1200, speed: 70, aggressive: true,
+  sprite: 'skeleton', palette: ['#e8dcc0', '#a8906a', '#2a2a3a'],
+  drops: [{ id: 'e_rustyhook', rate: 0.45 }, { id: 'u_white', rate: 0.04 }, { id: 'm_piratepatch', rate: 0.002 }, { id: 'h_piratehat', rate: 0.001 }, { id: 'w_seasaber', rate: 0.0004 }, { id: 'c_seadog', rate: CARD.secret }],
+  desc: '해적왕의 보물을 지키는 갑판장의 해골. 한 손에 녹슨 갈고리를 끼웠다.',
+});
+mob({
+  id: 'pirateking', name: '해적왕의 망령', lv: 56, hp: 60000, atk: [330, 420], def: 40, mdef: 40, agi: 55, dex: 110, luk: 50,
+  element: 'shadow', race: 'undead', size: 'large', range: 36, delay: 1150, speed: 75, aggressive: true, boss: 'field', scale: 1.8, expMul: 22,
+  sprite: 'skeleton_knight', palette: ['#d8d0c0', '#1a1a2a', '#c8a020'],
+  skills: [{ kind: 'charge', cd: 7000, mult: 1.7 }, { kind: 'slam', cd: 8500, mult: 1.9, radius: 95 }, { kind: 'summon', cd: 15000, summon: 'seadog', count: 2, below: 0.7 }],
+  drops: [{ id: 'e_kingcoin', rate: 1 }, { id: 'x_pirate', rate: 0.2 }, { id: 'x_pirate', rate: 0.08, slots: 1 }, { id: 'h_piratehat', rate: 0.1 }, { id: 'w_seasaber', rate: 0.05, slots: 1 }, { id: 'r_ori', rate: 1 }, { id: 'r_elu', rate: 0.6 }, { id: 'c_pirateking', rate: CARD.sboss }],
+  desc: '보물섬 동굴의 금화 더미 위에서 일어난 해적왕. 암흑속성이라 성속성이 잘 든다. [필드 보스]',
+});
+
+// ── 거울 호수 (안개 호수, 숨김: 안개 거울 착용 + 새벽 4~10시)
+mob({
+  id: 'mirrorjelly', name: '거울 말랑', lv: 34, hp: 1900, atk: [100, 124], def: 15, mdef: 30, agi: 30, dex: 60, luk: 30, expMul: 1.05,
+  element: 'neutral', race: 'plant', size: 'medium', range: 26, delay: 1400, speed: 48, aggressive: false,
+  sprite: 'jelly', palette: ['#e0e8f0', '#a0b0c8', '#ffffff'],
+  drops: [{ id: 'e_mirrorjelly', rate: 0.45 }, { id: 'e_jelly', rate: 0.3 }, { id: 'u_blue', rate: 0.02 }, { id: 'x_mistmirror', rate: 0.002 }, { id: 'w_lakewand', rate: 0.0004 }, { id: 'c_mirrorjelly', rate: CARD.secret }],
+  desc: '몸에 보는 사람이 비치는 은빛 말랑. 자기 얼굴과 눈이 마주치면 깜짝 놀란다.',
+});
+mob({
+  id: 'swan', name: '백조', lv: 38, hp: 2200, atk: [118, 145], def: 15, mdef: 30, agi: 50, dex: 75, expMul: 1.05,
+  element: 'water', race: 'brute', size: 'medium', range: 26, delay: 1100, speed: 90, aggressive: true, flying: true, atkElement: 'water', scale: 1.2,
+  sprite: 'bird:swan', palette: ['#ffffff', '#d0d8e8', '#ff9a40'],
+  drops: [{ id: 'e_whitefeather', rate: 0.45 }, { id: 'u_yellow', rate: 0.04 }, { id: 'w_lakewand', rate: 0.0006 }, { id: 'x_mistmirror', rate: 0.0003, slots: 1 }, { id: 'c_swan', rate: CARD.secret }],
+  desc: '거울 호수에만 사는 백조. 우아하지만 날갯짓은 매섭다.',
+});
+mob({
+  id: 'swanqueen', name: '백조 여왕', lv: 41, hp: 32000, atk: [160, 205], def: 30, mdef: 50, agi: 60, dex: 100, luk: 50,
+  element: 'water', race: 'angel', size: 'large', range: 34, delay: 1200, speed: 85, aggressive: true, boss: 'field', scale: 1.8, expMul: 22, flying: true,
+  sprite: 'bird:swan', palette: ['#fffaf0', '#c8e0ff', '#ffd040'],
+  skills: [{ kind: 'bolt', cd: 4000, mult: 1.5, element: 'water' }, { kind: 'charge', cd: 8000, mult: 1.6 }, { kind: 'summon', cd: 16000, summon: 'swan', count: 2 }, { kind: 'heal', cd: 24000, below: 0.3 }],
+  drops: [{ id: 'e_swanfeather', rate: 1 }, { id: 'h_swanwing', rate: 0.08 }, { id: 'x_mistmirror', rate: 0.08, slots: 1 }, { id: 'w_lakewand', rate: 0.06, slots: 2 }, { id: 'u_blue', rate: 0.6 }, { id: 'r_ori', rate: 0.3 }, { id: 'r_elu', rate: 0.3 }, { id: 'c_swanqueen', rate: CARD.sboss }],
+  desc: '물에 비친 달을 왕관으로 쓴 백조. 거울 호수의 주인이다. 물속성이라 바람이 잘 든다. [필드 보스]',
 });
 
 export function monster(id: string): MonsterDef {

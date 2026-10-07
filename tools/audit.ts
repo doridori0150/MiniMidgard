@@ -1,9 +1,9 @@
 // Content audit: drop tables, cards, item sources, weapon ladders, map economy.
 // usage: node --experimental-strip-types tools/audit.ts [section]
-//   sections: all (default) · errors · ladder · acc · head · cards · maps · econ · curve
+//   sections: all (default) · errors · ladder · acc · head · cards · maps · econ · patches · curve
 import { MONSTERS, type MonsterDef } from '../src/game/data/monsters.ts';
 import { ITEMS, SHOPS } from '../src/game/data/items.ts';
-import { ZONES } from '../src/game/data/zones.ts';
+import { ZONES, REGION_INFO, openers } from '../src/game/data/zones.ts';
 import { sellPrice } from '../src/game/state.ts';
 import type { GameState, WeaponType } from '../src/game/types.ts';
 
@@ -55,12 +55,13 @@ for (const z of ZONES) {
   for (const e of z.mobs) if (!MONSTERS[e.id]) errors.push(`${z.id}: unknown mob ${e.id}`);
   if (z.boss && MONSTERS[z.boss]?.boss !== 'field') errors.push(`${z.id}: boss ${z.boss} is not a field boss`);
   if (z.mvp && MONSTERS[z.mvp]?.boss !== 'mvp') errors.push(`${z.id}: mvp ${z.mvp} is not an MVP`);
-  if (z.unlockBy) {
-    const u = ZONES.find((x) => x.id === z.unlockBy);
-    if (!u) errors.push(`${z.id}: unlockBy unknown ${z.unlockBy}`);
-    else if (!u.boss) errors.push(`${z.id}: unlockBy ${u.id} has no field boss`);
+  for (const o of openers(z)) {
+    const u = ZONES.find((x) => x.id === o);
+    if (!u) errors.push(`${z.id}: unlockBy/alsoBy unknown ${o}`);
+    else if (!u.boss) errors.push(`${z.id}: opener ${u.id} has no field boss`);
   }
-  if (z.id !== 'town' && z.id !== 'meadow' && !z.unlockBy && !z.gate) errors.push(`${z.id}: unreachable (no unlockBy, no gate)`);
+  if (z.start && (openers(z).length || z.gate)) errors.push(`${z.id}: open from the start but also gated`);
+  if (z.id !== 'town' && !z.start && !openers(z).length && !z.gate) errors.push(`${z.id}: unreachable (not start, no unlockBy, no gate)`);
   const g = z.gate;
   if (g) {
     if (g.clue && !ITEMS[g.clue]) errors.push(`${z.id}: clue ${g.clue} unknown`);
@@ -71,6 +72,8 @@ for (const z of ZONES) {
       if (n.kind === 'item' && !ITEMS[n.id].rarity) errors.push(`${z.id}: gate item ${n.id} has no rarity`);
       if ((n.kind === 'kills' || n.kind === 'boss' || n.kind === 'card') && !MONSTERS[n.mob]) errors.push(`${z.id}: gate mob ${n.mob} unknown`);
       if (n.kind === 'hours' && ((n.to - n.from + 24) % 24) < 4) errors.push(`${z.id}: hours window < 4h`);
+      if (n.kind === 'equip' && ITEMS[n.id]?.kind !== 'equip') errors.push(`${z.id}: gate equip ${n.id} is not equipment`);
+      if (n.kind === 'equip' && !dropsOf[n.id]) errors.push(`${z.id}: gate equip ${n.id} is never dropped`);
     }
     if (g.hidden && !g.clue && g.need[0]?.kind === 'hours') errors.push(`${z.id}: hidden map whose first need is hours`);
   }
@@ -88,9 +91,28 @@ for (const z of ZONES) {
   regions.set(z.region, r);
 }
 for (const [name, r] of regions) if (!r.boss || !r.mvp) errors.push(`region ${name}: boss ${r.boss}, mvp ${r.mvp}`);
+// every first-job home region has a beginner field open from the start
+for (const [name, info] of Object.entries(REGION_INFO)) {
+  if (!regions.has(name)) errors.push(`REGION_INFO ${name}: no such region`);
+  if (info.home && !ZONES.some((z) => z.region === name && z.start)) errors.push(`region ${name} (home of ${info.home}): no start-open field`);
+}
+// reachability: walk the unlock graph from the start fields (gates count as reachable if their needs name reachable mobs)
+{
+  const open = new Set(ZONES.filter((z) => z.start || z.id === 'town').map((z) => z.id));
+  for (let changed = true; changed;) {
+    changed = false;
+    for (const z of ZONES) {
+      if (open.has(z.id)) continue;
+      const byBoss = openers(z).some((o) => open.has(o));
+      const byGate = !!z.gate && z.gate.need.every((n) => n.kind !== 'boss' || ZONES.some((x) => open.has(x.id) && (x.boss === n.mob || x.mvp === n.mob)));
+      if (byBoss || (z.gate && !openers(z).length && byGate)) { open.add(z.id); changed = true; }
+    }
+  }
+  for (const z of ZONES) if (!open.has(z.id)) errors.push(`${z.id}: not reachable from the start fields`);
+}
 
 if (on('errors') || want === 'all') {
-  console.log(`== integrity: ${Object.keys(MONSTERS).length} monsters, ${Object.values(ITEMS).filter((i) => i.kind === 'card').length} cards, ${ZONES.length} zones, ${Object.keys(ITEMS).length} items`);
+  console.log(`== integrity: ${Object.keys(MONSTERS).length} monsters, ${Object.values(ITEMS).filter((i) => i.kind === 'card').length} cards, ${ZONES.length} zones (${ZONES.filter((z) => z.mobs.length).length} hunting maps, ${ZONES.filter((z) => z.start).length} open from the start), ${Object.keys(ITEMS).length} items`);
   console.log(errors.length ? 'ERRORS:\n  ' + errors.join('\n  ') : 'no errors');
   if (warn.length) console.log('warnings:\n  ' + warn.join('\n  '));
 }
@@ -156,6 +178,29 @@ if (on('econ') || on('maps')) {
     }
     console.log(`  ${z.id.padEnd(12)} ${String(z.lv[0]).padStart(2)}-${String(z.lv[1]).padEnd(2)} ${(z.role ?? []).join('/').padEnd(9)} mobLv${lv.toFixed(0).padStart(3)} exp${Math.round(exp).toString().padStart(6)} zeny${Math.round(etc).toString().padStart(5)}+${Math.round(eq).toString().padStart(4)} ore${(ore * 1000).toFixed(1).padStart(5)} cards${(card * 1000).toFixed(1).padStart(4)}`);
   }
+}
+// ── patch ladder: cards / gear that patch an early wall (HIT · FLEE · HP · SP · crit · element), by the level of their
+//    earliest source — the "where do I farm my fix" table (docs/CONTENT.md 4.4)
+if (on('patches')) {
+  console.log('\n== patch ladder (earliest source level · item · what it patches · source)');
+  const kinds: [string, (b: NonNullable<(typeof ITEMS)[string]['bonus']>) => boolean][] = [
+    ['HIT', (b) => !!b.hit || (b.dex ?? 0) >= 2],
+    ['FLEE', (b) => !!b.flee || (b.agi ?? 0) >= 2],
+    ['HP', (b) => !!b.maxHp || !!b.maxHpPct || (b.vit ?? 0) >= 2],
+    ['SP', (b) => !!b.maxSp || !!b.maxSpPct || !!b.spRegenPct || (b.int ?? 0) >= 2],
+    ['crit', (b) => !!b.crit],
+    ['element', (b) => !!b.weaponElement || !!b.eleDmg || !!b.eleRes],
+  ];
+  const rows: { lv: number; line: string }[] = [];
+  for (const it of Object.values(ITEMS)) {
+    if (!it.bonus || !(it.kind === 'card' || it.kind === 'equip')) continue;
+    const src = (dropsOf[it.id] ?? []).map((d) => MONSTERS[d.mob]).sort((a, b) => a.lv - b.lv)[0];
+    if (!src || src.lv > 50) continue;
+    const tags = kinds.filter(([, f]) => f(it.bonus!)).map(([k]) => k);
+    if (!tags.length) continue;
+    rows.push({ lv: src.lv, line: `  Lv${String(src.lv).padStart(2)} ${tags.join('/').padEnd(12)} ${it.name.padEnd(12)} ${(it.kind === 'card' ? it.desc.split('\n').slice(0, -1).join(' / ') : it.desc.split('. ').pop())}  ← ${src.name} @${(mobZones[src.id] ?? ['?']).join(',')}` });
+  }
+  for (const r of rows.sort((a, b) => a.lv - b.lv)) console.log(r.line);
 }
 // ── stat curve outliers (normal mobs): HP and ATK vs a smooth curve by level
 if (on('curve')) {

@@ -215,6 +215,8 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
     }
     for (let i = 0; i < 6; i++) props.push({ x: R() * W, y: 60 + R() * (H - 60), kind: R() < 0.5 ? 'skulls' : 'pillar', v: 0, s: 0.9 + R() * 0.3 });
   } else if (z.theme === 'desert') {
+    // the harbour's sandy maps (a beach, a treasure island) reuse the desert ground with palms and rocks instead of cacti and ruins
+    const shore = z.region === '푸른 항구 지방';
     ctx.fillStyle = '#e6c983'; ctx.fillRect(0, 0, W, H);
     for (let i = 0; i < 140; i++) softBlob(ctx, R() * W, R() * H, 50 + R() * 100, R() < 0.5 ? '#f4dca0' : '#c8a464', 0.35);
     // dune ridges
@@ -239,10 +241,14 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
     for (let i = 0, tries = 0; i < 26 && tries < 400; tries++) {
       const x = 40 + R() * (W - 80), y = 70 + R() * (H - 110);
       if (!freeD(x, y)) continue;
-      props.push({ x, y, kind: R() < 0.7 ? 'cactus' : 'rock', v: Math.floor(R() * 3), s: 0.7 + R() * 0.5 }); i++;
+      const r = R();
+      props.push({ x, y, kind: shore ? (r < 0.4 ? 'palm' : 'rock') : r < 0.7 ? 'cactus' : 'rock', v: Math.floor(R() * 3), s: 0.7 + R() * 0.5 }); i++;
     }
     edgeProps('dune', 24, 60, 2, 0.9, 1.4);
-    for (let i = 0; i < 5; i++) props.push({ x: 100 + R() * (W - 200), y: 120 + R() * (H - 200), kind: R() < 0.6 ? 'ruin' : 'skulls', v: 0, s: 0.9 + R() * 0.3 });
+    for (let i = 0; i < 5; i++) {
+      const x = 100 + R() * (W - 200), y = 120 + R() * (H - 200), r = R();
+      props.push({ x, y, kind: shore ? 'rock' : r < 0.6 ? 'ruin' : 'skulls', v: 0, s: 0.9 + R() * 0.3 });
+    }
   } else if (z.theme === 'snow') {
     ctx.fillStyle = '#e8f0f8'; ctx.fillRect(0, 0, W, H);
     for (let i = 0; i < 150; i++) softBlob(ctx, R() * W, R() * H, 50 + R() * 90, R() < 0.55 ? '#ffffff' : '#bcd0e8', 0.4);
