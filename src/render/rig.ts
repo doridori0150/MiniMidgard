@@ -5,6 +5,7 @@
 import type { WeaponType } from '../game/types.ts';
 import { BOW_RELEASE, MELEE_CONTACT } from '../game/world.ts';
 import type { HeroLookDraw, Pose } from './hero.ts';
+import { drawSprite, loadSprites, spriteSupports } from './sprite.ts';
 
 type V2 = [number, number];
 interface PartDef { file: string; size: V2; pivot: V2; anchors: Record<string, V2>; z: number }
@@ -30,7 +31,8 @@ const HEIGHT = 76;
 export const RIG_METRICS = { height: M?.canvas.referenceHeight ?? 236, sheetToUnits: (M?.canvas.referenceHeight ?? 236) / HEIGHT };
 
 export function loadRig(): Promise<void> {
-  if (!M) return Promise.resolve();
+  const sprites = loadSprites();
+  if (!M) return sprites;
   const jobs: Promise<void>[] = [];
   for (const [path, url] of Object.entries(FILES)) {
     const name = path.match(/parts\/([^/]+)\.png$/)?.[1];
@@ -38,7 +40,7 @@ export function loadRig(): Promise<void> {
     const img = new Image(); img.src = url;
     jobs.push(img.decode().then(() => { imgs.set(name, img); }, () => {}));
   }
-  return Promise.all(jobs).then(() => { ready = Object.values(M.parts).every((p) => imgs.has(partName(p))); });
+  return Promise.all([...jobs, sprites]).then(() => { ready = Object.values(M.parts).every((p) => imgs.has(partName(p))); });
 }
 const partName = (p: PartDef) => p.file.replace(/^parts\//, '').replace(/\.png$/, '');
 
@@ -49,7 +51,11 @@ const WEAPON: Partial<Record<WeaponType, string | null>> = { none: null, dagger:
 /** game headgear looks with painted parts */
 const HEADGEAR: Record<string, string> = { leaf: 'leaf', hairpin: 'hairpin' };
 
+/** painted frame sprites (v4) win wherever they exist; the cut-out rig stays as the fallback and for comparison */
 export function rigSupports(L: HeroLookDraw) {
+  return spriteSupports(L) || cutoutSupports(L);
+}
+export function cutoutSupports(L: HeroLookDraw) {
   return ready && !!M && !!OUTFIT[L.cls] && !!M.outfits[OUTFIT[L.cls]!] && L.wtype in WEAPON;
 }
 
@@ -134,7 +140,11 @@ function tint(name: string, color: string): CanvasImageSource | undefined {
 }
 
 export function drawRigHero(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {
-  if (!rigSupports(L) || !M) return false;
+  if (drawSprite(ctx, L, pose)) return true;
+  return drawCutout(ctx, L, pose);
+}
+export function drawCutout(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {
+  if (!cutoutSupports(L) || !M) return false;
   const outfit = M.outfits[OUTFIT[L.cls]!];
   const look: Record<string, string | null> = {
     weapon: WEAPON[L.wtype] ?? null,
