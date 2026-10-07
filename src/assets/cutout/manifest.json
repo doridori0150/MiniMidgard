@@ -9,7 +9,7 @@
       148,
       286
     ],
-    "referenceHeight": 236,
+    "referenceHeight": 257,
     "displayHeight": 80,
     "axis": "x right, y down",
     "angles": "clockwise degrees"
@@ -342,6 +342,10 @@
       "offset": [
         2,
         -7
+      ],
+      "scale": [
+        1.18,
+        1.18
       ]
     },
     "hair_back": {
@@ -831,7 +835,7 @@
             "body": {
               "offset": [
                 148,
-                207
+                189
               ]
             },
             "leg_near": {
@@ -901,8 +905,8 @@
           "nodes": {
             "body": {
               "offset": [
-                129,
-                259
+                164,
+                216
               ],
               "angle": -90
             },
