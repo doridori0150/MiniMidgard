@@ -10,15 +10,6 @@ import { computeDerived } from '../../game/stats.ts';
 import { expNext, jobExpNext, statCost } from '../../game/exp.ts';
 import { skillIconURL } from '../../render/icons.ts';
 
-function useHold(fn: () => void) {
-  const t = useRef<number | null>(null);
-  const stop = () => { if (t.current !== null) { clearInterval(t.current); t.current = null; } };
-  return {
-    onPointerDown: () => { fn(); stop(); let n = 0; t.current = window.setInterval(() => { if (++n > 3) fn(); }, 110); },
-    onPointerUp: stop, onPointerLeave: stop, onPointerCancel: stop,
-  };
-}
-
 const STAT_META: Record<StatKey, { ko: string; color: string }> = {
   str: { ko: '힘', color: '#e0603a' },
   agi: { ko: '민첩', color: '#2fa865' },
@@ -52,7 +43,6 @@ function preview(cur: D, next: D): string {
 
 function StatLine(props: { k: StatKey; base: number; plus: number; pts: number; step: number; prev: string; bump: { text: string; n: number } | null; onUp: () => void; onHelp: () => void }) {
   const cost = statCost(props.base);
-  const hold = useHold(props.onUp);
   const m = STAT_META[props.k];
   const can = props.pts >= cost && props.base < 99;
   return (
@@ -66,7 +56,7 @@ function StatLine(props: { k: StatKey; base: number; plus: number; pts: number; 
         <div class="stat-prev">{props.prev ? <>▶ {props.prev}</> : <span class="muted">—</span>}</div>
       </div>
       <div class="stat-cost"><small>필요</small><b>{cost}</b></div>
-      <button class="stat-btn" disabled={!can} aria-label={`${STAT_KO[props.k]} ${props.step} 올리기`} {...hold}>+</button>
+      <button class="stat-btn" disabled={!can} aria-label={`${STAT_KO[props.k]} ${props.step} 올리기`} onClick={props.onUp}>+</button>
     </div>
   );
 }

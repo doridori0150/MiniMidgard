@@ -18,11 +18,12 @@ function slotAccepts(slot: EquipSlot, id: string) {
   return d.loc === slot;
 }
 
-export function EquipPanel() {
+export function EquipPanel(props: { view?: 'equip' | 'costume' } = {}) {
   const g = useGame();
   const h = g.hero;
   const s = g.s;
-  const [tab, setTab] = useState<'equip' | 'costume'>('equip');
+  const [ownTab, setTab] = useState<'equip' | 'costume'>('equip');
+  const tab = props.view ?? ownTab; // on the page shell the inner tab row picks the view
   const [pick, setPick] = useState<string | null>(null);
   const instOf = (uid?: number) => (uid === undefined ? undefined : s.equips.find((e) => e.uid === uid));
   const cell = (slot: EquipSlot, label: string, right: boolean) => {
@@ -64,10 +65,12 @@ export function EquipPanel() {
 
   return (
     <Win title={`장비 — ${h.name}`} onClose={() => g.openPanel(null)}>
-      <div class="tabs">
-        <button class={tab === 'equip' ? 'on' : ''} onClick={() => { setTab('equip'); setPick(null); }}>장비</button>
-        <button class={tab === 'costume' ? 'on' : ''} onClick={() => { setTab('costume'); setPick(null); }}>의상 (외형)</button>
-      </div>
+      {!props.view && (
+        <div class="tabs">
+          <button class={tab === 'equip' ? 'on' : ''} onClick={() => { setTab('equip'); setPick(null); }}>장비</button>
+          <button class={tab === 'costume' ? 'on' : ''} onClick={() => { setTab('costume'); setPick(null); }}>의상 (외형)</button>
+        </div>
+      )}
       <div class="win-body">
         <HeroTabs sel={g.sel} onSel={(i) => { g.sel = i; setPick(null); g.notify(); }} />
         {tab === 'equip' ? (

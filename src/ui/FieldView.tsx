@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 import { game, useGame } from './game.ts';
 import { MONSTERS } from '../game/data/monsters.ts';
+import { zone } from '../game/data/zones.ts';
 import { QuickBar } from './QuickBar.tsx';
 import { PartyRail } from './Hud.tsx';
 
@@ -88,18 +89,39 @@ export function FieldView() {
     ro.observe(ref.current);
     return () => ro.disconnect();
   }, []);
-  // keep the party visible above an open panel
+  // hunting: the whole field, party kept above the quick bar. Managing: a small live band that frames the party
+  const manage = g.page !== null;
+  const closed = manage && g.bandClosed();
   useEffect(() => {
     const r = game.renderer;
-    if (!r || !wrap.current) return;
-    const fieldH = wrap.current.clientHeight;
-    const appH = wrap.current.parentElement!.clientHeight;
-    const sheet = appH * (g.panel === 'equip' || g.panel === 'town' || g.panel === 'map' || g.panel === 'cards' || g.panel === 'party' ? 0.78 : 0.6);
-    r.insetBottom = g.panel ? Math.max(0, Math.min(fieldH - 90, sheet)) : 84; // keep the party above the quick bar
-  }, [g.panel]);
+    if (!r) return;
+    r.observe = manage;
+    r.insetBottom = manage ? 0 : 84;
+    r.resize();
+  }, [manage, closed]);
+  if (game.renderer) game.renderer.focusHeroId = g.selId;
+  // the canvas is always the first child of the same wrapper, so the renderer keeps drawing into the same element
+  const z = zone(g.s.zone);
+  const off = game.renderer?.offscreen ?? 0;
+  if (manage) return (
+    <div class={'field band' + (closed ? ' closed' : '')} ref={wrap}>
+      <div class="band-view" id="band-canvas">
+        <canvas class="main" ref={ref} />
+        <button class="band-hit" tabIndex={-1} aria-hidden="true" onClick={() => g.toggleBand()} />
+      </div>
+      <button class="band-bar" aria-expanded={!closed} aria-controls="band-canvas" onClick={() => g.toggleBand()}>
+        <b>{z.name}</b><span>· {z.id === 'town' ? '마을' : g.world.wipeUntil > 0 ? '재정비 중' : '사냥 진행'}</span>
+        {off > 0 && !closed && <small>화면 밖 동료 {off}명</small>}
+        <span class="sp1" /><i class="band-chev" aria-hidden="true">{closed ? '▾' : '▴'}</i>
+        <span class="sr-only">{closed ? '전투 화면 펼치기' : '전투 화면 접기'}</span>
+      </button>
+    </div>
+  );
   return (
     <div class="field" ref={wrap}>
-      <canvas class="main" ref={ref} />
+      <div class="band-view">
+        <canvas class="main" ref={ref} />
+      </div>
       <PartyRail />
       <Minimap />
       <Gauges />

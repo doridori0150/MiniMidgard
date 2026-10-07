@@ -91,6 +91,13 @@ export class FieldRenderer {
   cam = { x: 0, y: 0, zoom: 1 };
   cssW = 300; cssH = 300; dpr = 1;
   insetBottom = 84;
+  /** management pages show the field as a small live band: frame the party (or the selected hero) and ignore taps */
+  observe = false;
+  /** hero id the observe camera falls back to when the party is too spread out to fit */
+  focusHeroId = -1;
+  /** heroes outside the band in the fallback framing (drawn as a small note) */
+  offscreen = 0;
+  private baseZoom = 1;
   shake = 0;
   flash = 0;
   flashColor = '#ffffff';
@@ -147,12 +154,14 @@ export class FieldRenderer {
 
   resize() {
     const r = this.canvas.getBoundingClientRect();
+    if (r.width < 2 || r.height < 2) return; // collapsed band: keep the last good buffer instead of a 0×0 canvas
     this.dpr = this.pixelMode ? 0.5 : Math.min(2.5, window.devicePixelRatio || 1);
     this.canvas.style.imageRendering = this.pixelMode ? 'pixelated' : '';
     this.cssW = r.width; this.cssH = r.height;
     this.canvas.width = Math.round(r.width * this.dpr);
     this.canvas.height = Math.round(r.height * this.dpr);
-    this.cam.zoom = Math.max(1, Math.min(2.1, Math.min(r.width / 330, r.height / 300)));
+    this.baseZoom = Math.max(1, Math.min(2.1, Math.min(r.width / 330, r.height / 300)));
+    if (!this.observe) this.cam.zoom = this.baseZoom;
   }
 
   private artKit = -1;
@@ -192,6 +201,7 @@ export class FieldRenderer {
   }
 
   private onPointer(e: PointerEvent) {
+    if (this.observe) return; // the band only watches: no focus-fire or NPC taps while a page is open
     const r = this.canvas.getBoundingClientRect();
     const [wx, wy] = this.toWorld(e.clientX - r.left, e.clientY - r.top);
     if (this.world.zone.id === 'town' && this.art) {
@@ -718,6 +728,42 @@ export class FieldRenderer {
   }
 
   // ───────── frame
+  /** fit every living hero head-to-feet inside the band (8px margin); if that needs a zoom below 0.75, fit the selected
+   *  hero instead and count who is left outside. No map-edge clamp here, so nobody gets cut at the border. */
+  private observeCamera(dt: number) {
+    const w = this.world;
+    const box = (list: HeroUnit[]) => {
+      let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      for (const h of list) {
+        const sm = this.smooth.get(h.uid) ?? h;
+        const lying = h.state === 'dead';
+        x0 = Math.min(x0, sm.x - (lying ? 34 : 18)); x1 = Math.max(x1, sm.x + (lying ? 34 : 18));
+        // head + hair on top, name tag and bars below the feet
+        y0 = Math.min(y0, sm.y - (lying ? 34 : 94)); y1 = Math.max(y1, sm.y + 24);
+      }
+      return { x0, y0, x1, y1 };
+    };
+    const fit = (b: { x0: number; y0: number; x1: number; y1: number }) => Math.min((this.cssW - 16) / (b.x1 - b.x0), (this.cssH - 16) / (b.y1 - b.y0));
+    const alive = w.heroes.filter((h) => h.state !== 'dead');
+    const all = alive.length ? alive : w.heroes;
+    if (!all.length) return;
+    let b = box(all), z = fit(b);
+    this.offscreen = 0;
+    if (z < 0.75) {
+      const me = w.heroes.find((h) => h.hero.id === this.focusHeroId) ?? all[0];
+      b = box([me]); z = fit(b);
+      const vw = this.cssW / z / 2, vh = this.cssH / z / 2, cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+      this.offscreen = all.filter((h) => h !== me && (Math.abs(h.x - cx) > vw || Math.abs(h.y - 40 - cy) > vh)).length;
+    }
+    z = Math.min(z, 2.1);
+    const k = 1 - Math.exp(-dt / 220);
+    const snap = Math.abs(this.cam.zoom - z) > 1.2; // first frame in the band: jump instead of sliding in from the full view
+    this.cam.zoom = snap ? z : this.cam.zoom + (z - this.cam.zoom) * k;
+    const cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+    this.cam.x = snap ? cx : this.cam.x + (cx - this.cam.x) * k;
+    this.cam.y = snap ? cy : this.cam.y + (cy - this.cam.y) * k;
+  }
+
   frame(nowMs: number) {
     const dt = this.lastFrame ? Math.max(0, Math.min(100, nowMs - this.lastFrame)) : 16;
     this.lastFrame = Math.max(this.lastFrame, nowMs);
@@ -745,14 +791,18 @@ export class FieldRenderer {
     for (const id of this.smooth.keys()) if (!live.has(id)) this.smooth.delete(id);
 
     // camera
-    const c = w.center();
     const ck = 1 - Math.exp(-dt / 350);
-    this.cam.x += (c.x - this.cam.x) * ck;
-    this.cam.y += (c.y - 10 - this.cam.y) * ck;
-    const vw = this.viewW(), vh = (this.cssH - this.insetBottom) / this.cam.zoom;
-    this.cam.x = Math.max(vw / 2, Math.min(w.zone.w - vw / 2, this.cam.x));
-    this.cam.y = Math.max(vh / 2, Math.min(w.zone.h - vh / 2 + this.insetBottom / this.cam.zoom * 0.0, this.cam.y));
-    if (vw >= w.zone.w) this.cam.x = w.zone.w / 2;
+    if (this.observe) this.observeCamera(dt);
+    else {
+      const c = w.center();
+      this.cam.zoom += (this.baseZoom - this.cam.zoom) * (1 - Math.exp(-dt / 160));
+      this.cam.x += (c.x - this.cam.x) * ck;
+      this.cam.y += (c.y - 10 - this.cam.y) * ck;
+      const vw = this.viewW(), vh = (this.cssH - this.insetBottom) / this.cam.zoom;
+      this.cam.x = Math.max(vw / 2, Math.min(w.zone.w - vw / 2, this.cam.x));
+      this.cam.y = Math.max(vh / 2, Math.min(w.zone.h - vh / 2 + this.insetBottom / this.cam.zoom * 0.0, this.cam.y));
+      if (vw >= w.zone.w) this.cam.x = w.zone.w / 2;
+    }
 
     let sx = 0, sy = 0;
     if (this.shake > 0.1) { sx = (Math.random() - 0.5) * this.shake; sy = (Math.random() - 0.5) * this.shake; this.shake *= Math.pow(0.001, dt / 1000); } else this.shake = 0;

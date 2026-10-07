@@ -49,7 +49,12 @@ export async function qaBoot(): Promise<boolean> {
   s.zone = q.get('zone') ?? 'meadow';
   game.qa = true;
   game.begin(s, true);
+  // ?panel=<legacy id> or ?page=<tab>&sub=<inner tab>, ?sel=<hero index>, ?band=closed
   const panel = q.get('panel');
-  if (panel) game.panel = panel as never;
+  if (panel) game.openPanel(panel as never);
+  const page = q.get('page');
+  if (page) game.openPage(page as never, q.get('sub') ?? undefined);
+  if (q.has('sel')) game.sel = Number(q.get('sel'));
+  if (q.get('band') === 'closed') game.ui.bandClosed = { general: true, party: true };
   return true;
 }

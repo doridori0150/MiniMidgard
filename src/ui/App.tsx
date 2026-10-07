@@ -3,12 +3,7 @@ import { game, useGame } from './game.ts';
 import { Hud, Nav } from './Hud.tsx';
 import { FieldView } from './FieldView.tsx';
 import { Modals } from './Modals.tsx';
-import { StatusPanel, SkillsPanel } from './panels/StatusSkills.tsx';
-import { EquipPanel, BagPanel } from './panels/EquipBag.tsx';
-import { TownPanel, SettingsPanel } from './panels/World.tsx';
-import { PartyPanel } from './panels/Party.tsx';
-import { MapPanel } from './WorldMap.tsx';
-import { CardPanel } from './panels/Cards.tsx';
+import { ManagePage } from './Page.tsx';
 import { LookCanvas } from './widgets.tsx';
 import { newGame, load, defaultLook, HAIR_COLORS, HAIR_STYLES, SKIN_TONES, autoDistribute } from '../game/state.ts';
 import type { Look } from '../game/types.ts';
@@ -21,23 +16,13 @@ function Toasts() {
 
 function GameScreen() {
   const g = useGame();
-  const p = g.panel;
-  const tall = p === 'equip' || p === 'town' || p === 'map' || p === 'cards' || p === 'party';
+  // hunting: HUD → full field → nav. Managing: HUD → live field band → page (title, hero, tabs, body) → nav
+  const manage = g.page !== null;
   return (
-    <div class="app">
+    <div class={'app' + (manage ? ' manage' : '')}>
       <Hud />
       <FieldView />
-      <div class={'sheet' + (p ? ' open' : '') + (tall ? ' tall' : '')}>
-        {p === 'status' && <StatusPanel />}
-        {p === 'skills' && <SkillsPanel />}
-        {p === 'equip' && <EquipPanel />}
-        {p === 'cards' && <CardPanel />}
-        {p === 'bag' && <BagPanel />}
-        {p === 'map' && <MapPanel />}
-        {p === 'town' && <TownPanel />}
-        {p === 'party' && <PartyPanel />}
-        {p === 'settings' && <SettingsPanel />}
-      </div>
+      {manage && <ManagePage />}
       <Nav />
       <Modals />
       <Toasts />

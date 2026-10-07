@@ -1,5 +1,5 @@
-import type { ComponentChildren } from 'preact';
-import { useEffect, useRef } from 'preact/hooks';
+import { createContext, type ComponentChildren } from 'preact';
+import { useContext, useEffect, useRef } from 'preact/hooks';
 import type { Element, EquipInst, Hero } from '../game/types.ts';
 import { inked } from '../render/ink.ts';
 import { drawRigHero, rigSupports } from '../render/rig.ts';
@@ -10,8 +10,11 @@ import { heroLookDraw } from '../render/field.ts';
 import { ELEMENT_COLOR, ELEMENT_KO } from '../game/data/elements.ts';
 import { ITEMS } from '../game/data/items.ts';
 import { MONSTERS } from '../game/data/monsters.ts';
-import { CLASSES } from '../game/data/classes.ts';
-import { itemName } from '../game/state.ts';
+import { CLASSES, lineage } from '../game/data/classes.ts';
+import { SKILLS } from '../game/data/skills.ts';
+import { STAT_KEYS } from '../game/types.ts';
+import { statCost } from '../game/exp.ts';
+import { itemName, canJobChange, canLearn } from '../game/state.ts';
 import { game } from './game.ts';
 
 // one shared animation ticker for all small canvases
@@ -102,7 +105,17 @@ export function CardArt(props: { id: string; w?: number; h?: number }) {
   return <canvas ref={ref} style={{ width: (props.w ?? 140) + 'px', height: (props.h ?? 196) + 'px' }} />;
 }
 
+/** inside the management page shell the shell draws the title, hero selector and tabs once: panels render body only */
+export const PageCtx = createContext<{ heroRow: boolean } | null>(null);
+
 export function Win(props: { title: string; onClose?: () => void; children: ComponentChildren; right?: ComponentChildren }) {
+  const page = useContext(PageCtx);
+  if (page) return (
+    <div class="page-win">
+      {props.right && <div class="page-info">{props.right}</div>}
+      {props.children}
+    </div>
+  );
   return (
     <div class="win">
       <div class="win-title">
@@ -150,16 +163,37 @@ export function ItemSlot(props: { id: string; inst?: EquipInst; qty?: number; eq
   );
 }
 
+/** hero picker used inside panels/modals; on a management page the shell's HeroSelector already does this */
 export function HeroTabs(props: { sel: number; onSel: (i: number) => void }) {
+  const page = useContext(PageCtx);
+  if (page?.heroRow) return null;
+  return <HeroSelector sel={props.sel} onSel={props.onSel} />;
+}
+
+/** what a hero can act on right now (shared by the rail, the selector and the nav badges) */
+export function heroReady(h: Hero): 'job' | 'grow' | null {
+  if (!canJobChange(h)) return 'job';
+  const stat = STAT_KEYS.some((k) => h.stats[k] < 99 && h.statPts >= statCost(h.stats[k]));
+  const skill = h.skillPts > 0 && lineage(h.cls).some((c) => Object.values(SKILLS).some((sk) => sk.cls === c && canLearn(h, sk.id)));
+  return stat || skill ? 'grow' : null;
+}
+
+/** one row of portrait buttons (48px) — picks whose stats / gear / cards / tactics the page edits */
+export function HeroSelector(props: { sel: number; onSel: (i: number) => void }) {
   const s = game.s;
-  if (s.heroes.length < 2) return null;
   return (
-    <div class="hero-tabs">
-      {s.heroes.map((h, i) => (
-        <button class={i === props.sel ? 'on' : ''} onClick={() => props.onSel(i)}>
-          <span style={{ color: CLASSES[h.cls].color }}>●</span><span>{h.name}</span>
-        </button>
-      ))}
+    <div class="hero-sel" role="radiogroup" aria-label="편집할 캐릭터">
+      {s.heroes.map((h, i) => {
+        const ready = heroReady(h);
+        return (
+          <button role="radio" aria-checked={i === props.sel} class={i === props.sel ? 'on' : ''} key={h.id}
+            aria-label={h.name + (ready === 'job' ? ' (전직 가능)' : ready ? ' (포인트 사용 가능)' : '')} onClick={() => props.onSel(i)}>
+            <span class="hs-face"><HeroCanvas hero={h} face zoom={0.62} animate={false} /></span>
+            <span class="hs-nm">{h.name}</span>
+            {ready && <i class={'hs-dot' + (ready === 'job' ? ' job' : '')}>{ready === 'job' ? '전직' : ''}</i>}
+          </button>
+        );
+      })}
     </div>
   );
 }

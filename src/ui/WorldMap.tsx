@@ -264,7 +264,7 @@ export function MobModal(props: { id: string }) {
           {m.drops.map((d) => {
             const it = ITEMS[d.id];
             return (
-              <button class={'dcard ' + (it.kind === 'card' ? 'card' : it.rarity ?? (it.kind === 'equip' ? 'rare' : ''))} onClick={() => g.setModal({ kind: 'item', id: d.id })}>
+              <button class={'dcard ' + (it.kind === 'card' ? 'card' : it.rarity ?? (it.kind === 'equip' ? 'rare' : ''))} onClick={() => g.pushModal({ kind: 'item', id: d.id })}>
                 <img src={itemIconURL(d.id)} alt="" />
                 <span class={'dname ' + nameClass(d.id)}>{it.name}{d.slots ? ` [${d.slots}]` : ''}</span>
                 <span class="drate">{d.rate >= 0.01 ? (d.rate * 100).toFixed(0) : (d.rate * 100).toFixed(2)}%</span>

@@ -35,11 +35,12 @@ function pct(r: number) {
   return (p >= 1 ? p.toFixed(0) : p >= 0.1 ? p.toFixed(1) : p.toFixed(2)) + '%';
 }
 
-export function CardPanel() {
+export function CardPanel(props: { view?: 'slots' | 'book' } = {}) {
   const g = useGame();
   const s = g.s;
   const h = g.hero;
-  const [tab, setTab] = useState<'slots' | 'book'>('slots');
+  const [ownTab, setTab] = useState<'slots' | 'book'>('slots');
+  const tab = props.view ?? ownTab;
   const [filter, setFilter] = useState<CardLoc | 'all'>('all');
   const [pickCard, setPickCard] = useState<string | null>(null);
   const [pickEquip, setPickEquip] = useState<number | null>(null);
@@ -118,10 +119,12 @@ export function CardPanel() {
 
   return (
     <Win title="카드" onClose={() => g.openPanel(null)}>
-      <div class="tabs">
-        <button class={tab === 'slots' ? 'on' : ''} onClick={() => setTab('slots')}>슬롯 관리</button>
-        <button class={tab === 'book' ? 'on' : ''} onClick={() => setTab('book')}>카드 도감 <small>{found}/{allBook.length}</small></button>
-      </div>
+      {props.view ? (tab === 'book' && <div class="page-info">카드 도감 <b>{found}</b> / {allBook.length}</div>) : (
+        <div class="tabs">
+          <button class={tab === 'slots' ? 'on' : ''} onClick={() => setTab('slots')}>슬롯 관리</button>
+          <button class={tab === 'book' ? 'on' : ''} onClick={() => setTab('book')}>카드 도감 <small>{found}/{allBook.length}</small></button>
+        </div>
+      )}
       {tab === 'slots' ? (
         <div class="win-body cards-body" key="slots">
           <HeroTabs sel={g.sel} onSel={(i) => { g.sel = i; setPickEquip(null); g.notify(); }} />

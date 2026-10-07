@@ -9,6 +9,23 @@ import { audio } from '../audio/audio.ts';
 import { zone } from '../game/data/zones.ts';
 
 export type PanelId = 'status' | 'skills' | 'equip' | 'cards' | 'bag' | 'map' | 'town' | 'party' | 'settings';
+/** bottom-nav pages (UX debate phase A, docs/ux/codex_r2.md §4): hunting is page null */
+export type MainTab = 'party' | 'grow' | 'gear' | 'cards' | 'explore' | 'settings';
+export const SUBTABS: Record<MainTab, [string, string][]> = {
+  party: [['ops', '작전'], ['members', '파티원']],
+  grow: [['status', '스탯'], ['skills', '스킬']],
+  gear: [['equip', '착용'], ['costume', '의상'], ['bag', '가방']],
+  cards: [['slots', '슬롯 관리'], ['book', '카드 도감']],
+  explore: [['map', '지도'], ['town', '마을 서비스']],
+  settings: [],
+};
+/** legacy panel ids → page + sub tab, so every existing openPanel() call lands in the new layout */
+const PANEL_TO: Record<PanelId, [MainTab, string]> = {
+  status: ['grow', 'status'], skills: ['grow', 'skills'], equip: ['gear', 'equip'], bag: ['gear', 'bag'], cards: ['cards', 'slots'],
+  map: ['explore', 'map'], town: ['explore', 'town'], party: ['party', 'ops'], settings: ['settings', ''],
+};
+const UI_KEY = 'minimidgard.ui.v1';
+interface UiPrefs { bandClosed: { general: boolean; party: boolean } }
 export type TownView = 'menu' | 'tool' | 'weapon' | 'armor' | 'costume' | 'refine' | 'stylist' | 'job';
 
 export interface Toast { id: number; text: string; kind: 'info' | 'good' | 'bad' | 'card' | 'level' }
@@ -18,7 +35,7 @@ export type Modal =
   | { kind: 'item'; uid?: number; id?: string; heroIdx?: number }
   | { kind: 'offline'; report: OfflineReport }
   | { kind: 'job'; heroIdx: number }
-  | { kind: 'confirm'; text: string; ok: () => void; danger?: boolean }
+  | { kind: 'confirm'; text: string; ok: () => void; danger?: boolean; /** the parent detail stops making sense afterwards (e.g. sold) */ closeAll?: boolean }
   | { kind: 'recruit' }
   | { kind: 'credits' }
   | { kind: 'card'; id: string }
@@ -32,12 +49,21 @@ class Game {
   world!: World;
   renderer: FieldRenderer | null = null;
   started = false;
-  panel: PanelId | null = null;
+  /** the open management page (null = hunting) and the last inner tab of each */
+  page: MainTab | null = null;
+  sub: Record<MainTab, string> = { party: 'ops', grow: 'status', gear: 'equip', cards: 'slots', explore: 'map', settings: '' };
+  /** where settings was opened from, to return there */
+  private beforeSettings: MainTab | null = null;
   town: TownView = 'menu';
-  sel = 0;
+  /** the selected hero, by id so reordering the party keeps the same hero (g.sel stays an index view of it) */
+  selId = -1;
+  ui: UiPrefs = { bandClosed: { general: false, party: false } };
   /** dev QA session (?qa): never touches the real save */
   qa = false;
-  modal: Modal | null = null;
+  /** detail stack: the top is shown; push for drill-down (item → monster → drop), pop to go back */
+  modals: Modal[] = [];
+  get modal(): Modal | null { return this.modals[this.modals.length - 1] ?? null; }
+  set modal(m: Modal | null) { this.modals = m ? [m] : []; }
   toasts: Toast[] = [];
   announces: Announce[] = [];
   version = 0;
@@ -64,12 +90,21 @@ class Game {
     this.world.onTravel = (id) => { this.bossMusic = false; audio.playBgm(zone(id).bgm); this.announce(zone(id).name, 'zone'); this.notify(); };
     this.world.setZone(s.zone);
     this.started = true;
+    if (!s.heroes.some((h) => h.id === this.selId)) this.selId = s.heroes[0]?.id ?? -1;
+    this.loadUi();
     audio.setVolumes(s.settings.sfx, s.settings.bgm, s.settings.muted);
     audio.playBgm(zone(s.zone).bgm);
     save(s);
     this.lastSave = performance.now();
     this.loop(performance.now());
     document.addEventListener('visibilitychange', () => this.onVisibility());
+    // Escape and the browser/Android back button step back: detail → settings → page → hunting
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.back()) e.preventDefault(); });
+    window.addEventListener('popstate', () => {
+      if (this.ignorePop) { this.ignorePop = false; return; }
+      const had = this.page !== null;
+      if (this.back(true) && had && this.page !== null) history.pushState({ mm: 'page' }, '');
+    });
     window.addEventListener('pagehide', () => { if (!this.qa) save(this.s); });
     this.notify();
   }
@@ -153,22 +188,82 @@ class Game {
     this.notify();
   }
 
-  openPanel(p: PanelId | null) {
-    if (this.panel === p) p = null;
-    audio.play(p ? 'open' : 'close');
-    this.panel = p;
-    if (p === 'town') this.town = 'menu';
+  /** the legacy panel id of what is on screen (null while hunting) */
+  get panel(): PanelId | null {
+    const p = this.page;
+    if (!p) return null;
+    const sub = this.sub[p];
+    switch (p) {
+      case 'grow': return sub === 'skills' ? 'skills' : 'status';
+      case 'gear': return sub === 'bag' ? 'bag' : 'equip';
+      case 'cards': return 'cards';
+      case 'explore': return sub === 'town' ? 'town' : 'map';
+      case 'party': return 'party';
+      case 'settings': return 'settings';
+    }
+  }
+
+  private ignorePop = false;
+  /** one step back; true if something was closed */
+  back(fromHistory = false): boolean {
+    const m = this.modal;
+    if (m) { if (m.kind === 'offline') return false; this.popModal(); return true; }
+    if (this.page === 'settings') { this.closeSettings(); return true; }
+    if (this.page) { this.page = null; audio.play('close'); if (!fromHistory) this.leaveHistory(); this.notify(); return true; }
+    return false;
+  }
+  private leaveHistory() { if (history.state?.mm === 'page') { this.ignorePop = true; history.back(); } }
+
+  /** open a page (and inner tab). Re-selecting the open page never closes it; null returns to hunting */
+  openPage(p: MainTab | null, sub?: string) {
+    if (p === 'settings' && this.page !== 'settings') this.beforeSettings = this.page;
+    if (!this.page && p) history.pushState({ mm: 'page' }, '');
+    else if (this.page && !p) this.leaveHistory();
+    const changed = p !== this.page;
+    this.page = p;
+    if (p && sub !== undefined) this.sub[p] = sub;
+    if (p === 'explore' && sub === 'town') this.town = 'menu';
+    if (changed) audio.play(p ? 'open' : 'close');
     this.notify();
+  }
+  openSub(p: MainTab, sub: string) { this.sub[p] = sub; if (p === 'explore' && sub === 'town') this.town = 'menu'; audio.play('click'); this.notify(); }
+  closeSettings() { this.openPage(this.beforeSettings); }
+  goHunt() { this.openPage(null); }
+
+  /** legacy adapter: every old openPanel(id) call lands on the matching page/tab; null = back to hunting */
+  openPanel(p: PanelId | null) {
+    if (!p) { this.goHunt(); return; }
+    const [page, sub] = PANEL_TO[p];
+    this.openPage(page, page === 'settings' ? undefined : sub);
   }
 
   openTown(v: TownView) {
-    this.panel = 'town';
+    this.page = 'explore';
+    this.sub.explore = 'town';
     this.town = v;
     audio.play('open');
     this.notify();
   }
 
+  /** replace the whole detail stack (null closes every detail) */
   setModal(m: Modal | null) { this.modal = m; this.notify(); }
+  /** drill into a detail from another one; popModal returns to it */
+  pushModal(m: Modal) { this.modals.push(m); this.notify(); }
+  popModal() { this.modals.pop(); this.notify(); }
+
+  // ── UI preferences (not part of the save; QA sessions keep them in memory only)
+  loadUi() {
+    if (this.qa) return;
+    try { const v = JSON.parse(localStorage.getItem(UI_KEY) ?? 'null'); if (v?.bandClosed) this.ui = { bandClosed: { general: !!v.bandClosed.general, party: !!v.bandClosed.party } }; } catch { /* storage blocked: keep defaults */ }
+  }
+  bandClosed() { return this.ui.bandClosed[this.page === 'party' ? 'party' : 'general']; }
+  toggleBand() {
+    const k = this.page === 'party' ? 'party' : 'general';
+    this.ui.bandClosed[k] = !this.ui.bandClosed[k];
+    if (!this.qa) { try { localStorage.setItem(UI_KEY, JSON.stringify(this.ui)); } catch { /* ignore */ } }
+    audio.play('click');
+    this.notify();
+  }
 
   travel(id: string) {
     this.world.setZone(id);
@@ -178,7 +273,9 @@ class Game {
     this.commit('confirm');
   }
 
-  get hero() { return this.s.heroes[Math.min(this.sel, this.s.heroes.length - 1)]; }
+  get sel() { const i = this.s.heroes.findIndex((h) => h.id === this.selId); return i < 0 ? 0 : i; }
+  set sel(i: number) { this.selId = this.s.heroes[Math.max(0, Math.min(i, this.s.heroes.length - 1))]?.id ?? -1; }
+  get hero() { return this.s.heroes[this.sel]; }
   heroUnit(idx = this.sel) { return this.world.heroes[idx]; }
 }
 

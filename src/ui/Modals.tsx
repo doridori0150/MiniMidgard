@@ -78,12 +78,12 @@ function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
         {cardPick && (
           <div class="box" style={{ marginTop: '8px' }}>
             {(inst ? fittingCards : []).map((c) => (
-              <div class="li" onClick={() => g.setModal({ kind: 'confirm', text: `${ITEMS[c].name}을(를) 꽂을까요?\n한 번 꽂으면 뺄 수 없습니다.`, ok: () => { const e = compound(s, inst!.uid, c); if (e) g.toast(e, 'bad'); else { g.toast(`카드 장착! ${itemName(inst!)}`, 'card'); g.commit('refine_ok'); } } })}>
+              <div class="li" onClick={() => g.pushModal({ kind: 'confirm', text: `${ITEMS[c].name}을(를) 꽂을까요?\n한 번 꽂으면 뺄 수 없습니다.`, ok: () => { const e = compound(s, inst!.uid, c); if (e) g.toast(e, 'bad'); else { g.toast(`카드 장착! ${itemName(inst!)}`, 'card'); g.commit('refine_ok'); } } })}>
                 <img src={itemIconURL(c)} /><div class="mid"><div class="nm">{ITEMS[c].name}</div><div class="small muted">{bonusLines(ITEMS[c].bonus).join(', ')}</div></div><span class="small">×{s.stacks[c]}</span>
               </div>
             ))}
             {d.kind === 'card' && fittingEquips.map((e) => (
-              <div class="li" onClick={() => g.setModal({ kind: 'confirm', text: `${itemName(e)}에 ${d.name}을(를) 꽂을까요?\n한 번 꽂으면 뺄 수 없습니다.`, ok: () => { const er = compound(s, e.uid, id); if (er) g.toast(er, 'bad'); else { g.toast(`카드 장착! ${itemName(e)}`, 'card'); g.commit('refine_ok'); } } })}>
+              <div class="li" onClick={() => g.pushModal({ kind: 'confirm', text: `${itemName(e)}에 ${d.name}을(를) 꽂을까요?\n한 번 꽂으면 뺄 수 없습니다.`, ok: () => { const er = compound(s, e.uid, id); if (er) g.toast(er, 'bad'); else { g.toast(`카드 장착! ${itemName(e)}`, 'card'); g.commit('refine_ok'); } } })}>
                 <img src={itemIconURL(e.id)} /><div class="mid"><div class={'nm ' + nameClass(e.id)}>{itemName(e)}</div><div class="small muted">{equippedBy(s, e.uid)?.name ?? '가방'}</div></div>
               </div>
             ))}
@@ -117,7 +117,7 @@ function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
           if (he.sp) u.sp = Math.min(u.d.maxSp, u.sp + Math.floor((he.sp[0] + he.sp[1]) / 2));
           g.commit('potion');
         }}>{h.name}에게 사용</button>}
-        {inst && !owner && <button class="btn" onClick={() => g.setModal({ kind: 'confirm', danger: true, text: `${itemName(inst)}을(를) ${fmt(sellPrice(s, id, inst.refine))}z에 판매할까요?`, ok: () => { const z = sellEquip(s, inst.uid); if (z) g.toast(`+${fmt(z)} 제니`, 'good'); g.commit('zeny'); } })}>판매</button>}
+        {inst && !owner && <button class="btn" onClick={() => g.pushModal({ kind: 'confirm', danger: true, closeAll: true, text: `${itemName(inst)}을(를) ${fmt(sellPrice(s, id, inst.refine))}z에 판매할까요?`, ok: () => { const z = sellEquip(s, inst.uid); if (z) g.toast(`+${fmt(z)} 제니`, 'good'); g.commit('zeny'); } })}>판매</button>}
         {have > 0 && d.kind !== 'ammo' && <button class="btn" onClick={() => { sellStack(s, id, 1); g.commit('zeny'); if (!(s.stacks[id] > 0)) close(); }}>1개 판매</button>}
         {!inst && !have && d.kind === 'equip' && d.price > 0 && false && <button class="btn">-</button>}
       </div>
@@ -274,15 +274,15 @@ function RecruitModal() {
   );
 }
 
-function ConfirmModal(props: { text: string; ok: () => void; danger?: boolean }) {
+function ConfirmModal(props: { text: string; ok: () => void; danger?: boolean; closeAll?: boolean }) {
   const g = useGame();
   return (
     <div class="modal" style={{ maxWidth: '320px' }}>
       <div class="win-title"><span>확인</span></div>
       <div class="win-body"><div class="desc" style={{ marginTop: 0, fontSize: '12.5px' }}>{props.text}</div></div>
       <div class="foot">
-        <button class="btn" onClick={() => { g.setModal(null); audio.play('close'); }}>취소</button>
-        <button class={'btn ' + (props.danger ? 'danger' : 'pri')} onClick={() => { g.setModal(null); props.ok(); }}>확인</button>
+        <button class="btn" onClick={() => { g.popModal(); audio.play('close'); }}>취소</button>
+        <button class={'btn ' + (props.danger ? 'danger' : 'pri')} onClick={() => { if (props.closeAll) g.setModal(null); else g.popModal(); props.ok(); }}>확인</button>
       </div>
     </div>
   );
@@ -307,9 +307,11 @@ export function Modals() {
   const g = useGame();
   const m = g.modal;
   if (!m) return null;
-  const close = () => { if (m.kind !== 'offline') g.setModal(null); };
+  // tapping outside steps back one detail (item → monster → drop returns to the monster); the offline report needs its button
+  const close = () => { if (m.kind !== 'offline') g.popModal(); };
   return (
-    <div class="modal-bg" onClick={(e) => { if (e.target === e.currentTarget) close(); }}>
+    <div class="modal-bg" role="dialog" aria-modal="true" onClick={(e) => { if (e.target === e.currentTarget) close(); }}>
+      {g.modals.length > 1 && <button class="modal-back" onClick={() => g.popModal()} aria-label="이전 정보로">‹ 뒤로</button>}
       {m.kind === 'item' && <ItemModal uid={m.uid} id={m.id} heroIdx={m.heroIdx} />}
       {m.kind === 'offline' && <OfflineModal report={m.report} />}
       {m.kind === 'job' && <JobModal heroIdx={m.heroIdx} />}
@@ -318,7 +320,7 @@ export function Modals() {
       {m.kind === 'mob' && <MobModal id={m.id} />}
       {m.kind === 'buy' && <BuyModal id={m.id} />}
       {m.kind === 'sell' && <SellModal id={m.id} uid={m.uid} />}
-      {m.kind === 'confirm' && <ConfirmModal text={m.text} ok={m.ok} danger={m.danger} />}
+      {m.kind === 'confirm' && <ConfirmModal text={m.text} ok={m.ok} danger={m.danger} closeAll={m.closeAll} />}
       {m.kind === 'credits' && (
         <div class="modal">
           <div class="win-title"><span>크레딧</span><span class="sp" /><button class="x" onClick={() => g.setModal(null)}>×</button></div>
