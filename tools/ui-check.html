@@ -7,7 +7,7 @@
 <iframe id="f" style="width:390px;height:844px;border:0"></iframe>
 <script type="module">
   const out = [];
-  const log = (ok, name, info = '') => out.push(`${ok ? 'PASS' : 'FAIL'}  ${name}${info ? '  — ' + info : ''}`);
+  const log = (ok, name, info = '') => { out.push(`${ok ? 'PASS' : 'FAIL'}  ${name}${info ? '  — ' + info : ''}`); document.getElementById('out').textContent = out.join('\n') + '\n…'; };
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const f = document.getElementById('f');
   const boot = (q) => new Promise((res) => { f.onload = () => setTimeout(res, 1200); f.src = '/?qa&' + q; });
@@ -39,11 +39,15 @@
     await click($$('.modal-layer:not([hidden]) .btn').find((b) => b.textContent.includes('앞으로')));
     log(g.s.heroes[1].name === '보리' && g.hero.name === '보리', 'popup reorders, selection follows', g.s.heroes.map((h) => h.name).join(','));
     await esc(); log(g.modals.length === 0, 'Escape closes the popup');
-    // 4. shop rows: 장착 buys and equips on the selected hero
+    // 4. shop: a row's 구매 only opens the buy popup (compare); 사서 바로 장착 there buys and equips on the selected hero
     g.sel = 0; g.openTown('weapon'); await sleep(150);
-    const row = $$('.srow').find((r) => r.querySelector('.btn.gold')); const before = g.s.heroes[0].equip.weapon;
-    await click(row?.querySelector('.btn.gold'));
-    log(!!row && g.s.heroes[0].equip.weapon !== before, 'shop row 장착 buys and equips', row?.querySelector('b')?.textContent ?? 'no row');
+    const row = $$('.srow').find((r) => !r.classList.contains('cant')); const before = g.s.heroes[0].equip.weapon, zb = g.s.zeny, nb = g.s.equips.length;
+    await click(row?.querySelector('.sr-btns .btn'));
+    const opened = g.modal?.kind === 'buy', nothingBought = g.s.zeny === zb && g.s.equips.length === nb;
+    const cmp = !!$('.modal-layer:not([hidden]) .cmp'), btns = $$('.modal-layer:not([hidden]) .foot .btn').map((b) => b.textContent).join('/');
+    log(opened && nothingBought && btns === '닫기/사서 바로 장착/구매', 'shop row 구매 opens the popup, buys nothing', `${g.modal?.kind}, ${btns}, compare ${cmp}`);
+    await click($$('.modal-layer:not([hidden]) .btn').find((b) => b.textContent === '사서 바로 장착'));
+    log(g.modals.length === 0 && g.s.heroes[0].equip.weapon !== before && g.s.zeny < zb, 'popup 사서 바로 장착 buys and equips', row?.querySelector('b')?.textContent ?? 'no row');
     await esc(); await esc();
     // 5. detail stack: item → sell confirm → cancel returns to the item, hero choice kept; OK runs once
     await click(nav('가방'));
@@ -82,6 +86,7 @@
     log(g.s.partySlots === 3 && qaParty === 3, 'party full (no recruit button needed)', `${qaParty}/${g.s.partySlots}`);
     // 9. quick slot: keyboard and tap each use one
     for (const u of g.world.heroes) u.hp = Math.max(1, Math.floor(u.d.maxHp * 0.2));
+    g.s.quick[0].auto = false; // the live game would also drink one automatically mid-test
     const qs = $('.qs'), id = g.s.quick[0].id, n0 = g.s.stacks[id];
     qs.dispatchEvent(new MouseEvent('click', { bubbles: true, detail: 0 })); await sleep(60);
     const n1 = g.s.stacks[id];

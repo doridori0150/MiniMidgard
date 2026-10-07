@@ -89,27 +89,7 @@ function fitText(d: ItemDef, h: Hero, err: string | null) {
   return '재료';
 }
 
-function quickBuy(g: ReturnType<typeof useGame>, d: ItemDef, n: number) {
-  const e = buy(g.s, d.id, n);
-  if (e) { g.toast(e, 'bad'); audio.play('error'); return; }
-  g.toast(`${d.name}${n > 1 ? ` ×${n}` : ''} 구매 (-${fmt(buyPrice(g.s, d.id) * n)}z)`, 'good');
-  g.commit('zeny');
-}
-
-/** buy one and put it straight on the selected hero */
-function quickBuyEquip(g: ReturnType<typeof useGame>, d: ItemDef, h: Hero) {
-  const e = buy(g.s, d.id, 1);
-  if (e) { g.toast(e, 'bad'); audio.play('error'); return; }
-  if (d.kind === 'ammo') equipAmmo(g.s, h, d.id);
-  else {
-    const r = equip(g.s, h, g.s.equips[g.s.equips.length - 1].uid);
-    if (r) { g.toast(r, 'bad'); g.commit('zeny'); return; }
-  }
-  g.toast(`${h.name}: ${d.name} 장착!`, 'good');
-  g.commit('zeny');
-}
-
-/** one-line row: tap the row for details, tap the button to buy right away */
+/** one-line row: the row and its 구매 button both open the buy popup (compare, then 구매 / 사서 바로 장착) */
 function ShopRow(props: { d: ItemDef; h: Hero; onOpen: () => void }) {
   const g = useGame();
   const { d, h } = props;
@@ -117,7 +97,6 @@ function ShopRow(props: { d: ItemDef; h: Hero; onOpen: () => void }) {
   const err = d.kind === 'equip' || d.kind === 'ammo' ? canEquip(h, d.id) : null;
   const up = upgradeScore(g.s, h, d);
   const have = d.kind !== 'equip' ? g.s.stacks[d.id] ?? 0 : g.s.equips.filter((e) => e.id === d.id).length;
-  const stack = d.kind === 'use';
   return (
     <div class={'srow ' + (d.kind === 'equip' ? 'eq-' + (d.loc ?? '') : d.kind) + (err ? ' cant' : '')} onClick={props.onOpen}>
       <span class="sr-icon"><img src={itemIconURL(d.id)} alt="" /></span>
@@ -132,11 +111,7 @@ function ShopRow(props: { d: ItemDef; h: Hero; onOpen: () => void }) {
       </div>
       <div class="sr-right" onClick={(e) => e.stopPropagation()}>
         <span class={'sr-price' + (g.s.zeny >= price ? '' : ' poor')}>{fmt(price)}z</span>
-        <div class="sr-btns">
-          {(d.kind === 'equip' || d.kind === 'ammo') && !err && <button class="btn sm gold" disabled={g.s.zeny < price} onClick={() => quickBuyEquip(g, d, h)}>장착</button>}
-          <button class="btn sm pri" disabled={g.s.zeny < price} onClick={() => quickBuy(g, d, 1)}>구매</button>
-          {stack && <button class="btn sm" disabled={g.s.zeny < price * 10} onClick={() => quickBuy(g, d, 10)}>×10</button>}
-        </div>
+        <div class="sr-btns"><button class="btn sm pri" onClick={props.onOpen}>구매</button></div>
       </div>
     </div>
   );
@@ -307,12 +282,13 @@ export function BuyModal(props: { id: string }) {
   const err = d.kind === 'equip' || d.kind === 'ammo' ? canEquip(h, d.id) : null;
   const cur = currentFor(s, h, d);
   const lines = bonusLines(d.bonus);
-  const cmp = cur && d.kind === 'equip' ? (() => {
-    const c = ITEMS[cur.id];
+  // compared with what the hero wears in that slot now (an empty slot counts as 0)
+  const cmp = d.kind === 'equip' ? (() => {
+    const c = cur ? ITEMS[cur.id] : undefined;
     const key = d.loc === 'weapon' ? 'ATK' : 'DEF';
-    const a = d.loc === 'weapon' ? (c.atk ?? 0) + cur.refine * 3 : (c.def ?? 0) + cur.refine;
+    const a = !cur || !c ? 0 : d.loc === 'weapon' ? (c.atk ?? 0) + cur.refine * 3 : (c.def ?? 0) + cur.refine;
     const b = d.loc === 'weapon' ? d.atk ?? 0 : d.def ?? 0;
-    return { key, a, b, name: itemName(cur) };
+    return { key, a, b, name: cur ? itemName(cur) : '없음' };
   })() : null;
   const doBuy = (andEquip: boolean) => {
     const n = stack ? q : 1;
