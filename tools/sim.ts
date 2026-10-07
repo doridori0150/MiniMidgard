@@ -2,9 +2,12 @@
 // usage: npm run sim -- [minutes=60] [party=swordsman,acolyte,mage] [seed=1] [flags]
 //   flags (comma separated): gear  = equip drops/shop upgrades, compound cards, safe-refine, buy better potions
 //                            quiet = summary only, solo = never recruit party members
+// Map choice (multi-map regions): go for unkilled field bosses that unlock something, try each new map once,
+// then hunt the map with the best measured EXP/h (wipes penalised), spending ~30 of every 120 minutes on the
+// best loot / ore / secret map. Sealed maps open through a local copy of the gate rules (sim clock starts 09:00).
 import { World } from '../src/game/world.ts';
-import { newGame, defaultLook, autoDistribute, learnSkill, jobChange, canJobChange, nextJobs, buy, addEquip, equip, newHero, equipAmmo, sellAllEtc, canEquip, sellEquip, equippedBy, compound, cardFits, refine, refineInfo } from '../src/game/state.ts';
-import { ZONES } from '../src/game/data/zones.ts';
+import { newGame, defaultLook, autoDistribute, learnSkill, jobChange, canJobChange, nextJobs, buy, addEquip, equip, newHero, equipAmmo, sellStack, canEquip, sellEquip, equippedBy, compound, cardFits, refine, refineInfo, removeStack } from '../src/game/state.ts';
+import { ZONES, type ZoneDef, type GateNeed } from '../src/game/data/zones.ts';
 import { MONSTERS, type MonsterDef } from '../src/game/data/monsters.ts';
 import { CLASSES, SECOND_JOB_OF } from '../src/game/data/classes.ts';
 import { SKILLS } from '../src/game/data/skills.ts';
@@ -250,16 +253,123 @@ function manage(s: GameState, w: World, wantCls: ClassId[]) {
   const minLv = Math.min(...s.heroes.map((h) => h.baseLv));
   const ready = w.bossReady();
   const z = ZONES.find((z) => z.id === s.zone)!;
+  const backedOff = (id?: string) => !!id && minLv < waitLv(id);
   if (w.time < w.bossRetryAt) { /* recently wiped by a boss */ }
-  else if (ready.mvp && minLv >= MONSTERS[z.mvp!].lv - 2) w.summonBoss('mvp');
-  else if (ready.boss && minLv >= MONSTERS[z.boss!].lv - 3) w.summonBoss('boss');
+  else if (ready.mvp && minLv >= MONSTERS[z.mvp!].lv - 2 && !backedOff(z.mvp)) w.summonBoss('mvp');
+  else if (ready.boss && minLv >= MONSTERS[z.boss!].lv - 3 && !backedOff(z.boss)) w.summonBoss('boss');
   const pot = GEARUP ? bestPotion(minLv) : 'u_red';
   if (GEARUP && s.quick[0].id !== pot) s.quick[0] = { ...s.quick[0], id: pot };
   if ((s.stacks[pot] ?? 0) < 30 && s.zeny > 3000 + 30 * ITEMS[pot].price) { buy(s, pot, 30); spent.pots += 30 * ITEMS[pot].price; }
-  if (s.zeny < 5000 || GEARUP) { const r = sellAllEtc(s); earned.etc += r.zeny; }
-  // move up a zone when ready
-  const best = [...ZONES].reverse().find((z) => z.id !== 'town' && s.unlocked.includes(z.id) && minLv >= z.lv[0] + 2);
-  if (best && best.id !== s.zone) w.setZone(best.id);
+  if (s.zeny < 5000 || GEARUP) earned.etc += sellEtc(s);
+  gateCheck();
+  chooseZone(minLv);
+}
+
+// ───────── sealed / hidden maps: a local copy of the gate rules (state.ts owns the real ones)
+const START_HOUR = 9;
+const clockHour = () => (START_HOUR + Math.floor(curMin / 60)) % 24;
+const discovered = new Set<string>();
+const gateItems = new Set(ZONES.flatMap((z) => [z.gate?.clue, ...(z.gate?.need ?? []).map((n) => (n.kind === 'item' ? n.id : undefined))]).filter(Boolean) as string[]);
+function inWindow(n: { from: number; to: number }) { const h = clockHour(); return n.from <= n.to ? h >= n.from && h < n.to : h >= n.from || h < n.to; }
+function needOk(n: GateNeed): boolean {
+  switch (n.kind) {
+    case 'item': return (s.stacks[n.id] ?? 0) >= n.qty;
+    case 'kills': return (s.book[n.mob]?.kills ?? 0) >= n.n;
+    case 'boss': return (s.book[n.mob]?.kills ?? 0) > 0;
+    case 'card': return !!s.book[n.mob]?.card;
+    case 'level': return Math.max(...s.heroes.map((h) => h.baseLv)) >= n.lv;
+    case 'job': return s.heroes.some((h) => CLASSES[h.cls].tier >= n.tier);
+    case 'hours': return inWindow(n);
+  }
+}
+function gateCheck() {
+  for (const z of ZONES) {
+    const g = z.gate;
+    if (!g || s.unlocked.includes(z.id)) continue;
+    const first = g.need.find((n) => n.kind !== 'hours');
+    if (!discovered.has(z.id) && (!g.hidden || (g.clue && (s.stacks[g.clue] ?? 0) > 0) || (first && needOk(first)))) {
+      discovered.add(z.id);
+      if (g.hidden) mile(`discovered 「${z.name}」`);
+    }
+    if (discovered.has(z.id) && g.need.every((n) => n.kind === 'hours' || needOk(n))) {
+      for (const n of g.need) if (n.kind === 'item' && n.consume) removeStack(s, n.id, n.qty);
+      s.unlocked.push(z.id);
+      mile(`opened 「${z.name}」`);
+    }
+  }
+}
+function canEnterNow(z: ZoneDef) {
+  if (z.id === 'town' || !s.unlocked.includes(z.id)) return false;
+  const h = z.gate?.need.find((n) => n.kind === 'hours');
+  return !h || h.kind !== 'hours' || inWindow(h);
+}
+/** etc items are sold except ores and anything a gate asks for (mirrors state.ts isKeepItem, but boss trophies are sold) */
+function sellEtc(st: GameState): number {
+  let z = 0;
+  for (const [id, n] of Object.entries(st.stacks)) if (ITEMS[id].kind === 'etc' && !id.startsWith('r_') && !gateItems.has(id)) z += sellStack(st, id, n);
+  return z;
+}
+
+// ───────── map choice
+const zoneScore: Record<string, number> = {}; // measured EXP/h (EMA over visits), wipes penalised
+let visit = { zone: '', min: 0, exp: 0, deaths: 0 };
+let nextPick = 0;
+const bossFail: Record<string, number> = {}; // boss id → min party level at the last failed attempt
+const bossFails: Record<string, number> = {}; // boss id → failed attempts
+/** after n failed attempts wait 2n more levels before trying that boss again */
+const waitLv = (id: string) => (bossFail[id] ?? -99) + 2 * (bossFails[id] ?? 1);
+const wipeRate = (id: string) => { const z = zoneStat[id]; return z && z.min > 20 ? z.deaths / (z.min / 60) : 0; };
+function closeVisit() {
+  if (visit.zone && visit.min >= 9.5) {
+    const v = visit.exp / (visit.min / 60) / (1 + 0.5 * visit.deaths / (visit.min / 60));
+    zoneScore[visit.zone] = zoneScore[visit.zone] === undefined ? v : zoneScore[visit.zone] * 0.4 + v * 0.6;
+  } else if (visit.zone && visit.deaths >= 2) {
+    zoneScore[visit.zone] = Math.min(zoneScore[visit.zone] ?? 0, 0); // chased out by wipes: explored, and bad
+  }
+}
+/** the boss / MVP the party came to this map for; two wipes on the way count as a failed attempt */
+let goal: { mob: string; wipes: number } | null = null;
+function goTo(id: string, why: string) {
+  const g = /^(boss|mvp) (\w+)$/.exec(why)?.[2];
+  if (g !== goal?.mob) goal = g ? { mob: g, wipes: 0 } : null;
+  if (id === s.zone) return;
+  closeVisit();
+  visit = { zone: id, min: 0, exp: 0, deaths: 0 };
+  w.setZone(id);
+  if (!QUIET) console.log(`${String(curMin).padStart(5)}m  → ${id} (${why})`);
+}
+function chooseZone(minLv: number) {
+  const cur = ZONES.find((z) => z.id === s.zone)!;
+  if (visit.zone !== s.zone) { closeVisit(); visit = { zone: s.zone, min: 0, exp: 0, deaths: 0 }; } // the world retreated after wipes
+  if (w.mobs.some((m) => m.m.boss && m.state !== 'dead') && canEnterNow(cur)) return; // finish the boss fight
+  if (curMin < nextPick && canEnterNow(cur)) return;
+  nextPick = curMin + 10;
+  const open = ZONES.filter(canEnterNow);
+  // 1. progression: an unkilled field boss that opens new maps, once strong enough
+  const prog = open.filter((z) => z.boss && s.progress[z.id].bossKills === 0 && minLv >= Math.max(z.lv[0], MONSTERS[z.boss].lv - 3)
+    && minLv >= waitLv(z.boss) && ZONES.some((n) => n.unlockBy === z.id && !s.unlocked.includes(n.id)))
+    .sort((a, b) => MONSTERS[a.boss!].lv - MONSTERS[b.boss!].lv)[0];
+  if (prog) return goTo(prog.id, 'boss ' + prog.boss);
+  // 2. first MVP kill once comfortably over its level
+  // (a solo hero only tries an MVP when far over its level, and nobody camps a map that keeps wiping them)
+  const mvp = open.filter((z) => z.mvp && s.progress[z.id].mvpKills === 0 && minLv >= MONSTERS[z.mvp].lv + (SOLO ? 10 : 1) && minLv >= waitLv(z.mvp) && wipeRate(z.id) < 2)
+    .sort((a, b) => MONSTERS[a.mvp!].lv - MONSTERS[b.mvp!].lv)[0];
+  if (mvp) return goTo(mvp.id, 'mvp ' + mvp.mvp);
+  // 3. try every map we can handle once, highest first (a map opened late is still worth a look)
+  const fresh = open.filter((z) => minLv >= z.lv[0] + 2 && zoneScore[z.id] === undefined && !(visit.zone === z.id && visit.min < 9.5))
+    .sort((a, b) => b.lv[0] - a.lv[0])[0];
+  if (fresh) return goTo(fresh.id, 'explore');
+  // any map we out-level is fair game when the at-level ones keep wiping us
+  const pool = open.filter((z) => minLv >= z.lv[0] + 2 && zoneScore[z.id] !== undefined);
+  if (!pool.length) return;
+  if (visit.min < 9.5 && pool.some((z) => z.id === s.zone)) return;
+  // 4. best measured map; ~30 of every 120 minutes on the best loot / ore / secret map
+  //    (a loot map has to be worth at least half the best map — nobody farms a map that keeps wiping them)
+  const score = (z: ZoneDef) => zoneScore[z.id] ?? 0;
+  const ranked = pool.sort((a, b) => score(b) - score(a));
+  const isLoot = (z: ZoneDef) => !!z.gate || (z.role ?? []).some((r) => r === 'loot' || r === 'ore');
+  const loot = curMin % 120 < 30 ? ranked.find((z) => isLoot(z) && score(z) >= score(ranked[0]) * 0.5) : undefined;
+  goTo((loot ?? ranked[0]).id, loot ? 'loot' : 'exp');
 }
 
 // ───────── run + report
@@ -277,30 +387,56 @@ const zoneStat: Record<string, { first: number; minLv: number; min: number; kill
 const cardsFound: Record<string, number> = {};
 const equipFound: Record<string, number> = {};
 const zenyAt: string[] = [];
+const cardsByZone: Record<string, number> = {};
+const potByZone: Record<string, number> = {};
+const POTS = ['u_red', 'u_orange', 'u_yellow', 'u_white'];
+const expByZone: Record<string, number> = {};
 function mile(t: string) { miles.push(`${String(curMin).padStart(5)}m  ${t}`); }
+const expSum = () => Object.entries(s.book).reduce((a, [id, b]) => a + b.kills * (MONSTERS[id]?.exp ?? 0), 0);
+let lastExp = 0;
 
 let lastKills = 0;
 let prevCards: Record<string, number> = {};
 let seenUid = Math.max(0, ...s.equips.map((e) => e.uid));
 let lastDeaths = 0;
+let bossUp = new Set<string>();
 const every = minutes > 400 ? 60 : minutes > 120 ? 15 : 5;
 for (let min = 1; min <= minutes; min++) {
   curMin = min;
   for (let sec = 0; sec < 60; sec++) {
     const zid = s.zone;
     const k0 = s.progress[zid].kills;
+    const p0 = POTS.reduce((a, id) => a + (s.stacks[id] ?? 0) * ITEMS[id].price, 0);
     w.advance(1000);
+    const p1 = POTS.reduce((a, id) => a + (s.stacks[id] ?? 0) * ITEMS[id].price, 0);
+    if (p1 < p0) potByZone[zid] = (potByZone[zid] ?? 0) + p0 - p1;
     const zs = (zoneStat[zid] ??= { first: min, minLv: Math.min(...s.heroes.map((h) => h.baseLv)), min: 0, kills: 0, deaths: 0 });
     zs.kills += s.progress[zid].kills - k0;
     zs.min += 1 / 60;
-    if (s.totals.deaths !== lastDeaths) { zs.deaths += s.totals.deaths - lastDeaths; lastDeaths = s.totals.deaths; }
+    if (s.totals.deaths !== lastDeaths) {
+      zs.deaths += s.totals.deaths - lastDeaths;
+      if (visit.zone === zid) visit.deaths += s.totals.deaths - lastDeaths;
+      lastDeaths = s.totals.deaths;
+      const lv = Math.min(...s.heroes.map((h) => h.baseLv));
+      const zd = ZONES.find((z) => z.id === zid)!;
+      for (const id of [zd.boss, zd.mvp]) if (id && bossUp.has(id)) { bossFail[id] = lv; bossFails[id] = (bossFails[id] ?? 0) + 1; mile(`lost to ${id} (Lv ${lv})`); }
+      const gl = goal as { mob: string; wipes: number } | null; // (assigned inside goTo)
+      if (gl && (zd.boss === gl.mob || zd.mvp === gl.mob) && !bossUp.has(gl.mob) && ++gl.wipes >= 2) {
+        bossFail[gl.mob] = lv; bossFails[gl.mob] = (bossFails[gl.mob] ?? 0) + 1; goal = null; nextPick = 0;
+      }
+    }
+    bossUp = new Set(w.mobs.filter((m) => m.m.boss && m.state !== 'dead').map((m) => m.m.id));
     if (sec % 10 === 0) {
       // new cards / equips
       for (const [id, n] of Object.entries(s.stacks)) {
         if (!id.startsWith('c_')) continue;
         const d = n - (prevCards[id] ?? 0);
-        if (d > 0) cardsFound[id] = (cardsFound[id] ?? 0) + d;
+        if (d > 0) { cardsFound[id] = (cardsFound[id] ?? 0) + d; cardsByZone[zid] = (cardsByZone[zid] ?? 0) + d; }
       }
+      const e = expSum();
+      expByZone[zid] = (expByZone[zid] ?? 0) + e - lastExp;
+      if (visit.zone === zid) { visit.exp += e - lastExp; visit.min += 1 / 6; }
+      lastExp = e;
       for (const e of s.equips) if (e.uid > seenUid) { seenUid = Math.max(seenUid, e.uid); if (!bought.has(e.uid)) equipFound[e.id + (e.slots ? `[${e.slots}]` : '')] = (equipFound[e.id + (e.slots ? `[${e.slots}]` : '')] ?? 0) + 1; }
       manage(s, w, party);
       if (GEARUP && sec === 0) gearUp(s, w);
@@ -320,12 +456,12 @@ console.log(`\n== sim ${minutes}m party=${party.join(',')} seed=${process.argv[4
 console.log(`final: ${s.heroes.map((h) => `${CLASSES[h.cls].name} ${h.baseLv}/${h.jobLv}`).join(', ')}  deaths ${s.totals.deaths}  zeny ${s.zeny}  cards ${s.totals.cards}`);
 console.log(`2nd job at: ${secondJobAt.map((m) => (m / 60).toFixed(1) + 'h').join(', ') || '-'}`);
 console.log('milestones:\n' + miles.join('\n'));
-console.log('zones (first@min minLv | hours kills kph deaths | boss/mvp kills):');
+console.log('zones (first@min minLv | hours kills kph wipes | boss/mvp kills | exp/h cards pots-z/h):');
 for (const z of ZONES) {
   const zs = zoneStat[z.id];
   if (!zs) continue;
   const p = s.progress[z.id];
-  console.log(`  ${z.id.padEnd(10)} @${String(zs.first).padStart(5)}m Lv${String(zs.minLv).padStart(3)} | ${(zs.min / 60).toFixed(1).padStart(5)}h ${String(zs.kills).padStart(6)} ${String(Math.round(zs.kills / Math.max(0.01, zs.min / 60))).padStart(5)}/h ${String(zs.deaths).padStart(3)}d | ${p.bossKills}/${p.mvpKills}`);
+  console.log(`  ${z.id.padEnd(12)} @${String(zs.first).padStart(5)}m Lv${String(zs.minLv).padStart(3)} | ${(zs.min / 60).toFixed(1).padStart(5)}h ${String(zs.kills).padStart(6)} ${String(Math.round(zs.kills / Math.max(0.01, zs.min / 60))).padStart(5)}/h ${String(zs.deaths).padStart(3)}d | ${p.bossKills}/${p.mvpKills} | ${String(Math.round((expByZone[z.id] ?? 0) / Math.max(0.01, zs.min / 60))).padStart(8)} ${String(cardsByZone[z.id] ?? 0).padStart(3)} ${String(Math.round((potByZone[z.id] ?? 0) / Math.max(0.01, zs.min / 60))).padStart(6)}`);
 }
 console.log(`zeny: ${zenyAt.join(' ')}  | etc sold ${earned.etc}, equips sold ${earned.sell}, shop ${spent.shop}, refine ${spent.refine}, pots ${spent.pots}`);
 console.log('cards: ' + Object.entries(cardsFound).map(([k, v]) => `${k}${v > 1 ? '×' + v : ''}`).join(' '));
