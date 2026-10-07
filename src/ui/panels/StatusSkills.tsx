@@ -199,11 +199,12 @@ export function SkillsPanel() {
         <HeroTabs sel={g.sel} onSel={(i) => { g.sel = i; g.notify(); }} />
         {nextJobs(h).length > 0 && (
           <div class={jobErr ? 'hint' : 'box'} style={{ marginBottom: '8px' }}>
-            {jobErr ? <>{h.cls === 'novice' ? '전직 조건: 직업 레벨 10 + 기본기 9.' : `2차 전직(${nextJobs(h).map((j) => CLASSES[j].name).join('/')}) 조건: 직업 레벨 ${SECOND_JOB_LV}.`} ({jobErr})</> : (
+            {jobErr ? <><b>{h.cls === 'novice' ? '1차 전직' : `2차 전직(${nextJobs(h).map((j) => CLASSES[j].name).join('/')})`}</b> — {h.cls === 'novice' ? `직업 레벨 10 · 기본기 9 (지금 Job ${h.jobLv}, 기본기 ${h.skills.basic ?? 0})` : `직업 레벨 ${SECOND_JOB_LV} 필요 (지금 ${h.jobLv})`}</> : (
               <div class="row"><b>전직할 수 있습니다!</b><span class="sp1" /><button class="btn gold" onClick={() => g.setModal({ kind: 'job', heroIdx: g.sel })}>전직하기</button></div>
             )}
           </div>
         )}
+        {h.skillPts === 0 && <div class="small muted" style={{ margin: '0 2px 6px' }}>스킬 포인트가 없습니다. 직업 레벨이 오를 때마다 1점씩 얻습니다.</div>}
         {list.map((sk, idx) => {
           const lv = h.skills[sk.id] ?? 0;
           const header = idx === 0 || list[idx - 1].cls !== sk.cls ? (
@@ -224,9 +225,15 @@ export function SkillsPanel() {
                 {open === sk.id && <div class="desc">{sk.desc(Math.max(1, lv))}{lv < sk.maxLv && lv > 0 ? `\n\n▶ 다음 레벨: ${sk.desc(lv + 1).split('\n')[0]}` : ''}</div>}
               </div>
               {isActive && lv > 0 && sk.auto !== 'none' && (
-                <button class={'toggle' + (auto ? ' on' : '')} title="자동 사용" onClick={() => { h.auto.skills[sk.id] = !auto; g.commit('click'); }} />
+                <button class="sk-auto" role="switch" aria-checked={auto} aria-label={`${sk.name} 자동 사용`} onClick={() => { h.auto.skills[sk.id] = !auto; g.commit('click'); }}>
+                  <span class={'toggle' + (auto ? ' on' : '')} /><small>{auto ? '자동' : '수동'}</small>
+                </button>
               )}
-              {canLearnTier(sk.cls) && <button class="btn xs pri" disabled={!can} onClick={() => { if (learnSkill(h, sk.id)) g.commit('confirm'); }}>+</button>}
+              {/* one clear state per row: MAX, locked behind a prerequisite, or the learn button (hidden with no points) */}
+              {canLearnTier(sk.cls) && (lv >= sk.maxLv ? <span class="sk-state max">MAX</span>
+                : locked ? <span class="sk-state">잠김</span>
+                : h.skillPts > 0 ? <button class="sk-learn" disabled={!can} aria-label={`${sk.name} 배우기`} onClick={() => { if (learnSkill(h, sk.id)) g.commit('confirm'); }}>+</button>
+                : null)}
             </div></>
           );
         })}
