@@ -1,7 +1,6 @@
 // Painterly zone grounds (pre-rendered once per zone) + y-sorted props.
 import type { ZoneDef } from '../game/data/zones.ts';
 import { shade, rgba } from './color.ts';
-import { loadPainterly, painterlyKit } from './painterly.ts';
 
 // ───── image kits: painted ground tiles + props per theme (src/assets/kits/<theme>/), used when loaded
 const KIT_FILES = import.meta.glob('../assets/kits/*/*.{png,jpg}', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
@@ -34,10 +33,10 @@ export function loadKits(): Promise<void> {
     const bag = name === 'grass' || name === 'dirt' ? kit.tiles : kit.props;
     jobs.push(img.decode().then(() => { bag[name] = img; }, () => {}));
   }
-  return Promise.all([...jobs, loadPainterly()]).then(() => { kitVer++; });
+  return Promise.all(jobs).then(() => { kitVer++; });
 }
 export function kitFor(theme: string): Kit | undefined {
-  const k = (theme === 'meadow' ? painterlyKit() : undefined) ?? kits.get(theme); // ?style=painterly swaps the meadow kit
+  const k = kits.get(theme);
   return k && k.tiles.grass ? k : undefined;
 }
 /** occlusion box of a kit-drawn prop (for the see-through fade), or null for code-drawn props */
@@ -362,7 +361,7 @@ function drawPine(ctx: CanvasRenderingContext2D, v: number) {
 }
 
 export function drawProp(ctx: CanvasRenderingContext2D, p: Prop, t: number) {
-  const kimg = p.kit ? (kitFor(p.kit) ?? kits.get(p.kit))?.props[p.kind] : undefined;
+  const kimg = p.kit ? kits.get(p.kit)?.props[p.kind] : undefined;
   if (kimg) {
     // painted prop: ground contact at the bottom centre, a soft contact shadow, mirrored variants
     const h = KIT_PROP_H[p.kind] * p.s, w = kimg.width * h / kimg.height;
