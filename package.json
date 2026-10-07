@@ -8,7 +8,8 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host --port 4201",
     "typecheck": "tsc --noEmit",
-    "sim": "taskpolicy -b node --experimental-strip-types tools/sim.ts"
+    "sim": "taskpolicy -b node --experimental-strip-types tools/sim.ts",
+    "party-check": "taskpolicy -b node --experimental-strip-types tools/party-check.ts"
   },
   "dependencies": {
     "preact": "^10.26.0"

@@ -1,4 +1,4 @@
-import type { ClassId, EquipInst, EquipSlot, GameState, Hero, Look, StatKey, CostumeSlot, QuickSlot, Tactics, PartyOrders } from './types.ts';
+import type { ClassId, EquipInst, EquipSlot, GameState, Hero, HeroRole, Look, StatKey, CostumeSlot, QuickSlot, Tactics, PartyOrders } from './types.ts';
 import { STAT_KEYS, QUICK_SLOTS } from './types.ts';
 import { CLASSES, FIRST_JOBS, SECOND_JOB_OF, SECOND_JOB_LV, lineage } from './data/classes.ts';
 import { SKILLS } from './data/skills.ts';
@@ -42,14 +42,38 @@ export function quickTrigger(id: string): 'hp' | 'sp' | 'buff' | 'none' {
 /** class-role defaults for 행동 요령 */
 export function defaultTactics(cls: ClassId): Tactics {
   switch (lineage(cls).at(-2) ?? cls) { // 1st-job root: knight → swordsman
-    case 'swordsman': return { target: 'protect', position: 'auto', skills: 'normal', chase: 'normal' };
-    case 'mage': return { target: 'assist', position: 'auto', skills: 'normal', chase: 'tight' };
-    case 'archer': return { target: 'assist', position: 'auto', skills: 'normal', chase: 'normal' };
-    case 'acolyte': return { target: 'assist', position: 'auto', skills: 'conserve', chase: 'tight' };
-    case 'thief': return { target: 'weakest', position: 'auto', skills: 'aggressive', chase: 'normal' };
-    case 'merchant': return { target: 'assist', position: 'auto', skills: 'normal', chase: 'normal' };
+    case 'swordsman': return { target: 'protect', position: 'auto', skills: 'normal', chase: 'normal', role: 'auto' };
+    case 'mage': return { target: 'assist', position: 'auto', skills: 'normal', chase: 'tight', role: 'auto' };
+    case 'archer': return { target: 'assist', position: 'auto', skills: 'normal', chase: 'normal', role: 'auto' };
+    case 'acolyte': return { target: 'assist', position: 'auto', skills: 'conserve', chase: 'tight', role: 'auto' };
+    case 'thief': return { target: 'weakest', position: 'auto', skills: 'aggressive', chase: 'normal', role: 'auto' };
+    case 'merchant': return { target: 'assist', position: 'auto', skills: 'normal', chase: 'normal', role: 'auto' };
   }
-  return { target: 'assist', position: 'auto', skills: 'normal', chase: 'normal' };
+  return { target: 'assist', position: 'auto', skills: 'normal', chase: 'normal', role: 'auto' };
+}
+
+/** roles a class can play, its natural one first. Acolytes: support healer, battle priest (melee) or exorcist (holy caster) */
+export function roleOptions(cls: ClassId): HeroRole[] {
+  switch (lineage(cls).at(-2) ?? cls) {
+    case 'swordsman': return ['tank', 'melee'];
+    case 'mage': return ['caster'];
+    case 'archer': return ['ranged'];
+    case 'acolyte': return ['healer', 'melee', 'caster'];
+    case 'thief': return ['melee', 'tank'];
+    case 'merchant': return ['melee', 'tank'];
+  }
+  return ['melee'];
+}
+
+/** what 'auto' means for this hero: the natural role, except an acolyte with more STR than INT fights as a battle priest */
+export function autoRole(h: Hero): HeroRole {
+  if ((lineage(h.cls).at(-2) ?? h.cls) === 'acolyte' && h.stats.str > h.stats.int) return 'melee';
+  return roleOptions(h.cls)[0];
+}
+
+export function heroRole(h: Hero): HeroRole {
+  const r = h.tactics?.role;
+  return r && r !== 'auto' && roleOptions(h.cls).includes(r) ? r : autoRole(h);
 }
 
 export function defaultOrders(): PartyOrders {
@@ -113,7 +137,7 @@ export function load(): GameState | null {
       if (z.gate || !z.unlockBy || s.unlocked.includes(z.id)) continue;
       if ((s.progress[z.unlockBy]?.bossKills ?? 0) > 0) s.unlocked.push(z.id);
     }
-    for (const h of s.heroes) h.tactics ??= defaultTactics(h.cls);
+    for (const h of s.heroes) { h.tactics ??= defaultTactics(h.cls); h.tactics.role ??= 'auto'; }
     if (!s.quick) {
       // migrate the old per-hero potion sliders into quick slots
       const a = s.heroes[0]?.auto;

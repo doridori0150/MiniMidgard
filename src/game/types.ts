@@ -123,6 +123,8 @@ export type TacticTarget =
 export type TacticPosition = 'auto' | 'front' | 'mid' | 'back';
 export type TacticSkills = 'aggressive' | 'normal' | 'conserve';
 export type TacticChase = 'tight' | 'normal' | 'free';
+/** what a hero does in the party: hold aggro, hit in melee, shoot, cast from the back, keep everyone alive */
+export type HeroRole = 'tank' | 'melee' | 'ranged' | 'caster' | 'healer';
 export interface Tactics {
   target: TacticTarget;
   /** auto = class default (melee front, ranged/casters mid/back, healer back) */
@@ -131,6 +133,8 @@ export interface Tactics {
   skills: TacticSkills;
   /** how far from the leader/party center this hero may chase: stay close / normal / free hunting */
   chase: TacticChase;
+  /** auto = the class's natural role (an acolyte built on STR fights as a battle priest); or any role the class can play */
+  role?: 'auto' | HeroRole;
 }
 
 /** party-wide orders (파티 작전) */

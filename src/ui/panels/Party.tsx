@@ -1,15 +1,31 @@
 import { useState } from 'preact/hooks';
 import { useGame } from '../game.ts';
 import { HeroCanvas, Win } from '../widgets.tsx';
-import { CLASSES } from '../../game/data/classes.ts';
-import { defaultOrders, defaultTactics } from '../../game/state.ts';
+import { CLASSES, lineage } from '../../game/data/classes.ts';
+import { autoRole, defaultOrders, defaultTactics, roleOptions } from '../../game/state.ts';
 import type { PartyRole } from '../../game/world.ts';
-import type { Hero, PartyOrders, Tactics } from '../../game/types.ts';
+import type { ClassId, Hero, HeroRole, PartyOrders, Tactics } from '../../game/types.ts';
 
 const ROLE: Record<PartyRole, [string, string]> = {
   tank: ['탱커', '#4e7ad0'], melee: ['근접 딜러', '#c05a3a'], ranged: ['원거리', '#3f9a4a'], caster: ['마법', '#8a5ad0'], healer: ['힐러', '#c8962a'],
 };
 const AUTO_POS: Record<PartyRole, string> = { tank: '전열', melee: '전열', ranged: '중열', caster: '후열', healer: '전열↔중열' };
+/** acolytes play three very different builds, so their roles get their own names */
+const ACO_ROLE: Partial<Record<HeroRole, [string, string]>> = {
+  healer: ['지원', '힐·버프가 먼저. 모두 건강하면 앞에서 거들고, 누가 다치면 뒤로 빠져 회복에 집중합니다.'],
+  melee: ['전투', '전열에서 둔기로 싸웁니다. 힐은 위급할 때(HP 45% 이하)만 씁니다. STR형 성직자의 자동 역할.'],
+  caster: ['퇴마', '후열에서 성스러운 빛·대퇴마로 공격하고, 불사형에게는 힐로 공격합니다. 회복도 맡습니다.'],
+};
+const ROLE_DESC: Record<HeroRole, string> = {
+  tank: '적을 붙잡고 맞아 줍니다. 도발로 동료를 노리는 적을 끌어옵니다.',
+  melee: '전열에서 싸웁니다. 탱커가 적을 잡고 있으면 적의 뒤쪽으로 돌아 칩니다.',
+  ranged: '중열에서 쏩니다. 혼자일 땐 붙은 적에게서 한 걸음씩 물러나며 싸웁니다.',
+  caster: '후열에서 마법을 씁니다. 혼자일 땐 붙은 적에게서 물러나며 싸웁니다.',
+  healer: '힐·버프 담당. 동료가 다치면 뒤로 빠져 회복합니다.',
+};
+const isAco = (cls: ClassId) => lineage(cls).at(-2) === 'acolyte';
+const roleName = (cls: ClassId, r: HeroRole) => (isAco(cls) ? ACO_ROLE[r]?.[0] : undefined) ?? ROLE[r][0];
+const roleDesc = (cls: ClassId, r: HeroRole) => (isAco(cls) ? ACO_ROLE[r]?.[1] : undefined) ?? ROLE_DESC[r];
 
 type Opt<K extends string> = [K, string, string];
 const TARGET: Opt<Tactics['target']>[] = [
@@ -40,10 +56,10 @@ const REST: [number, string][] = [[0, '안 쉼'], [10, '10%'], [20, '20%'], [35,
 
 /** one-tap 작전 presets (DQ-style): orders + per-hero tactics */
 const PRESETS: { id: string; name: string; desc: string; orders: PartyOrders; tac: (h: Hero) => Tactics }[] = [
-  { id: 'balance', name: '균형', desc: '직업별 추천 요령', orders: defaultOrders(), tac: (h) => defaultTactics(h.cls) },
-  { id: 'focus', name: '집중 공격', desc: '한 마리씩 협공', orders: { pull: 1, rest: 20 }, tac: (h) => ({ ...defaultTactics(h.cls), target: 'assist', chase: 'tight' }) },
-  { id: 'farm', name: '각자 사냥', desc: '흩어져 빠르게', orders: { pull: 5, rest: 10 }, tac: (h) => ({ ...defaultTactics(h.cls), target: 'nearest', chase: 'free', skills: 'aggressive' }) },
-  { id: 'safe', name: '안전 제일', desc: '보호·자주 휴식', orders: { pull: 1, rest: 50 }, tac: (h) => ({ ...defaultTactics(h.cls), target: 'protect', chase: 'tight', skills: 'conserve' }) },
+  { id: 'balance', name: '균형', desc: '직업별 추천 요령', orders: defaultOrders(), tac: (h) => ({ ...defaultTactics(h.cls), role: h.tactics.role ?? 'auto' }) },
+  { id: 'focus', name: '집중 공격', desc: '한 마리씩 협공', orders: { pull: 1, rest: 20 }, tac: (h) => ({ ...defaultTactics(h.cls), role: h.tactics.role ?? 'auto', target: 'assist', chase: 'tight' }) },
+  { id: 'farm', name: '각자 사냥', desc: '흩어져 빠르게', orders: { pull: 5, rest: 10 }, tac: (h) => ({ ...defaultTactics(h.cls), role: h.tactics.role ?? 'auto', target: 'nearest', chase: 'free', skills: 'aggressive' }) },
+  { id: 'safe', name: '안전 제일', desc: '보호·자주 휴식', orders: { pull: 1, rest: 50 }, tac: (h) => ({ ...defaultTactics(h.cls), role: h.tactics.role ?? 'auto', target: 'protect', chase: 'tight', skills: 'conserve' }) },
 ];
 
 const same = (a: object, b: object) => JSON.stringify(a) === JSON.stringify(b);
@@ -106,7 +122,7 @@ export function PartyPanel() {
         {s.heroes.map((h, i) => {
           const u = g.world.heroes.find((x) => x.hero.id === h.id);
           const role = u ? g.world.roleOf(u) : 'melee';
-          const [rname, rcolor] = ROLE[role];
+          const rname = roleName(h.cls, role), rcolor = ROLE[role][1];
           const tac = h.tactics;
           const isOpen = open === i;
           const custom = !same(tac, defaultTactics(h.cls));
@@ -130,6 +146,14 @@ export function PartyPanel() {
               </div>
               {isOpen && (
                 <div class="tac">
+                  {roleOptions(h.cls).length > 1 && (
+                    <div class="tac-row">
+                      <div class="tac-l">역할</div>
+                      <Seg opts={[['auto', `자동·${roleName(h.cls, autoRole(h))}`] as [string, string], ...roleOptions(h.cls).map((r) => [r, roleName(h.cls, r)] as [string, string])]}
+                        value={tac.role ?? 'auto'} onPick={(v) => setTac(h, { role: v as Tactics['role'] })} />
+                      <div class="tac-d">{roleDesc(h.cls, role)}{(tac.role ?? 'auto') === 'auto' && isAco(h.cls) ? ' (자동: STR이 INT보다 높으면 전투)' : ''}</div>
+                    </div>
+                  )}
                   {([['공격 대상', TARGET, 'target'], ['위치', POSITION, 'position'], ['스킬 사용', SKILLS, 'skills'], ['추격 범위', CHASE, 'chase']] as const).map(([label, opts, key]) => {
                     const cur = (opts as readonly Opt<string>[]).find((o) => o[0] === tac[key])!;
                     return (

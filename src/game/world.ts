@@ -1,5 +1,5 @@
 // Real-time hunt simulation for one zone. DOM-free: renderer and UI read `events`, `logs` and unit state.
-import type { Element, GameState, Hero, Tactics } from './types.ts';
+import type { Element, GameState, Hero, HeroRole, Tactics } from './types.ts';
 import { computeDerived, partyPerks, type ActiveBuff, type Derived } from './stats.ts';
 import { elementMod, sizeMod, ELEMENT_KO } from './data/elements.ts';
 import { SKILLS, type SkillDef, type FixedCtx } from './data/skills.ts';
@@ -8,7 +8,7 @@ import { ITEMS, CARD_SKILLS } from './data/items.ts';
 import { zone as zoneDef, ZONES, type ZoneDef } from './data/zones.ts';
 import { CLASSES, lineage } from './data/classes.ts';
 import { expNext } from './exp.ts';
-import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics, gateDiscoverable, gateReady, openGate, zoneKnown, inHours, isKeepItem } from './state.ts';
+import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics, heroRole, gateDiscoverable, gateReady, openGate, zoneKnown, inHours, isKeepItem } from './state.ts';
 
 export type DmgKind = 'normal' | 'crit' | 'taken' | 'heal' | 'sp' | 'miss' | 'lucky' | 'total' | 'zero' | 'absorb';
 
@@ -36,7 +36,7 @@ export interface LogLine { id: number; text: string; color: string; t: number }
 
 type UnitState = 'idle' | 'ready' | 'walk' | 'attack' | 'cast' | 'sit' | 'dead' | 'hurt' | 'spawn';
 
-export type PartyRole = 'tank' | 'melee' | 'ranged' | 'caster' | 'healer';
+export type PartyRole = HeroRole;
 export type Position = 'front' | 'mid' | 'back';
 /** how far (px) from the leader a follower may chase, per tactics.chase */
 const CHASE_R = { tight: 170, normal: 270, free: Infinity } as const;
@@ -72,6 +72,8 @@ export interface HeroUnit {
   thinkAt: number;
   /** stepping away from a melee mob (back line) until / not again before */
   kiteUntil: number;
+  /** a melee damage dealer that dropped low steps behind the tank until it's patched up */
+  backOff: boolean;
   kiteNext: number;
 }
 
@@ -184,7 +186,7 @@ export class World {
         kind: 'hero', uid: this.uidSeq++, hero, x: sx - i * 26, y: sy + (i % 2 ? 22 : -10), facing: 1,
         hp: d.maxHp, sp: d.maxSp, d, dAt: 0, state: 'idle', stateT: 0, lockUntil: 0, atkReady: 0,
         target: null, cast: null, buffs: [], cds: {}, deadUntil: 0, hpTickAt: HP_TICK, spTickAt: SP_TICK, potAt: 0,
-        poisonUntil: 0, poisonNext: 0, hurtAt: -9999, sitting: false, thinkAt: 0, kiteUntil: 0, kiteNext: 0,
+        poisonUntil: 0, poisonNext: 0, hurtAt: -9999, sitting: false, thinkAt: 0, kiteUntil: 0, kiteNext: 0, backOff: false,
       } satisfies HeroUnit;
     });
   }
@@ -537,20 +539,21 @@ export class World {
 
   tactics(h: HeroUnit): Tactics { return h.hero.tactics ?? defaultTactics(h.hero.cls); }
 
-  roleOf(h: HeroUnit): PartyRole {
-    switch (lineage(h.hero.cls).at(-2)) {
-      case 'swordsman': return 'tank';
-      case 'mage': return 'caster';
-      case 'archer': return 'ranged';
-      case 'acolyte': return 'healer';
-    }
-    return 'melee';
-  }
+  /** the role from the hero's tactics (auto = class role; STR acolytes fight as battle priests) */
+  roleOf(h: HeroUnit): PartyRole { return heroRole(h.hero); }
 
   posOf(h: HeroUnit): Position {
     const p = this.tactics(h).position;
     if (p !== 'auto') return p;
-    switch (this.roleOf(h)) {
+    const role = this.roleOf(h);
+    if (role === 'melee') {
+      // below 40% HP a melee damage dealer lets the tank hold and steps back until healed past 65%
+      const tank = this.heroes.some((a) => a !== h && a.state !== 'dead' && !a.sitting && this.roleOf(a) === 'tank');
+      const r = h.hp / h.d.maxHp;
+      h.backOff = tank && (h.backOff ? r < 0.65 : r < 0.4);
+      if (h.backOff) return 'mid';
+    }
+    switch (role) {
       case 'caster': return 'back';
       case 'ranged': return 'mid';
       case 'healer': {
@@ -678,6 +681,21 @@ export class World {
       }
     }
 
+    // alone without a front line, archers and casters step back from a melee mob between shots instead of trading blows
+    if (pos !== 'front' && !front && !melee) {
+      const chaser = this.mobs.find((m) => this.alive(m) && m.target === h.uid && m.m.range < 60 && dist(m, h) < this.bodyR(m) + 34);
+      if (this.time < h.kiteUntil && chaser) {
+        const dx = h.x - chaser.x, dy = h.y - chaser.y, d = Math.hypot(dx, dy) || 1;
+        this.moveTo(h, clamp(h.x + dx / d * 90, 24, this.zone.w - 24), clamp(h.y + dy / d * 90, 70, this.zone.h - 24), h.d.moveSpd * 1.1, dt, 4);
+        return true;
+      }
+      if (chaser && this.time >= h.kiteNext) {
+        h.kiteUntil = this.time + 550;
+        h.kiteNext = this.time + 2200;
+        return true;
+      }
+    }
+
     if (pos === 'front' || (melee && !front)) {
       if (edge > reach) { this.moveTo(h, t.x, t.y, h.d.moveSpd, dt, reach * 0.85); return true; }
       // melee damage dealers take the far side of the target when the tank already holds it
@@ -685,7 +703,8 @@ export class World {
         const fx = t.x - front.x, fy = t.y - front.y, fd = Math.hypot(fx, fy) || 1;
         const off = this.bodyR(t) + 14;
         const D = { x: t.x + fx / fd * off, y: t.y + fy / fd * off * 0.8 };
-        if (dist(h, D) > 12) { this.moveTo(h, D.x, D.y, h.d.moveSpd, dt, 4); return true; }
+        // already swinging: only walk round when well off the flank, so small shoves don't keep it shuffling
+        if (dist(h, D) > (edge <= reach ? 30 : 12)) { this.moveTo(h, D.x, D.y, h.d.moveSpd, dt, 4); return true; }
       }
       return false;
     }
@@ -736,7 +755,7 @@ export class World {
   }
 
   private restDone() {
-    return this.heroes.every((a) => a.state === 'dead' || (a.hp >= a.d.maxHp * 0.85 && (!this.usesSp(a) || a.sp >= a.d.maxSp * 0.7)));
+    return this.heroes.every((a) => a.state === 'dead' || (a.hp >= a.d.maxHp * 0.8 && (!this.usesSp(a) || a.sp >= a.d.maxSp * 0.55)));
   }
 
   /** casters and healers rest for SP; everyone else falls back to normal attacks */
@@ -852,12 +871,21 @@ export class World {
     // heal
     for (const { sk, lv } of this.enabledSkills(h, ['heal'])) {
       if (!this.canPay(h, sk, lv)) continue;
-      const pct = sk.id === 'first_aid' ? 50 : h.hero.auto.healPct;
+      // first aid's 5 HP only matters to a fresh novice; past that it just eats a turn
+      if (sk.id === 'first_aid' && 5 < h.d.maxHp * 0.05) continue;
+      // battle priests and tanks keep swinging and heal in an emergency (themselves a bit earlier); healers and
+      // exorcists use the set threshold
+      const role = this.roleOf(h);
+      const fighter = role === 'melee' || role === 'tank';
+      const amt = sk.kind === 'heal' ? this.healAmount(h, lv) : 5;
       let best: HeroUnit | undefined; let br = 1;
       const pool = sk.id === 'first_aid' ? [h] : this.aliveHeroes();
       for (const a of pool) {
         const r = a.hp / a.d.maxHp;
-        if (r * 100 < pct && r < br && dist(a, h) < 260) { br = r; best = a; }
+        const pct = sk.id === 'first_aid' ? 50 : fighter ? (a === h ? Math.min(h.hero.auto.healPct, 60) : Math.min(h.hero.auto.healPct, 45)) : h.hero.auto.healPct;
+        // don't spend SP topping up a scratch: wait until most of a heal would land, unless it's an emergency
+        const worth = r < 0.35 || a.d.maxHp - a.hp >= amt * 0.6;
+        if (r * 100 < pct && worth && r < br && dist(a, h) < 260) { br = r; best = a; }
       }
       if (best) { this.startSkill(h, sk, lv, best); return true; }
     }
@@ -878,7 +906,7 @@ export class World {
 
   private tryProvoke(h: HeroUnit): boolean {
     const lv = h.hero.skills.provoke ?? 0;
-    if (!lv || h.hero.auto.skills.provoke === false) return false;
+    if (!lv || h.hero.auto.skills.provoke === false || this.roleOf(h) !== 'tank') return false;
     const sk = SKILLS.provoke;
     if (!this.canPay(h, sk, lv)) return false;
     const loose = this.mobs.find((m) => this.alive(m) && m.target !== null && m.target !== h.uid && this.heroUnit(m.target) && dist(m, h) < 180 && m.provokeUntil < this.time);
@@ -893,6 +921,10 @@ export class World {
     // conserve: offensive skills only while SP ≥ 50% (heals/buffs/CC are separate)
     if (tac === 'conserve' && h.sp < h.d.maxSp * 0.5) return null;
     const list = this.enabledSkills(h, ['attack', 'aoe']).filter(({ sk, lv }) => this.canPay(h, sk, lv));
+    // heal sears the undead (RO): offered as an attack while the target is undead-element
+    if (this.mobElement(t) === 'undead') {
+      for (const e of this.enabledSkills(h, ['heal'])) if (e.sk.kind === 'heal' && this.canPay(h, e.sk, e.lv)) list.push(e);
+    }
     if (!list.length) return null;
     // don't waste skills on nearly-dead targets
     const est = this.estimateNormal(h, t);
@@ -925,7 +957,16 @@ export class World {
     return Math.max(1, avg * el * (100 - t.m.def) / 100 + d.refineAtk);
   }
 
+  private healAmount(h: HeroUnit, lv: number) {
+    return Math.floor((h.hero.baseLv + h.d.total.int) / 8) * (4 + lv * 8) * (1 + (h.d.b.healPct ?? 0) / 100);
+  }
+  /** heal on an undead-element mob: half the heal as holy damage, by element, ignoring MDEF (RO) */
+  private healDamage(h: HeroUnit, t: MobUnit, lv: number) {
+    return Math.floor(this.healAmount(h, lv) * elementMod('holy', this.mobElement(t)) / 2);
+  }
+
   private estimateSkill(h: HeroUnit, t: MobUnit, sk: SkillDef, lv: number) {
+    if (sk.kind === 'heal') return this.healDamage(h, t, lv);
     const hits = sk.bySize ? (t.m.size === 'small' ? 1 : t.m.size === 'medium' ? 2 : 3) : sk.hits ? sk.hits(lv) : 1;
     if (sk.fixed) return sk.fixed(lv, this.fixedCtx(h)) * hits * elementMod(sk.element ?? 'neutral', this.mobElement(t));
     const mult = (sk.mult ? sk.mult(lv) : 100) / 100;
@@ -1275,8 +1316,18 @@ export class World {
         return;
       }
       case 'heal': {
+        if (tm) {
+          // cast on an undead mob: the same light pillar, as holy damage
+          this.emit({ t: 'skill', fx: 'heal', from: h.uid, to: tm.uid, x: tm.x, y: tm.y, lv });
+          this.sound('heal');
+          if (this.alive(tm)) {
+            this.dealToMob(h, tm, Math.max(0, this.healDamage(h, tm, lv)), 'normal', 0);
+            this.emit({ t: 'hit', uid: tm.uid, style: 'magic', element: 'holy' });
+          }
+          return;
+        }
         const tgt = tu?.kind === 'hero' ? tu : h;
-        const amt = Math.floor((h.hero.baseLv + h.d.total.int) / 8) * (4 + lv * 8) * (1 + (h.d.b.healPct ?? 0) / 100);
+        const amt = this.healAmount(h, lv);
         this.emit({ t: 'skill', fx: 'heal', from: h.uid, to: tgt.uid, x: tgt.x, y: tgt.y, lv });
         this.sound('heal');
         this.healHero(tgt, Math.max(1, Math.floor(amt)), true);
