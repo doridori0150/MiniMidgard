@@ -1074,3 +1074,32 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .mo-row small { font-size: 9.5px; color: #7a84a0; }
 .mo-row .good { color: #2a8a3a; } .mo-row .ok { color: #b07a10; } .mo-row .bad { color: #c03a3a; }
 .mo-need { font-family: 'Galmuri9'; font-size: 10px; color: #7a84a0; margin-top: 2px; }
+
+/* ───── 목표 핀 */
+.tstrip { flex: none; display: flex; align-items: center; gap: 6px; height: 24px; padding: 0 8px; border: 0; border-bottom: 1px solid #0c1222;
+  background: linear-gradient(90deg, #3a2a10, #1c2440 60%); color: #ffe8b0; font: inherit; font-size: 11.5px; cursor: pointer; position: relative; z-index: 5; text-align: left; }
+.tstrip img { width: 18px; height: 18px; }
+.tstrip b { font-weight: normal; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.tstrip small { font-family: 'Galmuri9'; font-size: 10px; color: #c8d4f4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1; }
+.ts-pin { font-size: 12px; }
+.ts-more { font-style: normal; font-family: 'Galmuri9'; font-size: 10px; padding: 0 5px; border-radius: 7px; background: rgba(255,255,255,0.15); }
+.pin-btn { flex: none; border: 1px solid #d0a040; background: #fff6d8; color: #6a4a00; border-radius: 6px; padding: 3px 8px; font: inherit; font-size: 11px; cursor: pointer; margin-left: auto; }
+.pin-btn.on { background: #ffd84a; }
+.pin-btn.btn { width: 100%; padding: 7px; font-size: 12.5px; }
+.targets-modal .win-body { max-height: min(74vh, 640px); overflow-y: auto; }
+.tg-card { border: 1px solid var(--line); border-radius: 8px; padding: 8px 9px; margin-bottom: 8px; background: #fff; }
+.tg-head { display: flex; align-items: center; gap: 8px; }
+.tg-head img { width: 32px; height: 32px; }
+.tg-head div { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.tg-head small { font-size: 10.5px; color: #6a7490; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tg-prog { margin: 6px 0 4px; font-size: 12px; }
+.tg-src { border-top: 1px dashed #d8deec; padding: 5px 0 2px; }
+.tg-mob { font-size: 12px; } .tg-mob i { font-style: normal; font-family: 'Galmuri9'; font-size: 10.5px; color: #b07a10; }
+.tg-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-family: 'Galmuri9'; font-size: 10.5px; margin-top: 2px; }
+.tg-meta .good { color: #2a8a3a; } .tg-meta .ok { color: #b07a10; } .tg-meta .bad { color: #c03a3a; }
+.tg-meta .btn { margin-left: auto; }
+.tg-here { margin-left: auto; color: #2a8a3a; }
+.tg-idea { display: flex; align-items: center; gap: 7px; padding: 5px 0; font-size: 12px; } .tg-idea img { width: 24px; height: 24px; }
+.bd-item .pin-btn { align-self: center; }
+/* the name keeps at least ~3 letters next to the buff chips */
+.pf-nm > span:first-child { min-width: 3.2em; }

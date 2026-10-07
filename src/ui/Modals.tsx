@@ -18,7 +18,9 @@ import { QuickSetupModal } from './QuickBar.tsx';
 import { HeroModal } from './HeroModal.tsx';
 import { MobModal } from './WorldMap.tsx';
 import { BuyModal, SellModal } from './Shop.tsx';
-import { BuildModal } from './BuildModal.tsx';
+import { BuildModal, PinButton } from './BuildModal.tsx';
+import { TargetsModal } from './Targets.tsx';
+import { sourcesOf } from '../game/targets.ts';
 import { skillIconURL } from '../render/icons.ts';
 import { RACE_KO } from '../game/data/elements.ts';
 import { skillsOf } from '../game/data/skills.ts';
@@ -95,6 +97,7 @@ function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
             {((inst && fittingCards.length === 0) || (d.kind === 'card' && fittingEquips.length === 0)) && <div class="muted small">{d.kind === 'card' ? '이 카드를 꽂을 수 있는 빈 슬롯 장비가 없습니다.' : '꽂을 수 있는 카드가 없습니다.'}</div>}
           </div>
         )}
+        {sourcesOf(id).length > 0 && <div style={{ marginTop: '8px' }}><PinButton id={id} wide /></div>}
         {dropsFrom.length > 0 && !inst && <div class="small muted" style={{ marginTop: '8px' }}>획득처: {dropsFrom.map((m) => `${m.name}(${(m.drops.find((x) => x.id === id)!.rate * 100).toFixed(m.drops.find((x) => x.id === id)!.rate < 0.01 ? 2 : 0)}%)`).join(', ')}</div>}
         {(inst && !owner && d.kind === 'equip') || d.kind === 'ammo' ? <div style={{ marginTop: '8px' }}><HeroTabs sel={heroIdx} onSel={setHeroIdx} /></div> : null}
       </div>
@@ -322,6 +325,7 @@ function ModalBody(props: { m: Modal }) {
     case 'buy': return <BuyModal id={m.id} />;
     case 'sell': return <SellModal id={m.id} uid={m.uid} />;
     case 'build': return <BuildModal heroId={m.heroId} />;
+    case 'targets': return <TargetsModal />;
     case 'confirm': return <ConfirmModal text={m.text} ok={m.ok} danger={m.danger} closeAll={m.closeAll} />;
     case 'card': return null;
     case 'credits': return (

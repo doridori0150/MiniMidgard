@@ -84,7 +84,7 @@ export function PartyRail() {
             <span class="pf-face"><HeroCanvas hero={h} face zoom={0.74} /><span class="pf-lv">{h.baseLv}</span></span>
             <span class="pf-body">
               <span class="pf-nm"><span>{h.name}</span>
-                {buffs.length > 0 && <span class="pf-buffs">{buffs.slice(0, 4).map((b) => (
+                {buffs.length > 0 && <span class="pf-buffs">{buffs.slice(0, 3).map((b) => (
                   <i key={b.id} class={b.until - g.world.time < 3000 ? 'end' : ''} style={{ '--bc': BUFF_CHIP[b.id]?.[1] ?? '#9fb4e6' }} title={b.name}>{BUFF_CHIP[b.id]?.[0] ?? b.name[0]}</i>
                 ))}</span>}
               </span>

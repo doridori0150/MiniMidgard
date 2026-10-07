@@ -5,26 +5,29 @@ import { useGame } from './game.ts';
 import { buildsFor, type BuildDef } from '../game/data/builds.ts';
 import { ITEMS } from '../game/data/items.ts';
 import { MONSTERS } from '../game/data/monsters.ts';
-import { ZONES } from '../game/data/zones.ts';
 import { SKILLS } from '../game/data/skills.ts';
 import { CLASSES } from '../game/data/classes.ts';
 import { STAT_KO } from '../game/data/elements.ts';
 import type { StatKey } from '../game/types.ts';
 import { itemIconURL } from '../render/icons.ts';
+import { isTarget, pinTarget, sourcesOf, unpinTarget } from '../game/targets.ts';
 
-/** monsters that drop the item, best rate first, with the maps they live on */
-export function dropSources(id: string): { mob: string; rate: number; maps: string[] }[] {
-  const out: { mob: string; rate: number; maps: string[] }[] = [];
-  for (const m of Object.values(MONSTERS)) {
-    const d = m.drops.find((x) => x.id === id);
-    if (!d) continue;
-    const maps = ZONES.filter((z) => z.mobs.some((x) => x.id === m.id) || z.boss === m.id || z.mvp === m.id).map((z) => z.name);
-    out.push({ mob: m.id, rate: d.rate, maps });
-  }
-  return out.sort((a, b) => b.rate - a.rate);
+export const pct = (r: number) => (r >= 0.01 ? `${Math.round(r * 100)}%` : `${(r * 100).toFixed(r >= 0.001 ? 2 : 3)}%`);
+
+/** 🎯 목표로 / 해제 toggle for any item that drops somewhere */
+export function PinButton(props: { id: string; wide?: boolean }) {
+  const g = useGame();
+  const on = isTarget(g.s, props.id);
+  return (
+    <button class={'pin-btn' + (on ? ' on' : '') + (props.wide ? ' btn' : '')} aria-pressed={on} onClick={(e) => {
+      e.stopPropagation();
+      if (on) { unpinTarget(g.s, props.id); g.commit('click'); return; }
+      const err = pinTarget(g.s, props.id);
+      if (err) { g.toast(err, 'bad'); return; }
+      g.toast(`🎯 목표: ${ITEMS[props.id].name}`, 'good'); g.commit('confirm');
+    }}>{on ? '🎯 목표 해제' : '🎯 목표로'}</button>
+  );
 }
-
-const pct = (r: number) => (r >= 0.01 ? `${Math.round(r * 100)}%` : `${(r * 100).toFixed(r >= 0.001 ? 2 : 3)}%`);
 
 function BuildCard(props: { b: BuildDef; on: boolean; pick: () => void }) {
   const { b, on } = props;
@@ -37,11 +40,12 @@ function BuildCard(props: { b: BuildDef; on: boolean; pick: () => void }) {
       <div class="bd-stats">{stats.map(([k, w]) => <span class="bd-stat"><b>{STAT_KO[k]}</b><i style={{ width: w * 6 + 'px' }} /></span>)}</div>
       {b.skills.length > 0 && <div class="bd-line"><span>핵심 스킬</span>{b.skills.map((id) => SKILLS[id]?.name).filter(Boolean).join(' · ')}</div>}
       {items.map((id) => {
-        const src = dropSources(id)[0];
+        const src = sourcesOf(id)[0];
         return (
           <div class="bd-item">
             <img src={itemIconURL(id)} alt="" />
-            <div><b>{ITEMS[id].name}</b><small>{src ? `${MONSTERS[src.mob].name} ${pct(src.rate)}${src.maps.length ? ` · ${src.maps[0]}` : ''}` : '아직 얻을 곳이 없다'}</small></div>
+            <div><b>{ITEMS[id].name}</b><small>{src ? `${MONSTERS[src.mob].name} ${pct(src.rate)}${src.zones.length ? ` · ${src.zones[0].name}` : ''}` : '아직 얻을 곳이 없다'}</small></div>
+            {src && <PinButton id={id} />}
           </div>
         );
       })}

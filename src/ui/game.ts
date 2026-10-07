@@ -8,6 +8,8 @@ import { FieldRenderer } from '../render/field.ts';
 import { audio } from '../audio/audio.ts';
 import { zone } from '../game/data/zones.ts';
 import { Notifier } from './notify.ts';
+import { takeAchieved, suggestTargets } from '../game/targets.ts';
+import { ITEMS } from '../game/data/items.ts';
 
 export type PanelId = 'status' | 'skills' | 'equip' | 'cards' | 'bag' | 'map' | 'town' | 'party' | 'settings';
 /** bottom-nav pages (UX debate phase A, docs/ux/codex_r2.md §4): hunting is page null */
@@ -45,7 +47,8 @@ export type Modal =
   | { kind: 'mob'; id: string }
   | { kind: 'buy'; id: string }
   | { kind: 'sell'; id?: string; uid?: number }
-  | { kind: 'build'; heroId: number };
+  | { kind: 'build'; heroId: number }
+  | { kind: 'targets' };
 
 class Game {
   s!: GameState;
@@ -181,11 +184,29 @@ class Game {
     } else {
       for (let left = dt; left > 0; left -= 5000) this.world.advance(Math.min(left, 5000));
     }
+    this.checkTargets();
     this.notifier.watch(this.world, this.world.events, this.world.notices);
     this.notifier.flush(!!this.s.settings.notify, now);
     this.world.events.length = 0; // nothing draws them while hidden
     for (const n of this.world.notices.splice(0)) this.toast(n.text, n.kind === 'job' ? 'level' : 'good');
     if (now - this.lastSave > 10_000) { this.lastSave = now; if (!this.qa) save(this.s); this.dirty = false; }
+  }
+
+  private lastTargetCheck = 0;
+  /** 목표 핀: an obtained target is announced (and sent to the desktop) and the next one is suggested */
+  private checkTargets() {
+    const done = takeAchieved(this.s);
+    if (!done.length) return;
+    for (const id of done) {
+      const name = ITEMS[id].name;
+      this.announce(`🎯 목표 달성! ${name}`, 'card');
+      this.toast(`🎯 목표 달성! ${name}`, 'card');
+      this.notifier.push(`🎯 목표 달성 — ${name}`);
+    }
+    const next = suggestTargets(this.s, this.s.heroes[0]);
+    if (next.length) this.toast(`다음 목표 추천: ${next.map((id) => ITEMS[id].name).join(', ')}`, 'info');
+    this.dirty = true;
+    this.notify();
   }
 
   private loop = (t: number) => {
@@ -207,6 +228,7 @@ class Game {
       this.dirty = true;
     }
     if (t - this.lastNotify > 180) { this.lastNotify = t; this.notify(); }
+    if (t - this.lastTargetCheck > 1000) { this.lastTargetCheck = t; this.checkTargets(); }
     if (t - this.lastSave > 10_000) { this.lastSave = t; if (!this.qa) save(this.s); this.dirty = false; }
   };
 

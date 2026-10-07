@@ -258,4 +258,6 @@ export interface GameState {
   cardSeen?: number;
   /** hidden maps whose existence the player has discovered (gate.hidden) */
   discovered?: string[];
+  /** 목표 핀: items being chased (have0 = owned when pinned, kills0 = source kills when pinned) */
+  targets?: { id: string; since: number; have0: number; kills0: number }[];
 }

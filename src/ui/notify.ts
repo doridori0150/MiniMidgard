@@ -45,6 +45,9 @@ export class Notifier {
     for (const n of notices) if (n.kind === 'job') this.lines.push(n.text);
   }
 
+  /** a line of our own (e.g. a target obtained), shown only while the player is away */
+  push(line: string) { if (this.away()) this.lines.push(line); }
+
   /** at most one notification every few seconds, with everything since the last one */
   flush(enabled: boolean, now: number) {
     if (!this.lines.length || now - this.lastFlush < 3000) return;

@@ -98,6 +98,12 @@
     qs.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true })); qs.dispatchEvent(new PointerEvent('pointerup', { bubbles: true }));
     qs.dispatchEvent(new MouseEvent('click', { bubbles: true, detail: 1 })); await sleep(60);
     log(a1 === !a0 && g.s.quick[0].auto === a0 && g.s.stacks[id] === n0, 'quick slot: key / tap toggle auto once each, nothing used', `${a0}→${a1}→${g.s.quick[0].auto}, ${n0}→${g.s.stacks[id]}`);
+    // 9b. 목표 핀: pin from an item detail, the strip shows it, owning one more clears it
+    g.setModal({ kind: 'item', id: 'w_bloodmoon' }); await sleep(80);
+    await click($('.modal-layer:not([hidden]) .pin-btn')); g.setModal(null); await sleep(80);
+    const pinned = (g.s.targets ?? []).some((t) => t.id === 'w_bloodmoon') && !!$('.tstrip');
+    g.s.equips.push({ uid: 987654, id: 'w_bloodmoon', refine: 0, slots: 0, cards: [] }); await sleep(1300);
+    log(pinned && !(g.s.targets ?? []).some((t) => t.id === 'w_bloodmoon'), '목표 핀: pin → strip → obtained clears it', `pinned ${pinned}`);
     // 10. recruit flow with a free slot
     await boot('party=swordsman&lv=24');
     const g2 = G(); await click($('.pf-add'));
