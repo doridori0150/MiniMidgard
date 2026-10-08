@@ -26,7 +26,7 @@
 | mage_female | walk_2 | 먼 쪽 팔이 지팡이를 쥠 (hand 207,274) |
 | mage_female | attack_0 | 먼 쪽 팔을 들어 지팡이가 그 손으로 감 (hand 162,237) |
 | mage_female | cast_0, cast_1 | 지팡이가 사라짐 |
-| archer_male | walk_3 | 활 쥔 손이 몸 가운데로 넘어감 — 가까운 쪽 팔이 맞는지 확인하고 아니면 고침 |
+| archer_male | walk_3 | **먼 쪽 팔이 활을 쥠(반대 손으로 넘어감, 사용자 확인)** (hand 257,279). 가까운 쪽 팔이 활을 쥐게 다시 그림 |
 | archer_male | cast_0, cast_1 | 활이 사라짐 |
 | swordsman_male | attack_0 | 칼 든 팔은 아래에 두고 먼 쪽 빈 주먹을 치켜듦 → 다음 프레임에서 공격하는 팔이 바뀌어 보임 |
 | swordsman_male | cast_0, cast_1 | 칼이 사라짐(두 주먹을 듦) |
