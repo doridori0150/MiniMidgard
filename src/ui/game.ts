@@ -196,6 +196,8 @@ class Game {
   }
 
   private lastTargetCheck = 0;
+  private lastFrame = 0;
+  private calm = false;
   /** 목표 핀: an obtained target is announced (and sent to the desktop) and the next one is suggested */
   private checkTargets() {
     const done = takeAchieved(this.s);
@@ -224,13 +226,18 @@ class Game {
     // boss music
     const bossOn = this.world.mobs.some((m) => m.m.boss && m.state !== 'dead');
     if (bossOn !== this.bossMusic) { this.bossMusic = bossOn; audio.playBgm(bossOn ? 'boss' : this.world.zone.bgm); }
-    if (this.renderer) this.renderer.frame(t);
+    // keep the laptop cool: an unfocused window (the player is working elsewhere) draws ~10 fps, 저전력 모드 ~30 fps;
+    // the hunt itself advances every frame either way
+    const away = !document.hasFocus();
+    if (away !== this.calm) { this.calm = away; document.documentElement.classList.toggle('calm', away); }
+    const every = away ? 100 : this.s.settings.powerSave ? 33 : 0;
+    if (this.renderer && t - this.lastFrame >= every) { this.lastFrame = t; this.renderer.frame(t); }
     // notices from the sim
     if (this.world.notices.length) {
       for (const n of this.world.notices.splice(0)) this.toast(n.text, n.kind === 'job' ? 'level' : 'good');
       this.dirty = true;
     }
-    if (t - this.lastNotify > 180) { this.lastNotify = t; this.notify(); }
+    if (t - this.lastNotify > (away ? 1000 : 180)) { this.lastNotify = t; this.notify(); }
     if (t - this.lastTargetCheck > 1000) { this.lastTargetCheck = t; this.checkTargets(); }
     if (t - this.lastSave > 10_000) { this.lastSave = t; if (!this.qa) save(this.s); this.dirty = false; }
   };

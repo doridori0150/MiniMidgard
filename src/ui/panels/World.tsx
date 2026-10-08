@@ -219,6 +219,7 @@ export function SettingsPanel() {
           {Sw('대미지 숫자 표시', st.showDamage, () => { st.showDamage = !st.showDamage; })}
           {Sw('이펙트 간소화 (저사양)', st.lowFx, () => { st.lowFx = !st.lowFx; })}
           {Sw('CRT 모니터 필터', st.crt !== false, () => { st.crt = st.crt === false; })}
+          {Sw('저전력 모드 (30fps, 발열 감소)', !!st.powerSave, () => { st.powerSave = !st.powerSave; })}
           {Sw('도트 모드 (레트로 픽셀)', !!st.pixel, () => { st.pixel = !st.pixel; if (g.renderer) { g.renderer.pixelMode = !!st.pixel; g.renderer.resize(); } })}
           {Sw('잡템 자동 판매', st.autoSellEtc, () => { st.autoSellEtc = !st.autoSellEtc; })}
           {Sw('보스·MVP 자동 소환', st.autoBoss, () => { st.autoBoss = !st.autoBoss; })}

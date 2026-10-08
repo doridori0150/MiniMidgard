@@ -278,6 +278,8 @@ export interface Settings {
   crt?: boolean;
   /** desktop notifications for level ups, cards, rare gear, MVPs while the player is in another window */
   notify?: boolean;
+  /** 저전력 모드: draw at ~30 fps (an unfocused window always drops to ~10 fps) */
+  powerSave?: boolean;
 }
 
 export interface GameState {

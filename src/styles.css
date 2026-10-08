@@ -1188,3 +1188,5 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .tc-badge.lock { background: #e0dce8; color: #5a5470; animation: none; }
 .tcard.dim { filter: saturate(0.55); opacity: 0.85; }
 .tcard.wide { grid-column: 1 / -1; }
+/* the window lost focus (the player works elsewhere): every CSS animation rests — the CRT flicker/roll, glows, badges */
+.calm *, .calm *::before, .calm *::after { animation-play-state: paused !important; }

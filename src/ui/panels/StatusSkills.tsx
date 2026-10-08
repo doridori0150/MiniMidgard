@@ -1,8 +1,8 @@
 import { useRef, useState } from 'preact/hooks';
 import { useGame } from '../game.ts';
 import { Bar, ElChip, HeroCanvas, HeroTabs, Win, fmt } from '../widgets.tsx';
-import { STAT_KEYS, type StatKey } from '../../game/types.ts';
-import { STAT_HELP, STAT_KO, ELEMENT_KO } from '../../game/data/elements.ts';
+import { STAT_KEYS, type Hero, type StatKey } from '../../game/types.ts';
+import { STAT_KO, ELEMENT_KO, statHelp } from '../../game/data/elements.ts';
 import { CLASSES, lineage, SECOND_JOB_LV } from '../../game/data/classes.ts';
 import { SKILLS, skillsOf } from '../../game/data/skills.ts';
 import { raiseStat, autoDistribute, canLearn, learnSkill, canJobChange, skillReqMet, nextJobs } from '../../game/state.ts';
@@ -22,14 +22,30 @@ const STAT_META: Record<StatKey, { ko: string; color: string }> = {
 
 type D = ReturnType<typeof computeDerived>;
 /** what one more point in `k` would change, biggest effects first */
-function preview(cur: D, next: D): string {
+/** does this hero cast spells at all (MATK only matters then) */
+function usesMagic(h: Hero) {
+  return Object.entries(h.skills).some(([id, lv]) => lv > 0 && SKILLS[id]?.magic) || ['mage', 'wizard', 'acolyte', 'priest'].includes(h.cls);
+}
+/** what a stat point buys for THIS hero: the skills it relies on first (heal, falcon), then the derived numbers that
+ *  matter for its weapon and skills — so a knight's INT no longer leads with MATK and an archer's DEX shows its arrows */
+function preview(cur: D, next: D, h?: Hero): string {
   const out: [string, number, number][] = [];
   const add = (label: string, a: number, b: number, dec = 0) => {
     const v = +(b - a).toFixed(dec);
     if (Math.abs(v) >= (dec ? 0.05 : 1)) out.push([label, v, dec]);
   };
-  add('ATK', cur.statusAtk, next.statusAtk);
-  add('MATK', (cur.matkMin + cur.matkMax) / 2, (next.matkMin + next.matkMax) / 2);
+  if (h) {
+    const heal = h.skills.heal ?? 0;
+    if (heal) add('힐', Math.floor((h.baseLv + cur.total.int) / 8) * (4 + heal * 8), Math.floor((h.baseLv + next.total.int) / 8) * (4 + heal * 8));
+    const blitz = h.skills.blitz_beat ?? 0;
+    if (blitz) {
+      const per = (d: D) => Math.floor((d.total.dex / 10 + d.total.int / 2 + (h.skills.steel_crow ?? 0) * 6 + 40) * 2);
+      add('블리츠/타', per(cur), per(next));
+    }
+    if (h.skills.falcon_eyes) add('오토 블리츠%', cur.total.luk / 3, next.total.luk / 3, 1);
+  }
+  add(cur.ranged ? 'ATK(활)' : 'ATK', cur.statusAtk, next.statusAtk);
+  if (!h || usesMagic(h)) add('MATK', (cur.matkMin + cur.matkMax) / 2, (next.matkMin + next.matkMax) / 2);
   add('최대HP', cur.maxHp, next.maxHp);
   add('최대SP', cur.maxSp, next.maxSp);
   add('ASPD', cur.aspd, next.aspd, 1);
@@ -38,7 +54,8 @@ function preview(cur: D, next: D): string {
   add('CRIT', cur.crit, next.crit, 1);
   add('DEF', cur.vitDef, next.vitDef);
   add('MDEF', cur.intMdef, next.intMdef);
-  add('시전속도', -cur.castMul * 100, -next.castMul * 100, 1);
+  if (!h || usesMagic(h)) add('시전속도', -cur.castMul * 100, -next.castMul * 100, 1);
+  if (h && !usesMagic(h)) add('MATK', (cur.matkMin + cur.matkMax) / 2, (next.matkMin + next.matkMax) / 2);
   return out.slice(0, 3).map(([l, v, dec]) => `${l} ${v > 0 ? '+' : ''}${dec ? v.toFixed(dec) : v}${l === '시전속도' ? '%' : ''}`).join(' · ');
 }
 
@@ -102,7 +119,7 @@ export function StatusPanel() {
     // short on points: still show what the next point buys, so the player knows what they are saving for
     if (!n) { if (h.stats[k] >= 99) return ''; copy.stats[k]++; }
     const nx = computeDerived(g.s, copy, buffs, g.world.time);
-    return (step > 1 ? `+${n}: ` : '') + preview(base, nx);
+    return (step > 1 ? `+${n}: ` : '') + preview(base, nx, h);
   };
   const hpNow = Math.floor(u?.hp ?? d.maxHp), spNow = Math.floor(u?.sp ?? d.maxSp);
   const tile = (label: string, value: preact.ComponentChildren, sub?: string) => (
@@ -160,12 +177,12 @@ export function StatusPanel() {
                 const n = raiseStat(h, k, step);
                 if (!n) return;
                 const after = computeDerived(g.s, h, buffs, g.world.time);
-                setBump({ k, text: preview(before, after), n: (bump?.k === k ? bump.n : 0) + 1 });
+                setBump({ k, text: preview(before, after, h), n: (bump?.k === k ? bump.n : 0) + 1 });
                 g.commit('joblevel');
               }} onHelp={() => setHelp(help === k ? null : k)} />
           ))}
         </div>
-        {help ? <div class="hint st-help"><b>{STAT_KO[help]} ({STAT_META[help].ko})</b> — {STAT_HELP[help]}</div>
+        {help ? <div class="hint st-help"><b>{STAT_KO[help]} ({STAT_META[help].ko})</b> — {statHelp(h.cls, help)}</div>
           : <div class="st-tip">{cls.name} 추천: {cls.hint}</div>}
 
         <div class="st-sec">공격</div>
