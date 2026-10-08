@@ -196,6 +196,43 @@ export function TownPanel() {
   );
 }
 
+/** 테스트 도구: level / job level up, zeny — for trying builds and late content without the grind */
+function TestTools() {
+  const g = useGame();
+  const [open, setOpen] = useState(false);
+  const [all, setAll] = useState(true);
+  const s = g.s;
+  const h = g.hero;
+  const ids = all ? s.heroes.map((x) => x.id) : [h.id];
+  const btn = (label: string, base: number, job: number) => (
+    <button class="btn sm" onClick={() => { g.cheatLevels(ids, base, job); g.toast(`${all ? '파티 전체' : h.name}: ${label}`, 'level'); }}>{label}</button>
+  );
+  return (
+    <div class="box test-tools">
+      <button class="set-row" onClick={() => setOpen(!open)} aria-expanded={open}>
+        <span>테스트 도구 (치트)</span><span class="sp1" /><small>{open ? '접기' : '펼치기'}</small>
+      </button>
+      {open && (
+        <>
+          <div class="row" style={{ gap: '6px', margin: '6px 0' }}>
+            <div class="seg">
+              <button class={all ? 'on' : ''} onClick={() => setAll(true)}>파티 전체</button>
+              <button class={!all ? 'on' : ''} onClick={() => setAll(false)}>{h.name}만</button>
+            </div>
+          </div>
+          {!all && <HeroTabs sel={g.sel} onSel={(i) => { g.sel = i; g.notify(); }} />}
+          <div class="tt-row"><b>레벨</b>{btn('Lv +1', 1, 0)}{btn('Lv +5', 5, 0)}{btn('Lv +10', 10, 0)}</div>
+          <div class="tt-row"><b>잡 레벨</b>{btn('Job +1', 0, 1)}{btn('Job +5', 0, 5)}{btn('Job 최대', 0, 99)}</div>
+          <div class="tt-row"><b>제니</b>
+            <button class="btn sm" onClick={() => { s.zeny += 1_000_000; g.commit('zeny'); }}>+100만 z</button>
+          </div>
+          <div class="small muted">스탯·스킬 포인트와 파티 슬롯은 실제 레벨업과 똑같이 들어옵니다. 초보자는 잡 10이 되면 '기본기' 9를 배운 뒤 전직하세요.</div>
+        </>
+      )}
+    </div>
+  );
+}
+
 export function SettingsPanel() {
   const g = useGame();
   const st = g.s.settings;
@@ -236,6 +273,7 @@ export function SettingsPanel() {
           </button>
           <div class="small muted" style={{ marginTop: '4px' }}>다른 창에서 일하는 동안에도 사냥은 계속됩니다. 레벨업, 전직 가능, 카드, 슬롯 장비, MVP 처치, 전멸이 생기면 알림이 뜨고 탭 제목에 개수가 표시됩니다.</div>
         </div>
+        <TestTools />
         <div class="sec">기록</div>
         <div class="derived">
           <div><span>총 처치</span><span>{fmt(t.kills)}</span></div>

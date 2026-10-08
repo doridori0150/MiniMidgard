@@ -607,6 +607,20 @@ export function applyExp(hero: Hero, base: number, job: number): { base: number;
   return { base: bu, job: ju };
 }
 
+/** 테스트 도구: exactly the EXP for n more base or job levels (so stat/skill points and unlocks run as in play) */
+export function expForLevels(h: Hero, n: number, kind: 'base' | 'job'): number {
+  let total = 0;
+  if (kind === 'base') {
+    let lv = h.baseLv, cur = h.baseExp;
+    for (let i = 0; i < n && lv < 99; i++, lv++) { total += expNext(lv) - cur; cur = 0; }
+  } else {
+    const cls = CLASSES[h.cls];
+    let lv = h.jobLv, cur = h.jobExp;
+    for (let i = 0; i < n && lv < cls.jobMax; i++, lv++) { total += jobExpNext(cls.tier, lv, cls.jobMax) - cur; cur = 0; }
+  }
+  return total;
+}
+
 // ───────── sealed & hidden maps (ZoneDef.gate)
 export function inHours(n: { from: number; to: number }, now = new Date()): boolean {
   const h = now.getHours();

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 import type { GameState } from '../game/types.ts';
 import { World } from '../game/world.ts';
-import { save, load } from '../game/state.ts';
+import { save, load, expForLevels, applyExp } from '../game/state.ts';
 import { applyOffline, type OfflineReport } from '../game/offline.ts';
 import { FieldRenderer } from '../render/field.ts';
 import { audio } from '../audio/audio.ts';
@@ -193,6 +193,19 @@ class Game {
     this.world.events.length = 0; // nothing draws them while hidden
     for (const n of this.world.notices.splice(0)) this.toast(n.text, n.kind === 'job' ? 'level' : 'good');
     if (now - this.lastSave > 10_000) { this.lastSave = now; if (!this.qa) save(this.s); this.dirty = false; }
+  }
+
+  /** 테스트 도구: level heroes up by exact EXP — party members through the world (slot unlocks, refresh, effects), the bench directly */
+  cheatLevels(heroIds: number[], base: number, job: number) {
+    for (const id of heroIds) {
+      const hero = this.s.heroes.find((h) => h.id === id) ?? this.s.bench?.find((h) => h.id === id);
+      if (!hero) continue;
+      const b = base ? expForLevels(hero, base, 'base') : 0;
+      const j = job ? expForLevels(hero, job, 'job') : 0;
+      const u = this.world.heroes.find((x) => x.hero.id === id);
+      if (u) this.world.giveExpTo(u, b, j); else applyExp(hero, b, j);
+    }
+    this.commit('levelup');
   }
 
   private lastTargetCheck = 0;

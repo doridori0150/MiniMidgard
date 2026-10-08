@@ -1190,3 +1190,5 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .tcard.wide { grid-column: 1 / -1; }
 /* the window lost focus (the player works elsewhere): every CSS animation rests — the CRT flicker/roll, glows, badges */
 .calm *, .calm *::before, .calm *::after { animation-play-state: paused !important; }
+.test-tools .tt-row { display: flex; align-items: center; gap: 6px; margin: 4px 0; flex-wrap: wrap; }
+.test-tools .tt-row b { width: 52px; font-weight: normal; font-size: 12px; color: var(--title2); }
