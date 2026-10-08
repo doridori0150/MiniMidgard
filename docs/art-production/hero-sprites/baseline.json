@@ -1349,6 +1349,9 @@
       ]
     }
   },
+  "display": {
+    "bodyPx": 80
+  },
   "render": {
     "order": [
       "weaponBehind",

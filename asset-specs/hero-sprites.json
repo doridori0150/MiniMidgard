@@ -94,14 +94,6 @@
           "grip": "grips/{line}/{state}_{n}.png — 손잡이를 덮는 앞 손가락(hand.z가 front일 때)"
         }
       },
-      "rules": {
-        "bodyHeight": 310,
-        "bodyHeightTolerance": 0.03,
-        "origin": [
-          220,
-          360
-        ]
-      },
       "notes": [
         "무기는 프레임에 그리지 않는다. 손은 빈 주먹(쥘 자리)으로 그린다.",
         "웅크린 공격·앉기·누움은 같은 배율이라 자연히 키가 줄어든다. 프레임별로 키를 맞추지 않는다."

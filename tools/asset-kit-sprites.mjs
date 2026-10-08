@@ -4,7 +4,7 @@
 // 사용: node tools/asset-kit-sprites.mjs --root <MiniMidgard> [--in src/assets/sprites/manifest.json] --out <표준 manifest.json>
 import fs from 'node:fs';
 import path from 'node:path';
-// copied from asset-kit v0.2 (adapters/minimidgard-sprites.mjs, ee8bd60); parseArgs inlined so it runs from this repo
+// copied from asset-kit v0.2 (adapters/minimidgard-sprites.mjs, afc9ab2); parseArgs inlined so it runs from this repo
 function parseArgs(argv) {
   const a = {};
   for (let i = 0; i < argv.length; i++) if (argv[i].startsWith('--')) { const k = argv[i].slice(2); a[k] = argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[++i] : true; }
@@ -40,6 +40,7 @@ export function convert(src, base) {
     sheets,
     attachments,
     tints: { hair: src.hairTints || {} },
+    ...(src.canvas.displayHeight ? { display: { bodyPx: src.canvas.displayHeight } } : {}),
     render: { order: ['weaponBehind', 'figure', 'weaponFront', 'grip', 'headgear'], tint: 'out = base × (1 − m + m × tint), tint는 0~1 배수' },
   };
 }
