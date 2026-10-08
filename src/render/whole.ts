@@ -35,8 +35,13 @@ export function loadWhole(): Promise<void> {
 }
 
 /** game class line → painted character (2nd jobs wear their 1st job's set until they have their own) */
-const LINE: Partial<Record<string, string>> = { novice: 'novice', swordsman: 'swordsman', knight: 'swordsman' };
-const WEAPON: Partial<Record<WeaponType, string | null>> = { none: null, dagger: 'dagger', katar: 'dagger', sword: 'sword', sword2h: 'sword' };
+const LINE: Partial<Record<string, string>> = {
+  novice: 'novice', swordsman: 'swordsman', knight: 'swordsman',
+  mage: 'mage', wizard: 'mage', acolyte: 'acolyte', priest: 'acolyte', archer: 'archer', hunter: 'archer',
+};
+const WEAPON: Partial<Record<WeaponType, string | null>> = {
+  none: null, dagger: 'dagger', katar: 'dagger', sword: 'sword', sword2h: 'sword', staff: 'staff', mace: 'mace', bow: 'bow',
+};
 const HEADGEAR: Record<string, string> = { leaf: 'leaf', hairpin: 'hairpin' };
 /** game hair colour index (state.ts HAIR_COLORS order) → RGB multipliers over the cream hair; null = as painted */
 const HAIR_TINT: (number[] | null)[] = [
