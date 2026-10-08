@@ -157,6 +157,30 @@
     await click($$('.rf-live .btn').find((b) => b.textContent === '나가기'));
     await click($$('.modal-layer:not([hidden]) .btn').find((b) => b.textContent === '확인')); await sleep(120);
     log(!g3.world.rift && g3.s.zone === 'town' && g3.s.rift?.last?.why === '포기', '균열: 나가기 gives the run up and returns to town', `${g3.s.zone}, ${g3.s.rift?.last?.why}`);
+    // 14. build signature skills (SKILLS_META.md): tagged rows in the skill list (gold for the hero's own build), the
+    //     build card leads with them, and a slotted signature active is cast in the field
+    await boot('party=knight,priest,wizard&lv=62&builds=kn_crit,pr_support,wz_storm&zone=cave');
+    const g5 = G(); g5.sel = 0;
+    g5.openPanel('skills'); await sleep(150);
+    const tagOf = (name) => $$('.skill').find((r) => r.querySelector('.nm b')?.textContent === name)?.querySelector('.chip.build');
+    const moonTag = tagOf('광월참'), artTag = tagOf('광월의 극의'), galeTag = tagOf('질풍 보법');
+    log(moonTag?.textContent === '빌드: 광월 크리 기사' && moonTag.classList.contains('mine') && artTag?.classList.contains('mine') && !!galeTag && !galeTag.classList.contains('mine'),
+      'signature skills: build tags in the skill list (own build gold)', `${moonTag?.textContent} / ${galeTag?.textContent}`);
+    g5.openPanel(null); g5.pushModal({ kind: 'build', heroId: g5.s.heroes[0].id }); await sleep(150);
+    const card = $$('.bd-card').find((c) => c.querySelector('.bd-head b')?.textContent === '광월 크리 기사');
+    const firstSig = card?.querySelector('.bd-line .bd-sig')?.textContent ?? '';
+    const lineText = card?.querySelector('.bd-line')?.textContent ?? '';
+    log(firstSig.includes('광월참') && lineText.replace('핵심 스킬', '').trim().startsWith('★ 광월참'), 'build card lists the signature skill first', lineText);
+    g5.popModal(); await sleep(80);
+    const kn = g5.s.heroes[0];
+    g5.s.equips.push({ uid: 987001, id: 'w_claymore', refine: 0, slots: 0, cards: [] }); kn.equip.weapon = 987001; g5.world.syncParty();
+    const moonCasts = [];
+    const orig5 = g5.world.startSkill.bind(g5.world);
+    g5.world.startSkill = (hh, sk, lv, tt) => { if (hh.hero === kn) moonCasts.push(sk.id); return orig5(hh, sk, lv, tt); };
+    for (const u of g5.world.heroes) { u.hp = u.d.maxHp; u.sp = u.d.maxSp; }
+    for (let i = 0; i < 600 && !moonCasts.includes('moon_slash'); i++) g5.world.advance(100);
+    g5.world.startSkill = orig5;
+    log((kn.skillSlots ?? []).includes('moon_slash') && moonCasts.includes('moon_slash'), 'AI: a slotted signature active (광월참) is cast', `slots ${(kn.skillSlots ?? []).join(',')}; casts ${[...new Set(moonCasts)].join(',')}`);
   } catch (e) { log(false, 'exception', e.message); }
   log(localStorage.getItem('minimidgard.save.v1') === savedBefore, 'QA run never touched the save');
   const fails = out.filter((l) => l.startsWith('FAIL')).length;

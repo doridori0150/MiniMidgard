@@ -575,10 +575,55 @@ export class FieldRenderer {
         });
         break;
       }
-      case 'fireball': case 'storm': case 'shower': case 'cart': case 'slam': case 'darkslam': case 'roots':
+      // ── build signature skills (SKILLS_META.md)
+      case 'moonslash': {
+        // 광월참: three crescent moons cut across the target, one per critical
+        for (let i = 0; i < 3; i++) {
+          const tilt = [-0.55, 0.45, -0.1][i], flip = i % 2 ? -1 : 1;
+          this.effects.push({ t0: now + i * 120, dur: 320, layer: 'top', draw: (ctx, q) => {
+            const pp = (e.to !== undefined && this.pos(e.to)) || { x, y, h: 20 };
+            ctx.save(); ctx.translate(pp.x, pp.y - pp.h * 0.5); ctx.rotate(tilt); ctx.scale(flip, 1);
+            ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = q < 0.25 ? q / 0.25 : 1 - (q - 0.25) / 0.75;
+            const R = 26 + q * 10, sweep = Math.PI * (0.35 + q * 0.75);
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = '#ff6a9a'; ctx.lineWidth = 9 * (1 - q * 0.6);
+            ctx.beginPath(); ctx.arc(0, 0, R, -Math.PI * 0.85, -Math.PI * 0.85 + sweep); ctx.stroke();
+            ctx.strokeStyle = '#fff0f8'; ctx.lineWidth = 3.2 * (1 - q * 0.5);
+            ctx.beginPath(); ctx.arc(0, 0, R, -Math.PI * 0.85, -Math.PI * 0.85 + sweep); ctx.stroke();
+            ctx.restore();
+          } });
+          this.later(i * 120 + 40, () => { const pp = (e.to !== undefined && this.pos(e.to)) || { x, y, h: 20 }; this.burst(pp.x, pp.y - pp.h * 0.5, 8, '#ffc0e0', 'star', 140, 0.5); });
+        }
+        add(500, 'ground', (ctx, q) => {
+          ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = (1 - q) * 0.8;
+          ctx.drawImage(glow('#ff8ab8'), x - 40 - q * 20, y - 24 - q * 10, 80 + q * 40, 48 + q * 20);
+          ctx.restore();
+        });
+        break;
+      }
+      case 'falconstrike': {
+        // 매의 일격: the falcon folds its wings and hits once — a white-hot claw cross and a puff of feathers
+        const pp = (e.to !== undefined && this.pos(e.to)) || { x, y, h: 20 };
+        add(380, 'top', (ctx, q) => {
+          const p2 = (e.to !== undefined && this.pos(e.to)) || pp;
+          ctx.save(); ctx.translate(p2.x, p2.y - p2.h * 0.5); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 1 - q;
+          ctx.drawImage(glow('#ffd070'), -46 - q * 26, -46 - q * 26, 92 + q * 52, 92 + q * 52);
+          ctx.lineCap = 'round';
+          for (const a of [-0.75, -0.95, -1.15]) {
+            ctx.save(); ctx.rotate(a); ctx.strokeStyle = '#ffb84a'; ctx.lineWidth = 5 * (1 - q) + 1;
+            ctx.beginPath(); ctx.moveTo(-30, 0); ctx.lineTo(30 * (0.4 + q * 0.6), 0); ctx.stroke();
+            ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.6; ctx.stroke(); ctx.restore();
+          }
+          ctx.restore();
+        });
+        this.burst(pp.x, pp.y - pp.h * 0.5, 10, '#fff4e0', 'feather', 120, 0.9);
+        this.burst(pp.x, pp.y - pp.h * 0.5, 12, '#ffd070', 'spark', 220, 0.45);
+        break;
+      }
+      case 'fireball': case 'storm': case 'shower': case 'cart': case 'slam': case 'darkslam': case 'roots': case 'goldstorm':
       case 'bowling': case 'brandish': case 'hammer': case 'trap': case 'meteor': case 'gust': case 'lov': case 'magnus': case 'grimtooth': {
         const r = e.radius ?? 60;
-        const AC: Record<string, string> = { fireball: '#ff7030', storm: '#ffe45a', lov: '#ffe45a', darkslam: '#a060ff', roots: '#90c050', slam: '#ff9050', meteor: '#ff5a2a', trap: '#ff7a3a', gust: '#9fe8ff', magnus: '#fff3a0', grimtooth: '#8a5ad0', bowling: '#ffcf80', brandish: '#bfe0ff', hammer: '#e0c080' };
+        const AC: Record<string, string> = { fireball: '#ff7030', storm: '#ffe45a', lov: '#ffe45a', darkslam: '#a060ff', roots: '#90c050', slam: '#ff9050', meteor: '#ff5a2a', trap: '#ff7a3a', gust: '#9fe8ff', magnus: '#fff3a0', grimtooth: '#8a5ad0', bowling: '#ffcf80', brandish: '#bfe0ff', hammer: '#e0c080', goldstorm: '#ffd24a' };
         const c2 = AC[e.fx] ?? '#e0c080';
         const hits = e.hits ?? 1;
         if (e.fx === 'meteor') {
@@ -675,6 +720,7 @@ export class FieldRenderer {
         });
         if (e.fx === 'fireball') { this.burst(x, y - 10, 24, '#ff7030', 'glow', 160, 0.6, -40); this.kick('decision', 2); }
         if (e.fx === 'cart') this.burst(x, y, 16, '#c8b090', 'smoke', 120, 0.6);
+        if (e.fx === 'goldstorm') { this.burst(x, y - 10, this.lowFx ? 10 : 26, '#ffd24a', 'coin', 200, 0.8, -90); this.kick('decision', 2); }
         if (e.fx === 'slam' || e.fx === 'darkslam') this.burst(x, y, 20, e.fx === 'darkslam' ? '#a060ff' : '#c0a080', 'smoke', 160, 0.7);
         break;
       }

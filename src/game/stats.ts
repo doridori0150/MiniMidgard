@@ -162,7 +162,8 @@ export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], 
       lh = {
         watk: Math.round((d.atk ?? 0) * (1 + gb)), wlv: lwlv, refineAtk: inst.refine * REFINE_ATK[lwlv - 1],
         overRefine: Math.max(0, inst.refine - WEAPON_SAFE[lwlv - 1]) * OVER_ATK[lwlv - 1], element: d.element ?? 'neutral', wtype: d.wtype ?? 'dagger',
-        pct: 30 + (h.skills.left_hand ?? 0) * 10, rpct: 50 + (h.skills.right_hand ?? 0) * 10,
+        // 쌍검무 (as_dagger signature, SKILLS_META.md): the left hand hits harder
+        pct: 30 + (h.skills.left_hand ?? 0) * 10 + (h.skills.twin_dance ?? 0) * 5, rpct: 50 + (h.skills.right_hand ?? 0) * 10,
       };
     } else if (slot === 'weapon') {
       wlv = d.wlv ?? 1;
@@ -188,7 +189,8 @@ export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], 
   if (lh && wtype === 'katar') lh = null;
   // passives (toggle ones only while switched on)
   const mounted = skillOn(h, 'riding');
-  const pctx = { skills: h.skills, baseLv: h.baseLv, mounted, dual: !!lh, second: cls.tier === 2 };
+  const up = new Set(buffs.filter((bf) => bf.until > now).map((bf) => bf.id));
+  const pctx = { skills: h.skills, baseLv: h.baseLv, mounted, dual: !!lh, second: cls.tier === 2, base: h.stats, buffs: up };
   for (const [id, lv] of Object.entries(h.skills)) {
     const sk = SKILLS[id];
     if (!sk?.passive || lv <= 0 || (sk.toggle && h.skillOff?.[id])) continue;
@@ -214,6 +216,11 @@ export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], 
       t += extra;
     }
     total[k] = Math.max(1, t);
+  }
+  // passives that read the final stats (광월의 극의: LUK → crit, 명궁의 호흡: DEX → hit and range): derived numbers only
+  for (const [id, slv] of Object.entries(h.skills)) {
+    const sk = SKILLS[id];
+    if (sk?.post && slv > 0) addBonus(b, sk.post(slv, total, wtype));
   }
   const { str, agi, vit, int, dex, luk } = total;
   const lv = h.baseLv;
@@ -255,7 +262,7 @@ export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], 
     mdef: Math.min(90, mdef + (b.mdef ?? 0)), intMdef: int + Math.floor(vit / 2),
     hit: lv + dex + (b.hit ?? 0),
     flee: lv + agi + (b.flee ?? 0),
-    crit: (1 + luk * 0.3 + (b.crit ?? 0)) * (wtype === 'katar' ? 2 : 1),
+    crit: Math.max(0, (1 + luk * 0.3 + (b.crit ?? 0)) * (wtype === 'katar' ? 2 : 1)),
     pdodge: 1 + luk * 0.1 + (b.pdodge ?? 0),
     aspd, delay, castMul, range, moveSpd,
     wtype, lh, mounted, ranged, weaponElement, armorElement,

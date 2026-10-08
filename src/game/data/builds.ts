@@ -14,7 +14,7 @@ export interface BuildDef {
   pitch: string;
   /** stat ratio for 추천 분배 */
   weights: Partial<Record<StatKey, number>>;
-  /** skills it leans on (display) */
+  /** skills it leans on — its signature skill(s) first (SKILLS_META.md); the build card lists them, 슬롯 자동 채우기 prefers them */
   skills: string[];
   /** identity items / cards (ids; may name items that are not in the game yet) */
   items: string[];
@@ -98,49 +98,49 @@ export function matchups(p: BuildProfile | undefined): { strong: string[]; weak:
 
 export const BUILDS: BuildDef[] = [
   // ── 검사 → 기사
-  { id: 'kn_crit', line: 'swordsman', name: '광월 크리 기사', pitch: 'DEX를 버리고 크리로 명중을 해결한다. 크리는 회피를 무시한다', weights: { agi: 9, str: 8, luk: 6 }, skills: ['twohand_quicken', 'twohand_mastery'], items: ['w_bloodmoon', 'x_purify'], weak: '요도의 저주 → 정화의 부적 · HP가 낮다 → HP 카드 · 보스는 크리를 덜 맞는다' },
-  { id: 'kn_agi', line: 'swordsman', name: '질풍 양손검', pitch: '공속과 회피로 한 마리씩 빠르게', weights: { agi: 8, str: 8, dex: 4, vit: 2 }, skills: ['twohand_quicken', 'bash'], items: [], weak: '세 마리 이상에 둘러싸이면 회피가 무너진다 → 작전 "한 마리씩"' },
-  { id: 'kn_vit', line: 'swordsman', name: '철벽 창기사', pitch: '꿰뚫기의 명중 보너스로 명중을 메우는 단단한 창', weights: { str: 8, vit: 7, dex: 5, int: 2 }, skills: ['pierce', 'spear_mastery', 'riding', 'cavalier_mastery', 'brandish'], items: [], weak: '탑승하면 공속이 절반 → 기병 수련 · 종족 → 방패 카드' },
-  { id: 'kn_bowl', line: 'swordsman', name: '회전 몰이 기사', pitch: '몰아서 회전 강타로 한꺼번에', weights: { str: 8, vit: 6, agi: 4, dex: 4 }, skills: ['bowling_bash', 'magnum_break', 'endure'], items: ['x_whirlglove'], weak: 'SP가 모자란다 → SP 카드 · 받는 피해 → 흡혈' },
-  { id: 'kn_counter', line: 'swordsman', name: '반격 수호기사', pitch: '반격 자세로 막고 크리 반격. 파티의 방패', weights: { vit: 9, dex: 5, str: 5 }, skills: ['auto_counter', 'provoke', 'endure'], items: [], weak: '딜이 약하다 → 반격 크리 피해 · 마법 → MDEF' },
-  { id: 'kn_ele', line: 'swordsman', name: '속성검 기사', pitch: '지방마다 상성에 맞는 속성 무기로 정면 돌파', weights: { str: 8, dex: 6, vit: 3 }, skills: ['bash', 'magnum_break'], items: [], weak: '무기 여러 자루의 정련 부담' },
-  { id: 'kn_spell', line: 'swordsman', name: '마검 기사', pitch: '평타에 마법이 따라 나간다 (INT/STR)', weights: { str: 6, int: 5, dex: 5 }, skills: ['magnum_break', 'bash'], items: ['w_spellhilt'], weak: '물리·마법으로 장비가 갈린다 — 연구거리' },
+  { id: 'kn_crit', line: 'swordsman', name: '광월 크리 기사', pitch: 'DEX를 버리고 크리로 명중을 해결한다. 크리는 회피를 무시한다', weights: { agi: 9, str: 8, luk: 6 }, skills: ['moon_slash', 'moon_art', 'twohand_quicken', 'twohand_mastery'], items: ['w_bloodmoon', 'x_purify'], weak: '요도의 저주 → 정화의 부적 · HP가 낮다 → HP 카드 · 보스는 크리를 덜 맞는다' },
+  { id: 'kn_agi', line: 'swordsman', name: '질풍 양손검', pitch: '공속과 회피로 한 마리씩 빠르게', weights: { agi: 8, str: 8, dex: 4, vit: 2 }, skills: ['gale_step', 'twohand_quicken', 'bash'], items: [], weak: '세 마리 이상에 둘러싸이면 회피가 무너진다 → 작전 "한 마리씩"' },
+  { id: 'kn_vit', line: 'swordsman', name: '철벽 창기사', pitch: '꿰뚫기의 명중 보너스로 명중을 메우는 단단한 창', weights: { str: 8, vit: 7, dex: 5, int: 2 }, skills: ['iron_stance', 'pierce', 'spear_mastery', 'riding', 'cavalier_mastery', 'brandish'], items: [], weak: '탑승하면 공속이 절반 → 기병 수련 · 종족 → 방패 카드' },
+  { id: 'kn_bowl', line: 'swordsman', name: '회전 몰이 기사', pitch: '몰아서 회전 강타로 한꺼번에', weights: { str: 8, vit: 6, agi: 4, dex: 4 }, skills: ['whirl_cut', 'bowling_bash', 'magnum_break', 'endure'], items: ['x_whirlglove'], weak: 'SP가 모자란다 → SP 카드 · 받는 피해 → 흡혈' },
+  { id: 'kn_counter', line: 'swordsman', name: '반격 수호기사', pitch: '반격 자세로 막고 크리 반격. 파티의 방패', weights: { vit: 9, dex: 5, str: 5 }, skills: ['counter_oath', 'auto_counter', 'provoke', 'endure'], items: [], weak: '딜이 약하다 → 반격 크리 피해 · 마법 → MDEF' },
+  { id: 'kn_ele', line: 'swordsman', name: '속성검 기사', pitch: '지방마다 상성에 맞는 속성 무기로 정면 돌파', weights: { str: 8, dex: 6, vit: 3 }, skills: ['element_shift', 'bash', 'magnum_break'], items: [], weak: '무기 여러 자루의 정련 부담' },
+  { id: 'kn_spell', line: 'swordsman', name: '마검 기사', pitch: '평타에 마법이 따라 나간다 (INT/STR)', weights: { str: 6, int: 5, dex: 5 }, skills: ['mana_edge', 'magnum_break', 'bash'], items: ['w_spellhilt'], weak: '물리·마법으로 장비가 갈린다 — 연구거리' },
   // ── 마법사 → 위저드
-  { id: 'wz_intdex', line: 'mage', name: '인덱 학자', pitch: '볼트 한 방, DEX로 시전 단축', weights: { int: 9, dex: 8, vit: 1 }, skills: ['fire_bolt', 'cold_bolt', 'lightning_bolt', 'jupitel', 'mystic_amp'], items: ['w_sagestaff', 'x_manaspring'], weak: '맞으면 시전이 끊긴다 · HP가 낮다' },
-  { id: 'wz_storm', line: 'mage', name: '폭풍 술사', pitch: '탱커가 모아 주면 광역기로 쓸어 담는다', weights: { int: 9, dex: 7, vit: 3 }, skills: ['storm_gust', 'lord_vermilion', 'meteor', 'quagmire'], items: ['x_manaspring'], weak: 'SP · 파티 의존' },
-  { id: 'wz_freeze', line: 'mage', name: '빙뢰 연쇄', pitch: '얼려서 물속성으로 바꾼 뒤 번개 200%', weights: { int: 9, dex: 7 }, skills: ['frost_diver', 'lightning_bolt', 'jupitel', 'frost_nova', 'ice_wall'], items: [], weak: '불사는 얼지 않는다 · 얼음은 맞으면 깨진다' },
-  { id: 'wz_vit', line: 'mage', name: '인바탈 술사', pitch: '느리지만 죽지 않는 솔로', weights: { int: 9, vit: 6, dex: 4 }, skills: ['fire_bolt', 'soul_strike'], items: [], weak: '느리다 → 시전 단축 장비' },
-  { id: 'wz_soul', line: 'mage', name: '영혼 연사', pitch: '영혼 타격으로 염·불사를 사냥', weights: { int: 8, dex: 6, agi: 3 }, skills: ['soul_strike'], items: [], weak: '염·불사가 아니면 약하다' },
-  { id: 'wz_elem', line: 'mage', name: '원소 학자', pitch: '상대 약점 속성으로 볼트를 갈아 낀다', weights: { int: 8, dex: 8 }, skills: ['fire_bolt', 'cold_bolt', 'lightning_bolt', 'earth_spike', 'water_ball'], items: [], weak: '장비가 흩어진다 → 세트 수집 · 물의 구는 물가에서만 연타' },
+  { id: 'wz_intdex', line: 'mage', name: '인덱 학자', pitch: '볼트 한 방, DEX로 시전 단축', weights: { int: 9, dex: 8, vit: 1 }, skills: ['quick_chant', 'fire_bolt', 'cold_bolt', 'lightning_bolt', 'jupitel', 'mystic_amp'], items: ['w_sagestaff', 'x_manaspring'], weak: '맞으면 시전이 끊긴다 · HP가 낮다' },
+  { id: 'wz_storm', line: 'mage', name: '폭풍 술사', pitch: '탱커가 모아 주면 광역기로 쓸어 담는다', weights: { int: 9, dex: 7, vit: 3 }, skills: ['storm_eye', 'storm_gust', 'lord_vermilion', 'meteor', 'quagmire'], items: ['x_manaspring'], weak: 'SP · 파티 의존' },
+  { id: 'wz_freeze', line: 'mage', name: '빙뢰 연쇄', pitch: '얼려서 물속성으로 바꾼 뒤 번개 200%', weights: { int: 9, dex: 7 }, skills: ['frost_thunder', 'frost_diver', 'lightning_bolt', 'jupitel', 'frost_nova', 'ice_wall'], items: [], weak: '불사는 얼지 않는다 · 얼음은 맞으면 깨진다' },
+  { id: 'wz_vit', line: 'mage', name: '인바탈 술사', pitch: '느리지만 죽지 않는 솔로', weights: { int: 9, vit: 6, dex: 4 }, skills: ['mana_barrier', 'fire_bolt', 'soul_strike'], items: [], weak: '느리다 → 시전 단축 장비' },
+  { id: 'wz_soul', line: 'mage', name: '영혼 연사', pitch: '영혼 타격으로 염·불사를 사냥', weights: { int: 8, dex: 6, agi: 3 }, skills: ['soul_surge', 'soul_strike'], items: [], weak: '염·불사가 아니면 약하다' },
+  { id: 'wz_elem', line: 'mage', name: '원소 학자', pitch: '상대 약점 속성으로 볼트를 갈아 낀다', weights: { int: 8, dex: 8 }, skills: ['elem_resonance', 'fire_bolt', 'cold_bolt', 'lightning_bolt', 'earth_spike', 'water_ball'], items: [], weak: '장비가 흩어진다 → 세트 수집 · 물의 구는 물가에서만 연타' },
   // ── 궁수 → 헌터
-  { id: 'hu_dex', line: 'archer', name: '명궁', pitch: 'DEX로 명중·피해를 한 번에. 화살 속성 교체', weights: { dex: 9, agi: 8, luk: 1 }, skills: ['double_strafe', 'owls_eye', 'vultures_eye', 'arrow_repel'], items: ['w_huntbow'], weak: 'HP·회피가 낮다 → 앵클 스네어 · 대형 → 크기 카드' },
-  { id: 'hu_intblitz', line: 'archer', name: '매 한 방', pitch: 'INT·DEX로 블리츠 비트 한 방. 명중·방어 무시', weights: { dex: 9, int: 8, agi: 2 }, skills: ['blitz_beat', 'steel_crow', 'falcon_eyes'], items: ['x_falconglove'], weak: 'SP 소모 → SP 회복 장비' },
-  { id: 'hu_fist', line: 'archer', name: '주먹 매', pitch: '활을 내려놓고 맨손 초고속 평타로 오토 블리츠를 쏟아낸다', weights: { agi: 10, luk: 9, dex: 3 }, skills: ['falcon_eyes', 'blitz_beat', 'steel_crow'], items: ['x_falconknuckle', 'x_falconbell'], weak: '맨손이라 근접에 노출 → 회피 · 블리츠 타수는 잡 레벨 제한' },
-  { id: 'hu_mob', line: 'archer', name: '몰이 매', pitch: '모아 놓고 블리츠 범위로 녹인다 (VIT·공속·LUK)', weights: { vit: 6, agi: 8, luk: 6, dex: 2 }, skills: ['falcon_eyes', 'blitz_beat', 'ankle_snare'], items: ['x_falconbell'], weak: '몰이 피해 → VIT·HP 카드' },
-  { id: 'hu_trap', line: 'archer', name: '덫꾼', pitch: 'DEX·INT 고정 피해 덫 (클레이모어·폭발 지뢰·지뢰), 발목 덫으로 묶는다. 공속·활과 무관', weights: { dex: 8, int: 6, vit: 5 }, skills: ['claymore_trap', 'blast_mine', 'land_mine', 'ankle_snare', 'remove_trap'], items: [], weak: '덫 재료 비용 (덫 1~2개) → 덫 회수' },
-  { id: 'hu_shower', line: 'archer', name: '화살비 사수', pitch: '화살비 넉백 광역', weights: { dex: 8, agi: 5, vit: 4 }, skills: ['arrow_shower', 'double_strafe'], items: [], weak: '넉백이 몹을 흩뜨린다' },
-  { id: 'hu_snipe', line: 'archer', name: '저격수', pitch: 'DEX·LUK 원거리 크리 저격, 보스 사냥', weights: { dex: 10, luk: 5 }, skills: ['double_strafe', 'vultures_eye'], items: [], weak: '근접에 약하다' },
+  { id: 'hu_dex', line: 'archer', name: '명궁', pitch: 'DEX로 명중·피해를 한 번에. 화살 속성 교체', weights: { dex: 9, agi: 8, luk: 1 }, skills: ['archer_breath', 'double_strafe', 'owls_eye', 'vultures_eye', 'arrow_repel'], items: ['w_huntbow'], weak: 'HP·회피가 낮다 → 앵클 스네어 · 대형 → 크기 카드' },
+  { id: 'hu_intblitz', line: 'archer', name: '매 한 방', pitch: 'INT·DEX로 블리츠 비트 한 방. 명중·방어 무시', weights: { dex: 9, int: 8, agi: 2 }, skills: ['falcon_strike', 'raptor_wisdom', 'blitz_beat', 'steel_crow', 'falcon_eyes'], items: ['x_falconglove'], weak: 'SP 소모 → SP 회복 장비' },
+  { id: 'hu_fist', line: 'archer', name: '주먹 매', pitch: '활을 내려놓고 맨손 초고속 평타로 오토 블리츠를 쏟아낸다', weights: { agi: 10, luk: 9, dex: 3 }, skills: ['falcon_bond', 'bare_flurry', 'falcon_eyes', 'blitz_beat', 'steel_crow'], items: ['x_falconknuckle', 'x_falconbell'], weak: '맨손이라 근접에 노출 → 회피 · 블리츠 타수는 잡 레벨 제한' },
+  { id: 'hu_mob', line: 'archer', name: '몰이 매', pitch: '모아 놓고 블리츠 범위로 녹인다 (VIT·공속·LUK)', weights: { vit: 6, agi: 8, luk: 6, dex: 2 }, skills: ['falcon_circle', 'drover_whistle', 'falcon_eyes', 'blitz_beat', 'ankle_snare'], items: ['x_falconbell'], weak: '몰이 피해 → VIT·HP 카드' },
+  { id: 'hu_trap', line: 'archer', name: '덫꾼', pitch: 'DEX·INT 고정 피해 덫 (클레이모어·폭발 지뢰·지뢰), 발목 덫으로 묶는다. 공속·활과 무관', weights: { dex: 8, int: 6, vit: 5 }, skills: ['trap_chain', 'claymore_trap', 'blast_mine', 'land_mine', 'ankle_snare', 'remove_trap'], items: [], weak: '덫 재료 비용 (덫 1~2개) → 덫 회수' },
+  { id: 'hu_shower', line: 'archer', name: '화살비 사수', pitch: '화살비 넉백 광역', weights: { dex: 8, agi: 5, vit: 4 }, skills: ['storm_arrows', 'arrow_shower', 'double_strafe'], items: [], weak: '넉백이 몹을 흩뜨린다' },
+  { id: 'hu_snipe', line: 'archer', name: '저격수', pitch: 'DEX·LUK 원거리 크리 저격, 보스 사냥', weights: { dex: 10, luk: 5 }, skills: ['steady_breath', 'double_strafe', 'vultures_eye'], items: [], weak: '근접에 약하다' },
   // ── 성직자 → 프리스트
-  { id: 'pr_support', line: 'acolyte', name: '수호 사제', pitch: '힐·키리에·마그니피캇 — 파티의 생명줄', weights: { int: 9, vit: 8, dex: 4 }, skills: ['heal', 'kyrie', 'sanctuary', 'blessing', 'increase_agi', 'magnificat'], items: [], weak: '혼자서는 느리다 → 파티 · 성역은 푸른 마석' },
-  { id: 'pr_battle', line: 'acolyte', name: '철퇴 사제', pitch: '축복·속도 증가 셀프 버프 + 둔기 평타', weights: { str: 7, agi: 8, dex: 5, vit: 2 }, skills: ['holy_strike', 'blessing', 'increase_agi', 'impositio', 'aspersio', 'mace_mastery'], items: [], weak: '느린 둔기 → 속도 증가 · 성스러운 일격은 불사·악마가 아니면 평범하다' },
-  { id: 'pr_crit', line: 'acolyte', name: '광휘 크리 사제', pitch: '영광송 LUK로 크리 필중', weights: { agi: 8, luk: 7, str: 5 }, skills: ['gloria', 'holy_strike', 'increase_agi', 'blessing'], items: [], weak: '영광송 SP · 크리 저항 몹' },
-  { id: 'pr_exorcist', line: 'acolyte', name: '퇴마 사제', pitch: '대퇴마 결계로 불사·악마를 광역 정화, 영원의 율법으로 두 배', weights: { int: 9, dex: 8 }, skills: ['magnus', 'lex_aeterna', 'turn_undead', 'heal', 'holy_light'], items: [], weak: '불사·악마에게만 — 망령 던전이 최고 효율 · 푸른 마석' },
+  { id: 'pr_support', line: 'acolyte', name: '수호 사제', pitch: '힐·키리에·마그니피캇 — 파티의 생명줄', weights: { int: 9, vit: 8, dex: 4 }, skills: ['sanct_aura', 'heal', 'kyrie', 'magnificat', 'blessing', 'increase_agi', 'sanctuary'], items: [], weak: '혼자서는 느리다 → 파티 · 성역은 푸른 마석' },
+  { id: 'pr_battle', line: 'acolyte', name: '철퇴 사제', pitch: '축복·속도 증가 셀프 버프 + 둔기 평타', weights: { str: 7, agi: 8, dex: 5, vit: 2 }, skills: ['battle_prayer', 'holy_strike', 'blessing', 'increase_agi', 'impositio', 'aspersio', 'mace_mastery'], items: [], weak: '느린 둔기 → 속도 증가 · 성스러운 일격은 불사·악마가 아니면 평범하다' },
+  { id: 'pr_crit', line: 'acolyte', name: '광휘 크리 사제', pitch: '영광송 LUK로 크리 필중', weights: { agi: 8, luk: 7, str: 5 }, skills: ['radiance', 'gloria', 'holy_strike', 'increase_agi', 'blessing'], items: [], weak: '영광송 SP · 크리 저항 몹' },
+  { id: 'pr_exorcist', line: 'acolyte', name: '퇴마 사제', pitch: '대퇴마 결계로 불사·악마를 광역 정화, 영원의 율법으로 두 배', weights: { int: 9, dex: 8 }, skills: ['exorcist_vow', 'magnus', 'lex_aeterna', 'turn_undead', 'heal', 'holy_light'], items: [], weak: '불사·악마에게만 — 망령 던전이 최고 효율 · 푸른 마석' },
   { id: 'pr_turn', line: 'acolyte', name: '정화 사제', pitch: '정화로 불사를 단숨에 — LUK·INT가 확률', weights: { int: 8, luk: 7, dex: 5 }, skills: ['turn_undead', 'heal', 'lex_aeterna'], items: [], weak: '보스·불사가 아닌 몹에게는 무력 → 망령 맵 · 원정 맵의 불사 위험 몹' },
-  { id: 'pr_heal', line: 'acolyte', name: '힐 폭격 사제', pitch: '힐이 불사에게는 성 피해, 성역으로 녹인다', weights: { int: 9, vit: 6 }, skills: ['heal', 'sanctuary'], items: [], weak: '불사가 아니면 무력' },
-  { id: 'pr_wall', line: 'acolyte', name: '방패 사제', pitch: '키리에를 두르고 버티는 탱 사제', weights: { vit: 9, int: 5, dex: 4 }, skills: ['kyrie', 'heal', 'angelus', 'pr_safety_wall'], items: [], weak: '딜이 없다 → 파티' },
+  { id: 'pr_heal', line: 'acolyte', name: '힐 폭격 사제', pitch: '힐이 불사에게는 성 피해, 성역으로 녹인다', weights: { int: 9, vit: 6 }, skills: ['reverse_life', 'heal', 'sanctuary'], items: [], weak: '불사가 아니면 무력' },
+  { id: 'pr_wall', line: 'acolyte', name: '방패 사제', pitch: '키리에를 두르고 버티는 탱 사제', weights: { vit: 9, int: 5, dex: 4 }, skills: ['bulwark', 'kyrie', 'heal', 'angelus', 'pr_safety_wall'], items: [], weak: '딜이 없다 → 파티' },
   // ── 도둑 → 어새신
-  { id: 'as_crit', line: 'thief', name: '치명 카타르', pitch: '카타르 크리 ×2. DEX 없이 크리로 명중', weights: { str: 8, agi: 8, luk: 5 }, skills: ['katar_mastery', 'double_attack'], items: ['w_fangkatar'], weak: '크리 저항 몹 · HP' },
-  { id: 'as_sonic', line: 'thief', name: '음속 카타르', pitch: '음속 일격 한 방', weights: { str: 9, agi: 8, dex: 4 }, skills: ['sonic_blow', 'katar_mastery', 'sonic_accel'], items: ['x_sonicband'], weak: '빗나갈 수 있다 → DEX·명중 장비' },
-  { id: 'as_dagger', line: 'thief', name: '쌍단검', pitch: '이도류: 왼손에도 단검. 오른손·왼손 수련 + 이중 공격', weights: { str: 9, agi: 8, dex: 5 }, skills: ['right_hand', 'left_hand', 'double_attack'], items: [], weak: '대형에 50% → 대형 카드 필수 · 두 자루를 다 키워야 한다' },
-  { id: 'as_dodge', line: 'thief', name: '그림자 회피', pitch: '맞지 않는 탐색꾼', weights: { agi: 10, str: 6, dex: 4 }, skills: ['improve_dodge', 'double_attack'], items: ['g_shadowcape'], weak: '둘러싸이면 회피가 무너진다 · 망토의 대가(성 피해)' },
-  { id: 'as_poison', line: 'thief', name: '맹독술사', pitch: '독을 쌓아 녹인다', weights: { str: 6, agi: 7, dex: 6, luk: 3 }, skills: ['envenom', 'enchant_poison', 'venom_dust', 'venom_splasher', 'poison_react'], items: ['w_viperfang'], weak: '불사·무형은 독에 걸리지 않는다' },
-  { id: 'as_grim', line: 'thief', name: '그림자 이빨', pitch: '은신 이동 중 그림자 송곳니 광역 (몬스터 대부분이 못 본다)', weights: { str: 8, agi: 6, dex: 5, vit: 3 }, skills: ['cloaking', 'grimtooth', 'sonic_blow'], items: [], weak: 'SP (은신이 SP를 먹는다) · 곤충·악마·보스는 은신을 본다' },
-  { id: 'as_steal', line: 'thief', name: '훔치기 상인', pitch: 'DEX·LUK로 훔치기 — 드랍 경제', weights: { dex: 8, agi: 6, luk: 5 }, skills: ['steal', 'double_attack'], items: [], weak: '화력이 약하다 → 파티' },
+  { id: 'as_crit', line: 'thief', name: '치명 카타르', pitch: '카타르 크리 ×2. DEX 없이 크리로 명중', weights: { str: 8, agi: 8, luk: 5 }, skills: ['vital_stab', 'katar_mastery', 'double_attack'], items: ['w_fangkatar'], weak: '크리 저항 몹 · HP' },
+  { id: 'as_sonic', line: 'thief', name: '음속 카타르', pitch: '음속 일격 한 방', weights: { str: 9, agi: 8, dex: 4 }, skills: ['sonic_chain', 'sonic_blow', 'katar_mastery', 'sonic_accel'], items: ['x_sonicband'], weak: '빗나갈 수 있다 → DEX·명중 장비' },
+  { id: 'as_dagger', line: 'thief', name: '쌍단검', pitch: '이도류: 왼손에도 단검. 오른손·왼손 수련 + 이중 공격', weights: { str: 9, agi: 8, dex: 5 }, skills: ['twin_dance', 'right_hand', 'left_hand', 'double_attack'], items: [], weak: '대형에 50% → 대형 카드 필수 · 두 자루를 다 키워야 한다' },
+  { id: 'as_dodge', line: 'thief', name: '그림자 회피', pitch: '맞지 않는 탐색꾼', weights: { agi: 10, str: 6, dex: 4 }, skills: ['shadow_clone', 'improve_dodge', 'double_attack'], items: ['g_shadowcape'], weak: '둘러싸이면 회피가 무너진다 · 망토의 대가(성 피해)' },
+  { id: 'as_poison', line: 'thief', name: '맹독술사', pitch: '독을 쌓아 녹인다', weights: { str: 6, agi: 7, dex: 6, luk: 3 }, skills: ['venom_stack', 'enchant_poison', 'envenom', 'venom_dust', 'venom_splasher', 'poison_react'], items: ['w_viperfang'], weak: '불사·무형은 독에 걸리지 않는다' },
+  { id: 'as_grim', line: 'thief', name: '그림자 이빨', pitch: '은신 이동 중 그림자 송곳니 광역 (몬스터 대부분이 못 본다)', weights: { str: 8, agi: 6, dex: 5, vit: 3 }, skills: ['dark_hunt', 'cloaking', 'grimtooth', 'sonic_blow'], items: [], weak: 'SP (은신이 SP를 먹는다) · 곤충·악마·보스는 은신을 본다' },
+  { id: 'as_steal', line: 'thief', name: '훔치기 상인', pitch: 'DEX·LUK로 훔치기 — 드랍 경제', weights: { dex: 8, agi: 6, luk: 5 }, skills: ['grand_thief', 'steal', 'double_attack'], items: [], weak: '화력이 약하다 → 파티' },
   // ── 상인 → 블랙스미스
-  { id: 'bs_battle', line: 'merchant', name: '전투 대장장이', pitch: '아드레날린·과신 도끼', weights: { str: 9, agi: 8, dex: 4 }, skills: ['adrenaline', 'over_thrust', 'weapon_perfection'], items: [], weak: '느린 공속 → 아드레날린 · 빗나감 → 무기 연구' },
-  { id: 'bs_cart', line: 'merchant', name: '카트 몰이', pitch: '카트 회전 광역', weights: { str: 8, vit: 7, dex: 3 }, skills: ['cart_revolution', 'pushcart'], items: [], weak: '몰이 피해 → VIT' },
-  { id: 'bs_zeny', line: 'merchant', name: '금화 강타', pitch: '돈을 벌어 돈으로 때린다', weights: { str: 9, dex: 5, luk: 4 }, skills: ['mammonite', 'overcharge'], items: ['x_greedpouch'], weak: '제니 소모 → 바가지·자동 판매' },
-  { id: 'bs_hammer', line: 'merchant', name: '해머 제압', pitch: '광역 기절로 파티 보조', weights: { vit: 7, dex: 6, str: 5 }, skills: ['hammer_fall'], items: [], weak: '보스에게 안 통한다' },
+  { id: 'bs_battle', line: 'merchant', name: '전투 대장장이', pitch: '아드레날린·과신 도끼', weights: { str: 9, agi: 8, dex: 4 }, skills: ['smith_fury', 'adrenaline', 'over_thrust', 'weapon_perfection'], items: [], weak: '느린 공속 → 아드레날린 · 빗나감 → 무기 연구' },
+  { id: 'bs_cart', line: 'merchant', name: '카트 몰이', pitch: '카트 회전 광역', weights: { str: 8, vit: 7, dex: 3 }, skills: ['cart_rush', 'cart_revolution', 'pushcart'], items: [], weak: '몰이 피해 → VIT' },
+  { id: 'bs_zeny', line: 'merchant', name: '금화 강타', pitch: '돈을 벌어 돈으로 때린다', weights: { str: 9, dex: 5, luk: 4 }, skills: ['gold_storm', 'mammonite', 'overcharge'], items: ['x_greedpouch'], weak: '제니 소모 → 바가지·자동 판매' },
+  { id: 'bs_hammer', line: 'merchant', name: '해머 제압', pitch: '광역 기절로 파티 보조', weights: { vit: 7, dex: 6, str: 5 }, skills: ['thunder_hammer', 'hammer_fall'], items: [], weak: '보스에게 안 통한다' },
   { id: 'bs_ore', line: 'merchant', name: '광석 사냥꾼', pitch: '광석을 캐서 정련 경제를 돌린다', weights: { str: 7, dex: 5, luk: 6 }, skills: ['ore_discovery', 'weaponry_research'], items: [], weak: '화력 → 무기 연구' },
 ];
 

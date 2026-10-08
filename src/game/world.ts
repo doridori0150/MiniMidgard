@@ -94,6 +94,16 @@ export interface HeroUnit {
   prCounters: number;
   /** throttle for out-of-fight utilities (aqua benedicta, find stone, teleport) */
   utilAt: number;
+  // ── build signature skills (SKILLS_META.md)
+  /** 질풍 보법: dodged — the next non-critical blow is stronger until then */
+  gale: number;
+  /** 맨주먹 연타: bare-handed swings at double speed until then */
+  flurryUntil: number;
+  /** 원소 공명: the element of the last attack spell and the resonance (0–3) */
+  lastEl: Element | null;
+  reso: number;
+  /** 성역의 오라: next SP drain */
+  auraAt: number;
 }
 
 /** a placed skill effect on the field (fire wall, sanctuary, traps…): world state, drawn by the renderer every frame */
@@ -178,6 +188,8 @@ export interface MobUnit {
   breakHold: number;
   /** a hiding monster: unseen until then; next hide not before */
   hiddenUntil: number; hideNext: number;
+  /** 맹독 누적 (SKILLS_META.md): poison layers, each one bites harder */
+  poisonStacks: number;
 }
 
 /** a rift run in progress (rift.ts): the clock, the progress bar, the guardian and its mechanic */
@@ -249,9 +261,13 @@ const SPAWN_MS = 600;
 // M10 danger monsters: how close one may come before the party runs (200, then keep running until 300 away), how long
 // it chases without being fought before it loses interest, and how long it then ignores the party
 const RUN_NEAR = 200, RUN_CLEAR = 300, CHASE_MS = 9000, BORED_MS = 12000;
+/** the bolts 고속 영창 speeds up (SKILLS_META.md) */
+const QUICK_BOLTS = new Set(['fire_bolt', 'cold_bolt', 'lightning_bolt']);
 
 
 function clamp(v: number, a: number, b: number) { return v < a ? a : v > b ? b : v; }
+/** the unit if it is a monster */
+function tm0(u: Unit | undefined): MobUnit | undefined { return u?.kind === 'mob' ? u : undefined; }
 function dist(a: { x: number; y: number }, b: { x: number; y: number }) { return Math.hypot(a.x - b.x, a.y - b.y); }
 
 export class World {
@@ -326,6 +342,7 @@ export class World {
         target: null, cast: null, buffs: [], cds: {}, deadUntil: 0, hpTickAt: HP_TICK, spTickAt: SP_TICK, potAt: 0,
         poisonUntil: 0, poisonNext: 0, hurtAt: -9999, sitting: false, thinkAt: 0, kiteUntil: 0, kiteNext: 0, backOff: false, doing: '',
         counterUntil: 0, slowPoisonUntil: 0, hideDrainAt: 0, prCounters: 0, utilAt: 0,
+        gale: 0, flurryUntil: 0, lastEl: null, reso: 0, auraAt: 0,
       } satisfies HeroUnit;
     });
   }
@@ -586,7 +603,7 @@ export class World {
       danger: m.danger ? { stay: 60000 } : null, bornAt: this.time, dmgAt: -99999, chaseSince: 0, boredUntil: 0, vanish: false,
       elite: null, prog: 0,
       stoneUntil: 0, sleepUntil: 0, silenceUntil: 0, snareUntil: 0, agiDown: 0, agiDownUntil: 0, quag: 0, quagUntil: 0,
-      crucis: 0, lex: false, lexUntil: 0, breakHold: 0, hiddenUntil: 0, hideNext: this.time + 4000,
+      crucis: 0, lex: false, lexUntil: 0, breakHold: 0, hiddenUntil: 0, hideNext: this.time + 4000, poisonStacks: 0,
     };
     this.mobs.push(u);
     this.emit({ t: 'spawn', uid: u.uid });
@@ -1188,7 +1205,7 @@ export class World {
 
     // tank provoke, auto counter stance, crowd control & debuffs
     if (this.tryProvoke(h)) { h.doing = '도발'; return; }
-    if (this.tryStance(h)) return;
+    if (this.tryStance(h, t)) return;
     if (this.tryCc(h, t)) return;
 
     // offensive skill or normal attack from this hero's position (front / mid / back)
@@ -1640,6 +1657,12 @@ export class World {
         }
       }
     }
+    // 성역의 오라: a lasting aura that eats 2 SP every 3 s
+    if (this.hasBuff(h, 'saura') && this.time >= h.auraAt) {
+      const first = h.auraAt === 0;
+      h.auraAt = this.time + 3000;
+      if (!first) { h.sp -= 2; if (h.sp <= 0) { h.sp = 0; h.buffs = h.buffs.filter((b) => b.id !== 'saura'); } }
+    } else if (!this.hasBuff(h, 'saura')) h.auraAt = 0;
     for (const b of h.buffs) {
       if (b.until <= this.time || (b.id !== 'sight' && b.id !== 'ruwach' && b.id !== 'detect')) continue;
       this.revealAround(h, SKILLS[b.id === 'sight' ? 'sight' : b.id === 'ruwach' ? 'ruwach' : 'detect'], b.lv);
@@ -1709,9 +1732,11 @@ export class World {
   }
 
   /** 반격: brace just before a melee monster swings (tanks, or against bosses / elites, or when hurt) */
-  private tryStance(h: HeroUnit): boolean {
+  private tryStance(h: HeroUnit, t?: MobUnit): boolean {
     const e = this.enabledSkills(h, ['tank']).find((x) => x.sk.kind === 'stance');
-    if (!e || !this.canPay(h, e.sk, e.lv) || h.d.ranged) return false;
+    // (a priority buff waiting for its SP comes first — a stance costs SP too — and the main attack keeps the SP it needs)
+    if (!e || !this.canPay(h, e.sk, e.lv) || h.d.ranged || this.buffPending(h)) return false;
+    if (h.sp - this.spCost(h, e.sk, e.lv) < this.reserveSp(h, t)) return false;
     const win = e.lv * 400;
     const threat = this.mobs.find((m) => {
       if (!this.alive(m) || m.target !== h.uid || m.m.range >= 60 || dist(m, h) > m.m.range + this.bodyR(m) + 16) return false;
@@ -1731,7 +1756,10 @@ export class World {
 
   /** crowd control & debuffs, each with its own trigger (SKILLS_RO.md §0.7) */
   private tryCc(h: HeroUnit, t: MobUnit): boolean {
+    if (this.buffPending(h)) return false;
+    const keep = this.reserveSp(h, t);
     for (const { sk, lv } of this.enabledSkills(h, ['cc'])) {
+      if (sk.sp && h.sp - this.spCost(h, sk, lv) < keep) continue; // the main skill's SP
       if (!this.canPay(h, sk, lv) || !this.usable(h, sk)) continue;
       const pick = this.ccTarget(h, t, sk, lv);
       if (!pick) continue;
@@ -1787,6 +1815,9 @@ export class World {
       case 'lex_divina': return eng.find((m) => free(m) && !m.m.boss && !!m.m.skills?.length && m.silenceUntil <= this.time && inR(m));
       case 'lex_aeterna': {
         if (!free(t) || t.lex || !inR(t)) return undefined;
+        // only with SP left for the attack it doubles (else it eats the SP of that attack)
+        const follow = this.enabledSkills(h, ['attack', 'aoe']).find((e) => !!e.sk.sp);
+        if (follow && h.sp < this.spCost(h, sk, lv) + this.spCost(h, follow.sk, follow.lv)) return undefined;
         // worth a turn on the big ones: bosses, elites, danger monsters, or a monster the party's best hitter needs many swings for
         const best = Math.max(...this.aliveHeroes().map((a) => this.estimateNormal(a, t)));
         return t.m.boss || t.danger || t.elite || t.hp > best * 15 ? t : undefined;
@@ -1819,31 +1850,137 @@ export class World {
     return h.d.range;
   }
 
-  /** the radius a skill's area covers (ground effects use their spec) */
-  private areaR(sk: SkillDef, lv: number) {
+  /** the radius a skill's area covers (ground effects use their spec); 폭풍의 눈 / 질주 카트 widen the caster's */
+  private areaR(sk: SkillDef, lv: number, h?: HeroUnit) {
     if (sk.id === 'brandish') return (Math.min(4, Math.ceil(lv / 3)) + 1) * CELL * 0.9;
-    if (sk.ground) return sk.ground.r(lv);
-    return sk.radius ?? 60;
+    const r = sk.ground ? sk.ground.r(lv) : sk.radius ?? 60;
+    return r * (h ? this.areaMul(h, sk) : 1);
+  }
+  private areaMul(h: HeroUnit, sk: SkillDef) {
+    const eye = this.sig(h, 'storm_eye'), cart = this.sig(h, 'cart_rush');
+    if (eye && sk.magic && (sk.kind === 'aoe' || sk.kind === 'selfAoe' || sk.kind === 'ground') && sk.auto === 'aoe') return 1 + eye * 0.06;
+    if (cart && sk.id === 'cart_revolution') return 1 + cart * 0.1;
+    return 1;
   }
 
-  private canAfford(h: HeroUnit, sk: SkillDef, lv: number) {
-    if (sk.sp && h.sp < sk.sp(lv)) return false;
+  // ───────────────────────────── build signature skills (docs/design/SKILLS_META.md)
+  /** a learned signature skill's level (0 = not learned) */
+  private sig(h: HeroUnit, id: string) { return h.hero.skills[id] ?? 0; }
+  /** packs: 소용돌이 베기 (bowling bash), 질주 카트 (cart revolution), 폭풍의 눈 (area spells) — more damage per extra target */
+  private crowdMul(h: HeroUnit, sk: SkillDef, n: number) {
+    if (n < 2) return 1;
+    if (sk.id === 'bowling_bash') { const w = this.sig(h, 'whirl_cut'); return 1 + w * 0.06 * Math.min(4, n - 1); }
+    if (sk.id === 'cart_revolution') { const c = this.sig(h, 'cart_rush'); return 1 + c * 0.08 * Math.min(5, n - 1); }
+    const eye = this.sig(h, 'storm_eye');
+    if (eye && sk.magic && n > 2) return 1 + Math.min(0.2, eye * 0.02 * (n - 2));
+    return 1;
+  }
+  /** 원소 공명: an attack spell of another element than the last one raises the resonance (to 3), the same one breaks it */
+  private resonate(h: HeroUnit, sk: SkillDef, el: Element) {
+    const lv = this.sig(h, 'elem_resonance');
+    if (!lv || !sk.magic || (sk.auto !== 'attack' && sk.auto !== 'aoe')) return 1;
+    h.reso = h.lastEl && h.lastEl !== el ? Math.min(3, h.reso + 1) : 0;
+    h.lastEl = el;
+    if (h.reso > 0) this.emit({ t: 'status', uid: h.uid, text: `공명 ${h.reso}`, color: '#a0e0ff' });
+    return 1 + lv * 0.04 * h.reso;
+  }
+  /** 속성 전환: the element (fire / water / earth / wind) that hurts this monster most, if it beats `cur` */
+  private weakEl(t: MobUnit, cur: Element): Element {
+    const me = this.mobElement(t);
+    let best = cur, bm = elementMod(cur, me);
+    for (const e of ['fire', 'water', 'earth', 'wind'] as Element[]) { const v = elementMod(e, me); if (v > bm) { bm = v; best = e; } }
+    return best;
+  }
+  /** 성역의 오라: the damage cut a priest's aura gives this hero (the strongest one in reach) */
+  private auraCut(a: HeroUnit) {
+    let cut = 0;
+    for (const p of this.heroes) {
+      if (p.state === 'dead' || !this.hasBuff(p, 'saura') || dist(p, a) > 220) continue;
+      cut = Math.max(cut, this.sig(p, 'sanct_aura') * 0.03);
+    }
+    return cut;
+  }
+  /** 질풍 보법 · 그림자 분신: what a dodge sets off */
+  private onDodge(t: HeroUnit, m: MobUnit) {
+    if (this.sig(t, 'gale_step') && t.d.wtype === 'sword2h') t.gale = this.time + 3000;
+    const sc = this.sig(t, 'shadow_clone');
+    if (sc && !t.d.ranged && m.m.range < 60 && !this.shunned(m) && this.rng() < sc * 0.08) {
+      this.emit({ t: 'status', uid: t.uid, text: '그림자 분신!', color: '#b0a0e0' });
+      this.after(90, () => { if (this.alive(m) && t.state !== 'dead') this.resolvePhys(t, m, 100, t.d.weaponElement, 0, true, 'slash'); });
+    }
+  }
+  /** 매의 일격: one big single-target dive (a blitz hit × 2–4.5, fixed damage, no splash) */
+  private falconDive(h: HeroUnit, t: MobUnit, sk: SkillDef, lv: number) {
+    const fly = Math.max(160, dist(h, t) / 0.8);
+    this.emit({ t: 'shot', from: h.uid, to: t.uid, kind: 'falcon', dur: fly, element: 'neutral' });
+    this.sound('arrow');
+    const sd = h.d.b.skillDmg ?? {};
+    const per = sk.fixed!(lv, this.fixedCtx(h)) * (1 + ((sd.blitz_beat ?? 0) + (sd.falcon_strike ?? 0)) / 100);
+    this.lexPacket(t, fly + 200);
+    this.after(fly, () => {
+      if (!this.alive(t)) return;
+      this.emit({ t: 'skill', fx: 'falconstrike', from: h.uid, to: t.uid, x: t.x, y: t.y, lv });
+      this.emit({ t: 'shake', power: 2.5 });
+      this.sound('crit');
+      this.dealFixed(h, t, per, 'neutral', 0, 'claw', 'crit');
+    });
+  }
+  /** extra bolts: 고속 영창 Lv 5 (+1 fire / cold / lightning bolt), 영혼 폭주 (+1 soul strike per 2 levels on ghosts and undead) */
+  private extraBolts(h: HeroUnit, sk: SkillDef, t: MobUnit) {
+    if (QUICK_BOLTS.has(sk.id)) return this.sig(h, 'quick_chant') >= 5 ? 1 : 0;
+    if (sk.id === 'soul_strike') {
+      const me = this.mobElement(t);
+      return (me === 'ghost' || me === 'undead' || t.m.race === 'undead') && this.sig(h, 'soul_surge') >= 3 ? 1 : 0;
+    }
+    return 0;
+  }
+  /** the weapon itself is poison-element (독사의 송곳니), not just enchanted */
+  private poisonBlade(h: HeroUnit) {
+    const uid = h.hero.equip.weapon;
+    const inst = uid === undefined ? undefined : this.s.equips.find((e) => e.uid === uid);
+    return !!inst && ITEMS[inst.id]?.element === 'poison';
+  }
+  /** catalysts — 퇴마의 서약 Lv 5 frees magnus of its blue gemstone */
+  private catalystFor(h: HeroUnit, sk: SkillDef, lv: number) {
+    const c = sk.catalyst;
+    if (!c || (c.from && lv < c.from)) return null;
+    if (sk.id === 'magnus' && this.sig(h, 'exorcist_vow') >= 5) return null;
+    return c;
+  }
+
+  private canAfford(h: HeroUnit, sk: SkillDef, lv: number, t?: MobUnit) {
+    if (sk.sp && h.sp < this.spCost(h, sk, lv, t)) return false;
     if (sk.hpCost && h.hp <= sk.hpCost(lv) + 5) return false;
     if (sk.zeny && this.s.zeny < this.zenyCost(h, sk, lv)) return false;
-    const c = sk.catalyst;
-    if (c && (!c.from || lv >= c.from) && (this.s.stacks[c.id] ?? 0) < c.n) return false;
+    const c = this.catalystFor(h, sk, lv);
+    if (c && (this.s.stacks[c.id] ?? 0) < c.n) return false;
     return true;
   }
 
   /** M12: a skill's damage % with the hero's per-skill gear bonuses */
   private skMult(h: HeroUnit, sk: SkillDef, lv: number) {
     // 균열 결계 also halves 금화 강타 (the build tree counts it as fixed damage)
-    const ward = sk.id === 'mammonite' ? this.rift?.mods.fixedMul ?? 1 : 1;
+    const ward = sk.id === 'mammonite' || sk.id === 'gold_storm' ? this.rift?.mods.fixedMul ?? 1 : 1;
     let m = sk.mult ? sk.mult(lv) : 100;
+    if (sk.id === 'moon_slash') m += h.d.total.luk * 3; // (15×Lv + LUK×3)%: a crit knight's swing, weak without LUK
+    // 황금 폭풍: the area version of the 금화 강타 the hero knows — as strong as its level
+    if (sk.id === 'gold_storm') m = SKILLS.mammonite.mult!(Math.max(1, h.hero.skills.mammonite ?? 1)) * (1 + lv * 0.04);
     if (sk.id === 'cart_revolution') m += (h.hero.skills.enlarge_weight ?? 0) * 10; // the cart's weight
     return m * (1 + (h.d.b.skillDmg?.[sk.id] ?? 0) / 100) * ward;
   }
+  /** SP a cast costs (영혼 폭주 makes soul strike cheaper, 빙뢰 공명 lightning at a frozen target) */
+  private spCost(h: HeroUnit, sk: SkillDef, lv: number, t?: MobUnit) {
+    const n = sk.sp!(lv);
+    if (sk.id === 'soul_strike') return Math.ceil(n * (1 - this.sig(h, 'soul_surge') * 0.02));
+    if (sk.id === 'pierce' && this.hasBuff(h, 'ironstance')) return n - 1; // 철벽 자세
+    if (sk.id === 'arrow_shower') return n - this.sig(h, 'storm_arrows'); // 폭우의 화살
+    if (sk.id === 'grimtooth') return Math.max(1, n - Math.floor(this.sig(h, 'dark_hunt') / 2)); // 어둠 사냥
+    if (t && sk.element === 'wind' && sk.magic && t.frozenUntil > this.time) return Math.ceil(n * (1 - this.sig(h, 'frost_thunder') * 0.08));
+    return n;
+  }
   private zenyCost(h: HeroUnit, sk: SkillDef, lv: number) {
+    // 황금 폭풍 costs twice the hero's 금화 강타
+    if (sk.id === 'gold_storm') return Math.round(SKILLS.mammonite.zeny!(Math.max(1, h.hero.skills.mammonite ?? 1)) * 2 * (1 + (h.d.b.zenyCostPct ?? 0) / 100));
     return Math.round(sk.zeny!(lv) * (1 + (h.d.b.zenyCostPct ?? 0) / 100));
   }
 
@@ -1936,8 +2073,17 @@ export class World {
     // buffs (only when not being chased hard)
     const pressed = this.mobs.some((m) => m.target === h.uid && this.alive(m) && dist(m, h) < 40);
     if (pressed && h.hp < h.d.maxHp * 0.5) return false;
+    const pending = this.buffPending(h);
+    // buffs slotted after the main attack leave it the SP it needs
+    const ht = this.mob(h.target);
+    const keep = this.reserveSp(h, ht && this.targetable(ht) ? ht : undefined);
+    const slots = h.hero.skillSlots ?? [];
+    const mainAt = keep ? slots.indexOf(this.enabledSkills(h, ['attack', 'aoe'])[0]?.sk.id ?? '') : -1;
     for (const { sk, lv } of this.enabledSkills(h, ['buff'])) {
-      if (!this.canPay(h, sk, lv) || !sk.buff || !this.usable(h, sk)) continue;
+      if (!sk.buff || !this.usable(h, sk)) continue;
+      if (keep && mainAt >= 0 && sk.sp && (slots.indexOf(sk.id) < 0 || slots.indexOf(sk.id) > mainAt) && h.sp - this.spCost(h, sk, lv) < keep) continue;
+      // a self buff ahead in the slots is waiting for its SP: the buffs after it don't take that SP
+      if (!this.canPay(h, sk, lv)) { if (pending && !sk.buff.party && !sk.buff.ally && this.buffShort(h, sk, lv)) break; continue; }
       const bid = sk.buff.id;
       const lacks = (a: HeroUnit) => {
         const b = a.buffs.find((x) => x.id === bid);
@@ -1975,6 +2121,29 @@ export class World {
     return els.length > 0 && els.filter((e) => elementMod('holy', e) > 1).length / els.length >= 0.5;
   }
 
+  /** a self buff slotted ahead of the main attack (the player put it first) is down and SP is short of it: save up
+   *  (attacks, stances, control and the buffs after it wait — heals and revives don't) */
+  private buffPending(h: HeroUnit): boolean {
+    for (const id of h.hero.skillSlots ?? []) {
+      const sk = id ? SKILLS[id] : undefined, lv = id ? h.hero.skills[id] ?? 0 : 0;
+      if (!sk || lv <= 0) continue;
+      if (sk.auto === 'attack' || sk.auto === 'aoe') return false; // only buffs before the first attack
+      // (a self buff, or a one-target buff that isn't meant for an ally: 맹독 부여 on the assassin's own blade)
+      if (sk.auto === 'buff' && (sk.kind === 'selfBuff' || (sk.kind === 'buff' && !sk.buff?.party && !sk.buff?.ally)) && this.buffShort(h, sk, lv)) return true;
+    }
+    return false;
+  }
+  /** this self buff is down (or about to drop), wanted now, and only SP keeps it from going up */
+  private buffShort(h: HeroUnit, sk: SkillDef, lv: number): boolean {
+    // (barriers are spent by being hit — waiting for one under fire would stall everything)
+    // (nor auras and calls that are about the party or the pack, not this hero's own strength)
+    if (!sk.buff?.dur || !sk.sp || sk.buff.shieldPct || sk.buff.id === 'mbarrier' || sk.buff.id === 'saura' || sk.buff.id === 'whistle') return false;
+    const cost = this.spCost(h, sk, lv);
+    if (h.sp >= cost || cost > h.d.maxSp * 0.6 || (h.cds[sk.id] ?? 0) > this.time || (sk.weapon && !sk.weapon.includes(h.d.wtype))) return false;
+    const b = h.buffs.find((x) => x.id === sk.buff!.id);
+    return (!b || b.until - this.time < 4000) && this.buffWanted(h, sk);
+  }
+
   /** party / self buffs that only make sense in some fights */
   private buffWanted(h: HeroUnit, sk: SkillDef): boolean {
     switch (sk.id) {
@@ -1986,6 +2155,17 @@ export class World {
       }
       case 'poison_react': return this.mobs.some((m) => this.alive(m) && m.target === h.uid && m.m.range < 60);
       case 'sight_blaster': return this.pc.engaged.length > 0 || this.roleOf(h) === 'caster';
+      // signature buffs (SKILLS_META.md)
+      case 'element_shift': return this.pc.engaged.length > 0;
+      // the barrier is paid from the SP the spells need: only from a full-ish pool, when something is on the wizard or it is hurt
+      case 'mana_barrier': return h.sp > h.d.maxSp * 0.5 && (h.hp < h.d.maxHp * 0.85 || this.mobs.some((m) => this.alive(m) && m.target === h.uid && dist(m, h) < m.m.range + 60));
+      case 'sanct_aura': return this.pc.engaged.length > 0 || this.aliveHeroes().length > 1;
+      case 'drover_whistle': {
+        // 몰이: worth a whistle when at least two monsters around would come over (and we can take them)
+        if (h.hp < h.d.maxHp * 0.45 || !this.pc.engaged.length) return false;
+        const loose = this.mobs.filter((m) => this.targetable(m) && !this.shunned(m) && m.target !== h.uid && !m.m.boss && dist(m, h) < (sk.radius ?? 200)).length;
+        return loose >= 2;
+      }
     }
     return true;
   }
@@ -2045,7 +2225,7 @@ export class World {
   /** how many monsters an area skill aimed at t would catch */
   private countArea(h: HeroUnit, t: MobUnit, sk: SkillDef, lv: number) {
     const self = sk.kind === 'selfAoe';
-    const cx = self ? h.x : t.x, cy = self ? h.y : t.y, r = this.areaR(sk, lv);
+    const cx = self ? h.x : t.x, cy = self ? h.y : t.y, r = this.areaR(sk, lv, h);
     let n = 0;
     for (const m of this.mobs) {
       if (!this.alive(m) || this.shunned(m) || (m.hiddenUntil > this.time && !sk.reveal)) continue;
@@ -2068,8 +2248,13 @@ export class World {
       case 'charge_attack': return dist(h, t) > 3 * CELL + this.bodyR(t);
       case 'venom_splasher': return t.poisonUntil > this.time && t.hp < t.maxHp * 0.75 && !t.m.boss;
       case 'throw_stone': return !t.m.boss || t.hp > 50;
+      // 빙결: never on ice (the bolt would shatter it — that's for lightning); on what can't freeze only as the last resort
+      case 'frost_diver':
+        if (t.frozenUntil > this.time) return false;
+        if (t.m.boss || t.m.element === 'undead') return !this.enabledSkills(h, ['attack']).some((e) => e.sk.id !== 'frost_diver' && !!e.sk.magic);
+        return true;
     }
-    if (sk.kind === 'ground' || sk.kind === 'trap') return !ownNear(sk.kind === 'trap' ? 30 : this.areaR(sk, lv) * 0.6);
+    if (sk.kind === 'ground' || sk.kind === 'trap') return !ownNear(sk.kind === 'trap' ? 30 : this.areaR(sk, lv, h) * 0.6);
     return true;
   }
 
@@ -2079,30 +2264,92 @@ export class World {
     if (tac === 'conserve' && h.sp < h.d.maxSp * 0.5) return null;
     // heal sears the undead (RO): offered as an attack (at its slot's place) while the target is undead-element
     const undead = this.mobElement(t) === 'undead';
-    const list = this.enabledSkills(h, ['attack', 'aoe', 'heal'])
+    let list = this.enabledSkills(h, ['attack', 'aoe', 'heal'])
       .filter(({ sk, lv }) => (sk.auto !== 'heal' || (undead && sk.kind === 'heal')) && this.canPay(h, sk, lv) && this.usable(h, sk));
     if (!list.length) return null;
+    // a spell the target resists goes after the slotted ones it doesn't (stable: slot order otherwise); 원소 공명 (wz_elem)
+    // also puts another element than the last spell first
+    {
+      const me = this.mobElement(t), reso = this.sig(h, 'elem_resonance') > 0;
+      const key = ({ sk }: { sk: SkillDef }) => {
+        if (!sk.magic || !sk.element) return 0;
+        return (elementMod(sk.element, me) < 1 ? 4 : 0) + (reso && sk.element === h.lastEl ? 2 : 0);
+      };
+      list = list.map((e, i) => ({ e, i })).sort((a, b) => key(a.e) - key(b.e) || a.i - b.i).map((x) => x.e);
+    }
     const est = this.estimateNormal(h, t);
     // don't waste single-target skills on nearly-dead targets
     const nearlyDead = t.hp <= est * 1.1 && !t.m.boss && tac !== 'aggressive';
     // casters save area spells for real packs unless told to go all out
     const minAoe = tac === 'aggressive' ? 2 : this.roleOf(h) === 'caster' ? 3 : 2;
     const weakOk = h.d.ranged || CLASSES[h.hero.cls].ranged || tac === 'aggressive';
+    const areaOk = (sk: SkillDef, lv: number) => this.areaOk(h, t, sk, lv);
+    // the first slotted attack is the build's main skill: its SP is kept for it (normal attacks meanwhile)
+    const pending = this.buffPending(h);
+    const hold = this.mainHold(h, t);
+    const keep = this.reserveSp(h, t);
+    const mainId = this.enabledSkills(h, ['attack', 'aoe'])[0]?.sk.id;
     // 스킬 슬롯: the first slotted skill (left first) whose conditions hold
     for (const e of list) {
       const { sk, lv } = e;
+      if (pending && sk.sp) continue;
+      if (sk.sp && sk.id !== mainId && h.sp - this.spCost(h, sk, lv, t) < keep) continue;
+      if (hold === 'pack' && sk.sp && !this.isArea(sk)) continue;
       if (!this.skillFits(h, t, sk, lv)) continue;
       if (this.isArea(sk)) {
-        const n = this.countArea(h, t, sk, lv);
-        const need = sk.undeadOnly ? Math.min(minAoe, 2) : minAoe;
-        if (n < need && !(n >= 1 && (t.m.boss || t.danger) && sk.kind === 'ground')) continue;
-        return e;
+        if (areaOk(sk, lv)) return e;
+        // RO: bowling bash is a two-hit blow on its target as well, grimtooth a stab from hiding — worth it alone
+        if (sk.id !== 'bowling_bash' && sk.id !== 'grimtooth') continue;
       }
       if (nearlyDead) continue;
       if (sk.kind !== 'heal' && !weakOk && this.estimateSkill(h, t, sk, lv) < est * 1.15) continue;
       return e;
     }
     return null;
+  }
+
+  /** an area skill would catch enough here (casters wait for 3, everyone else for 2; grounds go on a lone boss) */
+  private areaOk(h: HeroUnit, t: MobUnit, sk: SkillDef, lv: number) {
+    const tac = this.tactics(h).skills;
+    const minAoe = tac === 'aggressive' ? 2 : this.roleOf(h) === 'caster' ? 3 : 2;
+    const n = this.countArea(h, t, sk, lv);
+    const need = sk.undeadOnly ? Math.min(minAoe, 2) : minAoe;
+    return n >= need || (n >= 1 && (t.m.boss || t.danger) && sk.kind === 'ground');
+  }
+  /**
+   * The first slotted attack is the build's main skill: the SP it needs is kept for it (0 = nothing to keep). Cheaper
+   * attacks, control, stances and the buffs slotted after it only spend what is above that — builds whose key skill costs
+   * more than their cheap fillers kept starving it. Without a target only a single-target main skill keeps its SP.
+   */
+  private reserveSp(h: HeroUnit, t?: MobUnit): number {
+    const main = this.enabledSkills(h, ['attack', 'aoe'])[0];
+    if (!main?.sk.sp) return 0;
+    const { sk, lv } = main, cost = this.spCost(h, sk, lv, t);
+    if (cost > h.d.maxSp * 0.6 || (h.cds[sk.id] ?? 0) > this.time + 1000 || (sk.weapon && !sk.weapon.includes(h.d.wtype)) || !this.usable(h, sk)) return 0;
+    const area = this.isArea(sk) && sk.id !== 'bowling_bash' && sk.id !== 'grimtooth';
+    if (!t) return area ? 0 : cost;
+    if (!this.skillFits(h, t, sk, lv)) return 0;
+    if (area && !this.areaOk(h, t, sk, lv) && !this.packNear(h, sk)) return 0;
+    return cost;
+  }
+  /** enough of a pack on the party, near this hero, for an area skill (even before it bunches up) */
+  private packNear(h: HeroUnit, sk: SkillDef) {
+    const tac = this.tactics(h).skills;
+    const minAoe = tac === 'aggressive' ? 2 : this.roleOf(h) === 'caster' ? 3 : 2;
+    return this.pc.engaged.filter((m) => dist(m, h) < 260).length >= (sk.undeadOnly ? 2 : minAoe);
+  }
+  /** 'pack': an area main skill with a pack on the party that hasn't bunched up yet — single-target skills wait for it */
+  private mainHold(h: HeroUnit, t: MobUnit): 'sp' | 'pack' | null {
+    const main = this.enabledSkills(h, ['attack', 'aoe'])[0];
+    if (!main?.sk.sp) return null;
+    const { sk, lv } = main, cost = this.spCost(h, sk, lv);
+    if (cost > h.d.maxSp * 0.6 || (h.cds[sk.id] ?? 0) > this.time || (sk.weapon && !sk.weapon.includes(h.d.wtype)) || !this.usable(h, sk) || !this.skillFits(h, t, sk, lv)) return null;
+    const area = this.isArea(sk) && sk.id !== 'bowling_bash' && sk.id !== 'grimtooth';
+    if (!area) return h.sp < cost ? 'sp' : null;
+    const pack = this.packNear(h, sk);
+    const ok = this.areaOk(h, t, sk, lv);
+    if (h.sp < cost) return ok || pack ? 'sp' : null;
+    return !ok && pack ? 'pack' : null;
   }
 
   private estimateNormal(h: HeroUnit, t: MobUnit) {
@@ -2124,7 +2371,8 @@ export class World {
   }
   /** heal on an undead-element mob: half the heal as holy damage, by element, ignoring MDEF (RO) */
   private healDamage(h: HeroUnit, t: MobUnit, lv: number) {
-    return Math.floor(this.healAmount(h, lv) * elementMod('holy', this.mobElement(t)) / 2);
+    // 역류하는 생명 (pr_heal): the undead burn harder
+    return Math.floor(this.healAmount(h, lv) * elementMod('holy', this.mobElement(t)) / 2 * (1 + this.sig(h, 'reverse_life') * 0.15));
   }
 
   private estimateSkill(h: HeroUnit, t: MobUnit, sk: SkillDef, lv: number) {
@@ -2270,8 +2518,9 @@ export class World {
     // a cloaked assassin's swing gives it away
     if (this.hasBuff(h, 'cloak')) this.unhide(h);
     this.setState(h, 'attack');
-    h.atkReady = this.time + d.delay;
-    h.lockUntil = this.time + Math.min(320, d.delay * 0.8);
+    const delay = d.delay * (h.flurryUntil > this.time && d.wtype === 'none' ? 0.5 : 1); // 맨주먹 연타
+    h.atkReady = this.time + delay;
+    h.lockUntil = this.time + Math.min(320, delay * 0.8);
     if (d.ranged) {
       // draw → release (the arrow leaves on the release frame) → flight → hit
       this.after(BOW_RELEASE, () => {
@@ -2282,6 +2531,12 @@ export class World {
         this.after(fly, () => {
           const hit = this.resolvePhys(h, t, 100, d.weaponElement, 0, true, 'pierce');
           this.afterNormalHit(h, t, hit);
+          // 명궁의 호흡: the breath carries a free double strafe with the shot
+          const br = this.sig(h, 'archer_breath'), ds = h.hero.skills.double_strafe ?? 0;
+          if (hit && br && ds && this.alive(t) && this.rng() * 100 < br * 1.6) {
+            this.emit({ t: 'status', uid: h.uid, text: '명궁의 호흡!', color: '#ffe08a' });
+            this.releaseCast(h, { sk: SKILLS.double_strafe, lv: ds, target: t.uid, x: t.x, y: t.y, start: this.time, end: this.time }, true);
+          }
         });
       });
       return;
@@ -2292,12 +2547,21 @@ export class World {
       const lh = d.lh;
       const r = this.resolvePhys(h, t, lh ? lh.rpct : 100, d.weaponElement, 0, true, d.wtype === 'mace' || d.wtype === 'staff' || d.wtype === 'none' ? 'blunt' : 'slash');
       this.afterNormalHit(h, t, r); // M3: a bare-handed falconer's fists call the falcon too
+      // 마력 부여: a magic strike follows the blade
+      const edge = r && h.buffs.find((b) => b.id === 'manaedge' && b.until > this.time);
+      if (edge) this.after(70, () => { if (this.alive(t)) this.resolveMagic(h, t, 30 + edge.lv * 12, d.weaponElement, 3); });
       // double attack
       const da = h.hero.skills.double_attack ?? 0;
       if (r && da && d.wtype === 'dagger' && this.rng() < da * 0.05 && this.alive(t)) {
         this.after(110, () => this.resolvePhys(h, t, lh ? lh.rpct : 100, d.weaponElement, 0, false, 'slash', 1));
       }
-      if (lh) this.after(80, () => this.resolvePhys(h, t, lh.pct, d.b.weaponElement ?? lh.element, 0, true, 'slash', 2, 0, { lh: true }));
+      if (lh) this.after(80, () => {
+        const lr = this.resolvePhys(h, t, lh.pct, d.b.weaponElement ?? lh.element, 0, true, 'slash', 2, 0, { lh: true });
+        // 쌍검무: the left dagger rolls its own double attack
+        if (lr && da && lh.wtype === 'dagger' && this.sig(h, 'twin_dance') && this.rng() < da * 0.05 && this.alive(t)) {
+          this.after(100, () => this.resolvePhys(h, t, lh.pct, d.b.weaponElement ?? lh.element, 0, false, 'slash', 3, 0, { lh: true }));
+        }
+      });
     });
   }
 
@@ -2308,7 +2572,23 @@ export class World {
     this.autoBlitz(h, t);
     if (b.procs) for (const p of b.procs) if ((p.on === 'attack' || (p.on === 'crit' && this.lastCrit)) && this.rng() * 100 < p.chance) this.runProc(h, t, p);
     if (b.selfCurse && this.rng() * 100 < b.selfCurse) this.curseHero(h);
+    // 음속 연쇄: a katar swing sometimes breaks into a sonic blow by itself (free)
+    const sc = this.sig(h, 'sonic_chain'), sb = h.hero.skills.sonic_blow ?? 0;
+    if (sc && sb && h.d.wtype === 'katar' && this.alive(t) && this.rng() * 100 < sc * 0.4) {
+      this.emit({ t: 'status', uid: h.uid, text: '음속 연쇄!', color: '#ff9ac0' });
+      this.after(60, () => { if (this.alive(t) && h.state !== 'dead') this.releaseCast(h, { sk: SKILLS.sonic_blow, lv: sb, target: t.uid, x: t.x, y: t.y, start: this.time, end: this.time }, true); });
+    }
+    // 대도: a light hand takes zeny off the monster
+    const gt = this.sig(h, 'grand_thief');
+    if (gt && !t.summoned && this.rng() * 100 < gt) {
+      const z = t.m.lv * (4 + Math.floor(this.rng() * 5));
+      this.s.zeny += z;
+      this.grandZeny += z;
+      this.emit({ t: 'status', uid: h.uid, text: `+${z}z`, color: '#ffd860' });
+    }
   }
+  /** 대도: zeny snatched so far (tools) */
+  grandZeny = 0;
 
   /** hunter falcon proc on normal attacks, any weapon or none: LUK×0.3% (RO) + gear */
   private autoBlitz(h: HeroUnit, t: MobUnit) {
@@ -2317,13 +2597,20 @@ export class World {
     if (this.rng() * 100 >= h.d.total.luk * 0.3 + (h.d.b.autoBlitzPct ?? 0)) return;
     const sk = SKILLS.blitz_beat;
     const hits = Math.min(blitz, Math.floor((h.hero.jobLv + 9) / 10)) + (h.d.b.blitzHits ?? 0);
-    this.falconStrike(h, t, sk, blitz, hits);
+    this.falconStrike(h, t, sk, blitz, hits, true);
+    // 맨주먹 연타: the fists follow the falcon in at double speed
+    const fl = this.sig(h, 'bare_flurry');
+    if (fl && h.d.wtype === 'none') {
+      h.flurryUntil = this.time + [400, 600, 800][fl - 1];
+      h.atkReady = Math.min(h.atkReady, this.time + h.d.delay * 0.5);
+    }
   }
 
   /** M5: one item/card effect */
   private runProc(h: HeroUnit, t: MobUnit | null, p: Proc) {
     if (p.healPct) this.healHero(h, Math.floor(h.d.maxHp * p.healPct / 100), true);
-    if (p.status && t && this.alive(t) && !t.m.boss) this.inflict(t, p.status.kind, p.status.dur);
+    // (맹독 부여's poison layers only on a blade that is poisonous itself — 맹독 누적 is the poison dagger's craft)
+    if (p.status && t && this.alive(t) && !t.m.boss) this.setStatus(t, p.status.kind, p.status.dur, p.tag !== 'edp' || this.poisonBlade(h) ? h : undefined);
     if (p.cast) {
       const sk = SKILLS[p.cast.skill];
       if (!sk) return;
@@ -2334,11 +2621,8 @@ export class World {
     }
   }
 
-  /** a status from gear (no skill roll: the proc already rolled) */
-  private inflict(t: MobUnit, kind: 'stun' | 'freeze' | 'poison' | 'blind', dur: number) { this.setStatus(t, kind, dur); }
-
   /** put a status on a monster (immunities by element and race; bosses are kept out by the callers) */
-  private setStatus(t: MobUnit, kind: SkStatus | 'poison', dur: number) {
+  private setStatus(t: MobUnit, kind: SkStatus | 'poison', dur: number, by?: HeroUnit) {
     if (!this.alive(t)) return;
     const until = this.time + dur;
     switch (kind) {
@@ -2354,11 +2638,17 @@ export class World {
       case 'sleep': t.sleepUntil = Math.max(t.sleepUntil, until); this.emit({ t: 'status', uid: t.uid, text: '수면', color: '#c0b0ff' }); return;
       case 'silence': t.silenceUntil = Math.max(t.silenceUntil, until); this.emit({ t: 'status', uid: t.uid, text: '침묵', color: '#c0c0ff' }); return;
       case 'blind': t.blindUntil = Math.max(t.blindUntil, until); this.emit({ t: 'status', uid: t.uid, text: '실명', color: '#d8c080' }); return;
-      case 'poison':
+      case 'poison': {
         if (t.m.element === 'undead' || t.m.race === 'formless') return;
-        t.poisonUntil = until; t.poisonNext = this.time + 1000;
+        // 맹독 누적: poisoning a poisoned monster adds a layer (up to the skill level)
+        const vs = by ? this.sig(by, 'venom_stack') : 0;
+        const was = t.poisonUntil > this.time;
+        t.poisonStacks = was && vs ? Math.min(vs, t.poisonStacks + 1) : was ? Math.max(1, t.poisonStacks) : 1;
+        if (!was) t.poisonNext = this.time + 1000;
+        t.poisonUntil = Math.max(t.poisonUntil, until);
         t.poisonDmg = Math.max(2, Math.floor(t.maxHp * 0.015));
-        this.emit({ t: 'status', uid: t.uid, text: '중독', color: '#c080ff' });
+        this.emit({ t: 'status', uid: t.uid, text: t.poisonStacks > 1 ? `맹독 ${t.poisonStacks}겹` : '중독', color: '#c080ff' });
+      }
     }
   }
 
@@ -2392,7 +2682,9 @@ export class World {
     return { dex: h.d.total.dex, int: h.d.total.int, luk: h.d.total.luk, baseLv: h.hero.baseLv, skills: h.hero.skills, matk: (h.d.matkMin + h.d.matkMax) / 2 };
   }
 
-  private falconStrike(h: HeroUnit, t: MobUnit, sk: SkillDef, lv: number, hits: number) {
+  private falconStrike(h: HeroUnit, t: MobUnit, sk: SkillDef, lv: number, hits: number, auto = false) {
+    // 매의 선회 (hu_mob): the falcon that dives with the fists circles wider and hits the pack harder
+    const circle = auto ? this.sig(h, 'falcon_circle') : 0;
     const fly = Math.max(160, dist(h, t) / 0.7);
     this.emit({ t: 'shot', from: h.uid, to: t.uid, kind: 'falcon', dur: fly, element: 'neutral' });
     this.emit({ t: 'status', uid: h.uid, text: '블리츠 비트!', color: '#ffd080' });
@@ -2400,32 +2692,40 @@ export class World {
     // (DEX/10 + INT/2 + steel crow×3 + 40) × 2 per hit (RO) — steel crow is inside the formula
     const per = sk.fixed!(lv, this.fixedCtx(h)) * (1 + (h.d.b.skillDmg?.blitz_beat ?? 0) / 100);
     // M4: the falcon's dive hits everything around the target (RO's 3×3)
-    const r = 60 + (h.d.b.blitzRadius ?? 0);
+    const r = 60 + (h.d.b.blitzRadius ?? 0) + circle * 15;
     for (let i = 0; i < hits; i++) {
       this.after(fly + i * 120, () => {
         if (!this.alive(t)) return;
         const cx = t.x, cy = t.y;
         total += this.dealFixed(h, t, per, 'neutral', i, 'claw');
-        for (const m of this.mobs) if (m !== t && this.targetable(m) && !this.shunned(m) && Math.hypot(m.x - cx, m.y - cy) <= r) this.dealFixed(h, m, per, 'neutral', i, 'claw');
+        const splash = per * (1 + circle * 0.15);
+        for (const m of this.mobs) if (m !== t && this.targetable(m) && !this.shunned(m) && Math.hypot(m.x - cx, m.y - cy) <= r) this.dealFixed(h, m, splash, 'neutral', i, 'claw');
         if (i === hits - 1 && hits > 1 && total > 0) this.emit({ t: 'dmg', uid: t.uid, n: total, kind: 'total' });
       });
     }
   }
 
   /** fixed damage: ignores DEF and FLEE, still respects element */
-  private dealFixed(h: HeroUnit, t: MobUnit, base: number, el: Element, idx: number, style: 'claw' | 'magic' = 'magic'): number {
+  private dealFixed(h: HeroUnit, t: MobUnit, base: number, el: Element, idx: number, style: 'claw' | 'magic' = 'magic', kind: DmgKind = 'normal'): number {
     if (!this.alive(t)) return 0;
     const em = elementMod(el, this.mobElement(t));
     const n = em <= 0 ? 0 : Math.max(1, Math.floor(base * em * (0.9 + this.rng() * 0.2) * (this.rift?.mods.fixedMul ?? 1)));
-    this.dealToMob(h, t, n, 'normal', idx);
+    this.dealToMob(h, t, n, kind, idx);
     this.emit({ t: 'hit', uid: t.uid, style, element: el });
     return n;
   }
 
-  private applyStatus(t: MobUnit, sk: SkillDef, lv: number) {
-    if (!sk.status || !this.alive(t) || t.m.boss) return;
+  private applyStatus(t: MobUnit, sk: SkillDef, lv: number, h?: HeroUnit) {
+    if (!sk.status || !this.alive(t)) return;
+    const th = sk.id === 'hammer_fall' && h ? this.sig(h, 'thunder_hammer') : 0;
+    if (t.m.boss) {
+      // 천둥의 망치질: even a boss staggers for a moment
+      if (th && this.rng() * 100 < sk.status(lv).chance) { t.stunUntil = Math.max(t.stunUntil, this.time + 500 + th * 100); this.emit({ t: 'status', uid: t.uid, text: '경직!', color: '#ffe45a' }); }
+      return;
+    }
     const st = sk.status(lv);
     if (this.rng() * 100 >= st.chance) return;
+    if (th) { this.setStatus(t, 'stun', st.dur * (1 + th * 0.1)); return; }
     if (sk.id === 'ankle_snare') { t.stunUntil = this.time + st.dur; this.emit({ t: 'status', uid: t.uid, text: '속박!', color: '#ffe080' }); return; }
     this.setStatus(t, st.kind, st.dur);
   }
@@ -2443,18 +2743,29 @@ export class World {
   /** whether the last resolvePhys was a critical (crit procs) */
   private lastCrit = false;
 
-  /** returns true when it hit. o.lh = the off-hand weapon (이도류), forceCrit / ignoreDef (auto counter), sure (no FLEE roll) */
+  /** returns true when it hit. o.lh = the off-hand weapon (이도류), forceCrit / ignoreDef (auto counter), sure (no FLEE roll),
+   *  sureCrit (광월참: a critical unless a boss's crit resistance turns it), counter (역습의 맹세 crit damage) */
   private resolvePhys(h: HeroUnit, t: MobUnit, mult: number, el: Element, hitBonus: number, canCrit: boolean, style: 'slash' | 'blunt' | 'pierce' | 'claw', idx = 0, flat = 0,
-    o: { lh?: boolean; forceCrit?: boolean; ignoreDef?: boolean; sure?: boolean } = {}): boolean {
+    o: { lh?: boolean; forceCrit?: boolean; ignoreDef?: boolean; sure?: boolean; sureCrit?: boolean; counter?: boolean } = {}): boolean {
     if (!this.alive(t) || h.state === 'dead') return false;
     const d = h.d;
     const w = o.lh && d.lh ? d.lh : null;
+    // 속성 전환: whatever the weapon carries turns into the target's weakness (the advantage at 50–70%)
+    let shift = 0;
+    if (this.hasBuff(h, 'eshift') && (el === d.weaponElement || (w && el === (d.b.weaponElement ?? w.element)))) {
+      const to = this.weakEl(t, el);
+      if (to !== el) { shift = 0.3 + 0.1 * this.sig(h, 'element_shift'); el = to; }
+    }
+    // 숨 고르기: the first shot at a target may crit (even a double strafe arrow)
+    const steady = d.ranged ? this.sig(h, 'steady_breath') : 0;
+    const first = steady > 0 && !(t.dmgBy[h.uid] > 0);
+    if (first) canCrit = true;
     // 속도 감소 / 늪 lower the monster's AGI (its FLEE)
     const agi = Math.max(0, (t.m.agi - (t.agiDownUntil > this.time ? t.agiDown : 0)) * (1 - (t.quagUntil > this.time ? t.quag : 0)));
     const mobFlee = t.m.lv + agi;
     const critRes = t.m.critRes ?? (t.m.boss === 'mvp' ? 0.5 : t.m.boss ? 0.25 : 0);
-    const critChance = canCrit ? Math.max(0, d.crit - t.m.luk * 0.2) * (1 - critRes) : 0;
-    const crit = !!o.forceCrit || this.rng() * 100 < critChance;
+    const critChance = canCrit ? Math.max(0, d.crit + (first ? steady * 10 : 0) - t.m.luk * 0.2) * (1 - critRes) : 0;
+    const crit = !!o.forceCrit || (!!o.sureCrit && this.rng() >= critRes) || this.rng() * 100 < critChance;
     this.lastCrit = crit;
     const frozen = t.frozenUntil > this.time, stoned = t.stoneUntil > this.time;
     if (!crit && !frozen && !stoned && t.sleepUntil <= this.time && !o.sure) {
@@ -2473,16 +2784,22 @@ export class World {
     let dmg = d.statusAtk + Math.floor(wroll * this.sizeOf(h, w ? w.wtype : d.wtype, t)) + (w ? 0 : d.ammoAtk) + d.bonusAtk;
     dmg = dmg * mult / 100;
     dmg *= 1 + (b.atkPct ?? 0) / 100;
+    // 질풍 보법: the blow right after a dodge (not a critical)
+    if (!crit && h.gale > this.time) { dmg *= 1 + this.sig(h, 'gale_step') * 0.16; h.gale = 0; }
+    // 숨 고르기: bosses from range · 천둥의 망치질: a stunned monster
+    if (steady && t.m.boss) dmg *= 1 + steady * 0.05;
+    if (t.stunUntil > this.time) dmg *= 1 + this.sig(h, 'thunder_hammer') * 0.05;
     const mel = this.mobElement(t);
     dmg *= 1 + (b.raceDmg?.[t.m.race] ?? 0) / 100;
     dmg *= 1 + (b.sizeDmg?.[t.m.size] ?? 0) / 100;
     dmg *= 1 + (b.eleDmg?.[mel] ?? 0) / 100;
     if (d.ranged) dmg *= 1 + (b.rangedPct ?? 0) / 100;
-    const em = elementMod(el, mel);
+    let em = elementMod(el, mel);
+    if (shift) em = 1 + (em - 1) * shift;
     dmg *= em;
     if (h.buffs.some((x) => x.id === 'magnum' && x.until > this.time)) dmg *= 1 + 0.2 * elementMod('fire', mel);
     if (crit) {
-      dmg *= 1.4 * (1 + (b.critDmgPct ?? 0) / 100);
+      dmg *= 1.4 * (1 + ((b.critDmgPct ?? 0) + (o.counter ? this.sig(h, 'counter_oath') * 5 : 0) + (first ? steady * 10 : 0)) / 100);
     } else if (!o.ignoreDef) {
       let hard = t.m.def;
       if (t.provokeUntil > this.time) hard *= 1 - t.provokeDef;
@@ -2502,15 +2819,18 @@ export class World {
     if (b.lifeStealPct && n > 0) this.healHero(h, Math.floor(n * b.lifeStealPct / 100), false);
     // steal
     const st = h.hero.skills.steal ?? 0;
-    if (st && !t.stolen && !t.m.boss && !t.summoned && this.rng() * 100 < st * 1.2) this.trySteal(h, t);
+    if (st && !t.stolen && !t.m.boss && !t.summoned && this.rng() * 100 < st * 1.2 + this.sig(h, 'grand_thief') * 2) this.trySteal(h, t);
     return true;
   }
 
-  private resolveMagic(h: HeroUnit, t: MobUnit, mult: number, el: Element, idx = 0, sk?: SkillDef, lv = 1): number {
+  private resolveMagic(h: HeroUnit, t: MobUnit, mult: number, el: Element, idx = 0, sk?: SkillDef, lv = 1, chained = false): number {
     if (!this.alive(t)) return 0;
     const d = h.d;
     const roll = d.matkMin + this.rng() * (d.matkMax - d.matkMin + 1);
     let dmg = roll * mult / 100;
+    // 빙뢰 공명: lightning through ice hits harder and jumps to another frozen monster nearby
+    const ft = el === 'wind' && t.frozenUntil > this.time ? this.sig(h, 'frost_thunder') : 0;
+    if (ft) dmg *= 1 + ft * 0.15;
     const mel = this.mobElement(t);
     const em = elementMod(el, mel);
     dmg *= em;
@@ -2523,6 +2843,14 @@ export class World {
     if (em <= 0) n = 0; else n = Math.max(1, n);
     this.dealToMob(h, t, n, 'normal', idx);
     this.emit({ t: 'hit', uid: t.uid, style: 'magic', element: el });
+    if (ft && !chained) {
+      const o2 = this.mobs.find((m) => m !== t && this.targetable(m) && !this.shunned(m) && m.frozenUntil > this.time && dist(m, t) < 5 * CELL);
+      if (o2) {
+        this.holdBreak(o2, 260);
+        this.emit({ t: 'skill', fx: 'lightning', from: h.uid, to: o2.uid, x: o2.x, y: o2.y, lv: 1, hits: 1, element: 'wind' });
+        this.resolveMagic(h, o2, mult, el, idx, sk, lv, true);
+      }
+    }
     // 균열 반사: part of the spell comes back at the caster (never more than 8% of max HP a hit)
     const rf = this.rift?.mods.reflect ?? 0;
     if (rf > 0 && n > 0 && h.state !== 'dead') {
@@ -2581,7 +2909,11 @@ export class World {
 
   startSkill(h: HeroUnit, sk: SkillDef, lv: number, target: Unit | null) {
     h.sitting = false;
-    const castBase = sk.cast ? sk.cast(lv) : 0;
+    const qc = QUICK_BOLTS.has(sk.id) ? this.sig(h, 'quick_chant') : 0; // 고속 영창
+    // 빙뢰 공명: lightning comes quicker at something already frozen
+    const ft = sk.element === 'wind' && sk.magic && target?.kind === 'mob' && target.frozenUntil > this.time ? this.sig(h, 'frost_thunder') : 0;
+    const vow = sk.id === 'magnus' ? this.sig(h, 'exorcist_vow') : 0; // 퇴마의 서약
+    const castBase = (sk.cast ? sk.cast(lv) : 0) * (1 - qc * 0.07) * (1 - ft * 0.05) * (1 - vow * 0.08);
     const cast = castBase * h.d.castMul;
     // 기도: the next spell's cast is shorter, then it's spent
     if (castBase > 0 && this.hasBuff(h, 'suffragium')) { h.buffs = h.buffs.filter((b) => b.id !== 'suffragium'); this.refresh(h); }
@@ -2605,18 +2937,22 @@ export class World {
     if (!info) { h.cast = null; this.emit({ t: 'castEnd', uid: h.uid }); }
     const { sk, lv } = c;
     if (!free) {
-      if (!this.canAfford(h, sk, lv) || !this.usable(h, sk)) {
+      const ct = tm0(this.unit(c.target));
+      if (!this.canAfford(h, sk, lv, ct) || !this.usable(h, sk)) {
         this.setState(h, 'idle');
         return;
       }
-      if (sk.sp) h.sp -= sk.sp(lv);
+      if (sk.sp) h.sp -= this.spCost(h, sk, lv, ct);
       if (sk.hpCost) h.hp -= sk.hpCost(lv);
       if (sk.zeny) { this.s.zeny -= this.zenyCost(h, sk, lv); this.onPersist(); }
       // catalysts (stone curse from Lv 6 only pays on success)
-      const cat = sk.catalyst;
-      if (cat && (!cat.from || lv >= cat.from) && !(sk.id === 'stone_curse' && lv >= 6)) { removeStack(this.s, cat.id, cat.n); this.onPersist(); }
+      const cat = this.catalystFor(h, sk, lv);
+      if (cat && !(sk.id === 'stone_curse' && lv >= 6)) { removeStack(this.s, cat.id, cat.n); this.onPersist(); }
       if (sk.cd) h.cds[sk.id] = this.time + sk.cd(lv);
-      const delay = sk.delay ? sk.delay(lv) : 300;
+      // 빙뢰 공명: lightning at a frozen target recovers quicker too
+      const ftm = tm0(this.unit(c.target));
+      const fz = sk.element === 'wind' && sk.magic && ftm && ftm.frozenUntil > this.time ? this.sig(h, 'frost_thunder') : 0;
+      const delay = (sk.delay ? sk.delay(lv) : 300) * (1 - fz * 0.05);
       h.lockUntil = this.time + delay;
       h.atkReady = Math.max(h.atkReady, this.time + Math.min(delay, h.d.delay));
       this.setState(h, sk.magic || sk.kind === 'heal' || sk.kind === 'buff' || sk.kind === 'selfBuff' || sk.kind === 'ground' || sk.kind === 'cure' ? 'cast' : 'attack');
@@ -2645,6 +2981,17 @@ export class World {
         this.after(SKILL_CONTACT - 20, () => { if (this.alive(tm)) this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm.uid, x: tm.x, y: tm.y, lv, element: el }); });
         const mhits = sk.bySize ? (tm.m.size === 'small' ? 1 : tm.m.size === 'medium' ? 2 : 3) : sk.hits ? sk.hits(lv) : 1;
         const gap = sk.id === 'sonic_blow' ? 70 : 120;
+        // 광월참: sure crits for the knight who gave up DEX (base DEX ≤ 10); anyone else swings three ordinary blows
+        const moon = sk.id === 'moon_slash' && h.hero.stats.dex <= 10;
+        // 음속 연쇄: sometimes the flurry goes again at once (free; never chains off a free one)
+        const chain = sk.id === 'sonic_blow' && !free ? this.sig(h, 'sonic_chain') : 0;
+        if (chain && this.rng() < chain * 0.08) {
+          this.after(SKILL_CONTACT + mhits * gap + 140, () => {
+            if (!this.alive(tm) || h.state === 'dead') return;
+            this.emit({ t: 'status', uid: h.uid, text: '음속 연쇄!', color: '#ff9ac0' });
+            this.releaseCast(h, { sk, lv, target: tm.uid, x: tm.x, y: tm.y, start: this.time, end: this.time }, true);
+          });
+        }
         this.lexPacket(tm, SKILL_CONTACT + mhits * gap + 100);
         this.holdBreak(tm, SKILL_CONTACT + mhits * gap + 100);
         const hb = (sk.hitBonus ? sk.hitBonus(lv) : 0) + (sk.id === 'sonic_blow' && h.hero.skills.sonic_accel ? 50 : 0);
@@ -2653,7 +3000,7 @@ export class World {
           for (let i = 0; i < mhits; i++) {
             this.after(SKILL_CONTACT + i * gap, () => {
               const before = tm.hp;
-              this.resolvePhys(h, tm, mult, el, hb, false, sk.id === 'pierce' ? 'pierce' : 'slash', i);
+              this.resolvePhys(h, tm, mult, el, hb, moon, sk.id === 'pierce' ? 'pierce' : 'slash', i, 0, moon ? { sureCrit: true } : {});
               total += Math.max(0, before - Math.max(0, tm.hp));
               if (i === mhits - 1) {
                 if (total > 0) this.emit({ t: 'dmg', uid: tm.uid, n: total, kind: 'total' });
@@ -2670,12 +3017,15 @@ export class World {
           const hit = this.resolvePhys(h, tm, mult, el, hb, false, 'slash', 0, flat);
           if (!hit || !this.alive(tm)) return;
           this.applyStatus(tm, sk, lv);
-          if (sk.id === 'envenom' && this.rng() * 100 < 10 + lv * 4 && !tm.m.boss) this.setStatus(tm, 'poison', 10000);
+          if (sk.id === 'envenom' && this.rng() * 100 < 10 + lv * 4 && !tm.m.boss) this.setStatus(tm, 'poison', 10000, h);
           // 급소 강타: bash Lv 6+ stuns, 5% × (bash − 5) × base level / 50
           if (sk.id === 'bash' && lv >= 6 && h.hero.skills.fatal_blow && !tm.m.boss && this.rng() * 100 < 5 * (lv - 5) * h.hero.baseLv / 50) this.setStatus(tm, 'stun', 3000);
           if (sk.knock) this.knock(tm, h.x, h.y, sk.knock(lv));
         });
         if (sk.id === 'mammonite') this.sound('coin_skill');
+        // 마력 부여: a melee skill carries the magic strike as well (once per cast)
+        const edge = h.buffs.find((b) => b.id === 'manaedge' && b.until > this.time);
+        if (edge) this.after(SKILL_CONTACT + 90, () => { if (this.alive(tm)) this.resolveMagic(h, tm, 30 + edge.lv * 12, h.d.weaponElement, 3); });
         return;
       }
       case 'ranged': {
@@ -2693,7 +3043,7 @@ export class World {
             total += Math.max(0, before - Math.max(0, tm.hp));
             if (i === hits - 1 && total > 0 && hits > 1) this.emit({ t: 'dmg', uid: tm.uid, n: total, kind: 'total' });
             if (!hit || !this.alive(tm)) return;
-            if (sk.id === 'venom_knife' && !tm.m.boss && this.rng() < 0.6) this.setStatus(tm, 'poison', 10000);
+            if (sk.id === 'venom_knife' && !tm.m.boss && this.rng() < 0.6) this.setStatus(tm, 'poison', 10000, h);
             if (sk.knock && i === hits - 1) this.knock(tm, h.x, h.y, sk.knock(lv));
           });
         }
@@ -2702,7 +3052,8 @@ export class World {
       case 'bolt': {
         if (!tm) return;
         if (sk.id === 'turn_undead') { this.turnUndead(h, tm, lv); return; }
-        const hits = sk.id === 'water_ball' ? this.waterBalls(lv) : sk.hits ? sk.hits(lv) : 1;
+        if (sk.id === 'falcon_strike') { this.falconDive(h, tm, sk, lv); return; }
+        const hits = (sk.id === 'water_ball' ? this.waterBalls(lv) : sk.hits ? sk.hits(lv) : 1) + this.extraBolts(h, sk, tm);
         if (sk.id === 'blitz_beat') { this.falconStrike(h, tm, sk, lv, hits); this.sound('arrow'); return; }
         if (sk.fixed) {
           // 돌 던지기: a thrown stone, fixed damage
@@ -2712,6 +3063,7 @@ export class World {
           return;
         }
         const step = sk.id === 'water_ball' ? 70 : 150;
+        const rm = this.resonate(h, sk, el); // 원소 공명
         this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm.uid, x: tm.x, y: tm.y, lv, hits, element: el });
         this.sound(sk.fx === 'firebolt' ? 'fire' : sk.fx === 'coldbolt' || sk.fx === 'frost' || sk.fx === 'waterball' ? 'ice' : sk.fx === 'lightning' ? 'thunder' : sk.fx === 'holy' ? 'heal' : 'cast');
         this.lexPacket(tm, 160 + hits * step + 100);
@@ -2719,7 +3071,7 @@ export class World {
         let total = 0;
         for (let i = 0; i < hits; i++) {
           this.after(160 + i * step, () => {
-            const n = this.resolveMagic(h, tm, this.skMult(h, sk, lv), el, i, sk, lv);
+            const n = this.resolveMagic(h, tm, this.skMult(h, sk, lv) * rm, el, i, sk, lv);
             total += n;
             if (n > 0) this.applyStatus(tm, sk, lv);
             if (i === hits - 1 && hits > 1 && total > 0) this.emit({ t: 'dmg', uid: tm.uid, n: total, kind: 'total' });
@@ -2735,7 +3087,7 @@ export class World {
         const self = sk.kind === 'selfAoe';
         let cx = self ? h.x : (tm ? tm.x : c.x);
         let cy = self ? h.y : (tm ? tm.y : c.y);
-        const r = this.areaR(sk, lv);
+        const r = this.areaR(sk, lv, h);
         const hits = sk.hits ? sk.hits(lv) : 1;
         if (sk.id === 'sightrasher') h.buffs = h.buffs.filter((b) => b.id !== 'sight'); // the fire spreads out and is gone
         // 창 찌르기: everything on the line to (and a bit past) the target
@@ -2745,24 +3097,50 @@ export class World {
         this.sound(el === 'fire' ? 'fire' : el === 'wind' ? 'thunder' : el === 'water' ? 'ice' : el === 'holy' ? 'heal' : sk.fx === 'shower' ? 'arrow' : 'hit_heavy');
         if (self || sk.fx === 'hammer' || sk.fx === 'bowling') this.emit({ t: 'shake', power: 2 });
         if (sk.reveal) for (const m of this.mobs) if (this.alive(m) && m.hiddenUntil > this.time && inArea(m)) { m.hiddenUntil = 0; m.hideNext = this.time + 12000; }
+        // 소용돌이 베기: the swing drags what stands around the target into the whirl before it lands
+        const wc = sk.id === 'bowling_bash' ? this.sig(h, 'whirl_cut') : 0;
+        if (wc && tm) {
+          for (const m of this.mobs) {
+            if (m === tm || !this.targetable(m) || this.shunned(m) || m.m.boss || m.m.immobile || m.danger) continue;
+            const dd = Math.hypot(m.x - tm.x, m.y - tm.y);
+            if (dd <= r || dd > r + 30 + wc * 12) continue;
+            const k = (r * 0.6) / dd;
+            m.x = tm.x + (m.x - tm.x) * k; m.y = tm.y + (m.y - tm.y) * k; m.charge = null; m.dest = null;
+          }
+        }
         const span = 150 + hits * 180 + 100;
         for (const m of this.mobs) if (this.targetable(m) && inArea(m)) { this.lexPacket(m, span); this.holdBreak(m, span); }
-        for (let i = 0; i < hits; i++) {
-          this.after(150 + i * 180, () => {
-            const list = this.mobs.filter((m) => this.targetable(m) && !this.shunned(m) && inArea(m));
-            // 염 폭발: the blast is shared by all it hits
-            const share = sk.split ? Math.max(1, list.length) : 1;
-            for (const m of list) {
-              if (sk.id === 'frost_nova' && m.frozenUntil > this.time) continue; // already frozen: untouched
-              if (sk.fixed) this.dealFixed(h, m, sk.fixed(lv, this.fixedCtx(h)), el, i);
-              else if (sk.magic) this.resolveMagic(h, m, this.skMult(h, sk, lv) / share, el, i, sk, lv);
-              else this.resolvePhys(h, m, this.skMult(h, sk, lv) / share, el, sk.hitBonus ? sk.hitBonus(lv) : 20, false, sk.fx === 'shower' ? 'pierce' : 'blunt', i);
-              this.applyStatus(m, sk, lv);
-              if (sk.knock && i === hits - 1) this.knock(m, line ? h.x : self ? h.x : cx, line ? h.y : self ? h.y : cy, sk.knock(lv));
-            }
-          });
+        const rm = this.resonate(h, sk, el); // 원소 공명
+        // 어둠 사냥: grimtooth from the shadows may crit
+        const darkCrit = sk.id === 'grimtooth' && this.sig(h, 'dark_hunt') > 0 && this.heroHidden(h);
+        const volley = (t0: number) => {
+          for (let i = 0; i < hits; i++) {
+            this.after(t0 + 150 + i * 180, () => {
+              const list = this.mobs.filter((m) => this.targetable(m) && !this.shunned(m) && inArea(m));
+              // 염 폭발: the blast is shared by all it hits · packs: 소용돌이 베기 / 질주 카트 / 폭풍의 눈
+              const share = sk.split ? Math.max(1, list.length) : 1;
+              const mul = this.skMult(h, sk, lv) / share * this.crowdMul(h, sk, list.length) * rm;
+              // 소용돌이 베기: every extra monster swept up gives SP back (once per cast)
+              if (i === 0 && t0 === 0 && sk.id === 'bowling_bash' && list.length > 1) h.sp = Math.min(h.d.maxSp, h.sp + this.sig(h, 'whirl_cut') * Math.min(4, list.length - 1));
+              for (const m of list) {
+                if (sk.id === 'frost_nova' && m.frozenUntil > this.time) continue; // already frozen: untouched
+                if (sk.fixed) this.dealFixed(h, m, sk.fixed(lv, this.fixedCtx(h)), el, i);
+                else if (sk.magic) this.resolveMagic(h, m, mul, el, i, sk, lv);
+                else this.resolvePhys(h, m, mul, el, sk.hitBonus ? sk.hitBonus(lv) : 20, darkCrit, sk.fx === 'shower' ? 'pierce' : 'blunt', i);
+                this.applyStatus(m, sk, lv, h);
+                // (질주 카트: the cart drags what it hits along instead of scattering the pack)
+                if (sk.knock && i === hits - 1 && !(sk.id === 'cart_revolution' && this.sig(h, 'cart_rush'))) this.knock(m, line ? h.x : self ? h.x : cx, line ? h.y : self ? h.y : cy, sk.knock(lv));
+              }
+            });
+          }
+        };
+        volley(0);
+        // 폭우의 화살 Lv 5: the sky opens a second time over the same spot
+        if (sk.id === 'arrow_shower' && this.sig(h, 'storm_arrows') >= 5) {
+          this.after(480, () => this.emit({ t: 'skill', fx: sk.fx, from: h.uid, x: cx, y: cy, lv, radius: r, hits, element: el }));
+          volley(480);
         }
-        if (sk.buff) this.applyBuff(h, sk, lv);
+        if (sk.buff) this.applyBuff(h, sk, lv, h);
         return;
       }
       case 'heal': {
@@ -2794,13 +3172,23 @@ export class World {
         const ally = tu?.kind === 'hero' && tu.state !== 'dead' ? tu : h;
         const targets = sk.kind === 'selfBuff' ? [h] : sk.buff?.party ? this.aliveHeroes() : sk.buff?.ally ? [ally] : [h];
         for (const a of targets) {
-          if (sk.buff) this.applyBuff(a, sk, lv);
+          if (sk.buff) this.applyBuff(a, sk, lv, h);
           if (sk.id === 'blessing' && a.buffs.some((b) => b.id === 'curse')) { a.buffs = a.buffs.filter((b) => b.id !== 'curse'); this.refresh(a); this.emit({ t: 'status', uid: a.uid, text: '저주 해제', color: '#ffe680' }); }
           this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: a.uid, x: a.x, y: a.y, lv });
         }
         if (sk.reveal) this.revealAround(h, sk, lv);
         if (sk.id === 'hiding' || sk.id === 'cloaking' || sk.id === 'play_dead') { h.hideDrainAt = 0; this.lose(h); h.target = null; }
         if (sk.id === 'poison_react') h.prCounters = [1, 1, 2, 2, 3, 3, 4, 4, 5, 6][lv - 1];
+        // 몰이꾼의 호각: everything around comes running to the hunter
+        if (sk.id === 'drover_whistle') {
+          for (const m of this.mobs) {
+            if (!this.targetable(m) || this.shunned(m) || m.m.boss || dist(m, h) > (sk.radius ?? 200) || !this.sees(m, h)) continue;
+            m.target = h.uid; m.chaseSince = this.time;
+            m.provokeUntil = this.time + 10000; m.provokeBy = h.uid; m.provokeDef = 0; m.provokeAtk = 0;
+            this.emit({ t: 'status', uid: m.uid, text: '!', color: '#ffd84a' });
+          }
+          this.emit({ t: 'skill', fx: 'provoke', from: h.uid, to: h.uid, x: h.x, y: h.y, lv, radius: sk.radius ?? 200 });
+        }
         this.sound('buff');
         return;
       }
@@ -2862,7 +3250,8 @@ export class World {
 
   /** 유성우: 2–7 meteors land around the target, each hitting its 7×7 1–5 times */
   private meteorStorm(h: HeroUnit, sk: SkillDef, lv: number, x: number, y: number) {
-    const n = [2, 3, 3, 4, 4, 5, 5, 6, 6, 7][lv - 1], hits = sk.hits!(lv), R = 77;
+    const n = [2, 3, 3, 4, 4, 5, 5, 6, 6, 7][lv - 1], hits = sk.hits!(lv), R = 77 * this.areaMul(h, sk);
+    const rm = this.resonate(h, sk, 'fire');
     this.sound('fire');
     for (let i = 0; i < n; i++) {
       const a = this.rng() * Math.PI * 2, rr = this.rng() * (sk.radius ?? 100) * 0.55;
@@ -2870,10 +3259,11 @@ export class World {
       this.after(i * 260, () => this.emit({ t: 'skill', fx: 'meteor', from: h.uid, x: mx, y: my, lv, radius: R * 0.8, hits: 1, element: 'fire' }));
       for (let j = 0; j < hits; j++) {
         this.after(i * 260 + 260 + j * 140, () => {
-          for (const m of this.mobs) {
-            if (!this.targetable(m) || this.shunned(m) || Math.hypot(m.x - mx, m.y - my) > R + this.bodyR(m) * 0.5) continue;
-            this.resolveMagic(h, m, this.skMult(h, sk, lv), 'fire', j, sk, lv);
-            this.applyStatus(m, sk, lv);
+          const list = this.mobs.filter((m) => this.targetable(m) && !this.shunned(m) && Math.hypot(m.x - mx, m.y - my) <= R + this.bodyR(m) * 0.5);
+          const mul = this.skMult(h, sk, lv) * this.crowdMul(h, sk, list.length) * rm;
+          for (const m of list) {
+            this.resolveMagic(h, m, mul, 'fire', j, sk, lv);
+            this.applyStatus(m, sk, lv, h);
           }
         });
       }
@@ -2968,12 +3358,25 @@ export class World {
     h.lockUntil = Math.max(h.lockUntil, this.time + ms);
   }
 
-  private applyBuff(a: HeroUnit, sk: SkillDef, lv: number) {
+  private applyBuff(a: HeroUnit, sk: SkillDef, lv: number, caster?: HeroUnit) {
     const bs = sk.buff!;
     a.buffs = a.buffs.filter((b) => b.id !== bs.id);
-    const shield = bs.shieldPct ? Math.floor(a.d.maxHp * bs.shieldPct(lv) / 100) : undefined;
-    const hits = bs.shieldHits ? bs.shieldHits(lv) : bs.id === 'endure' ? 7 : undefined;
-    a.buffs.push({ id: bs.id, name: bs.name, lv, until: this.time + bs.dur(lv), bonus: bs.bonus(lv), statPct: bs.statPct?.(lv), shield, shieldMax: shield, hits });
+    let shield = bs.shieldPct ? Math.floor(a.d.maxHp * bs.shieldPct(lv) / 100) : undefined;
+    let hits = bs.shieldHits ? bs.shieldHits(lv) : bs.id === 'endure' ? 7 : undefined;
+    let dur = bs.dur(lv);
+    const bonus = bs.bonus(lv);
+    // 성벽 (pr_wall): a thicker kyrie, longer and sturdier on the priest herself
+    const wall = caster && bs.id === 'kyrie' ? this.sig(caster, 'bulwark') : 0;
+    if (wall && shield !== undefined) {
+      shield = Math.floor(shield * (1 + wall * 0.1));
+      if (a === caster) { dur = Math.floor(dur * 1.5); if (hits !== undefined) hits += 2; }
+    }
+    // 마력 장벽 (wz_vit): a barrier of SP
+    if (bs.id === 'mbarrier') shield = Math.floor(a.d.maxSp * lv * 0.08);
+    // 광휘 (pr_crit): the gloria also sharpens crits
+    const rad = caster && bs.id === 'gloria' ? this.sig(caster, 'radiance') : 0;
+    if (rad) bonus.crit = (bonus.crit ?? 0) + rad * 2;
+    a.buffs.push({ id: bs.id, name: bs.name, lv, until: this.time + dur, bonus, statPct: bs.statPct?.(lv), shield, shieldMax: shield, hits });
     this.refresh(a);
     this.emit({ t: 'buff', uid: a.uid, name: bs.name });
   }
@@ -3005,7 +3408,7 @@ export class World {
     const mine = this.grounds.filter((g) => !g.done && g.owner === h.uid && g.sk.id === sk.id);
     if (sk.maxActive && mine.length >= sk.maxActive) this.endGround(mine[0], false);
     const g: GroundFx = {
-      id: this.gfxSeq++, sk, lv, owner: h.uid, x: clamp(x, 30, this.zone.w - 30), y: clamp(y, 76, this.zone.h - 30), r: spec.r(lv), ax, ay,
+      id: this.gfxSeq++, sk, lv, owner: h.uid, x: clamp(x, 30, this.zone.w - 30), y: clamp(y, 76, this.zone.h - 30), r: spec.r(lv) * this.areaMul(h, sk), ax, ay,
       line: spec.shape === 'line', born: this.time, until: this.time + spec.dur(lv),
       next: this.time + (sk.id === 'magnus' ? 300 : spec.every ?? 0), every: spec.every ?? 0, charges: spec.charges?.(lv) ?? Infinity,
       hits: {}, armAt: this.time + (sk.kind === 'trap' ? 250 : 0), done: false,
@@ -3091,24 +3494,33 @@ export class World {
         this.emit({ t: 'skill', fx: 'magnus', from: g.owner, x: g.x, y: g.y, lv, radius: g.r, hits: Math.min(6, lv), element: 'holy' });
         for (const m of this.mobs) if (inside(m) && this.unholy(m)) this.resolveMagic(owner, m, this.skMult(owner, sk, lv), 'holy', 0, sk, lv);
         return;
-      case 'storm_gust':
+      case 'storm_gust': {
         g.charges--;
-        for (const m of this.mobs) {
-          if (!inside(m) || m.frozenUntil > this.time) continue; // frozen: the storm passes over it
+        const list = this.mobs.filter((m) => inside(m) && m.frozenUntil <= this.time); // frozen: the storm passes over it
+        const mul = this.skMult(owner, sk, lv) * this.crowdMul(owner, sk, list.length); // 폭풍의 눈
+        for (const m of list) {
           const n = (g.hits[m.uid] = (g.hits[m.uid] ?? 0) + 1);
-          this.resolveMagic(owner, m, this.skMult(owner, sk, lv), 'water', n % 3, sk, lv);
+          this.resolveMagic(owner, m, mul, 'water', n % 3, sk, lv);
           if (!this.alive(m)) continue;
           if (n >= 3 && m.m.boss !== 'mvp') this.setStatus(m, 'freeze', 4000);
           else this.knock(m, g.x, g.y, 2);
         }
         if (g.charges <= 0) this.endGround(g, true);
         return;
+      }
       case 'quagmire':
         for (const m of this.mobs) if (inside(m) && !m.m.boss) { m.quag = lv * 0.1; m.quagUntil = this.time + 400; }
         return;
-      case 'venom_dust':
-        for (const m of this.mobs) if (inside(m) && this.poisonable(m)) this.setStatus(m, 'poison', 10000);
+      case 'venom_dust': {
+        // 맹독 누적: the mist thickens the poison on what already breathes it (a layer a second)
+        const vs = this.sig(owner, 'venom_stack');
+        for (const m of this.mobs) {
+          if (!inside(m)) continue;
+          if (this.poisonable(m)) this.setStatus(m, 'poison', 10000, owner);
+          else if (vs && m.poisonUntil > this.time && m.poisonStacks < vs && (g.hits[m.uid] ?? 0) <= this.time) { g.hits[m.uid] = this.time + 1000; this.setStatus(m, 'poison', 10000, owner); }
+        }
         return;
+      }
     }
   }
 
@@ -3118,6 +3530,18 @@ export class World {
     this.endGround(g, true);
     if (!owner) return;
     const sk = g.sk, lv = g.lv, el = sk.element ?? 'neutral';
+    // 덫 연쇄: the blast sets off this hunter's other traps nearby, and traps hit harder
+    const tc = sk.kind === 'trap' && sk.id !== 'fire_pillar' ? this.sig(owner, 'trap_chain') : 0;
+    const tmul = 1 + tc * 0.15;
+    if (tc) {
+      const near = this.grounds.filter((x) => !x.done && x !== g && x.owner === g.owner && x.sk.kind === 'trap' && x.sk.id !== 'fire_pillar' && this.time >= x.armAt
+        && Math.hypot(x.x - g.x, x.y - g.y) <= g.r + 4 * CELL);
+      near.forEach((x, i) => this.after(120 + i * 90, () => {
+        if (x.done) return;
+        const vm = this.mobs.find((mm) => this.targetable(mm) && !this.shunned(mm) && Math.hypot(mm.x - x.x, mm.y - x.y) <= x.r + 30);
+        this.detonate(x, vm ?? null);
+      }));
+    }
     const single = sk.id === 'land_mine' || sk.id === 'ankle_snare' || sk.id === 'skid_trap';
     const victims = single ? (m ? [m] : []) : this.mobs.filter((x) => this.targetable(x) && !this.shunned(x) && Math.hypot(x.x - g.x, x.y - g.y) <= g.r + this.bodyR(x) * 0.5);
     this.emit({ t: 'skill', fx: sk.id === 'fire_pillar' ? 'firepillar' : sk.id === 'ankle_snare' ? 'snare' : 'trapburst', from: owner.uid, to: m?.uid, x: g.x, y: g.y, lv, radius: Math.max(24, g.r), element: el });
@@ -3137,7 +3561,7 @@ export class World {
           this.emit({ t: 'status', uid: v.uid, text: '기력 소진', color: '#a0a0ff' });
           break;
         case 'freezing_trap':
-          this.resolvePhys(owner, v, this.skMult(owner, sk, lv), 'water', 0, false, 'blunt', 0, 0, { sure: true });
+          this.resolvePhys(owner, v, this.skMult(owner, sk, lv) * tmul, 'water', 0, false, 'blunt', 0, 0, { sure: true });
           if (!v.m.boss) this.setStatus(v, 'freeze', lv * 3000);
           break;
         case 'fire_pillar': {
@@ -3147,7 +3571,7 @@ export class World {
         }
         case 'flasher': if (v.m.race !== 'plant' && v.m.boss !== 'mvp') this.applyStatus(v, sk, lv); break;
         default:
-          if (sk.fixed) this.dealFixed(owner, v, sk.fixed(lv, this.fixedCtx(owner)), el, 0);
+          if (sk.fixed) this.dealFixed(owner, v, sk.fixed(lv, this.fixedCtx(owner)) * tmul, el, 0);
           this.applyStatus(v, sk, lv);
       }
     }
@@ -3422,7 +3846,7 @@ export class World {
     if (this.rift && m.uid === this.rift.guardian) this.guardianTick(m);
     if (m.poisonUntil > this.time && this.time >= m.poisonNext) {
       m.poisonNext = this.time + 1000;
-      const n = Math.min(Math.floor(m.poisonDmg * (this.rift?.mods.fixedMul ?? 1)), m.hp - 1);
+      const n = Math.min(Math.floor(m.poisonDmg * (1 + 1.5 * Math.max(0, m.poisonStacks - 1)) * (this.rift?.mods.fixedMul ?? 1)), m.hp - 1);
       if (n > 0) { m.hp -= n; this.emit({ t: 'dmg', uid: m.uid, n, kind: 'normal' }); }
     }
     // 석화: the stone crumbles 1% of max HP every 5 s (not below 25%)
@@ -3541,15 +3965,20 @@ export class World {
         return;
       }
       // 반격: braced — block the swing and strike back with a critical that ignores DEF
-      if (t.counterUntil > this.time && m.m.range < 60 && !this.shunned(m)) {
+      // (역습의 맹세: now and then even without the stance, and the struck monster turns on the knight)
+      const oath = this.sig(t, 'counter_oath');
+      const braced = t.counterUntil > this.time || (oath > 0 && !t.d.ranged && !t.cast && this.rng() * 100 < oath * 1.4);
+      if (braced && m.m.range < 60 && !this.shunned(m)) {
         t.counterUntil = 0;
         t.lockUntil = Math.min(t.lockUntil, this.time + 120);
         this.emit({ t: 'status', uid: t.uid, text: '반격!', color: '#ffb0a0' });
-        this.after(80, () => this.resolvePhys(t, m, 100, t.d.weaponElement, 0, true, 'slash', 0, 0, { forceCrit: true, ignoreDef: true }));
+        if (oath && !m.m.boss) { m.provokeUntil = Math.max(m.provokeUntil, this.time + 10000); m.provokeBy = t.uid; m.target = t.uid; }
+        this.after(80, () => this.resolvePhys(t, m, 100, t.d.weaponElement, 0, true, 'slash', 0, 0, { forceCrit: true, ignoreDef: true, counter: true }));
         return;
       }
       if (this.rng() * 100 < d.pdodge) {
         this.emit({ t: 'dmg', uid: t.uid, n: 0, kind: 'lucky' });
+        this.onDodge(t, m);
         return;
       }
       const crowd = this.mobs.reduce((a, x) => a + (x.state !== 'dead' && x.target === t.uid && dist(x, t) <= x.m.range + 40 ? 1 : 0), 0);
@@ -3560,6 +3989,7 @@ export class World {
       if (this.rng() * 100 >= rate) {
         this.emit({ t: 'dmg', uid: t.uid, n: 0, kind: 'miss' });
         this.sound('miss');
+        this.onDodge(t, m);
         return;
       }
     }
@@ -3571,6 +4001,7 @@ export class World {
     dmg *= 1 - (d.b.raceRes?.[m.m.race] ?? 0) / 100;
     dmg *= 1 - (d.b.eleRes?.[el] ?? 0) / 100;
     dmg *= 1 - (d.b.dmgReducePct ?? 0) / 100;
+    dmg *= 1 - this.auraCut(t); // 성역의 오라
     dmg -= d.b.raceFlatRes?.[m.m.race] ?? 0; // 신의 가호, after DEF
     // 마력 갑주: SP soaks physical blows — the fuller the SP, the more (RO energy coat)
     if (!magic && this.hasBuff(t, 'ecoat') && t.sp > 0) {

@@ -3,7 +3,7 @@
 // (RateMyServer pre-re). Cast and delay times are scaled to the idle pace (about half of RO's). Names are original
 // Korean (the repo is public): no RO-coined names for new skills. Utility skills follow the idle adaptations of §0.
 // The blacksmith's own skills are left exactly as they were (the user excluded the blacksmith from stage 1).
-import type { Bonus, ClassId, Element, IconSpec, WeaponType } from '../types.ts';
+import type { Bonus, ClassId, Element, IconSpec, StatKey, WeaponType } from '../types.ts';
 
 export type SkillKind =
   | 'passive' | 'melee' | 'ranged' | 'bolt' | 'aoe' | 'selfAoe'
@@ -25,8 +25,12 @@ export type AutoRole = 'attack' | 'aoe' | 'heal' | 'buff' | 'tank' | 'cc' | 'rev
 export type StatusKind = 'stun' | 'freeze' | 'blind' | 'sleep' | 'stone' | 'silence';
 /** inputs for fixed-damage skills (traps, falcon, fire pillar) */
 export interface FixedCtx { dex: number; int: number; luk: number; baseLv: number; skills: Record<string, number>; matk: number }
-/** what a passive may look at besides its level and the weapon */
-export interface PassiveCtx { skills: Record<string, number>; baseLv: number; mounted: boolean; dual: boolean; second: boolean }
+/** what a passive may look at besides its level and the weapon: the stats the player put in (`base`, without job or
+ *  gear bonuses) and the buffs up right now (build signature skills, SKILLS_META.md) */
+export interface PassiveCtx {
+  skills: Record<string, number>; baseLv: number; mounted: boolean; dual: boolean; second: boolean;
+  base: Record<StatKey, number>; buffs: Set<string>;
+}
 
 export interface BuffSpec {
   id: string;
@@ -88,6 +92,10 @@ export interface SkillDef {
   hitBonus?: (lv: number) => number;
   weapon?: WeaponType[];
   passive?: (lv: number, w: WeaponType, c: PassiveCtx) => Bonus;
+  /** a passive part that reads the final stats (LUK → crit, DEX → hit): derived numbers only (crit, hit, range, flee…) */
+  post?: (lv: number, total: Record<StatKey, number>, w: WeaponType) => Bonus;
+  /** a build signature skill (SKILLS_META.md): the build id it belongs to (shown as 「빌드: ○○」) */
+  build?: string;
   /** a passive the player can switch off (riding, auto berserk, cart look) */
   toggle?: boolean;
   buff?: BuffSpec;
@@ -754,7 +762,7 @@ def({
   id: 'blitz_beat', name: '블리츠 비트', cls: 'hunter', maxLv: 5, kind: 'bolt', auto: 'attack', fx: 'falcon', element: 'neutral',
   icon: { glyph: 'bird', color: '#ffb84a' }, req: { falcon_eyes: 1 }, range: 220,
   sp: L((lv) => 7 + lv * 3), hits: L((lv) => lv), cast: fixed(800), delay: fixed(900),
-  fixed: (_lv, c) => Math.floor((c.dex / 10 + c.int / 2 + (c.skills.steel_crow ?? 0) * 3 + 40) * 2),
+  fixed: (_lv, c) => blitzPer(c),
   desc: (lv) => `매가 ${lv}연속 급강하. 각 (DEX/10 + INT/2 + 강철 발톱×3 + 40)×2 고정 피해 (방어 무시)\nSP ${7 + lv * 3}`,
 });
 def({
@@ -769,6 +777,10 @@ def({
   buff: { id: 'detect', name: '탐지', dur: fixed(4000), bonus: () => ({}) },
   desc: (lv) => `매가 주위(${1 + lv * 2}칸)를 훑어 숨은 몬스터와 덫을 드러냅니다.\nSP 8`,
 });
+/** one falcon dive (RO): (DEX/10 + INT/2 + steel crow×3 + 40)×2 — 맹금의 지혜 raises the INT part */
+export function blitzPer(c: FixedCtx): number {
+  return Math.floor((c.dex / 10 + c.int / 2 * (1 + (c.skills.raptor_wisdom ?? 0) * 0.08) + (c.skills.steel_crow ?? 0) * 3 + 40) * 2);
+}
 const TRAP = (n: number) => ({ id: 'k_trap', n });
 const trapDesc = (n: number) => `덫 ${n}개`;
 def({
@@ -1002,7 +1014,7 @@ def({
 def({
   id: 'enchant_poison', name: '맹독 부여', cls: 'assassin', maxLv: 10, kind: 'buff', auto: 'buff', fx: 'poisonbuff', req: { envenom: 1 },
   icon: { glyph: 'poison', color: '#b070e0' }, sp: fixed(20), range: 40, delay: fixed(500),
-  buff: { id: 'edp', name: '맹독 부여', dur: L((lv) => 15000 + lv * 15000), bonus: (lv) => ({ weaponElement: 'poison', procs: [{ on: 'attack', chance: 2.5 + lv * 0.5, status: { kind: 'poison', dur: 10000 } }] }) },
+  buff: { id: 'edp', name: '맹독 부여', dur: L((lv) => 15000 + lv * 15000), bonus: (lv) => ({ weaponElement: 'poison', procs: [{ on: 'attack', chance: 2.5 + lv * 0.5, status: { kind: 'poison', dur: 10000 }, tag: 'edp' }] }) },
   desc: (lv) => `${15 + lv * 15}초간 무기를 독속성으로. 평타마다 ${(2.5 + lv * 0.5).toFixed(1)}% 확률로 중독\nSP 20`,
 });
 def({
@@ -1085,6 +1097,278 @@ def({
   passive: () => ({}),
   desc: (lv) => `정련석·별철·수호석 드롭률 +${lv * 20}% (파티 공유)`,
 });
+
+// ═════════ Build signature skills (docs/design/SKILLS_META.md): one per meta build — two for the flagships (광월 크리,
+// 매 한 방, 주먹 매, 몰이 매) — each amplifying its build's core mechanic. Ordinary 2nd-job skills (Lv 1–5) behind the build's
+// key skill, so where the points go is the build. Their effects are conditional (DEX ≤ 10, bare hands, a katar, packs…),
+// so another build that takes one gains little. Not classic RO: original names, counted apart from the RO trees.
+// ───────── Knight
+def({
+  id: 'moon_art', name: '광월의 극의', cls: 'knight', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'kn_crit',
+  icon: { glyph: 'sword2', color: '#ff6a7a', color2: '#ffe0e8' }, req: { twohand_mastery: 5 },
+  passive: (lv, _w, c) => (c.base.dex <= 10 ? { critDmgPct: lv * 4 } : {}),
+  post: (lv, t) => ({ crit: Math.floor(t.luk / 10) * 0.5 * lv }),
+  desc: (lv) => `달이 차오르듯 운이 칼끝에 모입니다.\nLUK 10마다 크리티컬 +${(lv * 0.5).toFixed(1)}\n직접 찍은 DEX가 10 이하이면 크리티컬 피해 +${lv * 4}% — DEX를 버린 크리 기사의 보상\n(크리 저항이 있는 보스에게는 여전히 덜 들어갑니다)`,
+});
+def({
+  id: 'moon_slash', name: '광월참', cls: 'knight', maxLv: 5, kind: 'melee', auto: 'attack', fx: 'moonslash', build: 'kn_crit',
+  icon: { glyph: 'sword2', color: '#ffd0f0', color2: '#ff6a7a' }, req: { moon_art: 3 }, weapon: ['sword2h'],
+  sp: fixed(18), hits: fixed(3), mult: L((lv) => lv * 15), delay: fixed(450), cd: fixed(8000),
+  desc: (lv) => `초승달 세 줄기로 베는 3연타, 각 ATK (${lv * 15} + LUK×3)%\n직접 찍은 DEX가 10 이하이면 모두 확정 크리티컬(회피·방어 무시). 크리 저항이 있는 보스에게는 그만큼 크리가 빗나갑니다.\n운도 버리지 않고 DEX도 버리지 않은 검에는 그저 가벼운 세 번의 칼질\n(양손검 필요) SP 18 · 재사용 8초`,
+});
+def({
+  id: 'gale_step', name: '질풍 보법', cls: 'knight', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'kn_agi',
+  icon: { glyph: 'wind', color: '#9af0c0' }, req: { twohand_quicken: 3 },
+  passive: (lv, w) => (w === 'sword2h' ? { flee: lv * 3, crit: -lv * 2 } : {}),
+  desc: (lv) => `양손검을 든 채 바람처럼 비켜 섭니다.\n양손검 장착 시 FLEE +${lv * 3}, 대신 크리티컬 −${lv * 2} (몸을 빼느라 급소를 노리지 못함)\n공격을 피한 직후 다음 일격(크리티컬이 아닌 타격) +${lv * 16}% (3초 안)`,
+});
+def({
+  id: 'iron_stance', name: '철벽 자세', cls: 'knight', maxLv: 5, kind: 'selfBuff', auto: 'buff', fx: 'endure', build: 'kn_vit',
+  icon: { glyph: 'shield', color: '#a8c0e0', color2: '#5a7aa0' }, req: { pierce: 5 }, weapon: ['spear'],
+  sp: L((lv) => 8 + lv), cd: fixed(3000),
+  buff: { id: 'ironstance', name: '철벽 자세', dur: fixed(120000), bonus: (lv) => ({ def: lv * 4, moveSpd: -5, skillDmg: { pierce: lv * 20 } }) },
+  desc: (lv) => `창을 땅에 박고 버티는 자세 (2분).\nDEF +${lv * 4}, 꿰뚫기 피해 +${lv * 20}%, 꿰뚫기 SP −1, 이동 속도 −5%\n(창 필요) SP ${8 + lv}`,
+});
+def({
+  id: 'whirl_cut', name: '소용돌이 베기', cls: 'knight', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'kn_bowl',
+  icon: { glyph: 'burst', color: '#ffb060', color2: '#a0b0c0' }, req: { bowling_bash: 5 },
+  passive: () => ({}),
+  desc: (lv) => `휘두르는 대검이 소용돌이를 일으킵니다.\n회전 강타가 대상 주위(범위 밖 ${Math.round((30 + lv * 12) / 22 * 10) / 10}칸까지)의 적을 끌어당긴 뒤 벱니다\n맞힌 대상이 1명 늘 때마다 피해 +${lv * 6}%, SP ${lv} 회복 (5명까지: 최대 +${lv * 24}%, SP ${lv * 4})`,
+});
+def({
+  id: 'counter_oath', name: '역습의 맹세', cls: 'knight', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'kn_counter',
+  icon: { glyph: 'shield', color: '#ff8a7a', color2: '#ffe0a0' }, req: { auto_counter: 3 },
+  passive: () => ({}),
+  desc: (lv) => `막는 순간이 곧 공격의 순간입니다.\n자세 없이도 근접 공격을 받을 때 ${(lv * 1.4).toFixed(1)}% 확률로 반격 (막고 크리티컬로 되받아침)\n반격의 크리티컬 피해 +${lv * 5}%, 반격당한 적은 10초간 이 기사만 노립니다 (도발)\n(활 제외)`,
+});
+def({
+  id: 'element_shift', name: '속성 전환', cls: 'knight', maxLv: 3, kind: 'selfBuff', auto: 'buff', fx: 'amp', build: 'kn_ele',
+  icon: { glyph: 'flame', color: '#c8a0ff', color2: '#7ad0ff' }, req: { magnum_break: 3 },
+  sp: T([12, 10, 8]), cd: fixed(2000),
+  buff: { id: 'eshift', name: '속성 전환', dur: fixed(60000), bonus: () => ({}) },
+  desc: (lv) => `60초간 무기의 속성이 지금 대상의 약점 속성(불·물·땅·바람)으로 저절로 바뀝니다.\n상성 보너스는 ${30 + lv * 10}%까지만 실립니다 (예: 불 → 땅 150% → ${100 + (30 + lv * 10) / 2}%)\n속성 무기 여러 자루를 들고 다니던 속성검 기사의 기술. 약점이 없는 대상에게는 원래 속성 그대로\nSP ${T([12, 10, 8])(lv)}`,
+});
+def({
+  id: 'mana_edge', name: '마력 부여', cls: 'knight', maxLv: 5, kind: 'selfBuff', auto: 'buff', fx: 'amp', build: 'kn_spell',
+  icon: { glyph: 'sword', color: '#d0a0ff', color2: '#80c0ff' }, req: { magnum_break: 1 },
+  sp: L((lv) => 10 + lv * 2), cd: fixed(2000),
+  buff: { id: 'manaedge', name: '마력 부여', dur: L((lv) => 60000 + lv * 24000), bonus: () => ({}) },
+  desc: (lv) => `${60 + lv * 24}초간 칼날에 마력을 두릅니다.\n근접 평타나 근접 스킬이 맞으면 무기 속성 마법 추가타 MATK ${30 + lv * 12}% (INT가 높을수록 강함)\nSP ${10 + lv * 2}`,
+});
+// ───────── Wizard
+const BOLT3 = { fire_bolt: 5, cold_bolt: 5, lightning_bolt: 5 };
+def({
+  id: 'quick_chant', name: '고속 영창', cls: 'wizard', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'wz_intdex',
+  icon: { glyph: 'book', color: '#ffd060', color2: '#ff6a3d' }, req: BOLT3,
+  passive: () => ({}),
+  desc: (lv) => `볼트 주문을 혀끝에 붙여 둡니다.\n화염·냉기·번개 화살의 시전 시간 −${lv * 7}%${lv >= 5 ? '\n5레벨: 볼트가 한 발 더 나갑니다' : '\n(5레벨이 되면 볼트가 한 발 더)'}`,
+});
+def({
+  id: 'storm_eye', name: '폭풍의 눈', cls: 'wizard', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'wz_storm',
+  icon: { glyph: 'storm', color: '#9fe8ff', color2: '#ffe45a' }, req: { storm_gust: 3 },
+  passive: () => ({}),
+  desc: (lv) => `폭풍의 한가운데에서 주문을 넓힙니다.\n광역 마법의 범위 +${lv * 6}%\n한 번에 맞힌 적이 2명을 넘으면 1명마다 피해 +${lv * 2}% (최대 +20%)`,
+});
+def({
+  id: 'frost_thunder', name: '빙뢰 공명', cls: 'wizard', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'wz_freeze',
+  icon: { glyph: 'bolt', color: '#bff0ff', color2: '#ffe45a' }, req: { frost_diver: 5 },
+  passive: () => ({}),
+  desc: (lv) => `얼음 속을 번개가 타고 흐릅니다.\n얼어 있는 대상에게 바람(번개) 마법 피해 +${lv * 15}%, SP −${lv * 8}%, 시전 시간·딜레이 −${lv * 5}%\n그 타격이 근처(5칸)의 다른 얼어 있는 적 1명에게 연쇄합니다`,
+});
+def({
+  id: 'mana_barrier', name: '마력 장벽', cls: 'wizard', maxLv: 5, kind: 'selfBuff', auto: 'buff', fx: 'kyrie', build: 'wz_vit',
+  icon: { glyph: 'shield', color: '#80b0ff', color2: '#d080ff' }, req: { energy_coat: 1 },
+  sp: L((lv) => 8 + lv * 2), cast: fixed(500), cd: fixed(10000),
+  buff: { id: 'mbarrier', name: '마력 장벽', dur: fixed(120000), bonus: () => ({}) },
+  desc: (lv) => `SP를 엮어 몸 앞에 장벽을 칩니다 (2분).\n최대 SP의 ${lv * 8}%만큼 피해를 막습니다 (SP가 많을수록 두꺼운 장벽).\n장벽이 버티는 동안 맞아도 시전이 밀리지 않습니다.\nSP ${8 + lv * 2} · 재사용 10초 (방치형: SP가 절반 넘게 남았고 몬스터에게 쫓기거나 HP가 줄었을 때 칩니다)`,
+});
+def({
+  id: 'soul_surge', name: '영혼 폭주', cls: 'wizard', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'wz_soul',
+  icon: { glyph: 'spirit', color: '#b8f0ff', color2: '#8060ff' }, req: { soul_strike: 5 },
+  passive: () => ({}),
+  desc: (lv) => `영혼탄이 넋 있는 것을 알아봅니다.\n염·불사 대상에게 영혼 강타 +${lv >= 3 ? 1 : 0}발 (3레벨부터)\n영혼 강타 SP −${lv * 2}%`,
+});
+def({
+  id: 'elem_resonance', name: '원소 공명', cls: 'wizard', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'wz_elem',
+  icon: { glyph: 'drop', color: '#7ad0ff', color2: '#ff8a3d' }, req: { fire_bolt: 3, cold_bolt: 3, lightning_bolt: 3 },
+  passive: () => ({}),
+  desc: (lv) => `원소가 바뀔 때마다 마력이 공명합니다.\n직전과 다른 속성의 공격 마법을 쓰면 공명 1단계 (최대 3), 단계마다 마법 피해 +${lv * 4}% (최대 +${lv * 12}%)\n같은 속성을 이어 쓰면 공명이 풀립니다. 익히면 AI가 대상의 약점 쪽으로 볼트를 번갈아 씁니다.`,
+});
+// ───────── Hunter
+def({
+  id: 'archer_breath', name: '명궁의 호흡', cls: 'hunter', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'hu_dex',
+  icon: { glyph: 'arrows', color: '#ffe08a', color2: '#7ad06a' }, req: { double_strafe: 5 },
+  passive: (lv, w) => (w === 'bow' ? { skillDmg: { double_strafe: lv * 8 } } : {}),
+  post: (_lv, t, w) => (w === 'bow' ? { hit: Math.floor(t.dex / 20), range: Math.floor(t.dex / 20) * 8 } : {}),
+  desc: (lv) => `숨을 고르고 두 발을 한 호흡에.\n활 장착 시 이중 사격 피해 +${lv * 8}%\n활 평타가 맞으면 ${(lv * 1.6).toFixed(1)}% 확률로 SP 없이 이중 사격을 함께 쏩니다 (배운 레벨)\nDEX 20마다 사거리 +1칸, 명중 +1`,
+});
+def({
+  id: 'falcon_strike', name: '매의 일격', cls: 'hunter', maxLv: 5, kind: 'bolt', auto: 'attack', fx: 'falconstrike', build: 'hu_intblitz',
+  icon: { glyph: 'bird', color: '#ffe080', color2: '#ff6a3d' }, req: { blitz_beat: 3 }, range: 220,
+  sp: fixed(12), hits: fixed(1), delay: fixed(700), cd: fixed(5000),
+  fixed: (lv, c) => Math.floor(blitzPer(c) * (1.5 + lv * 0.3)),
+  desc: (lv) => `매가 한 마리만 노리고 내리꽂힙니다.\n블리츠 비트 한 타 × ${(1.5 + lv * 0.3).toFixed(1)}배의 고정 피해 한 방 (방어·회피 무시, 주변에 퍼지지 않음)\n블리츠 비트 피해 보너스(장비)도 그대로 실립니다. 시전 없이 바로\nSP 12 · 재사용 5초`,
+});
+def({
+  id: 'raptor_wisdom', name: '맹금의 지혜', cls: 'hunter', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'hu_intblitz',
+  icon: { glyph: 'book', color: '#d0a060', color2: '#ffe080' }, req: { falcon_strike: 1 },
+  passive: () => ({}),
+  desc: (lv) => `매에게 사냥의 이치를 가르칩니다.\n블리츠 비트(오토 블리츠·매의 일격 포함)의 INT 계수 +${lv * 8}%\n(INT/2 → INT/2 × ${(1 + lv * 0.08).toFixed(2)})`,
+});
+def({
+  id: 'falcon_bond', name: '매와 한 몸', cls: 'hunter', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'hu_fist',
+  icon: { glyph: 'hand', color: '#e0b070', color2: '#ffb84a' }, req: { falcon_eyes: 1 },
+  passive: (lv, w) => (w === 'none' ? { autoBlitzPct: lv, unarmedAspdPct: lv * 2 } : {}),
+  desc: (lv) => `활을 내려놓은 주먹에 매가 맞춰 날아듭니다.\n맨손일 때만: 오토 블리츠 확률 +${lv}%, 공격 속도 +${lv * 2}%`,
+});
+def({
+  id: 'bare_flurry', name: '맨주먹 연타', cls: 'hunter', maxLv: 3, kind: 'passive', auto: 'none', fx: '', build: 'hu_fist',
+  icon: { glyph: 'hand', color: '#ff9a6a', color2: '#ffe080' }, req: { falcon_bond: 3 },
+  passive: () => ({}),
+  desc: (lv) => `매가 덮치는 틈에 주먹이 몰아칩니다.\n맨손 평타가 오토 블리츠를 일으키면 ${[0.4, 0.6, 0.8][lv - 1]}초간 평타 공격 속도 2배`,
+});
+def({
+  id: 'falcon_circle', name: '매의 선회', cls: 'hunter', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'hu_mob',
+  icon: { glyph: 'bird', color: '#ffd84a', color2: '#a0d0ff' }, req: { blitz_beat: 3 },
+  passive: () => ({}),
+  desc: (lv) => `평타에 맞춰 덮치는 매가 크게 원을 그립니다.\n오토 블리츠(평타로 매가 덮칠 때)의 범위 +${lv * 15}, 범위로 휩쓸린(대상이 아닌) 적에게 피해 +${lv * 15}%`,
+});
+def({
+  id: 'drover_whistle', name: '몰이꾼의 호각', cls: 'hunter', maxLv: 3, kind: 'selfBuff', auto: 'buff', fx: 'provoke', build: 'hu_mob',
+  icon: { glyph: 'shout', color: '#ffd84a', color2: '#c89060' }, req: { falcon_circle: 3 },
+  sp: fixed(20), cd: fixed(12000), radius: 200,
+  buff: { id: 'whistle', name: '몰이꾼의 호각', dur: fixed(10000), bonus: (lv) => ({ dmgReducePct: lv * 10 }) },
+  desc: (lv) => `호각을 불어 주위(9칸)의 몬스터를 자신에게 끌어모읍니다.\n10초간 받는 피해 −${lv * 10}%\n방치형: 근처에 몰려올 몹이 둘 이상일 때 씁니다. SP 20 · 재사용 12초`,
+});
+def({
+  id: 'trap_chain', name: '덫 연쇄', cls: 'hunter', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'hu_trap',
+  icon: { glyph: 'burst', color: '#ff8a3d', color2: '#d0e0ff' }, req: { claymore_trap: 3 },
+  passive: () => ({}),
+  desc: (lv) => `덫과 덫 사이에 도화선을 잇습니다.\n덫이 터지면 근처(덫 범위 + 4칸)의 다른 내 덫도 함께 터집니다\n덫 피해 +${lv * 15}%`,
+});
+def({
+  id: 'storm_arrows', name: '폭우의 화살', cls: 'hunter', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'hu_shower',
+  icon: { glyph: 'rain', color: '#a0d0ff', color2: '#c8e07a' }, req: { arrow_shower: 5 },
+  passive: (lv) => ({ skillDmg: { arrow_shower: lv * 20 } }),
+  desc: (lv) => `하늘을 덮을 만큼 화살을 퍼붓습니다.\n화살비 피해 +${lv * 20}%, SP −${lv}${lv >= 5 ? '\n5레벨: 화살비가 한 번 더 쏟아집니다' : '\n(5레벨이 되면 화살비가 한 번 더)'}`,
+});
+def({
+  id: 'steady_breath', name: '숨 고르기', cls: 'hunter', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'hu_snipe',
+  icon: { glyph: 'eye2', color: '#ffe080', color2: '#ff6a3d' }, req: { vultures_eye: 5 },
+  passive: () => ({}),
+  desc: (lv) => `첫 발에 모든 것을 겁니다.\n활로 대상에게 처음 쏘는 공격(이중 사격의 첫 발 포함)의 크리티컬 확률 +${lv * 10}%, 그 크리티컬 피해 +${lv * 10}%\n보스에게 원거리 피해 +${lv * 5}%`,
+});
+// ───────── Priest
+def({
+  id: 'sanct_aura', name: '성역의 오라', cls: 'priest', maxLv: 5, kind: 'selfBuff', auto: 'buff', fx: 'angelus', build: 'pr_support',
+  icon: { glyph: 'halo', color: '#fff3a0', color2: '#bfe8ff' }, req: { kyrie: 5 },
+  sp: fixed(25), cd: fixed(2000),
+  buff: { id: 'saura', name: '성역의 오라', dur: fixed(120000), bonus: () => ({}) },
+  desc: (lv) => `몸에서 은은한 빛이 퍼집니다 (2분, 3초마다 SP 2).\n주위(10칸) 파티원이 받는 피해 −${lv * 3}% (자신 포함)\nSP 25`,
+});
+def({
+  id: 'battle_prayer', name: '전투 기도', cls: 'priest', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'pr_battle',
+  icon: { glyph: 'mace', color: '#ffe680', color2: '#ff9a3a' }, req: { mace_mastery: 5 },
+  passive: (lv, w, c) => (w === 'mace' ? { aspdPct: lv * 2, atk: lv * 3 * ((c.buffs.has('blessing') ? 1 : 0) + (c.buffs.has('agi_up') ? 1 : 0)) } : {}),
+  desc: (lv) => `기도하며 휘두르는 철퇴.\n둔기 장착 시: 공격 속도 +${lv * 2}%\n축복·속도 증가가 걸려 있으면 하나마다 ATK +${lv * 3}`,
+});
+def({
+  id: 'radiance', name: '광휘', cls: 'priest', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'pr_crit',
+  icon: { glyph: 'sun', color: '#fff0a0', color2: '#ff9ad8' }, req: { gloria: 3 },
+  passive: () => ({}),
+  desc: (lv) => `영광송이 날카로운 빛을 띱니다.\n내가 부른 영광송이 파티 전원에게 크리티컬 +${lv * 2}도 함께 줍니다`,
+});
+def({
+  id: 'exorcist_vow', name: '퇴마의 서약', cls: 'priest', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'pr_exorcist',
+  icon: { glyph: 'cross', color: '#fff3a0', color2: '#a0c8ff' }, req: { magnus: 5 },
+  passive: (lv) => ({ skillDmg: { magnus: lv * 8 } }),
+  desc: (lv) => `망자를 남김없이 보내겠다는 서약.\n대퇴마 피해 +${lv * 8}%, 시전 시간 −${lv * 8}%${lv >= 5 ? '\n5레벨: 대퇴마에 푸른 마석이 들지 않습니다' : '\n(5레벨이 되면 푸른 마석 없이 대퇴마)'}`,
+});
+def({
+  id: 'reverse_life', name: '역류하는 생명', cls: 'priest', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'pr_heal',
+  icon: { glyph: 'cross', color: '#7fff9a', color2: '#ffe680' }, req: { heal: 10 },
+  passive: () => ({}),
+  desc: (lv) => `생명이 넘쳐 죽은 것을 태웁니다.\n불사 속성 몬스터에게 힐 피해 +${lv * 15}%`,
+});
+def({
+  id: 'bulwark', name: '성벽', cls: 'priest', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'pr_wall',
+  icon: { glyph: 'shield', color: '#bfe8ff', color2: '#fff3a0' }, req: { kyrie: 5 },
+  passive: () => ({}),
+  desc: (lv) => `장막을 성벽처럼 두껍게 칩니다.\n내가 건 수호의 장막의 흡수량 +${lv * 10}%\n자신에게 건 수호의 장막은 지속 시간 +50%, 막는 횟수 +2`,
+});
+// ───────── Assassin
+def({
+  id: 'vital_stab', name: '급소 찌르기', cls: 'assassin', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'as_crit',
+  icon: { glyph: 'dagger2', color: '#ff6a8a', color2: '#ffe080' }, req: { katar_mastery: 5 },
+  passive: (lv, w, c) => (w === 'katar' && c.base.dex <= 10 ? { crit: lv * 0.8, critDmgPct: lv * 6 } : {}),
+  desc: (lv) => `카타르 끝이 급소만 찾아 들어갑니다. DEX 없이 크리로 명중하는 카타르의 기술.\n카타르 장착, 직접 찍은 DEX 10 이하일 때: 크리티컬 +${(lv * 0.8).toFixed(1)} (카타르라 두 배로 적용), 크리티컬 피해 +${lv * 6}%`,
+});
+def({
+  id: 'sonic_chain', name: '음속 연쇄', cls: 'assassin', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'as_sonic',
+  icon: { glyph: 'dagger2', color: '#ff5a8a', color2: '#a0e0ff' }, req: { sonic_blow: 5 },
+  passive: () => ({}),
+  desc: (lv) => `칼이 멈추기 전에 다음 연격이 시작됩니다.\n음속 연격을 쓴 뒤 ${lv * 8}% 확률로 SP·재사용 대기 없이 한 번 더\n카타르 평타가 맞으면 ${(lv * 0.4).toFixed(1)}% 확률로 음속 연격이 저절로 터집니다 (SP 없이)`,
+});
+def({
+  id: 'twin_dance', name: '쌍검무', cls: 'assassin', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'as_dagger',
+  icon: { glyph: 'sword', color: '#c0a0ff', color2: '#ff9ad8' }, req: { left_hand: 3 },
+  passive: () => ({}),
+  desc: (lv) => `두 자루가 하나의 춤처럼 움직입니다.\n양손에 무기를 들었을 때 왼손 피해 +${lv * 5}%p\n이중 공격이 왼손 단검에서도 터집니다`,
+});
+def({
+  id: 'shadow_clone', name: '그림자 분신', cls: 'assassin', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'as_dodge',
+  icon: { glyph: 'spirit', color: '#8a7ab0', color2: '#ff9ad8' }, req: { improve_dodge: 5 },
+  passive: () => ({}),
+  desc: (lv) => `피한 자리에 남은 그림자가 칼을 휘두릅니다.\n공격을 피하면 ${lv * 8}% 확률로 그 적에게 반격 (평타 100%)`,
+});
+def({
+  id: 'venom_stack', name: '맹독 누적', cls: 'assassin', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'as_poison',
+  icon: { glyph: 'poison', color: '#c050ff', color2: '#80e080' }, req: { enchant_poison: 3 },
+  passive: () => ({}),
+  desc: (lv) => `독 위에 독을 덧바릅니다.\n맹독·독 안개·독 무기로 중독된 적을 다시 중독시키면 독이 겹칩니다 (최대 ${lv}겹). 한 겹마다 독 피해 +150%\n(맹독 부여의 평타 중독은 독속성 무기를 들었을 때만 겹칩니다)\n(불사·무형은 여전히 중독되지 않습니다)`,
+});
+def({
+  id: 'dark_hunt', name: '어둠 사냥', cls: 'assassin', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'as_grim',
+  icon: { glyph: 'claw', color: '#8a5ad0', color2: '#ff6a8a' }, req: { grimtooth: 3 },
+  passive: (lv) => ({ skillDmg: { grimtooth: lv * 15 } }),
+  desc: (lv) => `그림자 속에서 급소를 노립니다.\n그림자 송곳니 피해 +${lv * 15}%, SP −${Math.floor(lv / 2)}\n은신 이동 중에 쓴 그림자 송곳니는 크리티컬이 터질 수 있습니다`,
+});
+def({
+  id: 'grand_thief', name: '대도', cls: 'assassin', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'as_steal',
+  icon: { glyph: 'coins', color: '#ffd080', color2: '#8070a0' }, req: { steal: 5 },
+  passive: () => ({}),
+  desc: (lv) => `한 번 스친 주머니는 가벼워집니다.\n훔치기 확률 +${lv * 2}%p\n평타가 맞을 때 ${lv}% 확률로 제니를 낚아챕니다 (몬스터 레벨 × 4~8)`,
+});
+// ───────── Blacksmith (combat builds only — smithing stays out by the user's decision)
+def({
+  id: 'smith_fury', name: '대장장이의 분노', cls: 'blacksmith', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'bs_battle',
+  icon: { glyph: 'hammer', color: '#ff6a3a', color2: '#ffe080' }, req: { adrenaline: 3 },
+  passive: (lv, w, c) => (c.buffs.has('adrenaline') ? { crit: lv * 2, ...(w === 'axe' ? { atkPct: lv * 3 } : {}) } : {}),
+  desc: (lv) => `망치질하던 분노를 도끼에 싣습니다.\n아드레날린 러쉬 중: 크리티컬 +${lv * 2}, 도끼 피해 +${lv * 3}%`,
+});
+def({
+  id: 'cart_rush', name: '질주 카트', cls: 'blacksmith', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'bs_cart',
+  icon: { glyph: 'cart2', color: '#ff9a3a', color2: '#e0a050' }, req: { cart_revolution: 1 },
+  passive: () => ({}),
+  desc: (lv) => `가득 실은 손수레가 멈추지 않습니다.\n카트 돌진 범위 +${lv * 10}%, 맞힌 대상 1명마다 피해 +${lv * 8}% (첫 대상 제외, 5명까지)\n맞힌 적을 밀쳐내지 않고 함께 끌고 갑니다 (몰이가 흩어지지 않음)`,
+});
+def({
+  id: 'gold_storm', name: '황금 폭풍', cls: 'blacksmith', maxLv: 5, kind: 'aoe', auto: 'aoe', fx: 'goldstorm', build: 'bs_zeny',
+  icon: { glyph: 'coins', color: '#ffe060', color2: '#ff9a3a' }, req: { mammonite: 5 }, radius: 80,
+  sp: fixed(8), zeny: fixed(2000), mult: L((lv) => 600 * (1 + lv * 0.04)), delay: fixed(600), cd: fixed(1000),
+  desc: (lv) => `금화를 한 움큼 쥐고 휘둘러 주위를 쓸어버립니다.\n대상 주변(반경 80)의 적 모두에게 배운 금화 강타의 ${100 + lv * 4}% 피해 (금화 강타 10레벨이면 ATK ${Math.round(600 * (1 + lv * 0.04))}%)\n소모: 금화 강타 제니의 두 배 (10레벨이면 2,000 제니), SP 8`,
+});
+def({
+  id: 'thunder_hammer', name: '천둥의 망치질', cls: 'blacksmith', maxLv: 5, kind: 'passive', auto: 'none', fx: '', build: 'bs_hammer',
+  icon: { glyph: 'hammer', color: '#ffe45a', color2: '#c0a080' }, req: { hammer_fall: 3 },
+  passive: () => ({}),
+  desc: (lv) => `망치 소리가 천둥처럼 땅을 흔듭니다.\n해머 낙하의 기절 시간 +${lv * 10}%, 기절한 적에게 주는 피해 +${lv * 5}%\n보스도 ${(0.5 + lv * 0.1).toFixed(1)}초 경직됩니다`,
+});
+
+/** the build signature skills (SKILLS_META.md) of a build, in the order the build card lists them */
+export function signatureSkills(buildId: string): SkillDef[] {
+  return Object.values(SKILLS).filter((s) => s.build === buildId);
+}
 
 export function skillsOf(cls: ClassId): SkillDef[] {
   return Object.values(SKILLS).filter((s) => s.cls === cls);

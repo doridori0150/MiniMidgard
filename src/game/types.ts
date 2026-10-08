@@ -77,6 +77,8 @@ export type StatusKind = 'stun' | 'freeze' | 'poison' | 'blind' | 'curse' | 'sle
 /** M5: an item/card effect that fires by chance */
 export interface Proc {
   on: 'attack' | 'crit' | 'hit';
+  /** where it comes from, when a skill cares (맹독 누적 doesn't layer the poison of 맹독 부여's own procs) */
+  tag?: string;
   /** % per trigger */
   chance: number;
   /** cast this skill for free at this level (on the target, or on yourself for heals/buffs) */

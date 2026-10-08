@@ -8,6 +8,7 @@ import { sellPrice } from '../src/game/state.ts';
 import type { ClassId, GameState, WeaponType } from '../src/game/types.ts';
 import { SKILLS, SLOT_COUNT, slotable } from '../src/game/data/skills.ts';
 import { CLASSES, lineage } from '../src/game/data/classes.ts';
+import { BUILDS } from '../src/game/data/builds.ts';
 import { readFileSync } from 'node:fs';
 import {
   ESSENCE, FIXED_ORDER, MECHS, RIFT_MAX, RULES, RULE_IDS, bandPool, bandRange, essenceForClear, firstClearReward, guardianPool, planRift,
@@ -226,13 +227,37 @@ const skillRows: string[] = [];
   };
   for (const id of Object.keys(SKILLS)) visit(id, []);
   // counts per class against the classic trees; points a line needs to learn everything (non-quest)
+  // build signature skills (SKILLS_META.md): a build tag that names a real build of this class line, a 2nd-job skill,
+  // Lv 1–5, an icon (checked above), a description (above), an AI role for actives (passives have none), and the build
+  // card lists it first
+  const SECOND: Record<string, ClassId> = { swordsman: 'knight', mage: 'wizard', archer: 'hunter', acolyte: 'priest', thief: 'assassin', merchant: 'blacksmith' };
+  const sigs = Object.values(SKILLS).filter((s) => s.build);
+  for (const sk of sigs) {
+    const where = `signature ${sk.id}`;
+    const b = BUILDS.find((x) => x.id === sk.build);
+    if (!b) { errors.push(`${where}: build tag ${sk.build} is no build`); continue; }
+    if (SECOND[b.line] !== sk.cls) errors.push(`${where}: a ${sk.cls} skill for the ${b.line} build ${b.id}`);
+    if (sk.maxLv < 1 || sk.maxLv > 5) errors.push(`${where}: max Lv ${sk.maxLv} (signature skills are Lv 1–5)`);
+    if (sk.quest || sk.extra) errors.push(`${where}: should be an ordinary skill (no quest / extra flag)`);
+    if (!sk.req || !Object.keys(sk.req).length) errors.push(`${where}: no prerequisite (it should sit behind the build's key skill)`);
+    if (sk.kind === 'passive' ? sk.auto !== 'none' : sk.auto === 'none') errors.push(`${where}: AI role ${sk.auto} for a ${sk.kind}`);
+    if (!sk.icon?.glyph || !sk.icon.color) errors.push(`${where}: no icon`);
+    if (!b.skills.includes(sk.id)) errors.push(`${where}: ${b.id}'s card does not list it`);
+  }
+  for (const b of BUILDS) {
+    const own = sigs.filter((s) => s.build === b.id).map((s) => s.id);
+    if (!own.length) continue;
+    if (b.skills.slice(0, own.length).some((id) => !own.includes(id))) errors.push(`build ${b.id}: the card lists ${b.skills.slice(0, own.length).join(', ')} first, not its signature skill(s) ${own.join(', ')}`);
+  }
+  skillRows.push(`  signature skills ${sigs.length} for ${new Set(sigs.map((s) => s.build)).size} builds (${BUILDS.filter((b) => !sigs.some((s) => s.build === b.id)).map((b) => b.id).join(', ') || 'none'} without)`);
   for (const cls of Object.keys(CLASSES) as ClassId[]) {
     const list = Object.values(SKILLS).filter((s) => s.cls === cls);
-    const ro = list.filter((s) => !s.extra);
+    const ro = list.filter((s) => !s.extra && !s.build);
     const act = list.filter(slotable).length, pas = list.filter((s) => s.kind === 'passive').length, quest = list.filter((s) => s.quest).length;
     const pts = ro.filter((s) => !s.quest).reduce((a, s) => a + s.maxLv, 0);
     if (ro.length !== RO_COUNT[cls]) errors.push(`skills ${cls}: ${ro.length} classic skills, the RO tree has ${RO_COUNT[cls]}`);
-    skillRows.push(`  ${cls.padEnd(10)} ${String(list.length).padStart(3)} skills · RO ${String(ro.length).padStart(2)}/${RO_COUNT[cls]} · active ${String(act).padStart(2)} · passive ${String(pas).padStart(2)} · quest ${quest} · extra ${list.length - ro.length} · ${pts} points to max all (job gives 49)`);
+    const nsig = list.filter((s) => s.build).length;
+    skillRows.push(`  ${cls.padEnd(10)} ${String(list.length).padStart(3)} skills · RO ${String(ro.length).padStart(2)}/${RO_COUNT[cls]} · active ${String(act).padStart(2)} · passive ${String(pas).padStart(2)} · quest ${quest} · extra ${list.length - ro.length - nsig} · signature ${nsig} · ${pts} points to max all (job gives 49)`);
   }
   if (SLOT_COUNT !== 6) errors.push(`skill slots: ${SLOT_COUNT}, expected 6`);
 }

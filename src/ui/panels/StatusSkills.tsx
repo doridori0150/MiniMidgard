@@ -11,7 +11,7 @@ import {
   learnQuest, questBlock, ARROW_RECIPES, craftArrow,
 } from '../../game/state.ts';
 import { computeDerived } from '../../game/stats.ts';
-import { buildOf, buildsFor } from '../../game/data/builds.ts';
+import { BUILDS, buildOf, buildsFor } from '../../game/data/builds.ts';
 import { expNext, jobExpNext, statCost } from '../../game/exp.ts';
 import { skillIconURL } from '../../render/icons.ts';
 
@@ -299,7 +299,9 @@ export function SkillsPanel() {
               <button class="sk-mid" aria-expanded={open === sk.id} onClick={() => setOpen(open === sk.id ? null : sk.id)}>
               <img src={skillIconURL(sk.id)} alt="" />
               <div class="mid">
-                <div class="nm"><b>{sk.name}</b><span class="lv">Lv {lv}/{sk.maxLv}</span>{!isActive && <span class="chip">패시브</span>}{sk.quest && <span class="chip quest">퀘스트</span>}{sk.extra && <span class="chip">추가</span>}{sk.cls === 'novice' && h.cls !== 'novice' && <span class="chip">초보자</span>}</div>
+                <div class="nm"><b>{sk.name}</b><span class="lv">Lv {lv}/{sk.maxLv}</span>{!isActive && <span class="chip">패시브</span>}{sk.quest && <span class="chip quest">퀘스트</span>}{sk.extra && <span class="chip">추가</span>}{sk.cls === 'novice' && h.cls !== 'novice' && <span class="chip">초보자</span>}
+                  {/* build signature skill (SKILLS_META.md): which build it belongs to; gold when it is this hero's build */}
+                  {sk.build && <span class={'chip build' + (h.build === sk.build ? ' mine' : '')}>빌드: {BUILDS.find((b) => b.id === sk.build)?.name ?? sk.build}</span>}</div>
                 {locked && <div class="small" style={{ color: '#c05050' }}>필요: {reqText(sk.id)}</div>}
                 {open === sk.id && <div class="desc">{sk.desc(Math.max(1, lv))}{lv < sk.maxLv && lv > 0 ? `\n\n▶ 다음 레벨: ${sk.desc(lv + 1).split('\n')[0]}` : ''}{sk.quest && lv < sk.maxLv ? `\n\n퀘스트: 직업 레벨 ${sk.quest.job} · ${sk.quest.zeny.toLocaleString()}z` : ''}</div>}
                 {open === sk.id && sk.id === 'arrow_craft' && lv > 0 && (

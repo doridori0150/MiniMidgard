@@ -47,7 +47,12 @@ function BuildCard(props: { b: BuildDef; on: boolean; pick: () => void }) {
         );
       })()}
       <div class="bd-stats">{stats.map(([k, w]) => <span class="bd-stat"><b>{STAT_KO[k]}</b><i style={{ width: w * 6 + 'px' }} /></span>)}</div>
-      {b.skills.length > 0 && <div class="bd-line"><span>핵심 스킬</span>{b.skills.map((id) => SKILLS[id]?.name).filter(Boolean).join(' · ')}</div>}
+      {b.skills.length > 0 && (
+        <div class="bd-line"><span>핵심 스킬</span>{b.skills.filter((id) => SKILLS[id]).map((id, i) => (
+          // the build's signature skill(s) lead the list (SKILLS_META.md)
+          <>{i > 0 && ' · '}{SKILLS[id].build === b.id ? <b class="bd-sig" title="이 빌드의 특화 스킬">★ {SKILLS[id].name}</b> : SKILLS[id].name}</>
+        ))}</div>
+      )}
       {items.map((id) => {
         const src = sourcesOf(id)[0];
         return (
