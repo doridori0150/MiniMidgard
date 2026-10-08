@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-09",
+  "tool": "built-in image_gen",
+  "references": [
+    "docs/art/concepts/round3/class_lineup.png",
+    "src/assets/sprites/frames/novice/idle_0.png",
+    "src/assets/sprites/frames/swordsman/idle_0.png"
+  ],
+  "sources": [
+    {
+      "id": "mage_female",
+      "source": "source/mage.png",
+      "source_sha256": "a4bdb85841481881d57349680c6348a8771ebad3dc5217328e7086ec03b797a0",
+      "uniform_scale": 1.1397058823529411,
+      "frames": 14,
+      "prompt": "prompts/mage_female-hero-attempt-01.txt",
+      "tool": "built-in image_gen",
+      "attempt": 1,
+      "idle1Derivation": {
+        "frame": "idle_0",
+        "operation": "whole-figure foot-locked breathing",
+        "topDisplacementPx": 2,
+        "verticalFactor": 0.9935483870967742
+      }
+    },
+    {
+      "id": "acolyte_female",
+      "source": "source/acolyte.png",
+      "source_sha256": "89665b489537860f0531fc8c0122f8e9c8db567d069cb5c6d0deca8e5c96c811",
+      "uniform_scale": 1.2015503875968991,
+      "frames": 14,
+      "prompt": "prompts/acolyte_female-hero-attempt-01.txt",
+      "tool": "built-in image_gen",
+      "attempt": 1,
+      "idle1Derivation": {
+        "frame": "idle_0",
+        "operation": "whole-figure foot-locked breathing",
+        "topDisplacementPx": 2,
+        "verticalFactor": 0.9935483870967742
+      }
+    },
+    {
+      "id": "archer_male",
+      "source": "source/archer.png",
+      "source_sha256": "9e3b23cf395bc3598fc5d8521cd980787219dd2a4963a4890b601a0c9e4a2e7b",
+      "uniform_scale": 1.1524163568773234,
+      "frames": 14,
+      "prompt": "prompts/archer_male-hero-attempt-01.txt",
+      "tool": "built-in image_gen",
+      "attempt": 1,
+      "idle1Derivation": {
+        "frame": "idle_0",
+        "operation": "whole-figure foot-locked breathing",
+        "topDisplacementPx": 2,
+        "verticalFactor": 0.9935483870967742
+      }
+    },
+    {
+      "id": "staff",
+      "source": "source/staff.png",
+      "source_sha256": "c4e56ab42963d405b3c9055b77abfc7f4508e9b948a2e23515424d27677d0c8b",
+      "uniform_scale": 0.175,
+      "sourcePivot": [
+        505,
+        872
+      ],
+      "sourceHead": [
+        837,
+        482
+      ],
+      "rotationDegrees": 49.59284533039397,
+      "prompt": "prompts/staff-weapon-attempt-02.txt",
+      "tool": "built-in image_gen",
+      "attempt": 2
+    },
+    {
+      "id": "mace",
+      "source": "source/mace.png",
+      "source_sha256": "0a071d171be5807217095ed41ee96ac78a62ce54753bbdd2820298f6d54e22c5",
+      "uniform_scale": 0.12,
+      "sourcePivot": [
+        480,
+        827
+      ],
+      "sourceHead": [
+        818,
+        481
+      ],
+      "rotationDegrees": 45.67009552222453,
+      "prompt": "prompts/mace-weapon-attempt-02.txt",
+      "tool": "built-in image_gen",
+      "attempt": 2
+    },
+    {
+      "id": "bow",
+      "source": "source/bow.png",
+      "source_sha256": "0c37708bfb60da2d1e969851674eeedd72d5335c5ed21f92e30cd101f8ce2653",
+      "uniform_scale": 0.15,
+      "sourcePivot": [
+        729,
+        668
+      ],
+      "sourceHead": [
+        900,
+        668
+      ],
+      "rotationDegrees": 0,
+      "prompt": "prompts/bow-weapon-attempt-01.txt",
+      "tool": "built-in image_gen",
+      "attempt": 1
+    }
+  ],
+  "rejected": [
+    {
+      "source": "source/staff-rejected.png",
+      "prompt": "prompts/staff-weapon-attempt-01.txt",
+      "reason": "Unapproved gold ring; regenerated against original lineup."
+    },
+    {
+      "source": "source/mace-rejected.png",
+      "prompt": "prompts/mace-weapon-attempt-01.txt",
+      "reason": "Pointed priest-like petals; regenerated rounded acolyte petals against original lineup."
+    }
+  ],
+  "processing": "Whole-figure crop, detached-speck removal, limited flat palette with preserved colour-boundary antialiasing, one uniform scale per original character sheet, foot grounding, source-space anchor transform, aligned connected hair segmentation and source-pixel grip overlay. No head/body assembly. Idle_1 is an explicitly recorded 2px whole-figure breathing deformation of idle_0. Bow grip colours flattened to approved wood palette.",
+  "environment": "Node PNG codec; no Python dependencies required."
+}

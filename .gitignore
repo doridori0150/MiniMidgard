@@ -3,3 +3,7 @@ dist
 .DS_Store
 .claude/
 .saves/
+
+# asset production: keep deliveries, skip bulky intermediates
+docs/art-production/*/verification/
+docs/art-production/*/source/
