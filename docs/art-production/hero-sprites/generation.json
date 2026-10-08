@@ -123,5 +123,1029 @@
     }
   ],
   "processing": "Whole-figure crop, detached-speck removal, limited flat palette with preserved colour-boundary antialiasing, one uniform scale per original character sheet, foot grounding, source-space anchor transform, aligned connected hair segmentation and source-pixel grip overlay. No head/body assembly. Idle_1 is an explicitly recorded 2px whole-figure breathing deformation of idle_0. Bow grip colours flattened to approved wood palette.",
-  "environment": "Node PNG codec; no Python dependencies required."
+  "environment": "Node PNG codec; no Python dependencies required.",
+  "fix1": {
+    "tool": "built-in image_gen",
+    "reference": "docs/art/concepts/round3/class_lineup.png",
+    "updates": [
+      {
+        "id": "acolyte_female",
+        "frame": "attack_0",
+        "source": "source/fix1/acolyte-attempt1.png",
+        "source_sha256": "bf80eaa8dbb484dbdc0dec6cc2747b22398efefc47f2493ee3e35ea8dfa2ff15",
+        "uniform_scale": 0.695067264573991,
+        "sourceRect": [
+          0,
+          0,
+          709,
+          554
+        ],
+        "sourceBounds": [
+          181,
+          86,
+          507,
+          532
+        ],
+        "translation": [
+          -11.804932735426007,
+          -9.775784753363212
+        ],
+        "sourceAnnotations": [
+          477,
+          245,
+          338,
+          92,
+          430,
+          170
+        ],
+        "prompt": "prompts/acolyte_female-fix1-attempt1.txt"
+      },
+      {
+        "id": "acolyte_female",
+        "frame": "cast_0",
+        "source": "source/fix1/acolyte-attempt1.png",
+        "source_sha256": "bf80eaa8dbb484dbdc0dec6cc2747b22398efefc47f2493ee3e35ea8dfa2ff15",
+        "uniform_scale": 0.695067264573991,
+        "sourceRect": [
+          709,
+          0,
+          1418,
+          554
+        ],
+        "sourceBounds": [
+          187,
+          86,
+          501,
+          532
+        ],
+        "translation": [
+          -15.280269058295971,
+          -9.775784753363212
+        ],
+        "sourceAnnotations": [
+          1180,
+          338,
+          1053,
+          92,
+          1145,
+          170
+        ],
+        "prompt": "prompts/acolyte_female-fix1-attempt1.txt"
+      },
+      {
+        "id": "acolyte_female",
+        "frame": "cast_1",
+        "source": "source/fix1/acolyte-attempt1.png",
+        "source_sha256": "bf80eaa8dbb484dbdc0dec6cc2747b22398efefc47f2493ee3e35ea8dfa2ff15",
+        "uniform_scale": 0.695067264573991,
+        "sourceRect": [
+          0,
+          554,
+          709,
+          1108
+        ],
+        "sourceBounds": [
+          182,
+          70,
+          470,
+          514
+        ],
+        "translation": [
+          -13.195067264573993,
+          2.735426008968602
+        ],
+        "sourceAnnotations": [
+          438,
+          875,
+          338,
+          630,
+          433,
+          710
+        ],
+        "prompt": "prompts/acolyte_female-fix1-attempt1.txt"
+      },
+      {
+        "id": "mage_female",
+        "frame": "walk_2",
+        "source": "source/fix1/mage-attempt1.png",
+        "source_sha256": "f91aca9b0ad15813a25b0ef4bc671cad18f97a98fcfc2ad418d433e8b174d574",
+        "uniform_scale": 0.6888888888888889,
+        "sourceRect": [
+          0,
+          0,
+          709,
+          554
+        ],
+        "sourceBounds": [
+          211,
+          66,
+          476,
+          516
+        ],
+        "translation": [
+          -20.077777777777783,
+          4.53333333333336
+        ],
+        "sourceAnnotations": [
+          449,
+          361,
+          276,
+          73,
+          406,
+          166
+        ],
+        "prompt": "prompts/mage_female-fix1-attempt1.txt"
+      },
+      {
+        "id": "mage_female",
+        "frame": "cast_0",
+        "source": "source/fix1/mage-attempt1.png",
+        "source_sha256": "f91aca9b0ad15813a25b0ef4bc671cad18f97a98fcfc2ad418d433e8b174d574",
+        "uniform_scale": 0.6888888888888889,
+        "sourceRect": [
+          0,
+          554,
+          709,
+          1108
+        ],
+        "sourceBounds": [
+          208,
+          52,
+          514,
+          487
+        ],
+        "translation": [
+          -15.599999999999994,
+          24.51111111111112
+        ],
+        "sourceAnnotations": [
+          486,
+          835,
+          279,
+          613,
+          407,
+          704
+        ],
+        "prompt": "prompts/mage_female-fix1-attempt1.txt"
+      },
+      {
+        "id": "mage_female",
+        "frame": "cast_1",
+        "source": "source/fix1/mage-attempt1.png",
+        "source_sha256": "f91aca9b0ad15813a25b0ef4bc671cad18f97a98fcfc2ad418d433e8b174d574",
+        "uniform_scale": 0.6888888888888889,
+        "sourceRect": [
+          709,
+          554,
+          1418,
+          1108
+        ],
+        "sourceBounds": [
+          197,
+          51,
+          520,
+          486
+        ],
+        "translation": [
+          -12.844444444444434,
+          25.19999999999999
+        ],
+        "sourceAnnotations": [
+          1202,
+          831,
+          990,
+          612,
+          1119,
+          704
+        ],
+        "prompt": "prompts/mage_female-fix1-attempt1.txt"
+      },
+      {
+        "id": "mage_female",
+        "frame": "attack_0",
+        "source": "source/fix1/mage-attempt2.png",
+        "source_sha256": "ff29a293e373057bd4fa2bdcf1c8a2c0167a387aea9a0bfc4961d7740b29235e",
+        "uniform_scale": 0.37394451145958985,
+        "sourceRect": [
+          0,
+          0,
+          1419,
+          1108
+        ],
+        "sourceBounds": [
+          424,
+          151,
+          1001,
+          980
+        ],
+        "translation": [
+          -36.712907117008456,
+          -6.465621230398028
+        ],
+        "sourceAnnotations": [
+          950,
+          482,
+          535,
+          163,
+          813,
+          357
+        ],
+        "prompt": "prompts/mage_female-fix1-attempt2.txt"
+      },
+      {
+        "id": "archer_male",
+        "frame": "cast_0",
+        "source": "source/fix1/archer-attempt1.png",
+        "source_sha256": "67ad7dc6ae498234d6e7330efc50f5544bcea2d9641b31add579440cf8aedfbd",
+        "uniform_scale": 0.6904231625835189,
+        "sourceRect": [
+          709,
+          0,
+          1418,
+          554
+        ],
+        "sourceBounds": [
+          183,
+          80,
+          530,
+          529
+        ],
+        "translation": [
+          -19.922048997772805,
+          -5.2338530066815
+        ],
+        "sourceAnnotations": [
+          1211,
+          319,
+          1077,
+          87,
+          1118,
+          182
+        ],
+        "prompt": "prompts/archer_male-fix1-attempt1.txt"
+      },
+      {
+        "id": "archer_male",
+        "frame": "cast_1",
+        "source": "source/fix1/archer-attempt1.png",
+        "source_sha256": "67ad7dc6ae498234d6e7330efc50f5544bcea2d9641b31add579440cf8aedfbd",
+        "uniform_scale": 0.6904231625835189,
+        "sourceRect": [
+          0,
+          554,
+          709,
+          1108
+        ],
+        "sourceBounds": [
+          189,
+          60,
+          533,
+          499
+        ],
+        "translation": [
+          -22.33853006681514,
+          15.478841870824056
+        ],
+        "sourceAnnotations": [
+          507,
+          833,
+          372,
+          621,
+          414,
+          714
+        ],
+        "prompt": "prompts/archer_male-fix1-attempt1.txt"
+      },
+      {
+        "id": "novice_female",
+        "frame": "attack_0",
+        "source": "source/fix1/novice-attempt1.png",
+        "source_sha256": "6f89c12a25393f25ade965f056321f53f3f37195a04736d18de047717174367a",
+        "uniform_scale": 0.7013574660633484,
+        "sourceRect": [
+          0,
+          0,
+          709,
+          554
+        ],
+        "sourceBounds": [
+          220,
+          88,
+          487,
+          530
+        ],
+        "translation": [
+          -31.436651583710386,
+          -11.71945701357464
+        ],
+        "sourceAnnotations": [
+          456,
+          285,
+          363,
+          96,
+          414,
+          190
+        ],
+        "prompt": "prompts/novice_female-fix1-attempt1.txt"
+      },
+      {
+        "id": "novice_female",
+        "frame": "attack_2",
+        "source": "source/fix1/novice-attempt1.png",
+        "source_sha256": "6f89c12a25393f25ade965f056321f53f3f37195a04736d18de047717174367a",
+        "uniform_scale": 0.7013574660633484,
+        "sourceRect": [
+          709,
+          0,
+          1418,
+          554
+        ],
+        "sourceBounds": [
+          219,
+          114,
+          504,
+          530
+        ],
+        "translation": [
+          -16.357466063348397,
+          -11.71945701357464
+        ],
+        "sourceAnnotations": [
+          1180,
+          419,
+          1117,
+          122,
+          1141,
+          223
+        ],
+        "prompt": "prompts/novice_female-fix1-attempt1.txt"
+      },
+      {
+        "id": "novice_female",
+        "frame": "cast_0",
+        "source": "source/fix1/novice-attempt1.png",
+        "source_sha256": "6f89c12a25393f25ade965f056321f53f3f37195a04736d18de047717174367a",
+        "uniform_scale": 0.7013574660633484,
+        "sourceRect": [
+          0,
+          554,
+          709,
+          1108
+        ],
+        "sourceBounds": [
+          214,
+          51,
+          511,
+          491
+        ],
+        "translation": [
+          -31.78733031674207,
+          15.633484162895968
+        ],
+        "sourceAnnotations": [
+          483,
+          842,
+          354,
+          614,
+          409,
+          706
+        ],
+        "prompt": "prompts/novice_female-fix1-attempt1.txt"
+      },
+      {
+        "id": "novice_female",
+        "frame": "cast_1",
+        "source": "source/fix1/novice-attempt1.png",
+        "source_sha256": "6f89c12a25393f25ade965f056321f53f3f37195a04736d18de047717174367a",
+        "uniform_scale": 0.7013574660633484,
+        "sourceRect": [
+          709,
+          554,
+          1418,
+          1108
+        ],
+        "sourceBounds": [
+          213,
+          51,
+          504,
+          491
+        ],
+        "translation": [
+          -31.08597285067873,
+          15.633484162895968
+        ],
+        "sourceAnnotations": [
+          1185,
+          826,
+          1061,
+          614,
+          1117,
+          706
+        ],
+        "prompt": "prompts/novice_female-fix1-attempt1.txt"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "attack_0",
+        "source": "source/fix1/swordsman-attempt1.png",
+        "source_sha256": "261330b70b57a2e34d68b54b3c35a1877739cc3a7ec04579ca64e6f67fd8a2b4",
+        "uniform_scale": 0.6843267108167771,
+        "sourceRect": [
+          0,
+          0,
+          709,
+          554
+        ],
+        "sourceBounds": [
+          215,
+          66,
+          491,
+          519
+        ],
+        "translation": [
+          -17.11920529801327,
+          4.8344370860926915
+        ],
+        "sourceAnnotations": [
+          463,
+          279,
+          361,
+          75,
+          413,
+          166
+        ],
+        "prompt": "prompts/swordsman_male-fix1-attempt1.txt"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "cast_0",
+        "source": "source/fix1/swordsman-attempt1.png",
+        "source_sha256": "261330b70b57a2e34d68b54b3c35a1877739cc3a7ec04579ca64e6f67fd8a2b4",
+        "uniform_scale": 0.6843267108167771,
+        "sourceRect": [
+          709,
+          0,
+          1418,
+          554
+        ],
+        "sourceBounds": [
+          219,
+          66,
+          476,
+          519
+        ],
+        "translation": [
+          -20.88300220750554,
+          4.8344370860926915
+        ],
+        "sourceAnnotations": [
+          1106,
+          348,
+          1074,
+          75,
+          1128,
+          166
+        ],
+        "prompt": "prompts/swordsman_male-fix1-attempt1.txt"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "cast_1",
+        "source": "source/fix1/swordsman-attempt1.png",
+        "source_sha256": "261330b70b57a2e34d68b54b3c35a1877739cc3a7ec04579ca64e6f67fd8a2b4",
+        "uniform_scale": 0.6843267108167771,
+        "sourceRect": [
+          0,
+          554,
+          709,
+          1108
+        ],
+        "sourceBounds": [
+          213,
+          57,
+          470,
+          504
+        ],
+        "translation": [
+          -19.514348785871988,
+          15.09933774834434
+        ],
+        "sourceAnnotations": [
+          435,
+          889,
+          355,
+          620,
+          411,
+          710
+        ],
+        "prompt": "prompts/swordsman_male-fix1-attempt1.txt"
+      }
+    ],
+    "cleanup": [
+      {
+        "id": "swordsman_male",
+        "frame": "idle_0",
+        "pixels": 524,
+        "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "idle_1",
+        "pixels": 513,
+        "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "walk_0",
+        "pixels": 436,
+        "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "walk_1",
+        "pixels": 256,
+        "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "walk_2",
+        "pixels": 354,
+        "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "walk_3",
+        "pixels": 392,
+        "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "attack_1",
+        "pixels": 405,
+        "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "attack_2",
+        "pixels": 290,
+        "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "sit_0",
+        "pixels": 314,
+        "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "hurt_0",
+        "pixels": 418,
+        "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "dead_0",
+        "pixels": 378,
+        "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+      },
+      {
+        "id": "novice_female",
+        "frame": "walk_3",
+        "pixels": 29,
+        "operation": "removed isolated below-ground component only"
+      }
+    ],
+    "unresolved": [
+      {
+        "id": "archer_male",
+        "frame": "walk_3",
+        "status": "original preserved; replacement not delivered",
+        "reason": "Attempt 1 retained wrong arm; attempt 2 baked bow into figure. Two-attempt limit reached."
+      }
+    ],
+    "processing": "Whole figures only; common uniform scale per generated sheet; source-pixel annotations; flat palette and aligned hair mask; no head/body assembly. Legacy cleanup changes only orange contamination and one below-ground speck."
+  },
+  "fix2": {
+    "request": "docs/art-requests/hero-sprites-a-fix2.md",
+    "status": "complete",
+    "unresolved": [],
+    "method": "Removed bow and string from fix1 attempt2 with built-in image_gen; whole-figure normalization; no fallback assembly.",
+    "updates": [
+      {
+        "id": "archer_male",
+        "frame": "walk_3",
+        "source": "source/fix2/archer-attempt1.png",
+        "source_sha256": "83017bf4e9a1257e533c2de71bf3091135cf922192f54d68318a1ae1aa6d272b",
+        "uniform_scale": 0.3462857142857143,
+        "sourceRect": [
+          0,
+          0,
+          1419,
+          1108
+        ],
+        "sourceBounds": [
+          420,
+          113,
+          948,
+          988
+        ],
+        "translation": [
+          -17.03257142857143,
+          17.86971428571428
+        ],
+        "sourceAnnotations": [
+          904,
+          732,
+          709,
+          179,
+          877,
+          370
+        ],
+        "prompt": "prompts/archer_male-fix2-attempt1.txt"
+      }
+    ],
+    "anchorChanges": [
+      {
+        "id": "mage_female",
+        "frame": "walk_2",
+        "anchor": "crown",
+        "before": [
+          170.056,
+          54.822
+        ],
+        "after": [
+          222,
+          78
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "walk_2",
+        "anchor": "side",
+        "before": [
+          259.611,
+          118.889
+        ],
+        "after": [
+          280,
+          140
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "attack_0",
+        "anchor": "crown",
+        "before": [
+          163.347,
+          54.487
+        ],
+        "after": [
+          223,
+          78
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "attack_0",
+        "anchor": "side",
+        "before": [
+          267.304,
+          127.033
+        ],
+        "after": [
+          283,
+          145
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "cast_0",
+        "anchor": "crown",
+        "before": [
+          176.6,
+          65.156
+        ],
+        "after": [
+          226,
+          87
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "cast_0",
+        "anchor": "side",
+        "before": [
+          264.778,
+          127.844
+        ],
+        "after": [
+          280,
+          151
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "cast_1",
+        "anchor": "crown",
+        "before": [
+          180.733,
+          65.156
+        ],
+        "after": [
+          225,
+          87
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "cast_1",
+        "anchor": "side",
+        "before": [
+          269.6,
+          128.533
+        ],
+        "after": [
+          280,
+          152
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "cast_0",
+        "anchor": "crown",
+        "before": [
+          234.154,
+          54.833
+        ],
+        "after": [
+          211,
+          73
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "cast_0",
+        "anchor": "side",
+        "before": [
+          262.461,
+          120.423
+        ],
+        "after": [
+          277,
+          135
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "cast_1",
+        "anchor": "crown",
+        "before": [
+          234.499,
+          61.737
+        ],
+        "after": [
+          211,
+          80
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "cast_1",
+        "anchor": "side",
+        "before": [
+          263.497,
+          125.947
+        ],
+        "after": [
+          277,
+          138
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "attack_0",
+        "anchor": "crown",
+        "before": [
+          223.156,
+          55.611
+        ],
+        "after": [
+          222,
+          84
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "attack_0",
+        "anchor": "side",
+        "before": [
+          258.925,
+          121.538
+        ],
+        "after": [
+          274,
+          128
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "attack_2",
+        "anchor": "crown",
+        "before": [
+          269.796,
+          73.846
+        ],
+        "after": [
+          262,
+          78
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "attack_2",
+        "anchor": "side",
+        "before": [
+          286.629,
+          144.683
+        ],
+        "after": [
+          306,
+          146
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "cast_0",
+        "anchor": "crown",
+        "before": [
+          216.493,
+          57.715
+        ],
+        "after": [
+          211,
+          84
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "cast_0",
+        "anchor": "side",
+        "before": [
+          255.068,
+          122.24
+        ],
+        "after": [
+          264,
+          130
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "cast_1",
+        "anchor": "crown",
+        "before": [
+          215.792,
+          57.715
+        ],
+        "after": [
+          211,
+          84
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "cast_1",
+        "anchor": "side",
+        "before": [
+          255.068,
+          122.24
+        ],
+        "after": [
+          265,
+          130
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "attack_0",
+        "anchor": "crown",
+        "before": [
+          229.923,
+          56.159
+        ],
+        "after": [
+          225,
+          82
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "attack_0",
+        "anchor": "side",
+        "before": [
+          265.508,
+          118.433
+        ],
+        "after": [
+          281,
+          135
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "cast_0",
+        "anchor": "crown",
+        "before": [
+          228.896,
+          56.159
+        ],
+        "after": [
+          224,
+          81
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "cast_0",
+        "anchor": "side",
+        "before": [
+          265.85,
+          118.433
+        ],
+        "after": [
+          278,
+          135
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "cast_1",
+        "anchor": "crown",
+        "before": [
+          223.422,
+          60.265
+        ],
+        "after": [
+          222,
+          85
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "cast_1",
+        "anchor": "side",
+        "before": [
+          261.744,
+          121.854
+        ],
+        "after": [
+          275,
+          136
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "walk_3",
+        "anchor": "hand",
+        "before": [
+          256.877,
+          279.331
+        ],
+        "after": [
+          296.01,
+          271.351
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "walk_3",
+        "anchor": "crown",
+        "before": [
+          224.61,
+          82.268
+        ],
+        "after": [
+          228.484,
+          79.855
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "walk_3",
+        "anchor": "side",
+        "before": [
+          291.45,
+          144.498
+        ],
+        "after": [
+          286.66,
+          145.995
+        ]
+      }
+    ],
+    "tool": "built-in image_gen",
+    "prompt": "prompts/archer_male-fix2-attempt1.txt",
+    "reference": "docs/art/concepts/round3/class_lineup.png",
+    "editTarget": "source/fix1/archer-attempt2.png"
+  }
 }

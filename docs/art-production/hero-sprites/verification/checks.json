@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "technicalStatus": "PASS",
+  "frames": 70,
+  "gripOverlays": 66,
+  "attachmentConfigurations": 560,
+  "clipping": [],
+  "maskLeaks": [],
+  "errors": [],
+  "sourcePreserved": true,
+  "unexpectedChanges": [],
+  "changedExistingFiles": [
+    "docs/art-production/hero-sprites/frames/archer/walk_3.png",
+    "docs/art-production/hero-sprites/masks/archer/walk_3.png",
+    "docs/art-production/hero-sprites/grips/archer/walk_3.png"
+  ],
+  "allTenCastingFramesRetainWeapon": true,
+  "uniformScaleBySource": {
+    "source/mage.png": 1.1397058823529411,
+    "source/fix1/mage-attempt1.png": 0.6888888888888889,
+    "source/fix1/mage-attempt2.png": 0.37394451145958985,
+    "source/acolyte.png": 1.2015503875968991,
+    "source/fix1/acolyte-attempt1.png": 0.695067264573991,
+    "source/archer.png": 1.1524163568773234,
+    "source/fix2/archer-attempt1.png": 0.3462857142857143,
+    "source/fix1/archer-attempt1.png": 0.6904231625835189,
+    "source/fix1/imported/novice/idle_0.png": 1,
+    "source/fix1/imported/novice/idle_1.png": 1,
+    "source/fix1/imported/novice/walk_0.png": 1,
+    "source/fix1/imported/novice/walk_1.png": 1,
+    "source/fix1/imported/novice/walk_2.png": 1,
+    "source/fix1/imported/novice/walk_3.png": 1,
+    "source/fix1/novice-attempt1.png": 0.7013574660633484,
+    "source/fix1/imported/novice/attack_1.png": 1,
+    "source/fix1/imported/novice/sit_0.png": 1,
+    "source/fix1/imported/novice/hurt_0.png": 1,
+    "source/fix1/imported/novice/dead_0.png": 1,
+    "source/fix1/imported/swordsman/idle_0.png": 1,
+    "source/fix1/imported/swordsman/idle_1.png": 1,
+    "source/fix1/imported/swordsman/walk_0.png": 1,
+    "source/fix1/imported/swordsman/walk_1.png": 1,
+    "source/fix1/imported/swordsman/walk_2.png": 1,
+    "source/fix1/imported/swordsman/walk_3.png": 1,
+    "source/fix1/swordsman-attempt1.png": 0.6843267108167771,
+    "source/fix1/imported/swordsman/attack_1.png": 1,
+    "source/fix1/imported/swordsman/attack_2.png": 1,
+    "source/fix1/imported/swordsman/sit_0.png": 1,
+    "source/fix1/imported/swordsman/hurt_0.png": 1,
+    "source/fix1/imported/swordsman/dead_0.png": 1
+  },
+  "unresolved": [],
+  "visualReview": {
+    "status": "PASS",
+    "reviewedCharacters": [
+      "mage_female",
+      "acolyte_female",
+      "archer_male",
+      "novice_female",
+      "swordsman_male"
+    ],
+    "reviewedFrames": 70,
+    "attachments": [
+      "defaultWeapon",
+      "leaf",
+      "hairpin"
+    ],
+    "nearHandArcherWalk3": true,
+    "crownOnSkullNotTuftOrBun": true,
+    "sideOnOuterTempleHair": true,
+    "additionalAnchorChangesOutsideRequestedTable": [],
+    "note": "All five final equipped review sheets inspected; preserved sit/hurt/dead anchors also reviewed."
+  },
+  "animation": {
+    "file": "preview_animation.gif",
+    "width": 1120,
+    "height": 1050,
+    "frames": 80,
+    "durationSeconds": 1.6,
+    "attachments": [
+      "defaultWeapon",
+      "leaf",
+      "hairpin"
+    ],
+    "verifiedWith": "ffprobe -count_frames"
+  }
+}

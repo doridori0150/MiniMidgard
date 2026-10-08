@@ -4,7 +4,7 @@
     "schema": "minimidgard.sprites/1",
     "note": "변환기로 만든 표준 기록입니다. 원본은 게임 manifest입니다.",
     "gameManifest": "docs/art-production/hero-sprites/game-manifest.json",
-    "gameManifest_sha256": "f3e33e56a9aeebc617bb066765ac6014161f6d4f5c68410d42435f67239f418a",
+    "gameManifest_sha256": "d261c703481cc135aa96770acdae905295fd467bc39ea007fa70cd7924223b05",
     "enrichment": "record.mjs: only source/scale, hashes, raster bounds, weapon sheets and bundle evidence added after standard converter."
   },
   "sheets": [
@@ -292,8 +292,8 @@
           "anchors": {
             "hand": {
               "point": [
-                207.463,
-                274.522
+                289.233,
+                253.222
               ],
               "angle": -48,
               "z": "front",
@@ -301,17 +301,17 @@
             },
             "crown": {
               "point": [
-                222.279,
-                83.051
+                222,
+                78
               ],
-              "angle": -3
+              "angle": 0
             },
             "side": {
               "point": [
-                282.684,
-                144.596
+                280,
+                140
               ],
-              "angle": -3
+              "angle": 0
             }
           },
           "masks": {
@@ -320,12 +320,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/mage/walk_2.png"
           },
-          "sha256": "155a7d4b01a8efdc580c587af1e37a07ac8cdb8028f05f8a4345dda3076996bc",
-          "rgba_sha256": "374d871be54fa78f83ff1a013483840ed2893d11ca72444c1857f75c537c159f",
+          "sha256": "dee000034a5b4f2402f3172e09e62ab3719f5c2f22895b41bce25051fd455049",
+          "rgba_sha256": "a6d04fc8cf05ed4c2bc3c58d54378946a46f19e666cc75ee130087cce70178bb",
           "bounds": [
-            132,
-            54,
-            312,
+            125,
+            50,
+            308,
             360
           ],
           "rect": [
@@ -334,11 +334,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/mage.png",
-          "uniform_scale": 1.1397058823529411,
+          "source": "docs/art-production/hero-sprites/source/fix1/mage-attempt1.png",
+          "uniform_scale": 0.6888888888888889,
           "layer_sha256": {
-            "hair": "bf39bd49f804f0968d7aa24ae5aed6b44fefa06e18f944d76d33179c2c2b5118",
-            "grip": "970196a6593a8ea045fee0a2793a5a1d13a291e3701756ecd6506645382a02d5"
+            "hair": "71ce66756876340ea5ffaa19faf828a2d7cfc5cc773f0876de072a8b14fcefa0",
+            "grip": "a7d2d76a98b78d3306751c849522a4338c2a50ffe64c0857b9be27c8b21d33fe"
           }
         },
         {
@@ -434,8 +434,8 @@
           "anchors": {
             "hand": {
               "point": [
-                161.875,
-                236.912
+                318.534,
+                173.776
               ],
               "angle": -115,
               "z": "front",
@@ -443,17 +443,17 @@
             },
             "crown": {
               "point": [
-                229.118,
-                86.471
+                223,
+                78
               ],
-              "angle": -7
+              "angle": 0
             },
             "side": {
               "point": [
-                292.941,
-                148.015
+                283,
+                145
               ],
-              "angle": -7
+              "angle": 0
             }
           },
           "masks": {
@@ -462,12 +462,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/mage/attack_0.png"
           },
-          "sha256": "c3c58f13b213bb0bc3dfc5d751b00df1deef3c0161f491e00571bd93f0be1625",
-          "rgba_sha256": "8b68101423fcbf238809724b7b0236d1f3a477227969850cf7354025d9b7d3cd",
+          "sha256": "a095c400c3b7493e13d80144484ddf3fadefa77fa6365272a02792a1611c6415",
+          "rgba_sha256": "52ed1813e6755579b213c6e2459b2a166a941cccff92f1a0825f679cad727299",
           "bounds": [
-            128,
-            58,
-            321,
+            122,
+            50,
+            338,
             360
           ],
           "rect": [
@@ -476,11 +476,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/mage.png",
-          "uniform_scale": 1.1397058823529411,
+          "source": "docs/art-production/hero-sprites/source/fix1/mage-attempt2.png",
+          "uniform_scale": 0.37394451145958985,
           "layer_sha256": {
-            "hair": "cec23a93f027f955c90b891b080424c636929727d7b8944934d1e2b89a058d7f",
-            "grip": "5aff871b88c4cf08db188886267842a72ebb959d6a79f732259b3654408ff6ff"
+            "hair": "7c95593d781af3b2c5762bfe15036683e8e0f66c94ae3bc67857701e204f719c",
+            "grip": "03190165ddfc9295542fe5b098c7f6516d99fe6c7392c2461b82c5d70d49b0c7"
           }
         },
         {
@@ -636,24 +636,24 @@
           "anchors": {
             "hand": {
               "point": [
-                318.015,
-                224.375
+                319.2,
+                218.089
               ],
-              "angle": -48,
+              "angle": -70,
               "z": "front",
-              "visible": false
+              "visible": true
             },
             "crown": {
               "point": [
-                222.279,
-                89.89
+                226,
+                87
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                282.684,
-                154.853
+                280,
+                151
               ],
               "angle": 0
             }
@@ -664,12 +664,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/mage/cast_0.png"
           },
-          "sha256": "a928f3011a350ee9c791f37733d15947c604a26fa445caa1212b0180c0cbcb5b",
-          "rgba_sha256": "2df3512ac7f5a8fbb80637484a71a9d5abf63b6bc03a46486a6f6231bfb27314",
+          "sha256": "19bbaa3498a85b83aa3995e6571772360af6eb0cf2dd0f3daac8c9c789054d62",
+          "rgba_sha256": "d39263b2b66fdb5b3dfb254dc9cab807afa06c4e330e99f6355aac2836e8ffd2",
           "bounds": [
             128,
-            61,
-            346,
+            60,
+            339,
             360
           ],
           "rect": [
@@ -678,11 +678,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/mage.png",
-          "uniform_scale": 1.1397058823529411,
+          "source": "docs/art-production/hero-sprites/source/fix1/mage-attempt1.png",
+          "uniform_scale": 0.6888888888888889,
           "layer_sha256": {
-            "hair": "3672edb5f584d96b351de67018f0505fca50862a12101590827a4ac74e6d367b",
-            "grip": "cca2c877c3beca1caf45ce72112f754eff5ab57e13a53d1f5cc06af38c132f9c"
+            "hair": "09888a1ba25d8ca7b5680b95d186734282b12e594b302ada5dfc9cb4e7156ff7",
+            "grip": "a156624365a450d7e7169a6745003cee360eb69ebb2ec8e8e2bb3423ce2a268a"
           }
         },
         {
@@ -696,24 +696,24 @@
           "anchors": {
             "hand": {
               "point": [
-                318.585,
-                234.632
+                326.778,
+                216.022
               ],
-              "angle": -48,
+              "angle": -70,
               "z": "front",
-              "visible": false
+              "visible": true
             },
             "crown": {
               "point": [
-                216.011,
-                89.89
+                225,
+                87
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                280.974,
-                153.713
+                280,
+                152
               ],
               "angle": 0
             }
@@ -724,12 +724,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/mage/cast_1.png"
           },
-          "sha256": "a21cc238f3dfc956e85308f0672f85315e6d46d2498e2fd35c2479b97a24fcdd",
-          "rgba_sha256": "0d7ba896f8f072629e7465f18822dfef12073bd130b4d2ce5ac47ec8973d64fa",
+          "sha256": "f73720a032594dca30ff70ff43f6164a6db8ee06969a2c57f3a0b4ce8c3f5280",
+          "rgba_sha256": "7f0bd49ca38e2297bd792f43422fed7859b0a6eb45e4c1fe02c6570a9c6540e4",
           "bounds": [
-            124,
-            62,
-            348,
+            123,
+            60,
+            346,
             360
           ],
           "rect": [
@@ -738,11 +738,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/mage.png",
-          "uniform_scale": 1.1397058823529411,
+          "source": "docs/art-production/hero-sprites/source/fix1/mage-attempt1.png",
+          "uniform_scale": 0.6888888888888889,
           "layer_sha256": {
-            "hair": "7c85b20b37ef9ef05f23be2b394989aca17ef50bb9bf5ce21930c0527eddd706",
-            "grip": "fd103302b310faeae4d8637f0ad7178d5ffc428ba3dacefbd477f93053f393d5"
+            "hair": "d24b0f8ffb36ca4862f696791fad2e538b998752e0429504eaa9fc3081557b0a",
+            "grip": "33f0f8fde22e06b53132a6fcdca1d79fa31ad7cfc8d229c0fd877ad7b64b874f"
           }
         }
       ],
@@ -1428,8 +1428,8 @@
           "anchors": {
             "hand": {
               "point": [
-                111.86,
-                176.163
+                319.742,
+                160.516
               ],
               "angle": -115,
               "z": "front",
@@ -1437,17 +1437,17 @@
             },
             "crown": {
               "point": [
-                224.806,
-                59.612
+                223.128,
+                54.17
               ],
-              "angle": -5
+              "angle": 0
             },
             "side": {
               "point": [
-                293.295,
-                125.698
+                287.074,
+                108.386
               ],
-              "angle": -5
+              "angle": 0
             }
           },
           "masks": {
@@ -1456,12 +1456,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/acolyte/attack_0.png"
           },
-          "sha256": "b9a279882023d7644491db01ad937fc43f7e8027e9940b60ce18ca0e91b9b12d",
-          "rgba_sha256": "d4f2d6196992ccb78636acd65028bb50ba7d6e3a4683063663ff9a1c6a79aaf9",
+          "sha256": "d8c74c22594e594eb3b570b32f986da7ec2098fd4ea37b129b5ab9a709e6171e",
+          "rgba_sha256": "2866fce0479d85b31a9dd5d70522f49fcf0efd955633f82fc8a0d701087aa5cd",
           "bounds": [
-            88,
-            53,
-            332,
+            114,
+            50,
+            341,
             360
           ],
           "rect": [
@@ -1470,11 +1470,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/acolyte.png",
-          "uniform_scale": 1.2015503875968991,
+          "source": "docs/art-production/hero-sprites/source/fix1/acolyte-attempt1.png",
+          "uniform_scale": 0.695067264573991,
           "layer_sha256": {
-            "hair": "213b6984937a30a0f5c0a299255fa61adf05acffac600bbdb446e49dcfa0ef07",
-            "grip": "742be8a099cbb855f9dc03e26dc94f105e0173cb251cb391073f051750a64280"
+            "hair": "69b23f217eda8d585d4c99c38173e57026503cae03c254d6a3b702b732c80061",
+            "grip": "89dd33df0fc9f9b77f7a6503fb8987776efedce2568226317aee440d3238d566"
           }
         },
         {
@@ -1630,24 +1630,24 @@
           "anchors": {
             "hand": {
               "point": [
-                334.147,
-                198.992
+                312.096,
+                225.157
               ],
-              "angle": -48,
+              "angle": -90,
               "z": "front",
-              "visible": false
+              "visible": true
             },
             "crown": {
               "point": [
-                218.798,
-                51.202
+                223.823,
+                54.17
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                287.287,
-                120.891
+                287.769,
+                108.386
               ],
               "angle": 0
             }
@@ -1658,12 +1658,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/acolyte/cast_0.png"
           },
-          "sha256": "3767939ebf3ef0268619976a8f34e73ec86ddd854f6d5ea8d043cc03ce070d42",
-          "rgba_sha256": "e0606c19e10612324dc49e0ea5702d2239394e122d7c14a62e82ce1daf930976",
+          "sha256": "6f3fdd574f710560dce8865d7d5268f99f5079d8c0860f19d562c34960593487",
+          "rgba_sha256": "8f26e956f277207c44fb3ad171fcbda4d0df2fc71fb936c4fb72b85f9e6f91f4",
           "bounds": [
-            109,
-            46,
-            357,
+            115,
+            50,
+            333,
             360
           ],
           "rect": [
@@ -1672,11 +1672,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/acolyte.png",
-          "uniform_scale": 1.2015503875968991,
+          "source": "docs/art-production/hero-sprites/source/fix1/acolyte-attempt1.png",
+          "uniform_scale": 0.695067264573991,
           "layer_sha256": {
-            "hair": "c56f5794601f527f05e49f1c381ea2fd51c04ea1a71b75ae5a197e798861f786",
-            "grip": "852f1d335fb01bac52b9ad4460af6269cc4569ba5db754c01fdd6ac1da85d50d"
+            "hair": "0236a409617c08af68d8b6e532372182b5b841f5972aa0625cb68bc87343b435",
+            "grip": "da4c010ce450f32b92b5a5ab2c7f2407810407f609444d845a34db2aea5dfc12"
           }
         },
         {
@@ -1690,24 +1690,24 @@
           "anchors": {
             "hand": {
               "point": [
-                252.442,
-                238.643
+                291.244,
+                225.852
               ],
-              "angle": -48,
+              "angle": -90,
               "z": "front",
-              "visible": false
+              "visible": true
             },
             "crown": {
               "point": [
-                218.798,
-                51.202
+                221.738,
+                55.561
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                284.884,
-                120.891
+                287.769,
+                111.166
               ],
               "angle": 0
             }
@@ -1718,12 +1718,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/acolyte/cast_1.png"
           },
-          "sha256": "bccf0baecef9f73d3c4a034a787760d78e86f77b4b274a46a7b3b930585a3726",
-          "rgba_sha256": "f04dbec1fc43a4b7d29af1b052cf287a2f0b331a477300cd2dce9db63eca4cec",
+          "sha256": "eda63945560b56e55cb5e0ddb242d04c197a63d8b15b1220f2133c7605077ac6",
+          "rgba_sha256": "67051a7d0bf5e44efec5c99508d220911c8feab83bfb032af6c6a2aa31b14837",
           "bounds": [
-            111,
-            46,
-            318,
+            113,
+            51,
+            314,
             360
           ],
           "rect": [
@@ -1732,11 +1732,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/acolyte.png",
-          "uniform_scale": 1.2015503875968991,
+          "source": "docs/art-production/hero-sprites/source/fix1/acolyte-attempt1.png",
+          "uniform_scale": 0.695067264573991,
           "layer_sha256": {
-            "hair": "970b62444ceb8bb0f311fff61517c67cbe0590f2430e4eea372d7a5c81065227",
-            "grip": "8847e08d72b0d63710569242d71854f03d8c7ee8c3054317e3c2cbf752e1eb9c"
+            "hair": "ddd0e25348b08a0ff4c8958881c1c2413d9565763391e1d63667ffd0974281d6",
+            "grip": "c674e43d680f7bb41fbb4c2a666d67e366113515dde7bbc0d5f210951f6314dd"
           }
         }
       ],
@@ -2340,8 +2340,8 @@
           "anchors": {
             "hand": {
               "point": [
-                256.877,
-                279.331
+                296.01,
+                271.351
               ],
               "angle": 0,
               "z": "front",
@@ -2349,15 +2349,15 @@
             },
             "crown": {
               "point": [
-                224.61,
-                82.268
+                228.484,
+                79.855
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                291.45,
-                144.498
+                286.66,
+                145.995
               ],
               "angle": 0
             }
@@ -2368,12 +2368,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/archer/walk_3.png"
           },
-          "sha256": "2aca0804e6a3d46e782036503ce052d9c80e4d03ead312d0103143e1b763d69b",
-          "rgba_sha256": "787353dc3e8af151d4a85d650f1c616d0ef4bf1615633d11774e9666a804491a",
+          "sha256": "8183a573a0305b026b84ba0b25d432789ce30567b3d49725c23f13f982a60935",
+          "rgba_sha256": "73e75aaefc904b0559b345baa2894789513e9d152788033b8247653d6580bdd1",
           "bounds": [
-            128,
-            56,
-            322,
+            129,
+            57,
+            312,
             360
           ],
           "rect": [
@@ -2382,11 +2382,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/archer.png",
-          "uniform_scale": 1.1524163568773234,
+          "source": "docs/art-production/hero-sprites/source/fix2/archer-attempt1.png",
+          "uniform_scale": 0.3462857142857143,
           "layer_sha256": {
-            "hair": "da85d94a08c78fa3d91777c8a2783e4340f6cbeb9e24cdd7e2f10d272d666807",
-            "grip": "98d0b627235ba90275c569ed99a1fb8f3faf7c294ba0c483acbeafa929712014"
+            "hair": "5e97457dbceb496391a83de0d80fec06ad55c54267f8d05a98761aff497b1747",
+            "grip": "c9d3ae968930d9bb522a2ea764615912cbb34986b81efa4790879125d7112a7e"
           }
         }
       ],
@@ -2624,24 +2624,24 @@
           "anchors": {
             "hand": {
               "point": [
-                321.413,
-                237.844
+                326.67,
+                215.011
               ],
               "angle": 0,
               "z": "front",
-              "visible": false
+              "visible": true
             },
             "crown": {
               "point": [
-                206.171,
-                89.182
+                211,
+                73
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                271.859,
-                152.565
+                277,
+                135
               ],
               "angle": 0
             }
@@ -2652,12 +2652,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/archer/cast_0.png"
           },
-          "sha256": "70aab3d52b2a4de19e277200c546852dedb58f4cda507f334c440498f48ce642",
-          "rgba_sha256": "28549e86eaf2307fda4273ec9a6ada684b12c30a4969ccdf54ff00ab4976e0d1",
+          "sha256": "9f6fd79d0b3b2b8547d357b509aa8de888b1d076a6a69dd9e693e0d23d92d110",
+          "rgba_sha256": "d4208616afab2e14c3787b9d6ca552d464842d3c28fb0c8b1ad299c6064340e3",
           "bounds": [
             106,
-            67,
-            340,
+            50,
+            346,
             360
           ],
           "rect": [
@@ -2666,11 +2666,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/archer.png",
-          "uniform_scale": 1.1524163568773234,
+          "source": "docs/art-production/hero-sprites/source/fix1/archer-attempt1.png",
+          "uniform_scale": 0.6904231625835189,
           "layer_sha256": {
-            "hair": "3bf29488ad205d25b33b3f2f04da4094ca120aa12aa0a1b0a16a8ad851436567",
-            "grip": "8e0f583865ff3d9486bea5dca6698db65eea7b196af32e7d15ab6a7ded942348"
+            "hair": "c30d705e26f974312ddee99691a912284e5795df435d6932f186078c42284636",
+            "grip": "fb35a22c69d7d7d619e35d2b7059d0d665deef44f6eb6a45b3c05ec229a4d900"
           }
         },
         {
@@ -2684,24 +2684,24 @@
           "anchors": {
             "hand": {
               "point": [
-                339.275,
-                230.929
+                327.706,
+                208.107
               ],
               "angle": 0,
               "z": "front",
-              "visible": false
+              "visible": true
             },
             "crown": {
               "point": [
-                212.509,
-                89.182
+                211,
+                80
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                279.349,
-                153.717
+                277,
+                138
               ],
               "angle": 0
             }
@@ -2712,12 +2712,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/archer/cast_1.png"
           },
-          "sha256": "f3b99a0c9809266ca3e0ba2bc0aa0d90a8588f7f03b51cabcdbc009df680780d",
-          "rgba_sha256": "199cf834fb2ec0705cea3a34d6fc2ad340ecfdd83083d25de403582edbaacc73",
+          "sha256": "8c72b7dd72223e126762fc7f4aa0038d74e955c6cea27f3d049eee75bdb7a959",
+          "rgba_sha256": "c26dbe6fd799cc4bd901b7f43335ba166bf141581db58047407fc8bf1cdcd9c7",
           "bounds": [
-            116,
-            64,
-            359,
+            108,
+            57,
+            346,
             360
           ],
           "rect": [
@@ -2726,11 +2726,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/archer.png",
-          "uniform_scale": 1.1524163568773234,
+          "source": "docs/art-production/hero-sprites/source/fix1/archer-attempt1.png",
+          "uniform_scale": 0.6904231625835189,
           "layer_sha256": {
-            "hair": "4504674405836b9c674b86de7e36094ae20a5501bbfa75bb660099e9a395d71d",
-            "grip": "b37b6cf128d19263287575e2926e811420d000f823e7f3ccc5444339533d4093"
+            "hair": "e12beaefaa87908b6007f198246e941893d5e3f242c8e3e33fe8639c3ed4809e",
+            "grip": "e67aff5a842e57ea7910866d6a7d7358d7b5e9b27bc8c04fc0a928444b5faa71"
           }
         }
       ],
@@ -2991,6 +2991,1978 @@
       "layout": "frames"
     },
     {
+      "id": "novice_female",
+      "kind": "idle",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "docs/art-production/hero-sprites/frames/novice/idle_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                276.307,
+                289.63
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                218.885,
+                83.507
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                273.792,
+                134.187
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/idle_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/novice/idle_0.png"
+          },
+          "sha256": "0d1a16af1022b1cb4b74063e9eed0623a658b340303899a0842567d134d5e757",
+          "rgba_sha256": "9b5efe0f4234bf06a20cca4e9ac79d44361dedd5b343e61b1fe4b10abec729e5",
+          "bounds": [
+            123,
+            49,
+            301,
+            362
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/novice/idle_0.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "d7bc78e51b50cb1f17511d8c0319e4d647c1eb1259a4f094905a668cba976c7a",
+            "grip": "462622cb5d5ab9225eb7141d1bd1112f5e12b8d10a7d5057e5b4f8d096213d81"
+          }
+        },
+        {
+          "name": "idle_1",
+          "file": "docs/art-production/hero-sprites/frames/novice/idle_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                276.307,
+                289.349
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                218.885,
+                82.401
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                273.792,
+                133.284
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/idle_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/novice/idle_1.png"
+          },
+          "sha256": "33597e86abf95a5d5a5b4a836568af01e482987b4c4b00a86263192b3a32e885",
+          "rgba_sha256": "68710c5c8d2873ade34d0b6b3256f262bf996915a5140e922e511be1145e2514",
+          "bounds": [
+            123,
+            48,
+            301,
+            362
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/novice/idle_1.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "dd84b5adc7a6cd28845ad35855cf117f7d7947299ee7057c116a30a8c5fe6b46",
+            "grip": "a4e1e741a1dc735962d245a91474400f79a9d2af2ae21d6b03ad939afc01387e"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        2,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "novice_female",
+      "kind": "walk",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "file": "docs/art-production/hero-sprites/frames/novice/walk_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                280.961,
+                264.513
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                208.196,
+                82.305
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                263.05,
+                132.985
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/walk_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/novice/walk_0.png"
+          },
+          "sha256": "1f43ca57f6bca004f681af0d17f335732d153acd25ce35699d241e6e3e1bfa3b",
+          "rgba_sha256": "42080e102620895b5a6623019de9d7872e00aaaee0e43ad27cfcac0049ca612e",
+          "bounds": [
+            112,
+            49,
+            302,
+            361
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/novice/walk_0.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "3a044f0c9584ea0148560187c79fd170aae070c365662cde70bf764691cb9ae3",
+            "grip": "690c7ea338395285014862f62e135c147f55996011c9087cb294969e9bf2d72d"
+          }
+        },
+        {
+          "name": "walk_1",
+          "file": "docs/art-production/hero-sprites/frames/novice/walk_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                271.789,
+                293.266
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                218.856,
+                87.621
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                272.707,
+                138.301
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/walk_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/novice/walk_1.png"
+          },
+          "sha256": "93496af08384ef74e77cd43770c92450c5e22eacfe188a9664a83ec16b260d5e",
+          "rgba_sha256": "b74183780411c027430744d210c1595a8cd5434be8fda9cb3354ea92b0f8f4c8",
+          "bounds": [
+            125,
+            55,
+            301,
+            362
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/novice/walk_1.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "81889e10193fee5d1f1647bd4d5ae71b943fea397714c621f48d1520f1c699d3",
+            "grip": "5f14b229c704bbe86f48dfa004008539df3b291a1a9579a388c64b77f4847b38"
+          }
+        },
+        {
+          "name": "walk_2",
+          "file": "docs/art-production/hero-sprites/frames/novice/walk_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                286.252,
+                279.776
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                210.833,
+                84.836
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                266.05,
+                135.516
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/walk_2.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/novice/walk_2.png"
+          },
+          "sha256": "e8ecaa84272dd40b9bfdca71b1367e233c2c206697ff077c6cd3b3f8f484c2dc",
+          "rgba_sha256": "1802f03f655994eb363e60eb375aa968c9c79da0a08255ee60d92ab9d30917e2",
+          "bounds": [
+            116,
+            48,
+            307,
+            362
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/novice/walk_2.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "36cf63725b10a1a998977b2e127bc8bc0467c6406177fafb55ec4f6b50f39aa5",
+            "grip": "7f7348abb5d4853d9e5cb522e54b424ec20cb700bff640f4db911b37c0e2de69"
+          }
+        },
+        {
+          "name": "walk_3",
+          "file": "docs/art-production/hero-sprites/frames/novice/walk_3.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                274.12,
+                286.504
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                220.066,
+                88.787
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                275.651,
+                139.467
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/walk_3.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/novice/walk_3.png"
+          },
+          "sha256": "0762e240086c40bcac506256ca75381bf2967c121f7c4672ca39aa9a4b51c04d",
+          "rgba_sha256": "aa7d2a95adc4f3f8d13b9307a80cb6b2e43db20657b4ed06271e89c4d8462dac",
+          "bounds": [
+            122,
+            56,
+            301,
+            361
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/novice/walk_3.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "032f437830de5022eb7aa02e2ed68a9dcb97e32e37109a96d829a63d1b267674",
+            "grip": "13aac734b68e90da988a1b6b4f43fcb6432dc7add7cf74275e120b4ce1e6e0d9"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        4,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "novice_female",
+      "kind": "attack",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "file": "docs/art-production/hero-sprites/frames/novice/attack_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                288.382,
+                188.167
+              ],
+              "angle": -115,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                222,
+                84
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                274,
+                128
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/attack_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/novice/attack_0.png"
+          },
+          "sha256": "81941050e24396d3f30a657fb32cc5cc18ee1b0b45184943ff746610f7555b45",
+          "rgba_sha256": "2c1e0317ac1168bcec70afb0782835535d92aba8b93461c9f09ca24b3335c404",
+          "bounds": [
+            123,
+            50,
+            311,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/novice-attempt1.png",
+          "uniform_scale": 0.7013574660633484,
+          "layer_sha256": {
+            "hair": "5a3a5ba55b01acf908b2c140c681cdbff028e44008f2cdd143e16f77a1b4465e",
+            "grip": "bc1e490359ab248c1469467d9ab26e845764ca1c60fe363e879117474e9c099e"
+          }
+        },
+        {
+          "name": "attack_1",
+          "file": "docs/art-production/hero-sprites/frames/novice/attack_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 80,
+          "anchors": {
+            "hand": {
+              "point": [
+                305.195,
+                242.78
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                212.077,
+                99.148
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                266.218,
+                149.828
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/attack_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/novice/attack_1.png"
+          },
+          "sha256": "187f4dac80e973ddd32040db6fd93572f1dd801d3e398babde09502f4b49c3f2",
+          "rgba_sha256": "73ca77fa665adb7fd2c4811bbb8c3e513f98dcca15053e69fe0cdd427c9b932b",
+          "bounds": [
+            117,
+            67,
+            326,
+            361
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/novice/attack_1.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "4c1b737690731f5391d8512f551dbb491bd977b8efac2a115f7f6408efa0ff78",
+            "grip": "bb21e95445fa01670b074f9d60af2fd39d4e509c616767dd9d227d4a2d2ba7b8"
+          }
+        },
+        {
+          "name": "attack_2",
+          "file": "docs/art-production/hero-sprites/frames/novice/attack_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                313.982,
+                282.149
+              ],
+              "angle": -25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                251,
+                95
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                306,
+                146
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/attack_2.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/novice/attack_2.png"
+          },
+          "sha256": "c2bc84dc827a0f41d7ea66a0f46387e03b42e85035e2875061076337c268b62e",
+          "rgba_sha256": "5c2ca1e914c77e25e1f6a646525dd476396a9a72761e55bfa0f945e6d21e2d99",
+          "bounds": [
+            137,
+            68,
+            338,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/novice-attempt1.png",
+          "uniform_scale": 0.7013574660633484,
+          "layer_sha256": {
+            "hair": "38a4317ba1fece9dc776d7da9fbae40fbd1673a3f03e3c8ac2c2724f447ea1a7",
+            "grip": "aa54595b64a1067b9d9fcc46af7abc679a1da4155aa60ff4b599ef19ce7d243f"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        3,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "novice_female",
+      "kind": "cast",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "cast_0",
+          "file": "docs/art-production/hero-sprites/frames/novice/cast_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                306.968,
+                217.624
+              ],
+              "angle": -55,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                211,
+                84
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                264,
+                130
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/cast_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/novice/cast_0.png"
+          },
+          "sha256": "e635b8848eb863dfe75e6479d5d400b90c55bf83c6e775910079b37f3436fb7c",
+          "rgba_sha256": "ba8d226f2f94c9e5fab724c65e03d7b2a2a07857a032d07e239d98b15df9e67e",
+          "bounds": [
+            118,
+            51,
+            327,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/novice-attempt1.png",
+          "uniform_scale": 0.7013574660633484,
+          "layer_sha256": {
+            "hair": "0164ef91318465bc3adc2b63fc8703dc4e06bb624a97cdc29c5e40cfbeebbba6",
+            "grip": "90348092ce483eb9aa111bd4d98374976113b0653307ad73a01efb3e78fe3156"
+          }
+        },
+        {
+          "name": "cast_1",
+          "file": "docs/art-production/hero-sprites/frames/novice/cast_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                302.76,
+                206.403
+              ],
+              "angle": -55,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                211,
+                84
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                265,
+                130
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/cast_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/novice/cast_1.png"
+          },
+          "sha256": "1b820dc8700a0f066e4f596770b7e50610dcc0c03628de48c70b3695610e1d12",
+          "rgba_sha256": "27dde8f2ccfe09227e99c4fbec0db70255d2971ea8ef447f6d1d100936ae8955",
+          "bounds": [
+            118,
+            51,
+            323,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/novice-attempt1.png",
+          "uniform_scale": 0.7013574660633484,
+          "layer_sha256": {
+            "hair": "3e7a2d73c305fdf109913aa41f1adc0f94af9480c9f8be7acf9a5654dcb126d8",
+            "grip": "05338f4accea57968e9c5bb4512fc1e70a4d2c7ef68eeeefd2ffc15e17e5b815"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        2,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "novice_female",
+      "kind": "sit",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sit_0",
+          "file": "docs/art-production/hero-sprites/frames/novice/sit_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                262.876,
+                308.99
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                190.416,
+                144.305
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                243.582,
+                194.985
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/sit_0.png"
+          },
+          "sha256": "4e67161f2fc59fe78c9db35b4bbbfefb667e1cf1d50e987633ec64abb6cc17c4",
+          "rgba_sha256": "1a8e379e1eca7c0a388378490a3b43eaf0a56ceee29010652cf5961575c1920c",
+          "bounds": [
+            98,
+            103,
+            309,
+            362
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/novice/sit_0.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "2c0aa5b36eeecb7c2e905000aff8e70b86c8bcaee557d84b359b23b05ea84363"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "novice_female",
+      "kind": "hurt",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hurt_0",
+          "file": "docs/art-production/hero-sprites/frames/novice/hurt_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                256.048,
+                210.506
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                138.786,
+                110.26
+              ],
+              "angle": -22
+            },
+            "side": {
+              "point": [
+                214.466,
+                157.918
+              ],
+              "angle": -22
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/hurt_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/novice/hurt_0.png"
+          },
+          "sha256": "cafdb2423979de3671ee980ab78eb0c8f84eddbdeb0f89aa5252fd269bda5ef9",
+          "rgba_sha256": "b8b84af0abd30f21fb656ecd2a13efd8bda0892c8fecbad87a82602cab6f100b",
+          "bounds": [
+            71,
+            76,
+            297,
+            361
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/novice/hurt_0.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "1c5a78ad8512d395a92ac9a7dcc486458b19956d7b640296fd362b56f147c7f0",
+            "grip": "d227799b6059be4ccb34d957ff2aab1da6bed6b9235c94797ab427ebfb36087e"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "novice_female",
+      "kind": "dead",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "dead_0",
+          "file": "docs/art-production/hero-sprites/frames/novice/dead_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                300.709,
+                317.386
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                63.8,
+                272.279
+              ],
+              "angle": -82
+            },
+            "side": {
+              "point": [
+                144.805,
+                335.064
+              ],
+              "angle": -82
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/novice/dead_0.png"
+          },
+          "sha256": "bdaa200c190b95a5c6afdef64b204e01daaf3c4159404b8721c4d33dc477c5c8",
+          "rgba_sha256": "266b770c6c3482f400153724791a0acdab51a0df2d6c795fadb19675064f886d",
+          "bounds": [
+            28,
+            181,
+            411,
+            362
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/novice/dead_0.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "47703490f2ddb0a780f8639875b5255d4e7099eb0428053bbdb89e04fc69aeb4"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "idle",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/idle_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                284.865,
+                282.048
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                227.589,
+                83.524
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                282.216,
+                134.204
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/idle_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/swordsman/idle_0.png"
+          },
+          "sha256": "d1e9c0c9ca0ae55d1ec0c5ea83664cfe6f3b7a46c5f8b8c7b1c2335f5aff6f19",
+          "rgba_sha256": "dcca06ca936aab29fecdd7e5944249e5caf5fe8d234f9d58b9fc2e6e93656ec2",
+          "bounds": [
+            128,
+            49,
+            308,
+            362
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/swordsman/idle_0.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "696578c26197412160b745eeeae1606b43df3997d80e1dad757233996e4f02ae",
+            "grip": "c0cd6bf91c6020b6ff54504b7b691c752d6adb538a46e8835118aa2796369319"
+          }
+        },
+        {
+          "name": "idle_1",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/idle_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                284.865,
+                281.736
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                227.589,
+                82.418
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                282.216,
+                133.301
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/idle_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/swordsman/idle_1.png"
+          },
+          "sha256": "19c3fb0c2fee7079a4e1f817acf3c1bfc4a8a454cd1d7bd0c23b1965ea078bf1",
+          "rgba_sha256": "84452640b87898234239710578a932e654f0eb78b5ef3abfe18edae2102ccac8",
+          "bounds": [
+            128,
+            47,
+            308,
+            362
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/swordsman/idle_1.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "9f4a7ebbada6fac585eeb66759660001f36e6f1384f401e8bf48c911676a0e25",
+            "grip": "a118f81d7c89541e19408d2e88d0877f61aff7ad73e932308af7ced1a6410eba"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        2,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "walk",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/walk_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                289.262,
+                276.425
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                230.889,
+                83.569
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                286.148,
+                134.249
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/walk_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/swordsman/walk_0.png"
+          },
+          "sha256": "f853699a3cde05581274544be883ca2cd9c3325a39c7b65e57bba53c78cc92f8",
+          "rgba_sha256": "b63302e2215df9f91d99e6373eb18928b85c9a737d1835f509646a4c704bf1b8",
+          "bounds": [
+            131,
+            49,
+            312,
+            361
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/swordsman/walk_0.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "afe40947ab47ea0d1947d809333d1d579f59ef21167fa6165b9c874c08b7fca7",
+            "grip": "9ed6dc5e8b59e0f3ed25b07c69734d465a3b59c17768ec5a20c0acf274dd5e75"
+          }
+        },
+        {
+          "name": "walk_1",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/walk_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                275.839,
+                296.682
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                229.858,
+                89.569
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                285.45,
+                140.249
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/walk_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/swordsman/walk_1.png"
+          },
+          "sha256": "dc2f68387153b1bf510f110c8479c3894801d15c845ea23b2f885adb3c582a9d",
+          "rgba_sha256": "c943fdd0828b61947286ecdf6fbcb816eba0bbc22d51e77b86067f47a46b904f",
+          "bounds": [
+            136,
+            54,
+            312,
+            361
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/swordsman/walk_1.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "081c9684c9ff50d269adc388b36dfd6710a402d9e91979c21799a7624e60dbb5",
+            "grip": "b8032ae104b24efba5fca054c2bf53e64842d52ad20beaeadbc98b51ea8698b0"
+          }
+        },
+        {
+          "name": "walk_2",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/walk_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                297.333,
+                266.454
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                230.496,
+                84.867
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                287.04,
+                135.547
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/walk_2.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/swordsman/walk_2.png"
+          },
+          "sha256": "682ba9dab2d25753863a3377af08e91d763fedb3dd78cbf19164c55ae01b8022",
+          "rgba_sha256": "d3de8d185429ef41b230bc519fea77c9ed8c186a15f1fd1e9a3dd1b45ce14305",
+          "bounds": [
+            128,
+            49,
+            316,
+            362
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/swordsman/walk_2.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "69f3d298be81fe804e728f9cba9ec77478ba8ff5e38fdd344dccdad6dce533a5",
+            "grip": "650502c90790230f9fa66f5271cf93809af1cd2f380f3b0e5c7a5efb1a945d20"
+          }
+        },
+        {
+          "name": "walk_3",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/walk_3.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                279.338,
+                282.823
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                228.18,
+                90.915
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                283.364,
+                141.595
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/walk_3.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/swordsman/walk_3.png"
+          },
+          "sha256": "abc1c94f0037cdd46337cf55027419efd720f701212ab68b93ae1de82be8f957",
+          "rgba_sha256": "8110bd4d9d8722a26cdcb747abbc7ed145ed8f3c042fe5ed371a666e0f420473",
+          "bounds": [
+            138,
+            54,
+            312,
+            361
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/swordsman/walk_3.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "cdf94c5b724e4bb9da72c254776f9610635b87ed323d004d3ce99a93b95edd2a",
+            "grip": "c1200a99fb4b19ed9d8b2b8af5afc72a23bca8d4c3b4719a1e7b549ca7ce4d91"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        4,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "attack",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/attack_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                299.724,
+                195.762
+              ],
+              "angle": -115,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                225,
+                82
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                281,
+                135
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/attack_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/swordsman/attack_0.png"
+          },
+          "sha256": "bfea7b4760eb1bd22566b6417131f5c6df4009ea72923e670b5f24c102399684",
+          "rgba_sha256": "6fdfffeb18d4bbbecdf5fc416cc18b0af94f9d99ac284c0c8e81a5c3521d0a2c",
+          "bounds": [
+            130,
+            50,
+            319,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/swordsman-attempt1.png",
+          "uniform_scale": 0.6843267108167771,
+          "layer_sha256": {
+            "hair": "76db4358df5734c2f750693aaed7008bb7a3ccddf3e00e6fb209e45375950217",
+            "grip": "974742f83cc3f6439d46ecebf78c6ec644b5798c67de07b4dee6b050e7b823fe"
+          }
+        },
+        {
+          "name": "attack_1",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/attack_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 80,
+          "anchors": {
+            "hand": {
+              "point": [
+                316.644,
+                239.076
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                221.761,
+                85.864
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                277.02,
+                136.544
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/attack_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/swordsman/attack_1.png"
+          },
+          "sha256": "41b8a3344412895a5deb755b62c1c6a822e2585641a8dc1779fc49d8d8a22c62",
+          "rgba_sha256": "acb4fc445343c1a99b215f82640cdb0156e5da8c8da572bbe51d31a6ea99fda4",
+          "bounds": [
+            126,
+            50,
+            340,
+            361
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/swordsman/attack_1.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "8eda08ae1934839d6fd2f8df7888733446afefc0e49ae7e41630cc3f5df1d718",
+            "grip": "50f1f834daf18f106994f07c9f35804172410c8a74475521369ff98678a2d20c"
+          }
+        },
+        {
+          "name": "attack_2",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/attack_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                302.119,
+                290.066
+              ],
+              "angle": 42,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                239.391,
+                94.887
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                295.232,
+                146.511
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/attack_2.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/swordsman/attack_2.png"
+          },
+          "sha256": "c6f5684a420450b2f07681abc8eaf377c94419c3de5ff41eda451e28a2497351",
+          "rgba_sha256": "daad769457c6f29bf7a1b48f0773e6212324c5b391d55f6adc4713127836f018",
+          "bounds": [
+            133,
+            64,
+            328,
+            362
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/swordsman/attack_2.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "341950c470947abe6022b12a98c8bf09c8f843316532798750cde56040e7fe70",
+            "grip": "cdd1c6105671d85c3cde22f7e11687edd6c045bc92976781372ec97afa54bc88"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        3,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "cast",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "cast_0",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/cast_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                250.795,
+                242.98
+              ],
+              "angle": -80,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                224,
+                81
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                278,
+                135
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/cast_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/swordsman/cast_0.png"
+          },
+          "sha256": "9bad823bcbf2080211355b7eb56f3ffe7170e4123a7611abb4d9c4f174afb6bc",
+          "rgba_sha256": "8b8e6479dea08660892891c6b2a099f63a63f1c2cc66f7457622a61f497dc549",
+          "bounds": [
+            129,
+            50,
+            305,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/swordsman-attempt1.png",
+          "uniform_scale": 0.6843267108167771,
+          "layer_sha256": {
+            "hair": "1f568b31fa204dfbfaa6655f76ad0935b887a9dd168cbfa6a035123729e9cf3f",
+            "grip": "2aa354e5f2939b87dd7ab895576ab382791c6ba948559713a1f4af6793952903"
+          }
+        },
+        {
+          "name": "cast_1",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/cast_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                278.168,
+                244.349
+              ],
+              "angle": -80,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                222,
+                85
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                275,
+                136
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/cast_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/swordsman/cast_1.png"
+          },
+          "sha256": "de1ceb14d35910c9ae0b6fe1a57b89bb6eaee2697e47b19ef653251b08e4f2e7",
+          "rgba_sha256": "074501a9018a8bc185552443273b50c87edbdeab8cfa1ee11613c64dd638e753",
+          "bounds": [
+            126,
+            54,
+            303,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/swordsman-attempt1.png",
+          "uniform_scale": 0.6843267108167771,
+          "layer_sha256": {
+            "hair": "4922faee3030c8d7e0d00dac1cb55f9445f81b204f093ba131125d8fc0301726",
+            "grip": "3dd5bf40579f75f8e1171c52ec224a1119ee2cedda328f06d60c5d5d69348fd7"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        2,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "sit",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sit_0",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/sit_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                274.765,
+                323.917
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                209.455,
+                155.663
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                265.047,
+                206.343
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/sit_0.png"
+          },
+          "sha256": "062d1c627f2637faa83b89daa98cac331d6ecace152af6e7957be899c1ac3724",
+          "rgba_sha256": "f2f5eeca13b6c391b3ebda87e7417e1365b53dfae3566c19f4edb423691f2ecf",
+          "bounds": [
+            117,
+            120,
+            314,
+            362
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/swordsman/sit_0.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "cdc69d2b907941fe379d596bbb0a8eef9d70e890573d6fd9a9223e05dcb751f5"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "hurt",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hurt_0",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/hurt_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                269.176,
+                257.506
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                142.871,
+                119.781
+              ],
+              "angle": -22
+            },
+            "side": {
+              "point": [
+                218.551,
+                168.719
+              ],
+              "angle": -22
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/hurt_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/grips/swordsman/hurt_0.png"
+          },
+          "sha256": "e645b91b6fe98572e704c3fc115beebec251adfd0e9720832e93b521ba3d53a9",
+          "rgba_sha256": "e425d0f684f79be44a6b420f74d65364b30d42361fab04642fe41ef5cd1541ba",
+          "bounds": [
+            75,
+            86,
+            287,
+            361
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/swordsman/hurt_0.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "d37082dd2f53769383f8732bffb55adc914e87d9212ba34390caad088a3e3691",
+            "grip": "42bb5e9eca8538c75ce8c5cc7847f2c4f1f0dfe5056c3e06c6fe6aa60cbf28f6"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "dead",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "dead_0",
+          "file": "docs/art-production/hero-sprites/frames/swordsman/dead_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                297.612,
+                325.179
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                75.833,
+                278.648
+              ],
+              "angle": -82
+            },
+            "side": {
+              "point": [
+                152.693,
+                338.325
+              ],
+              "angle": -82
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/masks/swordsman/dead_0.png"
+          },
+          "sha256": "bdb596813a5529b8e780fbfee1d7f19450ad33f7cf2f81204a3255bedea9de58",
+          "rgba_sha256": "06937164b9beac78c754e9729f6343164d5201cc3da851d3e28ae0b08758fd37",
+          "bounds": [
+            44,
+            186,
+            397,
+            362
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/fix1/imported/swordsman/dead_0.png",
+          "uniform_scale": 1,
+          "layer_sha256": {
+            "hair": "efea72b25a8ef30f899b13426c63dede966c59f8d86b30dee515460d1cd4600d"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
       "id": "staff",
       "kind": "weapon",
       "category": "image",
@@ -3118,6 +5090,92 @@
           "uniform_scale": 0.15
         }
       ]
+    },
+    {
+      "id": "dagger",
+      "kind": "weapon",
+      "category": "image",
+      "file": "docs/art-production/hero-sprites/equipment/dagger.png",
+      "size": [
+        84,
+        32
+      ],
+      "cell": [
+        84,
+        32
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sha256": "8479a4d8dad468cc9bb3a9babfff25d03a201faae185031fbffdb24a4f79a6b5",
+      "frames": [
+        {
+          "sha256": "8479a4d8dad468cc9bb3a9babfff25d03a201faae185031fbffdb24a4f79a6b5",
+          "rgba_sha256": "4885fb93752d4d2eb28ed217e44b9041666e51ac0d4c0ffdc288e54a15f3d02a",
+          "bounds": [
+            0,
+            0,
+            84,
+            32
+          ],
+          "rect": [
+            0,
+            0,
+            84,
+            32
+          ],
+          "pivot": [
+            16.5,
+            16.5
+          ],
+          "source": "docs/art-production/hero-sprites/equipment/dagger.png",
+          "uniform_scale": 1
+        }
+      ]
+    },
+    {
+      "id": "sword",
+      "kind": "weapon",
+      "category": "image",
+      "file": "docs/art-production/hero-sprites/equipment/sword.png",
+      "size": [
+        123,
+        37
+      ],
+      "cell": [
+        123,
+        37
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sha256": "fe1892da4a836f18c6d959c4b87651807dbb3b1ae14bc495eecef13c37ffe199",
+      "frames": [
+        {
+          "sha256": "fe1892da4a836f18c6d959c4b87651807dbb3b1ae14bc495eecef13c37ffe199",
+          "rgba_sha256": "1d069125bc30c6c71240cf2c17ea2647957f56844b745c6e16ad3c0d99f2ef9d",
+          "bounds": [
+            0,
+            0,
+            123,
+            37
+          ],
+          "rect": [
+            0,
+            0,
+            123,
+            37
+          ],
+          "pivot": [
+            23,
+            18.5
+          ],
+          "source": "docs/art-production/hero-sprites/equipment/sword.png",
+          "uniform_scale": 1
+        }
+      ]
     }
   ],
   "attachments": {
@@ -3162,6 +5220,34 @@
       "anchor": "hand",
       "slot": "weapon",
       "sha256": "2fc3cbc2e2a1e4dc19e9272a1aee41630191225fd6ff6df28ca6a8d44b86066f"
+    },
+    "dagger": {
+      "file": "docs/art-production/hero-sprites/equipment/dagger.png",
+      "pivot": [
+        16.5,
+        16.5
+      ],
+      "tip": [
+        81.5,
+        16.5
+      ],
+      "anchor": "hand",
+      "slot": "weapon",
+      "sha256": "8479a4d8dad468cc9bb3a9babfff25d03a201faae185031fbffdb24a4f79a6b5"
+    },
+    "sword": {
+      "file": "docs/art-production/hero-sprites/equipment/sword.png",
+      "pivot": [
+        23,
+        18.5
+      ],
+      "tip": [
+        120.5,
+        18.5
+      ],
+      "anchor": "hand",
+      "slot": "weapon",
+      "sha256": "fe1892da4a836f18c6d959c4b87651807dbb3b1ae14bc495eecef13c37ffe199"
     },
     "leaf": {
       "file": "docs/art-production/hero-sprites/equipment/leaf.png",
@@ -3285,6 +5371,131 @@
         "leaf",
         "hairpin"
       ]
+    },
+    {
+      "id": "novice_female",
+      "character": "novice_female",
+      "animations": [
+        "idle",
+        "walk",
+        "attack",
+        "cast",
+        "sit",
+        "hurt",
+        "dead"
+      ],
+      "weapon": "dagger",
+      "headgear": [
+        "leaf",
+        "hairpin"
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "character": "swordsman_male",
+      "animations": [
+        "idle",
+        "walk",
+        "attack",
+        "cast",
+        "sit",
+        "hurt",
+        "dead"
+      ],
+      "weapon": "sword",
+      "headgear": [
+        "leaf",
+        "hairpin"
+      ]
     }
-  ]
+  ],
+  "excluded": [
+    {
+      "id": "thief_male",
+      "kind": "idle",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "thief_male",
+      "kind": "walk",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "thief_male",
+      "kind": "attack",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "thief_male",
+      "kind": "cast",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "thief_male",
+      "kind": "sit",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "thief_male",
+      "kind": "hurt",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "thief_male",
+      "kind": "dead",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "merchant_female",
+      "kind": "idle",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "merchant_female",
+      "kind": "walk",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "merchant_female",
+      "kind": "attack",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "merchant_female",
+      "kind": "cast",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "merchant_female",
+      "kind": "sit",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "merchant_female",
+      "kind": "hurt",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "merchant_female",
+      "kind": "dead",
+      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
+    },
+    {
+      "id": "axe",
+      "kind": "weapon",
+      "reason": "Batch B; outside requested fix2 scope."
+    }
+  ],
+  "scope": {
+    "request": "docs/art-requests/hero-sprites-a-fix2.md",
+    "characters": [
+      "mage_female",
+      "acolyte_female",
+      "archer_male",
+      "novice_female",
+      "swordsman_male"
+    ],
+    "unresolved": [],
+    "note": "Exclusions are future batch B, not rejected fix2 frames. Unscoped checker evidence preserved in verification/check-unscoped-spec.json."
+  }
 }

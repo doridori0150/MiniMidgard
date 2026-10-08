@@ -236,10 +236,11 @@
         "walk_2": {
           "image": "frames/mage/walk_2.png",
           "hairMask": "masks/mage/walk_2.png",
+          "gripOverlay": "grips/mage/walk_2.png",
           "hand": {
             "point": [
-              207.463,
-              274.522
+              289.233,
+              253.222
             ],
             "angle": -48,
             "z": "front",
@@ -247,21 +248,20 @@
           },
           "crown": {
             "point": [
-              222.279,
-              83.051
+              222,
+              78
             ],
-            "angle": -3
+            "angle": 0
           },
           "side": {
             "point": [
-              282.684,
-              144.596
+              280,
+              140
             ],
-            "angle": -3
+            "angle": 0
           },
-          "gripOverlay": "grips/mage/walk_2.png",
-          "source": "source/mage.png",
-          "uniform_scale": 1.1397058823529411
+          "source": "source/fix1/mage-attempt1.png",
+          "uniform_scale": 0.6888888888888889
         },
         "walk_3": {
           "image": "frames/mage/walk_3.png",
@@ -296,10 +296,11 @@
         "attack_0": {
           "image": "frames/mage/attack_0.png",
           "hairMask": "masks/mage/attack_0.png",
+          "gripOverlay": "grips/mage/attack_0.png",
           "hand": {
             "point": [
-              161.875,
-              236.912
+              318.534,
+              173.776
             ],
             "angle": -115,
             "z": "front",
@@ -307,21 +308,20 @@
           },
           "crown": {
             "point": [
-              229.118,
-              86.471
+              223,
+              78
             ],
-            "angle": -7
+            "angle": 0
           },
           "side": {
             "point": [
-              292.941,
-              148.015
+              283,
+              145
             ],
-            "angle": -7
+            "angle": 0
           },
-          "gripOverlay": "grips/mage/attack_0.png",
-          "source": "source/mage.png",
-          "uniform_scale": 1.1397058823529411
+          "source": "source/fix1/mage-attempt2.png",
+          "uniform_scale": 0.37394451145958985
         },
         "attack_1": {
           "image": "frames/mage/attack_1.png",
@@ -386,62 +386,62 @@
         "cast_0": {
           "image": "frames/mage/cast_0.png",
           "hairMask": "masks/mage/cast_0.png",
+          "gripOverlay": "grips/mage/cast_0.png",
           "hand": {
             "point": [
-              318.015,
-              224.375
+              319.2,
+              218.089
             ],
-            "angle": -48,
+            "angle": -70,
             "z": "front",
-            "visible": false
+            "visible": true
           },
           "crown": {
             "point": [
-              222.279,
-              89.89
+              226,
+              87
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              282.684,
-              154.853
+              280,
+              151
             ],
             "angle": 0
           },
-          "gripOverlay": "grips/mage/cast_0.png",
-          "source": "source/mage.png",
-          "uniform_scale": 1.1397058823529411
+          "source": "source/fix1/mage-attempt1.png",
+          "uniform_scale": 0.6888888888888889
         },
         "cast_1": {
           "image": "frames/mage/cast_1.png",
           "hairMask": "masks/mage/cast_1.png",
+          "gripOverlay": "grips/mage/cast_1.png",
           "hand": {
             "point": [
-              318.585,
-              234.632
+              326.778,
+              216.022
             ],
-            "angle": -48,
+            "angle": -70,
             "z": "front",
-            "visible": false
+            "visible": true
           },
           "crown": {
             "point": [
-              216.011,
-              89.89
+              225,
+              87
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              280.974,
-              153.713
+              280,
+              152
             ],
             "angle": 0
           },
-          "gripOverlay": "grips/mage/cast_1.png",
-          "source": "source/mage.png",
-          "uniform_scale": 1.1397058823529411
+          "source": "source/fix1/mage-attempt1.png",
+          "uniform_scale": 0.6888888888888889
         },
         "sit_0": {
           "image": "frames/mage/sit_0.png",
@@ -730,10 +730,11 @@
         "attack_0": {
           "image": "frames/acolyte/attack_0.png",
           "hairMask": "masks/acolyte/attack_0.png",
+          "gripOverlay": "grips/acolyte/attack_0.png",
           "hand": {
             "point": [
-              111.86,
-              176.163
+              319.742,
+              160.516
             ],
             "angle": -115,
             "z": "front",
@@ -741,21 +742,20 @@
           },
           "crown": {
             "point": [
-              224.806,
-              59.612
+              223.128,
+              54.17
             ],
-            "angle": -5
+            "angle": 0
           },
           "side": {
             "point": [
-              293.295,
-              125.698
+              287.074,
+              108.386
             ],
-            "angle": -5
+            "angle": 0
           },
-          "gripOverlay": "grips/acolyte/attack_0.png",
-          "source": "source/acolyte.png",
-          "uniform_scale": 1.2015503875968991
+          "source": "source/fix1/acolyte-attempt1.png",
+          "uniform_scale": 0.695067264573991
         },
         "attack_1": {
           "image": "frames/acolyte/attack_1.png",
@@ -820,62 +820,62 @@
         "cast_0": {
           "image": "frames/acolyte/cast_0.png",
           "hairMask": "masks/acolyte/cast_0.png",
+          "gripOverlay": "grips/acolyte/cast_0.png",
           "hand": {
             "point": [
-              334.147,
-              198.992
+              312.096,
+              225.157
             ],
-            "angle": -48,
+            "angle": -90,
             "z": "front",
-            "visible": false
+            "visible": true
           },
           "crown": {
             "point": [
-              218.798,
-              51.202
+              223.823,
+              54.17
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              287.287,
-              120.891
+              287.769,
+              108.386
             ],
             "angle": 0
           },
-          "gripOverlay": "grips/acolyte/cast_0.png",
-          "source": "source/acolyte.png",
-          "uniform_scale": 1.2015503875968991
+          "source": "source/fix1/acolyte-attempt1.png",
+          "uniform_scale": 0.695067264573991
         },
         "cast_1": {
           "image": "frames/acolyte/cast_1.png",
           "hairMask": "masks/acolyte/cast_1.png",
+          "gripOverlay": "grips/acolyte/cast_1.png",
           "hand": {
             "point": [
-              252.442,
-              238.643
+              291.244,
+              225.852
             ],
-            "angle": -48,
+            "angle": -90,
             "z": "front",
-            "visible": false
+            "visible": true
           },
           "crown": {
             "point": [
-              218.798,
-              51.202
+              221.738,
+              55.561
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              284.884,
-              120.891
+              287.769,
+              111.166
             ],
             "angle": 0
           },
-          "gripOverlay": "grips/acolyte/cast_1.png",
-          "source": "source/acolyte.png",
-          "uniform_scale": 1.2015503875968991
+          "source": "source/fix1/acolyte-attempt1.png",
+          "uniform_scale": 0.695067264573991
         },
         "sit_0": {
           "image": "frames/acolyte/sit_0.png",
@@ -1134,10 +1134,11 @@
         "walk_3": {
           "image": "frames/archer/walk_3.png",
           "hairMask": "masks/archer/walk_3.png",
+          "gripOverlay": "grips/archer/walk_3.png",
           "hand": {
             "point": [
-              256.877,
-              279.331
+              296.01,
+              271.351
             ],
             "angle": 0,
             "z": "front",
@@ -1145,21 +1146,20 @@
           },
           "crown": {
             "point": [
-              224.61,
-              82.268
+              228.484,
+              79.855
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              291.45,
-              144.498
+              286.66,
+              145.995
             ],
             "angle": 0
           },
-          "gripOverlay": "grips/archer/walk_3.png",
-          "source": "source/archer.png",
-          "uniform_scale": 1.1524163568773234
+          "source": "source/fix2/archer-attempt1.png",
+          "uniform_scale": 0.3462857142857143
         },
         "attack_0": {
           "image": "frames/archer/attack_0.png",
@@ -1254,62 +1254,62 @@
         "cast_0": {
           "image": "frames/archer/cast_0.png",
           "hairMask": "masks/archer/cast_0.png",
+          "gripOverlay": "grips/archer/cast_0.png",
           "hand": {
             "point": [
-              321.413,
-              237.844
+              326.67,
+              215.011
             ],
             "angle": 0,
             "z": "front",
-            "visible": false
+            "visible": true
           },
           "crown": {
             "point": [
-              206.171,
-              89.182
+              211,
+              73
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              271.859,
-              152.565
+              277,
+              135
             ],
             "angle": 0
           },
-          "gripOverlay": "grips/archer/cast_0.png",
-          "source": "source/archer.png",
-          "uniform_scale": 1.1524163568773234
+          "source": "source/fix1/archer-attempt1.png",
+          "uniform_scale": 0.6904231625835189
         },
         "cast_1": {
           "image": "frames/archer/cast_1.png",
           "hairMask": "masks/archer/cast_1.png",
+          "gripOverlay": "grips/archer/cast_1.png",
           "hand": {
             "point": [
-              339.275,
-              230.929
+              327.706,
+              208.107
             ],
             "angle": 0,
             "z": "front",
-            "visible": false
+            "visible": true
           },
           "crown": {
             "point": [
-              212.509,
-              89.182
+              211,
+              80
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              279.349,
-              153.717
+              277,
+              138
             ],
             "angle": 0
           },
-          "gripOverlay": "grips/archer/cast_1.png",
-          "source": "source/archer.png",
-          "uniform_scale": 1.1524163568773234
+          "source": "source/fix1/archer-attempt1.png",
+          "uniform_scale": 0.6904231625835189
         },
         "sit_0": {
           "image": "frames/archer/sit_0.png",
@@ -1402,6 +1402,858 @@
           "uniform_scale": 1.1524163568773234
         }
       }
+    },
+    "novice_female": {
+      "class": "novice",
+      "gender": "female",
+      "defaultWeapon": "dagger",
+      "defaultHairTint": "cream",
+      "frames": {
+        "idle_0": {
+          "image": "frames/novice/idle_0.png",
+          "hairMask": "masks/novice/idle_0.png",
+          "hand": {
+            "point": [
+              276.307,
+              289.63
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              218.885,
+              83.507
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              273.792,
+              134.187
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/idle_0.png",
+          "source": "source/fix1/imported/novice/idle_0.png",
+          "uniform_scale": 1
+        },
+        "idle_1": {
+          "image": "frames/novice/idle_1.png",
+          "hairMask": "masks/novice/idle_1.png",
+          "hand": {
+            "point": [
+              276.307,
+              289.349
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              218.885,
+              82.401
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              273.792,
+              133.284
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/idle_1.png",
+          "source": "source/fix1/imported/novice/idle_1.png",
+          "uniform_scale": 1
+        },
+        "walk_0": {
+          "image": "frames/novice/walk_0.png",
+          "hairMask": "masks/novice/walk_0.png",
+          "hand": {
+            "point": [
+              280.961,
+              264.513
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              208.196,
+              82.305
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              263.05,
+              132.985
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/walk_0.png",
+          "source": "source/fix1/imported/novice/walk_0.png",
+          "uniform_scale": 1
+        },
+        "walk_1": {
+          "image": "frames/novice/walk_1.png",
+          "hairMask": "masks/novice/walk_1.png",
+          "hand": {
+            "point": [
+              271.789,
+              293.266
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              218.856,
+              87.621
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              272.707,
+              138.301
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/walk_1.png",
+          "source": "source/fix1/imported/novice/walk_1.png",
+          "uniform_scale": 1
+        },
+        "walk_2": {
+          "image": "frames/novice/walk_2.png",
+          "hairMask": "masks/novice/walk_2.png",
+          "hand": {
+            "point": [
+              286.252,
+              279.776
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              210.833,
+              84.836
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              266.05,
+              135.516
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/walk_2.png",
+          "source": "source/fix1/imported/novice/walk_2.png",
+          "uniform_scale": 1
+        },
+        "walk_3": {
+          "image": "frames/novice/walk_3.png",
+          "hairMask": "masks/novice/walk_3.png",
+          "hand": {
+            "point": [
+              274.12,
+              286.504
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              220.066,
+              88.787
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              275.651,
+              139.467
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/walk_3.png",
+          "source": "source/fix1/imported/novice/walk_3.png",
+          "uniform_scale": 1
+        },
+        "attack_0": {
+          "image": "frames/novice/attack_0.png",
+          "hairMask": "masks/novice/attack_0.png",
+          "gripOverlay": "grips/novice/attack_0.png",
+          "hand": {
+            "point": [
+              288.382,
+              188.167
+            ],
+            "angle": -115,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              222,
+              84
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              274,
+              128
+            ],
+            "angle": 0
+          },
+          "source": "source/fix1/novice-attempt1.png",
+          "uniform_scale": 0.7013574660633484
+        },
+        "attack_1": {
+          "image": "frames/novice/attack_1.png",
+          "hairMask": "masks/novice/attack_1.png",
+          "hand": {
+            "point": [
+              305.195,
+              242.78
+            ],
+            "angle": 0,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              212.077,
+              99.148
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              266.218,
+              149.828
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/novice/attack_1.png",
+          "source": "source/fix1/imported/novice/attack_1.png",
+          "uniform_scale": 1
+        },
+        "attack_2": {
+          "image": "frames/novice/attack_2.png",
+          "hairMask": "masks/novice/attack_2.png",
+          "gripOverlay": "grips/novice/attack_2.png",
+          "hand": {
+            "point": [
+              313.982,
+              282.149
+            ],
+            "angle": -25,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              251,
+              95
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              306,
+              146
+            ],
+            "angle": 0
+          },
+          "source": "source/fix1/novice-attempt1.png",
+          "uniform_scale": 0.7013574660633484
+        },
+        "cast_0": {
+          "image": "frames/novice/cast_0.png",
+          "hairMask": "masks/novice/cast_0.png",
+          "gripOverlay": "grips/novice/cast_0.png",
+          "hand": {
+            "point": [
+              306.968,
+              217.624
+            ],
+            "angle": -55,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              211,
+              84
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              264,
+              130
+            ],
+            "angle": 0
+          },
+          "source": "source/fix1/novice-attempt1.png",
+          "uniform_scale": 0.7013574660633484
+        },
+        "cast_1": {
+          "image": "frames/novice/cast_1.png",
+          "hairMask": "masks/novice/cast_1.png",
+          "gripOverlay": "grips/novice/cast_1.png",
+          "hand": {
+            "point": [
+              302.76,
+              206.403
+            ],
+            "angle": -55,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              211,
+              84
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              265,
+              130
+            ],
+            "angle": 0
+          },
+          "source": "source/fix1/novice-attempt1.png",
+          "uniform_scale": 0.7013574660633484
+        },
+        "sit_0": {
+          "image": "frames/novice/sit_0.png",
+          "hairMask": "masks/novice/sit_0.png",
+          "hand": {
+            "point": [
+              262.876,
+              308.99
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              190.416,
+              144.305
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              243.582,
+              194.985
+            ],
+            "angle": 0
+          },
+          "source": "source/fix1/imported/novice/sit_0.png",
+          "uniform_scale": 1
+        },
+        "hurt_0": {
+          "image": "frames/novice/hurt_0.png",
+          "hairMask": "masks/novice/hurt_0.png",
+          "hand": {
+            "point": [
+              256.048,
+              210.506
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              138.786,
+              110.26
+            ],
+            "angle": -22
+          },
+          "side": {
+            "point": [
+              214.466,
+              157.918
+            ],
+            "angle": -22
+          },
+          "gripOverlay": "grips/novice/hurt_0.png",
+          "source": "source/fix1/imported/novice/hurt_0.png",
+          "uniform_scale": 1
+        },
+        "dead_0": {
+          "image": "frames/novice/dead_0.png",
+          "hairMask": "masks/novice/dead_0.png",
+          "hand": {
+            "point": [
+              300.709,
+              317.386
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              63.8,
+              272.279
+            ],
+            "angle": -82
+          },
+          "side": {
+            "point": [
+              144.805,
+              335.064
+            ],
+            "angle": -82
+          },
+          "source": "source/fix1/imported/novice/dead_0.png",
+          "uniform_scale": 1
+        }
+      }
+    },
+    "swordsman_male": {
+      "class": "swordsman",
+      "gender": "male",
+      "defaultWeapon": "sword",
+      "defaultHairTint": "blue",
+      "frames": {
+        "idle_0": {
+          "image": "frames/swordsman/idle_0.png",
+          "hairMask": "masks/swordsman/idle_0.png",
+          "hand": {
+            "point": [
+              284.865,
+              282.048
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              227.589,
+              83.524
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              282.216,
+              134.204
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/idle_0.png",
+          "source": "source/fix1/imported/swordsman/idle_0.png",
+          "uniform_scale": 1
+        },
+        "idle_1": {
+          "image": "frames/swordsman/idle_1.png",
+          "hairMask": "masks/swordsman/idle_1.png",
+          "hand": {
+            "point": [
+              284.865,
+              281.736
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              227.589,
+              82.418
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              282.216,
+              133.301
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/idle_1.png",
+          "source": "source/fix1/imported/swordsman/idle_1.png",
+          "uniform_scale": 1
+        },
+        "walk_0": {
+          "image": "frames/swordsman/walk_0.png",
+          "hairMask": "masks/swordsman/walk_0.png",
+          "hand": {
+            "point": [
+              289.262,
+              276.425
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              230.889,
+              83.569
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              286.148,
+              134.249
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/walk_0.png",
+          "source": "source/fix1/imported/swordsman/walk_0.png",
+          "uniform_scale": 1
+        },
+        "walk_1": {
+          "image": "frames/swordsman/walk_1.png",
+          "hairMask": "masks/swordsman/walk_1.png",
+          "hand": {
+            "point": [
+              275.839,
+              296.682
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              229.858,
+              89.569
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              285.45,
+              140.249
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/walk_1.png",
+          "source": "source/fix1/imported/swordsman/walk_1.png",
+          "uniform_scale": 1
+        },
+        "walk_2": {
+          "image": "frames/swordsman/walk_2.png",
+          "hairMask": "masks/swordsman/walk_2.png",
+          "hand": {
+            "point": [
+              297.333,
+              266.454
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              230.496,
+              84.867
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              287.04,
+              135.547
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/walk_2.png",
+          "source": "source/fix1/imported/swordsman/walk_2.png",
+          "uniform_scale": 1
+        },
+        "walk_3": {
+          "image": "frames/swordsman/walk_3.png",
+          "hairMask": "masks/swordsman/walk_3.png",
+          "hand": {
+            "point": [
+              279.338,
+              282.823
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              228.18,
+              90.915
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              283.364,
+              141.595
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/walk_3.png",
+          "source": "source/fix1/imported/swordsman/walk_3.png",
+          "uniform_scale": 1
+        },
+        "attack_0": {
+          "image": "frames/swordsman/attack_0.png",
+          "hairMask": "masks/swordsman/attack_0.png",
+          "gripOverlay": "grips/swordsman/attack_0.png",
+          "hand": {
+            "point": [
+              299.724,
+              195.762
+            ],
+            "angle": -115,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              225,
+              82
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              281,
+              135
+            ],
+            "angle": 0
+          },
+          "source": "source/fix1/swordsman-attempt1.png",
+          "uniform_scale": 0.6843267108167771
+        },
+        "attack_1": {
+          "image": "frames/swordsman/attack_1.png",
+          "hairMask": "masks/swordsman/attack_1.png",
+          "hand": {
+            "point": [
+              316.644,
+              239.076
+            ],
+            "angle": 0,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              221.761,
+              85.864
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              277.02,
+              136.544
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/attack_1.png",
+          "source": "source/fix1/imported/swordsman/attack_1.png",
+          "uniform_scale": 1
+        },
+        "attack_2": {
+          "image": "frames/swordsman/attack_2.png",
+          "hairMask": "masks/swordsman/attack_2.png",
+          "hand": {
+            "point": [
+              302.119,
+              290.066
+            ],
+            "angle": 42,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              239.391,
+              94.887
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              295.232,
+              146.511
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/swordsman/attack_2.png",
+          "source": "source/fix1/imported/swordsman/attack_2.png",
+          "uniform_scale": 1
+        },
+        "cast_0": {
+          "image": "frames/swordsman/cast_0.png",
+          "hairMask": "masks/swordsman/cast_0.png",
+          "gripOverlay": "grips/swordsman/cast_0.png",
+          "hand": {
+            "point": [
+              250.795,
+              242.98
+            ],
+            "angle": -80,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              224,
+              81
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              278,
+              135
+            ],
+            "angle": 0
+          },
+          "source": "source/fix1/swordsman-attempt1.png",
+          "uniform_scale": 0.6843267108167771
+        },
+        "cast_1": {
+          "image": "frames/swordsman/cast_1.png",
+          "hairMask": "masks/swordsman/cast_1.png",
+          "gripOverlay": "grips/swordsman/cast_1.png",
+          "hand": {
+            "point": [
+              278.168,
+              244.349
+            ],
+            "angle": -80,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              222,
+              85
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              275,
+              136
+            ],
+            "angle": 0
+          },
+          "source": "source/fix1/swordsman-attempt1.png",
+          "uniform_scale": 0.6843267108167771
+        },
+        "sit_0": {
+          "image": "frames/swordsman/sit_0.png",
+          "hairMask": "masks/swordsman/sit_0.png",
+          "hand": {
+            "point": [
+              274.765,
+              323.917
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              209.455,
+              155.663
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              265.047,
+              206.343
+            ],
+            "angle": 0
+          },
+          "source": "source/fix1/imported/swordsman/sit_0.png",
+          "uniform_scale": 1
+        },
+        "hurt_0": {
+          "image": "frames/swordsman/hurt_0.png",
+          "hairMask": "masks/swordsman/hurt_0.png",
+          "hand": {
+            "point": [
+              269.176,
+              257.506
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              142.871,
+              119.781
+            ],
+            "angle": -22
+          },
+          "side": {
+            "point": [
+              218.551,
+              168.719
+            ],
+            "angle": -22
+          },
+          "gripOverlay": "grips/swordsman/hurt_0.png",
+          "source": "source/fix1/imported/swordsman/hurt_0.png",
+          "uniform_scale": 1
+        },
+        "dead_0": {
+          "image": "frames/swordsman/dead_0.png",
+          "hairMask": "masks/swordsman/dead_0.png",
+          "hand": {
+            "point": [
+              297.612,
+              325.179
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              75.833,
+              278.648
+            ],
+            "angle": -82
+          },
+          "side": {
+            "point": [
+              152.693,
+              338.325
+            ],
+            "angle": -82
+          },
+          "source": "source/fix1/imported/swordsman/dead_0.png",
+          "uniform_scale": 1
+        }
+      }
     }
   },
   "weapons": {
@@ -1436,6 +2288,28 @@
       "tip": [
         165.65,
         128
+      ]
+    },
+    "dagger": {
+      "image": "equipment/dagger.png",
+      "pivot": [
+        16.5,
+        16.5
+      ],
+      "tip": [
+        81.5,
+        16.5
+      ]
+    },
+    "sword": {
+      "image": "equipment/sword.png",
+      "pivot": [
+        23,
+        18.5
+      ],
+      "tip": [
+        120.5,
+        18.5
       ]
     }
   },
@@ -1504,5 +2378,436 @@
     "equipment": "null weapon and empty headgear list render naked figure; hidden weapon for cast/sit/dead; grip overlay only when visible weapon is front",
     "attackContact": "attack_1 at [100,180) ms, includes exact 140 ms contact; hand angle 0 makes blade forward",
     "sampling": "no interpolation between animation frames; bilinear display sampling; round RGB half up"
+  },
+  "fix1": {
+    "request": "docs/art-requests/hero-sprites-a-fix1.md",
+    "status": "partial-art-rejection",
+    "unresolved": [
+      {
+        "id": "archer_male",
+        "frame": "walk_3",
+        "status": "original preserved; replacement not delivered",
+        "reason": "Attempt 1 retained wrong arm; attempt 2 baked bow into figure. Two-attempt limit reached."
+      }
+    ]
+  },
+  "fix2": {
+    "request": "docs/art-requests/hero-sprites-a-fix2.md",
+    "status": "complete",
+    "unresolved": [],
+    "method": "Removed bow and string from fix1 attempt2 with built-in image_gen; whole-figure normalization; no fallback assembly.",
+    "updates": [
+      {
+        "id": "archer_male",
+        "frame": "walk_3",
+        "source": "source/fix2/archer-attempt1.png",
+        "source_sha256": "83017bf4e9a1257e533c2de71bf3091135cf922192f54d68318a1ae1aa6d272b",
+        "uniform_scale": 0.3462857142857143,
+        "sourceRect": [
+          0,
+          0,
+          1419,
+          1108
+        ],
+        "sourceBounds": [
+          420,
+          113,
+          948,
+          988
+        ],
+        "translation": [
+          -17.03257142857143,
+          17.86971428571428
+        ],
+        "sourceAnnotations": [
+          904,
+          732,
+          709,
+          179,
+          877,
+          370
+        ],
+        "prompt": "prompts/archer_male-fix2-attempt1.txt"
+      }
+    ],
+    "anchorChanges": [
+      {
+        "id": "mage_female",
+        "frame": "walk_2",
+        "anchor": "crown",
+        "before": [
+          170.056,
+          54.822
+        ],
+        "after": [
+          222,
+          78
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "walk_2",
+        "anchor": "side",
+        "before": [
+          259.611,
+          118.889
+        ],
+        "after": [
+          280,
+          140
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "attack_0",
+        "anchor": "crown",
+        "before": [
+          163.347,
+          54.487
+        ],
+        "after": [
+          223,
+          78
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "attack_0",
+        "anchor": "side",
+        "before": [
+          267.304,
+          127.033
+        ],
+        "after": [
+          283,
+          145
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "cast_0",
+        "anchor": "crown",
+        "before": [
+          176.6,
+          65.156
+        ],
+        "after": [
+          226,
+          87
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "cast_0",
+        "anchor": "side",
+        "before": [
+          264.778,
+          127.844
+        ],
+        "after": [
+          280,
+          151
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "cast_1",
+        "anchor": "crown",
+        "before": [
+          180.733,
+          65.156
+        ],
+        "after": [
+          225,
+          87
+        ]
+      },
+      {
+        "id": "mage_female",
+        "frame": "cast_1",
+        "anchor": "side",
+        "before": [
+          269.6,
+          128.533
+        ],
+        "after": [
+          280,
+          152
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "cast_0",
+        "anchor": "crown",
+        "before": [
+          234.154,
+          54.833
+        ],
+        "after": [
+          211,
+          73
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "cast_0",
+        "anchor": "side",
+        "before": [
+          262.461,
+          120.423
+        ],
+        "after": [
+          277,
+          135
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "cast_1",
+        "anchor": "crown",
+        "before": [
+          234.499,
+          61.737
+        ],
+        "after": [
+          211,
+          80
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "cast_1",
+        "anchor": "side",
+        "before": [
+          263.497,
+          125.947
+        ],
+        "after": [
+          277,
+          138
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "attack_0",
+        "anchor": "crown",
+        "before": [
+          223.156,
+          55.611
+        ],
+        "after": [
+          222,
+          84
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "attack_0",
+        "anchor": "side",
+        "before": [
+          258.925,
+          121.538
+        ],
+        "after": [
+          274,
+          128
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "attack_2",
+        "anchor": "crown",
+        "before": [
+          269.796,
+          73.846
+        ],
+        "after": [
+          262,
+          78
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "attack_2",
+        "anchor": "side",
+        "before": [
+          286.629,
+          144.683
+        ],
+        "after": [
+          306,
+          146
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "cast_0",
+        "anchor": "crown",
+        "before": [
+          216.493,
+          57.715
+        ],
+        "after": [
+          211,
+          84
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "cast_0",
+        "anchor": "side",
+        "before": [
+          255.068,
+          122.24
+        ],
+        "after": [
+          264,
+          130
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "cast_1",
+        "anchor": "crown",
+        "before": [
+          215.792,
+          57.715
+        ],
+        "after": [
+          211,
+          84
+        ]
+      },
+      {
+        "id": "novice_female",
+        "frame": "cast_1",
+        "anchor": "side",
+        "before": [
+          255.068,
+          122.24
+        ],
+        "after": [
+          265,
+          130
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "attack_0",
+        "anchor": "crown",
+        "before": [
+          229.923,
+          56.159
+        ],
+        "after": [
+          225,
+          82
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "attack_0",
+        "anchor": "side",
+        "before": [
+          265.508,
+          118.433
+        ],
+        "after": [
+          281,
+          135
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "cast_0",
+        "anchor": "crown",
+        "before": [
+          228.896,
+          56.159
+        ],
+        "after": [
+          224,
+          81
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "cast_0",
+        "anchor": "side",
+        "before": [
+          265.85,
+          118.433
+        ],
+        "after": [
+          278,
+          135
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "cast_1",
+        "anchor": "crown",
+        "before": [
+          223.422,
+          60.265
+        ],
+        "after": [
+          222,
+          85
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "cast_1",
+        "anchor": "side",
+        "before": [
+          261.744,
+          121.854
+        ],
+        "after": [
+          275,
+          136
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "walk_3",
+        "anchor": "hand",
+        "before": [
+          256.877,
+          279.331
+        ],
+        "after": [
+          296.01,
+          271.351
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "walk_3",
+        "anchor": "crown",
+        "before": [
+          224.61,
+          82.268
+        ],
+        "after": [
+          228.484,
+          79.855
+        ]
+      },
+      {
+        "id": "archer_male",
+        "frame": "walk_3",
+        "anchor": "side",
+        "before": [
+          291.45,
+          144.498
+        ],
+        "after": [
+          286.66,
+          145.995
+        ]
+      }
+    ]
   }
 }

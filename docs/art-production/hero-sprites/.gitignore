@@ -1,0 +1,25 @@
+# Keep the requested fix1 evidence reviewable; omit intermediate animation PNGs.
+!/source/
+source/*
+!source/fix1/
+source/fix1/*
+!source/fix1/*-attempt*.png
+!source/fix1/*-targets.png
+!source/fix1/annotations.json
+!source/fix1/game-manifest-before.json
+!source/fix1/imported/
+!/verification/
+verification/*
+!verification/review_*.png
+!verification/checks.json
+!verification/check-unscoped-spec.json
+!verification/check-fix1.log
+!verification/anchor-checks.png
+!verification/hair-tints.png
+!verification/fix1-build.log
+
+# fix2 source, exact prompt inputs, coordinates and preservation audit.
+!source/fix2/
+source/fix2/*
+!source/fix2/archer-attempt1.png
+!source/fix2/*.json

@@ -1,0 +1,85 @@
+{
+  "redrawn": 16,
+  "cleanup": [
+    {
+      "id": "swordsman_male",
+      "frame": "idle_0",
+      "pixels": 524,
+      "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "idle_1",
+      "pixels": 513,
+      "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "walk_0",
+      "pixels": 436,
+      "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "walk_1",
+      "pixels": 256,
+      "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "walk_2",
+      "pixels": 354,
+      "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "walk_3",
+      "pixels": 392,
+      "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "attack_1",
+      "pixels": 405,
+      "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "attack_2",
+      "pixels": 290,
+      "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "sit_0",
+      "pixels": 314,
+      "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "hurt_0",
+      "pixels": 418,
+      "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "dead_0",
+      "pixels": 378,
+      "operation": "orange contamination only; nearest original cream/skin material; original silhouette and pose unchanged"
+    },
+    {
+      "id": "novice_female",
+      "frame": "walk_3",
+      "pixels": 29,
+      "operation": "removed isolated below-ground component only"
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "archer_male",
+      "frame": "walk_3",
+      "status": "original preserved; replacement not delivered",
+      "reason": "Attempt 1 retained wrong arm; attempt 2 baked bow into figure. Two-attempt limit reached."
+    }
+  ]
+}

@@ -1,0 +1,4574 @@
+{
+  "manifest": "docs/art-production/hero-sprites/manifest.json",
+  "spec": "asset-specs/hero-sprites.json",
+  "at": "2026-10-08T18:09:04.580Z",
+  "totals": {
+    "error": 0,
+    "warn": 4,
+    "ok": 465,
+    "info": 18
+  },
+  "missing": [
+    {
+      "id": "thief_male",
+      "kind": "hero/idle",
+      "file": "frames/thief/{state}_{n}.png"
+    },
+    {
+      "id": "thief_male",
+      "kind": "hero/walk",
+      "file": "frames/thief/{state}_{n}.png"
+    },
+    {
+      "id": "thief_male",
+      "kind": "hero/attack",
+      "file": "frames/thief/{state}_{n}.png"
+    },
+    {
+      "id": "thief_male",
+      "kind": "hero/cast",
+      "file": "frames/thief/{state}_{n}.png"
+    },
+    {
+      "id": "thief_male",
+      "kind": "hero/sit",
+      "file": "frames/thief/{state}_{n}.png"
+    },
+    {
+      "id": "thief_male",
+      "kind": "hero/hurt",
+      "file": "frames/thief/{state}_{n}.png"
+    },
+    {
+      "id": "thief_male",
+      "kind": "hero/dead",
+      "file": "frames/thief/{state}_{n}.png"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "hero/idle",
+      "file": "frames/merchant/{state}_{n}.png"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "hero/walk",
+      "file": "frames/merchant/{state}_{n}.png"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "hero/attack",
+      "file": "frames/merchant/{state}_{n}.png"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "hero/cast",
+      "file": "frames/merchant/{state}_{n}.png"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "hero/sit",
+      "file": "frames/merchant/{state}_{n}.png"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "hero/hurt",
+      "file": "frames/merchant/{state}_{n}.png"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "hero/dead",
+      "file": "frames/merchant/{state}_{n}.png"
+    },
+    {
+      "id": "axe",
+      "kind": "weapon",
+      "file": "docs/art-production/hero-sprites/equipment/axe.png"
+    }
+  ],
+  "excluded": [],
+  "sheets": [
+    {
+      "id": "mage_female",
+      "kind": "idle",
+      "file": "docs/art-production/hero-sprites/frames/mage/ (2장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 114%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 114%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(2번) 높이 309px, 기준 310px (99.7%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            138,
+            49,
+            316,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 311,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            138,
+            51,
+            316,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 309,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "mage_female",
+      "kind": "walk",
+      "file": "docs/art-production/hero-sprites/frames/mage/ (4장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 114%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 114%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(4번) 높이 300px, 기준 310px (96.8%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            138,
+            49,
+            320,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 311,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            134,
+            55,
+            314,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 305,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            125,
+            50,
+            308,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 310,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            129,
+            60,
+            312,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 300,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "mage_female",
+      "kind": "attack",
+      "file": "docs/art-production/hero-sprites/frames/mage/ (3장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 37.4%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 114%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(3번) 높이 293px, 기준 310px (94.5%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            122,
+            50,
+            338,
+            360
+          ],
+          "foot": [
+            216,
+            360
+          ],
+          "height": 310,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            133,
+            65,
+            346,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 295,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            129,
+            66,
+            315,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 293,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "mage_female",
+      "kind": "cast",
+      "file": "docs/art-production/hero-sprites/frames/mage/ (2장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 68.9%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(2번) 높이 300px, 기준 310px (96.8%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            128,
+            60,
+            339,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 300,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            123,
+            60,
+            346,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 300,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "mage_female",
+      "kind": "sit",
+      "file": "docs/art-production/hero-sprites/frames/mage/ (1장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 114%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 114%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            122,
+            106,
+            319,
+            360
+          ],
+          "foot": [
+            221,
+            360
+          ],
+          "height": 253,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "mage_female",
+      "kind": "hurt",
+      "file": "docs/art-production/hero-sprites/frames/mage/ (1장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 114%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 114%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "warn",
+          "msg": "선 자세(1번) 높이 260px, 기준 310px (83.9%)",
+          "frames": [
+            1
+          ]
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            87,
+            100,
+            328,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 260,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "mage_female",
+      "kind": "dead",
+      "file": "docs/art-production/hero-sprites/frames/mage/ (1장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 114%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 114%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            74,
+            192,
+            366,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 168,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "idle",
+      "file": "docs/art-production/hero-sprites/frames/acolyte/ (2장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 120.2%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 120.2%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(2번) 높이 309px, 기준 310px (99.7%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            117,
+            49,
+            320,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 311,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            117,
+            51,
+            320,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 309,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "walk",
+      "file": "docs/art-production/hero-sprites/frames/acolyte/ (4장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 120.2%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 120.2%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(4번) 높이 308px, 기준 310px (99.4%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            120,
+            51,
+            325,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 309,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            123,
+            52,
+            324,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 308,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            117,
+            49,
+            329,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 311,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            118,
+            52,
+            324,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 308,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "attack",
+      "file": "docs/art-production/hero-sprites/frames/acolyte/ (3장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 69.5%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 120.2%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(3번) 높이 308px, 기준 310px (99.4%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            114,
+            50,
+            341,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 310,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            129,
+            57,
+            377,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 303,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            118,
+            52,
+            329,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 308,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "cast",
+      "file": "docs/art-production/hero-sprites/frames/acolyte/ (2장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 69.5%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(2번) 높이 309px, 기준 310px (99.7%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            115,
+            50,
+            333,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 310,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            113,
+            51,
+            314,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 309,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "sit",
+      "file": "docs/art-production/hero-sprites/frames/acolyte/ (1장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 120.2%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 120.2%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            120,
+            100,
+            333,
+            360
+          ],
+          "foot": [
+            221,
+            360
+          ],
+          "height": 260,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "hurt",
+      "file": "docs/art-production/hero-sprites/frames/acolyte/ (1장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 120.2%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 120.2%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(1번) 높이 282px, 기준 310px (91%)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            106,
+            78,
+            323,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 282,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "dead",
+      "file": "docs/art-production/hero-sprites/frames/acolyte/ (1장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 120.2%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 120.2%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            54,
+            194,
+            392,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 166,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "idle",
+      "file": "docs/art-production/hero-sprites/frames/archer/ (2장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 115.2%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 115.2%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(2번) 높이 308px, 기준 310px (99.4%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            121,
+            49,
+            316,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 310,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            121,
+            51,
+            316,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 308,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "walk",
+      "file": "docs/art-production/hero-sprites/frames/archer/ (4장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 115.2%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 115.2%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(4번) 높이 304px, 기준 310px (98.1%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side:odd",
+          "cause": "레이어",
+          "level": "warn",
+          "msg": "기준점 \"hand\"이 다른 프레임들과 따로 떨어져 있습니다(몸 높이의 12% 넘게). 쥐는 손이 바뀌었는지 보세요",
+          "frames": [
+            4
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            119,
+            42,
+            322,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 317,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            126,
+            45,
+            320,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 315,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            131,
+            59,
+            324,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 301,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            128,
+            56,
+            322,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 304,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "attack",
+      "file": "docs/art-production/hero-sprites/frames/archer/ (3장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 115.2%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 115.2%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(3번) 높이 287px, 기준 310px (92.6%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            121,
+            65,
+            354,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 294,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            116,
+            68,
+            359,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 292,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            116,
+            72,
+            331,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 287,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "cast",
+      "file": "docs/art-production/hero-sprites/frames/archer/ (2장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 69%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(2번) 높이 303px, 기준 310px (97.7%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            106,
+            50,
+            346,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 310,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            108,
+            57,
+            346,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 303,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "sit",
+      "file": "docs/art-production/hero-sprites/frames/archer/ (1장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 115.2%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 115.2%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            104,
+            112,
+            302,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 248,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "hurt",
+      "file": "docs/art-production/hero-sprites/frames/archer/ (1장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 115.2%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 115.2%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "warn",
+          "msg": "선 자세(1번) 높이 261px, 기준 310px (84.2%)",
+          "frames": [
+            1
+          ]
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            143,
+            99,
+            351,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 261,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "dead",
+      "file": "docs/art-production/hero-sprites/frames/archer/ (1장)",
+      "category": "motion",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 115.2%"
+        },
+        {
+          "key": "upscale",
+          "cause": "배율",
+          "level": "info",
+          "msg": "생성본을 최대 115.2%로 늘렸습니다(상한 125%)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            49,
+            190,
+            396,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 170,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "idle",
+      "file": "docs/art-production/hero-sprites/frames/novice/ (2장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 100%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(2번) 높이 313px, 기준 310px (101%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            123,
+            49,
+            301,
+            362
+          ],
+          "foot": [
+            220,
+            361
+          ],
+          "height": 312,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            123,
+            48,
+            301,
+            362
+          ],
+          "foot": [
+            220,
+            361
+          ],
+          "height": 313,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "walk",
+      "file": "docs/art-production/hero-sprites/frames/novice/ (4장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "specks",
+          "cause": "투명",
+          "level": "warn",
+          "msg": "본체와 떨어진 작은 얼룩 1개(1px). 배경 제거 잔여일 수 있어 몸 경계·발 기준점에서는 뺐습니다",
+          "frames": [
+            4
+          ]
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 100%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(4번) 높이 304px, 기준 310px (98.1%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 1px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            112,
+            49,
+            302,
+            361
+          ],
+          "foot": [
+            215,
+            360
+          ],
+          "height": 311,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            125,
+            55,
+            301,
+            362
+          ],
+          "foot": [
+            217,
+            361
+          ],
+          "height": 305,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            116,
+            48,
+            307,
+            362
+          ],
+          "foot": [
+            217,
+            361
+          ],
+          "height": 312,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            122,
+            56,
+            301,
+            384
+          ],
+          "foot": [
+            216,
+            360
+          ],
+          "height": 304,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "attack",
+      "file": "docs/art-production/hero-sprites/frames/novice/ (3장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 70.1%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(3번) 높이 292px, 기준 310px (94.2%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            123,
+            50,
+            311,
+            360
+          ],
+          "foot": [
+            221,
+            360
+          ],
+          "height": 310,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            117,
+            67,
+            326,
+            361
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 293,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            137,
+            68,
+            338,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 292,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "cast",
+      "file": "docs/art-production/hero-sprites/frames/novice/ (2장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 70.1%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(2번) 높이 309px, 기준 310px (99.7%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            118,
+            51,
+            327,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 309,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            118,
+            51,
+            323,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 309,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "sit",
+      "file": "docs/art-production/hero-sprites/frames/novice/ (1장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 100%"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            98,
+            103,
+            309,
+            362
+          ],
+          "foot": [
+            222,
+            361
+          ],
+          "height": 258,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "hurt",
+      "file": "docs/art-production/hero-sprites/frames/novice/ (1장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 100%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(1번) 높이 283px, 기준 310px (91.3%)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            71,
+            76,
+            297,
+            361
+          ],
+          "foot": [
+            228,
+            360
+          ],
+          "height": 283,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "dead",
+      "file": "docs/art-production/hero-sprites/frames/novice/ (1장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 100%"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            28,
+            181,
+            411,
+            362
+          ],
+          "foot": [
+            211,
+            361
+          ],
+          "height": 180,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "idle",
+      "file": "docs/art-production/hero-sprites/frames/swordsman/ (2장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 100%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(2번) 높이 314px, 기준 310px (101.3%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            128,
+            49,
+            308,
+            362
+          ],
+          "foot": [
+            221,
+            361
+          ],
+          "height": 312,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            128,
+            47,
+            308,
+            362
+          ],
+          "foot": [
+            221,
+            361
+          ],
+          "height": 314,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "walk",
+      "file": "docs/art-production/hero-sprites/frames/swordsman/ (4장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 100%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(4번) 높이 305px, 기준 310px (98.4%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 1px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            131,
+            49,
+            312,
+            361
+          ],
+          "foot": [
+            217,
+            360
+          ],
+          "height": 311,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            136,
+            54,
+            312,
+            361
+          ],
+          "foot": [
+            219,
+            360
+          ],
+          "height": 305,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            128,
+            49,
+            316,
+            362
+          ],
+          "foot": [
+            217,
+            361
+          ],
+          "height": 312,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            138,
+            54,
+            312,
+            361
+          ],
+          "foot": [
+            219,
+            360
+          ],
+          "height": 305,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "attack",
+      "file": "docs/art-production/hero-sprites/frames/swordsman/ (3장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 68.4%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(3번) 높이 297px, 기준 310px (95.8%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 1px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            130,
+            50,
+            319,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 310,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            126,
+            50,
+            340,
+            361
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 310,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            133,
+            64,
+            328,
+            362
+          ],
+          "foot": [
+            220,
+            361
+          ],
+          "height": 297,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "cast",
+      "file": "docs/art-production/hero-sprites/frames/swordsman/ (2장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 68.4%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(2번) 높이 306px, 기준 310px (98.7%)"
+        },
+        {
+          "key": "baseline",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "발 기준선 흔들림 0px (허용 12px)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            129,
+            50,
+            305,
+            360
+          ],
+          "foot": [
+            221,
+            360
+          ],
+          "height": 310,
+          "guardHits": 0
+        },
+        {
+          "bounds": [
+            126,
+            54,
+            303,
+            360
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 306,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "sit",
+      "file": "docs/art-production/hero-sprites/frames/swordsman/ (1장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 100%"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            117,
+            120,
+            314,
+            362
+          ],
+          "foot": [
+            222,
+            361
+          ],
+          "height": 241,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "hurt",
+      "file": "docs/art-production/hero-sprites/frames/swordsman/ (1장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 100%"
+        },
+        {
+          "key": "bodyHeight",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "선 자세(1번) 높이 273px, 기준 310px (88.1%)"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "overlays:grip",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "오버레이 \"grip\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:hand:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\"이 모든 프레임에서 앞쪽 같은 팔, 큰 튐 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            75,
+            86,
+            287,
+            361
+          ],
+          "foot": [
+            220,
+            360
+          ],
+          "height": 273,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "dead",
+      "file": "docs/art-production/hero-sprites/frames/swordsman/ (1장)",
+      "category": "motion",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "프레임 해시 일치"
+        },
+        {
+          "key": "canvas",
+          "cause": "형식",
+          "level": "ok",
+          "msg": "모든 프레임 캔버스 512×400"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        },
+        {
+          "key": "guard",
+          "cause": "여백",
+          "level": "ok",
+          "msg": "가장자리 8px 비투명 0"
+        },
+        {
+          "key": "commonScale",
+          "cause": "배율",
+          "level": "ok",
+          "msg": "공통 배율 100%"
+        },
+        {
+          "key": "pivot",
+          "cause": "기준점",
+          "level": "ok",
+          "msg": "기록된 pivot과 발 위치 일치"
+        },
+        {
+          "key": "masks:hair",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "마스크 \"hair\" 크기·위치 일치 (몸 안 최저 100%)"
+        },
+        {
+          "key": "anchor:hand",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"hand\" 모든 프레임에 있고 손 위(6px 안)"
+        },
+        {
+          "key": "anchor:crown",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"crown\" 모든 프레임에 있고 몸에 붙어 있음"
+        },
+        {
+          "key": "anchor:side",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "기준점 \"side\" 모든 프레임에 있고 몸에 붙어 있음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            44,
+            186,
+            397,
+            362
+          ],
+          "foot": [
+            238,
+            361
+          ],
+          "height": 175,
+          "guardHits": 0
+        }
+      ]
+    },
+    {
+      "id": "staff",
+      "kind": "weapon",
+      "file": "docs/art-production/hero-sprites/equipment/staff.png",
+      "category": "image",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "해시 일치"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            35,
+            108,
+            164,
+            147
+          ],
+          "foot": [
+            139,
+            147
+          ],
+          "height": 38,
+          "guardHits": 0,
+          "alphaSum": 721634,
+          "saturation": 0.642
+        }
+      ]
+    },
+    {
+      "id": "mace",
+      "kind": "weapon",
+      "file": "docs/art-production/hero-sprites/equipment/mace.png",
+      "category": "image",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "해시 일치"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            33,
+            105,
+            137,
+            153
+          ],
+          "foot": [
+            116,
+            153
+          ],
+          "height": 48,
+          "guardHits": 0,
+          "alphaSum": 612720,
+          "saturation": 0.384
+        }
+      ]
+    },
+    {
+      "id": "bow",
+      "kind": "weapon",
+      "file": "docs/art-production/hero-sprites/equipment/bow.png",
+      "category": "image",
+      "planned": true,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "해시 일치"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            103,
+            42,
+            157,
+            203
+          ],
+          "foot": [
+            114,
+            203
+          ],
+          "height": 161,
+          "guardHits": 0,
+          "alphaSum": 731390,
+          "saturation": 0.578
+        }
+      ]
+    },
+    {
+      "id": "dagger",
+      "kind": "weapon",
+      "file": "docs/art-production/hero-sprites/equipment/dagger.png",
+      "category": "image",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "해시 일치"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            0,
+            0,
+            84,
+            32
+          ],
+          "foot": [
+            32,
+            32
+          ],
+          "height": 32,
+          "guardHits": 0,
+          "alphaSum": 371749,
+          "saturation": 0.497
+        }
+      ]
+    },
+    {
+      "id": "sword",
+      "kind": "weapon",
+      "file": "docs/art-production/hero-sprites/equipment/sword.png",
+      "category": "image",
+      "planned": false,
+      "results": [
+        {
+          "key": "sha256",
+          "cause": "기록",
+          "level": "ok",
+          "msg": "해시 일치"
+        },
+        {
+          "key": "alpha",
+          "cause": "투명",
+          "level": "ok",
+          "msg": "진짜 알파, 빈 프레임 없음"
+        }
+      ],
+      "frames": [
+        {
+          "bounds": [
+            0,
+            0,
+            123,
+            37
+          ],
+          "foot": [
+            38,
+            37
+          ],
+          "height": 37,
+          "guardHits": 0,
+          "alphaSum": 624651,
+          "saturation": 0.435
+        }
+      ]
+    },
+    {
+      "id": "staff",
+      "kind": "부속(weapon)",
+      "file": "docs/art-production/hero-sprites/equipment/staff.png",
+      "results": [
+        {
+          "key": "attachment",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "pivot·tip이 그림 안, 배경 투명"
+        }
+      ]
+    },
+    {
+      "id": "mace",
+      "kind": "부속(weapon)",
+      "file": "docs/art-production/hero-sprites/equipment/mace.png",
+      "results": [
+        {
+          "key": "attachment",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "pivot·tip이 그림 안, 배경 투명"
+        }
+      ]
+    },
+    {
+      "id": "bow",
+      "kind": "부속(weapon)",
+      "file": "docs/art-production/hero-sprites/equipment/bow.png",
+      "results": [
+        {
+          "key": "attachment",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "pivot·tip이 그림 안, 배경 투명"
+        }
+      ]
+    },
+    {
+      "id": "dagger",
+      "kind": "부속(weapon)",
+      "file": "docs/art-production/hero-sprites/equipment/dagger.png",
+      "results": [
+        {
+          "key": "attachment",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "pivot·tip이 그림 안, 배경 투명"
+        }
+      ]
+    },
+    {
+      "id": "sword",
+      "kind": "부속(weapon)",
+      "file": "docs/art-production/hero-sprites/equipment/sword.png",
+      "results": [
+        {
+          "key": "attachment",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "pivot·tip이 그림 안, 배경 투명"
+        }
+      ]
+    },
+    {
+      "id": "leaf",
+      "kind": "부속(headgear)",
+      "file": "docs/art-production/hero-sprites/equipment/leaf.png",
+      "results": [
+        {
+          "key": "attachment",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "pivot이 그림 안, 배경 투명"
+        }
+      ]
+    },
+    {
+      "id": "hairpin",
+      "kind": "부속(headgear)",
+      "file": "docs/art-production/hero-sprites/equipment/hairpin.png",
+      "results": [
+        {
+          "key": "attachment",
+          "cause": "레이어",
+          "level": "ok",
+          "msg": "pivot이 그림 안, 배경 투명"
+        }
+      ]
+    }
+  ]
+}
