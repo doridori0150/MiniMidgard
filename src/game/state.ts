@@ -125,9 +125,43 @@ export function newGame(name: string, look: Look): GameState {
   return s;
 }
 
+/** set while a loaded save is being swapped in, so the running game can't write its old state over it */
+let frozen = false;
 export function save(s: GameState) {
+  if (frozen) return;
   s.lastSave = Date.now();
   try { localStorage.setItem(SAVE_KEY, JSON.stringify(s)); } catch { /* storage full or blocked */ }
+}
+
+// ───────── 세이브 저장 / 불러오기 (move a save between browsers and devices)
+const CODE_PREFIX = 'MMSAVE1:';
+export const SAVE_BACKUP_KEY = 'minimidgard.save.backup';
+/** the current save as a portable code (base64 of the JSON, so it survives chat apps and notes) */
+export function saveCode(s: GameState): string {
+  const json = JSON.stringify(s);
+  return CODE_PREFIX + btoa(unescape(encodeURIComponent(json)));
+}
+/** accepts a save code or raw save JSON; returns the save JSON text or an error */
+export function readSaveText(text: string): { json: string } | { error: string } {
+  let t = text.trim();
+  try {
+    if (t.startsWith(CODE_PREFIX)) t = decodeURIComponent(escape(atob(t.slice(CODE_PREFIX.length).replace(/\s+/g, ''))));
+    const s = JSON.parse(t) as Partial<GameState>;
+    if (s.v !== 1 || !Array.isArray(s.heroes) || !s.heroes.length) return { error: '미니 미드가르 세이브가 아닙니다.' };
+    return { json: t };
+  } catch {
+    return { error: '세이브를 읽을 수 없습니다. 코드나 파일이 잘렸는지 확인하세요.' };
+  }
+}
+/** swap a save in (the current one is kept as a backup). In a running game pass `freeze` and reload right after,
+ *  so the old state can't be written back over it */
+export function installSave(json: string, freeze = true) {
+  try {
+    const cur = localStorage.getItem(SAVE_KEY);
+    if (cur) localStorage.setItem(SAVE_BACKUP_KEY, cur);
+    localStorage.setItem(SAVE_KEY, json);
+  } catch { /* storage blocked */ }
+  if (freeze) frozen = true;
 }
 
 export function load(): GameState | null {

@@ -13,7 +13,7 @@ import { itemIconURL } from '../../render/icons.ts';
 import { audio } from '../../audio/audio.ts';
 import {
   buy, buyPrice, canEquip, canJobChange, equippedBy, itemName, refine, refineInfo, sellEquip, sellPrice, sellStack,
-  HAIR_COLORS, HAIR_STYLES, SKIN_TONES, DYE_COUNT, wipeSave, nextJobs, refineInfoFor,
+  HAIR_COLORS, HAIR_STYLES, SKIN_TONES, DYE_COUNT, wipeSave, nextJobs, refineInfoFor, save, saveCode, readSaveText, installSave,
 } from '../../game/state.ts';
 import { partyPerks } from '../../game/stats.ts';
 import { requestNotify } from '../notify.ts';
@@ -196,6 +196,60 @@ export function TownPanel() {
   );
 }
 
+/** 세이브 저장 / 불러오기: move a save between browsers and devices (a file, or a code to paste anywhere) */
+function SaveTools() {
+  const g = useGame();
+  const s = g.s;
+  const stamp = () => new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '');
+  const fileSave = () => {
+    save(s);
+    const blob = new Blob([JSON.stringify(s)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `minimidgard-${s.heroes[0]?.name ?? 'save'}-${stamp()}.json`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    g.toast('세이브 파일을 저장했습니다.', 'good');
+  };
+  const copyCode = async () => {
+    save(s);
+    try { await navigator.clipboard.writeText(saveCode(s)); g.toast('세이브 코드를 복사했습니다. 다른 기기에서 \'코드로 불러오기\'에 붙여 넣으세요.', 'good'); }
+    catch { g.toast('복사가 막혀 있어요. 파일로 저장을 써 주세요.', 'bad'); }
+  };
+  const apply = (text: string) => {
+    const r = readSaveText(text);
+    if ('error' in r) { g.toast(r.error, 'bad'); return; }
+    const who = (JSON.parse(r.json) as { heroes: { name: string; baseLv: number }[] }).heroes.map((h) => `${h.name} Lv ${h.baseLv}`).join(', ');
+    g.setModal({ kind: 'confirm', danger: true, text: `이 세이브로 바꿀까요?\n${who}\n\n지금 세이브는 백업으로 한 번 보관됩니다.`, ok: () => { installSave(r.json); location.reload(); } });
+  };
+  const fromFile = () => {
+    const inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = '.json,application/json,text/plain';
+    inp.onchange = () => { const f = inp.files?.[0]; if (f) void f.text().then(apply); };
+    inp.click();
+  };
+  const fromCode = async () => {
+    let text = '';
+    try { text = await navigator.clipboard.readText(); } catch { /* clipboard read blocked: ask instead */ }
+    if (!text || !text.trim().startsWith('MMSAVE1:')) text = prompt('세이브 코드를 붙여 넣으세요 (MMSAVE1:로 시작)') ?? '';
+    if (text) apply(text);
+  };
+  return (
+    <div class="box save-tools">
+      <div class="sec" style={{ marginTop: 0 }}>세이브</div>
+      <div class="tt-row"><b>저장</b>
+        <button class="btn sm pri" onClick={fileSave}>파일로 저장</button>
+        <button class="btn sm" onClick={copyCode}>코드 복사</button>
+      </div>
+      <div class="tt-row"><b>불러오기</b>
+        <button class="btn sm" onClick={fromFile}>파일에서</button>
+        <button class="btn sm" onClick={fromCode}>코드로</button>
+      </div>
+      <div class="small muted">세이브는 브라우저마다 따로 저장됩니다. 다른 기기로 옮길 때 파일이나 코드로 가져가세요. 불러오면 지금 세이브는 백업으로 한 번 보관됩니다.</div>
+    </div>
+  );
+}
+
 /** 테스트 도구: level / job level up, zeny — for trying builds and late content without the grind */
 function TestTools() {
   const g = useGame();
@@ -273,6 +327,7 @@ export function SettingsPanel() {
           </button>
           <div class="small muted" style={{ marginTop: '4px' }}>다른 창에서 일하는 동안에도 사냥은 계속됩니다. 레벨업, 전직 가능, 카드, 슬롯 장비, MVP 처치, 전멸이 생기면 알림이 뜨고 탭 제목에 개수가 표시됩니다.</div>
         </div>
+        <SaveTools />
         <TestTools />
         <div class="sec">기록</div>
         <div class="derived">
