@@ -37,36 +37,71 @@
       "category": "motion",
       "title": "영웅 통짜 프레임 세트",
       "layout": "frames",
-      "canvas": [512, 400],
+      "canvas": [
+        512,
+        400
+      ],
       "framePattern": "frames/{line}/{state}_{n}.png",
-      "file": "docs/art-production/hero-sprites/frames/{line}/",
-      "cell": [512, 400],
-      "grid": [1, 1],
       "frames": 14,
       "order": [
-        "idle_0 숨 들이쉼", "idle_1 숨 내쉼(어깨·머리 1~2px 내려감)",
-        "walk_0 오른발 앞 접지", "walk_1 통과", "walk_2 왼발 앞 접지", "walk_3 통과",
-        "attack_0 예비(무기를 뒤로)", "attack_1 접촉(무기가 정면 수평으로 뻗음, 140ms에 표시)", "attack_2 회수",
-        "cast_0 시전 준비(한 손을 앞으로)", "cast_1 시전 유지",
-        "sit_0 앉아 쉬기", "hurt_0 맞음(찡그린 눈 > <)", "dead_0 누움(눈 감음)"
+        "idle_0 숨 들이쉼",
+        "idle_1 숨 내쉼(어깨·머리 1~2px 내려감)",
+        "walk_0 오른발 앞 접지",
+        "walk_1 통과",
+        "walk_2 왼발 앞 접지",
+        "walk_3 통과",
+        "attack_0 예비(무기를 쥔 빈 주먹을 뒤로)",
+        "attack_1 접촉(쥔 손이 앞으로 뻗고, 얹힐 무기가 정면 수평을 가리키는 hand 각도 — 140ms에 표시)",
+        "attack_2 회수",
+        "cast_0 시전 준비(한 손을 앞으로)",
+        "cast_1 시전 유지",
+        "sit_0 앉아 쉬기",
+        "hurt_0 맞음(찡그린 눈 > <)",
+        "dead_0 누움(눈 감음)"
       ],
-      "timing": { "ms": 280, "impactFrame": 8, "split": "idle 800/800 · walk 180×4 · attack 100/80/100(접촉 140ms) · cast 360/360 · sit·hurt·dead 1장" },
+      "timing": {
+        "ms": 280,
+        "impactFrame": 8,
+        "split": "idle 800/800 · walk 180×4 · attack 100/80/100(접촉 140ms) · cast 360/360 · sit·hurt·dead 1장"
+      },
       "facing": "right",
       "anchor": "foot",
       "camera": "측면 3/4, 약간 위에서. 라인업과 같은 카메라.",
-      "refs": [{ "path": "docs/art/concepts/round3/class_lineup.png", "role": "외형 절대 기준 — 그 직업 한 명만 본다. 자세는 복사하지 않는다" }],
-      "styleRefs": ["src/assets/sprites/frames/novice/idle_0.png", "src/assets/sprites/frames/swordsman/idle_0.png"],
-      "standing": [1, 2],
+      "refs": [
+        {
+          "path": "docs/art/concepts/round3/class_lineup.png",
+          "role": "외형 절대 기준 — 그 직업 한 명만 본다. 자세는 복사하지 않는다"
+        }
+      ],
+      "styleRefs": [
+        "src/assets/sprites/frames/novice/idle_0.png",
+        "src/assets/sprites/frames/swordsman/idle_0.png"
+      ],
+      "standing": [
+        1,
+        2
+      ],
       "anchors": {
         "hand": "무기를 쥐는 손의 쥠 중심 {point, angle(시계방향 도), z: front|behind, visible}. 빈 주먹으로 그려 무기가 끼워질 자리를 남긴다",
         "crown": "정수리 {point, angle} — 위 머리장식",
         "side": "관자놀이 머리카락 {point, angle} — 머리핀"
       },
       "layers": {
-        "hairMask": "masks/{line}/{state}_{n}.png — 머리카락 흰색, 나머지 검정. 프레임과 1:1 정렬",
-        "gripOverlay": "grips/{line}/{state}_{n}.png — 손잡이를 덮는 앞 손가락(hand.z가 front일 때)"
+        "masks": {
+          "hair": "masks/{line}/{state}_{n}.png — 머리카락 흰색, 나머지 검정. 프레임과 1:1 정렬"
+        },
+        "overlays": {
+          "grip": "grips/{line}/{state}_{n}.png — 손잡이를 덮는 앞 손가락(hand.z가 front일 때)"
+        }
       },
-      "rules": { "bodyHeight": 310, "bodyHeightTolerance": 0.03, "origin": [220, 360] },
+      "rules": {
+        "bodyHeight": 310,
+        "bodyHeightTolerance": 0.03,
+        "origin": [
+          220,
+          360
+        ]
+      },
       "notes": [
         "무기는 프레임에 그리지 않는다. 손은 빈 주먹(쥘 자리)으로 그린다.",
         "웅크린 공격·앉기·누움은 같은 배율이라 자연히 키가 줄어든다. 프레임별로 키를 맞추지 않는다."
@@ -79,87 +114,232 @@
         "머리색 3종(갈색·검정·분홍)을 입혀도 머리카락만 바뀐다",
         "hurt·dead 머리장식이 머리를 따라간다"
       ],
-      "prompt": "motion"
+      "prompt": "motion",
+      "origin": [
+        220,
+        360
+      ],
+      "animations": {
+        "idle": {
+          "frames": 2,
+          "loop": true
+        },
+        "walk": {
+          "frames": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": 3,
+          "impactFrame": 2
+        },
+        "cast": {
+          "frames": 2,
+          "loop": true
+        },
+        "sit": {
+          "frames": 1,
+          "standing": []
+        },
+        "hurt": {
+          "frames": 1
+        },
+        "dead": {
+          "frames": 1,
+          "standing": []
+        }
+      }
     },
     "weapon": {
       "category": "image",
       "title": "무기 낱장(손 기준점에 얹힘)",
-      "file": "docs/art-production/hero-sprites/equipment/weapons/{id}.png",
-      "cell": [256, 256],
-      "grid": [1, 1],
+      "file": "docs/art-production/hero-sprites/equipment/{id}.png",
+      "cell": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
       "frames": 1,
       "anchor": "center",
-      "notes": ["pivot = 손이 쥐는 점(px). 오른쪽을 보는 기본 각도, 날·머리가 오른쪽 위"],
-      "acceptance": ["라인업의 무기와 같은 모양·색", "80px 캐릭터 손에서 읽힌다"]
+      "notes": [
+        "pivot = 손이 쥐는 점(px). 오른쪽을 보는 기본 각도, 날·머리가 오른쪽 위"
+      ],
+      "acceptance": [
+        "라인업의 무기와 같은 모양·색",
+        "80px 캐릭터 손에서 읽힌다"
+      ]
     }
   },
   "subjects": [
     {
       "id": "mage_female",
       "name": "마법사(여)",
-      "weapon": "나무 지팡이 끝에 파란 구슬",
       "bodyHeight": 310,
       "identity": "크림색 머리를 정수리에 둥글게 틀어 올리고 양옆 머리를 내림, 큰 파란 눈. 보라 로브(금색 테두리, 갈색 허리띠), 목에 짧은 보라 망토 깃, 갈색 신발",
-      "notCopy": ["위저드의 고깔모자와 남색 로브(2차 직업)", "성직자 흰 로브"],
-      "cautions": ["시전 프레임은 지팡이를 앞으로 드는 자세(빛·마법진은 이펙트가 그린다)"],
-      "assets": { "hero": { "concept": "가벼운 마법사. 공격은 지팡이로 툭 치는 근접 평타" }, "weapon": { "concept": "staff: 꼬인 나무 지팡이 + 파란 구슬" } }
+      "notCopy": [
+        "위저드의 고깔모자와 남색 로브(2차 직업)",
+        "성직자 흰 로브"
+      ],
+      "cautions": [
+        "무기(나무 지팡이 끝에 파란 구슬)는 프레임에 그리지 않는다. 손은 빈 주먹으로 쥘 자리만 남기고, 무기는 따로 된 그림을 hand 기준점에 얹는다.",
+        "시전 프레임은 지팡이를 앞으로 드는 자세(빛·마법진은 이펙트가 그린다)"
+      ],
+      "assets": {
+        "hero": {
+          "concept": "가벼운 마법사. 공격은 지팡이로 툭 치는 근접 평타"
+        }
+      },
+      "line": "mage"
     },
     {
       "id": "acolyte_female",
       "name": "성직자(여)",
-      "weapon": "은빛 꽃 모양 머리가 달린 철퇴",
       "bodyHeight": 310,
       "identity": "크림색 단발, 큰 파란 눈. 흰 긴 로브 가운데 파란 세로띠, 파란 두건 깃, 갈색 신발",
-      "notCopy": ["프리스트의 붉은 장식(2차 직업)", "마법사 보라 로브"],
-      "assets": { "hero": { "concept": "차분한 성직자. 공격은 철퇴 내려치기, 시전은 철퇴를 가슴 앞에 세움" }, "weapon": { "concept": "mace: 은빛 꽃봉오리 머리, 갈색 손잡이" } }
+      "notCopy": [
+        "프리스트의 붉은 장식(2차 직업)",
+        "마법사 보라 로브"
+      ],
+      "assets": {
+        "hero": {
+          "concept": "차분한 성직자. 공격은 철퇴 내려치기, 시전은 철퇴를 가슴 앞에 세움"
+        }
+      },
+      "line": "acolyte",
+      "cautions": [
+        "무기(은빛 꽃 모양 머리가 달린 철퇴)는 프레임에 그리지 않는다. 손은 빈 주먹으로 쥘 자리만 남기고, 무기는 따로 된 그림을 hand 기준점에 얹는다."
+      ]
     },
     {
       "id": "archer_male",
       "name": "궁수(남)",
-      "weapon": "나무 리커브 활",
       "bodyHeight": 310,
       "identity": "짧고 삐친 크림색 머리, 큰 파란 눈, 남성 얼굴. 초록 목도리, 초록 튜닉(갈색 허리띠·가죽 손목 보호대), 짙은 초록 바지, 갈색 장화. 등에 흰 깃 화살이 든 화살통(그림에 포함)",
-      "notCopy": ["헌터의 위장 무늬 망토(2차 직업)"],
+      "notCopy": [
+        "헌터의 위장 무늬 망토(2차 직업)"
+      ],
       "cautions": [
+        "무기(나무 리커브 활)는 프레임에 그리지 않는다. 손은 빈 주먹으로 쥘 자리만 남기고, 무기는 따로 된 그림을 hand 기준점에 얹는다.",
         "활은 따로 된 무기 그림이다. 활을 쥔 손(앞손) 기준점에 붙는다.",
         "attack은 시위를 당겼다 놓는 빈손 동작(뒷손). 화살은 이펙트가 그린다."
       ],
-      "assets": { "hero": { "concept": "궁수. 공격은 활시위를 당겨 놓기(접촉 프레임 = 놓는 순간)" }, "weapon": { "concept": "bow: 갈색 나무 리커브 활, 흰 시위" } }
+      "assets": {
+        "hero": {
+          "concept": "궁수. 공격은 활시위를 당겨 놓기(접촉 프레임 = 놓는 순간)"
+        }
+      },
+      "line": "archer"
     },
     {
       "id": "thief_male",
       "name": "도둑(남)",
-      "weapon": "단검(기존 dagger 무기 그림 사용)",
       "bodyHeight": 310,
       "identity": "뻗친 크림색 머리, 큰 파란 눈, 남성 얼굴. 보라 목도리, 검은 민소매 상의와 가죽 끈, 보라 바지, 가죽 손목 보호대, 갈색 장화",
-      "notCopy": ["어새신의 붉은 긴 목도리와 카타르(2차 직업)"],
-      "assets": { "hero": { "concept": "날렵한 도둑. 공격은 낮은 자세의 빠른 찌르기" } }
+      "notCopy": [
+        "어새신의 붉은 긴 목도리와 카타르(2차 직업)"
+      ],
+      "assets": {
+        "hero": {
+          "concept": "날렵한 도둑. 공격은 낮은 자세의 빠른 찌르기"
+        }
+      },
+      "line": "thief",
+      "cautions": [
+        "무기(단검(기존 dagger 무기 그림 사용))는 프레임에 그리지 않는다. 손은 빈 주먹으로 쥘 자리만 남기고, 무기는 따로 된 그림을 hand 기준점에 얹는다."
+      ]
     },
     {
       "id": "merchant_female",
       "name": "상인(여)",
-      "weapon": "손도끼",
       "bodyHeight": 310,
       "identity": "크림색 머리를 낮게 옆으로 묶음, 큰 파란 눈. 주황 튜닉에 흰 앞치마, 갈색 허리 주머니, 갈색 장화",
-      "notCopy": ["블랙스미스의 큰 갈색 가죽 앞치마(2차 직업)"],
-      "assets": { "hero": { "concept": "씩씩한 상인. 공격은 도끼를 위에서 아래로 내려치기" }, "weapon": { "concept": "axe: 회색 날, 갈색 손잡이 손도끼" } }
+      "notCopy": [
+        "블랙스미스의 큰 갈색 가죽 앞치마(2차 직업)"
+      ],
+      "assets": {
+        "hero": {
+          "concept": "씩씩한 상인. 공격은 도끼를 위에서 아래로 내려치기"
+        }
+      },
+      "line": "merchant",
+      "cautions": [
+        "무기(손도끼)는 프레임에 그리지 않는다. 손은 빈 주먹으로 쥘 자리만 남기고, 무기는 따로 된 그림을 hand 기준점에 얹는다."
+      ]
     }
   ],
   "batches": [
-    { "id": "a", "title": "시범 — 1차 직업 3", "note": "기존 두 캐릭터로 기준선을 잡은 뒤", "subjects": ["mage_female", "acolyte_female", "archer_male"] },
-    { "id": "b", "title": "1차 직업 나머지", "subjects": ["thief_male", "merchant_female"] }
+    {
+      "id": "a",
+      "title": "시범 — 1차 직업 3",
+      "note": "기존 두 캐릭터로 기준선을 잡은 뒤",
+      "subjects": [
+        "mage_female",
+        "acolyte_female",
+        "archer_male"
+      ],
+      "common": [
+        "staff",
+        "mace",
+        "bow"
+      ]
+    },
+    {
+      "id": "b",
+      "title": "1차 직업 나머지",
+      "subjects": [
+        "thief_male",
+        "merchant_female"
+      ],
+      "common": [
+        "axe"
+      ]
+    }
   ],
   "retryLimit": 2,
   "delivery": {
     "recordDir": "docs/art-production/hero-sprites/",
     "manifest": "docs/art-production/hero-sprites/manifest.json",
-    "records": ["prompts/", "generation.json", "verification/"],
-    "previews": ["preview_vs_lineup.png", "preview_frames.png", "preview_animation.gif"]
+    "records": [
+      "game-manifest.json — 게임이 읽는 minimidgard.sprites/1 (characters.<line>_<gender>.frames, weapons, headgear, renderContract는 src/assets/sprites/manifest.json과 같게)",
+      "manifest.json — 표준 기록. game-manifest.json에서 `node tools/asset-kit-sprites.mjs --root . --in docs/art-production/hero-sprites/game-manifest.json --out docs/art-production/hero-sprites/manifest.json`으로 만든다",
+      "prompts/",
+      "generation.json",
+      "verification/"
+    ],
+    "previews": [
+      "preview_vs_lineup.png",
+      "preview_frames.png",
+      "preview_animation.gif"
+    ]
   },
   "dont": [
     "기존 novice_female·swordsman_male 프레임과 src/ 아래 파일은 바꾸지 않는다(납품은 docs/art-production/hero-sprites/에만).",
     "몸·머리·얼굴을 따로 그려 조립하지 않는다(프레임마다 캐릭터 전체 한 장).",
     "다른 게임의 캐릭터·의상·로고를 베끼지 않는다(오리지널).",
-    "manifest는 minimidgard.sprites/1 형식(characters.<line>_<gender>.frames)으로 납품한다. 게임이 그대로 읽는다."
+    "게임용 manifest는 minimidgard.sprites/1 형식의 game-manifest.json으로 납품한다(게임이 그대로 읽는다). 표준 기록 manifest.json은 그 파일에서 변환기로 만든다."
+  ],
+  "common": [
+    {
+      "id": "staff",
+      "kind": "weapon",
+      "concept": "마법사 지팡이: 꼬인 나무 지팡이 끝에 파란 구슬. pivot = 손이 쥐는 점"
+    },
+    {
+      "id": "mace",
+      "kind": "weapon",
+      "concept": "성직자 철퇴: 은빛 꽃봉오리 머리, 갈색 손잡이. pivot = 손이 쥐는 점"
+    },
+    {
+      "id": "bow",
+      "kind": "weapon",
+      "concept": "궁수 활: 갈색 나무 리커브 활, 흰 시위. pivot = 앞손이 쥐는 활 손잡이 가운데"
+    },
+    {
+      "id": "axe",
+      "kind": "weapon",
+      "concept": "상인 손도끼: 회색 날, 갈색 손잡이. pivot = 손이 쥐는 점"
+    }
   ]
 }
