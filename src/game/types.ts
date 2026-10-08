@@ -60,9 +60,20 @@ export interface Bonus {
   unarmedAspdPct?: number;
   /** % more zeny spent by zeny-costing skills */
   zenyCostPct?: number;
+  // ── RO skill alignment (docs/design/SKILLS_RO.md)
+  /** mastery ATK (sword/spear/katar/mace mastery): added after DEF on every hit, not multiplied by skill % (RO) */
+  masteryAtk?: number;
+  /** flat ATK per hit against a race, after DEF (demon bane, beast bane) */
+  raceAtk?: Pct<Race>;
+  /** flat damage taken off each hit from a race, after DEF (divine protection) */
+  raceFlatRes?: Pct<Race>;
+  /** % VIT DEF (angelus +, auto berserk −) */
+  vitDefPct?: number;
+  /** riding: spears deal 100% to medium monsters */
+  mountSpear?: number;
 }
 
-export type StatusKind = 'stun' | 'freeze' | 'poison' | 'blind' | 'curse';
+export type StatusKind = 'stun' | 'freeze' | 'poison' | 'blind' | 'curse' | 'sleep' | 'stone' | 'silence';
 /** M5: an item/card effect that fires by chance */
 export interface Proc {
   on: 'attack' | 'crit' | 'hit';
@@ -71,7 +82,7 @@ export interface Proc {
   /** cast this skill for free at this level (on the target, or on yourself for heals/buffs) */
   cast?: { skill: string; lv: number };
   /** put a status on the target */
-  status?: { kind: Exclude<StatusKind, 'curse'>; dur: number };
+  status?: { kind: 'stun' | 'freeze' | 'poison' | 'blind'; dur: number };
   /** heal yourself by this % of max HP */
   healPct?: number;
 }
@@ -132,6 +143,8 @@ export interface EquipInst {
   opts?: Bonus[];
   /** dropped in the rift at this tier (rift.ts): its item level also lifts the base ATK / DEF */
   rift?: number;
+  /** 미감정 (RO unidentified): options hidden and it can't be worn until appraised (상인 감정 or 돋보기) */
+  unid?: boolean;
 }
 
 /** 균열 (rift.ts, ENDGAME.md §3): one planned run — its rules are rolled before entering so the line-up can be picked */
@@ -185,7 +198,8 @@ export interface Look {
 }
 
 export interface AutoConfig {
-  skills: Record<string, boolean>;
+  /** @deprecated per-skill auto on/off — replaced by Hero.skillSlots (migrated in state.ts load) */
+  skills?: Record<string, boolean>;
   hpPotPct: number;
   spPotPct: number;
   healPct: number;
@@ -238,6 +252,10 @@ export interface Hero {
   statPts: number;
   skills: Record<string, number>;
   skillPts: number;
+  /** 스킬 슬롯: the 6 active skills the auto AI may use, left first = attack priority (passives always apply) */
+  skillSlots: (string | null)[];
+  /** toggle passives the player switched off (riding, auto berserk, cart look) */
+  skillOff?: Record<string, boolean>;
   equip: Partial<Record<EquipSlot, number>>;
   /** equipped quiver (stack item id); quivers are never consumed */
   ammo?: string;
@@ -317,4 +335,8 @@ export interface GameState {
   rift?: RiftSave;
   /** the last ordinary hunting map: a rift entered from town hands its offline time back to it */
   lastHunt?: string;
+  /** skill data version (SKILLS_RO.md): 2 = classic RO skill trees + skill slots */
+  skillsV?: number;
+  /** a one-time notice for the player (e.g. skill points refunded by the skill migration) */
+  notice?: string;
 }

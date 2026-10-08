@@ -6,10 +6,11 @@
 //   lineup: name=cls#build,cls#build,cls#build   e.g. phys=knight#kn_vit,assassin#as_crit,priest#pr_support
 // Keep runs short: it plays every monster in real time on the efficiency cores (taskpolicy -b in the npm script).
 import { World, type RiftRun } from '../src/game/world.ts';
-import { newGame, defaultLook, autoDistribute, learnSkill, addEquip, equip, newHero, defaultTactics, canEquip, equippedBy } from '../src/game/state.ts';
+import { newGame, defaultLook, autoDistribute, learnSkill, learnPath, autoFillSlots, addEquip, equip, newHero, defaultTactics, canEquip, equippedBy } from '../src/game/state.ts';
 import { SKILLS } from '../src/game/data/skills.ts';
 import { ITEMS } from '../src/game/data/items.ts';
 import { lineage } from '../src/game/data/classes.ts';
+import { buildOf } from '../src/game/data/builds.ts';
 import { computeDerived } from '../src/game/stats.ts';
 import { elementMod, sizeMod } from '../src/game/data/elements.ts';
 import { gradeOf, GRADE_ORDER, GRADE_KO, type Grade } from '../src/game/gear.ts';
@@ -37,6 +38,7 @@ function makeParty(spec: string) {
   const s = newGame('check', defaultLook('f'));
   s.heroes = []; s.partySlots = 3; s.zeny = 500000;
   s.stacks.u_white = 400; s.stacks.u_yellow = 300; s.stacks.u_blue = 100; s.stacks.am_arrow = 1;
+  s.stacks.k_bluegem = 200; s.stacks.k_redgem = 200; s.stacks.k_trap = 800; s.stacks.k_holywater = 50;
   s.quick[0] = { id: 'u_white', auto: true, pct: 45 };
   s.quick[1] = { id: 'u_blue', auto: true, pct: 15 };
   spec.split(',').forEach((x, i) => {
@@ -47,7 +49,7 @@ function makeParty(spec: string) {
     const main = (k: { auto: string }) => k.auto === 'attack' || k.auto === 'aoe' || k.auto === 'heal' || k.auto === 'revive';
     const line = lineage(cls);
     for (const tier of [true, false]) for (let pass = 0; pass < 10 && h.skillPts > 0; pass++) {
-      for (const k of Object.values(SKILLS)) if (line.includes(k.cls as ClassId) && main(k) === tier && h.skillPts > 0) learnSkill(h, k.id);
+      for (const k of Object.values(SKILLS)) if (line.includes(k.cls as ClassId) && main(k) === tier && h.skillPts > 0) learnPath(h, k.id, (h.skills[k.id] ?? 0) + 1);
     }
     for (const id of [...(KIT[cls] ?? []), ...COMMON]) {
       if (!ITEMS[id] || canEquip(h, id)) continue;
@@ -57,6 +59,7 @@ function makeParty(spec: string) {
     }
     if (cls === 'hunter') h.ammo = 'am_arrow';
     h.tactics = { ...defaultTactics(cls), role: 'auto' };
+    autoFillSlots(h, buildOf(cls, build)?.skills ?? []);
     s.heroes.push(h);
   });
   s.unlocked.push('desert'); s.zone = 'town';
@@ -120,6 +123,7 @@ function levelUp(s: GameState) {
       const k = Object.values(SKILLS).find((x) => lineage(h.cls).includes(x.cls as ClassId) && learnSkill(h, x.id));
       if (!k) break;
     }
+    autoFillSlots(h, buildOf(h.cls, h.build)?.skills ?? []);
   }
 }
 

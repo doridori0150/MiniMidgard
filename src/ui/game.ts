@@ -102,6 +102,13 @@ class Game {
     this.world.onTravel = (id) => { this.bossMusic = false; audio.playBgm(zone(id).bgm); this.announce(zone(id).name, 'zone'); this.notify(); };
     this.world.setZone(s.zone);
     this.started = true;
+    // a one-time notice from a save migration (e.g. skill points refunded by the classic skill trees)
+    if (s.notice) {
+      const n = s.notice;
+      delete s.notice;
+      this.world.log(n, '#ffe8a0');
+      setTimeout(() => this.toast(n, 'info'), 1200);
+    }
     if (!s.heroes.some((h) => h.id === this.selId)) this.selId = s.heroes[0]?.id ?? -1;
     this.loadUi();
     audio.setVolumes(s.settings.sfx, s.settings.bgm, s.settings.muted);

@@ -1,11 +1,14 @@
 // Content audit: drop tables, cards, item sources, weapon ladders, map economy.
 // usage: node --experimental-strip-types tools/audit.ts [section]
-//   sections: all (default) · errors · ladder · acc · head · cards · maps · econ · patches · curve · expedition · rift
+//   sections: all (default) · errors · skills · ladder · acc · head · cards · maps · econ · patches · curve · expedition · rift
 import { MONSTERS, type MonsterDef } from '../src/game/data/monsters.ts';
 import { ITEMS, SHOPS } from '../src/game/data/items.ts';
 import { ZONES, REGION_INFO, openers, isExpedition } from '../src/game/data/zones.ts';
 import { sellPrice } from '../src/game/state.ts';
-import type { GameState, WeaponType } from '../src/game/types.ts';
+import type { ClassId, GameState, WeaponType } from '../src/game/types.ts';
+import { SKILLS, SLOT_COUNT, slotable } from '../src/game/data/skills.ts';
+import { CLASSES, lineage } from '../src/game/data/classes.ts';
+import { readFileSync } from 'node:fs';
 import {
   ESSENCE, FIXED_ORDER, MECHS, RIFT_MAX, RULES, RULE_IDS, bandPool, bandRange, essenceForClear, firstClearReward, guardianPool, planRift,
   riftIlvl, riftLevel, riftMonster, rollRiftGrade, tierAtk, tierHp, type RiftRuleId,
@@ -60,7 +63,8 @@ for (const it of Object.values(ITEMS)) {
     if (!it.cardLoc) errors.push(`${it.id}: no cardLoc`);
   }
   if (it.kind === 'equip' && !it.loc) errors.push(`${it.id}: equip without loc`);
-  if (it.kind !== 'card' && it.id !== ESSENCE && !dropsOf[it.id] && !chestOf[it.id] && !shopItems.has(it.id)) warn.push(`dead item (no drop, no shop): ${it.id} ${it.name}`);
+  // (k_holywater / k_stone are made by skills: 성수 만들기, 돌 줍기)
+  if (it.kind !== 'card' && it.id !== ESSENCE && it.id !== 'k_holywater' && it.id !== 'k_stone' && !dropsOf[it.id] && !chestOf[it.id] && !shopItems.has(it.id)) warn.push(`dead item (no drop, no shop): ${it.id} ${it.name}`);
 }
 for (const z of ZONES) {
   for (const e of z.mobs) if (!MONSTERS[e.id]) errors.push(`${z.id}: unknown mob ${e.id}`);
@@ -176,10 +180,76 @@ for (const [name, info] of Object.entries(REGION_INFO)) {
   }
 }
 
+// ── skills (docs/design/SKILLS_RO.md): classic RO trees per class, prerequisites without cycles, icons, descriptions,
+//    AI roles, the data each kind needs (ground spec, buff), catalysts that exist
+// stage-1 RO counts (rAthena pre-re skill_tree, quest skills included, stage-2 extras not counted); the blacksmith was
+// left out of stage 1 by the user and keeps its old 7
+const RO_COUNT: Record<ClassId, number> = {
+  novice: 3, swordsman: 10, mage: 14, archer: 7, acolyte: 15, thief: 10, merchant: 10,
+  knight: 11, wizard: 14, hunter: 18, priest: 19, assassin: 12, blacksmith: 7,
+};
+const iconSrc = readFileSync(new URL('../src/render/icons.ts', import.meta.url), 'utf8');
+const glyphBody = iconSrc.slice(iconSrc.indexOf('function drawSkillGlyph'), iconSrc.indexOf('export function skillIconURL'));
+const GLYPHS = new Set([...glyphBody.matchAll(/case '([a-z0-9]+)'/g)].map((m) => m[1]));
+const skillRows: string[] = [];
+{
+  for (const sk of Object.values(SKILLS)) {
+    const where = `skill ${sk.id}`;
+    if (!CLASSES[sk.cls]) errors.push(`${where}: unknown class ${sk.cls}`);
+    if (!GLYPHS.has(sk.icon.glyph)) errors.push(`${where}: icon glyph '${sk.icon.glyph}' is not drawn by icons.ts (falls back to a dot)`);
+    for (let lv = 1; lv <= sk.maxLv; lv++) {
+      let d = '';
+      try { d = sk.desc(lv); } catch (e) { errors.push(`${where}: desc(${lv}) throws ${(e as Error).message}`); continue; }
+      if (!d.trim() || /undefined|NaN/.test(d)) errors.push(`${where}: desc(${lv}) = ${JSON.stringify(d.slice(0, 60))}`);
+    }
+    if (sk.kind === 'passive' && sk.auto !== 'none') errors.push(`${where}: passive with AI role ${sk.auto}`);
+    if (sk.kind !== 'passive' && sk.auto === 'none' && sk.kind !== 'utility') errors.push(`${where}: active skill without an AI role`);
+    if ((sk.kind === 'ground' || sk.kind === 'trap') && !sk.ground) errors.push(`${where}: ${sk.kind} without a ground spec`);
+    if ((sk.kind === 'buff' || sk.kind === 'selfBuff') && !sk.buff) errors.push(`${where}: buff skill without a buff`);
+    if (sk.catalyst && !ITEMS[sk.catalyst.id]) errors.push(`${where}: catalyst ${sk.catalyst.id} is no item`);
+    if (sk.quest && sk.maxLv !== 1) errors.push(`${where}: quest skill with max Lv ${sk.maxLv}`);
+    for (const [r, rl] of Object.entries(sk.req ?? {})) {
+      const rs = SKILLS[r];
+      if (!rs) { errors.push(`${where}: prerequisite ${r} unknown`); continue; }
+      if (rl > rs.maxLv) errors.push(`${where}: needs ${r} ${rl} > its max ${rs.maxLv}`);
+      if (!lineage(sk.cls).includes(rs.cls)) errors.push(`${where}: prerequisite ${r} (${rs.cls}) is outside the ${sk.cls} line`);
+    }
+  }
+  // prerequisite cycles (DFS)
+  const state: Record<string, 0 | 1 | 2> = {};
+  const visit = (id: string, path: string[]): void => {
+    if (state[id] === 2) return;
+    if (state[id] === 1) { errors.push(`skill prerequisite cycle: ${[...path, id].join(' → ')}`); return; }
+    state[id] = 1;
+    for (const r of Object.keys(SKILLS[id]?.req ?? {})) visit(r, [...path, id]);
+    state[id] = 2;
+  };
+  for (const id of Object.keys(SKILLS)) visit(id, []);
+  // counts per class against the classic trees; points a line needs to learn everything (non-quest)
+  for (const cls of Object.keys(CLASSES) as ClassId[]) {
+    const list = Object.values(SKILLS).filter((s) => s.cls === cls);
+    const ro = list.filter((s) => !s.extra);
+    const act = list.filter(slotable).length, pas = list.filter((s) => s.kind === 'passive').length, quest = list.filter((s) => s.quest).length;
+    const pts = ro.filter((s) => !s.quest).reduce((a, s) => a + s.maxLv, 0);
+    if (ro.length !== RO_COUNT[cls]) errors.push(`skills ${cls}: ${ro.length} classic skills, the RO tree has ${RO_COUNT[cls]}`);
+    skillRows.push(`  ${cls.padEnd(10)} ${String(list.length).padStart(3)} skills · RO ${String(ro.length).padStart(2)}/${RO_COUNT[cls]} · active ${String(act).padStart(2)} · passive ${String(pas).padStart(2)} · quest ${quest} · extra ${list.length - ro.length} · ${pts} points to max all (job gives 49)`);
+  }
+  if (SLOT_COUNT !== 6) errors.push(`skill slots: ${SLOT_COUNT}, expected 6`);
+}
+
 if (on('errors') || want === 'all') {
   console.log(`== integrity: ${Object.keys(MONSTERS).length} monsters, ${Object.values(ITEMS).filter((i) => i.kind === 'card' && !i.star).length} cards, ${ZONES.length} zones (${ZONES.filter((z) => z.mobs.length).length} hunting maps, ${ZONES.filter((z) => z.start).length} open from the start), ${Object.keys(ITEMS).length} items`);
   console.log(errors.length ? 'ERRORS:\n  ' + errors.join('\n  ') : 'no errors');
   if (warn.length) console.log('warnings:\n  ' + warn.join('\n  '));
+}
+
+if (on('skills')) {
+  console.log(`\n== skills (SKILLS_RO.md): ${Object.keys(SKILLS).length} skills, ${GLYPHS.size} icon glyphs, slots ${SLOT_COUNT}`);
+  for (const r of skillRows) console.log(r);
+  const roles: Record<string, number> = {};
+  for (const sk of Object.values(SKILLS)) roles[sk.auto] = (roles[sk.auto] ?? 0) + 1;
+  console.log('  AI roles: ' + Object.entries(roles).map(([k, v]) => `${k} ${v}`).join(' · '));
+  console.log('  ground / trap skills: ' + Object.values(SKILLS).filter((s) => s.ground).map((s) => s.name).join(', '));
 }
 
 // ── weapon ladders

@@ -676,6 +676,17 @@ card('drownedmonk', '물에 잠긴 수도사', 'armor', '수도사의', { vit: 1
 card('bellghost', '종 치는 유령', 'acc', '종소리의', { healPct: 10, statusRes: { blind: 50, curse: 50 } }, '힐 회복량 +10%\n실명·저주 저항 +50%\n[액세서리]', 'epic');
 
 /** accessory cards that teach a skill (needs engine support: world.ts enabledSkills should add these while the card is equipped) */
+// ───────── skill catalysts & tools (SKILLS_RO.md): gemstones, traps, holy water, stones, the appraisal lens.
+// k_ items are never auto-sold (state.ts isKeepItem)
+const kit = (id: string, name: string, price: number, glyph: string, color: string, desc: string) =>
+  add({ id, name, kind: 'etc', price, icon: { glyph, color }, desc });
+kit('k_bluegem', '푸른 마석', 600, 'gem', '#4a8aff', '마력이 고인 푸른 돌. 수호벽·성역·대퇴마·부활·차원문·화염 기둥(6레벨부터)의 촉매.');
+kit('k_redgem', '붉은 마석', 600, 'gem', '#ff4a5a', '열기가 고인 붉은 돌. 석화·독 안개·독 폭발의 촉매.');
+kit('k_trap', '덫', 100, 'claw', '#a08060', '사냥꾼의 덫 재료. 덫 스킬 하나에 1~2개.');
+kit('k_holywater', '성수', 20, 'drop', '#d8f0ff', '성직자가 축복한 물. 성수 세례의 촉매. 성직자가 성수 만들기로 만든다.');
+kit('k_stone', '돌멩이', 2, 'ore', '#a8a8a0', '던지기 좋은 돌. 도둑이 돌 줍기로 줍는다.');
+kit('k_lens', '돋보기', 40, 'eye', '#e0e8f0', '미감정 장비 하나를 감정한다 (장비 정보 창의 감정 버튼).');
+
 export const CARD_SKILLS: Record<string, { skill: string; lv: number }> = {
   c_moonbun: { skill: 'heal', lv: 1 },
   c_jellyqueen: { skill: 'blessing', lv: 1 },
@@ -693,7 +704,7 @@ export const RARITY_COLOR: Record<string, string> = {
 
 /** shop inventories (town NPCs) */
 export const SHOPS: Record<string, { name: string; npc: string; items: string[] }> = {
-  tool: { name: '도구 상점', npc: 'tool', items: ['u_red', 'u_orange', 'u_yellow', 'u_white', 'u_blue', 'u_conc', 'u_awake', 'u_conv_fire', 'u_conv_water', 'u_conv_earth', 'u_conv_wind', 'r_phra', 'r_emver', 'am_arrow', 'am_fire', 'am_crystal', 'am_stone', 'am_wind', 'am_silver'] },
+  tool: { name: '도구 상점', npc: 'tool', items: ['u_red', 'u_orange', 'u_yellow', 'u_white', 'u_blue', 'u_conc', 'u_awake', 'u_conv_fire', 'u_conv_water', 'u_conv_earth', 'u_conv_wind', 'r_phra', 'r_emver', 'k_bluegem', 'k_redgem', 'k_trap', 'k_lens', 'am_arrow', 'am_fire', 'am_crystal', 'am_stone', 'am_wind', 'am_silver'] },
   weapon: { name: '무기 상점', npc: 'weapon', items: ['w_knife', 'w_cutter', 'w_gauche', 'w_stiletto', 'w_sword', 'w_falchion', 'w_blade', 'w_saber', 'w_katana', 'w_bastard', 'w_rod', 'w_wand', 'w_staff', 'w_bow', 'w_composite', 'w_greatbow', 'w_club', 'w_mace', 'w_smasher', 'w_axe', 'w_battleaxe', 'w_javelin', 'w_spear', 'w_pike', 'w_partizan', 'w_katar', 'w_huntbow'] },
   armor: { name: '방어구 상점', npc: 'armor', items: ['a_cotton', 'a_jacket', 'a_adventure', 'a_wooden', 'a_mantle', 'a_silk', 'a_tights', 'a_thief', 'a_chain', 'a_knight', 'a_wizard', 'a_hunter', 'a_priest', 'a_assassin', 'a_smith', 's_guard', 's_buckler', 'g_hood', 'g_muffler', 'g_feather', 'f_sandals', 'f_shoes', 'f_greaves', 'x_clip', 'h_flower', 'h_ribbon', 'h_cap', 'h_bandana'] },
   costume: { name: '의상실', npc: 'stylist', items: ['m_glasses', 'm_sunglasses', 'm_goggles', 'm_eyepatch', 'm_blush', 'l_pipe', 'l_mask', 'l_rose', 'l_scarf', 'h_wizard'] },

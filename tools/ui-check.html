@@ -79,7 +79,7 @@
     W().history.back(); await sleep(250);
     log(one === '0/equip' && g.panel === null, 'browser Back: detail first, then the sheet', `${one} → ${g.modals.length}/${g.panel}`);
     // 7. skill states and prerequisites
-    const sw = g.s.heroes.find((x) => x.cls === 'swordsman'); g.sel = g.s.heroes.indexOf(sw); sw.skillPts = 5; sw.skills.bash = 0;
+    const sw = g.s.heroes.find((x) => x.cls === 'swordsman'); g.sel = g.s.heroes.indexOf(sw); sw.skillPts = 5; sw.skills.bash = 0; sw.skills.magnum_break = 0;
     g.openPanel('skills'); await sleep(120);
     const rows = () => Object.fromEntries($$('.skill').map((r) => [r.querySelector('.nm b')?.textContent, r.querySelector('.sk-state')?.textContent ?? (r.querySelector('.sk-learn') ? '+1' : '-')]));
     let r1 = rows();
@@ -104,6 +104,40 @@
     const pinned = (g.s.targets ?? []).some((t) => t.id === 'w_bloodmoon') && !!$('.tstrip');
     g.s.equips.push({ uid: 987654, id: 'w_bloodmoon', refine: 0, slots: 0, cards: [] }); await sleep(1300);
     log(pinned && !(g.s.targets ?? []).some((t) => t.id === 'w_bloodmoon'), '목표 핀: pin → strip → obtained clears it', `pinned ${pinned}`);
+    // 12. 스킬 슬롯: six slots; a slot opens the picker, a pick fills it, 비우기 clears it; a row's slot button puts it in / takes it out
+    g.openPanel(null); g.setModal(null); await sleep(80);
+    const sw2 = g.s.heroes.find((x) => x.cls === 'swordsman'); g.sel = g.s.heroes.indexOf(sw2);
+    sw2.skills.bash = 5; sw2.skillSlots = [null, null, null, null, null, null];
+    g.openPanel('skills'); await sleep(150);
+    const slotEls = $$('.sk-slots .sk-slot');
+    await click(slotEls[2]);
+    await click($$('.sk-pick-item').find((b) => b.textContent.includes('강타')));
+    const assigned = sw2.skillSlots[2] === 'bash' && !!$$('.sk-slots .sk-slot')[2]?.querySelector('img');
+    await click($$('.sk-slots .sk-slot')[2]);
+    await click($$('.sk-pick .btn').find((b) => b.textContent === '비우기'));
+    const cleared = sw2.skillSlots[2] === null;
+    const rowBtn = () => $$('.skill').find((r) => r.querySelector('.nm b')?.textContent === '강타')?.querySelector('.sk-slotbtn');
+    await click(rowBtn()); const inRow = sw2.skillSlots.includes('bash');
+    await click(rowBtn()); const outRow = !sw2.skillSlots.includes('bash');
+    const passiveBtn = $$('.skill').find((r) => r.querySelector('.nm b')?.textContent === '한손검 수련')?.querySelector('.sk-slotbtn');
+    log(slotEls.length === 6 && assigned && cleared && inRow && outRow && !passiveBtn, '스킬 슬롯: 6 slots, pick / 비우기 / row 슬롯 넣기·빼기 (passives have none)',
+      `${slotEls.length} ${assigned} ${cleared} ${inRow} ${outRow} passive:${!!passiveBtn}`);
+    // 13. the AI uses only slotted skills: an unslotted bash is never cast; slotted, it is
+    g.openPanel(null); await sleep(60);
+    const wu = g.world.heroes.find((u) => u.hero === sw2);
+    sw2.tactics = { ...sw2.tactics, skills: 'aggressive' };
+    const casts = [];
+    const orig = g.world.startSkill.bind(g.world);
+    g.world.startSkill = (hh, sk, lv, tt) => { if (hh === wu) casts.push(sk.id); return orig(hh, sk, lv, tt); };
+    for (const u of g.world.heroes) { u.hp = u.d.maxHp; u.sp = u.d.maxSp; }
+    for (let i = 0; i < 300; i++) g.world.advance(100);
+    const bashOff = casts.filter((x) => x === 'bash').length;
+    sw2.skillSlots = ['bash', null, null, null, null, null];
+    for (const u of g.world.heroes) { u.hp = u.d.maxHp; u.sp = u.d.maxSp; }
+    for (let i = 0; i < 300; i++) g.world.advance(100);
+    const bashOn = casts.filter((x) => x === 'bash').length - bashOff;
+    g.world.startSkill = orig;
+    log(bashOff === 0 && bashOn > 0, 'AI: an unslotted skill is never cast, a slotted one is', `bash unslotted ${bashOff}, slotted ${bashOn}`);
     // 10. recruit flow with a free slot
     await boot('party=swordsman&lv=24');
     const g2 = G(); await click($('.pf-add'));

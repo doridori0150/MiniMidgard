@@ -47,6 +47,8 @@ export interface MonsterDef {
   flying?: boolean;
   /** M1: share of critical chance this monster shrugs off (bosses default to 0.25 / MVPs 0.5) */
   critRes?: number;
+  /** slips out of sight when hurt (RO hiding monsters): untargetable for a while unless Sight / Ruwach / Detect / Improve Concentration / Heaven's Drive find it */
+  hides?: boolean;
   /** M10: a roaming danger monster of an expedition map (map level +20~30): one at a time, the party avoids it by default */
   danger?: boolean;
   /** M7: a status its hits put on heroes (the curse is world.ts curseHero, blind its blindHero) */
@@ -402,7 +404,7 @@ mob({
   desc: '느리지만 끈질기다. 불과 성스러운 힘에 약하다.',
 });
 mob({
-  id: 'wisp', name: '유령등불', lv: 38, hp: 1700, atk: [108, 135], def: 0, mdef: 40, agi: 55, dex: 64,
+  id: 'wisp', hides: true, name: '유령등불', lv: 38, hp: 1700, atk: [108, 135], def: 0, mdef: 40, agi: 55, dex: 64,
   element: 'ghost', race: 'demon', size: 'small', range: 30, delay: 1200, speed: 80, aggressive: true, flying: true, atkElement: 'ghost',
   sprite: 'wisp', palette: ['#c8f4ff', '#7ad0f0', '#ffffff'],
   drops: [{ id: 'e_ectoplasm', rate: 0.45 }, { id: 'u_blue', rate: 0.03 }, { id: 'a_silk', rate: 0.003, slots: 1 }, { id: 'x_rosary', rate: 0.0015 }, { id: 'e_gem', rate: 0.004 }, { id: 'c_wisp', rate: CARD.exp }],
@@ -433,7 +435,7 @@ mob({
   desc: '뼈만 남은 사냥개. 냄새도 없이 달려든다.',
 });
 mob({
-  id: 'phantom', name: '갱도 망령', lv: 45, hp: 2600, atk: [140, 175], def: 5, mdef: 45, agi: 55, dex: 75,
+  id: 'phantom', hides: true, name: '갱도 망령', lv: 45, hp: 2600, atk: [140, 175], def: 5, mdef: 45, agi: 55, dex: 75,
   element: 'ghost', race: 'demon', size: 'small', range: 30, delay: 1200, speed: 75, aggressive: true, flying: true, atkElement: 'ghost', scale: 0.6,
   sprite: 'wraith', palette: ['#4a4a6a', '#9a8ad0', '#80ffd0'],
   drops: [{ id: 'e_chain', rate: 0.4 }, { id: 'u_blue', rate: 0.03 }, { id: 'g_ragcape', rate: 0.002 }, { id: 'w_katar', rate: 0.0015, slots: 1 }, { id: 'w_damascus', rate: 0.0006 }, { id: 'c_phantom', rate: CARD.dng }],
@@ -778,7 +780,7 @@ mob({
   desc: '신전 계단을 지키는 사자 석상이 살아 움직인다.',
 });
 mob({
-  id: 'sandwraith', name: '모래 망령', lv: 59, hp: 4800, atk: [245, 300], def: 10, mdef: 55, agi: 65, dex: 100,
+  id: 'sandwraith', hides: true, name: '모래 망령', lv: 59, hp: 4800, atk: [245, 300], def: 10, mdef: 55, agi: 65, dex: 100,
   element: 'shadow', race: 'demon', size: 'medium', range: 100, delay: 1500, speed: 70, aggressive: true, flying: true, atkElement: 'shadow', scale: 0.7,
   sprite: 'wraith', palette: ['#c8a060', '#8a6030', '#ff6a3a'],
   drops: [{ id: 'e_sandsoul', rate: 0.4 }, { id: 'u_blue', rate: 0.04 }, { id: 'w_sage', rate: 0.0005 }, { id: 'x_rosary', rate: 0.0004, slots: 1 }, { id: 'c_sandwraith', rate: CARD.secret }],
@@ -848,7 +850,7 @@ mob({
   desc: '수도원 묘지에서 깨어난 작은 해골. 성수 냄새를 맡으면 달그락거리며 도망친다.',
 });
 mob({
-  id: 'candlewisp', name: '촛불 망령', lv: 18, hp: 400, atk: [38, 48], def: 0, mdef: 30, agi: 28, dex: 30,
+  id: 'candlewisp', hides: true, name: '촛불 망령', lv: 18, hp: 400, atk: [38, 48], def: 0, mdef: 30, agi: 28, dex: 30,
   element: 'ghost', race: 'demon', size: 'small', range: 26, delay: 1300, speed: 65, aggressive: false, flying: true, atkElement: 'ghost', scale: 0.8,
   sprite: 'wisp', palette: ['#ffe0a0', '#ff9a40', '#fffbe0'],
   drops: [{ id: 'e_wax', rate: 0.5 }, { id: 'u_blue', rate: 0.01 }, { id: 'x_rosary', rate: 0.0012 }, { id: 'x_rosary', rate: 0.0002, slots: 1 }, { id: 'c_candlewisp', rate: CARD.exp }],
@@ -1005,7 +1007,7 @@ mob({
 
 // ── 도적 소굴 (작열하는 사막, 던전 EXP·제니)
 mob({
-  id: 'thiefbug', name: '좀도둑 벌레', lv: 15, hp: 400, atk: [30, 39], def: 14, mdef: 4, agi: 24, dex: 26,
+  id: 'thiefbug', hides: true, name: '좀도둑 벌레', lv: 15, hp: 400, atk: [30, 39], def: 14, mdef: 4, agi: 24, dex: 26,
   element: 'shadow', race: 'insect', size: 'small', range: 24, delay: 1150, speed: 85, aggressive: false, scale: 0.7,
   sprite: 'scorpion', palette: ['#3a3040', '#16101e', '#c0a050'],
   drops: [{ id: 'e_stolencoin', rate: 0.45 }, { id: 'u_orange', rate: 0.03 }, { id: 'w_dirk', rate: 0.0025, slots: 2 }, { id: 'l_bandit', rate: 0.002 }, { id: 'a_thief', rate: 0.002, slots: 1 }, { id: 'c_thiefbug', rate: CARD.dng }],
@@ -1019,7 +1021,7 @@ mob({
   desc: '먼지 낀 굴 천장에 매달려 사는 박쥐. 날갯짓에 모래가 쏟아진다.',
 });
 mob({
-  id: 'shadowboss', name: '그림자 두목', lv: 25, hp: 10000, atk: [75, 98], def: 15, mdef: 20, agi: 55, dex: 60, luk: 30,
+  id: 'shadowboss', hides: true, name: '그림자 두목', lv: 25, hp: 10000, atk: [75, 98], def: 15, mdef: 20, agi: 55, dex: 60, luk: 30,
   element: 'shadow', race: 'demihuman', size: 'medium', range: 30, delay: 950, speed: 110, aggressive: true, boss: 'field', scale: 1.3, expMul: 22, flying: true,
   sprite: 'wraith', palette: ['#4a3a2a', '#c8a060', '#ffd040'],
   skills: [{ kind: 'charge', cd: 6500, mult: 1.6 }, { kind: 'summon', cd: 15000, summon: 'thiefbug', count: 3, below: 0.8 }],

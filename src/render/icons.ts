@@ -365,6 +365,7 @@ function drawSkillGlyph(ctx: CanvasRenderingContext2D, glyph: string) {
     case 'tag': path(() => { ctx.moveTo(6, 16); ctx.lineTo(14, 6); ctx.lineTo(26, 6); ctx.lineTo(26, 26); ctx.lineTo(14, 26); ctx.closePath(); }); ctx.fillStyle = '#4a8a4a'; ctx.beginPath(); ctx.arc(12, 16, 2, 0, Math.PI * 2); ctx.fill(); break;
     case 'coin': case 'coins': path(() => { ctx.ellipse(16, 16, 10, 10, 0, 0, Math.PI * 2); }); ctx.fillStyle = '#c89020'; ctx.font = "bold 12px sans-serif"; ctx.textAlign = 'center'; ctx.fillText('Z', 16, 20.5); break;
     case 'cart': case 'cart2': path(() => { ctx.moveTo(5, 9); ctx.lineTo(27, 9); ctx.lineTo(24, 21); ctx.lineTo(8, 21); ctx.closePath(); }); ctx.fillStyle = '#fff'; for (const x of [11, 21]) { ctx.beginPath(); ctx.arc(x, 25, 3, 0, Math.PI * 2); ctx.stroke(); ctx.fill(); } break;
+    case 'ore': path(() => { ctx.moveTo(16, 5); ctx.lineTo(26, 12); ctx.lineTo(23, 26); ctx.lineTo(9, 26); ctx.lineTo(6, 12); ctx.closePath(); }); ctx.strokeStyle = 'rgba(20,20,40,0.5)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(6, 12); ctx.lineTo(16, 15); ctx.lineTo(26, 12); ctx.moveTo(16, 15); ctx.lineTo(16, 26); ctx.stroke(); break;
     default: path(() => { ctx.arc(16, 16, 8, 0, Math.PI * 2); });
   }
 }

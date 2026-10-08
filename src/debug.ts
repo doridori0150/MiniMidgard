@@ -31,17 +31,28 @@ export async function qaBoot(): Promise<boolean> {
   const st = await import('./game/state.ts');
   const { SKILLS } = await import('./game/data/skills.ts');
   const { ZONES } = await import('./game/data/zones.ts');
+  const { lineage, CLASSES } = await import('./game/data/classes.ts');
   const party = (q.get('party') ?? 'novice,swordsman,mage').split(',');
   const lv = Number(q.get('lv') ?? 24);
   const s = st.newGame('쿠키', st.defaultLook('f'));
   s.heroes = []; s.partySlots = 3; s.zeny = 50000; s.stacks.u_red = 99;
+  // skill catalysts so gem / trap skills can be seen working
+  s.stacks.k_bluegem = 30; s.stacks.k_redgem = 30; s.stacks.k_trap = 60; s.stacks.k_holywater = 10;
   const names = ['쿠키', '마루', '보리'];
   party.forEach((cls, i) => {
     const h = st.newHero(s, names[i] ?? 'QA', st.defaultLook(i === 1 ? 'm' : 'f'));
     h.cls = cls as never; h.baseLv = lv; h.jobLv = cls === 'novice' ? 9 : 20; h.statPts = 48 + lv * 5; st.autoDistribute(h);
-    h.skillPts = 30;
-    for (let k = 0; k < 60; k++) { if (!Object.values(SKILLS).find((x) => x.cls === cls && st.learnSkill(h, x.id))) break; }
+    // like a player: the job line's main attack / heal skills first (prerequisites on the way), then the rest
+    const line = lineage(h.cls);
+    const tierOf = CLASSES[h.cls as keyof typeof CLASSES].tier as number;
+    h.skillPts = tierOf === 2 ? 80 : tierOf === 1 ? 40 : 9;
+    const main = (x: { auto: string }) => x.auto === 'attack' || x.auto === 'aoe' || x.auto === 'heal' || x.auto === 'revive';
+    for (const tier of [true, false]) for (let pass = 0; pass < 10 && h.skillPts > 0; pass++) {
+      for (const x of Object.values(SKILLS)) if (line.includes(x.cls) && x.cls !== 'novice' === (h.cls !== 'novice') && !x.quest && !x.extra && main(x) === tier && h.skillPts > 0) st.learnPath(h, x.id, (h.skills[x.id] ?? 0) + 1);
+    }
+    if (h.cls === 'novice') st.learnPath(h, 'basic', 9);
     h.tactics = st.defaultTactics(h.cls);
+    st.autoFillSlots(h);
     s.heroes.push(h);
   });
   // open everything up to the party's level so the world map shows a realistic mid-game state

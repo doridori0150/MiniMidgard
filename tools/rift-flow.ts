@@ -3,7 +3,7 @@
 // tiers, auto push chains runs, a guardian kill never counts as the real boss, and a long gap drops the rift so offline
 // time goes to the hunting map. usage: npm run rift-flow
 import { World } from '../src/game/world.ts';
-import { newGame, defaultLook, autoDistribute, learnSkill, addEquip, equip, newHero, defaultTactics, canEquip } from '../src/game/state.ts';
+import { newGame, defaultLook, autoDistribute, learnPath, autoFillSlots, addEquip, equip, newHero, defaultTactics, canEquip } from '../src/game/state.ts';
 import { SKILLS } from '../src/game/data/skills.ts';
 import { ITEMS } from '../src/game/data/items.ts';
 import { lineage } from '../src/game/data/classes.ts';
@@ -13,11 +13,12 @@ import type { ClassId } from '../src/game/types.ts';
 let seed = 5;
 const rng = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
 const KIT: Record<string, string[]> = { knight: ['w_lance', 'a_knight'], priest: ['w_goldmace', 'a_priest', 's_mirror'], wizard: ['w_frostrod', 'a_wizard'] };
-const s = newGame('c', defaultLook('f')); s.heroes = []; s.partySlots = 3; s.stacks.u_white = 400;
+const s = newGame('c', defaultLook('f')); s.heroes = []; s.partySlots = 3; s.stacks.u_white = 400; s.stacks.k_bluegem = 100; s.stacks.k_redgem = 100; s.stacks.k_trap = 300;
 s.quick[0] = { id: 'u_white', auto: true, pct: 45 };
 for (const cls of ['knight', 'priest', 'wizard'] as ClassId[]) {
   const h = newHero(s, cls, defaultLook()); h.cls = cls; h.baseLv = 62; h.jobLv = 30; h.statPts = 48 + 62 * 5; autoDistribute(h); h.skillPts = 75;
-  for (let p = 0; p < 10; p++) for (const k of Object.values(SKILLS)) if (lineage(cls).includes(k.cls as ClassId) && h.skillPts > 0) learnSkill(h, k.id);
+  for (let p = 0; p < 10; p++) for (const k of Object.values(SKILLS)) if (lineage(cls).includes(k.cls as ClassId) && h.skillPts > 0) learnPath(h, k.id, (h.skills[k.id] ?? 0) + 1);
+  autoFillSlots(h);
   for (const id of [...KIT[cls], 'g_feather', 'f_greaves']) { if (canEquip(h, id)) continue; const e = addEquip(s, id); e.refine = ITEMS[id].loc === 'weapon' ? 5 : 4; equip(s, h, e.uid); }
   h.tactics = defaultTactics(cls); s.heroes.push(h);
 }

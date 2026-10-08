@@ -1,7 +1,8 @@
 import { useState } from 'preact/hooks';
 import { useGame, useViewState, useBackHandler } from '../game.ts';
 import { HeroCanvas, HeroTabs, ItemSlot, Win, fmt, nameClass } from '../widgets.tsx';
-import type { CostumeSlot, EquipInst, EquipSlot } from '../../game/types.ts';
+import type { CostumeSlot, EquipInst, EquipSlot, Hero } from '../../game/types.ts';
+import { offhandOk } from '../../game/stats.ts';
 import { ITEMS } from '../../game/data/items.ts';
 import { canEquip, equip, equippedBy, itemName, unequipUid, equipAmmo, setCostume, sellAllEtc } from '../../game/state.ts';
 import { itemIconURL } from '../../render/icons.ts';
@@ -11,10 +12,12 @@ const LEFT: [EquipSlot, string][] = [['headTop', '머리 상단'], ['headMid', '
 const RIGHT: [EquipSlot, string][] = [['weapon', '무기'], ['shield', '방패'], ['shoes', '신발'], ['acc1', '액세서리'], ['acc2', '액세서리']];
 const COSTUME: [CostumeSlot, string][] = [['headTop', '의상 상단'], ['headMid', '의상 중단'], ['headLow', '의상 하단'], ['garment', '의상 걸치기']];
 
-function slotAccepts(slot: EquipSlot, id: string) {
+function slotAccepts(slot: EquipSlot, id: string, h?: Hero) {
   const d = ITEMS[id];
   if (d.kind !== 'equip') return false;
   if (slot === 'acc1' || slot === 'acc2') return d.loc === 'acc';
+  // 이도류: an assassin's left hand takes a dagger, one-hand sword or axe
+  if (slot === 'shield' && h && d.loc === 'weapon') return offhandOk(h, d.wtype, d.twoHand);
   return d.loc === slot;
 }
 
@@ -29,7 +32,8 @@ export function EquipPanel(props: { view?: 'equip' | 'costume' } = {}) {
   const instOf = (uid?: number) => (uid === undefined ? undefined : s.equips.find((e) => e.uid === uid));
   const cell = (slot: EquipSlot, label: string, right: boolean) => {
     const inst = instOf(h.equip[slot]);
-    const covered = inst && (ITEMS[inst.id].loc !== slot && !(slot.startsWith('acc')));
+    // a two-hander shows greyed in the shield slot; an assassin's off-hand weapon there is its own piece
+    const covered = inst && (ITEMS[inst.id].loc !== slot && !(slot.startsWith('acc')) && !(slot === 'shield' && inst.uid !== h.equip.weapon));
     return (
       <button class={'eslot' + (right ? ' r' : '') + (pick === slot ? ' on' : '')} style={pick === slot ? { borderColor: '#4e6ab4', background: '#eef3ff' } : undefined} onClick={() => setPick(pick === slot ? null : slot)}>
         {inst ? <img src={itemIconURL(inst.id)} /> : <span class="ph" />}
@@ -55,7 +59,7 @@ export function EquipPanel(props: { view?: 'equip' | 'costume' } = {}) {
   if (pick && !pick.startsWith('c:') && pick !== 'ammo') {
     const slot = pick as EquipSlot;
     current = instOf(h.equip[slot]);
-    candidates = s.equips.filter((e) => slotAccepts(slot, e.id) && e.uid !== current?.uid);
+    candidates = s.equips.filter((e) => slotAccepts(slot, e.id, h) && e.uid !== current?.uid);
   } else if (pick?.startsWith('c:')) {
     const cs = pick.slice(2) as CostumeSlot;
     current = instOf(h.look.costume[cs]);
@@ -78,7 +82,7 @@ export function EquipPanel(props: { view?: 'equip' | 'costume' } = {}) {
           <div class="doll">
             <div class="col">{LEFT.map(([sl, l]) => cell(sl, l, false))}</div>
             <HeroCanvas hero={h} zoom={2.05} anchor={10} />
-            <div class="col">{RIGHT.map(([sl, l]) => cell(sl, l, true))}</div>
+            <div class="col">{RIGHT.map(([sl, l]) => cell(sl, sl === 'shield' && h.cls === 'assassin' ? '방패 · 왼손' : l, true))}</div>
           </div>
         ) : (
           <div class="doll">

@@ -16,6 +16,8 @@ export interface ActiveBuff {
   shield?: number;
   /** what the barrier started with, so the ring and the HP bar can show how much is left */
   shieldMax?: number;
+  /** hits it still takes before it breaks (kyrie: 5 + lv/2, endure: 7) */
+  hits?: number;
 }
 
 export interface Derived {
@@ -48,6 +50,10 @@ export interface Derived {
   range: number;
   moveSpd: number;
   wtype: WeaponType;
+  /** 이도류 (assassin): the off-hand weapon in the shield slot, with the left/right hand damage % */
+  lh: { watk: number; wlv: number; refineAtk: number; overRefine: number; element: Element; wtype: WeaponType; pct: number; rpct: number } | null;
+  /** riding (knight, toggle on) */
+  mounted: boolean;
   ranged: boolean;
   weaponElement: Element;
   armorElement: Element;
@@ -95,10 +101,14 @@ export function weaponType(s: GameState, h: Hero): WeaponType {
   return w ? ITEMS[w.id].wtype ?? 'none' : 'none';
 }
 
-export interface PartyPerks { discount: number; overcharge: number; dropPct: number; refineBonus: number; oreDrop: number }
+export interface PartyPerks {
+  discount: number; overcharge: number; dropPct: number; refineBonus: number; oreDrop: number;
+  /** 노점: equipment sells for more · 무게 증가: quick-slot potions heal more · 감정: drops are identified on pickup */
+  vending: number; potionPct: number; appraise: boolean;
+}
 
 export function partyPerks(s: GameState): PartyPerks {
-  let discount = 0, overcharge = 0, dropPct = 0, refineBonus = 0, oreDrop = 0;
+  let discount = 0, overcharge = 0, dropPct = 0, refineBonus = 0, oreDrop = 0, vending = 0, potionPct = 0, appraise = false;
   for (const h of s.heroes) {
     const d = h.skills.discount ?? 0, o = h.skills.overcharge ?? 0, p = h.skills.pushcart ?? 0;
     if (d) discount = Math.max(discount, 5 + d * 2);
@@ -106,8 +116,21 @@ export function partyPerks(s: GameState): PartyPerks {
     if (p) dropPct = Math.max(dropPct, p * 3);
     refineBonus = Math.max(refineBonus, h.skills.refine_mastery ?? 0);
     oreDrop = Math.max(oreDrop, (h.skills.ore_discovery ?? 0) * 20);
+    vending = Math.max(vending, (h.skills.vending ?? 0) * 3);
+    potionPct = Math.max(potionPct, h.skills.enlarge_weight ?? 0);
+    if ((h.skills.item_appraisal ?? 0) > 0) appraise = true;
   }
-  return { discount, overcharge, dropPct, refineBonus, oreDrop };
+  return { discount, overcharge, dropPct, refineBonus, oreDrop, vending, potionPct, appraise };
+}
+
+/** a toggle passive (riding, auto berserk…) that is learned and not switched off */
+export function skillOn(h: Hero, id: string): boolean {
+  return (h.skills[id] ?? 0) > 0 && !h.skillOff?.[id];
+}
+
+/** weapons an off hand can hold (RO dual wield: daggers, one-hand swords, axes) */
+export function offhandOk(h: Hero, wt: WeaponType | undefined, twoHand?: boolean): boolean {
+  return h.cls === 'assassin' && !twoHand && (wt === 'dagger' || wt === 'sword' || wt === 'axe');
 }
 
 export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], now = 0): Derived {
@@ -121,6 +144,7 @@ export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], 
   let matkPct = 0;
   let weaponElement: Element = 'neutral';
   let armorElement: Element = 'neutral';
+  let lh: Derived['lh'] = null;
 
   const seen = new Set<number>();
   for (const slot of EQUIP_SLOTS) {
@@ -132,7 +156,15 @@ export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], 
     for (const c of inst.cards) if (c) addBonus(b, ITEMS[c].bonus);
     for (const o of inst.opts ?? []) addBonus(b, o);
     const gb = gradeBase(inst);
-    if (slot === 'weapon') {
+    if (slot === 'shield' && d.loc === 'weapon') {
+      // 이도류: a weapon in the left hand (its cards and options count like any equipment)
+      const lwlv = d.wlv ?? 1;
+      lh = {
+        watk: Math.round((d.atk ?? 0) * (1 + gb)), wlv: lwlv, refineAtk: inst.refine * REFINE_ATK[lwlv - 1],
+        overRefine: Math.max(0, inst.refine - WEAPON_SAFE[lwlv - 1]) * OVER_ATK[lwlv - 1], element: d.element ?? 'neutral', wtype: d.wtype ?? 'dagger',
+        pct: 30 + (h.skills.left_hand ?? 0) * 10, rpct: 50 + (h.skills.right_hand ?? 0) * 10,
+      };
+    } else if (slot === 'weapon') {
       wlv = d.wlv ?? 1;
       watk = Math.round((d.atk ?? 0) * (1 + gb));
       refineAtk = inst.refine * REFINE_ATK[wlv - 1];
@@ -153,10 +185,14 @@ export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], 
   if (b.weaponElement) weaponElement = b.weaponElement;
   if (b.armorElement) armorElement = b.armorElement;
 
-  // passives
+  if (lh && wtype === 'katar') lh = null;
+  // passives (toggle ones only while switched on)
+  const mounted = skillOn(h, 'riding');
+  const pctx = { skills: h.skills, baseLv: h.baseLv, mounted, dual: !!lh, second: cls.tier === 2 };
   for (const [id, lv] of Object.entries(h.skills)) {
     const sk = SKILLS[id];
-    if (sk?.passive && lv > 0) addBonus(b, sk.passive(lv, wtype));
+    if (!sk?.passive || lv <= 0 || (sk.toggle && h.skillOff?.[id])) continue;
+    addBonus(b, sk.passive(lv, wtype, pctx));
   }
   const pct: Partial<Record<'agi' | 'dex', number>> = {};
   for (const bf of buffs) {
@@ -195,7 +231,9 @@ export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], 
   const matkMin = Math.floor((int + Math.floor(int / 7) ** 2) * (1 + matkPct / 100)) + (b.matk ?? 0);
   const matkMax = Math.floor((int + Math.floor(int / 5) ** 2) * (1 + matkPct / 100)) + (b.matk ?? 0);
 
-  const baseAspd = cls.aspd[wtype] ?? cls.aspd.none ?? 150;
+  let baseAspd = cls.aspd[wtype] ?? cls.aspd.none ?? 150;
+  // RO dual wield: both weapons' swing times, 70% of their sum
+  if (lh) baseAspd = 200 - ((200 - baseAspd) + (200 - (cls.aspd[lh.wtype] ?? baseAspd))) * 0.7;
   let aspd = 200 - (200 - baseAspd) * (1 - (4 * agi + dex) / 1000);
   let delay = (200 - aspd) * 20 * (1 - ((b.aspdPct ?? 0) + (wtype === 'none' ? b.unarmedAspdPct ?? 0 : 0)) / 100);
   delay = Math.max(200, delay);
@@ -211,21 +249,21 @@ export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], 
   return {
     base: { ...h.stats }, plus, total,
     maxHp, maxSp, statusAtk, watk, wlv, refineAtk, overRefine,
-    masteryAtk: 0, ammoAtk, bonusAtk: b.atk ?? 0,
+    masteryAtk: b.masteryAtk ?? 0, ammoAtk, bonusAtk: b.atk ?? 0,
     matkMin, matkMax,
-    def: Math.min(90, def + (b.def ?? 0)), vitDef: Math.floor(vit * 0.5),
+    def: Math.min(90, def + (b.def ?? 0)), vitDef: Math.max(0, Math.floor(vit * 0.5 * (1 + (b.vitDefPct ?? 0) / 100))),
     mdef: Math.min(90, mdef + (b.mdef ?? 0)), intMdef: int + Math.floor(vit / 2),
     hit: lv + dex + (b.hit ?? 0),
     flee: lv + agi + (b.flee ?? 0),
     crit: (1 + luk * 0.3 + (b.crit ?? 0)) * (wtype === 'katar' ? 2 : 1),
     pdodge: 1 + luk * 0.1 + (b.pdodge ?? 0),
     aspd, delay, castMul, range, moveSpd,
-    wtype, ranged, weaponElement, armorElement,
+    wtype, lh, mounted, ranged, weaponElement, armorElement,
     hpRegen, spRegen, b,
   };
 }
 
 /** total ATK shown in the status window (RO style "a + b"). */
 export function atkDisplay(d: Derived): [number, number] {
-  return [d.statusAtk, d.watk + d.refineAtk + d.ammoAtk + d.bonusAtk];
+  return [d.statusAtk, d.watk + d.refineAtk + d.ammoAtk + d.bonusAtk + d.masteryAtk];
 }

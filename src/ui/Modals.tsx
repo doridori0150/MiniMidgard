@@ -9,7 +9,9 @@ import type { ClassId, CostumeSlot, Look } from '../game/types.ts';
 import {
   addEquip, canEquip, cardFits, compound, defaultLook, equip, equippedBy, itemName, jobChange, newHero, removeStack, nextJobs,
   sellEquip, sellPrice, sellStack, setCostume, unequipUid, refineInfo, HAIR_COLORS, HAIR_STYLES, equipAmmo, buy, setQuick, rosterRoom, awakenCard,
+  appraise,
 } from '../game/state.ts';
+import { partyPerks, offhandOk } from '../game/stats.ts';
 import { heroLookDraw } from '../render/field.ts';
 import { itemIconURL } from '../render/icons.ts';
 import { bonusLines, itemTypeLine, jobsLine } from './format.ts';
@@ -78,7 +80,17 @@ function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
           <span>판매가</span><span>{fmt(sellPrice(s, id, inst?.refine ?? 0))}z</span>
         </div>
         {lines.length > 0 && d.kind !== 'card' && <div class="desc" style={{ color: '#2a5ab0' }}>{lines.join('\n')}</div>}
-        {inst && inst.grade && (
+        {inst && inst.grade && inst.unid && (
+          <div class={'grade-box g-' + inst.grade}>
+            <div class="gb-head"><b>{GRADE_KO[gradeOf(inst)]}</b> · 미감정</div>
+            <div class="gb-opt"><span>◆ ??? — 감정하면 옵션이 드러나고 입을 수 있습니다.</span></div>
+            <div class="row" style={{ marginTop: '4px' }}>
+              <span class="small muted">{partyPerks(s).appraise ? '파티의 상인이 공짜로 감정합니다.' : `돋보기 ${s.stacks.k_lens ?? 0}개 (도구 상점 40z)`}</span><span class="sp1" />
+              <button class="btn sm gold" onClick={() => { const e = appraise(s, inst.uid); if (e) g.toast(e, 'bad'); else { g.toast(`감정! ${itemName(inst)}`, 'good'); g.commit('refine_ok'); } }}>감정</button>
+            </div>
+          </div>
+        )}
+        {inst && inst.grade && !inst.unid && (
           <div class={'grade-box g-' + inst.grade}>
             <div class="gb-head"><b>{GRADE_KO[gradeOf(inst)]}</b> · 아이템 레벨 {inst.ilvl}{inst.rift ? ` · 균열 ${inst.rift}단계` : ''}{gradeBase(inst) > 0 ? ` · 기본치 +${Math.round(gradeBase(inst) * 100)}%` : ''}</div>
             {(inst.opts ?? []).map((o, i) => (
@@ -121,7 +133,10 @@ function ItemModal(props: { uid?: number; id?: string; heroIdx?: number }) {
         {(inst && !owner && d.kind === 'equip') || d.kind === 'ammo' ? <div style={{ marginTop: '8px' }}><HeroTabs sel={heroIdx} onSel={setHeroIdx} /></div> : null}
       </div>
       <div class="foot">
-        {inst && !owner && <button class="btn pri" disabled={!!canEquip(h, id)} onClick={() => { const e = equip(s, h, inst.uid); if (e) g.toast(e, 'bad'); else { g.commit('equip'); close(); } }}>{canEquip(h, id) ? '장착 불가' : `${h.name} 장착`}</button>}
+        {inst && !owner && <button class="btn pri" disabled={!!canEquip(h, id) || !!inst.unid} onClick={() => { const e = equip(s, h, inst.uid); if (e) g.toast(e, 'bad'); else { g.commit('equip'); close(); } }}>{inst.unid ? '미감정' : canEquip(h, id) ? '장착 불가' : `${h.name} 장착`}</button>}
+        {inst && !owner && !inst.unid && d.loc === 'weapon' && offhandOk(h, d.wtype, d.twoHand) && !canEquip(h, id) && (
+          <button class="btn" onClick={() => { const e = equip(s, h, inst.uid, 'shield'); if (e) g.toast(e, 'bad'); else { g.commit('equip'); close(); } }}>왼손 장착</button>
+        )}
         {inst && owner && <button class="btn" onClick={() => { unequipUid(s, owner, inst.uid); g.commit('equip'); close(); }}>해제</button>}
         {d.kind === 'ammo' && have > 0 && <button class="btn pri" disabled={!!canEquip(h, id)} onClick={() => { const e = equipAmmo(s, h, id); if (e) g.toast(e, 'bad'); else { g.commit('equip'); close(); } }}>{h.name} 화살통 장착</button>}
         {inst && inst.cards.includes(null) && <button class="btn gold" onClick={() => setCardPick(!cardPick)}>카드 꽂기</button>}

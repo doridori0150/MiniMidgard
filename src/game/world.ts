@@ -1,15 +1,15 @@
 // Real-time hunt simulation for one zone. DOM-free: renderer and UI read `events`, `logs` and unit state.
-import type { Element, GameState, Hero, HeroRole, Proc, StatusKind, Tactics } from './types.ts';
-import { computeDerived, partyPerks, type ActiveBuff, type Derived } from './stats.ts';
+import type { Element, GameState, Hero, HeroRole, Proc, StatusKind, Tactics, WeaponType } from './types.ts';
+import { computeDerived, partyPerks, skillOn, type ActiveBuff, type Derived } from './stats.ts';
 import { elementMod, sizeMod, ELEMENT_KO } from './data/elements.ts';
-import { SKILLS, type SkillDef, type FixedCtx } from './data/skills.ts';
+import { SKILLS, CELL, type SkillDef, type FixedCtx, type StatusKind as SkStatus } from './data/skills.ts';
 import { MONSTERS, type MonsterDef, type MobSkill } from './data/monsters.ts';
-import { ITEMS, CARD_SKILLS } from './data/items.ts';
+import { ITEMS, CARD_SKILLS, SHOPS } from './data/items.ts';
 import { zone as zoneDef, ZONES, openers, isExpedition, type ZoneDef, type DangerDef } from './data/zones.ts';
 import { CLASSES, lineage } from './data/classes.ts';
 import { expNext } from './exp.ts';
 import { applyGrade, rollGrade, gradeOf, GRADE_KO, type Grade } from './gear.ts';
-import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics, heroRole, gateDiscoverable, gateReady, openGate, zoneKnown, inHours, isKeepItem } from './state.ts';
+import { addItem, removeStack, sellStack, itemName, applyExp, quickTrigger, defaultTactics, heroRole, gateDiscoverable, gateReady, openGate, zoneKnown, inHours, isKeepItem, buy } from './state.ts';
 import {
   AFFIXES, AFFIX_IDS, ESSENCE, MECHS, RIFT_MAX, RIFT_MS, clearAdvance, ensurePlan, essenceForClear, essenceForElite, firstClearReward,
   fmtClock, makeRiftGear, progressOf, recordParty, riftMods, riftMonster, riftSave, riftUnlocked, riftWeek, riftZone, ruleName,
@@ -84,6 +84,42 @@ export interface HeroUnit {
   /** what this hero decided to do this tick and why, in words (set at each decision point; shown in the UI) */
   doing: string;
   kiteNext: number;
+  /** 반격 stance until (auto counter) */
+  counterUntil: number;
+  /** 해독 지연: poison doesn't bite until then */
+  slowPoisonUntil: number;
+  /** next SP drain while hidden (hiding / cloaking) */
+  hideDrainAt: number;
+  /** poison react: envenom counters left */
+  prCounters: number;
+  /** throttle for out-of-fight utilities (aqua benedicta, find stone, teleport) */
+  utilAt: number;
+}
+
+/** a placed skill effect on the field (fire wall, sanctuary, traps…): world state, drawn by the renderer every frame */
+export interface GroundFx {
+  id: number;
+  sk: SkillDef;
+  lv: number;
+  owner: number;
+  x: number; y: number;
+  /** radius (circle) or half-length (line) */
+  r: number;
+  /** line: unit direction along the wall */
+  ax: number; ay: number;
+  line: boolean;
+  born: number;
+  until: number;
+  next: number;
+  every: number;
+  charges: number;
+  /** per-monster hit counts (storm gust) */
+  hits: Record<number, number>;
+  /** a trap: armed from then on; done = went off */
+  armAt: number;
+  done: boolean;
+  /** talkie box text */
+  text?: string;
 }
 
 export interface MobUnit {
@@ -128,6 +164,20 @@ export interface MobUnit {
   elite: { affix: EliteAffix; leader: boolean } | null;
   /** 균열: share of the progress bar this kill fills (%) */
   prog: number;
+  // ── RO skill statuses (SKILLS_RO.md)
+  stoneUntil: number; sleepUntil: number; silenceUntil: number; snareUntil: number;
+  /** 속도 감소: AGI −n and −25% speed until */
+  agiDown: number; agiDownUntil: number;
+  /** 늪: −% AGI/DEX and −50% speed while standing in it */
+  quag: number; quagUntil: number;
+  /** 성호: DEF −% until death */
+  crucis: number;
+  /** 영원의 율법: the next damage doubles; lexUntil = the hits of one skill all double */
+  lex: boolean; lexUntil: number;
+  /** freeze / stone survive damage until then (the rest of the skill that froze or hit it) */
+  breakHold: number;
+  /** a hiding monster: unseen until then; next hide not before */
+  hiddenUntil: number; hideNext: number;
 }
 
 /** a rift run in progress (rift.ts): the clock, the progress bar, the guardian and its mechanic */
@@ -247,6 +297,12 @@ export class World {
   rift: RiftRun | null = null;
   /** a rift run just ended (tools listen; the UI reads world.rift.result) */
   onRiftEnd: (r: RiftRun) => void = () => {};
+  /** placed skill effects (fire wall, safety wall, sanctuary, traps, quagmire, ice wall, storm gust, magnus…) */
+  grounds: GroundFx[] = [];
+  private gfxSeq = 1;
+  /** party teleport / warp throttle */
+  private teleAt = 0;
+  private warpAt = 0;
 
   constructor(s: GameState, rng: () => number = Math.random) {
     this.s = s;
@@ -269,6 +325,7 @@ export class World {
         hp: d.maxHp, sp: d.maxSp, d, dAt: 0, state: 'idle', stateT: 0, lockUntil: 0, atkReady: 0,
         target: null, cast: null, buffs: [], cds: {}, deadUntil: 0, hpTickAt: HP_TICK, spTickAt: SP_TICK, potAt: 0,
         poisonUntil: 0, poisonNext: 0, hurtAt: -9999, sitting: false, thinkAt: 0, kiteUntil: 0, kiteNext: 0, backOff: false, doing: '',
+        counterUntil: 0, slowPoisonUntil: 0, hideDrainAt: 0, prCounters: 0, utilAt: 0,
       } satisfies HeroUnit;
     });
   }
@@ -289,12 +346,13 @@ export class World {
     if (id !== 'town') this.s.lastHunt = id;
     this.mobs = [];
     this.ground = [];
+    this.grounds = [];
     this.timers = [];
     this.focus = null;
     const sx = this.zone.w * 0.5, sy = this.zone.h * 0.55;
     this.heroes.forEach((h, i) => {
       h.x = sx - i * 26; h.y = sy + (i % 2 ? 22 : -10);
-      h.target = null; h.cast = null; h.state = h.state === 'dead' ? 'dead' : 'idle'; h.sitting = false;
+      h.target = null; h.cast = null; h.state = h.state === 'dead' ? 'dead' : 'idle'; h.sitting = false; h.counterUntil = 0;
     });
     this.spawnAt = this.time + 400;
     this.armExpedition();
@@ -380,6 +438,7 @@ export class World {
     for (const h of this.heroes) this.heroTick(h, dt);
     for (const m of this.mobs) this.mobTick(m, dt);
     this.separate();
+    this.fxTick();
     this.groundTick();
     // bosses get a longer collapse so their fall can be read
     this.mobs = this.mobs.filter((m) => !(m.state === 'dead' && this.time - m.deadAt > (m.m.boss ? 1800 : CORPSE_MS)));
@@ -526,6 +585,8 @@ export class World {
       summoned, deadAt: 0, hurtAt: -9999, dmgBy: {}, charge: null,
       danger: m.danger ? { stay: 60000 } : null, bornAt: this.time, dmgAt: -99999, chaseSince: 0, boredUntil: 0, vanish: false,
       elite: null, prog: 0,
+      stoneUntil: 0, sleepUntil: 0, silenceUntil: 0, snareUntil: 0, agiDown: 0, agiDownUntil: 0, quag: 0, quagUntil: 0,
+      crucis: 0, lex: false, lexUntil: 0, breakHold: 0, hiddenUntil: 0, hideNext: this.time + 4000,
     };
     this.mobs.push(u);
     this.emit({ t: 'spawn', uid: u.uid });
@@ -730,7 +791,7 @@ export class World {
     const zone = riftZone(plan);
     this.zone = zone;
     s.zone = back; // the save never points into a rift
-    this.mobs = []; this.ground = []; this.timers = []; this.focus = null; this.chests = []; this.run = null;
+    this.mobs = []; this.ground = []; this.grounds = []; this.timers = []; this.focus = null; this.chests = []; this.run = null;
     this.dangerAt = Infinity; this.chestAt = Infinity; this.wipeUntil = 0; this.fadeAt = 0;
     this.rift = {
       plan, zone, mods: riftMods(plan), back, start: this.time, end: this.time + RIFT_MS, progress: 0, phase: 'run', guardian: null,
@@ -1057,10 +1118,14 @@ export class World {
     this.regen(h);
     if (h.poisonUntil > this.time && this.time >= h.poisonNext) {
       h.poisonNext = this.time + 1000;
-      const dmg = Math.max(1, Math.floor(h.d.maxHp * 0.015));
-      this.damageHero(h, dmg, null, true);
-      if ((h.state as string) === 'dead') return;
+      // 해독 지연: the poison stays but doesn't bite
+      if (h.slowPoisonUntil <= this.time) {
+        const dmg = Math.max(1, Math.floor(h.d.maxHp * 0.015));
+        this.damageHero(h, dmg, null, true);
+        if ((h.state as string) === 'dead') return;
+      }
     }
+    this.selfEffects(h);
 
     // 피하기: a danger monster right on top of a caster breaks the cast — get away first
     if (h.cast && this.run) {
@@ -1073,7 +1138,8 @@ export class World {
       if (this.time >= h.cast.end) this.releaseCast(h);
       else {
         const t = this.unit(h.cast.target);
-        if (h.cast.target !== null && !this.alive(t) && h.cast.sk.kind !== 'aoe' && h.cast.sk.kind !== 'revive') {
+        const k = h.cast.sk.kind;
+        if (h.cast.target !== null && !this.alive(t) && k !== 'aoe' && k !== 'revive' && k !== 'ground' && k !== 'trap') {
           h.cast = null;
           this.emit({ t: 'castEnd', uid: h.uid });
           this.setState(h, 'idle');
@@ -1095,19 +1161,23 @@ export class World {
       return;
     }
 
+    // hiding / playing dead: lie low until patched up (potions still work), then come out
+    if (this.tryLieLow(h)) return;
     // 피하기: a danger monster closing in — run for the far side of the map, together
     if (this.tryEvade(h, dt)) return;
-    // support: revive, heal & buffs first
+    // support: revive, heal, cures, protective walls & buffs first
     if (this.trySupport(h)) return;
     // party rest (orders.rest) and casters sitting for SP
     if (this.tryRest(h)) return;
+    // hiding to shake off a crowd, reveals, out-of-fight chores (holy water, stones)
+    if (this.tryUtility(h)) return;
 
     // targeting: player focus > tactics (re-thought twice a second so the party regroups on the shared target)
     let t = this.mob(h.target);
-    if (!this.alive(t)) { h.target = null; t = undefined; }
+    if (!this.targetable(t)) { h.target = null; t = undefined; }
     if (this.focus !== null) {
       const f = this.mob(this.focus);
-      if (this.alive(f)) { t = f; h.target = f!.uid; } else this.focus = null;
+      if (this.targetable(f)) { t = f; h.target = f!.uid; } else if (!this.alive(f)) this.focus = null;
     }
     if (this.focus === null && (!t || this.time >= h.thinkAt)) {
       h.thinkAt = this.time + 450 + this.rng() * 150;
@@ -1116,18 +1186,21 @@ export class World {
     }
     if (!t) { this.idleFollow(h, dt); return; }
 
-    // tank provoke, crowd control
+    // tank provoke, auto counter stance, crowd control & debuffs
     if (this.tryProvoke(h)) { h.doing = '도발'; return; }
+    if (this.tryStance(h)) return;
     if (this.tryCc(h, t)) return;
 
     // offensive skill or normal attack from this hero's position (front / mid / back)
     const act = this.chooseSkill(h, t);
-    const range = act ? this.skillRange(h, act.sk) : h.d.range;
+    const range = act ? this.skillRange(h, act.sk, act.lv) : h.d.range;
     const saving = !act && this.tactics(h).skills === 'conserve' && h.sp < h.d.maxSp * 0.5 && this.enabledSkills(h, ['attack', 'aoe']).length > 0;
     h.doing = t.m.name + (act ? (act.sk.kind === 'heal' ? ' — 힐로 공격' : ' — ' + act.sk.name) : saving ? ' 공격 (SP 절약)' : ' 공격');
     if (this.position(h, t, range, dt)) return;
     h.facing = t.x >= h.x ? 1 : -1;
     if (act) { this.startSkill(h, act.sk, act.lv, t); return; }
+    // hiding: no normal attacks (cloaking may swing, which ends it)
+    if (this.heroHidden(h) && !this.hasBuff(h, 'cloak')) { this.setState(h, 'ready'); return; }
     if (this.time >= h.atkReady) this.normalAttack(h, t);
     else this.setState(h, 'ready');
   }
@@ -1141,16 +1214,16 @@ export class World {
     const lead = this.leader();
     // 피하기: danger monsters are never part of the fight — they are what the party keeps away from
     const dangers = this.mobs.filter((m) => this.alive(m) && this.shunned(m));
-    const engaged = this.mobs.filter((m) => this.alive(m) && !this.shunned(m) && ((m.target !== null && ids.has(m.target))
+    const engaged = this.mobs.filter((m) => this.targetable(m) && !this.shunned(m) && ((m.target !== null && ids.has(m.target))
       || (Object.keys(m.dmgBy).length > 0 && !!lead && dist(m, lead) < 320)));
     let target: MobUnit | undefined;
     const f = this.mob(this.focus);
-    if (f && this.alive(f)) target = f;
-    if (!target && lead) { const lt = this.mob(lead.target); if (lt && this.alive(lt)) target = lt; }
+    if (f && this.targetable(f)) target = f;
+    if (!target && lead) { const lt = this.mob(lead.target); if (lt && this.targetable(lt)) target = lt; }
     if (!target) {
       const tank = this.aliveHeroes().find((h) => this.roleOf(h) === 'tank');
       const tt = tank && this.mob(tank.target);
-      if (tt && this.alive(tt)) target = tt;
+      if (tt && this.targetable(tt)) target = tt;
     }
     if (!target && lead && engaged.length) target = engaged.reduce((a, b) => (dist(a, lead) <= dist(b, lead) ? a : b));
     this.pc = { engaged, target, dangers };
@@ -1174,6 +1247,8 @@ export class World {
       if (this.run && this.time >= this.run.until) this.run = null;
       return;
     }
+    // 순간이동 Lv2: right on top of us — blink away instead of running
+    if (td < 150 && this.tryTeleportAway(threat)) return;
     const fresh = !this.run;
     const cur = this.run;
     if (!cur || cur.from !== threat.uid || this.time >= cur.at || dist(lead, cur) < 30) {
@@ -1298,7 +1373,7 @@ export class World {
         break;
       }
       case 'nearest': pick = nearest(eng); break;
-      case 'boss': pick = this.mobs.find((m) => this.alive(m) && !!m.m.boss && dist(m, anchor) <= Math.max(R, 420)); break;
+      case 'boss': pick = this.mobs.find((m) => this.targetable(m) && !!m.m.boss && dist(m, anchor) <= Math.max(R, 420)); break;
     }
     let shared = this.pc.target && reach(this.pc.target) ? this.pc.target : undefined;
     // joining late on a target that is about to drop? take the next engaged mob instead of overkilling
@@ -1321,7 +1396,7 @@ export class World {
     const avgLv = this.heroes.reduce((a, x) => a + x.hero.baseLv, 0) / this.heroes.length;
     let best: MobUnit | undefined; let bd = radius;
     for (const m of this.mobs) {
-      if (!this.alive(m) || this.pc.engaged.includes(m)) continue;
+      if (!this.targetable(m) || this.pc.engaged.includes(m)) continue;
       if (m.danger) { if (this.shunned(m)) continue; } // 맞서기: hunted like a boss, whatever its level
       else if (!m.m.boss && m.m.lv > avgLv + 3 && !this.rift) continue; // the rift is cleared whatever the level
       if (this.pc.dangers.length && this.pc.dangers.some((d) => dist(d, m) < 230)) continue;
@@ -1376,8 +1451,9 @@ export class World {
       }
       const onMe = this.mobs.find((m) => this.alive(m) && m.target === h.uid && m.m.range < 60 && dist(m, h) < this.bodyR(m) + 30);
       if (onMe && this.time >= h.kiteNext && front.hp > front.d.maxHp * 0.3) {
-        h.kiteUntil = this.time + 600;
         h.kiteNext = this.time + 2600;
+        if (this.tryBackSlide(h)) return true; // 뒤로 구르기 instead of walking
+        h.kiteUntil = this.time + 600;
         return true;
       }
     }
@@ -1392,8 +1468,9 @@ export class World {
         return true;
       }
       if (chaser && this.time >= h.kiteNext) {
-        h.kiteUntil = this.time + 550;
         h.kiteNext = this.time + 2200;
+        if (this.tryBackSlide(h)) return true;
+        h.kiteUntil = this.time + 550;
         return true;
       }
     }
@@ -1466,7 +1543,7 @@ export class World {
   private usesSp(h: HeroUnit) {
     const role = this.roleOf(h);
     if (role !== 'caster' && role !== 'healer') return false;
-    return Object.entries(h.hero.skills).some(([id, lv]) => lv > 0 && SKILLS[id]?.sp && SKILLS[id].auto !== 'none' && h.hero.auto.skills[id] !== false && id !== 'first_aid');
+    return (h.hero.skillSlots ?? []).some((id) => !!id && (h.hero.skills[id] ?? 0) > 0 && !!SKILLS[id]?.sp && id !== 'first_aid');
   }
 
   private bodyR(u: Unit) { return u.kind === 'mob' ? 8 * u.m.scale : 11; }
@@ -1481,6 +1558,8 @@ export class World {
       const chest = this.chestFor(h);
       if (chest) { this.goChest(h, chest, dt); return; }
       const best = this.pullCandidate(h, Infinity);
+      // 순간이동: nothing worth hunting nearby — the party blinks next to a monster elsewhere on the map
+      if ((!best || dist(best, h) > 380) && this.tryTeleport(best)) return;
       h.doing = best ? '사냥감 찾는 중' : '대기';
       if (best) this.moveTo(h, best.x, best.y, h.d.moveSpd * 0.85, dt, 60);
       else this.setState(h, 'idle');
@@ -1510,17 +1589,151 @@ export class World {
     return false;
   }
 
-  /** ankle snare & co: whatever is chasing the back line first, else a dangerous target */
+  // ───────────────────────────── skill helpers (docs/design/SKILLS_RO.md)
+  hasBuff(h: HeroUnit, id: string) { return h.buffs.some((b) => b.id === id && b.until > this.time); }
+  /** hiding, cloaking or playing dead */
+  heroHidden(h: HeroUnit) { return h.buffs.some((b) => (b.id === 'hiding' || b.id === 'cloak' || b.id === 'playdead') && b.until > this.time); }
+  /** can this monster see the hero? insects, demons and bosses sniff out hiders; only bosses see through playing dead */
+  sees(m: MobUnit, h: HeroUnit) {
+    if (!this.heroHidden(h)) return true;
+    if (m.m.boss) return true;
+    if (this.hasBuff(h, 'playdead')) return false;
+    return m.m.race === 'insect' || m.m.race === 'demon';
+  }
+  /** alive and not hiding (a hiding monster can't be picked or hit until it shows itself or is revealed) */
+  targetable(m: MobUnit | undefined): m is MobUnit { return !!m && this.alive(m) && m.hiddenUntil <= this.time; }
+  private unhide(h: HeroUnit) {
+    if (!h.buffs.some((b) => b.id === 'hiding' || b.id === 'cloak' || b.id === 'playdead')) return;
+    h.buffs = h.buffs.filter((b) => b.id !== 'hiding' && b.id !== 'cloak' && b.id !== 'playdead');
+    this.refresh(h);
+    this.emit({ t: 'status', uid: h.uid, text: '모습을 드러냄', color: '#d0c8e8' });
+  }
+  /** monsters that can't see a hidden hero drop it */
+  private lose(h: HeroUnit) { for (const m of this.mobs) if (m.target === h.uid && !this.sees(m, h)) { m.target = null; m.provokeUntil = 0; } }
+
+  /** per step: auto berserk, the SP that hiding eats, sight blaster, reveals around sight / ruwach / detect */
+  private selfEffects(h: HeroUnit) {
+    if (skillOn(h.hero, 'auto_berserk')) {
+      const low = h.hp < h.d.maxHp * 0.25, on = this.hasBuff(h, 'berserk');
+      if (low && !on) {
+        h.buffs.push({ id: 'berserk', name: '자동 광폭', lv: 1, until: this.time + 3_600_000, bonus: { atkPct: 32, vitDefPct: -55 } });
+        this.refresh(h);
+        this.emit({ t: 'status', uid: h.uid, text: '광폭!', color: '#ff5050' });
+      } else if (!low && on) { h.buffs = h.buffs.filter((b) => b.id !== 'berserk'); this.refresh(h); }
+    }
+    const hide = h.buffs.find((b) => (b.id === 'hiding' || b.id === 'cloak') && b.until > this.time);
+    if (hide && this.time >= h.hideDrainAt) {
+      const first = h.hideDrainAt === 0;
+      h.hideDrainAt = this.time + (hide.id === 'hiding' ? (4 + hide.lv) * 1000 : [500, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000][hide.lv - 1]);
+      if (!first) { h.sp -= 1; if (h.sp <= 0) { h.sp = 0; this.unhide(h); } }
+    } else if (!hide) h.hideDrainAt = 0;
+    if (this.hasBuff(h, 'sblast')) {
+      const near = this.mobs.find((m) => this.targetable(m) && !this.shunned(m) && dist(m, h) < 2 * CELL + this.bodyR(m));
+      if (near) {
+        h.buffs = h.buffs.filter((b) => b.id !== 'sblast');
+        this.emit({ t: 'skill', fx: 'magnum', from: h.uid, x: near.x, y: near.y, lv: 1, radius: 40, element: 'fire' });
+        this.sound('fire');
+        for (const m of this.mobs) {
+          if (!this.targetable(m) || this.shunned(m) || dist(m, near) > 1.5 * CELL + this.bodyR(m)) continue;
+          this.resolveMagic(h, m, 100, 'fire', 0, SKILLS.sight_blaster, 1);
+          this.knock(m, h.x, h.y, 3);
+        }
+      }
+    }
+    for (const b of h.buffs) {
+      if (b.until <= this.time || (b.id !== 'sight' && b.id !== 'ruwach' && b.id !== 'detect')) continue;
+      this.revealAround(h, SKILLS[b.id === 'sight' ? 'sight' : b.id === 'ruwach' ? 'ruwach' : 'detect'], b.lv);
+    }
+  }
+
+  /** hiding monsters near the hero show themselves (성광 burns them with holy light) */
+  private revealAround(h: HeroUnit, sk: SkillDef, lv: number) {
+    const r = sk.reveal?.(lv) ?? 60;
+    for (const m of this.mobs) {
+      if (!this.alive(m) || m.hiddenUntil <= this.time || dist(m, h) > r + this.bodyR(m)) continue;
+      m.hiddenUntil = 0;
+      m.hideNext = this.time + 12000;
+      this.emit({ t: 'status', uid: m.uid, text: '발견!', color: '#ffe080' });
+      if (sk.id === 'ruwach') this.resolveMagic(h, m, 145, 'holy', 0, sk, 1);
+    }
+  }
+
+  /** hiding / playing dead: stay down (potions still heal) until patched up and nobody is looking */
+  private tryLieLow(h: HeroUnit): boolean {
+    const b = h.buffs.find((x) => (x.id === 'hiding' || x.id === 'playdead') && x.until > this.time);
+    if (!b) return false;
+    this.lose(h);
+    h.target = null;
+    const r = h.hp / h.d.maxHp;
+    const onMe = this.mobs.some((m) => this.alive(m) && m.target === h.uid);
+    if (!onMe && (r >= 0.6 || (r >= 0.4 && !this.pc.engaged.length))) { this.unhide(h); return false; }
+    h.doing = b.id === 'playdead' ? '죽은 척' : '숨어서 회복 대기';
+    this.setState(h, b.id === 'playdead' ? 'sit' : 'ready');
+    return true;
+  }
+
+  /** escapes (hiding, play dead), cloaking for grimtooth, reveals, and the chores between fights */
+  private tryUtility(h: HeroUnit): boolean {
+    const list = this.enabledSkills(h, ['support']);
+    if (!list.length) return false;
+    const onMe = this.mobs.filter((m) => this.alive(m) && m.target === h.uid && dist(m, h) < 90);
+    const engagedNear = this.pc.engaged.some((m) => dist(m, h) < 240);
+    for (const { sk, lv } of list) {
+      if (!this.canPay(h, sk, lv) || !this.usable(h, sk)) continue;
+      const go = (target: Unit | null) => { h.doing = sk.name; this.startSkill(h, sk, lv, target); return true; };
+      switch (sk.id) {
+        case 'play_dead': if (onMe.length && h.hp < h.d.maxHp * 0.25) return go(h); break;
+        case 'hiding': if (onMe.length && h.hp < h.d.maxHp * 0.3 && this.roleOf(h) !== 'tank' && !this.heroHidden(h)) return go(h); break;
+        case 'cloaking': {
+          if (this.heroHidden(h)) break;
+          const grim = (h.hero.skillSlots ?? []).includes('grimtooth') && h.d.wtype === 'katar';
+          if ((grim && engagedNear && h.sp > h.d.maxSp * 0.25) || (onMe.length && h.hp < h.d.maxHp * 0.3 && this.roleOf(h) !== 'tank')) return go(h);
+          break;
+        }
+        case 'sight': case 'ruwach': case 'detect': {
+          if (this.hasBuff(h, sk.id === 'sight' ? 'sight' : sk.id)) break;
+          const r = (sk.reveal?.(lv) ?? 60) + 40;
+          const hidden = this.mobs.some((m) => this.alive(m) && m.hiddenUntil > this.time && dist(m, h) < r);
+          // keep the flames up in a fight when sightrasher is slotted (it needs them)
+          const forRasher = sk.id === 'sight' && (h.hero.skillSlots ?? []).includes('sightrasher') && this.pc.engaged.length >= 2;
+          if (hidden || forRasher) return go(h);
+          break;
+        }
+        case 'aqua_benedicta': if (!engagedNear && this.time >= h.utilAt && (this.s.stacks.k_holywater ?? 0) < 10) { h.utilAt = this.time + 1200; return go(h); } break;
+        case 'find_stone': if (!engagedNear && this.time >= h.utilAt && (this.s.stacks.k_stone ?? 0) < 5) { h.utilAt = this.time + 1200; return go(h); } break;
+        // also used by position() when a melee monster corners a back-liner; here: a hurt fighter rolls out of a crowd
+        case 'back_slide': if (onMe.length >= 2 && h.hp < h.d.maxHp * 0.3 && this.roleOf(h) !== 'tank') return go(null); break;
+      }
+    }
+    return false;
+  }
+
+  /** 반격: brace just before a melee monster swings (tanks, or against bosses / elites, or when hurt) */
+  private tryStance(h: HeroUnit): boolean {
+    const e = this.enabledSkills(h, ['tank']).find((x) => x.sk.kind === 'stance');
+    if (!e || !this.canPay(h, e.sk, e.lv) || h.d.ranged) return false;
+    const win = e.lv * 400;
+    const threat = this.mobs.find((m) => {
+      if (!this.alive(m) || m.target !== h.uid || m.m.range >= 60 || dist(m, h) > m.m.range + this.bodyR(m) + 16) return false;
+      if (m.stunUntil > this.time || m.frozenUntil > this.time || m.stoneUntil > this.time || m.sleepUntil > this.time) return false;
+      // only worth standing still for: a boss / elite / danger monster, a hurt knight, or (a tank) a blow that really hurts
+      const big = (m.m.atk[0] + m.m.atk[1]) / 2 > h.d.maxHp * 0.07;
+      if (!(m.m.boss || m.danger || m.elite || h.hp < h.d.maxHp * 0.5 || (this.roleOf(h) === 'tank' && big))) return false;
+      const lands = m.atkReady + 220 - this.time;
+      return lands > 60 && lands < win - 40;
+    });
+    if (!threat) return false;
+    h.facing = threat.x >= h.x ? 1 : -1;
+    h.doing = `${threat.m.name} — ${e.sk.name} 자세`;
+    this.startSkill(h, e.sk, e.lv, threat);
+    return true;
+  }
+
+  /** crowd control & debuffs, each with its own trigger (SKILLS_RO.md §0.7) */
   private tryCc(h: HeroUnit, t: MobUnit): boolean {
     for (const { sk, lv } of this.enabledSkills(h, ['cc'])) {
-      if (!this.canPay(h, sk, lv)) continue;
-      const free = (m: MobUnit) => !m.m.boss && m.stunUntil <= this.time && m.frozenUntil <= this.time && dist(h, m) <= (sk.range ?? 180);
-      const chaser = this.pc.engaged.find((m) => {
-        if (!free(m)) return false;
-        const v = this.heroUnit(m.target);
-        return !!v && (v === h || this.posOf(v) !== 'front');
-      });
-      const pick = chaser ?? (free(t) && (t.m.aggressive || t.target !== null) ? t : undefined);
+      if (!this.canPay(h, sk, lv) || !this.usable(h, sk)) continue;
+      const pick = this.ccTarget(h, t, sk, lv);
       if (!pick) continue;
       h.facing = pick.x >= h.x ? 1 : -1;
       h.doing = `${pick.m.name} — ${sk.name}`;
@@ -1530,16 +1743,95 @@ export class World {
     return false;
   }
 
-  private skillRange(h: HeroUnit, sk: SkillDef) {
+  private ccTarget(h: HeroUnit, t: MobUnit, sk: SkillDef, lv: number): MobUnit | undefined {
+    const R = this.skillRange(h, sk, lv);
+    const inR = (m: MobUnit) => dist(h, m) - this.bodyR(m) <= R;
+    const free = (m: MobUnit) => this.targetable(m) && !this.shunned(m) && m.stunUntil <= this.time && m.frozenUntil <= this.time
+      && m.stoneUntil <= this.time && m.sleepUntil <= this.time && m.snareUntil <= this.time;
+    const eng = this.pc.engaged.filter((m) => this.targetable(m) && !this.shunned(m));
+    // whatever is chasing the back line (me too, when I stand back) in melee
+    const chaser = () => eng.find((m) => {
+      if (!free(m) || m.m.boss || m.m.range >= 4 * CELL) return false;
+      const v = this.heroUnit(m.target);
+      // (alone, with nobody in front to hand it to, a monster on me is just the fight)
+      return !!v && this.posOf(v) !== 'front' && (v !== h || !!this.frontLiner(h));
+    });
+    const near = (m: MobUnit, r: number) => eng.filter((x) => x !== m && dist(x, m) < r);
+    const ownNear = (m: MobUnit, r: number) => this.grounds.some((g) => !g.done && g.owner === h.uid && g.sk.id === sk.id && dist(g, m) < r);
+    switch (sk.id) {
+      case 'ankle_snare': case 'skid_trap': case 'stone_curse': case 'fire_wall': case 'ice_wall': {
+        const c = chaser();
+        if (c && inR(c) && !ownNear(c, 40)) {
+          const v = this.heroUnit(c.target);
+          // a wall needs room between the monster and its prey
+          if ((sk.id === 'fire_wall' || sk.id === 'ice_wall') && v && dist(c, v) < 26) return undefined;
+          return c;
+        }
+        if (sk.id === 'ankle_snare' && free(t) && !t.m.boss && (t.m.aggressive || t.target !== null) && inR(t) && !ownNear(t, 40)) return t;
+        return undefined;
+      }
+      case 'decrease_agi': {
+        const c = chaser();
+        if (c && c.agiDownUntil <= this.time && inR(c)) return c;
+        // quick = the party's best hitter still misses it a lot
+        const bestHit = Math.max(...this.aliveHeroes().map((a) => a.d.hit));
+        const quick = (m: MobUnit) => m.m.lv + m.m.agi > bestHit + 15;
+        if (free(t) && !t.m.boss && t.agiDownUntil <= this.time && inR(t) && (t.danger || t.elite || quick(t))) return t;
+        return undefined;
+      }
+      case 'signum_crucis': {
+        const ud = this.mobs.filter((m) => this.targetable(m) && !this.shunned(m) && m.crucis === 0 && dist(m, h) < (sk.radius ?? 320)
+          && (this.mobElement(m) === 'undead' || m.m.race === 'demon' || m.m.race === 'undead'));
+        return ud.length >= 2 || ud.some((m) => m.m.boss || m.danger) ? t : undefined;
+      }
+      case 'lex_divina': return eng.find((m) => free(m) && !m.m.boss && !!m.m.skills?.length && m.silenceUntil <= this.time && inR(m));
+      case 'lex_aeterna': {
+        if (!free(t) || t.lex || !inR(t)) return undefined;
+        // worth a turn on the big ones: bosses, elites, danger monsters, or a monster the party's best hitter needs many swings for
+        const best = Math.max(...this.aliveHeroes().map((a) => this.estimateNormal(a, t)));
+        return t.m.boss || t.danger || t.elite || t.hp > best * 15 ? t : undefined;
+      }
+      case 'quagmire': {
+        const m = eng.find((x) => !x.m.boss && x.quagUntil <= this.time && near(x, 60).length >= 1 && inR(x));
+        return m && !ownNear(m, 50) ? m : undefined;
+      }
+      case 'frost_nova': return this.mobs.filter((m) => this.targetable(m) && m.target === h.uid && m.m.range < 60 && dist(m, h) < 50 && m.frozenUntil <= this.time).length >= 2 ? t : undefined;
+      case 'arrow_repel': return this.mobs.find((m) => this.targetable(m) && !m.m.boss && m.target === h.uid && m.m.range < 60 && dist(m, h) < 60);
+      case 'shockwave_trap': return t.m.skills?.length && inR(t) && !ownNear(t, 50) ? t : undefined;
+      case 'sandman': case 'flasher': {
+        const m = eng.find((x) => free(x) && !x.m.boss && near(x, 50).length >= 1 && inR(x));
+        return m && !ownNear(m, 50) ? m : undefined;
+      }
+    }
+    // other debuffs with a status (ankle-snare style): the back line's chaser first, else a dangerous target
+    if (!sk.status) return undefined;
+    const c = chaser();
+    if (c && inR(c)) return c;
+    return free(t) && !t.m.boss && (t.m.aggressive || t.target !== null) && inR(t) ? t : undefined;
+  }
+
+  private skillRange(h: HeroUnit, sk: SkillDef, lv = 1) {
+    if (sk.id === 'spear_boomerang') return (1 + lv * 2) * CELL;
+    if (sk.id === 'grimtooth') return (2 + lv) * CELL;
+    if (sk.id === 'spear_stab') return 3 * CELL;
     if (sk.kind === 'selfAoe') return (sk.radius ?? 60) * 0.6;
     if (sk.range) return sk.range;
     return h.d.range;
+  }
+
+  /** the radius a skill's area covers (ground effects use their spec) */
+  private areaR(sk: SkillDef, lv: number) {
+    if (sk.id === 'brandish') return (Math.min(4, Math.ceil(lv / 3)) + 1) * CELL * 0.9;
+    if (sk.ground) return sk.ground.r(lv);
+    return sk.radius ?? 60;
   }
 
   private canAfford(h: HeroUnit, sk: SkillDef, lv: number) {
     if (sk.sp && h.sp < sk.sp(lv)) return false;
     if (sk.hpCost && h.hp <= sk.hpCost(lv) + 5) return false;
     if (sk.zeny && this.s.zeny < this.zenyCost(h, sk, lv)) return false;
+    const c = sk.catalyst;
+    if (c && (!c.from || lv >= c.from) && (this.s.stacks[c.id] ?? 0) < c.n) return false;
     return true;
   }
 
@@ -1547,7 +1839,9 @@ export class World {
   private skMult(h: HeroUnit, sk: SkillDef, lv: number) {
     // 균열 결계 also halves 금화 강타 (the build tree counts it as fixed damage)
     const ward = sk.id === 'mammonite' ? this.rift?.mods.fixedMul ?? 1 : 1;
-    return (sk.mult ? sk.mult(lv) : 100) * (1 + (h.d.b.skillDmg?.[sk.id] ?? 0) / 100) * ward;
+    let m = sk.mult ? sk.mult(lv) : 100;
+    if (sk.id === 'cart_revolution') m += (h.hero.skills.enlarge_weight ?? 0) * 10; // the cart's weight
+    return m * (1 + (h.d.b.skillDmg?.[sk.id] ?? 0) / 100) * ward;
   }
   private zenyCost(h: HeroUnit, sk: SkillDef, lv: number) {
     return Math.round(sk.zeny!(lv) * (1 + (h.d.b.zenyCostPct ?? 0) / 100));
@@ -1560,36 +1854,64 @@ export class World {
     return true;
   }
 
+  /** a skill's own condition: hidden (grimtooth), mounted (brandish), Sight up (sightrasher) */
+  private usable(h: HeroUnit, sk: SkillDef) {
+    if (sk.needs === 'hidden') return this.heroHidden(h) && !this.hasBuff(h, 'playdead');
+    if (sk.needs === 'mounted') return h.d.mounted;
+    if (sk.needs === 'sight') return this.hasBuff(h, 'sight');
+    // hiding / playing dead: nothing but grimtooth (cloaking may still fight)
+    if (this.heroHidden(h) && !this.hasBuff(h, 'cloak') && sk.kind !== 'selfBuff') return false;
+    return true;
+  }
+
+  /** the slotted active skills of these roles, slot order = priority (card-granted skills need no slot) */
   private enabledSkills(h: HeroUnit, roles: string[]) {
     const out: { sk: SkillDef; lv: number }[] = [];
-    const levels = { ...h.hero.skills };
-    // skills granted by equipped accessory cards (e.g. a heal Lv1 card) — the hero's own level wins
+    const seen = new Set<string>();
+    for (const id of h.hero.skillSlots ?? []) {
+      if (!id || seen.has(id)) continue;
+      const sk = SKILLS[id], lv = h.hero.skills[id] ?? 0;
+      if (!sk || lv <= 0 || !roles.includes(sk.auto)) continue;
+      out.push({ sk, lv });
+      seen.add(id);
+    }
+    // skills granted by equipped cards (e.g. a heal Lv1 card) are gear effects: always on, after the slotted ones
     for (const uid of Object.values(h.hero.equip)) {
       const inst = this.s.equips.find((e) => e.uid === uid);
       for (const c of inst?.cards ?? []) {
         const g = c ? CARD_SKILLS[c] : undefined;
-        if (g && (levels[g.skill] ?? 0) < g.lv) levels[g.skill] = g.lv;
+        if (!g || seen.has(g.skill) || !roles.includes(SKILLS[g.skill]?.auto)) continue;
+        out.push({ sk: SKILLS[g.skill], lv: g.lv });
+        seen.add(g.skill);
       }
-    }
-    for (const [id, lv] of Object.entries(levels)) {
-      const sk = SKILLS[id];
-      if (!sk || lv <= 0 || !roles.includes(sk.auto)) continue;
-      if (h.hero.auto.skills[id] === false) continue;
-      out.push({ sk, lv });
     }
     return out;
   }
 
   private trySupport(h: HeroUnit): boolean {
-    // resurrection beats everything else
+    // resurrection (and redemptio) beat everything else
     for (const { sk, lv } of this.enabledSkills(h, ['revive'])) {
       if (!this.canPay(h, sk, lv)) continue;
-      const dead = this.heroes.find((x) => x.state === 'dead' && x !== h && dist(x, h) < 300);
-      if (dead) { h.doing = `${sk.name} → ${dead.hero.name}`; this.startSkill(h, sk, lv, dead); return true; }
+      const dead = this.heroes.filter((x) => x.state === 'dead' && x !== h && dist(x, h) < 300);
+      if (sk.id === 'redemptio') {
+        if (dead.length >= 2 || (dead.length >= 1 && this.heroes.length === 2 && h.hp < h.d.maxHp * 0.5)) { h.doing = sk.name; this.startSkill(h, sk, lv, h); return true; }
+        continue;
+      }
+      if (dead[0]) { h.doing = `${sk.name} → ${dead[0].hero.name}`; this.startSkill(h, sk, lv, dead[0]); return true; }
     }
-    // heal
+    // heal (성역 for a hurt group)
     for (const { sk, lv } of this.enabledSkills(h, ['heal'])) {
       if (!this.canPay(h, sk, lv)) continue;
+      if (sk.kind === 'ground') {
+        if (this.grounds.some((g) => !g.done && g.owner === h.uid && g.sk.id === sk.id)) continue;
+        const hurt = this.aliveHeroes().filter((a) => a.hp / a.d.maxHp * 100 < h.hero.auto.healPct);
+        if (hurt.length < 2) continue;
+        const worst = hurt.reduce((a, b) => (a.hp / a.d.maxHp <= b.hp / b.d.maxHp ? a : b));
+        if (hurt.filter((a) => dist(a, worst) < 70).length < 2 || dist(worst, h) > 230) continue;
+        h.doing = `${sk.name} → ${worst.hero.name}`;
+        this.startSkill(h, sk, lv, worst);
+        return true;
+      }
       // first aid's 5 HP only matters to a fresh novice; past that it just eats a turn
       if (sk.id === 'first_aid' && 5 < h.d.maxHp * 0.05) continue;
       // battle priests and tanks keep swinging and heal in an emergency (themselves a bit earlier); healers and
@@ -1608,30 +1930,146 @@ export class World {
       }
       if (best) { h.doing = best === h ? `${sk.name} (자신)` : `${sk.name} → ${best.hero.name}`; this.startSkill(h, sk, lv, best); return true; }
     }
+    // cures and protective walls (safety wall, pneuma)
+    if (this.tryCure(h)) return true;
+    if (this.tryWard(h)) return true;
     // buffs (only when not being chased hard)
     const pressed = this.mobs.some((m) => m.target === h.uid && this.alive(m) && dist(m, h) < 40);
     if (pressed && h.hp < h.d.maxHp * 0.5) return false;
     for (const { sk, lv } of this.enabledSkills(h, ['buff'])) {
-      if (!this.canPay(h, sk, lv) || !sk.buff) continue;
-      const targets = sk.kind === 'selfBuff' ? [h] : this.aliveHeroes();
-      const need = targets.some((a) => {
-        const b = a.buffs.find((x) => x.id === sk.buff!.id);
-        return !b || b.until - this.time < 4000;
-      });
-      if (need) { h.doing = sk.name; this.startSkill(h, sk, lv, sk.kind === 'selfBuff' ? h : null); return true; }
+      if (!this.canPay(h, sk, lv) || !sk.buff || !this.usable(h, sk)) continue;
+      const bid = sk.buff.id;
+      const lacks = (a: HeroUnit) => {
+        const b = a.buffs.find((x) => x.id === bid);
+        return !b || b.until - this.time < 4000 || (b.shieldMax !== undefined && !((b.shield ?? 0) > 0)) || (bid === 'blessing' && this.hasBuff(a, 'curse'));
+      };
+      if (sk.buff.ally) {
+        const pick = this.allyFor(h, sk, lacks);
+        if (pick) { h.doing = pick === h ? sk.name : `${sk.name} → ${pick.hero.name}`; this.startSkill(h, sk, lv, pick); return true; }
+        continue;
+      }
+      if (!this.buffWanted(h, sk)) continue;
+      const targets = sk.kind === 'selfBuff' || !sk.buff.party ? [h] : this.aliveHeroes();
+      if (targets.some(lacks)) { h.doing = sk.name; this.startSkill(h, sk, lv, sk.kind === 'selfBuff' ? h : null); return true; }
     }
     return false;
   }
 
+  /** who gets a single-target ("friend") buff: kyrie on whoever is being hit, impositio / aspersio on the weapon users… */
+  private allyFor(h: HeroUnit, sk: SkillDef, lacks: (a: HeroUnit) => boolean): HeroUnit | undefined {
+    let list = this.aliveHeroes().filter((a) => dist(a, h) < 260 && lacks(a));
+    const physical = (a: HeroUnit) => { const r = this.roleOf(a); return r === 'tank' || r === 'melee' || r === 'ranged'; };
+    switch (sk.id) {
+      case 'kyrie': list = list.filter((a) => this.roleOf(a) === 'tank' || this.mobs.some((m) => this.alive(m) && m.target === a.uid)); break;
+      case 'impositio': list = list.filter(physical); break;
+      case 'aspersio': if (!this.holyHelps()) return undefined; list = list.filter((a) => physical(a) && (a.d.weaponElement !== 'holy' || a.buffs.some((b) => b.id === 'aspersio'))); break;
+      case 'suffragium': list = list.filter((a) => a !== h && this.roleOf(a) === 'caster'); break;
+    }
+    const score = (a: HeroUnit) => (sk.id === 'blessing' && this.hasBuff(a, 'curse') ? -1000 : 0) + (this.roleOf(a) === 'tank' ? -50 : 0) + dist(a, h) * 0.1;
+    return list.sort((a, b) => score(a) - score(b))[0];
+  }
+
+  /** the monsters here are weak to holy (undead, shadow…): worth a holy weapon */
+  private holyHelps(): boolean {
+    const els = this.pc.engaged.length ? this.pc.engaged.map((m) => this.mobElement(m)) : this.zone.mobs.map((e) => MONSTERS[e.id].element);
+    return els.length > 0 && els.filter((e) => elementMod('holy', e) > 1).length / els.length >= 0.5;
+  }
+
+  /** party / self buffs that only make sense in some fights */
+  private buffWanted(h: HeroUnit, sk: SkillDef): boolean {
+    switch (sk.id) {
+      case 'sacrament': {
+        const eng = this.pc.engaged;
+        if (!eng.length) return false;
+        const mod = (arm: Element) => eng.reduce((a, m) => a + elementMod(m.m.atkElement ?? 'neutral', arm), 0) / eng.length;
+        return mod('holy') < mod(h.d.armorElement) * 0.9;
+      }
+      case 'poison_react': return this.mobs.some((m) => this.alive(m) && m.target === h.uid && m.m.range < 60);
+      case 'sight_blaster': return this.pc.engaged.length > 0 || this.roleOf(h) === 'caster';
+    }
+    return true;
+  }
+
+  /** 치료 · 해독 · 해독 지연 · 상태 회복 */
+  private tryCure(h: HeroUnit): boolean {
+    for (const { sk, lv } of this.enabledSkills(h, ['support'])) {
+      if (sk.kind !== 'cure' || !this.canPay(h, sk, lv)) continue;
+      const need = (a: HeroUnit) => sk.id === 'cure' ? this.hasBuff(a, 'blind')
+        : sk.id === 'detoxify' ? a.poisonUntil > this.time
+        : sk.id === 'slow_poison' ? a.poisonUntil > this.time + 2000 && a.slowPoisonUntil <= this.time
+        : sk.id === 'status_recovery' ? this.hasBuff(a, 'curse') || this.hasBuff(a, 'blind') : false;
+      const a = this.aliveHeroes().find((x) => need(x) && dist(x, h) < 260);
+      if (a) { h.doing = `${sk.name} → ${a.hero.name}`; this.startSkill(h, sk, lv, a); return true; }
+    }
+    return false;
+  }
+
+  /** 수호벽 under a hero in melee trouble, 장막 under one being shot */
+  private tryWard(h: HeroUnit): boolean {
+    for (const { sk, lv } of this.enabledSkills(h, ['support'])) {
+      if (sk.kind !== 'ground' || !this.canPay(h, sk, lv)) continue;
+      const melee = sk.id !== 'pneuma';
+      const victim = this.aliveHeroes().find((a) => dist(a, h) < 230 && !this.inWard(a, melee) && (!melee || a.hp < a.d.maxHp * 0.75 || this.posOf(a) !== 'front')
+        && this.mobs.some((m) => this.alive(m) && m.target === a.uid && (melee
+          ? m.m.range < 4 * CELL && dist(m, a) < m.m.range + this.bodyR(m) + 20
+          : m.m.range >= 4 * CELL && dist(m, a) < m.m.range + 40)));
+      if (!victim) continue;
+      h.doing = `${sk.name} → ${victim.hero.name}`;
+      this.startSkill(h, sk, lv, victim);
+      return true;
+    }
+    return false;
+  }
+  /** standing in a safety wall (melee) or pneuma (ranged)? */
+  inWard(a: { x: number; y: number }, melee: boolean): GroundFx | undefined {
+    return this.grounds.find((g) => !g.done && (melee ? g.sk.id === 'safety_wall' || g.sk.id === 'pr_safety_wall' : g.sk.id === 'pneuma') && Math.hypot(g.x - a.x, g.y - a.y) <= g.r + 6);
+  }
+
   private tryProvoke(h: HeroUnit): boolean {
-    const lv = h.hero.skills.provoke ?? 0;
-    if (!lv || h.hero.auto.skills.provoke === false || this.roleOf(h) !== 'tank') return false;
-    const sk = SKILLS.provoke;
+    const e = this.enabledSkills(h, ['tank']).find((x) => x.sk.id === 'provoke');
+    if (!e || this.roleOf(h) !== 'tank') return false;
+    const { sk, lv } = e;
     if (!this.canPay(h, sk, lv)) return false;
-    const loose = this.mobs.find((m) => this.alive(m) && !this.shunned(m) && m.target !== null && m.target !== h.uid && this.heroUnit(m.target) && dist(m, h) < 180 && m.provokeUntil < this.time);
+    const loose = this.mobs.find((m) => this.targetable(m) && !this.shunned(m) && m.target !== null && m.target !== h.uid && this.heroUnit(m.target) && dist(m, h) < 180 && m.provokeUntil < this.time);
     if (!loose) return false;
     h.facing = loose.x >= h.x ? 1 : -1;
     this.startSkill(h, sk, lv, loose);
+    return true;
+  }
+
+  /** an area skill (by kind, or a damaging ground / trap) */
+  private isArea(sk: SkillDef) {
+    // napalm beat & co (role attack) are aimed at one target and splash; only aoe-role skills wait for a pack
+    return sk.auto === 'aoe' && (sk.kind === 'aoe' || sk.kind === 'selfAoe' || sk.kind === 'ground' || sk.kind === 'trap');
+  }
+  /** how many monsters an area skill aimed at t would catch */
+  private countArea(h: HeroUnit, t: MobUnit, sk: SkillDef, lv: number) {
+    const self = sk.kind === 'selfAoe';
+    const cx = self ? h.x : t.x, cy = self ? h.y : t.y, r = this.areaR(sk, lv);
+    let n = 0;
+    for (const m of this.mobs) {
+      if (!this.alive(m) || this.shunned(m) || (m.hiddenUntil > this.time && !sk.reveal)) continue;
+      if (sk.undeadOnly && !this.unholy(m)) continue;
+      if (sk.id === 'venom_dust' && !this.poisonable(m)) continue;
+      if (sk.id === 'spear_stab') { if (this.segDist(m, h.x, h.y, t.x + (t.x - h.x) * 0.3, t.y + (t.y - h.y) * 0.3) <= 20 + this.bodyR(m)) n++; continue; }
+      if (Math.hypot(m.x - cx, m.y - cy) <= r + this.bodyR(m) * 0.5) n++;
+    }
+    return n;
+  }
+  /** undead element or demon race: what magnus and sanctuary burn */
+  unholy(m: MobUnit) { return this.mobElement(m) === 'undead' || m.m.element === 'undead' || m.m.race === 'demon'; }
+  private poisonable(m: MobUnit) { return !m.m.boss && m.m.element !== 'undead' && m.m.race !== 'formless' && m.poisonUntil <= this.time; }
+
+  /** skill-specific conditions before the AI picks an attack */
+  private skillFits(h: HeroUnit, t: MobUnit, sk: SkillDef, lv: number): boolean {
+    const ownNear = (r: number) => this.grounds.some((g) => !g.done && g.owner === h.uid && g.sk.id === sk.id && dist(g, t) < r);
+    switch (sk.id) {
+      case 'turn_undead': return this.mobElement(t) === 'undead';
+      case 'charge_attack': return dist(h, t) > 3 * CELL + this.bodyR(t);
+      case 'venom_splasher': return t.poisonUntil > this.time && t.hp < t.maxHp * 0.75 && !t.m.boss;
+      case 'throw_stone': return !t.m.boss || t.hp > 50;
+    }
+    if (sk.kind === 'ground' || sk.kind === 'trap') return !ownNear(sk.kind === 'trap' ? 30 : this.areaR(sk, lv) * 0.6);
     return true;
   }
 
@@ -1639,41 +2077,46 @@ export class World {
     const tac = this.tactics(h).skills;
     // conserve: offensive skills only while SP ≥ 50% (heals/buffs/CC are separate)
     if (tac === 'conserve' && h.sp < h.d.maxSp * 0.5) return null;
-    const list = this.enabledSkills(h, ['attack', 'aoe']).filter(({ sk, lv }) => this.canPay(h, sk, lv));
-    // heal sears the undead (RO): offered as an attack while the target is undead-element
-    if (this.mobElement(t) === 'undead') {
-      for (const e of this.enabledSkills(h, ['heal'])) if (e.sk.kind === 'heal' && this.canPay(h, e.sk, e.lv)) list.push(e);
-    }
+    // heal sears the undead (RO): offered as an attack (at its slot's place) while the target is undead-element
+    const undead = this.mobElement(t) === 'undead';
+    const list = this.enabledSkills(h, ['attack', 'aoe', 'heal'])
+      .filter(({ sk, lv }) => (sk.auto !== 'heal' || (undead && sk.kind === 'heal')) && this.canPay(h, sk, lv) && this.usable(h, sk));
     if (!list.length) return null;
-    // don't waste skills on nearly-dead targets
     const est = this.estimateNormal(h, t);
-    if (t.hp <= est * 1.1 && !t.m.boss && tac !== 'aggressive') return null;
+    // don't waste single-target skills on nearly-dead targets
+    const nearlyDead = t.hp <= est * 1.1 && !t.m.boss && tac !== 'aggressive';
     // casters save area spells for real packs unless told to go all out
     const minAoe = tac === 'aggressive' ? 2 : this.roleOf(h) === 'caster' ? 3 : 2;
-    let best: { sk: SkillDef; lv: number } | null = null; let bv = 0;
+    const weakOk = h.d.ranged || CLASSES[h.hero.cls].ranged || tac === 'aggressive';
+    // 스킬 슬롯: the first slotted skill (left first) whose conditions hold
     for (const e of list) {
       const { sk, lv } = e;
-      let v: number;
-      if (sk.kind === 'aoe' || sk.kind === 'selfAoe') {
-        const cx = sk.kind === 'selfAoe' ? h.x : t.x, cy = sk.kind === 'selfAoe' ? h.y : t.y;
-        const n = this.mobs.filter((m) => this.alive(m) && !this.shunned(m) && Math.hypot(m.x - cx, m.y - cy) < (sk.radius ?? 60)).length;
-        if (n < minAoe) continue;
-        v = this.estimateSkill(h, t, sk, lv) * n;
-      } else {
-        v = this.estimateSkill(h, t, sk, lv);
+      if (!this.skillFits(h, t, sk, lv)) continue;
+      if (this.isArea(sk)) {
+        const n = this.countArea(h, t, sk, lv);
+        const need = sk.undeadOnly ? Math.min(minAoe, 2) : minAoe;
+        if (n < need && !(n >= 1 && (t.m.boss || t.danger) && sk.kind === 'ground')) continue;
+        return e;
       }
-      // weigh by sp efficiency so mages don't burn their pool on overkill
-      if (v > bv) { bv = v; best = e; }
+      if (nearlyDead) continue;
+      if (sk.kind !== 'heal' && !weakOk && this.estimateSkill(h, t, sk, lv) < est * 1.15) continue;
+      return e;
     }
-    if (best && bv < est * 1.15 && !h.d.ranged && !CLASSES[h.hero.cls].ranged && tac !== 'aggressive') return null;
-    return best;
+    return null;
   }
 
   private estimateNormal(h: HeroUnit, t: MobUnit) {
     const d = h.d;
     const el = elementMod(d.weaponElement, this.mobElement(t));
-    const avg = d.statusAtk + d.watk * 0.9 * sizeMod(d.wtype, t.m.size) + d.ammoAtk + d.bonusAtk;
-    return Math.max(1, avg * el * (100 - t.m.def) / 100 + d.refineAtk);
+    const avg = d.statusAtk + d.watk * 0.9 * this.sizeOf(h, d.wtype, t) + d.ammoAtk + d.bonusAtk;
+    return Math.max(1, avg * el * (100 - t.m.def) / 100 + (d.refineAtk + d.masteryAtk + (d.b.raceAtk?.[t.m.race] ?? 0)) * el);
+  }
+
+  /** the weapon's size modifier — 무기 완벽화 ignores it, a mounted spear hits medium monsters fully */
+  private sizeOf(h: HeroUnit, w: WeaponType, t: MobUnit) {
+    if (h.d.b.ignoreSize) return 1;
+    if (w === 'spear' && h.d.b.mountSpear && t.m.size === 'medium') return 1;
+    return sizeMod(w, t.m.size);
   }
 
   private healAmount(h: HeroUnit, lv: number) {
@@ -1686,27 +2129,146 @@ export class World {
 
   private estimateSkill(h: HeroUnit, t: MobUnit, sk: SkillDef, lv: number) {
     if (sk.kind === 'heal') return this.healDamage(h, t, lv);
-    const hits = sk.bySize ? (t.m.size === 'small' ? 1 : t.m.size === 'medium' ? 2 : 3) : sk.hits ? sk.hits(lv) : 1;
+    if (sk.id === 'turn_undead') {
+      const c = this.turnChance(h, t, lv);
+      return c * t.hp + (1 - c) * (h.hero.baseLv + h.d.total.int + lv * 10) * elementMod('holy', this.mobElement(t));
+    }
+    const hits = sk.bySize ? (t.m.size === 'small' ? 1 : t.m.size === 'medium' ? 2 : 3) : sk.id === 'water_ball' ? this.waterBalls(lv) : sk.hits ? sk.hits(lv) : 1;
     if (sk.fixed) return sk.fixed(lv, this.fixedCtx(h)) * hits * elementMod(sk.element ?? 'neutral', this.mobElement(t));
-    const mult = (this.skMult(h, sk, lv)) / 100;
+    let mult = this.skMult(h, sk, lv) / 100;
+    if (sk.id === 'charge_attack') mult = Math.min(5, 1 + Math.floor(dist(h, t) / (3 * CELL)));
     const el = sk.element ?? h.d.weaponElement;
     const em = elementMod(el, this.mobElement(t));
     if (sk.magic) {
       const avg = (h.d.matkMin + h.d.matkMax) / 2;
       let v = avg * mult * hits * em * (100 - t.m.mdef) / 100;
-      if (sk.id === 'soul_strike' && t.m.race === 'undead') v *= 1 + lv * 0.05;
+      if (sk.id === 'soul_strike' && this.mobElement(t) === 'undead') v *= 1 + lv * 0.05;
       return v;
     }
     const d = h.d;
-    const avg = d.statusAtk + d.watk * 0.9 * sizeMod(d.wtype, t.m.size) + d.ammoAtk + d.bonusAtk;
-    return Math.max(1, avg * mult * hits * em * (100 - t.m.def) / 100);
+    const avg = d.statusAtk + d.watk * 0.9 * this.sizeOf(h, d.wtype, t) + d.ammoAtk + d.bonusAtk;
+    return Math.max(1, avg * mult * hits * em * (100 - t.m.def) / 100 + (d.masteryAtk + d.refineAtk) * hits * em);
   }
 
-  private mobElement(m: MobUnit): Element { return m.frozenUntil > this.time ? 'water' : m.m.element; }
+  private mobElement(m: MobUnit): Element { return m.frozenUntil > this.time ? 'water' : m.stoneUntil > this.time ? 'earth' : m.m.element; }
+
+  /** 정화: kill chance (RO pre-re), 0..0.7 — bosses never */
+  private turnChance(h: HeroUnit, t: MobUnit, lv: number) {
+    if (t.m.boss || this.mobElement(t) !== 'undead') return 0;
+    const c = (lv * 20 + h.d.total.luk + h.d.total.int + h.hero.baseLv + (1 - t.hp / t.maxHp) * 200) / 10;
+    return Math.min(70, c) / 100;
+  }
+  /** 물의 구: RO needs water cells — full count on wet maps, a single ball elsewhere */
+  private waterBalls(lv: number) { return this.wet() ? [1, 8, 8, 24, 24][lv - 1] : 1; }
+  private wetCache: { id: string; v: boolean } | null = null;
+  wet(): boolean {
+    if (this.wetCache?.id !== this.zone.id) this.wetCache = { id: this.zone.id, v: /호수|해변|늪|수로|등대|난파|가라앉|산호|바다|항구|해저|폭포|강가|수도원|샘|빙하/.test(this.zone.name) };
+    return this.wetCache.v;
+  }
+
+  /** distance from a point to the segment a→b */
+  private segDist(p: { x: number; y: number }, ax: number, ay: number, bx: number, by: number) {
+    const dx = bx - ax, dy = by - ay, L2 = dx * dx + dy * dy || 1;
+    const k = clamp(((p.x - ax) * dx + (p.y - ay) * dy) / L2, 0, 1);
+    return Math.hypot(ax + dx * k - p.x, ay + dy * k - p.y);
+  }
+
+  /** knock a monster back `cells` away from (fx, fy): bosses, immobile and danger monsters stand firm */
+  knock(m: MobUnit, fx: number, fy: number, cells: number) {
+    if (!this.alive(m) || m.m.boss || m.m.immobile || m.danger || cells <= 0) return;
+    let dx = m.x - fx, dy = m.y - fy, d = Math.hypot(dx, dy);
+    if (d < 1) { const a = this.rng() * Math.PI * 2; dx = Math.cos(a); dy = Math.sin(a); d = 1; }
+    m.x = clamp(m.x + dx / d * cells * CELL, 40, this.zone.w - 40);
+    m.y = clamp(m.y + dy / d * cells * CELL * 0.8, 80, this.zone.h - 40);
+    m.charge = null; m.dest = null;
+  }
+
+  // ───────────────────────────── party utilities: teleport, warp portal
+  /** 순간이동 Lv1: when nothing is in reach, the whole party blinks next to a monster elsewhere on the map */
+  private tryTeleport(best: MobUnit | undefined): boolean {
+    if (this.time < this.teleAt || this.rift) return false;
+    const caster = this.aliveHeroes().find((x) => (x.hero.skillSlots ?? []).includes('teleport') && (x.hero.skills.teleport ?? 0) > 0 && !x.cast && this.time >= x.lockUntil
+      && this.canPay(x, SKILLS.teleport, x.hero.skills.teleport));
+    if (!caster) return false;
+    const pool = this.mobs.filter((m) => this.targetable(m) && !this.shunned(m) && !this.pc.engaged.includes(m) && (!this.pc.dangers.length || !this.pc.dangers.some((d) => dist(d, m) < 260)));
+    const dest = best ?? pool[Math.floor(this.rng() * pool.length)];
+    if (!dest) return false;
+    this.teleAt = this.time + 6000;
+    caster.sp -= SKILLS.teleport.sp!(caster.hero.skills.teleport);
+    this.partyBlink(dest.x + (this.rng() < 0.5 ? -1 : 1) * 110, dest.y + 20, `${caster.hero.name}: 순간이동!`);
+    return true;
+  }
+  /** move the whole living party to (x, y) at once (teleport / warp effects at both ends) */
+  private partyBlink(x: number, y: number, text: string) {
+    x = clamp(x, 60, this.zone.w - 60); y = clamp(y, 100, this.zone.h - 50);
+    this.heroes.forEach((h, i) => {
+      if (h.state === 'dead') return;
+      this.emit({ t: 'skill', fx: 'teleport', from: h.uid, x: h.x, y: h.y, lv: 1 });
+      h.x = x - i * 20; h.y = y + (i % 2 ? 16 : -10);
+      h.target = null; h.cast = null; h.sitting = false;
+      this.emit({ t: 'skill', fx: 'teleport', from: h.uid, to: h.uid, x: h.x, y: h.y, lv: 1 });
+    });
+    for (const m of this.mobs) if (m.target !== null && this.heroUnit(m.target)) { m.target = null; m.provokeUntil = 0; }
+    this.run = null;
+    this.log(text, '#c0e0ff');
+    this.sound('buff');
+  }
+  /** 순간이동 Lv2: a danger monster right on top of the party — blink away instead of running */
+  private tryTeleportAway(threat: MobUnit): boolean {
+    if (this.time < this.teleAt || this.rift) return false;
+    const caster = this.aliveHeroes().find((x) => (x.hero.skillSlots ?? []).includes('teleport') && (x.hero.skills.teleport ?? 0) >= 2 && !x.cast
+      && this.canPay(x, SKILLS.teleport, 2));
+    if (!caster) return false;
+    const lead = this.leader();
+    if (!lead) return false;
+    const p = this.farSpot(lead, threat);
+    this.teleAt = this.time + 6000;
+    caster.sp -= SKILLS.teleport.sp!(2);
+    this.partyBlink(p.x, p.y, `${caster.hero.name}: ${threat.m.name}을(를) 순간이동으로 따돌렸다!`);
+    return true;
+  }
+  /** 차원문: out of HP potions on a hunt → warp to town, restock the quick slots, (Lv 2+) warp back */
+  private tryWarp() {
+    if (this.time < this.warpAt || this.zone.id === 'town' || this.rift || this.wipeUntil) return;
+    this.warpAt = this.time + 2000;
+    const q = this.s.quick.filter((x) => x.id && x.auto && quickTrigger(x.id) === 'hp');
+    if (!q.length || q.some((x) => (this.s.stacks[x.id!] ?? 0) > 0)) return;
+    const caster = this.aliveHeroes().find((x) => (x.hero.skillSlots ?? []).includes('warp_portal') && (x.hero.skills.warp_portal ?? 0) > 0 && !x.cast
+      && this.canPay(x, SKILLS.warp_portal, x.hero.skills.warp_portal));
+    if (!caster) return;
+    const lv = caster.hero.skills.warp_portal;
+    caster.sp -= SKILLS.warp_portal.sp!(lv);
+    removeStack(this.s, 'k_bluegem');
+    const back = this.zone.id;
+    this.emit({ t: 'skill', fx: 'warp', from: caster.uid, x: caster.x, y: caster.y, lv });
+    this.log(`${caster.hero.name}: 차원문 — 물약을 채우러 마을로!`, '#a0c8ff');
+    this.setZone('town');
+    this.onTravel('town');
+    // restock every auto quick-slot consumable the shops sell, up to 30
+    const sold = new Set(Object.values(SHOPS).flatMap((x) => x.items));
+    const bought: string[] = [];
+    for (const slot of this.s.quick) {
+      if (!slot.id || !slot.auto || !sold.has(slot.id)) continue;
+      const want = 30 - (this.s.stacks[slot.id] ?? 0);
+      let n = 0;
+      for (let i = 0; i < want && !buy(this.s, slot.id, 1); i++) n++;
+      if (n) bought.push(`${ITEMS[slot.id].name} ×${n}`);
+    }
+    if (bought.length) this.log(`마을에서 ${bought.join(', ')} 구입`, '#c8e8ff');
+    this.onPersist();
+    if (lv >= 2) this.after(2500, () => {
+      if (this.zone.id !== 'town') return;
+      this.log('차원문으로 기억해 둔 사냥터로 돌아갑니다.', '#a0c8ff');
+      this.setZone(back);
+      this.onTravel(back);
+    });
+  }
 
   // ───────────────────────────── actions
   private normalAttack(h: HeroUnit, t: MobUnit) {
     const d = h.d;
+    // a cloaked assassin's swing gives it away
+    if (this.hasBuff(h, 'cloak')) this.unhide(h);
     this.setState(h, 'attack');
     h.atkReady = this.time + d.delay;
     h.lockUntil = this.time + Math.min(320, d.delay * 0.8);
@@ -1726,13 +2288,16 @@ export class World {
     }
     this.sound('swing');
     this.after(MELEE_CONTACT, () => {
-      const r = this.resolvePhys(h, t, 100, d.weaponElement, 0, true, d.wtype === 'mace' || d.wtype === 'staff' || d.wtype === 'none' ? 'blunt' : 'slash');
+      // 이도류: each hand at its mastery %, the left one right after
+      const lh = d.lh;
+      const r = this.resolvePhys(h, t, lh ? lh.rpct : 100, d.weaponElement, 0, true, d.wtype === 'mace' || d.wtype === 'staff' || d.wtype === 'none' ? 'blunt' : 'slash');
       this.afterNormalHit(h, t, r); // M3: a bare-handed falconer's fists call the falcon too
       // double attack
       const da = h.hero.skills.double_attack ?? 0;
       if (r && da && d.wtype === 'dagger' && this.rng() < da * 0.05 && this.alive(t)) {
-        this.after(110, () => this.resolvePhys(h, t, 100, d.weaponElement, 0, false, 'slash', 1));
+        this.after(110, () => this.resolvePhys(h, t, lh ? lh.rpct : 100, d.weaponElement, 0, false, 'slash', 1));
       }
+      if (lh) this.after(80, () => this.resolvePhys(h, t, lh.pct, d.b.weaponElement ?? lh.element, 0, true, 'slash', 2, 0, { lh: true }));
     });
   }
 
@@ -1745,11 +2310,11 @@ export class World {
     if (b.selfCurse && this.rng() * 100 < b.selfCurse) this.curseHero(h);
   }
 
-  /** hunter falcon proc on normal attacks, any weapon or none (chance LUK/3 + falcon_eyes% + gear) */
+  /** hunter falcon proc on normal attacks, any weapon or none: LUK×0.3% (RO) + gear */
   private autoBlitz(h: HeroUnit, t: MobUnit) {
     const eyes = h.hero.skills.falcon_eyes ?? 0, blitz = h.hero.skills.blitz_beat ?? 0;
     if (!eyes || !blitz || !this.alive(t)) return;
-    if (this.rng() * 100 >= h.d.total.luk / 3 + eyes + (h.d.b.autoBlitzPct ?? 0)) return;
+    if (this.rng() * 100 >= h.d.total.luk * 0.3 + (h.d.b.autoBlitzPct ?? 0)) return;
     const sk = SKILLS.blitz_beat;
     const hits = Math.min(blitz, Math.floor((h.hero.jobLv + 9) / 10)) + (h.d.b.blitzHits ?? 0);
     this.falconStrike(h, t, sk, blitz, hits);
@@ -1770,14 +2335,30 @@ export class World {
   }
 
   /** a status from gear (no skill roll: the proc already rolled) */
-  private inflict(t: MobUnit, kind: Exclude<StatusKind, 'curse'>, dur: number) {
-    if (kind === 'stun') { t.stunUntil = this.time + dur; this.emit({ t: 'status', uid: t.uid, text: '기절!', color: '#ffe080' }); }
-    else if (kind === 'freeze') { if (t.m.element === 'undead') return; t.frozenUntil = this.time + dur; this.emit({ t: 'status', uid: t.uid, text: '빙결!', color: '#9fe8ff' }); }
-    else if (kind === 'blind') { t.blindUntil = this.time + dur; this.emit({ t: 'status', uid: t.uid, text: '실명', color: '#d8c080' }); }
-    else if (t.m.element !== 'undead' && t.m.race !== 'formless') {
-      t.poisonUntil = this.time + dur; t.poisonNext = this.time + 1000;
-      t.poisonDmg = Math.max(2, Math.floor(t.maxHp * 0.015));
-      this.emit({ t: 'status', uid: t.uid, text: '중독', color: '#c080ff' });
+  private inflict(t: MobUnit, kind: 'stun' | 'freeze' | 'poison' | 'blind', dur: number) { this.setStatus(t, kind, dur); }
+
+  /** put a status on a monster (immunities by element and race; bosses are kept out by the callers) */
+  private setStatus(t: MobUnit, kind: SkStatus | 'poison', dur: number) {
+    if (!this.alive(t)) return;
+    const until = this.time + dur;
+    switch (kind) {
+      case 'stun': t.stunUntil = Math.max(t.stunUntil, until); this.emit({ t: 'status', uid: t.uid, text: '기절!', color: '#ffe080' }); return;
+      case 'freeze':
+        if (t.m.element === 'undead') return;
+        t.frozenUntil = Math.max(t.frozenUntil, until); t.breakHold = Math.max(t.breakHold, this.time + 60);
+        this.emit({ t: 'status', uid: t.uid, text: '빙결!', color: '#9fe8ff' }); return;
+      case 'stone':
+        if (t.m.element === 'undead') return;
+        t.stoneUntil = Math.max(t.stoneUntil, until); t.breakHold = Math.max(t.breakHold, this.time + 60);
+        this.emit({ t: 'status', uid: t.uid, text: '석화!', color: '#c8c0a8' }); return;
+      case 'sleep': t.sleepUntil = Math.max(t.sleepUntil, until); this.emit({ t: 'status', uid: t.uid, text: '수면', color: '#c0b0ff' }); return;
+      case 'silence': t.silenceUntil = Math.max(t.silenceUntil, until); this.emit({ t: 'status', uid: t.uid, text: '침묵', color: '#c0c0ff' }); return;
+      case 'blind': t.blindUntil = Math.max(t.blindUntil, until); this.emit({ t: 'status', uid: t.uid, text: '실명', color: '#d8c080' }); return;
+      case 'poison':
+        if (t.m.element === 'undead' || t.m.race === 'formless') return;
+        t.poisonUntil = until; t.poisonNext = this.time + 1000;
+        t.poisonDmg = Math.max(2, Math.floor(t.maxHp * 0.015));
+        this.emit({ t: 'status', uid: t.uid, text: '중독', color: '#c080ff' });
     }
   }
 
@@ -1808,7 +2389,7 @@ export class World {
   }
 
   private fixedCtx(h: HeroUnit): FixedCtx {
-    return { dex: h.d.total.dex, int: h.d.total.int, luk: h.d.total.luk, baseLv: h.hero.baseLv, skills: h.hero.skills };
+    return { dex: h.d.total.dex, int: h.d.total.int, luk: h.d.total.luk, baseLv: h.hero.baseLv, skills: h.hero.skills, matk: (h.d.matkMin + h.d.matkMax) / 2 };
   }
 
   private falconStrike(h: HeroUnit, t: MobUnit, sk: SkillDef, lv: number, hits: number) {
@@ -1816,7 +2397,8 @@ export class World {
     this.emit({ t: 'shot', from: h.uid, to: t.uid, kind: 'falcon', dur: fly, element: 'neutral' });
     this.emit({ t: 'status', uid: h.uid, text: '블리츠 비트!', color: '#ffd080' });
     let total = 0;
-    const per = (sk.fixed!(lv, this.fixedCtx(h)) + (h.hero.skills.steel_crow ?? 0) * 12) * (1 + (h.d.b.skillDmg?.blitz_beat ?? 0) / 100);
+    // (DEX/10 + INT/2 + steel crow×3 + 40) × 2 per hit (RO) — steel crow is inside the formula
+    const per = sk.fixed!(lv, this.fixedCtx(h)) * (1 + (h.d.b.skillDmg?.blitz_beat ?? 0) / 100);
     // M4: the falcon's dive hits everything around the target (RO's 3×3)
     const r = 60 + (h.d.b.blitzRadius ?? 0);
     for (let i = 0; i < hits; i++) {
@@ -1824,7 +2406,7 @@ export class World {
         if (!this.alive(t)) return;
         const cx = t.x, cy = t.y;
         total += this.dealFixed(h, t, per, 'neutral', i, 'claw');
-        for (const m of this.mobs) if (m !== t && this.alive(m) && !this.shunned(m) && Math.hypot(m.x - cx, m.y - cy) <= r) this.dealFixed(h, m, per, 'neutral', i, 'claw');
+        for (const m of this.mobs) if (m !== t && this.targetable(m) && !this.shunned(m) && Math.hypot(m.x - cx, m.y - cy) <= r) this.dealFixed(h, m, per, 'neutral', i, 'claw');
         if (i === hits - 1 && hits > 1 && total > 0) this.emit({ t: 'dmg', uid: t.uid, n: total, kind: 'total' });
       });
     }
@@ -1844,25 +2426,38 @@ export class World {
     if (!sk.status || !this.alive(t) || t.m.boss) return;
     const st = sk.status(lv);
     if (this.rng() * 100 >= st.chance) return;
-    if (st.kind === 'stun') { t.stunUntil = this.time + st.dur; this.emit({ t: 'status', uid: t.uid, text: sk.id === 'ankle_snare' ? '속박!' : '기절!', color: '#ffe080' }); }
-    else if (st.kind === 'freeze') { if (t.m.element === 'undead') return; t.frozenUntil = this.time + st.dur; this.emit({ t: 'status', uid: t.uid, text: '빙결!', color: '#9fe8ff' }); }
-    else { t.blindUntil = this.time + st.dur; this.emit({ t: 'status', uid: t.uid, text: '실명', color: '#d8c080' }); }
+    if (sk.id === 'ankle_snare') { t.stunUntil = this.time + st.dur; this.emit({ t: 'status', uid: t.uid, text: '속박!', color: '#ffe080' }); return; }
+    this.setStatus(t, st.kind, st.dur);
   }
+
+  /** 영원의 율법 on this target: every hit of the skill being released doubles */
+  private lexPacket(t: MobUnit | undefined, span: number) {
+    if (!t || !t.lex) return;
+    t.lex = false;
+    t.lexUntil = this.time + span;
+    this.emit({ t: 'status', uid: t.uid, text: '율법 ×2', color: '#ff90b0' });
+  }
+  /** the rest of this skill lands while it is still frozen / stoned (RO: one skill is one damage packet) */
+  private holdBreak(t: MobUnit | undefined, span: number) { if (t) t.breakHold = Math.max(t.breakHold, this.time + span); }
 
   /** whether the last resolvePhys was a critical (crit procs) */
   private lastCrit = false;
 
-  /** returns true when it hit */
-  private resolvePhys(h: HeroUnit, t: MobUnit, mult: number, el: Element, hitBonus: number, canCrit: boolean, style: 'slash' | 'blunt' | 'pierce' | 'claw', idx = 0, flat = 0): boolean {
+  /** returns true when it hit. o.lh = the off-hand weapon (이도류), forceCrit / ignoreDef (auto counter), sure (no FLEE roll) */
+  private resolvePhys(h: HeroUnit, t: MobUnit, mult: number, el: Element, hitBonus: number, canCrit: boolean, style: 'slash' | 'blunt' | 'pierce' | 'claw', idx = 0, flat = 0,
+    o: { lh?: boolean; forceCrit?: boolean; ignoreDef?: boolean; sure?: boolean } = {}): boolean {
     if (!this.alive(t) || h.state === 'dead') return false;
     const d = h.d;
-    const mobFlee = t.m.lv + t.m.agi;
+    const w = o.lh && d.lh ? d.lh : null;
+    // 속도 감소 / 늪 lower the monster's AGI (its FLEE)
+    const agi = Math.max(0, (t.m.agi - (t.agiDownUntil > this.time ? t.agiDown : 0)) * (1 - (t.quagUntil > this.time ? t.quag : 0)));
+    const mobFlee = t.m.lv + agi;
     const critRes = t.m.critRes ?? (t.m.boss === 'mvp' ? 0.5 : t.m.boss ? 0.25 : 0);
     const critChance = canCrit ? Math.max(0, d.crit - t.m.luk * 0.2) * (1 - critRes) : 0;
-    const crit = this.rng() * 100 < critChance;
+    const crit = !!o.forceCrit || this.rng() * 100 < critChance;
     this.lastCrit = crit;
-    const frozen = t.frozenUntil > this.time;
-    if (!crit && !frozen) {
+    const frozen = t.frozenUntil > this.time, stoned = t.stoneUntil > this.time;
+    if (!crit && !frozen && !stoned && t.sleepUntil <= this.time && !o.sure) {
       const rate = clamp(80 + d.hit + (this.rift?.mods.heroHit ?? 0) - mobFlee, 5, 100) + hitBonus; // RO: enough HIT is a sure hit
       if (this.rng() * 100 >= rate) {
         this.emit({ t: 'dmg', uid: t.uid, n: 0, kind: 'miss', i: idx });
@@ -1871,11 +2466,11 @@ export class World {
         return false;
       }
     }
-    const wmax = d.watk;
-    const wmin = Math.min(wmax, Math.floor(d.total.dex * (0.8 + 0.2 * Math.max(1, d.wlv))));
+    const wmax = w ? w.watk : d.watk;
+    const wmin = Math.min(wmax, Math.floor(d.total.dex * (0.8 + 0.2 * Math.max(1, w ? w.wlv : d.wlv))));
     const wroll = crit ? wmax : wmin + Math.floor(this.rng() * (wmax - wmin + 1));
     const b = d.b;
-    let dmg = d.statusAtk + Math.floor(wroll * (b.ignoreSize ? 1 : sizeMod(d.wtype, t.m.size))) + d.ammoAtk + d.bonusAtk;
+    let dmg = d.statusAtk + Math.floor(wroll * this.sizeOf(h, w ? w.wtype : d.wtype, t)) + (w ? 0 : d.ammoAtk) + d.bonusAtk;
     dmg = dmg * mult / 100;
     dmg *= 1 + (b.atkPct ?? 0) / 100;
     const mel = this.mobElement(t);
@@ -1883,19 +2478,22 @@ export class World {
     dmg *= 1 + (b.sizeDmg?.[t.m.size] ?? 0) / 100;
     dmg *= 1 + (b.eleDmg?.[mel] ?? 0) / 100;
     if (d.ranged) dmg *= 1 + (b.rangedPct ?? 0) / 100;
-    if (t.m.boss) dmg *= 1;
     const em = elementMod(el, mel);
     dmg *= em;
     if (h.buffs.some((x) => x.id === 'magnum' && x.until > this.time)) dmg *= 1 + 0.2 * elementMod('fire', mel);
     if (crit) {
       dmg *= 1.4 * (1 + (b.critDmgPct ?? 0) / 100);
-    } else {
+    } else if (!o.ignoreDef) {
       let hard = t.m.def;
       if (t.provokeUntil > this.time) hard *= 1 - t.provokeDef;
-      if (frozen) hard *= 0.5;
+      if (frozen || stoned) hard *= 0.5;
+      if (t.poisonUntil > this.time) hard *= 0.75; // RO: poison −25% DEF
+      if (t.crucis) hard *= 1 - t.crucis;         // 성호
       dmg = dmg * (100 - hard) / 100 - Math.floor(t.m.lv / 2 + this.rng() * t.m.lv / 4);
     }
-    dmg += (d.refineAtk + (d.overRefine ? Math.floor(this.rng() * d.overRefine) : 0)) * em + flat * em;
+    // after DEF: refine, mastery (sword / spear / katar / mace mastery) and race flats (demon bane, beast bane)
+    const refine = w ? w.refineAtk + (w.overRefine ? Math.floor(this.rng() * w.overRefine) : 0) : d.refineAtk + (d.overRefine ? Math.floor(this.rng() * d.overRefine) : 0);
+    dmg += (refine + (w ? 0 : d.masteryAtk) + (b.raceAtk?.[t.m.race] ?? 0)) * em + flat * em;
     let n = Math.floor(dmg);
     if (em <= 0) n = 0; else n = Math.max(1, n);
     this.dealToMob(h, t, n, crit ? 'crit' : 'normal', idx);
@@ -1917,9 +2515,9 @@ export class World {
     const em = elementMod(el, mel);
     dmg *= em;
     dmg *= 1 + (d.b.raceDmg?.[t.m.race] ?? 0) / 100;
-    if (sk?.id === 'soul_strike' && t.m.race === 'undead') dmg *= 1 + lv * 0.05;
+    if (sk?.id === 'soul_strike' && (mel === 'undead' || t.m.race === 'undead')) dmg *= 1 + lv * 0.05;
     if (sk?.vsUndead && (t.m.race === 'undead' || t.m.race === 'demon')) dmg *= sk.vsUndead;
-    const mdef = t.m.mdef * (t.frozenUntil > this.time ? 1.25 : 1);
+    const mdef = t.m.mdef * (t.frozenUntil > this.time || t.stoneUntil > this.time ? 1.25 : 1);
     dmg = dmg * (100 - Math.min(90, mdef)) / 100 - Math.floor(t.m.lv / 3);
     let n = Math.floor(dmg);
     if (em <= 0) n = 0; else n = Math.max(1, n);
@@ -1938,18 +2536,26 @@ export class World {
   private dealToMob(h: HeroUnit, t: MobUnit, n: number, kind: DmgKind, idx: number) {
     // 균열 수호막: the guardian shrugs off 90% while its adds stand
     if (n > 0 && this.rift?.barrier && t.uid === this.rift.guardian) n = Math.max(1, Math.floor(n * 0.1));
+    // 영원의 율법: the next damage (every hit of one skill) doubles
+    if (n > 0) {
+      if (t.lexUntil > this.time) n *= 2;
+      else if (t.lex) { t.lex = false; n *= 2; this.emit({ t: 'status', uid: t.uid, text: '율법 ×2', color: '#ff90b0' }); }
+    }
     this.emit({ t: 'dmg', uid: t.uid, n, kind: n === 0 ? 'zero' : kind, i: idx });
     t.hurtAt = this.time;
     t.dmgBy[h.uid] = (t.dmgBy[h.uid] ?? 0) + n;
     this.aggro(t, h);
     if (n <= 0) return;
+    // damage wakes a sleeper and (after the skill that froze or hit it) breaks ice and stone
+    t.sleepUntil = 0;
+    if (this.time > t.breakHold && (t.frozenUntil > this.time || t.stoneUntil > this.time)) { t.frozenUntil = 0; t.stoneUntil = 0; }
     t.dmgAt = this.time;
     t.hp -= n;
     if (t.hp <= 0) this.killMob(t, h);
   }
 
   private aggro(t: MobUnit, h: HeroUnit) {
-    if (t.provokeUntil > this.time) return;
+    if (t.provokeUntil > this.time || !this.sees(t, h)) return;
     if (t.target === null || !this.alive(this.heroUnit(t.target))) { t.target = h.uid; t.chaseSince = this.time; }
   }
 
@@ -1977,6 +2583,8 @@ export class World {
     h.sitting = false;
     const castBase = sk.cast ? sk.cast(lv) : 0;
     const cast = castBase * h.d.castMul;
+    // 기도: the next spell's cast is shorter, then it's spent
+    if (castBase > 0 && this.hasBuff(h, 'suffragium')) { h.buffs = h.buffs.filter((b) => b.id !== 'suffragium'); this.refresh(h); }
     const tx = target ? target.x : h.x, ty = target ? target.y : h.y;
     if (target) h.facing = target.x >= h.x ? 1 : (target === h ? h.facing : -1);
     const info: CastInfo = { sk, lv, target: target ? target.uid : null, x: tx, y: ty, start: this.time, end: this.time + cast };
@@ -1997,20 +2605,25 @@ export class World {
     if (!info) { h.cast = null; this.emit({ t: 'castEnd', uid: h.uid }); }
     const { sk, lv } = c;
     if (!free) {
-      if (!this.canAfford(h, sk, lv)) {
+      if (!this.canAfford(h, sk, lv) || !this.usable(h, sk)) {
         this.setState(h, 'idle');
         return;
       }
       if (sk.sp) h.sp -= sk.sp(lv);
       if (sk.hpCost) h.hp -= sk.hpCost(lv);
       if (sk.zeny) { this.s.zeny -= this.zenyCost(h, sk, lv); this.onPersist(); }
+      // catalysts (stone curse from Lv 6 only pays on success)
+      const cat = sk.catalyst;
+      if (cat && (!cat.from || lv >= cat.from) && !(sk.id === 'stone_curse' && lv >= 6)) { removeStack(this.s, cat.id, cat.n); this.onPersist(); }
       if (sk.cd) h.cds[sk.id] = this.time + sk.cd(lv);
       const delay = sk.delay ? sk.delay(lv) : 300;
       h.lockUntil = this.time + delay;
       h.atkReady = Math.max(h.atkReady, this.time + Math.min(delay, h.d.delay));
-      this.setState(h, sk.magic || sk.kind === 'heal' || sk.kind === 'buff' || sk.kind === 'selfBuff' ? 'cast' : 'attack');
+      this.setState(h, sk.magic || sk.kind === 'heal' || sk.kind === 'buff' || sk.kind === 'selfBuff' || sk.kind === 'ground' || sk.kind === 'cure' ? 'cast' : 'attack');
       this.stateHold(h, Math.min(delay, 450));
     }
+    // a cloaked assassin shows itself when it acts — except grimtooth (RO)
+    if (sk.id !== 'grimtooth' && sk.id !== 'cloaking' && this.hasBuff(h, 'cloak')) this.unhide(h);
     this.emit({ t: 'status', uid: h.uid, text: sk.name + '!', color: '#fff6c0' });
     const tu = this.unit(c.target);
     const tm = tu?.kind === 'mob' ? tu : undefined;
@@ -2019,20 +2632,34 @@ export class World {
     switch (sk.kind) {
       case 'melee': {
         if (!tm || !this.alive(tm)) return;
+        let mult = this.skMult(h, sk, lv);
+        if (sk.id === 'charge_attack') {
+          // 돌격: dash to the target; 3 cells of run-up add 100% each (to 500%)
+          const d0 = dist(h, tm);
+          mult = Math.min(500, 100 + 100 * Math.floor(d0 / (3 * CELL))) * (mult / 100);
+          const dx = h.x - tm.x, dy = h.y - tm.y, dd = Math.hypot(dx, dy) || 1, off = this.bodyR(tm) + 14;
+          this.emit({ t: 'skill', fx: 'teleport', from: h.uid, x: h.x, y: h.y, lv });
+          h.x = clamp(tm.x + dx / dd * off, 24, this.zone.w - 24); h.y = clamp(tm.y + dy / dd * off, 70, this.zone.h - 24);
+        }
         // the skill's impact effect bursts when the weapon arrives, not when the swing starts
         this.after(SKILL_CONTACT - 20, () => { if (this.alive(tm)) this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm.uid, x: tm.x, y: tm.y, lv, element: el }); });
         const mhits = sk.bySize ? (tm.m.size === 'small' ? 1 : tm.m.size === 'medium' ? 2 : 3) : sk.hits ? sk.hits(lv) : 1;
+        const gap = sk.id === 'sonic_blow' ? 70 : 120;
+        this.lexPacket(tm, SKILL_CONTACT + mhits * gap + 100);
+        this.holdBreak(tm, SKILL_CONTACT + mhits * gap + 100);
+        const hb = (sk.hitBonus ? sk.hitBonus(lv) : 0) + (sk.id === 'sonic_blow' && h.hero.skills.sonic_accel ? 50 : 0);
         if (mhits > 1) {
           let total = 0;
           for (let i = 0; i < mhits; i++) {
-            this.after(SKILL_CONTACT + i * (sk.id === 'sonic_blow' ? 70 : 120), () => {
+            this.after(SKILL_CONTACT + i * gap, () => {
               const before = tm.hp;
-              this.resolvePhys(h, tm, this.skMult(h, sk, lv), el, sk.hitBonus ? sk.hitBonus(lv) : 0, false, sk.id === 'pierce' ? 'pierce' : 'slash', i);
+              this.resolvePhys(h, tm, mult, el, hb, false, sk.id === 'pierce' ? 'pierce' : 'slash', i);
               total += Math.max(0, before - Math.max(0, tm.hp));
-              if (i === mhits - 1 && total > 0) {
-                this.emit({ t: 'dmg', uid: tm.uid, n: total, kind: 'total' });
+              if (i === mhits - 1) {
+                if (total > 0) this.emit({ t: 'dmg', uid: tm.uid, n: total, kind: 'total' });
                 // the flurry's weight lands with its total, once
                 if (sk.id === 'sonic_blow') this.emit({ t: 'shake', power: 1.5 });
+                if (total > 0) this.applyStatus(tm, sk, lv);
               }
             });
           }
@@ -2040,18 +2667,13 @@ export class World {
         }
         this.after(SKILL_CONTACT, () => {
           const flat = sk.id === 'envenom' ? lv * 15 : 0;
-          const hit = this.resolvePhys(h, tm, this.skMult(h, sk, lv), el, sk.hitBonus ? sk.hitBonus(lv) : 0, false, 'slash', 0, flat);
+          const hit = this.resolvePhys(h, tm, mult, el, hb, false, 'slash', 0, flat);
           if (!hit || !this.alive(tm)) return;
           this.applyStatus(tm, sk, lv);
-          if (sk.id === 'envenom' && this.rng() * 100 < 10 + lv * 4 && !tm.m.boss && tm.m.element !== 'undead') {
-            tm.poisonUntil = this.time + 10000; tm.poisonNext = this.time + 1000;
-            tm.poisonDmg = Math.max(2, Math.floor(tm.maxHp * 0.015));
-            this.emit({ t: 'status', uid: tm.uid, text: '중독', color: '#c080ff' });
-          }
-          if (sk.id === 'sand_attack' && this.rng() * 100 < 15 + lv * 5 && !tm.m.boss) {
-            tm.blindUntil = this.time + 8000;
-            this.emit({ t: 'status', uid: tm.uid, text: '실명', color: '#d8c080' });
-          }
+          if (sk.id === 'envenom' && this.rng() * 100 < 10 + lv * 4 && !tm.m.boss) this.setStatus(tm, 'poison', 10000);
+          // 급소 강타: bash Lv 6+ stuns, 5% × (bash − 5) × base level / 50
+          if (sk.id === 'bash' && lv >= 6 && h.hero.skills.fatal_blow && !tm.m.boss && this.rng() * 100 < 5 * (lv - 5) * h.hero.baseLv / 50) this.setStatus(tm, 'stun', 3000);
+          if (sk.knock) this.knock(tm, h.x, h.y, sk.knock(lv));
         });
         if (sk.id === 'mammonite') this.sound('coin_skill');
         return;
@@ -2061,56 +2683,82 @@ export class World {
         const hits = sk.hits ? sk.hits(lv) : 1;
         const fly = Math.max(100, dist(h, tm) / 0.9);
         this.after(BOW_RELEASE, () => this.sound('arrow'));
+        this.lexPacket(tm, BOW_RELEASE + hits * 110 + fly + 100);
         let total = 0;
         for (let i = 0; i < hits; i++) {
-          this.after(BOW_RELEASE + i * 110, () => this.emit({ t: 'shot', from: h.uid, to: tm.uid, kind: 'arrow', dur: fly, element: el }));
+          this.after(BOW_RELEASE + i * 110, () => this.emit({ t: 'shot', from: h.uid, to: tm.uid, kind: sk.id === 'spear_boomerang' ? 'bone' : 'arrow', dur: fly, element: el }));
           this.after(BOW_RELEASE + i * 110 + fly, () => {
             const before = tm.hp;
-            this.resolvePhys(h, tm, this.skMult(h, sk, lv), el, 0, false, 'pierce', i);
+            const hit = this.resolvePhys(h, tm, this.skMult(h, sk, lv), el, 0, false, 'pierce', i);
             total += Math.max(0, before - Math.max(0, tm.hp));
             if (i === hits - 1 && total > 0 && hits > 1) this.emit({ t: 'dmg', uid: tm.uid, n: total, kind: 'total' });
+            if (!hit || !this.alive(tm)) return;
+            if (sk.id === 'venom_knife' && !tm.m.boss && this.rng() < 0.6) this.setStatus(tm, 'poison', 10000);
+            if (sk.knock && i === hits - 1) this.knock(tm, h.x, h.y, sk.knock(lv));
           });
         }
         return;
       }
       case 'bolt': {
         if (!tm) return;
-        const hits = sk.hits ? sk.hits(lv) : 1;
-        if (sk.fixed) { this.falconStrike(h, tm, sk, lv, hits); this.sound('arrow'); return; }
+        if (sk.id === 'turn_undead') { this.turnUndead(h, tm, lv); return; }
+        const hits = sk.id === 'water_ball' ? this.waterBalls(lv) : sk.hits ? sk.hits(lv) : 1;
+        if (sk.id === 'blitz_beat') { this.falconStrike(h, tm, sk, lv, hits); this.sound('arrow'); return; }
+        if (sk.fixed) {
+          // 돌 던지기: a thrown stone, fixed damage
+          const fly = Math.max(120, dist(h, tm) / 0.8);
+          this.emit({ t: 'shot', from: h.uid, to: tm.uid, kind: 'bone', dur: fly, element: 'neutral' });
+          this.after(fly, () => { if (this.dealFixed(h, tm, sk.fixed!(lv, this.fixedCtx(h)), el, 0, 'magic') > 0) this.applyStatus(tm, sk, lv); });
+          return;
+        }
+        const step = sk.id === 'water_ball' ? 70 : 150;
         this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm.uid, x: tm.x, y: tm.y, lv, hits, element: el });
-        this.sound(sk.fx === 'firebolt' ? 'fire' : sk.fx === 'coldbolt' || sk.fx === 'frost' ? 'ice' : sk.fx === 'lightning' ? 'thunder' : sk.fx === 'holy' ? 'heal' : 'cast');
+        this.sound(sk.fx === 'firebolt' ? 'fire' : sk.fx === 'coldbolt' || sk.fx === 'frost' || sk.fx === 'waterball' ? 'ice' : sk.fx === 'lightning' ? 'thunder' : sk.fx === 'holy' ? 'heal' : 'cast');
+        this.lexPacket(tm, 160 + hits * step + 100);
+        this.holdBreak(tm, 160 + hits * step + 100);
         let total = 0;
         for (let i = 0; i < hits; i++) {
-          this.after(160 + i * 150, () => {
+          this.after(160 + i * step, () => {
             const n = this.resolveMagic(h, tm, this.skMult(h, sk, lv), el, i, sk, lv);
             total += n;
             if (n > 0) this.applyStatus(tm, sk, lv);
             if (i === hits - 1 && hits > 1 && total > 0) this.emit({ t: 'dmg', uid: tm.uid, n: total, kind: 'total' });
-            if (sk.id === 'frost_diver' && this.alive(tm) && !tm.m.boss && tm.m.element !== 'undead' && this.rng() * 100 < 35 + lv * 3) {
-              tm.frozenUntil = this.time + lv * 1500;
-              this.emit({ t: 'status', uid: tm.uid, text: '빙결!', color: '#9fe8ff' });
-            }
+            if (i === hits - 1 && sk.knock) this.knock(tm, h.x, h.y, sk.knock(lv));
+            if (sk.id === 'frost_diver' && this.alive(tm) && !tm.m.boss && this.rng() * 100 < 35 + lv * 3) this.setStatus(tm, 'freeze', lv * 1500);
           });
         }
         return;
       }
       case 'aoe':
       case 'selfAoe': {
-        const cx = sk.kind === 'selfAoe' ? h.x : (tm ? tm.x : c.x);
-        const cy = sk.kind === 'selfAoe' ? h.y : (tm ? tm.y : c.y);
-        const r = sk.radius ?? 60;
+        if (sk.id === 'meteor') { this.meteorStorm(h, sk, lv, tm ? tm.x : c.x, tm ? tm.y : c.y); return; }
+        const self = sk.kind === 'selfAoe';
+        let cx = self ? h.x : (tm ? tm.x : c.x);
+        let cy = self ? h.y : (tm ? tm.y : c.y);
+        const r = this.areaR(sk, lv);
         const hits = sk.hits ? sk.hits(lv) : 1;
+        if (sk.id === 'sightrasher') h.buffs = h.buffs.filter((b) => b.id !== 'sight'); // the fire spreads out and is gone
+        // 창 찌르기: everything on the line to (and a bit past) the target
+        const line = sk.id === 'spear_stab' && tm ? { ax: h.x, ay: h.y, bx: tm.x + (tm.x - h.x) * 0.3, by: tm.y + (tm.y - h.y) * 0.3 } : null;
+        const inArea = (m: MobUnit) => line ? this.segDist(m, line.ax, line.ay, line.bx, line.by) <= 20 + this.bodyR(m) : Math.hypot(m.x - cx, m.y - cy) <= r + this.bodyR(m) * 0.5;
         this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm?.uid, x: cx, y: cy, lv, radius: r, hits, element: el });
         this.sound(el === 'fire' ? 'fire' : el === 'wind' ? 'thunder' : el === 'water' ? 'ice' : el === 'holy' ? 'heal' : sk.fx === 'shower' ? 'arrow' : 'hit_heavy');
-        if (sk.kind === 'selfAoe' || sk.fx === 'hammer' || sk.fx === 'bowling') this.emit({ t: 'shake', power: 2 });
+        if (self || sk.fx === 'hammer' || sk.fx === 'bowling') this.emit({ t: 'shake', power: 2 });
+        if (sk.reveal) for (const m of this.mobs) if (this.alive(m) && m.hiddenUntil > this.time && inArea(m)) { m.hiddenUntil = 0; m.hideNext = this.time + 12000; }
+        const span = 150 + hits * 180 + 100;
+        for (const m of this.mobs) if (this.targetable(m) && inArea(m)) { this.lexPacket(m, span); this.holdBreak(m, span); }
         for (let i = 0; i < hits; i++) {
           this.after(150 + i * 180, () => {
-            for (const m of this.mobs) {
-              if (!this.alive(m) || Math.hypot(m.x - cx, m.y - cy) > r || this.shunned(m)) continue;
+            const list = this.mobs.filter((m) => this.targetable(m) && !this.shunned(m) && inArea(m));
+            // 염 폭발: the blast is shared by all it hits
+            const share = sk.split ? Math.max(1, list.length) : 1;
+            for (const m of list) {
+              if (sk.id === 'frost_nova' && m.frozenUntil > this.time) continue; // already frozen: untouched
               if (sk.fixed) this.dealFixed(h, m, sk.fixed(lv, this.fixedCtx(h)), el, i);
-              else if (sk.magic) this.resolveMagic(h, m, this.skMult(h, sk, lv), el, i, sk, lv);
-              else this.resolvePhys(h, m, this.skMult(h, sk, lv), el, 20, false, sk.fx === 'shower' ? 'pierce' : 'blunt', i);
+              else if (sk.magic) this.resolveMagic(h, m, this.skMult(h, sk, lv) / share, el, i, sk, lv);
+              else this.resolvePhys(h, m, this.skMult(h, sk, lv) / share, el, sk.hitBonus ? sk.hitBonus(lv) : 20, false, sk.fx === 'shower' ? 'pierce' : 'blunt', i);
               this.applyStatus(m, sk, lv);
+              if (sk.knock && i === hits - 1) this.knock(m, line ? h.x : self ? h.x : cx, line ? h.y : self ? h.y : cy, sk.knock(lv));
             }
           });
         }
@@ -2143,15 +2791,29 @@ export class World {
       }
       case 'buff':
       case 'selfBuff': {
-        const targets = sk.kind === 'selfBuff' || !sk.buff?.party ? [h] : this.aliveHeroes();
+        const ally = tu?.kind === 'hero' && tu.state !== 'dead' ? tu : h;
+        const targets = sk.kind === 'selfBuff' ? [h] : sk.buff?.party ? this.aliveHeroes() : sk.buff?.ally ? [ally] : [h];
         for (const a of targets) {
-          this.applyBuff(a, sk, lv);
+          if (sk.buff) this.applyBuff(a, sk, lv);
+          if (sk.id === 'blessing' && a.buffs.some((b) => b.id === 'curse')) { a.buffs = a.buffs.filter((b) => b.id !== 'curse'); this.refresh(a); this.emit({ t: 'status', uid: a.uid, text: '저주 해제', color: '#ffe680' }); }
           this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: a.uid, x: a.x, y: a.y, lv });
         }
+        if (sk.reveal) this.revealAround(h, sk, lv);
+        if (sk.id === 'hiding' || sk.id === 'cloaking' || sk.id === 'play_dead') { h.hideDrainAt = 0; this.lose(h); h.target = null; }
+        if (sk.id === 'poison_react') h.prCounters = [1, 1, 2, 2, 3, 3, 4, 4, 5, 6][lv - 1];
         this.sound('buff');
         return;
       }
       case 'revive': {
+        if (sk.id === 'redemptio') {
+          // 속죄: everyone who fell stands up at 50%, the priest pays with its own life
+          const dead = this.heroes.filter((x) => x.state === 'dead' && x !== h);
+          for (const x of dead) { this.revive(x, 0.5); this.emit({ t: 'status', uid: x.uid, text: '부활!', color: '#fff3a0' }); }
+          this.sound('levelup');
+          this.emit({ t: 'skill', fx: 'revive', from: h.uid, to: h.uid, x: h.x, y: h.y, lv });
+          if (dead.length) { h.sp = 0; this.damageHero(h, h.hp, null, true); }
+          return;
+        }
         const dead = tu?.kind === 'hero' ? tu : undefined;
         if (!dead || dead.state !== 'dead') return;
         this.revive(dead, (sk.revivePct ? sk.revivePct(lv) : 30) / 100);
@@ -2159,25 +2821,144 @@ export class World {
         this.emit({ t: 'status', uid: dead.uid, text: '부활!', color: '#fff3a0' });
         return;
       }
-      case 'debuff': {
-        if (!tm) return;
-        if (sk.id !== 'provoke') {
-          this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm.uid, x: tm.x, y: tm.y, lv, radius: 30 });
-          this.sound('buff');
-          this.applyStatus(tm, sk, lv);
-          return;
-        }
-        this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm.uid, x: tm.x, y: tm.y, lv, radius: 110 });
-        this.sound('buff');
-        for (const m of this.mobs) {
-          if (!this.alive(m) || dist(m, tm) > 110 || this.shunned(m)) continue;
-          m.provokeUntil = this.time + 30000;
-          m.provokeBy = h.uid;
-          m.provokeDef = (5 + lv * 5) / 100;
-          m.provokeAtk = (2 + lv * 3) / 100;
-          m.target = h.uid;
-          this.emit({ t: 'status', uid: m.uid, text: '!', color: '#ff6060' });
-        }
+      case 'debuff': { this.debuff(h, sk, lv, tm); return; }
+      case 'ground':
+      case 'trap': { this.placeGround(h, sk, lv, c); return; }
+      case 'cure': {
+        const a = tu?.kind === 'hero' ? tu : h;
+        if (sk.id === 'cure' || sk.id === 'status_recovery') a.buffs = a.buffs.filter((b) => b.id !== 'blind' && (sk.id === 'cure' || b.id !== 'curse'));
+        if (sk.id === 'detoxify') a.poisonUntil = 0;
+        if (sk.id === 'slow_poison') a.slowPoisonUntil = this.time + lv * 10000;
+        this.refresh(a);
+        this.emit({ t: 'skill', fx: 'heal', from: h.uid, to: a.uid, x: a.x, y: a.y, lv });
+        this.emit({ t: 'status', uid: a.uid, text: sk.name, color: '#c0ffd0' });
+        this.sound('heal');
+        return;
+      }
+      case 'utility': { this.utility(h, sk, lv); return; }
+      case 'stance': {
+        // 반격 자세: blocks the next melee blow and strikes back (mobHit)
+        h.counterUntil = this.time + lv * 400;
+        h.lockUntil = Math.max(h.lockUntil, h.counterUntil);
+        this.setState(h, 'ready');
+        this.emit({ t: 'skill', fx: 'counter', from: h.uid, to: h.uid, x: h.x, y: h.y, lv });
+        return;
+      }
+    }
+  }
+
+  /** 정화: an undead monster may be wiped out at once; otherwise it takes a little holy damage (RO) */
+  private turnUndead(h: HeroUnit, t: MobUnit, lv: number) {
+    this.emit({ t: 'skill', fx: 'holy', from: h.uid, to: t.uid, x: t.x, y: t.y, lv, element: 'holy' });
+    this.sound('heal');
+    if (!this.alive(t) || this.mobElement(t) !== 'undead') { this.emit({ t: 'status', uid: t.uid, text: '효과 없음', color: '#c0c0c0' }); return; }
+    if (this.rng() < this.turnChance(h, t, lv)) {
+      this.emit({ t: 'status', uid: t.uid, text: '정화!', color: '#ffffff' });
+      this.dealToMob(h, t, t.hp, 'crit', 0);
+      return;
+    }
+    this.dealFixed(h, t, h.hero.baseLv + h.d.total.int + lv * 10, 'holy', 0);
+  }
+
+  /** 유성우: 2–7 meteors land around the target, each hitting its 7×7 1–5 times */
+  private meteorStorm(h: HeroUnit, sk: SkillDef, lv: number, x: number, y: number) {
+    const n = [2, 3, 3, 4, 4, 5, 5, 6, 6, 7][lv - 1], hits = sk.hits!(lv), R = 77;
+    this.sound('fire');
+    for (let i = 0; i < n; i++) {
+      const a = this.rng() * Math.PI * 2, rr = this.rng() * (sk.radius ?? 100) * 0.55;
+      const mx = clamp(x + Math.cos(a) * rr, 30, this.zone.w - 30), my = clamp(y + Math.sin(a) * rr * 0.7, 80, this.zone.h - 30);
+      this.after(i * 260, () => this.emit({ t: 'skill', fx: 'meteor', from: h.uid, x: mx, y: my, lv, radius: R * 0.8, hits: 1, element: 'fire' }));
+      for (let j = 0; j < hits; j++) {
+        this.after(i * 260 + 260 + j * 140, () => {
+          for (const m of this.mobs) {
+            if (!this.targetable(m) || this.shunned(m) || Math.hypot(m.x - mx, m.y - my) > R + this.bodyR(m) * 0.5) continue;
+            this.resolveMagic(h, m, this.skMult(h, sk, lv), 'fire', j, sk, lv);
+            this.applyStatus(m, sk, lv);
+          }
+        });
+      }
+    }
+  }
+
+  /** monster debuffs (provoke, decrease agi, signum crucis, lex divina / aeterna, stone curse, venom splasher…) */
+  private debuff(h: HeroUnit, sk: SkillDef, lv: number, tm: MobUnit | undefined) {
+    if (sk.id === 'signum_crucis') {
+      this.emit({ t: 'skill', fx: sk.fx, from: h.uid, x: h.x, y: h.y, lv, radius: 120 });
+      this.sound('heal');
+      for (const m of this.mobs) {
+        if (!this.targetable(m) || dist(m, h) > (sk.radius ?? 320) || !(this.unholy(m) || m.m.race === 'undead') || m.crucis) continue;
+        if (this.rng() * 100 < 23 + lv * 4 + h.hero.baseLv - m.m.lv) { m.crucis = (10 + lv * 4) / 100; this.emit({ t: 'status', uid: m.uid, text: '성호', color: '#fff8c0' }); }
+      }
+      return;
+    }
+    if (!tm || !this.alive(tm)) return;
+    if (sk.id === 'provoke') {
+      this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm.uid, x: tm.x, y: tm.y, lv, radius: 110 });
+      this.sound('buff');
+      for (const m of this.mobs) {
+        if (!this.targetable(m) || dist(m, tm) > 110 || this.shunned(m)) continue;
+        // RO: undead and bosses shrug the weakening off — here they still turn to the knight
+        const resist = !!m.m.boss || m.m.element === 'undead';
+        m.provokeUntil = this.time + 30000;
+        m.provokeBy = h.uid;
+        m.provokeDef = resist ? 0 : (5 + lv * 5) / 100;
+        m.provokeAtk = resist ? 0 : (2 + lv * 3) / 100;
+        m.target = h.uid;
+        this.emit({ t: 'status', uid: m.uid, text: '!', color: '#ff6060' });
+      }
+      return;
+    }
+    this.emit({ t: 'skill', fx: sk.fx, from: h.uid, to: tm.uid, x: tm.x, y: tm.y, lv, radius: 30 });
+    this.sound('buff');
+    switch (sk.id) {
+      case 'decrease_agi': {
+        const chance = 40 + lv * 2 + (h.hero.baseLv + h.d.total.int) / 5 - tm.m.mdef;
+        if (tm.m.boss || this.rng() * 100 >= chance) { this.emit({ t: 'status', uid: tm.uid, text: '실패', color: '#c0c0c0' }); return; }
+        tm.agiDown = 2 + lv; tm.agiDownUntil = this.time + (30 + lv * 10) * 1000;
+        this.emit({ t: 'status', uid: tm.uid, text: '느려짐', color: '#a0b0c0' });
+        return;
+      }
+      case 'lex_aeterna':
+        if (tm.frozenUntil > this.time || tm.stoneUntil > this.time) return;
+        tm.lex = true;
+        this.emit({ t: 'status', uid: tm.uid, text: '영원의 율법', color: '#ff90b0' });
+        return;
+      case 'stone_curse': {
+        const before = tm.stoneUntil;
+        this.applyStatus(tm, sk, lv);
+        if (lv >= 6 && tm.stoneUntil > before) { removeStack(this.s, 'k_redgem'); this.onPersist(); }
+        return;
+      }
+      case 'venom_splasher': {
+        // a poison bomb on a poisoned, weakened monster: it bursts a few seconds later around it (split, no FLEE roll)
+        if (tm.m.boss || tm.poisonUntil <= this.time || tm.hp >= tm.maxHp * 0.75) return;
+        this.emit({ t: 'status', uid: tm.uid, text: '독 폭탄!', color: '#e080ff' });
+        const fuse = (4.5 + lv * 0.5) * 500;
+        this.after(fuse, () => {
+          const cx = tm.x, cy = tm.y;
+          this.emit({ t: 'skill', fx: 'splasher', from: h.uid, x: cx, y: cy, lv, radius: sk.radius ?? 60, element: 'poison' });
+          this.sound('hit_heavy');
+          const list = this.mobs.filter((m) => this.targetable(m) && !this.shunned(m) && Math.hypot(m.x - cx, m.y - cy) <= (sk.radius ?? 60) + this.bodyR(m) * 0.5);
+          for (const m of list) this.resolvePhys(h, m, this.skMult(h, sk, lv) / Math.max(1, list.length), 'poison', 0, false, 'blunt', 0, 0, { sure: true });
+        });
+        return;
+      }
+    }
+    this.applyStatus(tm, sk, lv);
+  }
+
+  /** teleport (by hand), holy water, stones, back slide */
+  private utility(h: HeroUnit, sk: SkillDef, lv: number) {
+    switch (sk.id) {
+      case 'aqua_benedicta': addItem(this.s, 'k_holywater', 1); this.emit({ t: 'skill', fx: 'heal', from: h.uid, to: h.uid, x: h.x, y: h.y, lv }); this.emit({ t: 'status', uid: h.uid, text: '성수 +1', color: '#d8f0ff' }); this.onPersist(); return;
+      case 'find_stone': addItem(this.s, 'k_stone', 1); this.emit({ t: 'status', uid: h.uid, text: '돌 +1', color: '#c8c8c0' }); this.onPersist(); return;
+      case 'teleport': this.tryTeleport(undefined); return;
+      case 'back_slide': {
+        const chaser = this.mobs.find((m) => this.alive(m) && m.target === h.uid) ?? this.mob(h.target);
+        const fx = chaser ? chaser.x : h.x + h.facing * 10, fy = chaser ? chaser.y : h.y;
+        const dx = h.x - fx, dy = h.y - fy, d = Math.hypot(dx, dy) || 1;
+        this.emit({ t: 'skill', fx: 'backslide', from: h.uid, x: h.x, y: h.y, lv });
+        h.x = clamp(h.x + dx / d * 5 * CELL, 24, this.zone.w - 24); h.y = clamp(h.y + dy / d * 5 * CELL * 0.8, 70, this.zone.h - 24);
         return;
       }
     }
@@ -2191,9 +2972,193 @@ export class World {
     const bs = sk.buff!;
     a.buffs = a.buffs.filter((b) => b.id !== bs.id);
     const shield = bs.shieldPct ? Math.floor(a.d.maxHp * bs.shieldPct(lv) / 100) : undefined;
-    a.buffs.push({ id: bs.id, name: bs.name, lv, until: this.time + bs.dur(lv), bonus: bs.bonus(lv), statPct: bs.statPct?.(lv), shield, shieldMax: shield });
+    const hits = bs.shieldHits ? bs.shieldHits(lv) : bs.id === 'endure' ? 7 : undefined;
+    a.buffs.push({ id: bs.id, name: bs.name, lv, until: this.time + bs.dur(lv), bonus: bs.bonus(lv), statPct: bs.statPct?.(lv), shield, shieldMax: shield, hits });
     this.refresh(a);
     this.emit({ t: 'buff', uid: a.uid, name: bs.name });
+  }
+
+  /** 뒤로 구르기: a back-liner with a melee monster on it rolls five cells away instead of walking */
+  private tryBackSlide(h: HeroUnit): boolean {
+    if (!(h.hero.skillSlots ?? []).includes('back_slide') || !(h.hero.skills.back_slide > 0)) return false;
+    const sk = SKILLS.back_slide;
+    if (!this.canPay(h, sk, 1)) return false;
+    this.startSkill(h, sk, 1, null);
+    return true;
+  }
+
+  // ───────────────────────────── ground effects (fire wall, safety wall, sanctuary, traps, quagmire, ice wall…)
+  private placeGround(h: HeroUnit, sk: SkillDef, lv: number, c: CastInfo) {
+    const spec = sk.ground!;
+    const tu = this.unit(c.target);
+    let x = tu ? tu.x : c.x, y = tu ? tu.y : c.y;
+    let ax = 1, ay = 0;
+    if (spec.where === 'between' && tu?.kind === 'mob') {
+      // just in front of the monster, across its path to its prey
+      const prey = this.heroUnit(tu.target) ?? h;
+      const dx = prey.x - tu.x, dy = prey.y - tu.y, d = Math.hypot(dx, dy) || 1;
+      const k = Math.min(0.5, (this.bodyR(tu) + 16) / d);
+      x = tu.x + dx * k; y = tu.y + dy * k;
+      ax = -dy / d; ay = dx / d;
+    } else if (spec.where === 'self') { x = h.x; y = h.y; }
+    // RO: the oldest goes when too many are out
+    const mine = this.grounds.filter((g) => !g.done && g.owner === h.uid && g.sk.id === sk.id);
+    if (sk.maxActive && mine.length >= sk.maxActive) this.endGround(mine[0], false);
+    const g: GroundFx = {
+      id: this.gfxSeq++, sk, lv, owner: h.uid, x: clamp(x, 30, this.zone.w - 30), y: clamp(y, 76, this.zone.h - 30), r: spec.r(lv), ax, ay,
+      line: spec.shape === 'line', born: this.time, until: this.time + spec.dur(lv),
+      next: this.time + (sk.id === 'magnus' ? 300 : spec.every ?? 0), every: spec.every ?? 0, charges: spec.charges?.(lv) ?? Infinity,
+      hits: {}, armAt: this.time + (sk.kind === 'trap' ? 250 : 0), done: false,
+    };
+    this.grounds.push(g);
+    this.emit({ t: 'skill', fx: sk.kind === 'trap' ? 'trapset' : sk.fx, from: h.uid, x: g.x, y: g.y, lv, radius: g.r, element: sk.element ?? 'neutral' });
+    this.sound(sk.kind === 'trap' ? 'click' : sk.element === 'fire' ? 'fire' : sk.element === 'water' ? 'ice' : sk.element === 'holy' ? 'heal' : 'buff');
+  }
+
+  /** a ground effect ends; an unsprung trap comes back with 덫 회수 */
+  private endGround(g: GroundFx, fired: boolean) {
+    if (g.done) return;
+    g.done = true;
+    const owner = this.heroUnit(g.owner);
+    if (!fired && g.sk.kind === 'trap' && g.sk.id !== 'fire_pillar' && owner && (owner.hero.skills.remove_trap ?? 0) > 0 && g.sk.catalyst) addItem(this.s, g.sk.catalyst.id, g.sk.catalyst.n);
+  }
+
+  /** inside a ground effect? (lines: within a cell of the wall) */
+  private inGround(g: GroundFx, p: { x: number; y: number }, pad: number) {
+    if (g.line) return this.segDist(p, g.x - g.ax * g.r, g.y - g.ay * g.r, g.x + g.ax * g.r, g.y + g.ay * g.r) <= 12 + pad;
+    return Math.hypot(p.x - g.x, p.y - g.y) <= g.r + pad;
+  }
+
+  /** per step: traps go off, walls burn, sanctuaries heal, the storm blows, the mud slows */
+  private fxTick() {
+    if (!this.grounds.length) return;
+    for (const g of this.grounds) {
+      if (g.done) continue;
+      if (this.time >= g.until) {
+        if (g.sk.id === 'blast_mine') this.detonate(g, null);
+        this.endGround(g, false);
+        continue;
+      }
+      const owner = this.heroUnit(g.owner) ?? this.leader();
+      if (!owner) continue;
+      if (g.sk.kind === 'trap') {
+        if (this.time < g.armAt) continue;
+        const trig = 14 + (owner.hero.skills.spring_trap ?? 0) * CELL * 0.5;
+        const m = this.mobs.find((x) => this.targetable(x) && !this.shunned(x) && Math.hypot(x.x - g.x, x.y - g.y) <= trig + this.bodyR(x));
+        if (m) this.detonate(g, m);
+        continue;
+      }
+      if (!g.every || this.time < g.next) continue;
+      g.next += g.every;
+      this.groundPulse(g, owner);
+    }
+    this.grounds = this.grounds.filter((g) => !g.done);
+  }
+
+  private groundPulse(g: GroundFx, owner: HeroUnit) {
+    const sk = g.sk, lv = g.lv;
+    const inside = (m: MobUnit, pad = 0.5) => this.targetable(m) && !this.shunned(m) && this.inGround(g, m, this.bodyR(m) * pad);
+    switch (sk.id) {
+      case 'fire_wall':
+        for (const m of this.mobs) {
+          if (g.charges <= 0) break;
+          if (!inside(m, 1)) continue;
+          this.resolveMagic(owner, m, this.skMult(owner, sk, lv), 'fire', 0, sk, lv);
+          // pushed back out the side it came from
+          const side = Math.sign((m.x - g.x) * -g.ay + (m.y - g.y) * g.ax) || 1;
+          this.knock(m, m.x + g.ay * side * 10, m.y - g.ax * side * 10, 2);
+          g.charges--;
+        }
+        if (g.charges <= 0) this.endGround(g, true);
+        return;
+      case 'sanctuary': {
+        const amt = [100, 200, 300, 400, 500, 600, 777, 777, 777, 777][lv - 1];
+        for (const a of this.aliveHeroes()) {
+          if (g.charges <= 0) break;
+          if (!this.inGround(g, a, 0) || a.hp >= a.d.maxHp) continue;
+          this.healHero(a, amt, true);
+          g.charges--;
+        }
+        for (const m of this.mobs) {
+          if (!inside(m) || !this.unholy(m)) continue;
+          this.dealToMob(owner, m, Math.max(1, Math.floor(amt / 2 * elementMod('holy', this.mobElement(m)))), 'normal', 0);
+          this.knock(m, g.x, g.y, 2);
+        }
+        if (g.charges <= 0) this.endGround(g, true);
+        return;
+      }
+      case 'magnus':
+        this.emit({ t: 'skill', fx: 'magnus', from: g.owner, x: g.x, y: g.y, lv, radius: g.r, hits: Math.min(6, lv), element: 'holy' });
+        for (const m of this.mobs) if (inside(m) && this.unholy(m)) this.resolveMagic(owner, m, this.skMult(owner, sk, lv), 'holy', 0, sk, lv);
+        return;
+      case 'storm_gust':
+        g.charges--;
+        for (const m of this.mobs) {
+          if (!inside(m) || m.frozenUntil > this.time) continue; // frozen: the storm passes over it
+          const n = (g.hits[m.uid] = (g.hits[m.uid] ?? 0) + 1);
+          this.resolveMagic(owner, m, this.skMult(owner, sk, lv), 'water', n % 3, sk, lv);
+          if (!this.alive(m)) continue;
+          if (n >= 3 && m.m.boss !== 'mvp') this.setStatus(m, 'freeze', 4000);
+          else this.knock(m, g.x, g.y, 2);
+        }
+        if (g.charges <= 0) this.endGround(g, true);
+        return;
+      case 'quagmire':
+        for (const m of this.mobs) if (inside(m) && !m.m.boss) { m.quag = lv * 0.1; m.quagUntil = this.time + 400; }
+        return;
+      case 'venom_dust':
+        for (const m of this.mobs) if (inside(m) && this.poisonable(m)) this.setStatus(m, 'poison', 10000);
+        return;
+    }
+  }
+
+  /** a trap goes off under `m` (or by itself: a blast mine running out) */
+  private detonate(g: GroundFx, m: MobUnit | null) {
+    const owner = this.heroUnit(g.owner) ?? this.leader();
+    this.endGround(g, true);
+    if (!owner) return;
+    const sk = g.sk, lv = g.lv, el = sk.element ?? 'neutral';
+    const single = sk.id === 'land_mine' || sk.id === 'ankle_snare' || sk.id === 'skid_trap';
+    const victims = single ? (m ? [m] : []) : this.mobs.filter((x) => this.targetable(x) && !this.shunned(x) && Math.hypot(x.x - g.x, x.y - g.y) <= g.r + this.bodyR(x) * 0.5);
+    this.emit({ t: 'skill', fx: sk.id === 'fire_pillar' ? 'firepillar' : sk.id === 'ankle_snare' ? 'snare' : 'trapburst', from: owner.uid, to: m?.uid, x: g.x, y: g.y, lv, radius: Math.max(24, g.r), element: el });
+    this.sound(sk.id === 'ankle_snare' || sk.id === 'skid_trap' ? 'click' : 'hit_heavy');
+    const center = this.center();
+    for (const v of victims) {
+      switch (sk.id) {
+        case 'skid_trap': if (v.m.race !== 'plant') this.knock(v, center.x, center.y, sk.knock!(lv)); break;
+        case 'ankle_snare': {
+          const dur = Math.min(20000, Math.max(3000, lv * 5 / Math.max(1, v.m.agi * 0.1) * 1000)) / (v.m.boss ? 5 : 1);
+          v.snareUntil = this.time + dur;
+          this.emit({ t: 'status', uid: v.uid, text: '속박!', color: '#ffe080' });
+          break;
+        }
+        case 'shockwave_trap':
+          (v.m.skills ?? []).forEach((ms, i) => { v.skillCd[i] = Math.max(v.skillCd[i], this.time) + ms.cd * (5 + lv * 15) / 100; });
+          this.emit({ t: 'status', uid: v.uid, text: '기력 소진', color: '#a0a0ff' });
+          break;
+        case 'freezing_trap':
+          this.resolvePhys(owner, v, this.skMult(owner, sk, lv), 'water', 0, false, 'blunt', 0, 0, { sure: true });
+          if (!v.m.boss) this.setStatus(v, 'freeze', lv * 3000);
+          break;
+        case 'fire_pillar': {
+          const per = sk.fixed!(lv, this.fixedCtx(owner));
+          for (let i = 0; i < sk.hits!(lv); i++) this.after(i * 110, () => this.dealFixed(owner, v, per, 'fire', i));
+          break;
+        }
+        case 'flasher': if (v.m.race !== 'plant' && v.m.boss !== 'mvp') this.applyStatus(v, sk, lv); break;
+        default:
+          if (sk.fixed) this.dealFixed(owner, v, sk.fixed(lv, this.fixedCtx(owner)), el, 0);
+          this.applyStatus(v, sk, lv);
+      }
+    }
+  }
+
+  /** 말하는 상자: a hunter's box shouts where a card turned up */
+  private talkie(x: number, y: number, text: string) {
+    const h = this.heroes.find((x2) => skillOn(x2.hero, 'talkie_box'));
+    if (!h) return;
+    this.grounds.push({ id: this.gfxSeq++, sk: SKILLS.talkie_box, lv: 1, owner: h.uid, x, y, r: 10, ax: 1, ay: 0, line: false, born: this.time, until: this.time + 5000,
+      next: Infinity, every: 0, charges: 0, hits: {}, armAt: Infinity, done: false, text });
   }
 
   healHero(h: HeroUnit, n: number, show: boolean) {
@@ -2209,7 +3174,10 @@ export class World {
     const mul = town ? 6 : h.sitting ? 2 : 1;
     if (this.time >= h.hpTickAt) {
       h.hpTickAt = this.time + HP_TICK / (h.sitting || town ? 2 : 1);
-      if (h.poisonUntil < this.time && h.hp < h.d.maxHp) h.hp = Math.min(h.d.maxHp, h.hp + Math.floor(h.d.hpRegen * mul * (this.rift?.mods.healMul ?? 1)));
+      // RO: no natural HP recovery while walking — 이동 중 회복 keeps half of it; hiding stops it too
+      const walk = h.state === 'walk' && !town ? ((h.hero.skills.moving_hp ?? 0) > 0 ? 0.5 : 0) : 1;
+      const hid = this.hasBuff(h, 'hiding') || this.hasBuff(h, 'cloak') ? 0 : 1;
+      if (h.poisonUntil < this.time && h.hp < h.d.maxHp) h.hp = Math.min(h.d.maxHp, h.hp + Math.floor(h.d.hpRegen * mul * walk * hid * (this.rift?.mods.healMul ?? 1)));
     }
     if (this.time >= h.spTickAt) {
       h.spTickAt = this.time + SP_TICK / (h.sitting || town ? 2 : 1);
@@ -2220,6 +3188,7 @@ export class World {
   /** quick-slot auto use: lower trigger % first so emergency potions win */
   private autoItems() {
     if (this.zone.id === 'town') return;
+    this.tryWarp();
     const q = this.s.quick;
     const order = q.map((_, i) => i)
       .filter((i) => q[i].id && q[i].auto && (this.s.stacks[q[i].id!] ?? 0) > 0)
@@ -2271,7 +3240,8 @@ export class World {
 
   private drinkSlot(i: number, h: HeroUnit, id: string) {
     const he = ITEMS[id].heal!;
-    const mul = he.hp ? (1 + (h.d.b.potionPct ?? 0) / 100) * (1 + h.d.total.vit * 2 / 100) : 1 + (h.d.total.int * 2) / 100;
+    // 무게 증가 (a merchant in the party): quick-slot potions heal a little more
+    const mul = (he.hp ? (1 + (h.d.b.potionPct ?? 0) / 100) * (1 + h.d.total.vit * 2 / 100) : 1 + (h.d.total.int * 2) / 100) * (1 + partyPerks(this.s).potionPct / 100);
     this.drink(h, id, mul);
     this.quickUsed[i] = this.time;
   }
@@ -2337,7 +3307,9 @@ export class World {
       const absorbed = Math.min(n, sh.shield!);
       sh.shield! -= absorbed;
       n -= absorbed;
-      if (sh.shield! <= 0) { h.buffs = h.buffs.filter((b) => b !== sh); this.emit({ t: 'status', uid: h.uid, text: '보호막 파괴', color: '#bfe8ff' }); }
+      // kyrie also breaks after its hit count (5 + lv/2)
+      if (sh.hits !== undefined) sh.hits--;
+      if (sh.shield! <= 0 || (sh.hits !== undefined && sh.hits <= 0)) { h.buffs = h.buffs.filter((b) => b !== sh); this.emit({ t: 'status', uid: h.uid, text: '보호막 파괴', color: '#bfe8ff' }); }
       // a block reads as a block: sky-blue absorbed amount, and no hurt flash when nothing got through
       if (absorbed > 0) this.emit({ t: 'dmg', uid: h.uid, n: absorbed, kind: 'absorb' });
       if (n <= 0) return;
@@ -2345,8 +3317,11 @@ export class World {
     h.hp -= n;
     h.hurtAt = this.time;
     this.emit({ t: 'dmg', uid: h.uid, n, kind: 'taken' });
+    // 인내 holds for 7 monster hits
+    const en = !dot && from ? h.buffs.find((b) => b.id === 'endure') : undefined;
+    if (en && en.hits !== undefined && --en.hits <= 0) { h.buffs = h.buffs.filter((b) => b !== en); this.refresh(h); }
     if (!dot) {
-      if (h.cast && h.cast.sk.magic && this.rng() < 0.15) {
+      if (h.cast && h.cast.sk.magic && !en && this.rng() < 0.15) {
         // light interruption: push the cast back a little (RO flinch)
         h.cast.end += 150;
       }
@@ -2450,10 +3425,18 @@ export class World {
       const n = Math.min(Math.floor(m.poisonDmg * (this.rift?.mods.fixedMul ?? 1)), m.hp - 1);
       if (n > 0) { m.hp -= n; this.emit({ t: 'dmg', uid: m.uid, n, kind: 'normal' }); }
     }
-    if (m.frozenUntil > this.time || m.stunUntil > this.time) return;
+    // 석화: the stone crumbles 1% of max HP every 5 s (not below 25%)
+    if (m.stoneUntil > this.time && Math.floor(this.time / 5000) !== Math.floor((this.time - dt) / 5000) && m.hp > m.maxHp * 0.25) {
+      const n = Math.floor(m.maxHp * 0.01);
+      if (n > 0) { m.hp -= n; this.emit({ t: 'dmg', uid: m.uid, n, kind: 'normal' }); }
+    }
+    if (m.frozenUntil > this.time || m.stunUntil > this.time || m.stoneUntil > this.time || m.sleepUntil > this.time) return;
     if (m.charge) { this.chargeTick(m, dt); return; }
     if (this.time < m.lockUntil) return;
     if (m.state === 'attack' || m.state === 'hurt' || m.state === 'cast') this.setState(m, 'idle');
+    // hiding monsters duck out of sight when hurt, then come back for an ambush
+    if (m.m.hides) this.mobHide(m);
+    if (m.hiddenUntil > this.time) { this.wander(m, dt); return; }
 
     // target
     if (m.provokeUntil > this.time) {
@@ -2462,27 +3445,29 @@ export class World {
     }
     if (m.danger) this.dangerThink(m);
     let t = this.heroUnit(m.target);
-    if (!t || t.state === 'dead') { m.target = null; t = undefined; }
+    if (!t || t.state === 'dead' || !this.sees(m, t)) { m.target = null; t = undefined; }
     if (!t && m.m.aggressive && !(m.danger && m.boredUntil > this.time)) {
       const range = m.m.boss ? 320 : m.danger ? 160 : 130;
       let bd = range;
       for (const h of this.heroes) {
-        if (h.state === 'dead') continue;
+        if (h.state === 'dead' || !this.sees(m, h)) continue;
         const d = dist(h, m);
         if (d < bd) { bd = d; t = h; }
       }
       if (t) { m.target = t.uid; m.chaseSince = this.time; if (!m.m.boss) this.emit({ t: 'status', uid: m.uid, text: '!', color: m.danger ? '#ff2030' : '#ff6060' }); }
     }
 
-    if (m.m.skills && t && this.mobSkill(m, t)) return;
+    // 침묵: no monster skills
+    if (m.m.skills && t && m.silenceUntil <= this.time && this.mobSkill(m, t)) return;
 
     if (!t) { this.wander(m, dt); return; }
     const d = dist(m, t) - 8;
     if (d > m.m.range) {
-      if (m.m.immobile) { m.target = null; return; }
+      // 앵클 스네어: held in place (it still swings at whatever is in reach)
+      if (m.m.immobile || m.snareUntil > this.time) { if (m.m.immobile) m.target = null; else this.setState(m, 'idle'); return; }
       // stop at body contact (never inside the hero's collision ring, or the crowd shoves the hero around)
       const contact = this.bodyR(m) + this.bodyR(t) + 5;
-      this.moveTo(m, t.x, t.y, m.m.speed, dt, Math.min(Math.max(m.m.range * 0.8, contact), m.m.range + 6));
+      this.moveTo(m, t.x, t.y, this.mobSpeed(m), dt, Math.min(Math.max(m.m.range * 0.8, contact), m.m.range + 6));
       return;
     }
     m.facing = t.x >= m.x ? 1 : -1;
@@ -2490,8 +3475,26 @@ export class World {
     this.mobAttack(m, t);
   }
 
+  /** walking speed with 속도 감소 (−25%) and 늪 (−50%) */
+  private mobSpeed(m: MobUnit) {
+    return m.m.speed * (m.agiDownUntil > this.time ? 0.75 : 1) * (m.quagUntil > this.time ? 0.5 : 1);
+  }
+
+  /** a hiding monster (data: hides) slips out of sight when hurt, for a few seconds */
+  private mobHide(m: MobUnit) {
+    if (m.hiddenUntil > this.time || this.time < m.hideNext || m.hp > m.maxHp * 0.75 || m.target === null) return;
+    m.hiddenUntil = this.time + 5000;
+    m.hideNext = this.time + 16000;
+    m.target = null; m.provokeUntil = 0;
+    for (const h of this.heroes) if (h.target === m.uid) h.target = null;
+    const c = this.center(), dx = m.x - c.x, dy = m.y - c.y, d = Math.hypot(dx, dy) || 1;
+    m.dest = { x: clamp(m.x + dx / d * 110, 40, this.zone.w - 40), y: clamp(m.y + dy / d * 80, 80, this.zone.h - 40) };
+    m.wanderAt = this.time + 5000;
+    this.emit({ t: 'status', uid: m.uid, text: '숨었다!', color: '#c8b8e0' });
+  }
+
   private wander(m: MobUnit, dt: number) {
-    if (m.m.immobile) { this.setState(m, 'idle'); return; }
+    if (m.m.immobile || m.snareUntil > this.time) { this.setState(m, 'idle'); return; }
     if (m.danger && this.time >= m.wanderAt) {
       // danger monsters roam the whole map
       m.wanderAt = this.time + 3000 + this.rng() * 3500;
@@ -2507,7 +3510,7 @@ export class World {
       } else m.dest = null;
     }
     if (m.dest) {
-      if (this.moveTo(m, m.dest.x, m.dest.y, m.m.speed * 0.5, dt, 3)) m.dest = null;
+      if (this.moveTo(m, m.dest.x, m.dest.y, this.mobSpeed(m) * 0.5, dt, 3)) m.dest = null;
     } else this.setState(m, 'idle');
   }
 
@@ -2528,14 +3531,31 @@ export class World {
   private mobHit(m: MobUnit, t: HeroUnit, mult: number, el: Element, magic: boolean, sure = false, posthumous = false) {
     if ((m.state === 'dead' && !posthumous) || t.state === 'dead') return;
     const d = t.d;
+    const melee = m.m.range < 4 * CELL;
     if (!magic && !sure) {
+      // 수호벽 (melee, counts its blocks) / 장막 (ranged): the blow never lands
+      const ward = this.inWard(t, melee);
+      if (ward) {
+        if (melee && --ward.charges <= 0) this.endGround(ward, true);
+        this.emit({ t: 'status', uid: t.uid, text: melee ? '수호벽!' : '장막!', color: '#ff9ad8' });
+        return;
+      }
+      // 반격: braced — block the swing and strike back with a critical that ignores DEF
+      if (t.counterUntil > this.time && m.m.range < 60 && !this.shunned(m)) {
+        t.counterUntil = 0;
+        t.lockUntil = Math.min(t.lockUntil, this.time + 120);
+        this.emit({ t: 'status', uid: t.uid, text: '반격!', color: '#ffb0a0' });
+        this.after(80, () => this.resolvePhys(t, m, 100, t.d.weaponElement, 0, true, 'slash', 0, 0, { forceCrit: true, ignoreDef: true }));
+        return;
+      }
       if (this.rng() * 100 < d.pdodge) {
         this.emit({ t: 'dmg', uid: t.uid, n: 0, kind: 'lucky' });
         return;
       }
       const crowd = this.mobs.reduce((a, x) => a + (x.state !== 'dead' && x.target === t.uid && dist(x, t) <= x.m.range + 40 ? 1 : 0), 0);
       const flee = d.flee * Math.max(0, 1 - 0.1 * (this.rift?.mods.crowdK ?? 1) * Math.max(0, crowd - 2)); // 균열 포위: ×2
-      let rate = clamp(80 + m.m.lv + m.m.dex - flee, 5, 95);
+      const dex = m.m.dex * (1 - (m.quagUntil > this.time ? m.quag : 0)); // 늪 dulls its aim
+      let rate = clamp(80 + m.m.lv + dex - flee, 5, 95);
       if (m.blindUntil > this.time) rate -= 25;
       if (this.rng() * 100 >= rate) {
         this.emit({ t: 'dmg', uid: t.uid, n: 0, kind: 'miss' });
@@ -2547,16 +3567,33 @@ export class World {
     if (m.provokeUntil > this.time) dmg *= 1 + m.provokeAtk;
     dmg *= elementMod(el, d.armorElement);
     if (magic) dmg = dmg * (100 - d.mdef) / 100 - d.intMdef;
-    else dmg = dmg * (100 - d.def) / 100 - (d.vitDef + this.rng() * d.total.vit * 0.3);
+    else dmg = dmg * (100 - d.def) / 100 - (d.vitDef + this.rng() * d.total.vit * 0.3 * (1 + (d.b.vitDefPct ?? 0) / 100));
     dmg *= 1 - (d.b.raceRes?.[m.m.race] ?? 0) / 100;
     dmg *= 1 - (d.b.eleRes?.[el] ?? 0) / 100;
     dmg *= 1 - (d.b.dmgReducePct ?? 0) / 100;
+    dmg -= d.b.raceFlatRes?.[m.m.race] ?? 0; // 신의 가호, after DEF
+    // 마력 갑주: SP soaks physical blows — the fuller the SP, the more (RO energy coat)
+    if (!magic && this.hasBuff(t, 'ecoat') && t.sp > 0) {
+      const r = t.sp / d.maxSp;
+      const step = r > 0.8 ? 5 : r > 0.6 ? 4 : r > 0.4 ? 3 : r > 0.2 ? 2 : 1;
+      dmg *= 1 - step * 6 / 100;
+      t.sp = Math.max(0, t.sp - Math.ceil(d.maxSp * (0.5 + step * 0.5) / 100));
+      if (t.sp <= 0) t.buffs = t.buffs.filter((b) => b.id !== 'ecoat');
+    }
     const n = Math.max(1, Math.floor(dmg));
     this.emit({ t: 'hit', uid: t.uid, style: 'claw', element: el });
-    const ac = t.hero.skills.auto_counter ?? 0;
-    if (ac && !magic && m.m.range < 60 && !this.shunned(m) && this.rng() * 100 < ac * 6) {
-      this.emit({ t: 'status', uid: t.uid, text: '반격!', color: '#ffb0a0' });
-      this.after(80, () => this.resolvePhys(t, m, 100, t.d.weaponElement, 100, true, 'slash'));
+    // 독 반격: a poisonous melee blow is paid back in full; anything else may get an envenom in return
+    if (!magic && m.m.range < 60 && this.hasBuff(t, 'preact') && !this.shunned(m)) {
+      const pr = t.buffs.find((b) => b.id === 'preact')!;
+      if ((m.m.atkElement ?? m.m.element) === 'poison') {
+        t.buffs = t.buffs.filter((b) => b !== pr);
+        this.emit({ t: 'status', uid: t.uid, text: '독 반격!', color: '#e070b0' });
+        this.after(80, () => this.resolvePhys(t, m, 100 + pr.lv * 30, 'poison', 0, false, 'slash'));
+      } else if (t.prCounters > 0 && this.rng() < 0.5) {
+        if (--t.prCounters <= 0) t.buffs = t.buffs.filter((b) => b !== pr);
+        const ev = SKILLS.envenom;
+        this.after(80, () => this.releaseCast(t, { sk: ev, lv: Math.max(1, t.hero.skills.envenom ?? 1), target: m.uid, x: m.x, y: m.y, start: this.time, end: this.time }, true));
+      }
     }
     if (el === 'poison' && !magic && this.rng() * 100 < 8 * (1 - (d.b.statusRes?.poison ?? 0) / 100)) {
       t.poisonUntil = this.time + 8000; t.poisonNext = this.time + 1000;
@@ -2780,6 +3817,7 @@ export class World {
       if (def.kind === 'card') {
         this.s.totals.cards++;
         (this.s.book[t.m.id] ??= { kills: 0 }).card = true;
+        this.talkie(t.x, t.y - 20, `${def.name}다!`);
       }
     }
     void killer;
@@ -2830,6 +3868,12 @@ export class World {
       // gear grades (ENDGAME.md §4): the drop rolls a grade and options sized by the dropper's level
       const inst = addItem(this.s, id, 1, slots)!;
       applyGrade(inst, def, rollGrade(def, { boss: from.boss, legend: def.rarity === 'epic' || def.rarity === 'mvp' }, this.rng), from.lv, this.rng);
+      // RO 미감정: 희귀 이상 drops come unidentified unless a merchant in the party appraises them on pickup
+      const g = gradeOf(inst);
+      if (g === 'rare' || g === 'legend') {
+        if (partyPerks(this.s).appraise) this.log(`감정 — ${itemName(inst)}`, '#ffe0a0');
+        else inst.unid = true;
+      }
       this.onPersist();
       return { name: itemName(inst), zeny: 0 };
     }
@@ -2910,10 +3954,28 @@ export class World {
         }
       }
     }
+    // 얼음 벽: five blocks of ice no monster walks through (they stall behind it until it melts)
+    for (const g of this.grounds) {
+      if (g.done || g.sk.id !== 'ice_wall') continue;
+      for (const b of this.iceBlocks(g)) {
+        for (const m of this.mobs) {
+          if (m.state === 'dead' || m.m.flying) continue;
+          const dx = m.x - b.x, dy = m.y - b.y, d = Math.hypot(dx, dy), min = 11 + this.bodyR(m);
+          if (d < min) { const k = (min - d) / (d || 1); m.x += (d ? dx : 1) * k; m.y += (d ? dy : 0) * k; }
+        }
+      }
+    }
     for (const u of all) {
       u.x = clamp(u.x, 24, this.zone.w - 24);
       u.y = clamp(u.y, 70, this.zone.h - 24);
     }
+  }
+
+  /** the five blocks of an ice wall */
+  iceBlocks(g: GroundFx) {
+    const out: { x: number; y: number }[] = [];
+    for (let i = -2; i <= 2; i++) out.push({ x: g.x + g.ax * i * CELL, y: g.y + g.ay * i * CELL });
+    return out;
   }
 
   /** make the whole party focus a mob (tap on field) */

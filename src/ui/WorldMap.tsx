@@ -10,7 +10,7 @@ import { ELEMENTS, ELEMENT_KO, RACE_KO, SIZE_KO, elementMod } from '../game/data
 import { drawWorldMap } from '../render/worldmap.ts';
 import { itemIconURL } from '../render/icons.ts';
 import { audio } from '../audio/audio.ts';
-import { zoneKnown, gateLines, gateReady, openGate, canEnter, hoursText } from '../game/state.ts';
+import { zoneKnown, gateLines, gateReady, openGate, canEnter, hoursText, allHeroes } from '../game/state.ts';
 import { computeDerived } from '../game/stats.ts';
 
 type Fit = { label: string; cls: string };
@@ -244,7 +244,9 @@ export function MobModal(props: { id: string }) {
   const book = g.s.book[m.id];
   const w = weakness(m);
   const zone = ZONES.find((z) => z.mobs.some((e) => e.id === m.id) || z.boss === m.id || z.mvp === m.id || z.danger?.some((d) => d.id === m.id) || z.chest?.trap === m.id);
-  const unk = dangerUnknown(g.s, m.id);
+  // 간파 (wizard): a monster nobody has felled yet is seen through, with its hidden traits
+  const sense = allHeroes(g.s).some((h) => (h.skills.sense ?? 0) > 0);
+  const unk = dangerUnknown(g.s, m.id) && !sense;
   const hours = zone?.danger?.find((d) => d.id === m.id)?.hours;
   if (unk) return (
     // M10: a danger monster nobody has felled yet — only its shadow and the rumour
@@ -314,6 +316,14 @@ export function MobModal(props: { id: string }) {
           <div><b class="good">약점</b> {w.weak.length ? w.weak.map((x) => <span class="wchip"><ElChip el={x.e} /> {x.v}%</span>) : <span class="muted">없음</span>}</div>
           <div><b class="bad">내성</b> {w.resist.length ? w.resist.map((x) => <span class="wchip"><ElChip el={x.e} /> {x.v}%</span>) : <span class="muted">없음</span>}{w.neutral !== 100 && <span class="wchip"><ElChip el="neutral" /> {w.neutral}%</span>}</div>
         </div>
+        {sense && (
+          <div class="hint" style={{ marginTop: '6px' }}>
+            <b>간파</b> — 크리 저항 {Math.round((m.critRes ?? (m.boss === 'mvp' ? 0.5 : m.boss ? 0.25 : 0)) * 100)}%
+            {m.boss ? ' · 상태이상 대부분 무효' : ''}{m.element === 'undead' ? ' · 빙결·석화·중독 무효 · 정화 가능' : ''}{m.race === 'formless' ? ' · 중독 무효' : ''}
+            {m.hides ? ' · 다치면 숨는다 (탐지의 불·성광·탐지로 찾기)' : ''}{m.skills?.length ? ` · 스킬 ${m.skills.length}개 (침묵의 율법이 막는다)` : ''}
+            {m.race === 'insect' || m.race === 'demon' ? ' · 숨은 상대를 찾아낸다' : ''}
+          </div>
+        )}
         <div class="desc">{m.desc}</div>
         <div class="zc-sec">드롭 아이템</div>
         <div class="drop-cards">

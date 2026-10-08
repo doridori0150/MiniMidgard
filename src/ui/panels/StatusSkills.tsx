@@ -4,8 +4,12 @@ import { Bar, ElChip, HeroCanvas, HeroTabs, Win, fmt } from '../widgets.tsx';
 import { STAT_KEYS, type Hero, type StatKey } from '../../game/types.ts';
 import { STAT_KO, ELEMENT_KO, statHelp } from '../../game/data/elements.ts';
 import { CLASSES, lineage, SECOND_JOB_LV } from '../../game/data/classes.ts';
-import { SKILLS, skillsOf } from '../../game/data/skills.ts';
-import { raiseStat, autoDistribute, canLearn, learnSkill, canJobChange, skillReqMet, nextJobs } from '../../game/state.ts';
+import { SKILLS, SLOT_COUNT, skillsOf, slotable } from '../../game/data/skills.ts';
+import { ITEMS } from '../../game/data/items.ts';
+import {
+  raiseStat, autoDistribute, canLearn, learnSkill, canJobChange, skillReqMet, nextJobs, setSlot, toggleSlot, autoFillSlots,
+  learnQuest, questBlock, ARROW_RECIPES, craftArrow,
+} from '../../game/state.ts';
 import { computeDerived } from '../../game/stats.ts';
 import { buildOf, buildsFor } from '../../game/data/builds.ts';
 import { expNext, jobExpNext, statCost } from '../../game/exp.ts';
@@ -215,21 +219,59 @@ export function SkillsPanel() {
   const g = useGame();
   const h = g.hero;
   const [open, setOpen] = useState<string | null>(null);
+  // 스킬 슬롯: the slot being edited (its picker shows the learned active skills)
+  const [pick, setPick] = useState<number | null>(null);
   const cls = CLASSES[h.cls];
   const groups = lineage(h.cls);
   const list = groups.flatMap((c) => skillsOf(c));
   const canLearnTier = (c: string) => c !== 'novice' || h.cls === 'novice';
   const jobErr = canJobChange(h);
+  const slots = h.skillSlots ?? [];
+  const learnedActive = list.filter((sk) => slotable(sk) && (h.skills[sk.id] ?? 0) > 0);
   const reqText = (id: string) => {
     const sk = SKILLS[id];
     if (!sk.req) return '';
     return Object.entries(sk.req).map(([r, lv]) => `${SKILLS[r].name} ${h.skills[r] ?? 0}/${lv}`).join(', ');
   };
+  const put = (i: number, id: string | null) => {
+    const e = setSlot(h, i, id);
+    if (e) { g.toast(e, 'bad'); return; }
+    setPick(null);
+    g.commit('click');
+  };
   return (
     <Win title={`캐릭터 — ${h.name}`} onClose={() => g.openPanel(null)} right={<span class="small">포인트 <b style={{ color: '#ffe880' }}>{h.skillPts}</b></span>}>
       <div class="win-body">
-        <HeroTabs sel={g.sel} onSel={(i) => { g.sel = i; g.notify(); }} />
+        <HeroTabs sel={g.sel} onSel={(i) => { g.sel = i; setPick(null); g.notify(); }} />
         <GrowTabs />
+        {/* 스킬 슬롯: what the auto AI may use, left first */}
+        <div class="sk-slots" role="group" aria-label="스킬 슬롯">
+          {Array.from({ length: SLOT_COUNT }, (_, i) => {
+            const id = slots[i];
+            const sk = id ? SKILLS[id] : undefined;
+            return (
+              <button class={'sk-slot' + (pick === i ? ' on' : '') + (sk ? '' : ' empty')} aria-label={`슬롯 ${i + 1}${sk ? ` — ${sk.name}` : ' — 비어 있음'}`}
+                onClick={() => setPick(pick === i ? null : i)}>
+                {sk ? <img src={skillIconURL(sk.id)} alt="" /> : <span class="ph">{i + 1}</span>}
+                <small>{sk ? sk.name : '비어 있음'}</small>
+              </button>
+            );
+          })}
+        </div>
+        <div class="small muted sk-slot-hint">AI는 슬롯에 넣은 스킬만 씁니다. 공격 스킬은 왼쪽 슬롯부터. 패시브는 슬롯 없이 늘 적용됩니다.</div>
+        {pick !== null && (
+          <div class="box sk-pick">
+            <div class="row"><b>슬롯 {pick + 1}</b><span class="sp1" />{slots[pick] && <button class="btn sm" onClick={() => put(pick, null)}>비우기</button>}</div>
+            {learnedActive.length === 0 && <div class="muted small">배운 액티브 스킬이 없습니다.</div>}
+            <div class="sk-pick-list">
+              {learnedActive.map((sk) => (
+                <button class={'sk-pick-item' + (slots[pick] === sk.id ? ' on' : '')} onClick={() => put(pick, sk.id)}>
+                  <img src={skillIconURL(sk.id)} alt="" /><span>{sk.name}</span>{slots.includes(sk.id) && slots[pick] !== sk.id && <small>슬롯 {slots.indexOf(sk.id) + 1}</small>}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         {nextJobs(h).length > 0 && (
           <div class={jobErr ? 'hint' : 'box'} style={{ marginBottom: '8px' }}>
             {jobErr ? <><b>{h.cls === 'novice' ? '1차 전직' : `2차 전직(${nextJobs(h).map((j) => CLASSES[j].name).join('/')})`}</b> — {h.cls === 'novice' ? `직업 레벨 10 · 기본기 9 (지금 Job ${h.jobLv}, 기본기 ${h.skills.basic ?? 0})` : `직업 레벨 ${SECOND_JOB_LV} 필요 (지금 ${h.jobLv})`}</> : (
@@ -237,7 +279,7 @@ export function SkillsPanel() {
             )}
           </div>
         )}
-        <div class="small muted" style={{ margin: '0 2px 6px' }}>스킬 포인트 <b>{h.skillPts}</b>{h.skillPts === 0 ? ' — 직업 레벨이 오를 때마다 1점씩 얻습니다.' : ''}</div>
+        <div class="small muted" style={{ margin: '0 2px 6px' }}>스킬 포인트 <b>{h.skillPts}</b>{h.skillPts === 0 ? ' — 직업 레벨이 오를 때마다 1점씩 얻습니다.' : ''} · 퀘스트 스킬은 포인트 없이 직업 레벨과 비용으로 배웁니다.</div>
         {list.map((sk, idx) => {
           const lv = h.skills[sk.id] ?? 0;
           const header = idx === 0 || list[idx - 1].cls !== sk.cls ? (
@@ -248,27 +290,48 @@ export function SkillsPanel() {
           const can = canLearn(h, sk.id);
           const locked = !skillReqMet(h, sk.id) && lv === 0;
           const isActive = sk.kind !== 'passive';
-          const auto = h.auto.skills[sk.id] !== false;
+          const inSlot = slots.includes(sk.id);
+          const qErr = sk.quest && lv < sk.maxLv ? questBlock(g.s, h, sk.id) : null;
+          const toggleOn = !h.skillOff?.[sk.id];
           return (
             <>{header}<div class={'skill' + (locked ? ' locked' : '')} key={sk.id}>
-              {/* the icon + name is one button that opens the details (reachable by keyboard, separate from learn/auto) */}
+              {/* the icon + name is one button that opens the details (reachable by keyboard, separate from learn/slot) */}
               <button class="sk-mid" aria-expanded={open === sk.id} onClick={() => setOpen(open === sk.id ? null : sk.id)}>
               <img src={skillIconURL(sk.id)} alt="" />
               <div class="mid">
-                <div class="nm"><b>{sk.name}</b><span class="lv">Lv {lv}/{sk.maxLv}</span>{!isActive && <span class="chip">패시브</span>}{sk.cls === 'novice' && h.cls !== 'novice' && <span class="chip">초보자</span>}</div>
+                <div class="nm"><b>{sk.name}</b><span class="lv">Lv {lv}/{sk.maxLv}</span>{!isActive && <span class="chip">패시브</span>}{sk.quest && <span class="chip quest">퀘스트</span>}{sk.extra && <span class="chip">추가</span>}{sk.cls === 'novice' && h.cls !== 'novice' && <span class="chip">초보자</span>}</div>
                 {locked && <div class="small" style={{ color: '#c05050' }}>필요: {reqText(sk.id)}</div>}
-                {open === sk.id && <div class="desc">{sk.desc(Math.max(1, lv))}{lv < sk.maxLv && lv > 0 ? `\n\n▶ 다음 레벨: ${sk.desc(lv + 1).split('\n')[0]}` : ''}</div>}
+                {open === sk.id && <div class="desc">{sk.desc(Math.max(1, lv))}{lv < sk.maxLv && lv > 0 ? `\n\n▶ 다음 레벨: ${sk.desc(lv + 1).split('\n')[0]}` : ''}{sk.quest && lv < sk.maxLv ? `\n\n퀘스트: 직업 레벨 ${sk.quest.job} · ${sk.quest.zeny.toLocaleString()}z` : ''}</div>}
+                {open === sk.id && sk.id === 'arrow_craft' && lv > 0 && (
+                  <div class="sk-craft">
+                    {ARROW_RECIPES.map((r, i) => (
+                      <span class="row" style={{ gap: '4px' }}>
+                        <span class="small">{ITEMS[r.from].name} ×{r.n} → {ITEMS[r.to].name} <span class="muted">(보유 {g.s.stacks[r.from] ?? 0})</span></span>
+                        <span class="sp1" />
+                        <span class="btn xs" role="button" onClick={(e) => { e.stopPropagation(); const err = craftArrow(g.s, h, i); if (err) g.toast(err, 'bad'); else { g.toast(`${ITEMS[r.to].name} 제작!`, 'good'); g.commit('confirm'); } }}>제작</span>
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
               </button>
-              {isActive && lv > 0 && sk.auto !== 'none' && (
-                <button class="sk-auto" role="switch" aria-checked={auto} aria-label={`${sk.name} 자동 사용`} onClick={() => { h.auto.skills[sk.id] = !auto; g.commit('click'); }}>
-                  <span class={'toggle' + (auto ? ' on' : '')} /><small>{auto ? '자동' : '수동'}</small>
+              {slotable(sk) && lv > 0 && (
+                <button class={'sk-slotbtn' + (inSlot ? ' on' : '')} aria-pressed={inSlot} aria-label={`${sk.name} 슬롯 ${inSlot ? '빼기' : '넣기'}`}
+                  onClick={() => { const e = toggleSlot(h, sk.id); if (e) g.toast(e, 'bad'); else g.commit('click'); }}>
+                  <b>{inSlot ? `${slots.indexOf(sk.id) + 1}` : '+'}</b><small>{inSlot ? '슬롯 빼기' : '슬롯 넣기'}</small>
                 </button>
               )}
-              {/* one readable state per row (codex_r2 §4-7): MAX › 학습 종료 › 선행 필요 › 포인트 부족 › 배우기 */}
+              {sk.toggle && lv > 0 && (
+                <button class="sk-auto" role="switch" aria-checked={toggleOn} aria-label={`${sk.name} 켜기`} onClick={() => { (h.skillOff ??= {})[sk.id] = toggleOn; if (!h.skillOff[sk.id]) delete h.skillOff[sk.id]; g.commit('click'); }}>
+                  <span class={'toggle' + (toggleOn ? ' on' : '')} /><small>{toggleOn ? '켬' : '끔'}</small>
+                </button>
+              )}
+              {/* one readable state per row (codex_r2 §4-7): MAX › 학습 종료 › 선행 필요 › 퀘스트 › 포인트 부족 › 배우기 */}
               {lv >= sk.maxLv ? <span class="sk-state max">MAX</span>
                 : !canLearnTier(sk.cls) ? <span class="sk-state">학습 종료</span>
                 : locked ? <span class="sk-state">선행 필요</span>
+                : sk.quest ? <button class="sk-learn quest" disabled={!!qErr} title={qErr ?? ''} aria-label={`${sk.name} 퀘스트로 배우기`}
+                    onClick={() => { const e = learnQuest(g.s, h, sk.id); if (e) g.toast(e, 'bad'); else { g.toast(`${sk.name} — 퀘스트 완료!`, 'good'); g.commit('confirm'); } }}>퀘스트</button>
                 : h.skillPts <= 0 ? <span class="sk-state">포인트 부족</span>
                 : <button class="sk-learn" disabled={!can} aria-label={`${sk.name} 배우기`} onClick={() => { if (canLearn(h, sk.id) && learnSkill(h, sk.id)) g.commit('confirm'); }}>+1</button>}
             </div></>
@@ -280,6 +343,10 @@ export function SkillsPanel() {
           <div class="row" style={{ marginTop: (h.skills.heal ?? 0) > 0 ? '6px' : 0 }}>
             <span class="small muted" style={{ whiteSpace: 'normal' }}>포션·물약 자동 사용은 사냥 화면 하단 퀵슬롯에서 설정합니다.</span><span class="sp1" />
             <button class="btn sm" onClick={() => g.setModal({ kind: 'quick', slot: 0 })}>퀵슬롯 설정</button>
+          </div>
+          <div class="row" style={{ marginTop: '6px' }}>
+            <span class="small muted" style={{ whiteSpace: 'normal' }}>슬롯을 배운 스킬 중 쓸 만한 순서로 다시 채웁니다.</span><span class="sp1" />
+            <button class="btn sm" onClick={() => { autoFillSlots(h, buildOf(h.cls, h.build)?.skills ?? []); g.commit('click'); }}>슬롯 자동 채우기</button>
           </div>
         </div>
         <div class="small muted" style={{ marginTop: '6px' }}>{cls.desc}</div>

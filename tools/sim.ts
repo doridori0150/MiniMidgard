@@ -12,10 +12,10 @@
 // and the World gets the same clock for time-of-day paths). A boss still standing after 30 minutes counts as a lost fight.
 // The report lists level milestones (party min level), hours per region and per-map EXP/h.
 import { World } from '../src/game/world.ts';
-import { newGame, defaultLook, autoDistribute, learnSkill, jobChange, canJobChange, nextJobs, buy, addEquip, equip, newHero, equipAmmo, sellStack, canEquip, sellEquip, equippedBy, compound, cardFits, refine, refineInfo, removeStack } from '../src/game/state.ts';
+import { newGame, defaultLook, autoDistribute, learnSkill, learnPath, autoFillSlots, jobChange, canJobChange, nextJobs, buy, addEquip, equip, newHero, equipAmmo, sellStack, canEquip, sellEquip, equippedBy, compound, cardFits, refine, refineInfo, removeStack } from '../src/game/state.ts';
 import { ZONES, openers, type ZoneDef, type GateNeed } from '../src/game/data/zones.ts';
 import { MONSTERS, type MonsterDef } from '../src/game/data/monsters.ts';
-import { CLASSES, SECOND_JOB_OF } from '../src/game/data/classes.ts';
+import { CLASSES, SECOND_JOB_OF, lineage } from '../src/game/data/classes.ts';
 import { SKILLS } from '../src/game/data/skills.ts';
 import { ITEMS, SHOPS } from '../src/game/data/items.ts';
 import { computeDerived, ARMOR_SAFE, WEAPON_SAFE } from '../src/game/stats.ts';
@@ -44,10 +44,10 @@ const SKILL_PLAN: Partial<Record<ClassId, string[]>> = {
   acolyte: ['heal', 'heal', 'heal', 'divine_protection', 'divine_protection', 'divine_protection', 'increase_agi', 'divine_protection', 'divine_protection', 'blessing', 'heal', 'angelus', 'holy_light', 'demon_bane'],
   thief: ['double_attack', 'improve_dodge', 'double_attack', 'improve_dodge', 'double_attack', 'envenom', 'steal'],
   merchant: ['discount', 'overcharge', 'mammonite', 'pushcart', 'mammonite', 'cart_revolution', 'overcharge'],
-  knight: ['twohand_quicken', 'bowling_bash', 'bowling_bash', 'auto_counter', 'bowling_bash', 'twohand_quicken'],
-  wizard: ['jupitel', 'jupitel', 'jupitel', 'storm_gust', 'spell_mastery', 'lord_vermilion', 'meteor', 'mystic_amp'],
+  knight: ['twohand_quicken', 'twohand_quicken', 'auto_counter', 'bowling_bash', 'bowling_bash', 'bowling_bash', 'twohand_quicken'],
+  wizard: ['jupitel', 'jupitel', 'jupitel', 'storm_gust', 'lord_vermilion', 'meteor', 'spell_mastery', 'mystic_amp'],
   hunter: ['falcon_eyes', 'blitz_beat', 'blitz_beat', 'blitz_beat', 'steel_crow', 'beast_bane', 'ankle_snare', 'claymore_trap'],
-  priest: ['kyrie', 'kyrie', 'impositio', 'magnificat', 'resurrection', 'magnus', 'gloria'],
+  priest: ['kyrie', 'kyrie', 'impositio', 'magnificat', 'resurrection', 'sanctuary', 'magnus', 'gloria'],
   assassin: ['katar_mastery', 'katar_mastery', 'katar_mastery', 'katar_mastery', 'sonic_blow', 'enchant_poison', 'grimtooth', 'shadow_step'],
   blacksmith: ['adrenaline', 'over_thrust', 'weaponry_research', 'weapon_perfection', 'hammer_fall'],
 };
@@ -70,15 +70,18 @@ const GEAR: Partial<Record<ClassId, string[]>> = {
 function spendSkills(h: Hero) {
   const plan = SKILL_PLAN[h.cls] ?? [];
   let guard = 0;
+  const pts = h.skillPts;
   while (h.skillPts > 0 && guard++ < 100) {
     let done = false;
-    for (const id of plan) if (learnSkill(h, id)) { done = true; break; }
+    // the plan's next level, prerequisites on the way (RO trees)
+    for (const id of plan) if ((h.skills[id] ?? 0) < (SKILLS[id]?.maxLv ?? 0) && SKILLS[id] && lineage(h.cls).includes(SKILLS[id].cls) && learnPath(h, id, (h.skills[id] ?? 0) + 1)) { done = true; break; }
     if (!done) {
       // fall back: any learnable skill of the class
       const any = Object.values(SKILLS).find((s) => s.cls === h.cls && learnSkill(h, s.id));
       if (!any) break;
     }
   }
+  if (h.skillPts !== pts) autoFillSlots(h, plan);
 }
 
 // ───────── gear policy (flag "gear"): a crude but class-aware power score
@@ -271,6 +274,13 @@ function manage(s: GameState, w: World, wantCls: ClassId[]) {
   const pot = GEARUP ? bestPotion(minLv) : 'u_red';
   if (GEARUP && s.quick[0].id !== pot) s.quick[0] = { ...s.quick[0], id: pot };
   if ((s.stacks[pot] ?? 0) < 30 && s.zeny > 3000 + 30 * ITEMS[pot].price) { buy(s, pot, 30); spent.pots += 30 * ITEMS[pot].price; }
+  // skill catalysts (gemstones, traps) for the slotted skills that need them, like a player would keep
+  for (const h of s.heroes) for (const id of h.skillSlots ?? []) {
+    const c = id ? SKILLS[id]?.catalyst : undefined;
+    if (!c || !ITEMS[c.id] || c.id === 'k_holywater' || (s.stacks[c.id] ?? 0) >= 10) continue;
+    const n = c.id === 'k_trap' ? 40 : 10;
+    if (s.zeny > 5000 + n * ITEMS[c.id].price) { buy(s, c.id, n); spent.pots += n * ITEMS[c.id].price; }
+  }
   if (s.zeny < 5000 || GEARUP) earned.etc += sellEtc(s);
   gateCheck();
   chooseZone(minLv);

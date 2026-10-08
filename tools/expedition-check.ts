@@ -6,7 +6,7 @@
 //   scenario: lv@zone:cls,cls,cls[@night][!fight|!avoid]   e.g. 45@castlejail:knight,priest,wizard!fight
 //   no order suffix = run both orders; @night = the world clock starts at 21:00 (else 12:00)
 import { World, type MobUnit } from '../src/game/world.ts';
-import { newGame, defaultLook, autoDistribute, learnSkill, addEquip, equip, newHero, defaultTactics } from '../src/game/state.ts';
+import { newGame, defaultLook, autoDistribute, learnPath, autoFillSlots, addEquip, equip, newHero, defaultTactics } from '../src/game/state.ts';
 import { SKILLS } from '../src/game/data/skills.ts';
 import { MONSTERS } from '../src/game/data/monsters.ts';
 import { ITEMS } from '../src/game/data/items.ts';
@@ -54,10 +54,11 @@ for (const sc of runs) {
     const main = (x: { auto: string }) => x.auto === 'attack' || x.auto === 'aoe' || x.auto === 'heal' || x.auto === 'revive';
     const line = lineage(cls);
     for (const tier of [true, false]) for (let pass = 0; pass < 10 && h.skillPts > 0; pass++) {
-      for (const x of Object.values(SKILLS)) if (line.includes(x.cls as ClassId) && main(x) === tier && h.skillPts > 0) learnSkill(h, x.id);
+      for (const x of Object.values(SKILLS)) if (line.includes(x.cls as ClassId) && main(x) === tier && h.skillPts > 0) learnPath(h, x.id, (h.skills[x.id] ?? 0) + 1);
     }
     for (const id of [...(GEAR[cls] ?? []), ...ARMOR]) { if (!ITEMS[id]) continue; const inst = addEquip(s, id); equip(s, h, inst.uid); }
     h.tactics = { ...defaultTactics(cls), role: 'auto' };
+    autoFillSlots(h);
     s.heroes.push(h);
   });
   s.zone = zoneId;

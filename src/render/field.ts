@@ -17,6 +17,7 @@ import { MONSTERS } from '../game/data/monsters.ts';
 import { findEquip } from '../game/stats.ts';
 import { itemIcon } from './icons.ts';
 import { rgba } from './color.ts';
+import { drawGround, drawIceBlock, drawTalkie, drawCart } from './grounds.ts';
 
 interface Particle {
   x: number; y: number; z: number; vx: number; vy: number; vz: number;
@@ -80,7 +81,8 @@ export function heroLookDraw(s: GameState, h: Hero): HeroLookDraw {
     eyes: h.look.eyes, brows: h.look.brows, nose: h.look.nose, mouth: h.look.mouth,
     headTop: look('headTop'), headMid: look('headMid'), headLow: look('headLow'),
     wtype: wd?.wtype ?? 'none', weaponColor: wd?.icon.color, refine: w?.refine ?? 0,
-    shield: !!eq('shield'),
+    // a two-hander (or an assassin's off-hand weapon) in the shield slot is not a shield
+    shield: ITEMS[eq('shield')?.id ?? '']?.loc === 'shield',
     garment: g ? gcolors[g.id] ?? '#8a6a4a' : undefined,
     ammoColor: h.ammo ? ITEMS[h.ammo].icon.color : undefined,
   };
@@ -730,6 +732,102 @@ export class FieldRenderer {
         break;
       }
       case 'strafe': break;
+      // ── RO skill set (SKILLS_RO.md)
+      case 'teleport': case 'warp': {
+        // a column of light where the party vanishes / lands
+        const c2 = e.fx === 'warp' ? '#a0c8ff' : '#c8f0ff';
+        add(600, 'top', (ctx, q) => {
+          ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 1 - q;
+          const g = ctx.createLinearGradient(x, y - 100, x, y); g.addColorStop(0, rgba(c2, 0)); g.addColorStop(1, rgba(c2, 0.8));
+          ctx.fillStyle = g; ctx.fillRect(x - 12 * (1 - q * 0.6), y - 100, 24 * (1 - q * 0.6), 100);
+          ctx.strokeStyle = rgba(c2, 1 - q); ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(x, y, 18 + q * 14, 6 + q * 4, 0, 0, Math.PI * 2); ctx.stroke();
+          ctx.restore();
+        });
+        this.burst(x, y - 20, 8, c2, 'star', 80, 0.7, -60);
+        break;
+      }
+      case 'backslide': this.burst(x, y, 10, '#d8c8a0', 'smoke', 80, 0.5); break;
+      case 'counter': this.burst(x, y - 26, 6, '#ff8a7a', 'spark', 90, 0.4); break;
+      case 'hide': this.burst(x, y - 10, 12, '#8070a0', 'smoke', 70, 0.7); break;
+      case 'sight': this.burst(x, y - 30, 10, e.element === 'holy' ? '#fff3a0' : '#ff9a3a', 'glow', 70, 0.6, -30); break;
+      case 'stone': if (tgt) this.burst(tgt.x, ty, 12, '#b8b0a0', 'smoke', 90, 0.6); break;
+      case 'decagi': {
+        add(600, 'top', (ctx, q) => {
+          const pp = (e.to !== undefined && this.pos(e.to)) || { x, y, h: 20 };
+          ctx.save(); ctx.globalAlpha = 1 - q; ctx.strokeStyle = '#8aa0c0'; ctx.lineWidth = 2;
+          for (let i = 0; i < 3; i++) { const cx = pp.x - 8 + i * 8, cy = pp.y - pp.h - 4 + q * 16; ctx.beginPath(); ctx.moveTo(cx - 3, cy - 4); ctx.lineTo(cx, cy); ctx.lineTo(cx + 3, cy - 4); ctx.stroke(); }
+          ctx.restore();
+        });
+        break;
+      }
+      case 'crucis': {
+        add(700, 'ground', (ctx, q) => {
+          ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = (1 - q) * 0.8; ctx.fillStyle = '#fff3a0';
+          const s = 20 + q * 40; ctx.fillRect(x - 3, y - s * 0.5, 6, s); ctx.fillRect(x - s * 0.6, y - 3, s * 1.2, 6);
+          ctx.restore();
+        });
+        break;
+      }
+      case 'lex': {
+        add(700, 'top', (ctx, q) => {
+          const pp = (e.to !== undefined && this.pos(e.to)) || { x, y, h: 20 };
+          ctx.save(); ctx.strokeStyle = rgba('#ff90b0', 1 - q); ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.ellipse(pp.x, pp.y - pp.h - 6, 14 * (1 - q * 0.4), 5, q * 3, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+        });
+        break;
+      }
+      case 'waterball': {
+        const hits = Math.min(12, e.hits ?? 1);
+        const from = this.pos(e.from);
+        if (!from) break;
+        for (let i = 0; i < hits; i++) {
+          this.effects.push({ t0: now + i * 70, dur: 200, layer: 'top', draw: (ctx, q) => {
+            const b = (e.to !== undefined && this.pos(e.to)) || { x, y, h: 20 };
+            const px = from.x + (b.x - from.x) * q, py = from.y - 26 + (b.y - b.h * 0.5 - from.y + 26) * q - Math.sin(q * Math.PI) * 14;
+            ctx.save(); ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI * 2); ctx.fillStyle = '#5aa8ff'; ctx.fill();
+            ctx.strokeStyle = '#1e3a5a'; ctx.lineWidth = 1.4; ctx.stroke(); ctx.fillStyle = '#d8f0ff'; ctx.fillRect(px - 2, py - 3, 2, 2); ctx.restore();
+          } });
+        }
+        break;
+      }
+      case 'spike': {
+        const r = e.radius ?? 0;
+        const n = Math.max(3, (e.hits ?? 1) * 2);
+        for (let i = 0; i < n; i++) {
+          const a = i / n * Math.PI * 2, rr = r ? r * (0.2 + Math.random() * 0.7) : 6 + Math.random() * 6;
+          const bx = (tgt && !r ? tgt.x : x) + Math.cos(a) * rr, by = (tgt && !r ? (this.pos(e.to!)?.y ?? y) : y) + Math.sin(a) * rr * 0.5;
+          this.effects.push({ t0: now + i * 40, dur: 420, layer: 'top', draw: (ctx, q) => {
+            const hh = Math.sin(Math.min(1, q * 1.6) * Math.PI) * 24;
+            ctx.save(); ctx.fillStyle = '#a07a48'; ctx.strokeStyle = '#2e1c12'; ctx.lineWidth = 1.2;
+            ctx.beginPath(); ctx.moveTo(bx - 4, by); ctx.lineTo(bx, by - hh); ctx.lineTo(bx + 4, by); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore();
+          } });
+        }
+        break;
+      }
+      case 'boomerang': break;
+      case 'splasher': case 'trapburst': case 'firepillar': {
+        const r = e.radius ?? 36;
+        const c2 = e.fx === 'splasher' ? '#c050ff' : e.fx === 'firepillar' ? '#ff5a20' : col;
+        if (e.fx === 'firepillar') {
+          add(700, 'top', (ctx, q) => {
+            ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = q < 0.15 ? q / 0.15 : 1 - (q - 0.15) / 0.85;
+            const g = ctx.createLinearGradient(x, y - 110, x, y); g.addColorStop(0, 'rgba(255,120,40,0)'); g.addColorStop(1, 'rgba(255,90,30,0.9)');
+            ctx.fillStyle = g; ctx.fillRect(x - 13, y - 110, 26, 110); ctx.restore();
+          });
+        }
+        add(450, 'ground', (ctx, q) => {
+          ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = (1 - q) * 0.9;
+          const g = ctx.createRadialGradient(x, y, 0, x, y, r * (0.5 + q * 0.6));
+          g.addColorStop(0, rgba(c2, 0.7)); g.addColorStop(1, rgba(c2, 0));
+          ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(x, y, r * (0.5 + q * 0.6), r * 0.6 * (0.5 + q * 0.6), 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+        });
+        this.burst(x, y - 8, 14, c2, 'glow', 130, 0.5, -40);
+        break;
+      }
+      case 'trapset': this.burst(x, y, 5, '#d8c090', 'smoke', 40, 0.4); break;
+      case 'safetywall': case 'pneuma': case 'sanctuary': case 'firewall': case 'icewall': case 'quagmire': case 'venomdust':
+        this.burst(x, y - 6, 8, e.fx === 'safetywall' ? '#ff9ad8' : e.fx === 'sanctuary' ? '#9affb0' : e.fx === 'firewall' ? '#ff7a2a' : e.fx === 'icewall' ? '#bfefff' : e.fx === 'quagmire' ? '#8a6a3a' : e.fx === 'venomdust' ? '#b060e0' : '#ffffff', 'smoke', 70, 0.5);
+        break;
     }
   }
 
@@ -849,8 +947,9 @@ export class FieldRenderer {
     ctx.imageSmoothingEnabled = true;
     ctx.drawImage(art.ground, x0 * art.scale, y0 * art.scale, (x1 - x0) * art.scale, (y1 - y0) * art.scale, x0, y0, x1 - x0, y1 - y0);
 
-    // ground effects + cast circles + focus marker
+    // ground effects + placed skills (fire wall, sanctuary, traps…) + cast circles + focus marker
     this.runEffects(ctx, 'ground');
+    for (const g of w.grounds) drawGround(ctx, g, w.renderTime);
     for (const [uid, cst] of this.casts) {
       const p = this.pos(uid);
       if (!p) { this.casts.delete(uid); continue; }
@@ -888,6 +987,13 @@ export class FieldRenderer {
     }
     for (const g of w.ground) drawables.push({ y: g.y - 1, draw: () => this.drawGroundItem(ctx, g, nowMs) });
     for (const c of w.chests) drawables.push({ y: c.y, draw: () => this.drawChest(ctx, c, nowMs) });
+    for (const g of w.grounds) {
+      const rt = w.renderTime;
+      if (g.sk.id === 'ice_wall') {
+        const a = Math.max(0, Math.min(1, (rt - g.born) / 200, (g.until - rt) / 400));
+        w.iceBlocks(g).forEach((b, i) => drawables.push({ y: b.y, draw: () => drawIceBlock(ctx, b.x, b.y, a, g.id + i) }));
+      } else if (g.sk.id === 'talkie_box') drawables.push({ y: g.y, draw: () => drawTalkie(ctx, g, rt) });
+    }
     for (const h of w.heroes) {
       const sm = this.smooth.get(h.uid)!;
       drawables.push({ y: sm.y, draw: () => this.drawHeroUnit(ctx, h, sm, nowMs) });
@@ -979,8 +1085,26 @@ export class FieldRenderer {
     const dur = h.state === 'attack' ? (h.d.wtype === 'bow' ? BOW_RELEASE / 0.6 : h.d.wtype === 'spear' ? MELEE_CONTACT / 0.47 : MELEE_CONTACT / 0.5) : undefined;
     const pose = { state: flash > 0.5 && (state === 'idle' || state === 'ready') ? 'hurt' : state, t: state === 'idle' || state === 'ready' || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing };
     this.lastPose.set(h.uid, pose);
+    // a merchant's pushcart rolls along behind it (카트 교체: the flowered one)
+    if ((h.hero.skills.pushcart ?? 0) > 0 && state !== 'dead') drawCart(ctx, 0, 0, h.facing, (h.hero.skills.change_cart ?? 0) > 0 && !h.hero.skillOff?.change_cart, now, state === 'walk');
     ctx.fillStyle = 'rgba(20,30,20,0.28)';
     ctx.beginPath(); ctx.ellipse(0, 0, state === 'dead' ? 17 : 11, 3.8, 0, 0, Math.PI * 2); ctx.fill();
+    // hiding / cloaking: only a faint shimmer is left
+    const hid = h.buffs.find((b) => (b.id === 'hiding' || b.id === 'cloak') && b.until > w.time);
+    if (hid) ctx.globalAlpha *= hid.id === 'cloak' ? 0.3 + Math.sin(now / 160) * 0.06 : 0.22;
+    // 반격 자세: a red guard ring
+    if (h.counterUntil > w.time) {
+      ctx.save(); ctx.strokeStyle = '#ff6a5a'; ctx.lineWidth = 2.2; ctx.globalAlpha *= 0.8;
+      ctx.beginPath(); ctx.ellipse(0, -26, 20, 30, 0, -Math.PI * 0.9, Math.PI * 0.1); ctx.stroke(); ctx.restore();
+    }
+    // 탐지의 불 / 성광: a little flame (or light) circling the caster
+    for (const b of h.buffs) {
+      if (b.until <= w.time || (b.id !== 'sight' && b.id !== 'ruwach')) continue;
+      const an = now / 260;
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      ctx.drawImage(glow(b.id === 'sight' ? '#ff9a3a' : '#fff3a0'), Math.cos(an) * 22 - 8, -30 + Math.sin(an) * 8 - 8, 16, 16);
+      ctx.restore();
+    }
     if (rigSupports(look)) {
       // painted cut-out rig (already inked by the painter)
       ctx.save();
@@ -1035,12 +1159,32 @@ export class FieldRenderer {
     }
     // a danger monster leaving the map fades where it stands instead of collapsing
     if (m.vanish) { ctx.globalAlpha *= 1 - dead; dead = 0; }
+    // a hiding monster: barely there until it shows itself (or someone reveals it)
+    if (m.hiddenUntil > w.time && !dead) ctx.globalAlpha *= 0.14;
+    // 앵클 스네어: the rope around its feet
+    if (m.snareUntil > w.time && !dead) {
+      ctx.save(); ctx.strokeStyle = '#6a8a40'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.ellipse(0, -2, 13 * m.m.scale / 1.2, 4, 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+    }
+    const stoned = m.stoneUntil > w.time && !dead;
+    if (stoned) ctx.filter = 'grayscale(1) brightness(0.85) contrast(1.1)';
     const mpose = { state: m.state === 'spawn' ? 'idle' : m.vanish ? 'idle' : m.state, t, facing: m.facing, hurt, frozen: m.frozenUntil > w.time, spawn, dead };
     if (this.lowFx) drawMob(ctx, m.m.sprite, m.m.palette, mpose, m.m.scale);
     else {
       if (!dead) mobShadow(ctx, m.m.sprite, m.m.scale);
       const bw = 80 * m.m.scale, bh = (mobHeight(m.m.sprite) + 30) * m.m.scale;
       inked(ctx, bw, bh, bw / 2, bh - 12 * m.m.scale, 1.2, (c) => drawMob(c, m.m.sprite, m.m.palette, mpose, m.m.scale, false, false));
+    }
+    if (stoned) ctx.filter = 'none';
+    // 수면 Zz · 침묵 … · 영원의 율법 rune over the head
+    const top = -(mobHeight(m.m.sprite) * m.m.scale + 10);
+    if (!dead && (m.sleepUntil > w.time || m.silenceUntil > w.time || m.lex)) {
+      ctx.save();
+      ctx.font = "bold 10px 'Galmuri11', sans-serif"; ctx.textAlign = 'center'; ctx.lineWidth = 3; ctx.strokeStyle = '#2e1c12';
+      const txt = m.sleepUntil > w.time ? 'Zz' : m.silenceUntil > w.time ? '…' : '';
+      if (txt) { ctx.fillStyle = m.sleepUntil > w.time ? '#d0c0ff' : '#c0c0ff'; ctx.strokeText(txt, 10, top + Math.sin(now / 300) * 2); ctx.fillText(txt, 10, top + Math.sin(now / 300) * 2); }
+      if (m.lex) { ctx.strokeStyle = '#ff90b0'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.ellipse(0, top - 4, 9, 3.2, now / 500, 0, Math.PI * 2); ctx.stroke(); }
+      ctx.restore();
     }
     if (m.stunUntil > w.time && !dead) {
       const hh = mobHeight(m.m.sprite) * m.m.scale + 6;

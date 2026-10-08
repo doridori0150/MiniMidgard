@@ -6,7 +6,7 @@
 //   cls may carry a build and a role: acolyte+str (STR build), acolyte@caster (role override), mage@caster
 //   no scenarios = the default matrix (classic party, archer party, solo of each first job, acolyte builds in a crypt)
 import { World } from '../src/game/world.ts';
-import { newGame, defaultLook, autoDistribute, learnSkill, addEquip, equip, newHero, defaultTactics, heroRole } from '../src/game/state.ts';
+import { newGame, defaultLook, autoDistribute, learnSkill, learnPath, autoFillSlots, addEquip, equip, newHero, defaultTactics, heroRole } from '../src/game/state.ts';
 import { SKILLS } from '../src/game/data/skills.ts';
 import type { ClassId, HeroRole } from '../src/game/types.ts';
 
@@ -37,6 +37,7 @@ for (const sc of scenarios) {
   const rng = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
   const s = newGame('check', defaultLook('f'));
   s.heroes = []; s.partySlots = 3; s.stacks.u_red = 60; s.zeny = 200000;
+  s.stacks.k_bluegem = 50; s.stacks.k_redgem = 50; s.stacks.k_trap = 200; s.stacks.k_holywater = 20;
   const specs = list.split(',');
   specs.forEach((spec, i) => {
     const m = spec.match(/^([a-z]+)(\+str)?(?:@([a-z]+))?$/)!;
@@ -44,12 +45,16 @@ for (const sc of scenarios) {
     const h = newHero(s, `${cls}${i}`, defaultLook(i % 2 ? 'm' : 'f'));
     h.cls = cls; h.baseLv = lv; h.jobLv = cls === 'novice' ? 9 : 30; h.statPts = 48 + lv * 5; autoDistribute(h);
     if (m[2]) [h.stats.str, h.stats.int] = [h.stats.int, h.stats.str]; // same points, spent on STR instead of INT
-    // like a real player: max the main attack / heal skills first, then spread the rest one level per pass
+    // like a real player: max the main attack / heal skills first (prerequisites on the way), then spread the rest
     h.skillPts = 40;
     const main = (x: { auto: string }) => x.auto === 'attack' || x.auto === 'aoe' || x.auto === 'heal' || x.auto === 'revive';
-    for (const tier of [true, false]) for (let pass = 0; pass < 10 && h.skillPts > 0; pass++) {
-      for (const x of Object.values(SKILLS)) if (x.cls === cls && main(x) === tier && h.skillPts > 0) learnSkill(h, x.id);
+    for (let pass = 0; pass < 10 && h.skillPts > 0; pass++) {
+      for (const x of Object.values(SKILLS)) if (x.cls === cls && main(x) && !x.quest && h.skillPts > 0) learnPath(h, x.id, (h.skills[x.id] ?? 0) + 1);
     }
+    for (let pass = 0; pass < 10 && h.skillPts > 0; pass++) {
+      for (const x of Object.values(SKILLS)) if (x.cls === cls && h.skillPts > 0) learnSkill(h, x.id);
+    }
+    autoFillSlots(h);
     for (const id of GEAR[cls] ?? []) { const inst = addEquip(s, id); equip(s, h, inst.uid); }
     h.tactics = { ...defaultTactics(cls), role: (m[3] as HeroRole | undefined) ?? 'auto' };
     s.heroes.push(h);

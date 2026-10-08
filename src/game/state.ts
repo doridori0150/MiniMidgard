@@ -1,14 +1,14 @@
 import type { ClassId, EquipInst, EquipSlot, GameState, Hero, HeroRole, Look, StatKey, CostumeSlot, QuickSlot, Tactics, PartyOrders } from './types.ts';
 import { STAT_KEYS, QUICK_SLOTS } from './types.ts';
 import { CLASSES, FIRST_JOBS, SECOND_JOB_OF, SECOND_JOB_LV, lineage } from './data/classes.ts';
-import { SKILLS } from './data/skills.ts';
+import { SKILLS, SLOT_COUNT, slotable, type SkillDef } from './data/skills.ts';
 import { ITEMS } from './data/items.ts';
 import { ZONES, openers, type ZoneDef, type GateNeed } from './data/zones.ts';
 import { MONSTERS } from './data/monsters.ts';
 import { buildOf } from './data/builds.ts'; // also registers the build identity items and their drops
 import { awakenCost, nextStarId } from './data/cardstars.ts'; // also registers the ★2/★3 card forms
 import { START_STAT_POINTS, statCost } from './exp.ts';
-import { ARMOR_SAFE, WEAPON_SAFE, partyPerks } from './stats.ts';
+import { ARMOR_SAFE, WEAPON_SAFE, partyPerks, offhandOk } from './stats.ts';
 
 export const SAVE_KEY = 'minimidgard.save.v1';
 
@@ -90,8 +90,9 @@ export function newHero(s: GameState, name: string, look: Look): Hero {
     stats: { str: 1, agi: 1, vit: 1, int: 1, dex: 1, luk: 1 },
     statPts: START_STAT_POINTS,
     skills: { first_aid: 1 }, skillPts: 0,
+    skillSlots: ['first_aid', ...Array(SLOT_COUNT - 1).fill(null)],
     equip: {},
-    auto: { skills: {}, hpPotPct: 40, spPotPct: 0, healPct: 70 },
+    auto: { hpPotPct: 40, spPotPct: 0, healPct: 70 },
     tactics: defaultTactics('novice'),
   };
 }
@@ -113,6 +114,7 @@ export function newGame(name: string, look: Look): GameState {
     tutorial: {},
     quick: defaultQuick(),
     orders: defaultOrders(),
+    skillsV: 2,
   };
   const h = newHero(s, name, look);
   s.heroes.push(h);
@@ -181,6 +183,14 @@ export function load(): GameState | null {
       if (openers(z).some((o) => (s.progress[o]?.bossKills ?? 0) > 0)) s.unlocked.push(z.id);
     }
     for (const h of s.heroes) { h.tactics ??= defaultTactics(h.cls); h.tactics.role ??= 'auto'; }
+    // SKILLS_RO.md stage 1: classic RO trees (max levels, prerequisites, quest skills) and skill slots
+    if ((s.skillsV ?? 1) < 2) {
+      let refunded = 0;
+      for (const h of allHeroes(s)) refunded += migrateSkills(h);
+      s.skillsV = 2;
+      s.notice = `스킬이 원작(클래식) 스킬 트리로 바뀌었습니다. ${refunded ? `바뀌거나 사라진 스킬의 포인트 ${refunded}점을 돌려드렸어요. ` : ''}자동 사냥은 이제 스킬 슬롯 6칸에 넣은 스킬만 씁니다 (캐릭터 → 스킬).`;
+    }
+    for (const h of allHeroes(s)) if (!Array.isArray(h.skillSlots)) { h.skillSlots = Array(SLOT_COUNT).fill(null); autoFillSlots(h); }
     if (!s.quick) {
       // migrate the old per-hero potion sliders into quick slots
       const a = s.heroes[0]?.auto;
@@ -267,13 +277,42 @@ export function sendToBench(s: GameState, idx: number): string | null {
   return null;
 }
 
+/** 화살 제작 (archer quest skill): etc items whittled into an elemental quiver */
+export const ARROW_RECIPES: { from: string; n: number; to: string }[] = [
+  { from: 'e_glowdust', n: 6, to: 'am_fire' },
+  { from: 'e_wetjelly', n: 10, to: 'am_crystal' },
+  { from: 'e_icecore', n: 3, to: 'am_crystal' },
+  { from: 'e_pebble', n: 4, to: 'am_stone' },
+  { from: 'e_rockskin', n: 4, to: 'am_stone' },
+  { from: 'e_fluff', n: 12, to: 'am_wind' },
+  { from: 'e_galecore', n: 2, to: 'am_wind' },
+  { from: 'e_dew', n: 6, to: 'am_silver' },
+];
+export function craftArrow(s: GameState, h: Hero, i: number): string | null {
+  const r = ARROW_RECIPES[i];
+  if (!r) return '없는 제작법입니다.';
+  if (!((h.skills.arrow_craft ?? 0) > 0)) return '화살 제작을 배우지 않았습니다.';
+  if (!removeStack(s, r.from, r.n)) return `${ITEMS[r.from].name} ${r.n}개가 필요합니다.`;
+  addItem(s, r.to, 1);
+  return null;
+}
+
+/** 감정: free with an appraising merchant in the party, else one 돋보기 */
+export function appraise(s: GameState, uid: number): string | null {
+  const inst = s.equips.find((e) => e.uid === uid);
+  if (!inst?.unid) return '감정할 것이 없습니다.';
+  if (!partyPerks(s).appraise && !removeStack(s, 'k_lens')) return '돋보기가 없습니다 (도구 상점). 파티에 감정을 익힌 상인이 있으면 공짜입니다.';
+  delete inst.unid;
+  return null;
+}
+
 export function itemName(inst: EquipInst): string {
   const d = ITEMS[inst.id];
   const prefixes = inst.cards.filter(Boolean).map((c) => ITEMS[c!].prefix);
   const counts = new Map<string, number>();
   for (const p of prefixes) if (p) counts.set(p, (counts.get(p) ?? 0) + 1);
   const pre = [...counts].map(([p, n]) => (n > 1 ? ['', '', '더블 ', '트리플 ', '쿼드 '][n] + p : p)).join(' ');
-  return `${inst.refine > 0 ? '+' + inst.refine + ' ' : ''}${pre ? pre + ' ' : ''}${d.name}${inst.slots > 0 ? ` [${inst.slots}]` : ''}`;
+  return `${inst.unid ? '(미감정) ' : ''}${inst.refine > 0 ? '+' + inst.refine + ' ' : ''}${pre ? pre + ' ' : ''}${d.name}${inst.slots > 0 ? ` [${inst.slots}]` : ''}`;
 }
 
 /** classes whose gear this hero may wear (a 2nd job keeps its 1st job's gear) */
@@ -300,12 +339,14 @@ export function equip(s: GameState, h: Hero, uid: number, prefer?: EquipSlot): s
   const inst = s.equips.find((e) => e.uid === uid);
   if (!inst) return '아이템이 없습니다.';
   const d = ITEMS[inst.id];
+  if (inst.unid) return '감정하지 않은 장비입니다. (상인의 감정 · 돋보기)';
   const err = canEquip(h, inst.id);
   if (err) return err;
   const other = equippedBy(s, uid);
   if (other) unequipUid(s, other, uid);
   let slot: EquipSlot;
   if (d.loc === 'acc') slot = prefer === 'acc2' || (h.equip.acc1 !== undefined && h.equip.acc2 === undefined) ? 'acc2' : 'acc1';
+  else if (d.loc === 'weapon' && prefer === 'shield' && offhandOk(h, d.wtype, d.twoHand)) slot = 'shield'; // 이도류: the left hand
   else slot = d.loc as EquipSlot;
   const occupy: EquipSlot[] = [slot, ...((d.alsoHead ?? []) as EquipSlot[])];
   if (d.twoHand) occupy.push('shield');
@@ -364,18 +405,176 @@ export function canLearn(h: Hero, id: string): boolean {
   const sk = SKILLS[id];
   if (!sk) return false;
   const cur = h.skills[id] ?? 0;
-  if (cur >= sk.maxLv || h.skillPts <= 0) return false;
+  if (cur >= sk.maxLv) return false;
+  if (sk.quest) return false; // quest skills: learnQuest
+  if (h.skillPts <= 0) return false;
   if (!lineage(h.cls).includes(sk.cls) || sk.cls === 'novice' && h.cls !== 'novice') return false;
   return skillReqMet(h, id);
+}
+
+/** why a quest skill can't be taken right now (null = it can) */
+export function questBlock(s: GameState, h: Hero, id: string): string | null {
+  const sk = SKILLS[id];
+  if (!sk?.quest) return '퀘스트 스킬이 아닙니다.';
+  if ((h.skills[id] ?? 0) >= sk.maxLv) return '이미 배웠습니다.';
+  if (!lineage(h.cls).includes(sk.cls) || sk.cls === 'novice' && h.cls !== 'novice') return '이 직업의 퀘스트가 아닙니다.';
+  if (!skillReqMet(h, id)) return '선행 스킬이 필요합니다.';
+  // the job level counts in the skill's own job; a later job has done it already
+  if (h.cls === sk.cls && h.jobLv < sk.quest.job) return `직업 레벨 ${sk.quest.job} 필요 (지금 ${h.jobLv})`;
+  if (s.zeny < sk.quest.zeny) return `퀘스트 비용 ${sk.quest.zeny.toLocaleString()}z가 모자랍니다.`;
+  return null;
+}
+
+/** finish an RO quest skill: no skill point, the job level and a fee */
+export function learnQuest(s: GameState, h: Hero, id: string): string | null {
+  const err = questBlock(s, h, id);
+  if (err) return err;
+  s.zeny -= SKILLS[id].quest!.zeny;
+  h.skills[id] = 1;
+  fillSlot(h, id);
+  return null;
 }
 
 export function learnSkill(h: Hero, id: string): boolean {
   if (!canLearn(h, id)) return false;
   h.skills[id] = (h.skills[id] ?? 0) + 1;
   h.skillPts--;
-  const sk = SKILLS[id];
-  if (sk.auto !== 'none' && h.auto.skills[id] === undefined) h.auto.skills[id] = true;
+  if (h.skills[id] === 1) fillSlot(h, id);
   return true;
+}
+
+/** tools / QA: learn `id` up to `lv`, prerequisites first, while points last (quest skills are simply granted) */
+export function learnPath(h: Hero, id: string, lv = SKILLS[id]?.maxLv ?? 1): boolean {
+  const sk = SKILLS[id];
+  if (!sk || !lineage(h.cls).includes(sk.cls) || (sk.cls === 'novice' && h.cls !== 'novice')) return false;
+  for (const [r, rl] of Object.entries(sk.req ?? {})) if (!learnPath(h, r, rl)) return false;
+  if (sk.quest) { if (!((h.skills[id] ?? 0) > 0)) { h.skills[id] = 1; fillSlot(h, id); } return true; }
+  while ((h.skills[id] ?? 0) < Math.min(lv, sk.maxLv) && learnSkill(h, id)) { /* one level at a time */ }
+  return (h.skills[id] ?? 0) >= Math.min(lv, sk.maxLv);
+}
+
+// ───────── 스킬 슬롯: the auto AI uses only the active skills in these 6 slots (left first = attack priority)
+function slotsOf(h: Hero): (string | null)[] {
+  if (!Array.isArray(h.skillSlots)) h.skillSlots = [];
+  while (h.skillSlots.length < SLOT_COUNT) h.skillSlots.push(null);
+  if (h.skillSlots.length > SLOT_COUNT) h.skillSlots.length = SLOT_COUNT;
+  return h.skillSlots;
+}
+export function isSlotted(h: Hero, id: string): boolean { return slotsOf(h).includes(id); }
+/** a freshly learned active skill takes the first empty slot */
+export function fillSlot(h: Hero, id: string) {
+  if (!slotable(SKILLS[id]) || isSlotted(h, id)) return;
+  const sl = slotsOf(h);
+  const i = sl.indexOf(null);
+  if (i >= 0) sl[i] = id;
+}
+/** put a learned active skill in slot i (it leaves any other slot — the two swap), or clear slot i */
+export function setSlot(h: Hero, i: number, id: string | null): string | null {
+  const sl = slotsOf(h);
+  if (i < 0 || i >= SLOT_COUNT) return '없는 슬롯입니다.';
+  if (id !== null) {
+    if (!slotable(SKILLS[id])) return '패시브는 슬롯 없이 늘 적용됩니다.';
+    if (!((h.skills[id] ?? 0) > 0)) return '배우지 않은 스킬입니다.';
+    const j = sl.indexOf(id);
+    if (j >= 0) sl[j] = sl[i];
+  }
+  sl[i] = id;
+  return null;
+}
+/** slot a skill into the first free slot, or take it out */
+export function toggleSlot(h: Hero, id: string): string | null {
+  const sl = slotsOf(h);
+  const j = sl.indexOf(id);
+  if (j >= 0) { sl[j] = null; return null; }
+  const i = sl.indexOf(null);
+  if (i < 0) return '슬롯 6칸이 모두 찼습니다. 슬롯을 눌러 비우거나 바꾸세요.';
+  return setSlot(h, i, id);
+}
+
+/** how much the AI wants a skill in a slot: heals for healers, the strongest attacks, then buffs, control, utilities */
+function slotScore(h: Hero, sk: SkillDef, lv: number): number {
+  const role = heroRole(h);
+  const base: Record<string, number> = {
+    heal: role === 'healer' ? 90 : 55, revive: 80, attack: 60, aoe: 58, buff: 44, tank: role === 'tank' ? (sk.kind === 'stance' ? 36 : 70) : 18, cc: 30, support: 16, none: 0,
+  };
+  let v = (base[sk.auto] ?? 0) + CLASSES[sk.cls].tier * 6 + lv;
+  // among attacks, the one that hits harder at its level first (a Lv 5 bolt over a splash of napalm beat)
+  if (sk.auto === 'attack' || sk.auto === 'aoe') {
+    const hits = sk.hits ? sk.hits(lv) : 1;
+    v += Math.min(25, (sk.fixed ? 300 : sk.mult ? sk.mult(lv) : 100) * hits / 40);
+  }
+  if (sk.id === 'first_aid' && h.cls !== 'novice') v -= 60;
+  if (sk.extra) v -= 2;
+  return v;
+}
+/** refill all 6 slots best-first from the learned active skills (`prefer`: these first, e.g. a build's skills) */
+export function autoFillSlots(h: Hero, prefer: string[] = [], only?: (id: string) => boolean) {
+  // (first aid's 5 HP is only worth a slot for a novice)
+  const learned = Object.entries(h.skills).filter(([id, lv]) => lv > 0 && slotable(SKILLS[id]) && (!only || only(id)) && (id !== 'first_aid' || h.cls === 'novice'));
+  learned.sort((a, b) => {
+    const pa = prefer.indexOf(a[0]), pb = prefer.indexOf(b[0]);
+    if (pa >= 0 || pb >= 0) return (pa < 0 ? 99 : pa) - (pb < 0 ? 99 : pb);
+    return slotScore(h, SKILLS[b[0]], b[1]) - slotScore(h, SKILLS[a[0]], a[1]);
+  });
+  const sl = slotsOf(h);
+  for (let i = 0; i < SLOT_COUNT; i++) sl[i] = learned[i]?.[0] ?? null;
+}
+
+/** skills that used to cost points and are RO quest skills now: the points come back, the skill stays (Lv 1) */
+export const QUEST_PAID_BEFORE = ['sand_attack', 'holy_light', 'cart_revolution'];
+
+/**
+ * Save migration to the classic trees (SKILLS_RO.md): unknown skills and levels over the new max are refunded, former
+ * paid skills that are quest skills now are refunded and kept, and a skill whose RO prerequisites aren't met first tries
+ * to buy them from the hero's points (so a build survives), else it is refunded. The old per-skill auto toggles become
+ * the 6 slots, best first. Returns the points refunded.
+ */
+export function migrateSkills(h: Hero): number {
+  let refund = 0;
+  for (const [id, lv] of Object.entries(h.skills)) {
+    const sk = SKILLS[id];
+    if (!sk) { refund += lv; delete h.skills[id]; continue; }
+    if (QUEST_PAID_BEFORE.includes(id) && lv > 0) { refund += lv; h.skills[id] = 1; continue; }
+    if (lv > sk.maxLv) { refund += lv - sk.maxLv; h.skills[id] = sk.maxLv; }
+  }
+  h.skillPts += refund;
+  // points needed to bring `id` up to `lv` with its own prerequisites (Infinity if this class can't)
+  const cost = (id: string, lv: number, seen: Set<string>): number => {
+    const sk = SKILLS[id];
+    if ((h.skills[id] ?? 0) >= lv) return 0;
+    if (!sk || seen.has(id) || !lineage(h.cls).includes(sk.cls) || sk.quest || (sk.cls === 'novice' && h.cls !== 'novice')) return Infinity;
+    seen.add(id);
+    let c = lv - (h.skills[id] ?? 0);
+    for (const [r, rl] of Object.entries(sk.req ?? {})) c += cost(r, rl, seen);
+    return c;
+  };
+  const buy = (id: string, lv: number) => {
+    for (const [r, rl] of Object.entries(SKILLS[id].req ?? {})) buy(r, rl);
+    const have = h.skills[id] ?? 0;
+    if (have < lv) { h.skillPts -= lv - have; h.skills[id] = lv; }
+  };
+  for (let changed = true, guard = 0; changed && guard < 60; guard++) {
+    changed = false;
+    for (const id of Object.keys(h.skills)) {
+      const lv = h.skills[id];
+      if (!(lv > 0) || skillReqMet(h, id)) continue;
+      const reqs = Object.entries(SKILLS[id].req ?? {});
+      const need = reqs.reduce((a, [r, rl]) => a + cost(r, rl, new Set()), 0);
+      if (need <= h.skillPts) for (const [r, rl] of reqs) buy(r, rl);
+      else {
+        const paid = SKILLS[id].quest ? 0 : lv; // quest skills cost no points
+        h.skillPts += paid; refund += paid;
+        delete h.skills[id];
+      }
+      changed = true;
+    }
+  }
+  // the old auto on/off toggles → slots: the active skills that were on, best first
+  const was = h.auto.skills ?? {};
+  h.skillSlots = Array(SLOT_COUNT).fill(null);
+  autoFillSlots(h, [], (id) => was[id] !== false);
+  delete h.auto.skills;
+  return refund;
 }
 
 /** classes this hero can change into next */
@@ -461,7 +660,8 @@ export function buyPrice(s: GameState, id: string): number {
 export function sellPrice(s: GameState, id: string, refine = 0): number {
   const d = ITEMS[id];
   const base = d.kind === 'card' ? ({ rare: 800, epic: 3000, mvp: 10000 } as Record<string, number>)[d.rarity ?? 'rare'] ?? 800 : Math.floor(d.price / 2);
-  return Math.floor(base * (1 + partyPerks(s).overcharge / 100)) + refine * 50;
+  const pk = partyPerks(s);
+  return Math.floor(base * (1 + pk.overcharge / 100) * (d.kind === 'equip' ? 1 + pk.vending / 100 : 1)) + refine * 50;
 }
 
 export function buy(s: GameState, id: string, qty = 1): string | null {
@@ -505,7 +705,7 @@ export function isKeepItem(id: string): boolean {
       for (const n of z.gate?.need ?? []) if (n.kind === 'item') gateItems.add(n.id);
     }
   }
-  return id.startsWith('r_') || !!ITEMS[id]?.rarity || gateItems.has(id);
+  return id.startsWith('r_') || id.startsWith('k_') || !!ITEMS[id]?.rarity || gateItems.has(id);
 }
 
 export function sellAllEtc(s: GameState): { count: number; zeny: number } {
