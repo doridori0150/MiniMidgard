@@ -139,7 +139,8 @@
           "frames": 1,
           "standing": []
         }
-      }
+      },
+      "weapon": "separate"
     },
     "weapon": {
       "category": "image",
@@ -175,7 +176,6 @@
         "성직자 흰 로브"
       ],
       "cautions": [
-        "무기(나무 지팡이 끝에 파란 구슬)는 프레임에 그리지 않는다. 손은 빈 주먹으로 쥘 자리만 남기고, 무기는 따로 된 그림을 hand 기준점에 얹는다.",
         "시전 프레임은 지팡이를 앞으로 드는 자세(빛·마법진은 이펙트가 그린다)"
       ],
       "assets": {
@@ -183,7 +183,8 @@
           "concept": "가벼운 마법사. 공격은 지팡이로 툭 치는 근접 평타"
         }
       },
-      "line": "mage"
+      "line": "mage",
+      "weapon": "나무 지팡이 끝에 파란 구슬"
     },
     {
       "id": "acolyte_female",
@@ -200,9 +201,7 @@
         }
       },
       "line": "acolyte",
-      "cautions": [
-        "무기(은빛 꽃 모양 머리가 달린 철퇴)는 프레임에 그리지 않는다. 손은 빈 주먹으로 쥘 자리만 남기고, 무기는 따로 된 그림을 hand 기준점에 얹는다."
-      ]
+      "weapon": "은빛 꽃 모양 머리가 달린 철퇴"
     },
     {
       "id": "archer_male",
@@ -213,7 +212,6 @@
         "헌터의 위장 무늬 망토(2차 직업)"
       ],
       "cautions": [
-        "무기(나무 리커브 활)는 프레임에 그리지 않는다. 손은 빈 주먹으로 쥘 자리만 남기고, 무기는 따로 된 그림을 hand 기준점에 얹는다.",
         "활은 따로 된 무기 그림이다. 활을 쥔 손(앞손) 기준점에 붙는다.",
         "attack은 시위를 당겼다 놓는 빈손 동작(뒷손). 화살은 이펙트가 그린다."
       ],
@@ -222,7 +220,8 @@
           "concept": "궁수. 공격은 활시위를 당겨 놓기(접촉 프레임 = 놓는 순간)"
         }
       },
-      "line": "archer"
+      "line": "archer",
+      "weapon": "나무 리커브 활"
     },
     {
       "id": "thief_male",
@@ -238,9 +237,7 @@
         }
       },
       "line": "thief",
-      "cautions": [
-        "무기(단검(기존 dagger 무기 그림 사용))는 프레임에 그리지 않는다. 손은 빈 주먹으로 쥘 자리만 남기고, 무기는 따로 된 그림을 hand 기준점에 얹는다."
-      ]
+      "weapon": "단검(기존 dagger 무기 그림)"
     },
     {
       "id": "merchant_female",
@@ -256,9 +253,7 @@
         }
       },
       "line": "merchant",
-      "cautions": [
-        "무기(손도끼)는 프레임에 그리지 않는다. 손은 빈 주먹으로 쥘 자리만 남기고, 무기는 따로 된 그림을 hand 기준점에 얹는다."
-      ]
+      "weapon": "손도끼"
     }
   ],
   "batches": [
@@ -294,8 +289,6 @@
     "recordDir": "docs/art-production/hero-sprites/",
     "manifest": "docs/art-production/hero-sprites/manifest.json",
     "records": [
-      "game-manifest.json — 게임이 읽는 minimidgard.sprites/1 (characters.<line>_<gender>.frames, weapons, headgear, renderContract는 src/assets/sprites/manifest.json과 같게)",
-      "manifest.json — 표준 기록. game-manifest.json에서 `node tools/asset-kit-sprites.mjs --root . --in docs/art-production/hero-sprites/game-manifest.json --out docs/art-production/hero-sprites/manifest.json`으로 만든다",
       "prompts/",
       "generation.json",
       "verification/"
@@ -304,7 +297,10 @@
       "preview_vs_lineup.png",
       "preview_frames.png",
       "preview_animation.gif"
-    ]
+    ],
+    "gameManifest": "docs/art-production/hero-sprites/game-manifest.json",
+    "gameFormat": "minimidgard.sprites/1",
+    "converter": "node tools/asset-kit-sprites.mjs --root . --in docs/art-production/hero-sprites/game-manifest.json --out docs/art-production/hero-sprites/manifest.json"
   },
   "dont": [
     "기존 novice_female·swordsman_male 프레임과 src/ 아래 파일은 바꾸지 않는다(납품은 docs/art-production/hero-sprites/에만).",
