@@ -9,7 +9,7 @@ for(const [id,w] of Object.entries(M.weapons)){const file=path.join(base,w.image
 for(const a of Object.values(out.attachments))a.sha256=sha(fs.readFileSync(path.join(root,a.file)));
 out.bundles=Object.entries(M.characters).map(([id,c])=>({id,character:id,animations:Object.keys(M.animations),weapon:c.defaultWeapon,headgear:Object.keys(M.headgear)}));
 out.source.gameManifest=path.join(base,'game-manifest.json');out.source.gameManifest_sha256=sha(fs.readFileSync(path.join(R,'game-manifest.json')));out.source.enrichment='record.mjs: only source/scale, hashes, raster bounds, weapon sheets and bundle evidence added after standard converter.';
-// Batch B is explicitly outside the requested fix3 scope; do not fabricate it.
-out.excluded=[...['thief_male','merchant_female'].flatMap(id=>Object.keys(M.animations).map(kind=>({id,kind,reason:'Batch B; outside hero-sprites-a-fix3 requested scope, not produced or reviewed.'}))),{id:'axe',kind:'weapon',reason:'Batch B; outside requested fix3 scope.'}];
-out.scope={request:'docs/art-requests/hero-sprites-a-fix3.md',characters:Object.keys(M.characters),unresolved:M.fix3?.unresolved??[],note:'Exclusions are future batch B, not rejected fix3 frames. Unscoped checker evidence preserved in verification/check-unscoped-spec.json.'};
+// Fix4 adopts both batch B characters; axe is already delivered.
+out.excluded=[];
+out.scope={request:'docs/art-requests/hero-sprites-fix4.md',characters:Object.keys(M.characters),unresolved:M.fix4?.unresolved??[],note:'All seven characters and six weapons delivered. Earlier fix3/batch B rejection records are historical; current adoption is recorded in fix4.'};
 fs.writeFileSync(path.join(R,'manifest.json'),JSON.stringify(out,null,2)+'\n');console.log('Added reproducible frame/source/layer hashes and uniform-scale evidence.');

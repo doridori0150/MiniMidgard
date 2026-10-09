@@ -1,6 +1,6 @@
-# 영웅 통짜 스프라이트 — Batch A / fix3
+# 영웅 통짜 스프라이트 — 수정 4 / A+B
 
-현재 납품은 **수정 3 부분 완료본: 4프레임 채택, 검사 걷기 2프레임 미해결**이다. 표준 검사 오류 0 · 주의 2 · 통과 466이며, 기술 검사 통과가 거절 프레임의 아트 승인을 뜻하지 않는다. 최신 상태는 마지막 **수정 3** 절을 따른다.
+현재 납품은 **수정 4 완료본: 검사 후보 2장과 도둑·상인 각 14장 채택, 총 7명·98프레임**이다. 표준 검사 **오류 0 · 누락 0 · 주의 5 · 통과 648**, 별도 장착·보존 검사 PASS다. 최신 결과는 마지막 **수정 4** 절을 따른다. 아래 수정 1~3 및 배치 B 절은 당시의 이력이다.
 
 ## 수정 1 이력
 
@@ -181,3 +181,50 @@ ffmpeg -hide_banner -loglevel error -y -framerate 50 -i docs/art-production/hero
 ## 배치 B (2026-10-09): 부분 납품
 
 도끼만 같은 game-manifest.json에 추가했습니다. thief_male·merchant_female은 최초 생성 뒤 두 번 재생성했으나 반대발 접지 동작이 계속 누락되어 요청서 규칙에 따라 반려했습니다. 검토용 28프레임과 마스크·그립은 rejected/b/, 장비 검수 시트는 verification/review_thief_male.png 및 verification/review_merchant_female.png에 보존했습니다. 전체 검사는 미납 14동작으로 FAIL입니다. 자세한 결과: [배치 B 보고서](verification/b-report.md). 기존 다섯 캐릭터와 src/는 변경하지 않았습니다.
+
+
+## 수정 4 — 반려 후보 보정·채택
+
+2026-10-09. 요청서 `docs/art-requests/hero-sprites-fix4.md`. `rejected/fix3/swordsman/`의 걷기 후보 2장과 `rejected/b/`의 도둑·상인 28장을 채택했다. 반려 폴더의 원본은 그대로 보존했다. 이번에는 생성 모델을 호출하지 않고, 요청서가 허용한 픽셀 처리와 기존 프레임 다리 합성으로 작업했다.
+
+### 처리 수치와 채택 결과
+
+| 대상 | 처리 | 확인 결과 |
+|---|---|---|
+| 검사 walk_1 | 가로 배율 1.0. 위쪽 y 이동 +4px, 어깨 부근 최대 +8px, 아래쪽으로 갈수록 이동량을 줄여 y=360 고정 | top 55, 어깨 214, 옷깃 225. 머리 마스크 156×151px |
+| 검사 walk_3 | 가로 배율 1.0. 위쪽 y 이동 +5px, 어깨 부근 최대 +9px, y=360 고정 | top 55, 어깨 215, 옷깃 224. 머리 마스크 157×152px |
+| 도둑 walk_2 | 후보 상반신 보존. idle_0의 다리 픽셀을 각각 추출해 −20°/+20° 회전하고 골반 아래에 재배치. 먼 다리를 앞 접지, 가까운 다리를 뒤로 배치 | 상반신 RGBA 차이 0. 머리 마스크·손 오버레이와 hand/crown/side 그대로 |
+| 상인 walk_2 | 같은 방식으로 idle_0 다리만 합성. 앞치마 가장자리 아래에서 연결 | 상반신 RGBA 차이 0. 머리 마스크·손 오버레이와 hand/crown/side 그대로 |
+| 도둑 hurt_0 | 전신·머리 마스크·손 오버레이를 모두 **1.25배**, 기준점도 같은 변환. y −0.6px의 서브픽셀 정렬 | 표준 검사와 같은 alpha≥16 기준 높이 **250px**, 바닥 y=360. alpha≥32 기준은 249px로 경계 안티앨리어싱에 따른 1px 차이 |
+| 도둑 attack_0 | idle_0의 머리 폭 기준으로 전신 **179/169 = 1.0591716배**, 원점 (220,360) 유지 | 작은 머리의 비율 차이를 보정. 손·머리장식 기준점, 마스크·오버레이 함께 변환 |
+
+검사의 이웃 walk_0·walk_2는 어깨 y=217/216, 옷깃 y=223이다. 보정 두 장 모두 ±3px 이내다. 머리 크기는 연결된 머리 마스크 영역으로 측정했으며 기준 160×153/154px 대비 폭·높이 모두 ±3% 이내다. crown은 바보털 뿌리의 머리통 윗선에 두었다. 새 기준점과 행별 이동 함수는 `source/fix4/annotations.json`에 기록했다.
+
+다리 합성 첫 방식(다리 픽셀의 수평 변형)은 교차 부위가 찌그러져 제외했다. 두 번째 방식은 idle_0 다리 합성이며, 부츠 끝 방향과 골반 이음매를 확인하며 회전·배치·추출 범위를 조정했다. 최종 앞발 바닥은 y=360, 뒤로 간 발은 y=352다. 다리의 세로 정렬은 골반을 고정하고 각 부츠 하단을 이 높이에 맞춘다. 실제 입력/출력 골반 좌표와 회전각은 annotations에 있다. 첫 결과는 `source/fix4/{thief,merchant}-walk_2-attempt1.png`에 남겼다. 새로 합성한 영역은 다리뿐이며, walk_1·walk_3 등 나머지 채택 프레임은 후보를 그대로 복사했다.
+
+`game-manifest.json`에는 `thief_male`(dagger), `merchant_female`(axe)을 추가했다. `record.mjs`의 제외 목록은 비웠다. 기존 다섯 캐릭터에서는 명시적으로 요청한 검사 walk_1·walk_3의 그림·마스크·오버레이·기준점만 바뀌었다. 도끼와 다른 기존 장비도 보존했다.
+
+### 검증과 남은 주의
+
+- 표준 변환 → 기록 보강 → 지정 검사: **오류 0 · 누락 0 · 제외 0 · 주의 5 · 통과 648**. `check.json`, `verification/fix4-check-log.txt`.
+- 별도 검증: **PASS**, 98프레임·784장착 조합, 캔버스 밖 장비 픽셀 0, 머리 마스크 누출 0. 시전 14장의 무기 유지, 접촉 시점 140ms와 수평 무기 축, 기준점의 유한 좌표를 확인했다. `verification/fix4-checks.json`.
+- 주의 5건은 마법사·궁수·도둑·상인의 낮은 피격 자세 높이 4건, 도둑 attack_0→attack_1의 큰 손 이동 1건이다. 직접 확인한 준비→찌르기 동작에 해당하므로 자세나 검사 규칙을 변경해 숨기지 않았다.
+- 전체 머리 마스크/장비 검수 및 세 캐릭터의 14프레임 시트에서 오른쪽 3/4 몸 방향, 같은 무기 팔, 잎·머리핀 위치를 확인했다. 도둑·상인은 먼 다리/가까운 다리를 구분해 앞 접지가 반대로 바뀌는지 검토했다. 도둑·상인의 walk_2와 walk_0 보폭 차이, 생성 시트 간 선과 자세의 작은 차이는 남아 있다. 새 반려 프레임이나 미납은 없다.
+- 시작 시 해시와 대조한 기존 래스터 변경은 검사 두 장의 본체·마스크·그립 **6파일뿐**이다. 나머지 기존 캐릭터 데이터, 후보 원본, src·tools·asset-specs·요청서·승인 원화는 보존했다. 모든 쓰기는 `docs/art-production/hero-sprites/` 안에서 수행했으며 커밋·푸시·게임 런타임 반영은 하지 않았다.
+
+### 납품 및 재현
+
+- 필수 검수 시트: `verification/review_swordsman_male.png`, `review_thief_male.png`, `review_merchant_female.png`. 무기+leaf+hairpin, 빨간 hand 점 포함.
+- 전체 `preview_frames.png`와 `verification/anchor-checks.png`, `hair-tints.png`를 7명·98프레임으로 갱신했다.
+- `preview_animation.gif`: 7명 × 대기·걷기·공격·시전, **1120×1465 / 80프레임 / 1.6초**, 무기와 머리장식 두 개를 장착한 실제 렌더. GIF 디코딩과 프레임 수를 확인했다.
+- `verification/fix4-<캐릭터>-walk.png`, `fix4-<캐릭터>-attack.png`, `fix4-legs-detail.png`, `fix4-display80.png`는 확대/실제 표시 크기 검수 자료다.
+- 실제 처리 지시는 `prompts/{swordsman_male,thief_male,merchant_female}-fix4-attempt<n>.txt`, 처리 코드와 정확한 좌표는 `fix4.mjs`, `source/fix4/annotations.json`, 처리/검수 기록은 `generation.json`의 fix4 및 `verification/fix4-visual-review.json`이다. 이전 수정 스크립트는 현재 납품에 실행하지 않는다.
+
+```sh
+node docs/art-production/hero-sprites/fix4.mjs
+node tools/asset-kit-sprites.mjs --root . --in docs/art-production/hero-sprites/game-manifest.json --out docs/art-production/hero-sprites/manifest.json
+node docs/art-production/hero-sprites/record.mjs
+node ../asset-kit/tools/check.mjs --root . --manifest docs/art-production/hero-sprites/manifest.json --spec asset-specs/hero-sprites.json --json docs/art-production/hero-sprites/check.json
+node docs/art-production/hero-sprites/verify-fix4.mjs
+ffmpeg -hide_banner -loglevel error -y -framerate 50 -i docs/art-production/hero-sprites/verification/animation-frames/%03d.png -filter_complex '[0:v]split[a][b];[a]palettegen=stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=3' -loop 0 docs/art-production/hero-sprites/preview_animation.gif
+```

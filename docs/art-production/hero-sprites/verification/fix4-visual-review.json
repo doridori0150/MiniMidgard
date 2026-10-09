@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "reviewer": "Codex direct image inspection",
+  "date": "2026-10-09",
+  "reviewed": [
+    {
+      "file": "verification/review_swordsman_male.png",
+      "sha256": "39d0ba5f7b0b434dbaaab0941a39493cae63295e302d3ea0b4b9edf4da2cd310"
+    },
+    {
+      "file": "verification/review_thief_male.png",
+      "sha256": "910f0844569d0abcf2305d0eb82a205b2a5386a4f7fff78685bcb5508f44e00e"
+    },
+    {
+      "file": "verification/review_merchant_female.png",
+      "sha256": "018f801089cb4257a54aea6b3c9b4a5820d8bf7ffc7d6b9ecc31b099415932c9"
+    },
+    {
+      "file": "verification/fix4-legs-detail.png",
+      "sha256": "92809bb11351e5fe4f09724f3baae6c0a4bb951a5097ce3ea5aa11f3bcd26041"
+    },
+    {
+      "file": "verification/fix4-gif-walk-decoded.png",
+      "sha256": "9b3c2808cfb0811a4169bc79a1cca75f86a37dd5e089e7045774aae0404a9b20"
+    },
+    {
+      "file": "verification/fix4-display80.png",
+      "sha256": "8b5d9b8594ed65625184c9f4d5fd68660d288c5718d51d5921d5240b7b74ac3d"
+    },
+    {
+      "file": "preview_animation.gif",
+      "sha256": "292e73d18372c0fa5171cc5e7490899207926b0baaa7a27a8cd0c999178c0d04"
+    }
+  ],
+  "checks": [
+    "세 캐릭터 각각 14프레임의 오른쪽 3/4 몸 방향과 같은 무기 팔 확인",
+    "잎과 머리핀의 머리통/관자놀이 부착 위치 확인",
+    "도둑/상인 walk_2는 idle_0의 먼 다리를 앞발로, 가까운 다리를 뒷발로 합성; walk_0과 접지 다리 반전",
+    "GIF에서 0/180/360/540ms 걷기 네 장을 디코딩하여 무기/머리장식 포함 확인",
+    "표시 높이 80px의 걷기/공격 시트 확인"
+  ],
+  "gif": {
+    "width": 1120,
+    "height": 1465,
+    "frames": 80,
+    "durationSeconds": 1.6
+  },
+  "limitations": [
+    "도둑/상인 walk_2와 walk_0의 보폭에는 차이가 있음",
+    "기존 생성 시트 사이 선/자세의 작은 차이는 유지",
+    "표준 검사 주의 5건: 피격 높이 4건, 도둑 공격 준비에서 접촉까지의 손 이동 1건"
+  ],
+  "generationCalls": 0,
+  "processingApproaches": 2,
+  "discarded": [
+    "source/fix4/thief-walk_2-attempt1.png",
+    "source/fix4/merchant-walk_2-attempt1.png"
+  ]
+}

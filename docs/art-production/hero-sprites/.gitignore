@@ -40,3 +40,10 @@ source/fix3/*
 !verification/b-*
 verification/b-animation-frames/
 !verification/check-b.log
+
+# fix4 adopted candidate processing, preservation audit and final visual evidence.
+!source/fix4/
+!source/fix4/**
+!verification/fix4-*.png
+!verification/fix4-*.json
+!verification/fix4-*.txt

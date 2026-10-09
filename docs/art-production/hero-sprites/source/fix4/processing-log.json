@@ -1,0 +1,315 @@
+[
+  {
+    "id": "swordsman_male",
+    "frame": "walk_1",
+    "operation": "foot-locked continuous vertical registration",
+    "source": "rejected/fix3/swordsman/walk_1.png",
+    "sourceYToOutputY": [
+      [
+        0,
+        4
+      ],
+      [
+        170,
+        174
+      ],
+      [
+        205,
+        213
+      ],
+      [
+        230,
+        235
+      ],
+      [
+        360,
+        360
+      ],
+      [
+        400,
+        400
+      ]
+    ],
+    "originalGenerationSource": "source/fix3/swordsman-attempt2.png",
+    "anchors": {
+      "hand": {
+        "point": [
+          282.37,
+          271.155
+        ],
+        "angle": -48,
+        "z": "front",
+        "visible": true
+      },
+      "crown": {
+        "point": [
+          225.082,
+          89.112
+        ],
+        "angle": 0
+      },
+      "side": {
+        "point": [
+          275.44,
+          135.311
+        ],
+        "angle": 0
+      }
+    },
+    "bounds": [
+      124,
+      55,
+      303,
+      360
+    ]
+  },
+  {
+    "id": "swordsman_male",
+    "frame": "walk_3",
+    "operation": "foot-locked continuous vertical registration",
+    "source": "rejected/fix3/swordsman/walk_3.png",
+    "sourceYToOutputY": [
+      [
+        0,
+        5
+      ],
+      [
+        170,
+        175
+      ],
+      [
+        205,
+        214
+      ],
+      [
+        230,
+        238
+      ],
+      [
+        360,
+        360
+      ],
+      [
+        400,
+        400
+      ]
+    ],
+    "originalGenerationSource": "source/fix3/swordsman-attempt2.png",
+    "anchors": {
+      "hand": {
+        "point": [
+          285.373,
+          271.553
+        ],
+        "angle": -48,
+        "z": "front",
+        "visible": true
+      },
+      "crown": {
+        "point": [
+          227.623,
+          89.65
+        ],
+        "angle": 0
+      },
+      "side": {
+        "point": [
+          278.443,
+          136.773
+        ],
+        "angle": 0
+      }
+    },
+    "bounds": [
+      124,
+      55,
+      306,
+      360
+    ]
+  },
+  {
+    "id": "thief_male",
+    "frame": "walk_2",
+    "operation": "idle_0 leg-only transplant, independently rotated at hips and grounded; far leg forward, near leg backward",
+    "attempt": 2,
+    "donor": "rejected/b/frames/thief/idle_0.png",
+    "sourcePivots": [
+      [
+        194,
+        294
+      ],
+      [
+        244,
+        294
+      ]
+    ],
+    "targetPivots": [
+      [
+        239,
+        291
+      ],
+      [
+        206,
+        291
+      ]
+    ],
+    "rotationDegrees": [
+      -20,
+      20
+    ],
+    "legBottom": [
+      360,
+      352
+    ],
+    "hem": [
+      [
+        0,
+        291
+      ],
+      [
+        152,
+        291
+      ],
+      [
+        158,
+        298
+      ],
+      [
+        172,
+        302
+      ],
+      [
+        184,
+        299
+      ],
+      [
+        190,
+        291
+      ],
+      [
+        260,
+        291
+      ],
+      [
+        266,
+        296
+      ],
+      [
+        512,
+        296
+      ]
+    ],
+    "foreground": "near leg",
+    "upperBodyUnchanged": true,
+    "source": "rejected/b/frames/thief/walk_2.png"
+  },
+  {
+    "id": "thief_male",
+    "frame": "hurt_0",
+    "source": "rejected/b/frames/thief/hurt_0.png",
+    "operation": "uniform whole-figure enlargement about foot origin",
+    "scale": 1.25,
+    "origin": [
+      220,
+      360
+    ],
+    "translation": [
+      0,
+      -0.6
+    ],
+    "note": "Subpixel raster registration; alpha>=16 occupied extent is y=110..359, foot baseline 360.",
+    "bounds": [
+      81,
+      110,
+      361,
+      360
+    ]
+  },
+  {
+    "id": "thief_male",
+    "frame": "attack_0",
+    "source": "rejected/b/frames/thief/attack_0.png",
+    "operation": "uniform whole-figure head-width match to idle_0",
+    "scale": 1.0591715976331362,
+    "origin": [
+      220,
+      360
+    ],
+    "referenceHairWidth": 179,
+    "candidateHairWidth": 169,
+    "bounds": [
+      101,
+      17,
+      340,
+      360
+    ]
+  },
+  {
+    "id": "merchant_female",
+    "frame": "walk_2",
+    "operation": "idle_0 leg-only transplant, independently rotated at hips and grounded; far leg forward, near leg backward",
+    "attempt": 2,
+    "donor": "rejected/b/frames/merchant/idle_0.png",
+    "sourcePivots": [
+      [
+        194,
+        300
+      ],
+      [
+        243,
+        300
+      ]
+    ],
+    "targetPivots": [
+      [
+        238,
+        300
+      ],
+      [
+        207,
+        298
+      ]
+    ],
+    "rotationDegrees": [
+      -20,
+      20
+    ],
+    "legBottom": [
+      360,
+      352
+    ],
+    "hem": [
+      [
+        0,
+        292
+      ],
+      [
+        168,
+        295
+      ],
+      [
+        194,
+        301
+      ],
+      [
+        220,
+        302
+      ],
+      [
+        248,
+        299
+      ],
+      [
+        271,
+        291
+      ],
+      [
+        512,
+        291
+      ]
+    ],
+    "foreground": "near leg",
+    "upperBodyUnchanged": true,
+    "source": "rejected/b/frames/merchant/walk_2.png"
+  }
+]

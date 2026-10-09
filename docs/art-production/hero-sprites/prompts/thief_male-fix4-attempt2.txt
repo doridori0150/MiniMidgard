@@ -1,0 +1,123 @@
+실제로 적용한 처리 지시 — 생성 모델 호출 없음.
+승인 외형 참조: docs/art/concepts/round3/class_lineup.png
+수정 4의 후보 채택 및 픽셀 처리·다리 합성 허용에 따라 fix4.mjs로 실행.
+머리·얼굴·몸 방향·무기 팔을 보존하고 캔버스 512x400, 원점 (220,360)을 유지.
+[
+  {
+    "id": "thief_male",
+    "frame": "walk_2",
+    "operation": "idle_0 leg-only transplant, independently rotated at hips and grounded; far leg forward, near leg backward",
+    "attempt": 2,
+    "donor": "rejected/b/frames/thief/idle_0.png",
+    "sourcePivots": [
+      [
+        194,
+        294
+      ],
+      [
+        244,
+        294
+      ]
+    ],
+    "targetPivots": [
+      [
+        239,
+        291
+      ],
+      [
+        206,
+        291
+      ]
+    ],
+    "rotationDegrees": [
+      -20,
+      20
+    ],
+    "legBottom": [
+      360,
+      352
+    ],
+    "hem": [
+      [
+        0,
+        291
+      ],
+      [
+        152,
+        291
+      ],
+      [
+        158,
+        298
+      ],
+      [
+        172,
+        302
+      ],
+      [
+        184,
+        299
+      ],
+      [
+        190,
+        291
+      ],
+      [
+        260,
+        291
+      ],
+      [
+        266,
+        296
+      ],
+      [
+        512,
+        296
+      ]
+    ],
+    "foreground": "near leg",
+    "upperBodyUnchanged": true,
+    "source": "rejected/b/frames/thief/walk_2.png"
+  },
+  {
+    "id": "thief_male",
+    "frame": "hurt_0",
+    "source": "rejected/b/frames/thief/hurt_0.png",
+    "operation": "uniform whole-figure enlargement about foot origin",
+    "scale": 1.25,
+    "origin": [
+      220,
+      360
+    ],
+    "translation": [
+      0,
+      -0.6
+    ],
+    "note": "Subpixel raster registration; alpha>=16 occupied extent is y=110..359, foot baseline 360.",
+    "bounds": [
+      81,
+      110,
+      361,
+      360
+    ]
+  },
+  {
+    "id": "thief_male",
+    "frame": "attack_0",
+    "source": "rejected/b/frames/thief/attack_0.png",
+    "operation": "uniform whole-figure head-width match to idle_0",
+    "scale": 1.0591715976331362,
+    "origin": [
+      220,
+      360
+    ],
+    "referenceHairWidth": 179,
+    "candidateHairWidth": 169,
+    "bounds": [
+      101,
+      17,
+      340,
+      360
+    ]
+  }
+]

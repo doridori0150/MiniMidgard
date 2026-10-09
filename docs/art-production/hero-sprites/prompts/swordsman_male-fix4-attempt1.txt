@@ -1,0 +1,134 @@
+실제로 적용한 처리 지시 — 생성 모델 호출 없음.
+승인 외형 참조: docs/art/concepts/round3/class_lineup.png
+수정 4의 후보 채택 및 픽셀 처리·다리 합성 허용에 따라 fix4.mjs로 실행.
+머리·얼굴·몸 방향·무기 팔을 보존하고 캔버스 512x400, 원점 (220,360)을 유지.
+[
+  {
+    "id": "swordsman_male",
+    "frame": "walk_1",
+    "operation": "foot-locked continuous vertical registration",
+    "source": "rejected/fix3/swordsman/walk_1.png",
+    "sourceYToOutputY": [
+      [
+        0,
+        4
+      ],
+      [
+        170,
+        174
+      ],
+      [
+        205,
+        213
+      ],
+      [
+        230,
+        235
+      ],
+      [
+        360,
+        360
+      ],
+      [
+        400,
+        400
+      ]
+    ],
+    "originalGenerationSource": "source/fix3/swordsman-attempt2.png",
+    "anchors": {
+      "hand": {
+        "point": [
+          282.37,
+          271.155
+        ],
+        "angle": -48,
+        "z": "front",
+        "visible": true
+      },
+      "crown": {
+        "point": [
+          225.082,
+          89.112
+        ],
+        "angle": 0
+      },
+      "side": {
+        "point": [
+          275.44,
+          135.311
+        ],
+        "angle": 0
+      }
+    },
+    "bounds": [
+      124,
+      55,
+      303,
+      360
+    ]
+  },
+  {
+    "id": "swordsman_male",
+    "frame": "walk_3",
+    "operation": "foot-locked continuous vertical registration",
+    "source": "rejected/fix3/swordsman/walk_3.png",
+    "sourceYToOutputY": [
+      [
+        0,
+        5
+      ],
+      [
+        170,
+        175
+      ],
+      [
+        205,
+        214
+      ],
+      [
+        230,
+        238
+      ],
+      [
+        360,
+        360
+      ],
+      [
+        400,
+        400
+      ]
+    ],
+    "originalGenerationSource": "source/fix3/swordsman-attempt2.png",
+    "anchors": {
+      "hand": {
+        "point": [
+          285.373,
+          271.553
+        ],
+        "angle": -48,
+        "z": "front",
+        "visible": true
+      },
+      "crown": {
+        "point": [
+          227.623,
+          89.65
+        ],
+        "angle": 0
+      },
+      "side": {
+        "point": [
+          278.443,
+          136.773
+        ],
+        "angle": 0
+      }
+    },
+    "bounds": [
+      124,
+      55,
+      306,
+      360
+    ]
+  }
+]

@@ -1928,10 +1928,11 @@
         "walk_1": {
           "image": "frames/swordsman/walk_1.png",
           "hairMask": "masks/swordsman/walk_1.png",
+          "gripOverlay": "grips/swordsman/walk_1.png",
           "hand": {
             "point": [
-              275.839,
-              296.682
+              282.37,
+              271.155
             ],
             "angle": -48,
             "z": "front",
@@ -1939,21 +1940,51 @@
           },
           "crown": {
             "point": [
-              229.858,
-              89.569
+              225.082,
+              89.112
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              285.45,
-              140.249
+              275.44,
+              135.311
             ],
             "angle": 0
           },
-          "gripOverlay": "grips/swordsman/walk_1.png",
-          "source": "source/fix1/imported/swordsman/walk_1.png",
-          "uniform_scale": 1
+          "source": "rejected/fix3/swordsman/walk_1.png",
+          "uniform_scale": 1,
+          "derivation": {
+            "operation": "foot-locked continuous vertical registration",
+            "source": "rejected/fix3/swordsman/walk_1.png",
+            "sourceYToOutputY": [
+              [
+                0,
+                4
+              ],
+              [
+                170,
+                174
+              ],
+              [
+                205,
+                213
+              ],
+              [
+                230,
+                235
+              ],
+              [
+                360,
+                360
+              ],
+              [
+                400,
+                400
+              ]
+            ],
+            "originalGenerationSource": "source/fix3/swordsman-attempt2.png"
+          }
         },
         "walk_2": {
           "image": "frames/swordsman/walk_2.png",
@@ -1988,10 +2019,11 @@
         "walk_3": {
           "image": "frames/swordsman/walk_3.png",
           "hairMask": "masks/swordsman/walk_3.png",
+          "gripOverlay": "grips/swordsman/walk_3.png",
           "hand": {
             "point": [
-              279.338,
-              282.823
+              285.373,
+              271.553
             ],
             "angle": -48,
             "z": "front",
@@ -1999,21 +2031,51 @@
           },
           "crown": {
             "point": [
-              228.18,
-              90.915
+              227.623,
+              89.65
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              283.364,
-              141.595
+              278.443,
+              136.773
             ],
             "angle": 0
           },
-          "gripOverlay": "grips/swordsman/walk_3.png",
-          "source": "source/fix1/imported/swordsman/walk_3.png",
-          "uniform_scale": 1
+          "source": "rejected/fix3/swordsman/walk_3.png",
+          "uniform_scale": 1,
+          "derivation": {
+            "operation": "foot-locked continuous vertical registration",
+            "source": "rejected/fix3/swordsman/walk_3.png",
+            "sourceYToOutputY": [
+              [
+                0,
+                5
+              ],
+              [
+                170,
+                175
+              ],
+              [
+                205,
+                214
+              ],
+              [
+                230,
+                238
+              ],
+              [
+                360,
+                360
+              ],
+              [
+                400,
+                400
+              ]
+            ],
+            "originalGenerationSource": "source/fix3/swordsman-attempt2.png"
+          }
         },
         "attack_0": {
           "image": "frames/swordsman/attack_0.png",
@@ -2252,6 +2314,1035 @@
           },
           "source": "source/fix1/imported/swordsman/dead_0.png",
           "uniform_scale": 1
+        }
+      }
+    },
+    "thief_male": {
+      "class": "thief",
+      "gender": "male",
+      "defaultWeapon": "dagger",
+      "defaultHairTint": "cream",
+      "frames": {
+        "idle_0": {
+          "image": "frames/thief/idle_0.png",
+          "hairMask": "masks/thief/idle_0.png",
+          "hand": {
+            "point": [
+              284.847,
+              285.136
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              237.527,
+              99.741
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              300.663,
+              161.769
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/thief/idle_0.png",
+          "source": "source/b/thief-attempt1.png",
+          "uniform_scale": 1.054421768707483
+        },
+        "idle_1": {
+          "image": "frames/thief/idle_1.png",
+          "hairMask": "masks/thief/idle_1.png",
+          "hand": {
+            "point": [
+              284.847,
+              285.619
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              237.527,
+              101.42
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              300.663,
+              163.048
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/thief/idle_1.png",
+          "source": "source/b/thief-attempt1.png",
+          "uniform_scale": 1.054421768707483,
+          "derivation": {
+            "frame": "idle_0",
+            "operation": "whole-figure foot-locked breathing",
+            "topDisplacementPx": 2
+          }
+        },
+        "walk_0": {
+          "image": "frames/thief/walk_0.png",
+          "hairMask": "masks/thief/walk_0.png",
+          "hand": {
+            "point": [
+              296.075,
+              265.65
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              250.175,
+              104.85
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              306.275,
+              160.25
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/thief/walk_0.png",
+          "source": "source/b/thief-attempt2.png",
+          "uniform_scale": 0.85
+        },
+        "walk_1": {
+          "image": "frames/thief/walk_1.png",
+          "hairMask": "masks/thief/walk_1.png",
+          "hand": {
+            "point": [
+              272.7,
+              287.75
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              243.8,
+              109.1
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              299.9,
+              166.2
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/thief/walk_1.png",
+          "source": "source/b/thief-attempt2.png",
+          "uniform_scale": 0.85
+        },
+        "walk_2": {
+          "image": "frames/thief/walk_2.png",
+          "hairMask": "masks/thief/walk_2.png",
+          "hand": {
+            "point": [
+              295.225,
+              269.05
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              251.025,
+              101.45
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              309.675,
+              159.4
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/thief/walk_2.png",
+          "source": "rejected/b/frames/thief/walk_2.png",
+          "uniform_scale": 1,
+          "derivation": {
+            "operation": "idle_0 leg-only transplant, independently rotated at hips and grounded; far leg forward, near leg backward",
+            "attempt": 2,
+            "donor": "rejected/b/frames/thief/idle_0.png",
+            "sourcePivots": [
+              [
+                194,
+                294
+              ],
+              [
+                244,
+                294
+              ]
+            ],
+            "targetPivots": [
+              [
+                239,
+                291
+              ],
+              [
+                206,
+                291
+              ]
+            ],
+            "rotationDegrees": [
+              -20,
+              20
+            ],
+            "legBottom": [
+              360,
+              352
+            ],
+            "hem": [
+              [
+                0,
+                291
+              ],
+              [
+                152,
+                291
+              ],
+              [
+                158,
+                298
+              ],
+              [
+                172,
+                302
+              ],
+              [
+                184,
+                299
+              ],
+              [
+                190,
+                291
+              ],
+              [
+                260,
+                291
+              ],
+              [
+                266,
+                296
+              ],
+              [
+                512,
+                296
+              ]
+            ],
+            "foreground": "near leg",
+            "upperBodyUnchanged": true,
+            "source": "rejected/b/frames/thief/walk_2.png"
+          }
+        },
+        "walk_3": {
+          "image": "frames/thief/walk_3.png",
+          "hairMask": "masks/thief/walk_3.png",
+          "hand": {
+            "point": [
+              272.7,
+              287.75
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              237.85,
+              109.1
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              300.75,
+              166.2
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/thief/walk_3.png",
+          "source": "source/b/thief-attempt2.png",
+          "uniform_scale": 0.85
+        },
+        "attack_0": {
+          "image": "frames/thief/attack_0.png",
+          "hairMask": "masks/thief/attack_0.png",
+          "hand": {
+            "point": [
+              311.168,
+              152.032
+            ],
+            "angle": -110,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              223.734,
+              68.198
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              283.206,
+              129.895
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/thief/attack_0.png",
+          "source": "rejected/b/frames/thief/attack_0.png",
+          "uniform_scale": 1.0591715976331362,
+          "derivation": {
+            "operation": "uniform whole-figure head-width match to idle_0",
+            "scale": 1.0591715976331362,
+            "origin": [
+              220,
+              360
+            ],
+            "referenceHairWidth": 179,
+            "candidateHairWidth": 169
+          }
+        },
+        "attack_1": {
+          "image": "frames/thief/attack_1.png",
+          "hairMask": "masks/thief/attack_1.png",
+          "hand": {
+            "point": [
+              372.891,
+              266.156
+            ],
+            "angle": 0,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              299.211,
+              158.789
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              360.238,
+              196.565
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/thief/attack_1.png",
+          "source": "source/b/thief-attempt1.png",
+          "uniform_scale": 1.054421768707483
+        },
+        "attack_2": {
+          "image": "frames/thief/attack_2.png",
+          "hairMask": "masks/thief/attack_2.png",
+          "hand": {
+            "point": [
+              318.175,
+              274.15
+            ],
+            "angle": 25,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              256.975,
+              118.45
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              321.575,
+              177.25
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/thief/attack_2.png",
+          "source": "source/b/thief-attempt2.png",
+          "uniform_scale": 0.85
+        },
+        "cast_0": {
+          "image": "frames/thief/cast_0.png",
+          "hairMask": "masks/thief/cast_0.png",
+          "hand": {
+            "point": [
+              314.35,
+              246.1
+            ],
+            "angle": -25,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              241.25,
+              114.2
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              301.6,
+              169.6
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/thief/cast_0.png",
+          "source": "source/b/thief-attempt2.png",
+          "uniform_scale": 0.85
+        },
+        "cast_1": {
+          "image": "frames/thief/cast_1.png",
+          "hairMask": "masks/thief/cast_1.png",
+          "hand": {
+            "point": [
+              307.55,
+              237.6
+            ],
+            "angle": -25,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              226.8,
+              114.2
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              291.4,
+              169.6
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/thief/cast_1.png",
+          "source": "source/b/thief-attempt2.png",
+          "uniform_scale": 0.85
+        },
+        "sit_0": {
+          "image": "frames/thief/sit_0.png",
+          "hairMask": "masks/thief/sit_0.png",
+          "hand": {
+            "point": [
+              244.779,
+              331.531
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              221.711,
+              166.17
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              276.412,
+              211.327
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/thief/sit_0.png",
+          "source": "source/b/thief-attempt1.png",
+          "uniform_scale": 1.054421768707483
+        },
+        "hurt_0": {
+          "image": "frames/thief/hurt_0.png",
+          "hairMask": "masks/thief/hurt_0.png",
+          "hand": {
+            "point": [
+              281.947,
+              331.721
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              279.472,
+              176.424
+            ],
+            "angle": -15
+          },
+          "side": {
+            "point": [
+              326.76,
+              234.187
+            ],
+            "angle": -15
+          },
+          "gripOverlay": "grips/thief/hurt_0.png",
+          "source": "rejected/b/frames/thief/hurt_0.png",
+          "uniform_scale": 1.25,
+          "derivation": {
+            "operation": "uniform whole-figure enlargement about foot origin",
+            "scale": 1.25,
+            "origin": [
+              220,
+              360
+            ],
+            "translation": [
+              0,
+              -0.6
+            ],
+            "note": "Subpixel raster registration; alpha>=16 occupied extent is y=110..359, foot baseline 360."
+          }
+        },
+        "dead_0": {
+          "image": "frames/thief/dead_0.png",
+          "hairMask": "masks/thief/dead_0.png",
+          "hand": {
+            "point": [
+              233.18,
+              343.129
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              365.31,
+              268.265
+            ],
+            "angle": 90
+          },
+          "side": {
+            "point": [
+              304.881,
+              349.456
+            ],
+            "angle": 90
+          },
+          "gripOverlay": "grips/thief/dead_0.png",
+          "source": "source/b/thief-attempt1.png",
+          "uniform_scale": 1.054421768707483
+        }
+      }
+    },
+    "merchant_female": {
+      "class": "merchant",
+      "gender": "female",
+      "defaultWeapon": "axe",
+      "defaultHairTint": "cream",
+      "frames": {
+        "idle_0": {
+          "image": "frames/merchant/idle_0.png",
+          "hairMask": "masks/merchant/idle_0.png",
+          "hand": {
+            "point": [
+              279.74,
+              269.583
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              220.538,
+              58.153
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              292.656,
+              145.799
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/merchant/idle_0.png",
+          "source": "source/b/merchant-attempt1.png",
+          "uniform_scale": 1.0763888888888888
+        },
+        "idle_1": {
+          "image": "frames/merchant/idle_1.png",
+          "hairMask": "masks/merchant/idle_1.png",
+          "hand": {
+            "point": [
+              279.74,
+              270.166
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              220.538,
+              60.1
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              292.656,
+              147.181
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/merchant/idle_1.png",
+          "source": "source/b/merchant-attempt1.png",
+          "uniform_scale": 1.0763888888888888,
+          "derivation": {
+            "frame": "idle_0",
+            "operation": "whole-figure foot-locked breathing",
+            "topDisplacementPx": 2
+          }
+        },
+        "walk_0": {
+          "image": "frames/merchant/walk_0.png",
+          "hairMask": "masks/merchant/walk_0.png",
+          "hand": {
+            "point": [
+              301.175,
+              255.45
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              224.675,
+              68.5
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              297.775,
+              150.9
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/merchant/walk_0.png",
+          "source": "source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85
+        },
+        "walk_1": {
+          "image": "frames/merchant/walk_1.png",
+          "hairMask": "masks/merchant/walk_1.png",
+          "hand": {
+            "point": [
+              279.5,
+              273.3
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              226.8,
+              67.65
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              293.95,
+              152.6
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/merchant/walk_1.png",
+          "source": "source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85
+        },
+        "walk_2": {
+          "image": "frames/merchant/walk_2.png",
+          "hairMask": "masks/merchant/walk_2.png",
+          "hand": {
+            "point": [
+              297.35,
+              255.45
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              227.65,
+              65.95
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              295.65,
+              150.9
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/merchant/walk_2.png",
+          "source": "rejected/b/frames/merchant/walk_2.png",
+          "uniform_scale": 1,
+          "derivation": {
+            "operation": "idle_0 leg-only transplant, independently rotated at hips and grounded; far leg forward, near leg backward",
+            "attempt": 2,
+            "donor": "rejected/b/frames/merchant/idle_0.png",
+            "sourcePivots": [
+              [
+                194,
+                300
+              ],
+              [
+                243,
+                300
+              ]
+            ],
+            "targetPivots": [
+              [
+                238,
+                300
+              ],
+              [
+                207,
+                298
+              ]
+            ],
+            "rotationDegrees": [
+              -20,
+              20
+            ],
+            "legBottom": [
+              360,
+              352
+            ],
+            "hem": [
+              [
+                0,
+                292
+              ],
+              [
+                168,
+                295
+              ],
+              [
+                194,
+                301
+              ],
+              [
+                220,
+                302
+              ],
+              [
+                248,
+                299
+              ],
+              [
+                271,
+                291
+              ],
+              [
+                512,
+                291
+              ]
+            ],
+            "foreground": "near leg",
+            "upperBodyUnchanged": true,
+            "source": "rejected/b/frames/merchant/walk_2.png"
+          }
+        },
+        "walk_3": {
+          "image": "frames/merchant/walk_3.png",
+          "hairMask": "masks/merchant/walk_3.png",
+          "hand": {
+            "point": [
+              276.525,
+              272.45
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              222.975,
+              65.95
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              290.975,
+              150.9
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/merchant/walk_3.png",
+          "source": "source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85
+        },
+        "attack_0": {
+          "image": "frames/merchant/attack_0.png",
+          "hairMask": "masks/merchant/attack_0.png",
+          "hand": {
+            "point": [
+              311.025,
+              144.4
+            ],
+            "angle": -110,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              212.025,
+              45.9
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              283.525,
+              130.1
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/merchant/attack_0.png",
+          "source": "source/b/merchant-attempt3.png",
+          "uniform_scale": 0.55
+        },
+        "attack_1": {
+          "image": "frames/merchant/attack_1.png",
+          "hairMask": "masks/merchant/attack_1.png",
+          "hand": {
+            "point": [
+              333.559,
+              208.229
+            ],
+            "angle": 0,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              232.378,
+              62.458
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              293.733,
+              151.181
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/merchant/attack_1.png",
+          "source": "source/b/merchant-attempt1.png",
+          "uniform_scale": 1.0763888888888888
+        },
+        "attack_2": {
+          "image": "frames/merchant/attack_2.png",
+          "hairMask": "masks/merchant/attack_2.png",
+          "hand": {
+            "point": [
+              314.35,
+              253.75
+            ],
+            "angle": 25,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              214.9,
+              65.1
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              279.5,
+              148.35
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/merchant/attack_2.png",
+          "source": "source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85
+        },
+        "cast_0": {
+          "image": "frames/merchant/cast_0.png",
+          "hairMask": "masks/merchant/cast_0.png",
+          "hand": {
+            "point": [
+              319.875,
+              217.2
+            ],
+            "angle": -25,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              215.325,
+              65.95
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              288.425,
+              148.35
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/merchant/cast_0.png",
+          "source": "source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85
+        },
+        "cast_1": {
+          "image": "frames/merchant/cast_1.png",
+          "hairMask": "masks/merchant/cast_1.png",
+          "hand": {
+            "point": [
+              311.8,
+              212.95
+            ],
+            "angle": -25,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              214.9,
+              65.1
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              288.85,
+              149.2
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/merchant/cast_1.png",
+          "source": "source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85
+        },
+        "sit_0": {
+          "image": "frames/merchant/sit_0.png",
+          "hairMask": "masks/merchant/sit_0.png",
+          "hand": {
+            "point": [
+              271.667,
+              292.188
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              208.16,
+              119.507
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              266.285,
+              201.771
+            ],
+            "angle": 0
+          },
+          "gripOverlay": "grips/merchant/sit_0.png",
+          "source": "source/b/merchant-attempt1.png",
+          "uniform_scale": 1.0763888888888888
+        },
+        "hurt_0": {
+          "image": "frames/merchant/hurt_0.png",
+          "hairMask": "masks/merchant/hurt_0.png",
+          "hand": {
+            "point": [
+              221.615,
+              288.958
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              256.059,
+              122.736
+            ],
+            "angle": -15
+          },
+          "side": {
+            "point": [
+              309.878,
+              179.167
+            ],
+            "angle": -15
+          },
+          "gripOverlay": "grips/merchant/hurt_0.png",
+          "source": "source/b/merchant-attempt1.png",
+          "uniform_scale": 1.0763888888888888
+        },
+        "dead_0": {
+          "image": "frames/merchant/dead_0.png",
+          "hairMask": "masks/merchant/dead_0.png",
+          "hand": {
+            "point": [
+              267.899,
+              337.396
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              371.691,
+              252.361
+            ],
+            "angle": 90
+          },
+          "side": {
+            "point": [
+              330.33,
+              339.549
+            ],
+            "angle": 90
+          },
+          "gripOverlay": "grips/merchant/dead_0.png",
+          "source": "source/b/merchant-attempt1.png",
+          "uniform_scale": 1.0763888888888888
         }
       }
     }
@@ -3032,5 +4123,365 @@
     ],
     "method": "Built-in image_gen whole-body correction; one uniform scale per source sheet; palette matching to unchanged walk_0; no head/body assembly.",
     "conditionalReview": "novice attack_1 also corrected: near sleeve moved to outer right shoulder and far fist lowered outside chest."
+  },
+  "fix4": {
+    "request": "docs/art-requests/hero-sprites-fix4.md",
+    "status": "accepted_after_visual_review",
+    "unresolved": [],
+    "adopted": {
+      "swordsman_male": [
+        "walk_1",
+        "walk_3"
+      ],
+      "thief_male": [
+        "idle_0",
+        "idle_1",
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "attack_0",
+        "attack_1",
+        "attack_2",
+        "cast_0",
+        "cast_1",
+        "sit_0",
+        "hurt_0",
+        "dead_0"
+      ],
+      "merchant_female": [
+        "idle_0",
+        "idle_1",
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "attack_0",
+        "attack_1",
+        "attack_2",
+        "cast_0",
+        "cast_1",
+        "sit_0",
+        "hurt_0",
+        "dead_0"
+      ]
+    },
+    "updates": [
+      {
+        "id": "swordsman_male",
+        "frame": "walk_1",
+        "operation": "foot-locked continuous vertical registration",
+        "source": "rejected/fix3/swordsman/walk_1.png",
+        "sourceYToOutputY": [
+          [
+            0,
+            4
+          ],
+          [
+            170,
+            174
+          ],
+          [
+            205,
+            213
+          ],
+          [
+            230,
+            235
+          ],
+          [
+            360,
+            360
+          ],
+          [
+            400,
+            400
+          ]
+        ],
+        "originalGenerationSource": "source/fix3/swordsman-attempt2.png",
+        "anchors": {
+          "hand": {
+            "point": [
+              282.37,
+              271.155
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              225.082,
+              89.112
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              275.44,
+              135.311
+            ],
+            "angle": 0
+          }
+        },
+        "bounds": [
+          124,
+          55,
+          303,
+          360
+        ]
+      },
+      {
+        "id": "swordsman_male",
+        "frame": "walk_3",
+        "operation": "foot-locked continuous vertical registration",
+        "source": "rejected/fix3/swordsman/walk_3.png",
+        "sourceYToOutputY": [
+          [
+            0,
+            5
+          ],
+          [
+            170,
+            175
+          ],
+          [
+            205,
+            214
+          ],
+          [
+            230,
+            238
+          ],
+          [
+            360,
+            360
+          ],
+          [
+            400,
+            400
+          ]
+        ],
+        "originalGenerationSource": "source/fix3/swordsman-attempt2.png",
+        "anchors": {
+          "hand": {
+            "point": [
+              285.373,
+              271.553
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              227.623,
+              89.65
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              278.443,
+              136.773
+            ],
+            "angle": 0
+          }
+        },
+        "bounds": [
+          124,
+          55,
+          306,
+          360
+        ]
+      },
+      {
+        "id": "thief_male",
+        "frame": "walk_2",
+        "operation": "idle_0 leg-only transplant, independently rotated at hips and grounded; far leg forward, near leg backward",
+        "attempt": 2,
+        "donor": "rejected/b/frames/thief/idle_0.png",
+        "sourcePivots": [
+          [
+            194,
+            294
+          ],
+          [
+            244,
+            294
+          ]
+        ],
+        "targetPivots": [
+          [
+            239,
+            291
+          ],
+          [
+            206,
+            291
+          ]
+        ],
+        "rotationDegrees": [
+          -20,
+          20
+        ],
+        "legBottom": [
+          360,
+          352
+        ],
+        "hem": [
+          [
+            0,
+            291
+          ],
+          [
+            152,
+            291
+          ],
+          [
+            158,
+            298
+          ],
+          [
+            172,
+            302
+          ],
+          [
+            184,
+            299
+          ],
+          [
+            190,
+            291
+          ],
+          [
+            260,
+            291
+          ],
+          [
+            266,
+            296
+          ],
+          [
+            512,
+            296
+          ]
+        ],
+        "foreground": "near leg",
+        "upperBodyUnchanged": true,
+        "source": "rejected/b/frames/thief/walk_2.png"
+      },
+      {
+        "id": "thief_male",
+        "frame": "hurt_0",
+        "source": "rejected/b/frames/thief/hurt_0.png",
+        "operation": "uniform whole-figure enlargement about foot origin",
+        "scale": 1.25,
+        "origin": [
+          220,
+          360
+        ],
+        "translation": [
+          0,
+          -0.6
+        ],
+        "note": "Subpixel raster registration; alpha>=16 occupied extent is y=110..359, foot baseline 360.",
+        "bounds": [
+          81,
+          110,
+          361,
+          360
+        ]
+      },
+      {
+        "id": "thief_male",
+        "frame": "attack_0",
+        "source": "rejected/b/frames/thief/attack_0.png",
+        "operation": "uniform whole-figure head-width match to idle_0",
+        "scale": 1.0591715976331362,
+        "origin": [
+          220,
+          360
+        ],
+        "referenceHairWidth": 179,
+        "candidateHairWidth": 169,
+        "bounds": [
+          101,
+          17,
+          340,
+          360
+        ]
+      },
+      {
+        "id": "merchant_female",
+        "frame": "walk_2",
+        "operation": "idle_0 leg-only transplant, independently rotated at hips and grounded; far leg forward, near leg backward",
+        "attempt": 2,
+        "donor": "rejected/b/frames/merchant/idle_0.png",
+        "sourcePivots": [
+          [
+            194,
+            300
+          ],
+          [
+            243,
+            300
+          ]
+        ],
+        "targetPivots": [
+          [
+            238,
+            300
+          ],
+          [
+            207,
+            298
+          ]
+        ],
+        "rotationDegrees": [
+          -20,
+          20
+        ],
+        "legBottom": [
+          360,
+          352
+        ],
+        "hem": [
+          [
+            0,
+            292
+          ],
+          [
+            168,
+            295
+          ],
+          [
+            194,
+            301
+          ],
+          [
+            220,
+            302
+          ],
+          [
+            248,
+            299
+          ],
+          [
+            271,
+            291
+          ],
+          [
+            512,
+            291
+          ]
+        ],
+        "foreground": "near leg",
+        "upperBodyUnchanged": true,
+        "source": "rejected/b/frames/merchant/walk_2.png"
+      }
+    ],
+    "method": "Deterministic candidate processing and original-leg pixel compositing explicitly authorized by fix4; no image generation.",
+    "visualReview": "verification/fix4-visual-review.json"
   }
 }

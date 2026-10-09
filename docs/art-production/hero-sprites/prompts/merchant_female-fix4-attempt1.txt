@@ -1,0 +1,50 @@
+실제로 적용한 처리 지시 — 생성 모델 호출 없음.
+승인 외형 참조: docs/art/concepts/round3/class_lineup.png
+수정 4의 후보 채택 및 픽셀 처리·다리 합성 허용에 따라 fix4.mjs로 실행.
+머리·얼굴·몸 방향·무기 팔을 보존하고 캔버스 512x400, 원점 (220,360)을 유지.
+[
+  {
+    "id": "merchant_female",
+    "frame": "walk_2",
+    "operation": "independent leg pixel shear and composite; far leg forward, near leg backward",
+    "sourceYRange": [
+      303,
+      337
+    ],
+    "farLegShiftX": 57,
+    "nearLegShiftX": -57,
+    "hem": [
+      [
+        0,
+        291
+      ],
+      [
+        170,
+        296
+      ],
+      [
+        194,
+        303
+      ],
+      [
+        220,
+        305
+      ],
+      [
+        248,
+        301
+      ],
+      [
+        271,
+        294
+      ],
+      [
+        512,
+        294
+      ]
+    ],
+    "foreground": "near leg",
+    "upperBodyUnchanged": true,
+    "source": "rejected/b/frames/merchant/walk_2.png"
+  }
+]
