@@ -1,0 +1,1503 @@
+[
+  {
+    "animation": "idle",
+    "frame": 0,
+    "source": "idle_0",
+    "previous": null,
+    "duration": 220,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "idle",
+    "frame": 1,
+    "source": "idle_breath",
+    "previous": "idle_0",
+    "duration": 220,
+    "bounds": [
+      48,
+      64,
+      85,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "idle",
+    "frame": 2,
+    "source": "idle_0",
+    "previous": "idle_breath",
+    "duration": 220,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "walk",
+    "frame": 0,
+    "source": "walk_contact_a",
+    "previous": null,
+    "duration": 120,
+    "bounds": [
+      45,
+      65,
+      85,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      1
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "walk",
+    "frame": 1,
+    "source": "walk_pass_a",
+    "previous": "walk_contact_a",
+    "duration": 100,
+    "bounds": [
+      44,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      0
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "walk",
+    "frame": 2,
+    "source": "walk_cross",
+    "previous": "walk_pass_a",
+    "duration": 120,
+    "bounds": [
+      45,
+      65,
+      85,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      1
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "walk",
+    "frame": 3,
+    "source": "walk_opposite",
+    "previous": "walk_cross",
+    "duration": 100,
+    "bounds": [
+      47,
+      64,
+      85,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "attack",
+    "frame": 0,
+    "source": "idle_0",
+    "previous": null,
+    "duration": 60,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "attack",
+    "frame": 1,
+    "source": "attack_ready",
+    "previous": "idle_0",
+    "duration": 150,
+    "bounds": [
+      45,
+      56,
+      85,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      -1,
+      2
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "attack",
+    "frame": 2,
+    "source": "attack_hit",
+    "previous": "attack_ready",
+    "duration": 60,
+    "bounds": [
+      48,
+      68,
+      93,
+      113
+    ],
+    "hand": "near",
+    "headOffset": [
+      3,
+      4
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "attack",
+    "frame": 3,
+    "source": "attack_hold",
+    "previous": "attack_hit",
+    "duration": 150,
+    "bounds": [
+      48,
+      69,
+      91,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      3,
+      5
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "attack",
+    "frame": 4,
+    "source": "recover",
+    "previous": "attack_hold",
+    "duration": 100,
+    "bounds": [
+      48,
+      65,
+      92,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "attack",
+    "frame": 5,
+    "source": "idle_0",
+    "previous": "recover",
+    "duration": 80,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "cast_start",
+    "frame": 0,
+    "source": "cast_gather",
+    "previous": null,
+    "duration": 90,
+    "bounds": [
+      48,
+      65,
+      81,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "cast_start",
+    "frame": 1,
+    "source": "cast_hold",
+    "previous": "cast_gather",
+    "duration": 100,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "cast",
+    "frame": 0,
+    "source": "cast_hold",
+    "previous": null,
+    "duration": 170,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "cast",
+    "frame": 1,
+    "source": "cast_breath_fix",
+    "previous": "cast_hold",
+    "duration": 170,
+    "bounds": [
+      47,
+      64,
+      85,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "cast",
+    "frame": 2,
+    "source": "cast_hold",
+    "previous": "cast_breath_fix",
+    "duration": 170,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "hurt",
+    "frame": 0,
+    "source": "hurt",
+    "previous": null,
+    "duration": 100,
+    "bounds": [
+      41,
+      66,
+      87,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      -2,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "hurt",
+    "frame": 1,
+    "source": "recover",
+    "previous": "hurt",
+    "duration": 140,
+    "bounds": [
+      48,
+      65,
+      92,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "hurt",
+    "frame": 2,
+    "source": "idle_0",
+    "previous": "recover",
+    "duration": 100,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "dead",
+    "frame": 0,
+    "source": "hurt",
+    "previous": null,
+    "duration": 100,
+    "bounds": [
+      41,
+      66,
+      87,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      -2,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "dead",
+    "frame": 1,
+    "source": "dead_kneel",
+    "previous": "hurt",
+    "duration": 140,
+    "bounds": [
+      45,
+      73,
+      89,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "dead",
+    "frame": 2,
+    "source": "dead_fall",
+    "previous": "dead_kneel",
+    "duration": 1000,
+    "bounds": [
+      33,
+      88,
+      95,
+      113
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "sit",
+    "frame": 0,
+    "source": "sit",
+    "previous": null,
+    "duration": 1000,
+    "bounds": [
+      45,
+      71,
+      93,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "skill_bolt",
+    "frame": 0,
+    "source": "cast_hold",
+    "previous": null,
+    "duration": 130,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_bolt",
+    "frame": 1,
+    "source": "bolt_release",
+    "previous": "cast_hold",
+    "duration": 130,
+    "bounds": [
+      49,
+      65,
+      95,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      2,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_bolt",
+    "frame": 2,
+    "source": "recover",
+    "previous": "bolt_release",
+    "duration": 140,
+    "bounds": [
+      48,
+      65,
+      92,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_bolt",
+    "frame": 3,
+    "source": "cast_hold",
+    "previous": "recover",
+    "duration": 100,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_bolt",
+    "frame": 4,
+    "source": "idle_0",
+    "previous": "cast_hold",
+    "duration": 100,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_orb",
+    "frame": 0,
+    "source": "cast_hold",
+    "previous": null,
+    "duration": 50,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_orb",
+    "frame": 1,
+    "source": "bolt_release",
+    "previous": "cast_hold",
+    "duration": 80,
+    "bounds": [
+      49,
+      65,
+      95,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      2,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_orb",
+    "frame": 2,
+    "source": "orb_release_fix",
+    "previous": "bolt_release",
+    "duration": 120,
+    "bounds": [
+      47,
+      68,
+      97,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      3,
+      4
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "skill_orb",
+    "frame": 3,
+    "source": "bolt_release",
+    "previous": "orb_release_fix",
+    "duration": 80,
+    "bounds": [
+      49,
+      65,
+      95,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      2,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_orb",
+    "frame": 4,
+    "source": "recover",
+    "previous": "bolt_release",
+    "duration": 130,
+    "bounds": [
+      48,
+      65,
+      92,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_orb",
+    "frame": 5,
+    "source": "idle_0",
+    "previous": "recover",
+    "duration": 140,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_ground",
+    "frame": 0,
+    "source": "cast_hold",
+    "previous": null,
+    "duration": 70,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_ground",
+    "frame": 1,
+    "source": "water_scoop",
+    "previous": "cast_hold",
+    "duration": 60,
+    "bounds": [
+      48,
+      66,
+      89,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      2
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_ground",
+    "frame": 2,
+    "source": "ground_press",
+    "previous": "water_scoop",
+    "duration": 180,
+    "bounds": [
+      48,
+      71,
+      85,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      2,
+      7
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "skill_ground",
+    "frame": 3,
+    "source": "water_scoop",
+    "previous": "ground_press",
+    "duration": 120,
+    "bounds": [
+      48,
+      66,
+      89,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      2
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_ground",
+    "frame": 4,
+    "source": "recover",
+    "previous": "water_scoop",
+    "duration": 130,
+    "bounds": [
+      48,
+      65,
+      92,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_ground",
+    "frame": 5,
+    "source": "idle_0",
+    "previous": "recover",
+    "duration": 120,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_sky",
+    "frame": 0,
+    "source": "cast_hold",
+    "previous": null,
+    "duration": 50,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_sky",
+    "frame": 1,
+    "source": "sky_raise",
+    "previous": "cast_hold",
+    "duration": 80,
+    "bounds": [
+      47,
+      57,
+      85,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_sky",
+    "frame": 2,
+    "source": "sky_command",
+    "previous": "sky_raise",
+    "duration": 200,
+    "bounds": [
+      46,
+      51,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "skill_sky",
+    "frame": 3,
+    "source": "sky_raise",
+    "previous": "sky_command",
+    "duration": 120,
+    "bounds": [
+      47,
+      57,
+      85,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_sky",
+    "frame": 4,
+    "source": "cast_hold",
+    "previous": "sky_raise",
+    "duration": 140,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_sky",
+    "frame": 5,
+    "source": "idle_0",
+    "previous": "cast_hold",
+    "duration": 110,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_water",
+    "frame": 0,
+    "source": "cast_hold",
+    "previous": null,
+    "duration": 50,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_water",
+    "frame": 1,
+    "source": "water_scoop",
+    "previous": "cast_hold",
+    "duration": 80,
+    "bounds": [
+      48,
+      66,
+      89,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      2
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_water",
+    "frame": 2,
+    "source": "water_release",
+    "previous": "water_scoop",
+    "duration": 100,
+    "bounds": [
+      46,
+      56,
+      95,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_water",
+    "frame": 3,
+    "source": "bolt_release",
+    "previous": "water_release",
+    "duration": 100,
+    "bounds": [
+      49,
+      65,
+      95,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      2,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_water",
+    "frame": 4,
+    "source": "water_release",
+    "previous": "bolt_release",
+    "duration": 100,
+    "bounds": [
+      46,
+      56,
+      95,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_water",
+    "frame": 5,
+    "source": "recover",
+    "previous": "water_release",
+    "duration": 130,
+    "bounds": [
+      48,
+      65,
+      92,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_water",
+    "frame": 6,
+    "source": "idle_0",
+    "previous": "recover",
+    "duration": 140,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_meteor",
+    "frame": 0,
+    "source": "cast_hold",
+    "previous": null,
+    "duration": 40,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_meteor",
+    "frame": 1,
+    "source": "sky_raise",
+    "previous": "cast_hold",
+    "duration": 90,
+    "bounds": [
+      47,
+      57,
+      85,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_meteor",
+    "frame": 2,
+    "source": "meteor_command",
+    "previous": "sky_raise",
+    "duration": 170,
+    "bounds": [
+      46,
+      67,
+      94,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      2,
+      3
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "skill_meteor",
+    "frame": 3,
+    "source": "attack_hold",
+    "previous": "meteor_command",
+    "duration": 120,
+    "bounds": [
+      48,
+      69,
+      91,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      3,
+      5
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_meteor",
+    "frame": 4,
+    "source": "recover",
+    "previous": "attack_hold",
+    "duration": 160,
+    "bounds": [
+      48,
+      65,
+      92,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_meteor",
+    "frame": 5,
+    "source": "idle_0",
+    "previous": "recover",
+    "duration": 120,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_blizzard",
+    "frame": 0,
+    "source": "cast_hold",
+    "previous": null,
+    "duration": 60,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_blizzard",
+    "frame": 1,
+    "source": "bolt_release",
+    "previous": "cast_hold",
+    "duration": 70,
+    "bounds": [
+      49,
+      65,
+      95,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      2,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_blizzard",
+    "frame": 2,
+    "source": "blizzard_sweep",
+    "previous": "bolt_release",
+    "duration": 220,
+    "bounds": [
+      38,
+      65,
+      96,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      1
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "skill_blizzard",
+    "frame": 3,
+    "source": "bolt_release",
+    "previous": "blizzard_sweep",
+    "duration": 110,
+    "bounds": [
+      49,
+      65,
+      95,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      2,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_blizzard",
+    "frame": 4,
+    "source": "recover",
+    "previous": "bolt_release",
+    "duration": 130,
+    "bounds": [
+      48,
+      65,
+      92,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_blizzard",
+    "frame": 5,
+    "source": "idle_0",
+    "previous": "recover",
+    "duration": 110,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_nova",
+    "frame": 0,
+    "source": "cast_gather",
+    "previous": null,
+    "duration": 130,
+    "bounds": [
+      48,
+      65,
+      81,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_nova",
+    "frame": 1,
+    "source": "nova_open",
+    "previous": "cast_gather",
+    "duration": 220,
+    "bounds": [
+      45,
+      67,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      3
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "skill_nova",
+    "frame": 2,
+    "source": "cast_hold",
+    "previous": "nova_open",
+    "duration": 140,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_nova",
+    "frame": 3,
+    "source": "idle_0",
+    "previous": "cast_hold",
+    "duration": 110,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_aura",
+    "frame": 0,
+    "source": "cast_gather",
+    "previous": null,
+    "duration": 120,
+    "bounds": [
+      48,
+      65,
+      81,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_aura",
+    "frame": 1,
+    "source": "aura_focus",
+    "previous": "cast_gather",
+    "duration": 280,
+    "bounds": [
+      47,
+      64,
+      82,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "skill_aura",
+    "frame": 2,
+    "source": "cast_gather",
+    "previous": "aura_focus",
+    "duration": 100,
+    "bounds": [
+      48,
+      65,
+      81,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_aura",
+    "frame": 3,
+    "source": "idle_0",
+    "previous": "cast_gather",
+    "duration": 120,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_barrier",
+    "frame": 0,
+    "source": "cast_gather",
+    "previous": null,
+    "duration": 100,
+    "bounds": [
+      48,
+      65,
+      81,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      1
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_barrier",
+    "frame": 1,
+    "source": "barrier_hold",
+    "previous": "cast_gather",
+    "duration": 220,
+    "bounds": [
+      46,
+      66,
+      82,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      -1,
+      2
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "skill_barrier",
+    "frame": 2,
+    "source": "cast_hold",
+    "previous": "barrier_hold",
+    "duration": 140,
+    "bounds": [
+      47,
+      64,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  },
+  {
+    "animation": "skill_barrier",
+    "frame": 3,
+    "source": "idle_0",
+    "previous": "cast_hold",
+    "duration": 120,
+    "bounds": [
+      47,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      0,
+      0
+    ],
+    "sourceReused": true
+  }
+]
