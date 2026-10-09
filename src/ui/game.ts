@@ -95,7 +95,7 @@ class Game {
   begin(s: GameState, fresh: boolean) {
     this.s = s;
     setWholeEnabled(s.settings.heroArt !== 'rig');
-    setPixelEnabled(s.settings.heroArt === 'pixel');
+    setPixelEnabled(s.settings.heroArt === 'pixel' || s.settings.heroArt === 'pixel2', s.settings.heroArt === 'pixel2' ? 'p2' : 'p3');
     if (!fresh) {
       const away = Date.now() - s.lastSave;
       const rep = applyOffline(s, away);

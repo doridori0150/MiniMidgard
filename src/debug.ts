@@ -68,6 +68,7 @@ export async function qaBoot(): Promise<boolean> {
   s.zone = q.get('zone') ?? 'meadow';
   if (q.get('art') === 'a') s.settings.heroArt = 'rig'; // &art=a: assembled heroes, &art=c: pixel heroes (A/B/C check)
   if (q.get('art') === 'c') s.settings.heroArt = 'pixel';
+  if (q.get('art') === 'd') s.settings.heroArt = 'pixel2';
   game.qa = true;
   game.begin(s, true);
   // ?panel=<legacy id> or ?page=<tab>&sub=<inner tab>, ?sel=<hero index>, ?band=closed

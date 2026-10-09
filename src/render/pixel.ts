@@ -9,10 +9,15 @@ import { HAIR_TINT, LINE, clip, pickFrame } from './whole.ts';
 type V2 = [number, number];
 interface Frame { image: string; head: { point: V2; pose: string }; weapon?: { z: 'front' | 'behind'; visible: boolean }; grip?: string }
 interface Manifest {
-  canvas: { size: V2; origin: V2; bodyHeight: number };
+  canvas: { size: V2; origin: V2; bodyHeight?: number };
   animations: Record<string, { frames: string[]; durations: number[]; duration: number; loop: boolean }>;
   hairKeys: string[];
-  characters: Record<string, { class: string; gender: string; defaultWeapon?: string; defaultHair?: string; frames: Record<string, Frame> }>;
+  characters: Record<string, {
+    class: string; gender: string; defaultWeapon?: string; defaultHair?: string; frames: Record<string, Frame>;
+    /** standing height in art pixels (proportion variants differ); falls back to canvas.bodyHeight */
+    bodyHeight?: number;
+    animations?: Manifest['animations'];
+  }>;
   hair: Record<string, { gender?: string; pivot?: V2; poses: Record<string, { front?: string; back?: string; pivot?: V2 }> }>;
   weapons: Record<string, { frames: Record<string, Record<string, string>> }>;
 }
@@ -23,6 +28,8 @@ const M: Manifest | undefined = Object.values(MAN)[0];
 const imgs = new Map<string, HTMLImageElement>();
 let ready = false;
 let enabled = false;
+/** proportion variant: 'p2' (about 2–2.5 heads) or 'p3' (about 3–4 heads); ids are <line>_<gender>_<variant> */
+let variant = '';
 const key = (file: string) => '../assets/pixel/' + file;
 
 /** field units the hero stands (matches the other hero renderers) */
@@ -33,8 +40,14 @@ const WEAPON: Partial<Record<WeaponType, string | null>> = { none: null, sword: 
 const STYLE_ORDER = ['ponytail', 'bob', 'long'];
 /* hair colours: the same per-colour multipliers the B sprites use over their cream hair (whole.ts HAIR_TINT), applied to the four cream keys */
 
-export function setPixelEnabled(on: boolean) { enabled = on; }
-export const pixelCharacters = () => Object.values(M?.characters ?? {}).map((c) => ({ cls: c.class, gender: c.gender === 'male' ? 'm' : 'f' }));
+export function setPixelEnabled(on: boolean, v = '') { enabled = on; variant = v; }
+export const pixelCharacters = () => {
+  const seen = new Set<string>();
+  return Object.values(M?.characters ?? {}).map((c) => ({ cls: c.class, gender: c.gender === 'male' || c.gender === 'm' ? 'm' : 'f' }))
+    .filter((c) => !seen.has(c.cls + c.gender) && seen.add(c.cls + c.gender));
+};
+/** art pixels → field units: the tallest variant stands HEIGHT tall, every other one keeps the same pixel size (so a 2-head hero is shorter) */
+const unitPerPx = () => HEIGHT / Math.max(1, ...Object.values(M?.characters ?? {}).map((c) => c.bodyHeight ?? M!.canvas.bodyHeight ?? 76));
 
 export function loadPixel(): Promise<void> {
   if (!M) return Promise.resolve();
@@ -47,8 +60,10 @@ export function loadPixel(): Promise<void> {
 function character(L: HeroLookDraw): string | undefined {
   if (!M || !enabled) return undefined;
   const line = LINE[L.cls];
-  const want = `${line}_${L.gender === 'm' ? 'male' : 'female'}`;
-  return line && M.characters[want] ? want : undefined;
+  if (!line) return undefined;
+  const base = `${line}_${L.gender === 'm' ? 'male' : 'female'}`;
+  for (const id of variant ? [`${base}_${variant}`, base] : [base]) if (M.characters[id]) return id;
+  return undefined;
 }
 export function pixelSupports(L: HeroLookDraw) {
   const id = ready ? character(L) : undefined;
@@ -100,7 +115,7 @@ export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: 
   const id = character(L)!;
   const c = M!.characters[id];
   const [state, t] = clip(pose);
-  const name = pickFrame(M!.animations, state, t);
+  const name = pickFrame(c.animations ?? M!.animations, state, t);
   const f = c.frames[name];
   if (!f) return false;
   const w = WEAPON[L.wtype];
@@ -110,7 +125,7 @@ export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: 
   const hp = style ? M!.hair[style].poses[f.head.pose] : undefined;
   const piv = hp?.pivot ?? (style ? M!.hair[style].pivot : undefined) ?? [0, 0];
   const hx = f.head.point[0] - piv[0], hy = f.head.point[1] - piv[1];
-  const k = HEIGHT / M!.canvas.bodyHeight;
+  const k = unitPerPx();
   const put = (src: CanvasImageSource | undefined, x = 0, y = 0) => { if (src) ctx.drawImage(src, x, y); };
   ctx.save();
   ctx.imageSmoothingEnabled = false;

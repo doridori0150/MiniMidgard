@@ -301,8 +301,8 @@ export interface Settings {
   /** 저전력 모드: draw at ~30 fps (an unfocused window always drops to ~10 fps) */
   powerSave?: boolean;
   /** hero art: 'rig' = the assembled parts renderer (A); absent = whole-figure sprites where a class×gender has them (B);
-   *  'pixel' = pixel-art layered heroes where they exist (C, trial), else B */
-  heroArt?: 'rig' | 'pixel';
+   *  'pixel' / 'pixel2' = pixel-art layered heroes about 3–4 / 2–2.5 heads tall where they exist (C / D, trial), else B */
+  heroArt?: 'rig' | 'pixel' | 'pixel2';
 }
 
 export interface GameState {
