@@ -1,0 +1,557 @@
+[
+  {
+    "frame": "cast_0",
+    "previous": "idle_0",
+    "sourcePose": "guard_ready",
+    "duration": 160,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "cast_1",
+    "previous": "cast_0",
+    "sourcePose": "guard_hold",
+    "duration": 160,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_cleave_0",
+    "previous": "idle_0",
+    "sourcePose": "idle_0",
+    "duration": 50,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_cleave_1",
+    "previous": "skill_cleave_0",
+    "sourcePose": "cleave_ready",
+    "duration": 80,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_cleave_2",
+    "previous": "skill_cleave_1",
+    "sourcePose": "cleave_hit",
+    "duration": 60,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_cleave_3",
+    "previous": "skill_cleave_2",
+    "sourcePose": "attack_4",
+    "duration": 160,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_cleave_4",
+    "previous": "skill_cleave_3",
+    "sourcePose": "attack_6",
+    "duration": 130,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_cleave_5",
+    "previous": "skill_cleave_4",
+    "sourcePose": "idle_0",
+    "duration": 120,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_sweep_0",
+    "previous": "idle_0",
+    "sourcePose": "attack_0",
+    "duration": 60,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_sweep_1",
+    "previous": "skill_sweep_0",
+    "sourcePose": "attack_1",
+    "duration": 70,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_sweep_2",
+    "previous": "skill_sweep_1",
+    "sourcePose": "attack_2",
+    "duration": 50,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_sweep_3",
+    "previous": "skill_sweep_2",
+    "sourcePose": "attack_3",
+    "duration": 60,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_sweep_4",
+    "previous": "skill_sweep_3",
+    "sourcePose": "attack_4",
+    "duration": 160,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_sweep_5",
+    "previous": "skill_sweep_4",
+    "sourcePose": "attack_6",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_sweep_6",
+    "previous": "skill_sweep_5",
+    "sourcePose": "idle_0",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_thrust_0",
+    "previous": "idle_0",
+    "sourcePose": "thrust_ready",
+    "duration": 130,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_thrust_1",
+    "previous": "skill_thrust_0",
+    "sourcePose": "thrust_hit",
+    "duration": 80,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_thrust_2",
+    "previous": "skill_thrust_1",
+    "sourcePose": "thrust_ready",
+    "duration": 60,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_thrust_3",
+    "previous": "skill_thrust_2",
+    "sourcePose": "thrust_hit",
+    "duration": 140,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_thrust_4",
+    "previous": "skill_thrust_3",
+    "sourcePose": "attack_6",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_thrust_5",
+    "previous": "skill_thrust_4",
+    "sourcePose": "idle_0",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_throw_0",
+    "previous": "idle_0",
+    "sourcePose": "throw_ready",
+    "duration": 130,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_throw_1",
+    "previous": "skill_throw_0",
+    "sourcePose": "throw_release",
+    "duration": 180,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_throw_2",
+    "previous": "skill_throw_1",
+    "sourcePose": "throw_catch",
+    "duration": 140,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_throw_3",
+    "previous": "skill_throw_2",
+    "sourcePose": "thrust_ready",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_throw_4",
+    "previous": "skill_throw_3",
+    "sourcePose": "idle_0",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_guard_0",
+    "previous": "idle_0",
+    "sourcePose": "guard_ready",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_guard_1",
+    "previous": "skill_guard_0",
+    "sourcePose": "guard_hold",
+    "duration": 220,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_guard_2",
+    "previous": "skill_guard_1",
+    "sourcePose": "guard_ready",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_guard_3",
+    "previous": "skill_guard_2",
+    "sourcePose": "idle_0",
+    "duration": 140,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_enchant_0",
+    "previous": "idle_0",
+    "sourcePose": "enchant_ready_fix",
+    "duration": 130,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_enchant_1",
+    "previous": "skill_enchant_0",
+    "sourcePose": "enchant_hold_fix",
+    "duration": 240,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_enchant_2",
+    "previous": "skill_enchant_1",
+    "sourcePose": "enchant_ready_fix",
+    "duration": 110,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_enchant_3",
+    "previous": "skill_enchant_2",
+    "sourcePose": "idle_0",
+    "duration": 120,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_provoke_0",
+    "previous": "idle_0",
+    "sourcePose": "taunt_ready",
+    "duration": 130,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_provoke_1",
+    "previous": "skill_provoke_0",
+    "sourcePose": "taunt_call",
+    "duration": 240,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_provoke_2",
+    "previous": "skill_provoke_1",
+    "sourcePose": "taunt_ready",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_provoke_3",
+    "previous": "skill_provoke_2",
+    "sourcePose": "idle_0",
+    "duration": 130,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_double_0",
+    "previous": "idle_0",
+    "sourcePose": "attack_0",
+    "duration": 60,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_double_1",
+    "previous": "skill_double_0",
+    "sourcePose": "attack_1",
+    "duration": 70,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_double_2",
+    "previous": "skill_double_1",
+    "sourcePose": "attack_2",
+    "duration": 60,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_double_3",
+    "previous": "skill_double_2",
+    "sourcePose": "attack_4",
+    "duration": 50,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_double_4",
+    "previous": "skill_double_3",
+    "sourcePose": "rise_hit",
+    "duration": 80,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_double_5",
+    "previous": "skill_double_4",
+    "sourcePose": "throw_catch",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_double_6",
+    "previous": "skill_double_5",
+    "sourcePose": "attack_6",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_double_7",
+    "previous": "skill_double_6",
+    "sourcePose": "idle_0",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_crescent_0",
+    "previous": "idle_0",
+    "sourcePose": "attack_0",
+    "duration": 60,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_crescent_1",
+    "previous": "skill_crescent_0",
+    "sourcePose": "attack_1",
+    "duration": 70,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_crescent_2",
+    "previous": "skill_crescent_1",
+    "sourcePose": "attack_3",
+    "duration": 60,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_crescent_3",
+    "previous": "skill_crescent_2",
+    "sourcePose": "attack_4",
+    "duration": 40,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_crescent_4",
+    "previous": "skill_crescent_3",
+    "sourcePose": "rise_hit",
+    "duration": 60,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_crescent_5",
+    "previous": "skill_crescent_4",
+    "sourcePose": "cleave_ready",
+    "duration": 50,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_crescent_6",
+    "previous": "skill_crescent_5",
+    "sourcePose": "cleave_hit",
+    "duration": 60,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_crescent_7",
+    "previous": "skill_crescent_6",
+    "sourcePose": "attack_4",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_crescent_8",
+    "previous": "skill_crescent_7",
+    "sourcePose": "attack_6",
+    "duration": 110,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_crescent_9",
+    "previous": "skill_crescent_8",
+    "sourcePose": "idle_0",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_charge_0",
+    "previous": "idle_0",
+    "sourcePose": "charge_ready",
+    "duration": 130,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_charge_1",
+    "previous": "skill_charge_0",
+    "sourcePose": "thrust_hit",
+    "duration": 240,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_charge_2",
+    "previous": "skill_charge_1",
+    "sourcePose": "thrust_ready",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_charge_3",
+    "previous": "skill_charge_2",
+    "sourcePose": "attack_6",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "skill_charge_4",
+    "previous": "skill_charge_3",
+    "sourcePose": "idle_0",
+    "duration": 100,
+    "headLocked": true,
+    "weaponHand": "near",
+    "review": "이전 장의 발 기준·머리 크기·동작 방향을 비교. 승인된 준비/타격/회수 자세 재사용은 sourcePose로 기록."
+  },
+  {
+    "frame": "attack_7",
+    "previous": "attack_6",
+    "sourcePose": "idle_0",
+    "review": "전체 창 시트에서 마지막 장의 휴대 각도 차이를 발견. 대기와 같은 -28도로 수정하고 합성 픽셀 일치 확인."
+  }
+]

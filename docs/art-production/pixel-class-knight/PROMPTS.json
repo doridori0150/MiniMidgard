@@ -1,0 +1,26 @@
+{
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "strategy": "one frame at a time; inspect tool image before next; normalize and inspect before assembly",
+  "notes": "PLAN.md has production prompt summaries, not verbatim tool inputs.",
+  "outputs": {
+    "cleave_ready": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-6ad5e14d-d69c-402a-8246-3b13f7bb5a83.png",
+    "cleave_hit": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-aafb16cb-fcb5-4a92-8338-fae6c49820c9.png",
+    "thrust_ready": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-536c48db-5a25-4b76-a6c3-80eeb1c37467.png",
+    "thrust_hit": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-dbb2b83c-f419-4ece-b292-93635736ce1c.png",
+    "throw_ready": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-937d7625-1171-4d14-b5a0-1cf3c1ec6ead.png",
+    "throw_release": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-86170b40-05c3-4a36-9e91-05dabda6414a.png",
+    "throw_catch": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-75fad658-2cb7-4064-8f06-4eeb077cb436.png",
+    "spear_master": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-892656c5-4dc2-4875-8bbf-bf0cbc2400b3.png",
+    "guard_ready": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-8261d55f-a802-4a7b-90fb-0f7619838b28.png",
+    "guard_hold": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-d4df8982-945b-4159-8d16-b6d66bba86b1.png",
+    "enchant_ready": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-2d0628d9-ecb1-4736-9adb-1d6c908b680c.png",
+    "enchant_hold": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-e040da46-fa2b-44b8-8e39-422c4fdb4eb8.png",
+    "taunt_ready": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-54444492-2587-42b2-910a-498f52033484.png",
+    "taunt_call": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-360eed76-f57c-4148-99f6-e9ebfe91b7d7.png",
+    "rise_hit": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-3f47d0a7-2907-44a6-b541-87ae8faf214f.png",
+    "charge_ready": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-d993e82e-4e23-4377-a07e-fbfc7d0f0b2c.png",
+    "enchant_ready_fix": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-606b566b-d161-45f9-9c9c-8d84950c9e53.png",
+    "enchant_hold_fix": "/Users/oreocookie03/.codex/generated_images/01a121ef-5f1f-7eb1-97f4-f3916347daf3/exec-fd2c3468-fa6f-4a2d-900b-499ed6c4ccc5.png"
+  }
+}

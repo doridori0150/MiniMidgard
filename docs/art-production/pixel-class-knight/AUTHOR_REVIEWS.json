@@ -1,0 +1,110 @@
+[
+  {
+    "frame": "cleave_ready",
+    "previousReference": "idle_0",
+    "decision": "채택",
+    "visualCheck": "같은 손을 머리 위로 올림. 얼굴은 기존 레이어로 고정."
+  },
+  {
+    "frame": "cleave_hit",
+    "previousReference": "cleave_ready",
+    "decision": "채택",
+    "visualCheck": "앞무릎을 낮추고 같은 손이 앞 아래로 이동. 좁은 내리베기 잔상."
+  },
+  {
+    "frame": "thrust_ready",
+    "previousReference": "idle_0",
+    "decision": "채택",
+    "visualCheck": "같은 무기 손을 허리에 당겨 수평 방향 준비."
+  },
+  {
+    "frame": "thrust_hit",
+    "previousReference": "thrust_ready",
+    "decision": "채택",
+    "visualCheck": "그 손을 오른쪽으로 연장. 머리 크기와 앞발 접지 확인."
+  },
+  {
+    "frame": "throw_ready",
+    "previousReference": "cleave_ready",
+    "decision": "채택",
+    "visualCheck": "무기 손을 어깨 뒤로 당기고 날을 앞으로 겨눔."
+  },
+  {
+    "frame": "throw_release",
+    "previousReference": "throw_ready",
+    "decision": "채택",
+    "visualCheck": "같은 팔이 앞으로 펴지고 빈손이 됨. 무기 그림 없음."
+  },
+  {
+    "frame": "throw_catch",
+    "previousReference": "throw_release",
+    "decision": "채택",
+    "visualCheck": "같은 손이 내려오며 무기를 되받음. 후방 발 회수."
+  },
+  {
+    "frame": "guard_ready",
+    "previousReference": "idle_0",
+    "decision": "채택",
+    "visualCheck": "가슴 앞 무기와 굽힌 무릎. 방패를 새로 만들지 않음."
+  },
+  {
+    "frame": "guard_hold",
+    "previousReference": "guard_ready",
+    "decision": "채택",
+    "visualCheck": "발 위치를 유지한 채 무릎과 팔을 더 압축."
+  },
+  {
+    "frame": "enchant_ready",
+    "previousReference": "idle_0",
+    "decision": "제외",
+    "visualCheck": "축소 합성에서 세운 날이 기존 머리 앞 레이어 뒤에 가려짐."
+  },
+  {
+    "frame": "enchant_hold",
+    "previousReference": "enchant_ready",
+    "decision": "제외",
+    "visualCheck": "같은 가림 문제. 연결될 두 장 모두 재생성."
+  },
+  {
+    "frame": "taunt_ready",
+    "previousReference": "idle_0",
+    "decision": "채택",
+    "visualCheck": "무기는 같은 손에 두고 반대 손으로 손짓."
+  },
+  {
+    "frame": "taunt_call",
+    "previousReference": "taunt_ready",
+    "decision": "채택",
+    "visualCheck": "반대 손가락을 당기고 가슴을 열음. 생성된 얼굴 변화는 원본 얼굴 고정으로 제거."
+  },
+  {
+    "frame": "rise_hit",
+    "previousReference": "cleave_hit",
+    "decision": "채택",
+    "visualCheck": "낮은 후속 자세에서 위로 역베기. 머리 바깥쪽 잔상 확인."
+  },
+  {
+    "frame": "charge_ready",
+    "previousReference": "thrust_ready",
+    "decision": "채택",
+    "visualCheck": "전방 기울임과 낮은 무릎을 강조. 기존 찌르기와 연결."
+  },
+  {
+    "frame": "enchant_ready_fix",
+    "previousReference": "enchant_ready",
+    "decision": "수정 채택",
+    "visualCheck": "팔을 더 내밀어 원본 머리 폭 바깥에 세운 검이 보임."
+  },
+  {
+    "frame": "enchant_hold_fix",
+    "previousReference": "enchant_ready_fix",
+    "decision": "수정 채택",
+    "visualCheck": "같은 무기 손과 검 위치 유지. 반대 손이 날을 따라 올라감."
+  },
+  {
+    "frame": "spear_master",
+    "previousReference": null,
+    "decision": "채택",
+    "visualCheck": "자체 생성 청록 자루·금 띠·은색 날. 프레임마다 같은 길이와 손잡이 위치로 합성."
+  }
+]

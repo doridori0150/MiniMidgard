@@ -8,7 +8,9 @@ import { SKILL_CONTACT } from '../game/world.ts';
 import { HAIR_TINT, LINE, clip, pickFrame } from './whole.ts';
 
 type V2 = [number, number];
-interface Frame { image: string; head: { point: V2; pose: string }; weapon?: { z: 'front' | 'behind'; visible: boolean }; grip?: string }
+interface WeaponPlace { z?: 'front' | 'behind'; visible?: boolean; gripOverlay?: string; gripBakedIntoWeapon?: boolean }
+/** `weapon.byType` overrides placement and the finger overlay per weapon layer (a knight's spear sits at its own angle) */
+interface Frame { image: string; head: { point: V2; pose: string }; weapon?: WeaponPlace & { byType?: Record<string, WeaponPlace> }; grip?: string }
 interface Manifest {
   canvas: { size: V2; origin: V2; bodyHeight?: number };
   animations: Record<string, { frames: string[]; durations: number[]; duration: number; loop: boolean }>;
@@ -40,7 +42,7 @@ const key = (file: string) => '../assets/pixel/' + file;
 const HEIGHT = 76;
 /** game weapon → pixel weapon set; null = empty-handed; missing = no pixel art for it yet (another renderer draws) */
 const WEAPON: Partial<Record<WeaponType, string | null>> = {
-  none: null, sword: 'sword', sword2h: 'sword', staff: 'staff', bow: 'bow', mace: 'mace', dagger: 'dagger', katar: 'dagger', axe: 'axe',
+  none: null, sword: 'sword', sword2h: 'sword', spear: 'spear', staff: 'staff', bow: 'bow', mace: 'mace', dagger: 'dagger', katar: 'dagger', axe: 'axe',
 };
 /** look.hair (0..7) picks a style by index among the character's gender's styles, in this order */
 const STYLE_ORDER = ['ponytail', 'bob', 'long'].flatMap((n) => [n, n + '_p2', n + '_p3']);
@@ -155,7 +157,10 @@ export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: 
   if (!f) return false;
   const w = WEAPON[L.wtype];
   const wfile = w ? M!.weapons[w].frames[id]?.[name] : undefined;
-  const showW = !!wfile && f.weapon?.visible !== false;
+  const bt = w ? f.weapon?.byType?.[w] : undefined;
+  const wz = bt?.z ?? f.weapon?.z;
+  const grip = bt ? (bt.gripBakedIntoWeapon ? undefined : bt.gripOverlay) : f.grip;
+  const showW = !!wfile && (bt?.visible ?? f.weapon?.visible) !== false;
   const style = styleFor(L, c);
   const hp = style ? M!.hair[style].poses[f.head.pose] : undefined;
   const piv = hp?.pivot ?? (style ? M!.hair[style].pivot : undefined) ?? [0, 0];
@@ -171,9 +176,9 @@ export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: 
   const m1 = ctx.getTransform();
   ctx.setTransform(m1.a, m1.b, m1.c, m1.d, Math.round(m1.e), Math.round(m1.f));
   put(layer(hp?.back, L.hairColor), hx, hy);
-  if (showW && f.weapon?.z === 'behind') put(imgs.get(key(wfile!)));
+  if (showW && wz === 'behind') put(imgs.get(key(wfile!)));
   put(layer(f.image, L.hairColor));
-  if (showW && f.weapon?.z !== 'behind') { put(imgs.get(key(wfile!))); put(f.grip ? imgs.get(key(f.grip)) : undefined); }
+  if (showW && wz !== 'behind') { put(imgs.get(key(wfile!))); put(grip ? imgs.get(key(grip)) : undefined); }
   put(layer(hp?.front, L.hairColor), hx, hy);
   ctx.restore();
   return true;
