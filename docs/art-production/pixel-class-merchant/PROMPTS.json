@@ -1,0 +1,127 @@
+[
+  {
+    "frame": "idle_0",
+    "prompt": "Use case: stylized-concept. Create ONE animation frame idle_0 for a new female MERCHANT, original pixel game art matching attached Knight and Cookie style/proportion, not their outfit. Transparent background. Single full-body sprite, right-facing 3/4 southeast, two heads tall, head accounts for half body height, very short compact limbs, exact crisp low-resolution pixel clusters as if a 48-pixel-tall sprite enlarged 8x nearest-neighbor. Cream-blond rounded tucked bob with side fringe (no braid), warm dark eyes, confident little smile. Mustard short waistcoat over ivory sleeves, dark teal work apron over shorts, small brown belt pouch at back screen-left hip, brown ankle boots. One compact broad single-edged steel AXE with short brown wooden haft held by the screen-right visible NEAR hand, pointing diagonally down right; axe blade beside boot, no sword. Far hand rests on hip: proud hardworking shopkeeper. Hair only cream #faf0d7 beige #e1cdb8 muted shadow #b49b91 and brown #49342f. Outline warm dark brown, restrained palette, no smooth painting, no tiny noisy details. Neutral balanced feet on same ground, head big and round. ONE sprite only, ample transparent padding, no labels/grid/shadow. Style references are our own Knight and Cookie, don't copy their hairstyle or armor. Pixel forms must remain legible when reduced to 48px tall. Output canvas 1024 square.",
+    "review": "새 단발/앞치마/가방과 가까운 손 도끼 확인. 원본 알파 220 문턱으로 투명 잡점 제외 후 48px 규격화."
+  },
+  {
+    "frame": "idle_1",
+    "prompt": "Edit the attached original merchant idle_0 into ONE next idle breathing frame idle_1. Keep EXACT identical tucked blonde bob, face, mustard waistcoat, teal apron, belt pouch, brown boots, compact two-head proportions and pixel grid. Feet remain planted same places; chest lifts by only one logical sprite pixel, shoulders and head rise one pixel, apron gently shifts. Same screen-right near hand continues holding the same small axe diagonally down right, far hand on hip. Eyes open. Transparent background, one sprite, same scale and composition and pixel art, no labels or new objects. Match previous frame closely; this is a subtle breathing change, NOT a new design.",
+    "review": "발과 도끼 방향 유지. 어깨·흉곽 호흡 변화, 머리 실루엣 일치 확인."
+  },
+  {
+    "frame": "idle_2",
+    "prompt": "ONE next idle frame for attached merchant. Previous breathing frame inspected: keep exactly same compact 2-head female, hair silhouette, clothing, bag, boots and axe in SAME near screen-right hand. Chest and shoulders settle down one logical pixel toward baseline. Brief relaxed blink, eyes become short dark curves, small confident smile. Feet do not move. Same axe down right. No redesign, no extra accessories, crisp 48px-style enlarged pixel art on transparent background, one full body sprite same composition.",
+    "review": "눈감음·가벼운 미소와 대기 복귀 연결 확인. 깜박임은 최종 120ms로 단축."
+  },
+  {
+    "frame": "walk_0",
+    "prompt": "Create ONE walk animation frame walk_0 from this exact merchant. First reference previous idle blink, second reference eyes-open original character. Keep face/hair/outfit/size/pixel style, reopen eyes. Right-facing 3/4 walk CONTACT pose: NEAR boot extends forward screen-right heel down, FAR boot trails screen-left toe down, clear short stride (not run). Body leans slightly forward. Far arm drops from hip and swings back beside pouch; near screen-right hand holds SAME AXE diagonally down right slightly ahead, no hand swap. Apron follows hips. Same large head and extremely short legs. Transparent, one full sprite, no ground/shadow/text. Preserve character scale/composition.",
+    "review": "앞발 접지·뒤꿈치 들림·팔 내려옴 확인. 동일 단발과 가까운 손 유지."
+  },
+  {
+    "frame": "walk_1",
+    "prompt": "ONE next frame walk_1 of exactly this merchant walk cycle. Previous contact pose inspected. Advance to PASSING: planted near leg moves underneath hip, far boot lifts and passes close behind near ankle, both knees slightly bent, feet nearly together. Head/chest one logical pixel higher. Far arm swings from rear toward center, near hand still grips SAME axe on screen-right angled down right, blade travels gently with hand. Keep SAME face, exact blonde tucked bob, mustard vest/teal apron/pouch/boots, proportions and crisp chunky pixels. No run, no jump, no extra weapon, no hand switch. Transparent full sprite, same canvas placement.",
+    "review": "교차 다리·몸 상승·가방 뒤쪽 유지. 도끼가 몸과 함께 이동하며 손 연결 유지."
+  },
+  {
+    "frame": "walk_2_rejected_hand",
+    "prompt": "ONE next walk frame walk_2, immediately after reference passing pose. FAR leg now swings forward screen-right, boot lifted slightly in front ready to touch down, NEAR supporting leg pushes backward screen-left. Short cute walk, not run. Far forearm swings forward over apron, near axe hand swings a little backward but REMAINS SAME screen-right visible hand holding axe. Axe stays to right clear of legs. Identical merchant face, blond bob, mustard vest, teal apron, belt pouch and short brown boots, two-head proportions, same chunky pixel style. Body returns one logical pixel lower. One sprite transparent no labels or ground.",
+    "review": "도끼가 화면 왼쪽 손으로 넘어가 제외. 다리만 수정하도록 다시 생성."
+  },
+  {
+    "frame": "walk_2",
+    "prompt": "Edit ONLY THE LEGS of attached merchant walk_1 into next walk frame. Keep the ENTIRE UPPER BODY, BOTH ARMS, BOTH HANDS, HEAD and AXE exactly where they are, unchanged. The axe MUST stay at lower SCREEN-RIGHT held by SCREEN-RIGHT hand, diagonal down-right. No axe on screen-left. Change legs only: far boot extends forward to screen-right and raised slightly, near supporting boot shifts back to screen-left, short stride. Same outfit and same pixel scale. This is one sequential frame of a sprite walk, NOT new artwork. Transparent full sprite.",
+    "review": "재생성에서 도끼를 화면 오른쪽으로 복원. 상체 유지하며 발 내딛기 확인."
+  },
+  {
+    "frame": "walk_3",
+    "prompt": "ONE next sequential walk frame walk_3 from attached corrected walk_2. Same merchant identical face hair proportions clothing. Forward far boot now contacts ground screen-right, rear near boot pushes off behind screen-left, head and body settle one logical pixel. This is the opposite contact pose of the first step. Keep screen-right forearm and its AXE on screen-right exactly as reference, short wooden shaft slants down right. Far empty hand stays in front near belt. Apron and bag shift gently with landing. Never swap weapon hand. Single crisp pixel sprite transparent, no labels no ground.",
+    "review": "반대 접지에서 앞치마 흔들림·뒤발 들림 확인. 손 교체 없음."
+  },
+  {
+    "frame": "walk_4",
+    "prompt": "ONE next frame walk_4 after attached opposite contact walk_3. Legs pass under hips again: forward far leg planted near center, near knee bends and near boot lifts in front of far shin, feet close together, clearly opposite overlap to earlier walk_1 (second reference). Far empty hand begins swinging back screen-left toward pouch. The AXE and gripping near hand remain on SCREEN RIGHT pointing down-right throughout. Exact same head, bob, face, mustard vest, teal apron, bag and boots. Slight one logical pixel upward body bob. Crisp compact two-head pixel sprite transparent, no ground or labels.",
+    "review": "반대 교차 다리와 빈손 뒤쪽 이동 확인. 실루엣·무기 손 유지."
+  },
+  {
+    "frame": "walk_5",
+    "prompt": "ONE final walk frame walk_5, connecting first reference walk_4 passing pose to second reference walk_0 contact. Near boot swings forward screen-right just above ground before contact, far boot is under/back screen-left with toe planted; legs separate gently. Far EMPTY hand drops backward alongside pouch, near hand and axe stay SCREEN RIGHT angled down right. Maintain exactly same original merchant head/hair, short stature, face and outfit. Keep axe same size, don't switch hands or mirror body. Pixel art crisp, transparent single full sprite, no text/ground. This frame should flow into walk_0.",
+    "review": "마지막 발 내밀기→walk_0 접지로 복귀 확인. 도끼/가방 좌우 보존."
+  },
+  {
+    "frame": "attack_0_rejected_hand",
+    "prompt": "ONE attack animation frame attack_0 for this exact merchant from idle reference. Begin heavy overhead AXE CHOP: feet spread shoulder width, knees brace, torso twists slightly back, SAME near screen-right hand lifts compact axe up beside her right cheek/shoulder, haft now near vertical and blade just above and behind the head. Far empty hand braces at waist, not holding weapon. Keep original axe compact and broad single steel blade, short brown shaft (no huge new axe). Exact face, cream tucked bob, mustard waistcoat, ivory sleeves, teal apron, brown hip pouch, short boots. Right-facing 3/4, two heads tall, crisp low-res pixel clusters, transparent single full sprite. No effect yet, no text, ample padding above.",
+    "review": "첫 준비 자세가 화면 왼쪽 손을 들어 도끼 손 연속성 실패. 제외 후 화면 좌표 고정 재생성."
+  },
+  {
+    "frame": "attack_0",
+    "prompt": "Make ONE first axe-attack preparation frame by editing original IDLE merchant attached. CRITICAL screen-space constraint: the SCREEN-LEFT arm remains bent with EMPTY HAND ON HIP, identical to reference. ONLY the SCREEN-RIGHT arm bends upward, its hand now beside the SCREEN-RIGHT cheek at x about 790; that hand holds the axe shaft pointing UP, axe blade above the SCREEN-RIGHT side of head, x about 880. DO NOT put an axe or raised arm on screen-left. Feet spread slightly for bracing. Same character face hair outfit small axe and 2-head pixel proportions. Transparent background single sprite. No attack smear yet. Keep left empty hand on hip and right hand holding axe clearly visible.",
+    "review": "재생성으로 화면 오른쪽 팔·도끼 연결 복원. 왼손 허리·발 벌림 확인."
+  },
+  {
+    "frame": "attack_1",
+    "prompt": "ONE NEXT heavy axe attack frame attack_1 from this exact merchant attack_0. Keep screen-left EMPTY hand on waist, same screen-right arm grips axe. Raise screen-right elbow higher and draw the same axe farther OVER AND BEHIND THE CROWN: gripping hand above screen-right temple, shaft angles from that hand UP-LEFT, broad blade above crown slightly screen-left of hand. Axe same compact length, do not grow weapon. Torso leans back slightly and knees brace, head tilts slightly forward under raised arm. Original bob and face, mustard vest teal apron pouch boots unchanged. This is the held apex before a downward chop, NO motion arc yet. Same pixel grid, two-head body, transparent one sprite. One axe and two arms only.",
+    "review": "오른팔을 따라 손이 정수리 위로 이동. 도끼 머리 뒤 준비·빈 왼손 유지 확인."
+  },
+  {
+    "frame": "attack_2",
+    "prompt": "ONE next frame attack_2 of this EXACT merchant's heavy OVERHEAD DOWNWARD axe chop. Previous apex inspected: same right arm now drives FORWARD-DOWN, same axe travels from overhead behind crown clockwise toward screen-right. Strong broad FAN-SHAPED motion smear, smoky lavender-grey with white leading edge, sweeps from above/behind head to right side, NOT a sword slash, not magic. Axe actual blade now at screen-right waist height at front of descending arc. Body bends forward and knees drop, lead boot steps right, head lowered a little. Far screen-left EMPTY hand moves slightly back for balance. Keep identical head/bob, size, outfit, pouch and boots; retain cute 2-head proportions. Same AXE held by screen-right hand, no swap. One crisp pixel sprite on true transparency, no floor. Let arc read as massive downward weight.",
+    "review": "머리 위→앞 아래 부채꼴 궤적, 오른팔 손잡이 연결, 왼팔 균형 확인. 생성 잔상 외곽 알파는 규격화 시 정리."
+  },
+  {
+    "frame": "attack_3",
+    "prompt": "ONE NEXT impact frame attack_3 from this merchant overhead chop. SAME CHARACTER and same near SCREEN-RIGHT hand gripping axe. Deeply bend both knees into low forward lunge, head and torso lower ~5 logical pixels, front boot planted right, back leg folded. Axe blade completes downstroke and TOUCHES GROUND ahead screen-right; haft angles down right from near hand. Broad fan smear now lower and forward: trailing grey lavender fan from upper-right above head down to bright white low blade, shorter than previous tall arc. This is HIT frame, tiny compact white chip at blade contact allowed but no drawn ground. Far empty left hand behind for balance. Preserve same head size/hair/outfit/axe head size, compact two-head original. Pixel art single sprite true transparent, no text.",
+    "review": "깊어진 무릎·전방 타격·하강 잔상 확인. hitFrame=3 채택. 실제 도끼 길이는 대기 규격에 맞춰 정규화 필요."
+  },
+  {
+    "frame": "attack_4",
+    "prompt": "ONE next frame attack_4 after attached impact. Keep EXACT same deeply crouched low lunge body pose, front/rear feet positions, lowered head, same hands and axe. REMOVE ALL the large lavender-white motion arc and all impact particles, leaving just actual compact steel axe blade resting on ground at lower right, same near screen-right hand on wooden haft. No additional axe, no switching hands. Hold after a heavy chop: apron and hair settle slightly, far empty arm still behind. Identical merchant face/hair/outfit/proportions, pixel clusters. Transparent background one complete sprite, no floor, no text. Important: absence of arc exposes actual axe.",
+    "review": "잔상 제거 후 실제 도끼/손 노출 확인. 타격 장과 같은 낮은 무릎·발 좌표 유지."
+  },
+  {
+    "frame": "attack_5",
+    "prompt": "ONE next settling hold frame attack_5 after attached low axe chop. Keep SAME low crouched lunge, boots exactly planted and SAME near screen-right hand gripping same axe, blade still planted ahead lower right. Body sinks just one logical pixel, hair fringe and apron settle downward; far empty left arm lowers a little from extended backward to behind hip. Mouth closes into focused little line. Do NOT stand up yet. No motion effects. Same character, same head size and hairstyle, same mustard/teal/brown palette and pixel grid, transparent single full sprite. This is a subtle follow-through held after a heavy strike.",
+    "review": "낮은 정지 유지·빈팔 하강·입 다물기 확인. 몸이 조기에 일어서지 않음."
+  },
+  {
+    "frame": "attack_6",
+    "prompt": "ONE recovery frame attack_6, BETWEEN first attached low crouch attack_5 and second attached standing idle_0. Same merchant rises halfway, knees still bent, front boot draws back a little, shoulders and head move upward. Same SCREEN-RIGHT near hand pulls the axe back closer beside boot, tip no longer far forward, shaft returns diagonal down right. Screen-LEFT empty hand returns toward hip. Face calm, exact same bob, head size, mustard vest teal apron pouch and boots. DO NOT switch axe hands or mirror body. Compact TWO heads tall at full standing, no growth or new design. Crisp pixel sprite transparent one full body, no arc or labels. Must visibly bridge crouch to idle.",
+    "review": "몸을 절반 일으킴·무기 회수·빈손 허리 복귀 확인. attack_7은 idle_0 원본/레이어 재사용으로 정확 복귀."
+  },
+  {
+    "frame": "hurt_0",
+    "prompt": "ONE hurt reaction frame hurt_0 for exact merchant in attached idle reference. Recoil BACK toward screen-left, torso arches backward, head tilts back/left, eyes pinch in pain, mouth small startled O. Feet remain grounded and knees flex, no airborne jump. Far screen-left EMPTY arm flies back slightly. Near SCREEN-RIGHT hand RETAINS SAME compact axe, lowered diagonally down right, no hand swap. Preserve same big cream bob head, mustard vest ivory sleeves teal apron hip pouch brown short boots, 2-head tiny pixel style. Single full sprite true transparency, no particles blood text or floor. This is RO-style backwards recoil, original art.",
+    "review": "뒤로 젖힌 상체·통증 표정·발 접지·동일 오른손 무기 확인."
+  },
+  {
+    "frame": "hurt_1",
+    "prompt": "ONE next hurt recovery frame hurt_1 of exactly this merchant. Previous backward recoil now eases halfway toward original idle (second reference). Torso still leans slightly back, knees absorb impact, head returns partway upright, eyes half open recovering, small tense mouth. Far screen-left empty hand lowers toward belt pouch, SAME SCREEN-RIGHT hand holds same axe diagonally down right. Keep exact face, cream bob/head size, mustard vest teal apron ivory sleeves brown boots. Feet stable, same scale, pixel art crisp transparent one sprite, no ground or text. Bridge hurt_0 back to idle, do not fall.",
+    "review": "기울기 완화·눈 다시 열림·왼손 허리 복귀 확인. hurt_0와 얼굴 정체성 유지."
+  },
+  {
+    "frame": "dead_0",
+    "prompt": "ONE first collapsing frame dead_0, same merchant as attached previous hurt recovery. Knees buckle deeply, body sinks toward ground, head bows forward with eyes closing, shoulders slump. Near SCREEN-RIGHT hand still loosely grips same AXE, blade lowers onto ground at right, far empty hand falls beside pouch. Boots and knees fold, do not lie down yet. Same exact head size, original cream bob, mustard/teal apron outfit and brown boots/pouch, compact 2-head pixel art. No injury details, no particles, no floor. One sprite transparent with ample padding. This will connect to sideways collapse.",
+    "review": "무릎이 접히고 고개 내려감. 가까운 손 도끼를 계속 잡고 있어 다음 낙하와 연결 가능."
+  },
+  {
+    "frame": "dead_1",
+    "prompt": "ONE next collapse frame dead_1 after attached kneeling merchant. She tips SIDEWAYS toward SCREEN LEFT, torso diagonal halfway to floor, large head drops left/down, eyes closed, cheek near shoulder. Far EMPTY left hand touches down to brace under body. Knees remain folded, boots to right. Near hand (original screen-right axe hand) stays in FRONT OF BODY still touching/gripping axe shaft; axe falls to rest near ground in front toward screen-right, no hand swap. Same face, bob, outfit and compact body, no stretching into adult proportions. Pixel art single full sprite on transparency, no floor/shadow or gore. This is an intermediate fall, not final fully flat.",
+    "review": "왼쪽으로 기울며 빈손 바닥 지지. 무기 손은 몸 앞쪽에 남음. 누운 장으로 추가 연결."
+  },
+  {
+    "frame": "dead_2",
+    "prompt": "ONE final dead/resting collapse frame dead_2 after attached merchant leaning on left hand. Complete falling onto SCREEN LEFT SIDE: head now resting on ground at screen-left, body almost HORIZONTAL, folded short legs and boots extend screen-right. Eyes closed peacefully; far empty arm folds beneath cheek; same near axe hand rests in FRONT near waist, touching wooden axe handle which lies low along ground toward screen-right. Same small steel axe. Keep original merchant cream bob head size, mustard vest, teal apron and leather pouch/boots, two-head proportions even horizontal. No wound, no particles, no floor or shadow. Single crisp pixel sprite fully visible with transparent background, same pixel scale. This is completely lying down, NOT sitting or kneeling.",
+    "review": "옆으로 완전히 누운 정지·접힌 다리·앞쪽 손/도끼 연결 확인. 마지막 장 유지."
+  },
+  {
+    "frame": "sit_0",
+    "prompt": "Create ONE sitting rest sprite sit_0 for exact merchant attached original idle. Same right-facing 3/4 view and same head/face/bob/proportions. Sit upright on ground with short legs folded comfortably forward, boots visible, apron draped over bent knees. Far screen-left empty hand rests on knee, near screen-right hand rests on the AXE handle with actual blade resting ground to right. Calm confident tiny smile, eyes open. Exact cream tucked bob, mustard short vest, ivory sleeves, dark teal work apron, brown waist pouch and short brown boots. No stool/chair or extra items. Crisp native-looking 48px character pixel art enlarged, same pixel scale and head size as idle. Transparent single full sprite no floor/shadow/text.",
+    "review": "앉은 다리/앞치마 접힘, 동일 머리/얼굴, 도끼를 오른손 아래에 둔 휴식 자세 확인."
+  },
+  {
+    "frame": "attack_7",
+    "source": "idle_0",
+    "review": "직전 회수 자세 확인 후 대기 장을 그대로 재사용해 루프 외형 드리프트 제거."
+  }
+]
