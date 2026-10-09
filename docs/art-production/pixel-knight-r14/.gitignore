@@ -1,0 +1,3 @@
+*.zip
+.swift-module-cache/
+normalized/

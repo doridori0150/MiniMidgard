@@ -1,0 +1,1177 @@
+{
+  "schema": "minimidgard.pixel/1",
+  "canvas": {
+    "size": [
+      128,
+      120
+    ],
+    "origin": [
+      64,
+      112
+    ],
+    "bodyHeight": 48
+  },
+  "animations": {
+    "idle": {
+      "frames": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durations": [
+        220,
+        220,
+        220,
+        220
+      ],
+      "duration": 880,
+      "loop": true
+    },
+    "walk": {
+      "frames": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "walk_4",
+        "walk_5",
+        "walk_6",
+        "walk_7"
+      ],
+      "durations": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "duration": 720,
+      "loop": true
+    },
+    "attack": {
+      "frames": [
+        "attack_0",
+        "attack_1",
+        "attack_2",
+        "attack_3",
+        "attack_4",
+        "attack_5",
+        "attack_6"
+      ],
+      "durations": [
+        80,
+        90,
+        40,
+        130,
+        70,
+        70,
+        80
+      ],
+      "duration": 560,
+      "loop": false,
+      "hitFrame": 3
+    },
+    "hurt": {
+      "frames": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durations": [
+        80,
+        160
+      ],
+      "duration": 240,
+      "loop": false
+    },
+    "dead": {
+      "frames": [
+        "dead_0",
+        "dead_1",
+        "dead_2",
+        "dead_3"
+      ],
+      "durations": [
+        80,
+        100,
+        140,
+        1000
+      ],
+      "duration": 1320,
+      "loop": false,
+      "holdLast": true
+    },
+    "sit": {
+      "frames": [
+        "sit_0"
+      ],
+      "durations": [
+        1000
+      ],
+      "duration": 1000,
+      "loop": false,
+      "holdLast": true
+    }
+  },
+  "hairKeys": [
+    "#faf0d7",
+    "#e1cdb8",
+    "#b49b91",
+    "#49342f"
+  ],
+  "characters": {
+    "knight_female_p2": {
+      "class": "knight",
+      "gender": "female",
+      "bodyHeight": 48,
+      "headHeight": 25,
+      "proportion": 2,
+      "defaultWeapon": "sword",
+      "defaultHair": "braided_bob_p2",
+      "hairStyles": [
+        "braided_bob_p2"
+      ],
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle_0",
+            "idle_1",
+            "idle_2",
+            "idle_3"
+          ],
+          "durations": [
+            220,
+            220,
+            220,
+            220
+          ],
+          "duration": 880,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            "walk_0",
+            "walk_1",
+            "walk_2",
+            "walk_3",
+            "walk_4",
+            "walk_5",
+            "walk_6",
+            "walk_7"
+          ],
+          "durations": [
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "duration": 720,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            "attack_0",
+            "attack_1",
+            "attack_2",
+            "attack_3",
+            "attack_4",
+            "attack_5",
+            "attack_6"
+          ],
+          "durations": [
+            80,
+            90,
+            40,
+            130,
+            70,
+            70,
+            80
+          ],
+          "duration": 560,
+          "loop": false,
+          "hitFrame": 3
+        },
+        "hurt": {
+          "frames": [
+            "hurt_0",
+            "hurt_1"
+          ],
+          "durations": [
+            80,
+            160
+          ],
+          "duration": 240,
+          "loop": false
+        },
+        "dead": {
+          "frames": [
+            "dead_0",
+            "dead_1",
+            "dead_2",
+            "dead_3"
+          ],
+          "durations": [
+            80,
+            100,
+            140,
+            1000
+          ],
+          "duration": 1320,
+          "loop": false,
+          "holdLast": true
+        },
+        "sit": {
+          "frames": [
+            "sit_0"
+          ],
+          "durations": [
+            1000
+          ],
+          "duration": 1000,
+          "loop": false,
+          "holdLast": true
+        }
+      },
+      "frames": {
+        "idle_0": {
+          "image": "body/knight_female_p2/idle_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              100
+            ],
+            "tipPoint": [
+              90,
+              111
+            ],
+            "angleDegrees": 31.43
+          },
+          "grip": "grips/knight_female_p2/idle_0.png"
+        },
+        "idle_1": {
+          "image": "body/knight_female_p2/idle_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              99
+            ],
+            "tipPoint": [
+              90,
+              110
+            ],
+            "angleDegrees": 31.43
+          },
+          "grip": "grips/knight_female_p2/idle_1.png"
+        },
+        "idle_2": {
+          "image": "body/knight_female_p2/idle_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              100
+            ],
+            "tipPoint": [
+              90,
+              111
+            ],
+            "angleDegrees": 31.43
+          },
+          "grip": "grips/knight_female_p2/idle_2.png"
+        },
+        "idle_3": {
+          "image": "body/knight_female_p2/idle_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              100
+            ],
+            "tipPoint": [
+              90,
+              110
+            ],
+            "angleDegrees": 29.05
+          },
+          "grip": "grips/knight_female_p2/idle_3.png"
+        },
+        "walk_0": {
+          "image": "body/knight_female_p2/walk_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              100
+            ],
+            "tipPoint": [
+              90,
+              110
+            ],
+            "angleDegrees": 29.05
+          },
+          "grip": "grips/knight_female_p2/walk_0.png"
+        },
+        "walk_1": {
+          "image": "body/knight_female_p2/walk_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              102
+            ],
+            "tipPoint": [
+              90,
+              112
+            ],
+            "angleDegrees": 29.05
+          },
+          "grip": "grips/knight_female_p2/walk_1.png"
+        },
+        "walk_2": {
+          "image": "body/knight_female_p2/walk_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              101
+            ],
+            "tipPoint": [
+              91,
+              111
+            ],
+            "angleDegrees": 27.76
+          },
+          "grip": "grips/knight_female_p2/walk_2.png"
+        },
+        "walk_3": {
+          "image": "body/knight_female_p2/walk_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              100
+            ],
+            "tipPoint": [
+              91,
+              111
+            ],
+            "angleDegrees": 31.43
+          },
+          "grip": "grips/knight_female_p2/walk_3.png"
+        },
+        "walk_4": {
+          "image": "body/knight_female_p2/walk_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              101
+            ],
+            "tipPoint": [
+              91,
+              112
+            ],
+            "angleDegrees": 31.43
+          },
+          "grip": "grips/knight_female_p2/walk_4.png"
+        },
+        "walk_5": {
+          "image": "body/knight_female_p2/walk_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              101
+            ],
+            "tipPoint": [
+              91,
+              112
+            ],
+            "angleDegrees": 30.07
+          },
+          "grip": "grips/knight_female_p2/walk_5.png"
+        },
+        "walk_6": {
+          "image": "body/knight_female_p2/walk_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              100
+            ],
+            "tipPoint": [
+              91,
+              110
+            ],
+            "angleDegrees": 27.76
+          },
+          "grip": "grips/knight_female_p2/walk_6.png"
+        },
+        "walk_7": {
+          "image": "body/knight_female_p2/walk_7.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_7",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              100
+            ],
+            "tipPoint": [
+              91,
+              111
+            ],
+            "angleDegrees": 31.43
+          },
+          "grip": "grips/knight_female_p2/walk_7.png"
+        },
+        "attack_0": {
+          "image": "body/knight_female_p2/attack_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              68,
+              94
+            ],
+            "tipPoint": [
+              89,
+              92
+            ],
+            "angleDegrees": -5.44
+          },
+          "grip": "grips/knight_female_p2/attack_0.png"
+        },
+        "attack_1": {
+          "image": "body/knight_female_p2/attack_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              88,
+              96
+            ],
+            "angleDegrees": 0.0
+          },
+          "grip": "grips/knight_female_p2/attack_1.png"
+        },
+        "attack_2": {
+          "image": "body/knight_female_p2/attack_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              95
+            ],
+            "tipPoint": [
+              97,
+              95
+            ],
+            "angleDegrees": 0.0
+          },
+          "grip": "grips/knight_female_p2/attack_2.png"
+        },
+        "attack_3": {
+          "image": "body/knight_female_p2/attack_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              82,
+              94
+            ],
+            "tipPoint": [
+              103,
+              94
+            ],
+            "angleDegrees": 0.0
+          },
+          "grip": "grips/knight_female_p2/attack_3.png"
+        },
+        "attack_4": {
+          "image": "body/knight_female_p2/attack_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              70,
+              94
+            ],
+            "tipPoint": [
+              91,
+              94
+            ],
+            "angleDegrees": 0.0
+          },
+          "grip": "grips/knight_female_p2/attack_4.png"
+        },
+        "attack_5": {
+          "image": "body/knight_female_p2/attack_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              91,
+              107
+            ],
+            "angleDegrees": 25.35
+          },
+          "grip": "grips/knight_female_p2/attack_5.png"
+        },
+        "hurt_0": {
+          "image": "body/knight_female_p2/hurt_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              100
+            ],
+            "tipPoint": [
+              91,
+              111
+            ],
+            "angleDegrees": 31.43
+          },
+          "grip": "grips/knight_female_p2/hurt_0.png"
+        },
+        "hurt_1": {
+          "image": "body/knight_female_p2/hurt_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              100
+            ],
+            "tipPoint": [
+              91,
+              112
+            ],
+            "angleDegrees": 33.69
+          },
+          "grip": "grips/knight_female_p2/hurt_1.png"
+        },
+        "dead_0": {
+          "image": "body/knight_female_p2/dead_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_0",
+            "basePose": "down"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              103
+            ],
+            "tipPoint": [
+              90,
+              114
+            ],
+            "angleDegrees": 31.43
+          },
+          "grip": "grips/knight_female_p2/dead_0.png"
+        },
+        "dead_1": {
+          "image": "body/knight_female_p2/dead_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_1",
+            "basePose": "down"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              75,
+              107
+            ],
+            "tipPoint": [
+              96,
+              112
+            ],
+            "angleDegrees": 13.39
+          },
+          "grip": "grips/knight_female_p2/dead_1.png"
+        },
+        "dead_2": {
+          "image": "body/knight_female_p2/dead_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_2",
+            "basePose": "down"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              107
+            ],
+            "tipPoint": [
+              95,
+              110
+            ],
+            "angleDegrees": 8.13
+          },
+          "grip": "grips/knight_female_p2/dead_2.png"
+        },
+        "dead_3": {
+          "image": "body/knight_female_p2/dead_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_3",
+            "basePose": "down"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              61,
+              108
+            ],
+            "tipPoint": [
+              82,
+              110
+            ],
+            "angleDegrees": 5.44
+          },
+          "grip": "grips/knight_female_p2/dead_3.png"
+        },
+        "sit_0": {
+          "image": "body/knight_female_p2/sit_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "sit_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              102
+            ],
+            "tipPoint": [
+              92,
+              110
+            ],
+            "angleDegrees": 22.83
+          },
+          "grip": "grips/knight_female_p2/sit_0.png"
+        },
+        "attack_6": {
+          "image": "body/knight_female_p2/attack_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              100
+            ],
+            "tipPoint": [
+              90,
+              111
+            ],
+            "angleDegrees": 31.43
+          },
+          "grip": "grips/knight_female_p2/attack_6.png"
+        }
+      }
+    }
+  },
+  "hair": {
+    "braided_bob_p2": {
+      "gender": "female",
+      "style": "braided_bob",
+      "proportion": "p2",
+      "pivot": [
+        0,
+        0
+      ],
+      "poses": {
+        "idle_0": {
+          "front": "hair/braided_bob_p2/idle_0_front.png",
+          "back": "hair/braided_bob_p2/idle_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_1": {
+          "front": "hair/braided_bob_p2/idle_1_front.png",
+          "back": "hair/braided_bob_p2/idle_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_2": {
+          "front": "hair/braided_bob_p2/idle_2_front.png",
+          "back": "hair/braided_bob_p2/idle_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_3": {
+          "front": "hair/braided_bob_p2/idle_3_front.png",
+          "back": "hair/braided_bob_p2/idle_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_0": {
+          "front": "hair/braided_bob_p2/walk_0_front.png",
+          "back": "hair/braided_bob_p2/walk_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_1": {
+          "front": "hair/braided_bob_p2/walk_1_front.png",
+          "back": "hair/braided_bob_p2/walk_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_2": {
+          "front": "hair/braided_bob_p2/walk_2_front.png",
+          "back": "hair/braided_bob_p2/walk_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_3": {
+          "front": "hair/braided_bob_p2/walk_3_front.png",
+          "back": "hair/braided_bob_p2/walk_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_4": {
+          "front": "hair/braided_bob_p2/walk_4_front.png",
+          "back": "hair/braided_bob_p2/walk_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_5": {
+          "front": "hair/braided_bob_p2/walk_5_front.png",
+          "back": "hair/braided_bob_p2/walk_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_6": {
+          "front": "hair/braided_bob_p2/walk_6_front.png",
+          "back": "hair/braided_bob_p2/walk_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_7": {
+          "front": "hair/braided_bob_p2/walk_7_front.png",
+          "back": "hair/braided_bob_p2/walk_7_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_0": {
+          "front": "hair/braided_bob_p2/attack_0_front.png",
+          "back": "hair/braided_bob_p2/attack_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_1": {
+          "front": "hair/braided_bob_p2/attack_1_front.png",
+          "back": "hair/braided_bob_p2/attack_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_2": {
+          "front": "hair/braided_bob_p2/attack_2_front.png",
+          "back": "hair/braided_bob_p2/attack_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_3": {
+          "front": "hair/braided_bob_p2/attack_3_front.png",
+          "back": "hair/braided_bob_p2/attack_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_4": {
+          "front": "hair/braided_bob_p2/attack_4_front.png",
+          "back": "hair/braided_bob_p2/attack_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_5": {
+          "front": "hair/braided_bob_p2/attack_5_front.png",
+          "back": "hair/braided_bob_p2/attack_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_0": {
+          "front": "hair/braided_bob_p2/hurt_0_front.png",
+          "back": "hair/braided_bob_p2/hurt_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_1": {
+          "front": "hair/braided_bob_p2/hurt_1_front.png",
+          "back": "hair/braided_bob_p2/hurt_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_0": {
+          "front": "hair/braided_bob_p2/dead_0_front.png",
+          "back": "hair/braided_bob_p2/dead_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_1": {
+          "front": "hair/braided_bob_p2/dead_1_front.png",
+          "back": "hair/braided_bob_p2/dead_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_2": {
+          "front": "hair/braided_bob_p2/dead_2_front.png",
+          "back": "hair/braided_bob_p2/dead_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_3": {
+          "front": "hair/braided_bob_p2/dead_3_front.png",
+          "back": "hair/braided_bob_p2/dead_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "sit_0": {
+          "front": "hair/braided_bob_p2/sit_0_front.png",
+          "back": "hair/braided_bob_p2/sit_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_6": {
+          "front": "hair/braided_bob_p2/attack_6_front.png",
+          "back": "hair/braided_bob_p2/attack_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      }
+    }
+  },
+  "weapons": {
+    "sword": {
+      "frames": {
+        "knight_female_p2": {
+          "idle_0": "weapons/sword/knight_female_p2/idle_0.png",
+          "idle_1": "weapons/sword/knight_female_p2/idle_1.png",
+          "idle_2": "weapons/sword/knight_female_p2/idle_2.png",
+          "idle_3": "weapons/sword/knight_female_p2/idle_3.png",
+          "walk_0": "weapons/sword/knight_female_p2/walk_0.png",
+          "walk_1": "weapons/sword/knight_female_p2/walk_1.png",
+          "walk_2": "weapons/sword/knight_female_p2/walk_2.png",
+          "walk_3": "weapons/sword/knight_female_p2/walk_3.png",
+          "walk_4": "weapons/sword/knight_female_p2/walk_4.png",
+          "walk_5": "weapons/sword/knight_female_p2/walk_5.png",
+          "walk_6": "weapons/sword/knight_female_p2/walk_6.png",
+          "walk_7": "weapons/sword/knight_female_p2/walk_7.png",
+          "attack_0": "weapons/sword/knight_female_p2/attack_0.png",
+          "attack_1": "weapons/sword/knight_female_p2/attack_1.png",
+          "attack_2": "weapons/sword/knight_female_p2/attack_2.png",
+          "attack_3": "weapons/sword/knight_female_p2/attack_3.png",
+          "attack_4": "weapons/sword/knight_female_p2/attack_4.png",
+          "attack_5": "weapons/sword/knight_female_p2/attack_5.png",
+          "hurt_0": "weapons/sword/knight_female_p2/hurt_0.png",
+          "hurt_1": "weapons/sword/knight_female_p2/hurt_1.png",
+          "dead_0": "weapons/sword/knight_female_p2/dead_0.png",
+          "dead_1": "weapons/sword/knight_female_p2/dead_1.png",
+          "dead_2": "weapons/sword/knight_female_p2/dead_2.png",
+          "dead_3": "weapons/sword/knight_female_p2/dead_3.png",
+          "sit_0": "weapons/sword/knight_female_p2/sit_0.png",
+          "attack_6": "weapons/sword/knight_female_p2/attack_6.png"
+        }
+      }
+    }
+  }
+}
