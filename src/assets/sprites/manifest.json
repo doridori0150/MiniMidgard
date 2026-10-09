@@ -3190,6 +3190,412 @@
           }
         }
       }
+    },
+    "swordsman_female": {
+      "class": "swordsman",
+      "gender": "female",
+      "defaultWeapon": "sword",
+      "defaultHairTint": "cream",
+      "frames": {
+        "idle_0": {
+          "image": "frames/swordsman_female/idle_0.png",
+          "hairMask": "masks/swordsman_female/idle_0.png",
+          "gripOverlay": "grips/swordsman_female/idle_0.png",
+          "hand": {
+            "point": [
+              285.807,
+              275.158
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              231.421,
+              85.895
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              293.421,
+              152.246
+            ],
+            "angle": 0
+          }
+        },
+        "idle_1": {
+          "image": "frames/swordsman_female/idle_1.png",
+          "hairMask": "masks/swordsman_female/idle_1.png",
+          "gripOverlay": "grips/swordsman_female/idle_1.png",
+          "hand": {
+            "point": [
+              285.807,
+              275.705
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              231.421,
+              87.663
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              293.421,
+              153.586
+            ],
+            "angle": 0
+          },
+          "derivation": {
+            "frame": "idle_0",
+            "operation": "whole-figure foot-locked breathing",
+            "topDisplacementPx": 2,
+            "verticalFactor": 0.9935483870967742
+          }
+        },
+        "walk_0": {
+          "image": "frames/swordsman_female/walk_0.png",
+          "hairMask": "masks/swordsman_female/walk_0.png",
+          "gripOverlay": "grips/swordsman_female/walk_0.png",
+          "hand": {
+            "point": [
+              293.965,
+              263.193
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              241.754,
+              78.281
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              296.14,
+              143.544
+            ],
+            "angle": 0
+          }
+        },
+        "walk_1": {
+          "image": "frames/swordsman_female/walk_1.png",
+          "hairMask": "masks/swordsman_female/walk_1.png",
+          "gripOverlay": "grips/swordsman_female/walk_1.png",
+          "hand": {
+            "point": [
+              282.544,
+              270.807
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              237.947,
+              81.544
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              290.158,
+              145.719
+            ],
+            "angle": 0
+          }
+        },
+        "walk_2": {
+          "image": "frames/swordsman_female/walk_2.png",
+          "hairMask": "masks/swordsman_female/walk_2.png",
+          "gripOverlay": "grips/swordsman_female/walk_2.png",
+          "hand": {
+            "point": [
+              303.65,
+              255.926
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              244.686,
+              79.392
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              302.229,
+              155.405
+            ],
+            "angle": 0
+          }
+        },
+        "walk_3": {
+          "image": "frames/swordsman_female/walk_3.png",
+          "hairMask": "masks/swordsman_female/walk_3.png",
+          "gripOverlay": "grips/swordsman_female/walk_3.png",
+          "hand": {
+            "point": [
+              291.246,
+              269.719
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              241.211,
+              82.632
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              301.035,
+              148.982
+            ],
+            "angle": 0
+          }
+        },
+        "attack_0": {
+          "image": "frames/swordsman_female/attack_0.png",
+          "hairMask": "masks/swordsman_female/attack_0.png",
+          "gripOverlay": "grips/swordsman_female/attack_0.png",
+          "hand": {
+            "point": [
+              302.123,
+              147.895
+            ],
+            "angle": -110,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              225.982,
+              84.807
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              280.368,
+              144.632
+            ],
+            "angle": 0
+          }
+        },
+        "attack_1": {
+          "image": "frames/swordsman_female/attack_1.png",
+          "hairMask": "masks/swordsman_female/attack_1.png",
+          "gripOverlay": "grips/swordsman_female/attack_1.png",
+          "hand": {
+            "point": [
+              340.737,
+              226.211
+            ],
+            "angle": 0,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              235.228,
+              90.246
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              300.491,
+              151.158
+            ],
+            "angle": 0
+          }
+        },
+        "attack_2": {
+          "image": "frames/swordsman_female/attack_2.png",
+          "hairMask": "masks/swordsman_female/attack_2.png",
+          "gripOverlay": "grips/swordsman_female/attack_2.png",
+          "hand": {
+            "point": [
+              328.228,
+              268.632
+            ],
+            "angle": 30,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              236.86,
+              100.035
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              297.772,
+              165.298
+            ],
+            "angle": 0
+          }
+        },
+        "cast_0": {
+          "image": "frames/swordsman_female/cast_0.png",
+          "hairMask": "masks/swordsman_female/cast_0.png",
+          "gripOverlay": "grips/swordsman_female/cast_0.png",
+          "hand": {
+            "point": [
+              310.281,
+              224.035
+            ],
+            "angle": -65,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              226.526,
+              89.158
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              283.088,
+              152.246
+            ],
+            "angle": 0
+          }
+        },
+        "cast_1": {
+          "image": "frames/swordsman_female/cast_1.png",
+          "hairMask": "masks/swordsman_female/cast_1.png",
+          "gripOverlay": "grips/swordsman_female/cast_1.png",
+          "hand": {
+            "point": [
+              310.281,
+              226.211
+            ],
+            "angle": -65,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              224.351,
+              91.333
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              286.351,
+              153.333
+            ],
+            "angle": 0
+          }
+        },
+        "sit_0": {
+          "image": "frames/swordsman_female/sit_0.png",
+          "hairMask": "masks/swordsman_female/sit_0.png",
+          "gripOverlay": "grips/swordsman_female/sit_0.png",
+          "hand": {
+            "point": [
+              233.596,
+              305.614
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              206.404,
+              128.316
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              277.105,
+              192.491
+            ],
+            "angle": 0
+          }
+        },
+        "hurt_0": {
+          "image": "frames/swordsman_female/hurt_0.png",
+          "hairMask": "masks/swordsman_female/hurt_0.png",
+          "gripOverlay": "grips/swordsman_female/hurt_0.png",
+          "hand": {
+            "point": [
+              265.14,
+              239.263
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              130.263,
+              125.053
+            ],
+            "angle": -32
+          },
+          "side": {
+            "point": [
+              210.754,
+              166.386
+            ],
+            "angle": -32
+          }
+        },
+        "dead_0": {
+          "image": "frames/swordsman_female/dead_0.png",
+          "hairMask": "masks/swordsman_female/dead_0.png",
+          "gripOverlay": "grips/swordsman_female/dead_0.png",
+          "hand": {
+            "point": [
+              236.532,
+              332.715
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": false
+          },
+          "crown": {
+            "point": [
+              76.674,
+              227.106
+            ],
+            "angle": -52
+          },
+          "side": {
+            "point": [
+              140.874,
+              349.086
+            ],
+            "angle": -52
+          }
+        }
+      }
     }
   },
   "weapons": {
