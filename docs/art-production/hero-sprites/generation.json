@@ -126,6 +126,50 @@
       "rotationDegrees": 60.477007293862584,
       "prompt": "prompts/axe-b-attempt-01.txt",
       "attempt": 1
+    },
+    {
+      "id": "swordsman_female",
+      "tool": "built-in image_gen",
+      "source": "source/c/swordsman_female-attempt1.png",
+      "source_sha256": "abd36c98bcdf55f865c8cb209a5352fdc30412eac8df8faa4ef7cdd3bb3264e2",
+      "uniform_scale": 1.087719298245614,
+      "prompt": "prompts/swordsman_female-hero-attempt-01.txt",
+      "frames": [
+        "idle_0",
+        "idle_1",
+        "walk_0",
+        "walk_1",
+        "walk_3",
+        "attack_0",
+        "attack_1",
+        "attack_2",
+        "cast_0",
+        "cast_1",
+        "sit_0",
+        "hurt_0"
+      ]
+    },
+    {
+      "id": "swordsman_female",
+      "tool": "built-in image_gen",
+      "source": "source/c/swordsman_female-walk-attempt3.png",
+      "source_sha256": "c2894fb98f4e9ae5997706a03e848c1bd0d99bcfabc299a5b504c81fbea31776",
+      "uniform_scale": 0.37,
+      "prompt": "prompts/swordsman_female-walk-attempt-03.txt",
+      "frames": [
+        "walk_2"
+      ]
+    },
+    {
+      "id": "swordsman_female",
+      "tool": "built-in image_gen",
+      "source": "source/c/swordsman_female-dead-attempt2.png",
+      "source_sha256": "86154c5829610ef67d6fe85974f37204af63658233db1ae9af2d558bf982a54c",
+      "uniform_scale": 0.321,
+      "prompt": "prompts/swordsman_female-dead-attempt-02.txt",
+      "frames": [
+        "dead_0"
+      ]
     }
   ],
   "rejected": [
@@ -2234,6 +2278,42 @@
         ],
         "status": "rejected"
       }
+    ]
+  },
+  "batchC": {
+    "request": "docs/art-requests/hero-sprites-c.md including final addendum",
+    "references": [
+      "docs/art/concepts/round3/class_lineup.png",
+      "docs/art-production/hero-sprites/frames/swordsman/idle_0.png",
+      "docs/art-production/hero-sprites/frames/novice/idle_0.png"
+    ],
+    "processing": "Whole-figure extraction; flat material palette; common scale per source; foot registration; color-segmented aligned full hair masks; original-pixel finger overlays. No head/body/face assembly. idle_1 uses recorded 2px foot-locked whole-figure breathing.",
+    "rejected": [
+      {
+        "source": "source/c/swordsman_female-attempt1.png",
+        "frames": [
+          "walk_2",
+          "dead_0"
+        ],
+        "reason": "Repeated leading foot; undersized lying head."
+      },
+      {
+        "source": "source/c/swordsman_female-walk-attempt2.png",
+        "reason": "Contact still same leading foot; body proportions drift."
+      }
+    ],
+    "annotations": "source/c/annotations.json",
+    "status": "delivered-with-documented-attack-motion-warning",
+    "verification": "verification/c-checks.json",
+    "headMetrics": "verification/c-head-metrics.json",
+    "previews": [
+      "preview_frames.png",
+      "preview_vs_lineup.png",
+      "preview_animation.gif",
+      "verification/review_swordsman_female.png",
+      "verification/c-hair-brown.png",
+      "verification/c-hair-tints.png",
+      "verification/c-display80.png"
     ]
   }
 }

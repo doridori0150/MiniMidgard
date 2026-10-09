@@ -1,0 +1,20 @@
+Use case: stylized-concept. Asset: one production sprite atlas for an original chibi female swordsman, 14 complete whole-body poses. Transparent background with real alpha.
+References: image 1 lineup is STYLE ONLY. Image 2 male swordsman idle is exact OUTFIT reference: silver breastplate, round silver shoulder guards, blue tunic with subtle mottled flat shading, red waist tab, brown belt, white trousers, brown boots and brown wrist bracers. Image 3 female novice is exact FACE AND HAIR reference: cream shoulder-length bob, single cowlick at top, large plain blue vertical eyes, feminine face, small confident smile. She is the same female novice after becoming a swordsman. Do not use the man's spiky hair. No helmet, cape, shield, sword, other weapon, effects, shadow, text or labels.
+Draw a 4-column by 4-row evenly spaced atlas, first 14 cells occupied, last two blank. Keep every character completely inside its own cell with ample padding. All characters same scale, identical head size within 4 percent, consistent broad face, hair outline, shoulder armor and costume. Sitting and lying characters naturally shorter, NEVER enlarged. Match supplied game sprites exactly: flat colors, single shadow step, thick dark brown outlines, no gradients or shine. Each cell a complete character, not separated pieces.
+All poses keep torso and face facing right-front three-quarter, never reverse or twist torso. Near arm originates at SCREEN-RIGHT shoulder and remains in front of torso in every pose. This SAME hand will hold a separately overlaid sword, so always draw it as an EMPTY gripping fist. Far arm stays along screen-left outside the chest, never crosses chest.
+Reading order:
+1 idle_0: confident standing, both boots grounded, near fist at right hip.
+2 idle_1: same idle only 1-2 pixels lower shoulders, boots unchanged.
+3 walk_0: contact, near RIGHT leg forward toward screen-right, far left leg back, near fist swings slightly back but stays visible on screen-right.
+4 walk_1: passing, legs beneath body, trailing left boot lifting.
+5 walk_2: opposite contact, far LEFT leg forward toward screen-right, near right leg extends back toward screen-left. Visibly opposite legs to cell 3. Torso same direction. Near fist swings slightly forward on screen-right.
+6 walk_3: opposite passing, legs beneath body, right boot lifting.
+7 attack_0: overhead diagonal sword windup, SCREEN-RIGHT near arm bent with EMPTY fist raised high and back beside screen-right temple, elbow visibly connected to screen-right shoulder, far arm remains down screen-left. No fist crosses behind head.
+8 attack_1: decisive downward slash reaches contact, near fist thrust out toward screen-right at chest height, entire torso still right-front. Empty fist for sword pointing horizontally right.
+9 attack_2: slash recovery, near fist extended screen-right and lowered to waist, knees slightly bent.
+10 cast_0: near gripping fist forward screen-right at chest height, far hand stays down. Will retain sword overlay.
+11 cast_1: same held spell stance, tiny breathing change, near gripping fist still visible and forward. No magic effects.
+12 sit_0: sitting resting on floor with legs forward, hands on knees, unchanged head and body scale.
+13 hurt_0: recoiling leaning back, eyes squeezed > <, same outfit and hair, near fist remains on screen-right.
+14 dead_0: lying sideways on ground, head on left boots on right, closed eyes, full body visible at SAME SCALE as standing figures.
+Crucial: exactly 14 whole character drawings in fixed row-major order, no duplicates or omissions, no weapons baked in, genuine transparent background.
