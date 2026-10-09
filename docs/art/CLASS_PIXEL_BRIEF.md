@@ -41,7 +41,7 @@ You decide frame counts and timing from the RO reference, adapted to our game. T
 Deliver into `docs/art-production/pixel-class-<class>/`:
 - a `manifest.json` in the `minimidgard.pixel/1` format of r15:
   - character id `<class>_<female|male>_p2`;
-  - its own hair style(s) in the four hair key colours `#faf0d7 #e1cdb8 #b49b91 #49342f`;
+  - its own hair style(s) in the four hair key colours `#faf0d7 #e1cdb8 #b49b91 #49342f`, **named with the class prefix** (e.g. `merchant_bob_p2`) so they never clash with other classes' hair;
   - a weapon layer named by our weapon type given in the class brief;
   - grip overlays;
   - per-character `animations` with `hitFrame`;
@@ -49,4 +49,4 @@ Deliver into `docs/art-production/pixel-class-<class>/`:
 - GIFs of each action at 1× and 4×, `contact_sheet.png`, and a side-by-side of this hero next to 쿠키 and the Knight at 1× and 4×;
 - `NOTES.md`, short: the plan, what you took from the RO reference, and your checks between frames.
 
-Write only inside that folder. Do not change `src/` or other folders. Do not commit or push. End with a short Korean summary.
+Do not leave build caches (e.g. `.swift-module-cache/`) in the folder. Write only inside that folder. Do not change `src/` or other folders. Do not commit or push. End with a short Korean summary.

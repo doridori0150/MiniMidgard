@@ -1,0 +1,214 @@
+[
+  {
+    "frame": "idle_0",
+    "prompt": "Generate ONE animation frame idle_0, not a sheet. Reference images: our Knight and Cookie only for exact pixel density, two-head-tall proportions, head/body size and polished tiny JRPG pixel rendering. NEW ORIGINAL MALE THIEF, facing screen-right three-quarter, total standing height 48 logical pixels, head 24 pixels, short swept-back ivory hair with one pointed forelock, thick STRAIGHT dark eyebrows, alert eyes, sleeveless slate-blue leather vest, dark undershirt, short burgundy sash at waist, brown wrist guards, dark trousers and short brown boots. No armor pauldrons, no cape. Single short silver dagger in his NEAR hand (the arm seen across the foreground, shoulder on screen-left), lowered diagonally toward screen-right by his hip; free far hand beside torso. Relaxed balanced idle, feet lightly apart. Genuine crisp pixel art with small coherent color clusters, no outlines thicker than one logical pixel, no smooth illustration or anti-aliasing. Hair exactly ivory #faf0d7 #e1cdb8 #b49b91 and dark outline #49342f. Transparent background, no floor shadow, no text. Canvas 128x120 logical pixels, soles at y112 and body centered x64; render enlarged as necessary preserving crisp square pixels. Character must occupy only 48/120 of canvas height, like references. One character only.",
+    "tool": "image_gen.imagegen",
+    "source": "sources/idle_0.png",
+    "accepted": true
+  },
+  {
+    "frame": "idle_1",
+    "prompt": "Create exactly ONE next animation frame. Use the supplied previous original male thief frame as identity and pixel-style lock. Same short swept ivory hair, thick straight eyebrows, slate sleeveless vest, burgundy sash, brown cuffs, boots, proportions and transparent canvas. Idle breathing IN: chest rises very slightly, head rises by only one logical pixel, feet stay planted at exactly previous sole positions, near hand on screen-left keeps same dagger lowered diagonally across foreground to screen-right. Do not change camera, expression, hair silhouette, weapon length, hand or costume. Crisp limited-palette pixel art, 2-head-tall character, no smooth edges, no shadow/text, SINGLE FRAME.",
+    "previous": "idle_0",
+    "tool": "image_gen.imagegen",
+    "source": "sources/idle_1.png",
+    "accepted": true
+  },
+  {
+    "frame": "idle_2",
+    "prompt": "ONE next idle animation frame of this EXACT original thief. Image 1 previous inhale frame, image 2 original idle identity. Gently exhale back near initial height, shoulders relax one pixel, sash tip settles slightly; feet fixed. Preserve face with straight thick male brows, short swept ivory hair, same exact near-hand dagger across foreground, slate sleeveless vest, burgundy sash, boots, 2-head proportion, pixel scale and canvas placement. Only subtle breathing change. Transparent background, crisp pixel art, no text, no shadow, no sheet.",
+    "previous": "idle_1",
+    "tool": "image_gen.imagegen",
+    "source": "sources/idle_2.png",
+    "accepted": true
+  },
+  {
+    "frame": "walk_0",
+    "prompt": "ONE original thief walk animation frame, starting rightward 3/4 walk. Previous idle is reference 1, original identity is reference 2. Contact pose A: NEAR leg (screen-left hip) extends FORWARD toward screen-right, far leg stretches backward screen-left. Distinct but small stride, compact nimble walk, not running. Head same size/face/hair, torso slightly forward; near arm holding same dagger remains low across foreground pointing down-right, far empty arm counter-swings. Slate sleeveless vest, burgundy short sash, brown cuffs/boots exact. 2-head-tall crisp tiny JRPG pixel art. Feet ground baseline same, transparent background and same canvas; no text or shadow. ONE FRAME.",
+    "previous": "idle_2",
+    "tool": "image_gen.imagegen",
+    "source": "sources/walk_0.png",
+    "accepted": true
+  },
+  {
+    "frame": "walk_1",
+    "prompt": "ONE next walk frame of EXACT thief in first reference; original identity second. Continue contact A into DOWN/weight absorption: forward screen-right boot planted, front knee bends a little, torso/head lower one logical pixel; rear screen-left heel lifts and rear knee begins swinging underneath. This is a WALK, feet never both airborne. Keep same head size, swept ivory hairstyle, thick straight brows, sleeveless slate vest, burgundy sash. Dagger remains in SAME near hand across foreground, down-right, short blade, never switch hands. Empty far arm begins coming forward slightly. Same transparent canvas baseline, crisp 2-head pixel sprite, one frame only.",
+    "previous": "walk_0",
+    "tool": "image_gen.imagegen",
+    "source": "sources/walk_1.png",
+    "accepted": true
+  },
+  {
+    "frame": "walk_2",
+    "prompt": "ONE next walk frame, exact thief first reference, original identity second. PASSING pose A, clearly different legs from previous wide stride: supporting near leg now almost vertical directly under hips; far swinging knee comes FORWARD and bent, its boot lifted just above ground beside the support ankle. Feet close together crossing under pelvis, not wide apart. Torso rises back one pixel. Near dagger hand swings slightly back toward screen-left hip while holding SAME short dagger angled down-right; empty far arm forward. Keep exact 2-head size, pixel style, ivory swept hair, straight brows, slate sleeveless vest/burgundy sash/brown boots. Single frame, transparent, no shadow/text.",
+    "previous": "walk_1",
+    "tool": "image_gen.imagegen",
+    "source": "sources/walk_2.png",
+    "accepted": true
+  },
+  {
+    "frame": "walk_3",
+    "prompt": "ONE next walk frame of exact thief. Previous frame first, neutral original second. Passing-to-UP A: far swinging knee now extends forward to screen-right, its boot slightly off ground ready to contact; near support foot pushes from its toe slightly behind center screen-left. Torso rises one logical pixel, head unchanged size, step modest and nimble. Same near hand is behind screen-left hip holding short dagger down-right, far empty arm swings forward. Preserve exact face swept ivory hair thick brows, slate sleeveless vest burgundy sash boots, two-head proportions, pixel density and transparent canvas. Single frame, no shadow/text.",
+    "previous": "walk_2",
+    "tool": "image_gen.imagegen",
+    "source": "sources/walk_3.png",
+    "accepted": true
+  },
+  {
+    "frame": "walk_4",
+    "prompt": "ONE next walk frame of exact original thief. Continue previous raised forward FAR foot to CONTACT B: screen-right far boot now touches ground heel-first and flattens, near leg stretches behind screen-left with lifted heel. This is opposite half-cycle from original contact. Near dagger arm stays BACK at screen-left hip, empty far arm FORWARD at screen-right. Dagger same short silver down-right blade and same near hand. Body settles to neutral walk height; exact head size, hair, face, costume colors and pixel rendering. 2-head-tall original male thief, transparent same canvas, no text/no shadow, SINGLE FRAME.",
+    "previous": "walk_3",
+    "tool": "image_gen.imagegen",
+    "source": "sources/walk_4.png",
+    "accepted": true
+  },
+  {
+    "frame": "walk_5",
+    "prompt": "ONE next walk frame exact thief. Previous contact B image 1; identity image 2. DOWN B weight absorption: forward FAR screen-right boot planted, far knee bends; rear NEAR foot lifts heel and starts swinging inward under hip. Head/torso lower one logical pixel. Near dagger hand starts moving forward a little from its rear position, blade still down-right; empty far hand begins retreating. No hand switching. Same tiny crisp pixel art, 2-head proportions and head size, swept ivory hair, straight brows, slate sleeveless vest, burgundy sash, brown cuffs and boots. Same transparent canvas, no text/shadow. One frame only.",
+    "previous": "walk_4",
+    "tool": "image_gen.imagegen",
+    "source": "sources/rejected/walk_5_missing_dagger.png",
+    "accepted": false
+  },
+  {
+    "frame": "walk_5",
+    "attempt": 2,
+    "prompt": "Edit this EXACT thief into ONE next walking frame. CRITICAL retain the visible SILVER DAGGER in the SCREEN-LEFT HAND as in first image; blade starts at that hand and points diagonally down-right. Do not omit it, hide it, or put it in screen-right hand. Change ONLY legs and body height subtly: front screen-right far boot bears weight, front knee bends slightly, rear screen-left near boot starts lifting heel to swing under hip; torso lowers one pixel. Screen-left weapon arm still angled backward and screen-right EMPTY arm slightly relaxed. Keep SAME visible dagger, head, swept ivory hair, face, vest, sash, pixel style, proportions. Transparent background. One frame, no sheet, no shadow.",
+    "previous": "walk_4",
+    "tool": "image_gen.imagegen",
+    "source": "sources/walk_5.png",
+    "accepted": true
+  },
+  {
+    "frame": "walk_6",
+    "prompt": "ONE next walk frame exact thief. PASSING B pose: legs close together under hips now. Far supporting leg vertical with boot on ground; NEAR moving leg crosses IN FRONT of support shin, near boot lifted and moving toward screen-right. Near weapon arm swings FORWARD across foreground again, keeping SILVER DAGGER visibly connected to that same near hand and blade down-right; far empty hand swings backward. Opposite passing pose to earlier half cycle. Head same size and hair, slate sleeveless vest burgundy sash, brown boots. Crisp 2-head pixel sprite, same transparent canvas. No shadow/text/sheet.",
+    "previous": "walk_5",
+    "tool": "image_gen.imagegen",
+    "source": "sources/walk_6.png",
+    "accepted": true
+  },
+  {
+    "frame": "walk_7",
+    "prompt": "ONE next walk frame closing cycle. Image1 previous passing B, image2 target contact A for next frame, image3 identity. Move from first toward second: near front leg extends screen-right, boot still just above ground about to land; far rear foot pushes off toe screen-left. Weapon forearm swings down slightly toward its contact-A position, SAME near hand holding visible short silver dagger diagonally down-right; empty far arm rear. Torso upright one pixel higher than contact; keep head size and costume EXACT. Crisp original male thief 2-head pixel art on transparent background, one frame only, no shadow/text.",
+    "previous": "walk_6",
+    "tool": "image_gen.imagegen",
+    "source": "sources/walk_7.png",
+    "accepted": true
+  },
+  {
+    "frame": "attack_0",
+    "prompt": "ONE attack starting frame of this EXACT thief. Reference1 idle design. Reference2 most recent walking frame for continuity. From relaxed idle make LOW READY stance: knees slightly bent, feet slightly wider, weight centered, near SCREEN-LEFT ARM keeps dagger by near hip pointing diagonally down-right, empty far hand lifts slightly near chest. Preparing a fast horizontal dagger slash. NO slash effect yet. Same ivory hair silhouette and head size, thick straight brows, sleeveless slate leather vest, burgundy sash, brown cuffs/boots, same 2-head pixel style and camera/canvas. Transparent, no shadow/text, single frame.",
+    "previous": "walk_7",
+    "actionBase": "idle_0",
+    "tool": "image_gen.imagegen",
+    "source": "sources/attack_0.png",
+    "accepted": true
+  },
+  {
+    "frame": "attack_1",
+    "prompt": "ONE next attack animation frame exact thief from previous first image. WIND-UP: pull the SAME NEAR screen-left weapon arm BEHIND torso toward screen-left, elbow half-bent, silver dagger now points backward screen-left near waist height. Torso twists a little left but face still looks right at target. Free far hand held in front chest screen-right. Feet remain where previous frame placed them, knees flex more. No effect yet. Important dagger stays in SAME near arm connected to screen-left shoulder. Preserve exact head size swept ivory hair male brows, slate sleeveless leather vest burgundy sash brown boots, crisp 2-head pixel art. Transparent same canvas, one frame only.",
+    "previous": "attack_0",
+    "tool": "image_gen.imagegen",
+    "source": "sources/attack_1.png",
+    "accepted": true
+  },
+  {
+    "frame": "attack_2",
+    "prompt": "ONE next attack frame: final BACK EXTENSION before horizontal slash. Continue previous thief pose: same near weapon arm now fully extended straight toward screen-left almost horizontal at lower-chest/waist level, short silver dagger extends further left from SAME fist. Lean torso forward toward right target, bend knees deeper, head drops about 2 logical pixels and shifts right a little while size unchanged. Forward screen-right knee loads, rear screen-left leg braces. Empty far hand near chest. No slash effect yet. Same identity/costume/hair and two-head pixel style as image2. Transparent background, no text/shadow, one frame only.",
+    "previous": "attack_1",
+    "tool": "image_gen.imagegen",
+    "source": "sources/attack_2.png",
+    "accepted": true
+  },
+  {
+    "frame": "attack_3",
+    "prompt": "ONE next frame, HIT of fast horizontal dagger slash. Previous image is exact thief wound up with near arm back; same character now drives that SAME near arm forward ACROSS FRONT of torso toward screen-right. Deep low forward lunge, front right boot planted farther right, rear leg stretched left, head drops 4 logical pixels and shifts right but unchanged size. BIG BROAD HORIZONTAL crescent/fan smear at WAIST LEVEL wrapping from screen-left around foreground to screen-right, like a flattened ellipse, NOT overhead/vertical arc. Smear dark lavender trailing left to brilliant pale silver-white leading edge right, crisp pixel clusters. Face unobscured. Near wrist and actual short dagger visible at leading right edge, hand connected across torso to near screen-left shoulder; far empty arm tucked back. Identity/head/costume exactly reference2. 2-head pixel sprite, transparent, no text, no shadow, ONE frame.",
+    "previous": "attack_2",
+    "tool": "image_gen.imagegen",
+    "source": "sources/attack_3.png",
+    "accepted": true
+  },
+  {
+    "frame": "attack_4",
+    "prompt": "ONE next frame after hit. First image exact previous horizontal slash; second identity. REMOVE ALL slash smear/effects; show same character clearly in SAME low wide lunge, near weapon arm still extended across front to screen-right at waist height, same SHORT silver dagger in same fist, blade horizontal right. Keep head same location and size or settle one logical pixel lower, front knee bent and rear leg extended, feet same positions. HOLD follow-through, no new swing. Empty far arm remains behind. Sash settles. Exact hair face slate vest burgundy sash brown cuffs boots. Crisp 2-head pixel art, transparent background, no extra marks, one frame only.",
+    "previous": "attack_3",
+    "tool": "image_gen.imagegen",
+    "source": "sources/attack_4.png",
+    "accepted": true
+  },
+  {
+    "frame": "attack_5",
+    "prompt": "ONE next recovery frame after horizontal slash. Previous first is low follow-through, identity second neutral. RECOVER HALFWAY to idle: front boot pulls back halfway, torso rises halfway, near weapon ELBOW BENDS and brings SAME fist back across foreground toward near screen-left hip, short dagger rotates from horizontal right to diagonal down-right. Make this a distinct intermediate recovery, not another thrust. Far empty arm returns beside torso. Keep head size unchanged and face right 3/4, original swept ivory hair thick brows, slate sleeveless vest burgundy sash brown cuffs/boots. No smear/effects, crisp 2-head pixel art, transparent, one frame.",
+    "previous": "attack_4",
+    "tool": "image_gen.imagegen",
+    "source": "sources/attack_5.png",
+    "accepted": true
+  },
+  {
+    "frame": "hurt_0",
+    "prompt": "ONE first HURT frame of EXACT original male thief, first image original idle, second recent recovery for consistency. A hit from screen-right makes chest and head RECOIL BACK toward screen-left slightly, eyebrows tense and eyes narrow, feet remain planted, knees soften. Near screen-left hand keeps visible short silver dagger lowered diagonally down-right across foreground; far empty arm flinches outward slightly. Not attacking. Same face/hair/head size, slate sleeveless vest burgundy sash brown cuffs/boots, 2-head crisp pixel art. Transparent same canvas, no blood/effects/text/shadow, one frame only.",
+    "previous": "attack_6",
+    "tool": "image_gen.imagegen",
+    "source": "sources/hurt_0.png",
+    "accepted": true
+  },
+  {
+    "frame": "hurt_1",
+    "prompt": "ONE next HURT frame exact thief: continue previous recoil to its peak. Head and upper chest lean a little farther BACK screen-left, chin raised, eyes briefly CLOSED in a pained squint. Knees bend under him, pelvis slightly forward, both feet remain at same ground points. Near screen-left hand STILL holds visible short silver dagger lowered across foreground down-right; far empty hand spreads outward for balance. Same original swept ivory hair silhouette and head size, slate vest burgundy sash brown cuffs boots, 2-head crisp pixel art. No blood, no effects, no shadow, transparent, single frame only.",
+    "previous": "hurt_0",
+    "tool": "image_gen.imagegen",
+    "source": "sources/hurt_1.png",
+    "accepted": true
+  },
+  {
+    "frame": "hurt_2",
+    "prompt": "ONE next recovery-from-hurt frame exact thief. First peak recoil, second neutral identity. Head and torso move HALFWAY back toward neutral upright, still a slight backward lean, eyes reopen with strained thick straight brows. Knees start straightening, feet stay planted. Far empty arm lowers, near weapon arm keeps visible same short silver dagger down-right in SAME hand. Preserve size, swept ivory hair, slate sleeveless vest burgundy sash brown cuffs boots, original 2-head pixel style. Transparent background same canvas, no effects/text/shadow, one frame only.",
+    "previous": "hurt_1",
+    "tool": "image_gen.imagegen",
+    "source": "sources/hurt_2.png",
+    "accepted": true
+  },
+  {
+    "frame": "dead_0",
+    "prompt": "ONE first collapse animation frame exact thief. Previous hurt first image, original identity second. His knees buckle DOWN, one knee reaches ground, torso folds FORWARD toward screen-right and head bows, eyes closed. Near screen-left shoulder/arm still holds short silver dagger but hand drops near ground ahead of his knee, blade diagonally down-right. Empty far hand reaches toward ground to catch fall. Clearly lowering from previous upright recoil, NOT seated rest. Keep SAME head size, swept ivory hair, face, slate sleeveless vest burgundy sash brown cuffs boots, 2-head pixel style, same ground baseline. Transparent no shadow, no blood or effects/text, one frame.",
+    "previous": "hurt_2",
+    "tool": "image_gen.imagegen",
+    "source": "sources/dead_0.png",
+    "accepted": true
+  },
+  {
+    "frame": "dead_1",
+    "prompt": "ONE next collapse frame exact thief. Continue from kneeling previous image to FALLING FORWARD screen-right: both knees low, torso almost horizontal, far EMPTY palm catches ground ahead; elbows buckle. Head moves down/right until cheek is just above ground, eyes shut. Near hand still grips SAME short silver dagger resting almost horizontally toward screen-right along ground beside face. Legs trail behind to screen-left, burgundy sash falls down over hip. This is falling face-down, not sitting or lying on back. Keep same head/hair SIZE and character identity/costume, crisp 2-head pixel art. Same ground baseline and transparent canvas, no blood/shadow/text, one frame.",
+    "previous": "dead_0",
+    "tool": "image_gen.imagegen",
+    "source": "sources/dead_1.png",
+    "accepted": true
+  },
+  {
+    "frame": "dead_2",
+    "prompt": "ONE final prone defeated frame of EXACT thief. Continue previous low collapse: lower chest and cheek fully onto ground, elbows relaxed and legs extend loosely behind screen-left. FACE-DOWN/prone, face partly visible turned toward viewer with closed eyes. SAME near hand rests on ground still loosely around short dagger hilt, blade extends right beside face; far empty hand relaxed forward. No pose flip. Head and hair SAME SIZE, swept ivory hair settles only slightly, costume same slate vest burgundy sash brown cuffs/boots. This is the held final frame, still and limp, no blood. Crisp 2-head pixel art transparent canvas, same ground line, no shadow/text, single frame.",
+    "previous": "dead_1",
+    "tool": "image_gen.imagegen",
+    "source": "sources/dead_2.png",
+    "accepted": true
+  },
+  {
+    "frame": "sit_0",
+    "prompt": "ONE seated resting animation frame of EXACT original male thief from reference1, reference2 only confirms same design in lowered pose. Face awake relaxed, right 3/4. Sit on ground with one knee casually raised and other leg folded/extended a little forward screen-right, far EMPTY hand planted behind him for support. Near screen-left arm rests over raised knee while SAME hand holds short silver dagger safely down-right beside knee, clearly visible. Torso upright relaxed, same head size and swept short ivory hair with thick straight male brows. Exact sleeveless slate vest/burgundy sash/brown wrist guards/boots, 2-head proportions, crisp small JRPG pixel clusters. Keep ground baseline, transparent background, no shadow/text/sheet, ONE frame only.",
+    "previous": "dead_2",
+    "actionBase": "idle_0",
+    "tool": "image_gen.imagegen",
+    "source": "sources/rejected/sit_0_oversized_lower_body.png",
+    "accepted": false
+  },
+  {
+    "frame": "sit_0",
+    "attempt": 2,
+    "prompt": "Create ONE compact SEATED frame of exact thief in reference1, same scale as standing. This is a tiny 2-head hero whose HEAD is 24 logical pixels and standing whole body 48. SEATED WHOLE HEIGHT must be only 36 logical pixels: unchanged 24-pixel HEAD and compressed seated body/legs region only 12 pixels high. DO NOT enlarge boots, legs or torso to fill standing height. Keep same head at 24px. Sit bottom on ground, knees bent low, small original-size boots tucked close forward screen-right. Far EMPTY hand planted beside him on ground. Near screen-left hand rests low on knee holding visibly attached same short SILVER DAGGER down-right. Awake calm male thick straight brows, swept ivory hair, slate sleeveless vest burgundy sash brown small boots/cuffs. Crisp original pixel art, transparent same canvas and ground baseline as standing reference. One frame, no text or shadow.",
+    "previous": "dead_2",
+    "actionBase": "idle_0",
+    "tool": "image_gen.imagegen",
+    "source": "sources/sit_0.png",
+    "accepted": true
+  }
+]
