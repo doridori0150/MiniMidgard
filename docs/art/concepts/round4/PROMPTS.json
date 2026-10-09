@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "created": "2026-10-09",
+  "brief": "docs/art/CONCEPT_BRIEF_R4.md",
+  "tool": "image_gen.imagegen (built-in)",
+  "use_case": "stylized-concept",
+  "description_ko": "실제로 사용한 생성 및 수정 프롬프트 전체. record_number는 의존 관계를 정리한 순서이며 병렬 호출의 완료 시각 순서가 아니다. selected=false도 최종본을 만드는 데 사용된 수정 전 시안이다.",
+  "reference_note_ko": "실행 당시 hero 경로의 원화는 수정 과정에서 갱신되었다. 파츠와 첫 모션의 기준 원화는 sources/r4a_design_reference.png 및 sources/r4b_design_reference.png에 보관했다. 최종 hero 및 최종 cutout은 각 최종 프롬프트 기록을 참조한다.",
+  "calls": [
+    {
+      "id": "heroA",
+      "direction": "A",
+      "output": "r4a_hero.png",
+      "prompt": "Use case: stylized-concept. Original IP concept art for a phone idle RPG. Rich hand-painted high-resolution 2D cut-out/bone-animation game illustration: visible soft pigment brushwork, layered color and shadow, thin variable dark COLOURED contours, warm restrained rim light, matte natural skin, expressive natural face. European fantasy storybook mood, saturated harmonious colors. Never thick uniform black contours, never glossy airbrushed gacha/anime skin or sparkle eyes, never 3D, pixel art, flat vector or chibi. No existing franchise characters, costumes, logos, or assets. Character identity: Cookie, young adult female swordswoman, confident and kind, shoulder-length neutral cream/ash-blonde hair with one expressive stray ahoge-like lock, blue eyes; royal-blue tunic, light silver breastplate and two pauldrons, red waist sash, brown leather belt, gloves and boots, white trousers. One-handed sword held in the near anatomical RIGHT hand. Camera sees her right side, character faces screen RIGHT in 3/4 view. Costume panels, locks of hair and limb overlaps suitable for cutout rigging.\nDirection A \"storybook\": exactly about 4.5 heads tall (head including cranium about 22% of anatomical full height), rounder sturdy forms, compact heroic legs, bold rich color, thick heavy fabric, ornamented stitched ivory-gold trims. Adult face, not a toddler or superdeformed chibi. Broad rounded pauldrons, short split blue tunic with simple wheat-vine border, small round belt buckle, red sash knot and tails at back. Cream hair with thick flowing painted locks.\nAsset: r4a_hero.png. A SINGLE full-body master character painting, portrait canvas, 1024 pixels tall or greater, clean plain pale warm ivory background. Standing ready, balanced slightly separated feet, relaxed ready sword held in her near RIGHT hand angled diagonally toward screen right and down with entire blade visible. Full hair, feet, blade and sash within margins. No other figures, no inset, no typography, no furniture or ground scene. Figure fills 83-87% of canvas height. Paint all visible costume details thoughtfully. Make shoulder-length hair, facial blue eyes, brown gloves and white trousers unmistakable.",
+      "transparent_background": false,
+      "record_number": 1,
+      "selected": false
+    },
+    {
+      "id": "heroB",
+      "direction": "B",
+      "output": "r4b_hero.png",
+      "prompt": "Use case: stylized-concept. Original IP concept art for a phone idle RPG. Rich hand-painted high-resolution 2D cut-out/bone-animation game illustration: visible soft pigment brushwork, layered color and shadow, thin variable dark COLOURED contours, warm restrained rim light, matte natural skin, expressive natural face. European fantasy storybook mood, saturated harmonious colors. Never thick uniform black contours, never glossy airbrushed gacha/anime skin or sparkle eyes, never 3D, pixel art, flat vector or chibi. No existing franchise characters, costumes, logos, or assets. Character identity: Cookie, young adult female swordswoman, confident and kind, shoulder-length neutral cream/ash-blonde hair with one expressive stray ahoge-like lock, blue eyes; royal-blue tunic, light silver breastplate and two pauldrons, red waist sash, brown leather belt, gloves and boots, white trousers. One-handed sword held in the near anatomical RIGHT hand. Camera sees her right side, character faces screen RIGHT in 3/4 view. Costume panels, locks of hair and limb overlaps suitable for cutout rigging.\nDirection B \"soft realism\": exactly about 6 heads tall (head including cranium about 16.7% of anatomical full height), slimmer elegant proportions, softer airy diffuse light, delicate restrained detail. Adult natural face. Slim gently pointed pauldrons, fitted blue tunic with divided tapering cloth tails and fine ivory piping, narrow brown belt with an oval clasp, soft narrow red waist sash trailing at back. Airy locks of neutral ash-blonde hair.\nAsset: r4b_hero.png. A SINGLE full-body master character painting, portrait canvas, 1024 pixels tall or greater, clean plain pale warm ivory background. Standing ready, balanced slightly separated feet, relaxed ready sword held in her near RIGHT hand angled diagonally toward screen right and down with entire blade visible. Full hair, feet, blade and sash within margins. No other figures, no inset, no typography, no furniture or ground scene. Figure fills 83-87% of canvas height. Paint all visible costume details thoughtfully. Make shoulder-length hair, facial blue eyes, brown gloves and white trousers unmistakable.",
+      "transparent_background": false,
+      "record_number": 2,
+      "selected": false
+    },
+    {
+      "id": "heroA_proportion_fix",
+      "direction": "A",
+      "output": "r4a_hero.png",
+      "prompt": "Edit the supplied original character painting. Use case: stylized-concept. Original IP concept art for a phone idle RPG. Rich hand-painted high-resolution 2D cut-out/bone-animation game illustration: visible soft pigment brushwork, layered color and shadow, thin variable dark COLOURED contours, warm restrained rim light, matte natural skin, expressive natural face. European fantasy storybook mood, saturated harmonious colors. Never thick uniform black contours, never glossy airbrushed gacha/anime skin or sparkle eyes, never 3D, pixel art, flat vector or chibi. No existing franchise characters, costumes, logos, or assets. Character identity: Cookie, young adult female swordswoman, confident and kind, shoulder-length neutral cream/ash-blonde hair with one expressive stray ahoge-like lock, blue eyes; royal-blue tunic, light silver breastplate and two pauldrons, red waist sash, brown leather belt, gloves and boots, white trousers. One-handed sword held in the near anatomical RIGHT hand. Camera sees her right side, character faces screen RIGHT in 3/4 view. Costume panels, locks of hair and limb overlaps suitable for cutout rigging.\nDirection A \"storybook\": exactly about 4.5 heads tall (head including cranium about 22% of anatomical full height), rounder sturdy forms, compact heroic legs, bold rich color, thick heavy fabric, ornamented stitched ivory-gold trims. Adult face, not a toddler or superdeformed chibi. Broad rounded pauldrons, short split blue tunic with simple wheat-vine border, small round belt buckle, red sash knot and tails at back. Cream hair with thick flowing painted locks.\nCRITICAL CORRECTION: source is too tall, approximately seven heads tall. Rebuild proportions to 4.5 heads tall: head crown to chin must be 22% of crown-to-sole height; enlarge head substantially, shorten thighs and shins and shorten torso, widen sturdy body and boots. This is a squat adult storybook heroine with a mature kind face, not a child, with chunky rounded forms.\nPreserve the original costume design, near anatomical right-hand sword, 3/4 facing screen right, shoulder-length light neutral hair, blue eyes, all specified colors and ready pose. Push the finish toward hand-painted gouache: visible broad soft strokes and layered matte pigment, less slick digital detail. Plain warm light background. Full body and entire blade within margins, portrait high-resolution character-only master painting. No text, no grid, no extra views.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/.codex/generated_images/01a11ea2-4930-7282-bf57-55c765b4bd03/exec-8e5bb861-de3d-4af1-aeb1-69e1fd0a4b7d.png"
+      ],
+      "transparent_background": false,
+      "record_number": 3,
+      "selected": false
+    },
+    {
+      "id": "heroB_proportion_fix",
+      "direction": "B",
+      "output": "r4b_hero.png",
+      "prompt": "Edit the supplied original character painting. Use case: stylized-concept. Original IP concept art for a phone idle RPG. Rich hand-painted high-resolution 2D cut-out/bone-animation game illustration: visible soft pigment brushwork, layered color and shadow, thin variable dark COLOURED contours, warm restrained rim light, matte natural skin, expressive natural face. European fantasy storybook mood, saturated harmonious colors. Never thick uniform black contours, never glossy airbrushed gacha/anime skin or sparkle eyes, never 3D, pixel art, flat vector or chibi. No existing franchise characters, costumes, logos, or assets. Character identity: Cookie, young adult female swordswoman, confident and kind, shoulder-length neutral cream/ash-blonde hair with one expressive stray ahoge-like lock, blue eyes; royal-blue tunic, light silver breastplate and two pauldrons, red waist sash, brown leather belt, gloves and boots, white trousers. One-handed sword held in the near anatomical RIGHT hand. Camera sees her right side, character faces screen RIGHT in 3/4 view. Costume panels, locks of hair and limb overlaps suitable for cutout rigging.\nDirection B \"soft realism\": exactly about 6 heads tall (head including cranium about 16.7% of anatomical full height), slimmer elegant proportions, softer airy diffuse light, delicate restrained detail. Adult natural face. Slim gently pointed pauldrons, fitted blue tunic with divided tapering cloth tails and fine ivory piping, narrow brown belt with an oval clasp, soft narrow red waist sash trailing at back. Airy locks of neutral ash-blonde hair.\nCRITICAL CORRECTION: source is too tall, approximately seven heads tall. Rebuild proportions to 6 heads tall: crown to chin must be 1/6 of crown-to-sole height; enlarge the head by about 18% relative to body and shorten legs a little, retaining elegant slender adult build.\nPreserve the original costume design, near anatomical right-hand sword, 3/4 facing screen right, shoulder-length light neutral hair, blue eyes, all specified colors and ready pose. Push the finish toward hand-painted gouache: visible broad soft strokes and layered matte pigment, less slick digital detail. Plain warm light background. Full body and entire blade within margins, portrait high-resolution character-only master painting. No text, no grid, no extra views.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/.codex/generated_images/01a11ea2-4930-7282-bf57-55c765b4bd03/exec-0c3b8f17-1929-4aa9-bf47-fcc778d940e4.png"
+      ],
+      "transparent_background": false,
+      "record_number": 4,
+      "selected": false
+    },
+    {
+      "id": "heroA_final_proportions",
+      "direction": "A",
+      "output": "r4a_hero.png",
+      "prompt": "Use case: stylized-concept. Paint a full-body ORIGINAL young adult female swordswoman for a hand-painted 2D storybook game. Very compact FOUR AND A HALF HEADS TALL stylized adult anatomy: BIG expressive head, SHORT broad torso, SHORT thick thighs and calves, chunky boots, sturdy round shapes. Total figure = head + only 3.5 head lengths beneath the chin. Head is almost as wide as the chest. Not realistic human proportions. Not tall. Strongly stylized miniature adventure heroine; adult facial features, not a baby. On a 1024x1536 canvas, head crown around y=220, chin y=460, belt y=760, knees y=1040 and soles y=1300.\nShoulder-length cream/ash-blonde neutral light hair with one curved stray lock, BLUE eyes, kind confident natural face. She stands ready full body in 3/4 view facing screen RIGHT, sword in near anatomical RIGHT hand, blade points screen right-down. Costume: blue tunic, light silver breastplate with pauldrons, red sash, brown belt gloves boots, white trousers. Heavy blue fabric, round pauldrons with wheat-leaf engraving, gold-ivory wheat-leaf ornamented short tunic trims, round sun buckle, heavy red sash. Bold rich cobalt and crimson.\nVISIBLE MATTE GOUACHE BRUSHWORK, soft chunky painted strokes and layered pigments, warm rim light, fine variable dark colored lines, flowing locks. Natural expressive face, no plastic skin, no airbrushed gloss, no sparkling anime eyes, no 3D, no pixel art, NO thick black outlines, no flat vector. Entire figure and sword within plain warm ivory portrait canvas. Character only, no text or scale lines. At least 1024px tall. Do not name or copy any existing game or studio.",
+      "transparent_background": false,
+      "record_number": 5,
+      "selected": false
+    },
+    {
+      "id": "heroB_final_proportions",
+      "direction": "B",
+      "output": "r4b_hero.png",
+      "prompt": "Use case: stylized-concept. Paint a full-body ORIGINAL young adult female swordswoman for a hand-painted 2D storybook game. SIX HEADS TALL elegant stylized adult anatomy, moderately large expressive head, slim body but intentionally shorter legs than fashion illustration. Total figure = head + exactly five head lengths beneath chin. On 1024x1536 canvas: crown y=180, chin y=390, waist y=680, knees y=1090, soles y=1440.\nShoulder-length cream/ash-blonde neutral light hair with one curved stray lock, BLUE eyes, kind confident natural face. She stands ready full body in 3/4 view facing screen RIGHT, sword in near anatomical RIGHT hand, blade points screen right-down. Costume: blue tunic, light silver breastplate with pauldrons, red sash, brown belt gloves boots, white trousers. Thin elegant blue tunic panels with delicate ivory piping, gently pointed pauldrons with modest star motif, oval leaf buckle, narrow flowing red sash. Soft airy light and muted harmonious royal blue.\nVISIBLE MATTE GOUACHE BRUSHWORK, soft chunky painted strokes and layered pigments, warm rim light, fine variable dark colored lines, flowing locks. Natural expressive face, no plastic skin, no airbrushed gloss, no sparkling anime eyes, no 3D, no pixel art, NO thick black outlines, no flat vector. Entire figure and sword within plain warm ivory portrait canvas. Character only, no text or scale lines. At least 1024px tall. Do not name or copy any existing game or studio.",
+      "transparent_background": false,
+      "record_number": 6,
+      "selected": false
+    },
+    {
+      "id": "heroA_shorten_body",
+      "direction": "A",
+      "output": "r4a_hero.png",
+      "prompt": "Edit this painting ONLY to correct body proportions. Preserve head and hair at EXACTLY the same size, face identity, costume painting, brush texture and right-facing pose. The figure BELOW THE CHIN MUST BECOME 35% SHORTER: compress torso, arms and both legs vertically to 65% of their current height. Do NOT shrink the head. Final character is squat, short, sturdy, exactly 4 to 4.5 head lengths from crown to sole, NOT six or seven heads. Head remains large, mature young adult face. Short stout thighs and boots. Keep the sword in the same near anatomical right hand. All design and palette unchanged. Place the compact resulting full-body figure centrally on a plain light portrait background. Do not stretch it tall again to fill the canvas. Rich matte hand-painted 2D, no text.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/.codex/generated_images/01a11ea2-4930-7282-bf57-55c765b4bd03/exec-a8b2873f-9dea-47a7-8c66-24bdb5ba07a8.png"
+      ],
+      "transparent_background": false,
+      "record_number": 7,
+      "selected": false
+    },
+    {
+      "id": "heroB_shorten_body",
+      "direction": "B",
+      "output": "r4b_hero.png",
+      "prompt": "Edit this painting ONLY to correct body proportions. Preserve the head, hair, face identity, shoulders, torso, arms, costume design, palette and visible matte brushwork. Shorten BOTH legs below the waist by 30%, especially long boots and thighs, and enlarge head plus hair uniformly by 15% relative to torso. Final slender adult heroine should stand approximately SIX head lengths crown-to-sole, not eight. Keep elegant natural forms, white trousers, brown boots and sword in same near anatomical RIGHT hand. 3/4 facing screen right, full-body on plain light portrait background. Do not stretch her tall again to fill canvas. No text.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/.codex/generated_images/01a11ea2-4930-7282-bf57-55c765b4bd03/exec-a486d3e7-f7ee-42a2-9738-85bd9ddc3640.png"
+      ],
+      "transparent_background": false,
+      "record_number": 8,
+      "selected": false
+    },
+    {
+      "id": "partsA",
+      "direction": "A",
+      "output": "r4a_parts.png",
+      "prompt": "Use case: stylized-concept. Transform the supplied MASTER PAINTING into an exploded cut-out parts sheet of THE SAME PAINTING, not a redesigned character. Preserve original painted contours, colors, face, embroidery and brush marks wherever visible. Separate every piece with generous whitespace, never overlap pieces. 4 by 4 orderly grid, pale ivory background, 16 parts EXACTLY, labels in small restrained legible type. Read rows left to right:\nRow1: \"01 FACE\" = head/face/ears ONLY with NO HAIR; \"02 HAIR BACK\" = complete back-hair mass; \"03 HAIR FRONT\" = front bangs with stray lock; \"04 TORSO\" = chest armor, tunic upper body, COMPLETE neck painted to under chin, shoulder sockets under removed arms painted in.\nRow2: \"05 PELVIS\" = belt/red sash/blue skirt panels with hips painted under cloth; \"06 UPPER ARM R\" = near/right upper arm with pauldron; \"07 UPPER ARM L\" = far/left upper arm with pauldron; \"08 FOREARM R\" = near/right forearm wristless, without hand.\nRow3: \"09 FOREARM L\" = far/left forearm without hand; \"10 HAND R\" = near/right brown glove gripping an EMPTY opening, NO sword attached; \"11 HAND L\" = far/left brown glove, NO forearm attached; \"12 THIGH R\" = white trouser thigh near/right, without shin.\nRow4: \"13 THIGH L\" = white trouser thigh far/left; \"14 SHIN + BOOT R\" = entire near/right lower leg and brown boot; \"15 SHIN + BOOT L\" = entire far/left lower leg and boot; \"16 SWORD\" = full original blade, guard and handle, no glove.\nAll hidden overlap ends fully painted with rounded caps in matching materials: shoulder under arm, neck under hair, elbow/wrist/hip/knee. Do not leave white holes in pieces. Mark EACH of all sixteen parts with one SMALL CYAN DOT at its primary joint pivot (face and hair at neck/root attachment; torso near waist; pelvis center; arms shoulders/elbows/wrists; legs hip/knee; sword grip). A little dot, not large circles. All limbs separated, all pairs complete, all parts entirely in frame. Keep exact character design and original proportions. High-resolution landscape technical art board. No decorative extra figures. Hand-painted game art.\nDirection A: Direction A \"storybook\": exactly about 4.5 heads tall (head including cranium about 22% of anatomical full height), rounder sturdy forms, compact heroic legs, bold rich color, thick heavy fabric, ornamented stitched ivory-gold trims. Adult face, not a toddler or superdeformed chibi. Broad rounded pauldrons, short split blue tunic with simple wheat-vine border, small round belt buckle, red sash knot and tails at back. Cream hair with thick flowing painted locks.. The supplied master image controls ALL design details, do not invent replacements.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round4/r4a_hero.png"
+      ],
+      "transparent_background": false,
+      "record_number": 9,
+      "selected": false
+    },
+    {
+      "id": "partsB",
+      "direction": "B",
+      "output": "r4b_parts.png",
+      "prompt": "Use case: stylized-concept. Transform the supplied MASTER PAINTING into an exploded cut-out parts sheet of THE SAME PAINTING, not a redesigned character. Preserve original painted contours, colors, face, embroidery and brush marks wherever visible. Separate every piece with generous whitespace, never overlap pieces. 4 by 4 orderly grid, pale ivory background, 16 parts EXACTLY, labels in small restrained legible type. Read rows left to right:\nRow1: \"01 FACE\" = head/face/ears ONLY with NO HAIR; \"02 HAIR BACK\" = complete back-hair mass; \"03 HAIR FRONT\" = front bangs with stray lock; \"04 TORSO\" = chest armor, tunic upper body, COMPLETE neck painted to under chin, shoulder sockets under removed arms painted in.\nRow2: \"05 PELVIS\" = belt/red sash/blue skirt panels with hips painted under cloth; \"06 UPPER ARM R\" = near/right upper arm with pauldron; \"07 UPPER ARM L\" = far/left upper arm with pauldron; \"08 FOREARM R\" = near/right forearm wristless, without hand.\nRow3: \"09 FOREARM L\" = far/left forearm without hand; \"10 HAND R\" = near/right brown glove gripping an EMPTY opening, NO sword attached; \"11 HAND L\" = far/left brown glove, NO forearm attached; \"12 THIGH R\" = white trouser thigh near/right, without shin.\nRow4: \"13 THIGH L\" = white trouser thigh far/left; \"14 SHIN + BOOT R\" = entire near/right lower leg and brown boot; \"15 SHIN + BOOT L\" = entire far/left lower leg and boot; \"16 SWORD\" = full original blade, guard and handle, no glove.\nAll hidden overlap ends fully painted with rounded caps in matching materials: shoulder under arm, neck under hair, elbow/wrist/hip/knee. Do not leave white holes in pieces. Mark EACH of all sixteen parts with one SMALL CYAN DOT at its primary joint pivot (face and hair at neck/root attachment; torso near waist; pelvis center; arms shoulders/elbows/wrists; legs hip/knee; sword grip). A little dot, not large circles. All limbs separated, all pairs complete, all parts entirely in frame. Keep exact character design and original proportions. High-resolution landscape technical art board. No decorative extra figures. Hand-painted game art.\nDirection B: Direction B \"soft realism\": exactly about 6 heads tall (head including cranium about 16.7% of anatomical full height), slimmer elegant proportions, softer airy diffuse light, delicate restrained detail. Adult natural face. Slim gently pointed pauldrons, fitted blue tunic with divided tapering cloth tails and fine ivory piping, narrow brown belt with an oval clasp, soft narrow red waist sash trailing at back. Airy locks of neutral ash-blonde hair.. The supplied master image controls ALL design details, do not invent replacements.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round4/r4b_hero.png"
+      ],
+      "transparent_background": false,
+      "record_number": 10,
+      "selected": false
+    },
+    {
+      "id": "motionA",
+      "direction": "A",
+      "output": "r4a_motion.png",
+      "prompt": "Use case: stylized-concept. Create one landscape motion key-pose board from this exact master character painting. Preserve identity, proportions, shoulder-length neutral blonde hair, blue eyes, ALL costume panels/ornaments/buckle/armor/sash/boots, paint texture. FOUR full-body figures only, evenly spaced in four columns with generous blade clearance, light plain background, same scale. Left to right small captions exactly: \"IDLE\", \"WALK CONTACT\", \"ATTACK WIND-UP\", \"ATTACK STRIKE\". All face screen RIGHT in 3/4 game view with near anatomical RIGHT arm clearly visible. Sword ALWAYS in same NEAR RIGHT HAND, never pass it to far hand; far left hand open and not touching sword.\n1 idle: relaxed planted feet, sword down-right.\n2 walk contact: leading heel down in front toward right, rear toe behind left, opposing free-arm swing.\n3 wind-up: weight back, bent knees, near right sword elbow folded raised near shoulder with blade swept up/back toward screen left, free far left arm balances low forward.\n4 strike: strong forward lunge toward screen right, near right arm straightened forward in front of chest holding sword with entire blade extended right, far left arm trails behind, hair and sash lag to left.\nNo magic, no motion blur covering limbs, no extra limbs, no mirrored character, no duplicated swords, no cropped blade. Silhouette of each pose visibly distinct. These are riggable cutout-style articulated key poses, not four idle copies. Preserve matte hand-painted 2D style, fine colored contours, soft warm light.\nDirection A \"storybook\": exactly about 4.5 heads tall (head including cranium about 22% of anatomical full height), rounder sturdy forms, compact heroic legs, bold rich color, thick heavy fabric, ornamented stitched ivory-gold trims. Adult face, not a toddler or superdeformed chibi. Broad rounded pauldrons, short split blue tunic with simple wheat-vine border, small round belt buckle, red sash knot and tails at back. Cream hair with thick flowing painted locks.. MASTER REFERENCE is authoritative, preserve its actual proportions.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round4/r4a_hero.png"
+      ],
+      "transparent_background": false,
+      "record_number": 11,
+      "selected": false
+    },
+    {
+      "id": "motionB",
+      "direction": "B",
+      "output": "r4b_motion.png",
+      "prompt": "Use case: stylized-concept. Create one landscape motion key-pose board from this exact master character painting. Preserve identity, proportions, shoulder-length neutral blonde hair, blue eyes, ALL costume panels/ornaments/buckle/armor/sash/boots, paint texture. FOUR full-body figures only, evenly spaced in four columns with generous blade clearance, light plain background, same scale. Left to right small captions exactly: \"IDLE\", \"WALK CONTACT\", \"ATTACK WIND-UP\", \"ATTACK STRIKE\". All face screen RIGHT in 3/4 game view with near anatomical RIGHT arm clearly visible. Sword ALWAYS in same NEAR RIGHT HAND, never pass it to far hand; far left hand open and not touching sword.\n1 idle: relaxed planted feet, sword down-right.\n2 walk contact: leading heel down in front toward right, rear toe behind left, opposing free-arm swing.\n3 wind-up: weight back, bent knees, near right sword elbow folded raised near shoulder with blade swept up/back toward screen left, free far left arm balances low forward.\n4 strike: strong forward lunge toward screen right, near right arm straightened forward in front of chest holding sword with entire blade extended right, far left arm trails behind, hair and sash lag to left.\nNo magic, no motion blur covering limbs, no extra limbs, no mirrored character, no duplicated swords, no cropped blade. Silhouette of each pose visibly distinct. These are riggable cutout-style articulated key poses, not four idle copies. Preserve matte hand-painted 2D style, fine colored contours, soft warm light.\nDirection B \"soft realism\": exactly about 6 heads tall (head including cranium about 16.7% of anatomical full height), slimmer elegant proportions, softer airy diffuse light, delicate restrained detail. Adult natural face. Slim gently pointed pauldrons, fitted blue tunic with divided tapering cloth tails and fine ivory piping, narrow brown belt with an oval clasp, soft narrow red waist sash trailing at back. Airy locks of neutral ash-blonde hair.. MASTER REFERENCE is authoritative, preserve its actual proportions.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round4/r4b_hero.png"
+      ],
+      "transparent_background": false,
+      "record_number": 12,
+      "selected": false
+    },
+    {
+      "id": "partsA_joint_fix",
+      "direction": "A",
+      "output": "r4a_parts.png",
+      "prompt": "Edit this parts board, retaining all sixteen parts, their exact layout, captions, colors, textures, identities and blue pivot dots. Change ONLY cell 04 TORSO: REMOVE both pauldrons and ALL attached arms/sleeves from the torso (they already exist in cells 06/07); paint the underlying rounded blue-cloth shoulder sockets as smooth solid overlapping caps with no holes. Paint a FULL natural skin-colored neck extending up out of the tunic collar under the head/hair, with solid rounded top and no open hole. Torso must contain chest armor, blue upper tunic, neck and covered shoulder sockets only, no arms or pauldrons. Keep its waist pivot dot.  Everything else unchanged. Preserve the same hand-painted 2D source artwork, no new characters.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/.codex/generated_images/01a11ea2-4930-7282-bf57-55c765b4bd03/exec-6ee93c68-5942-49a7-a08d-a65e4d7de589.png"
+      ],
+      "transparent_background": false,
+      "record_number": 13,
+      "selected": true
+    },
+    {
+      "id": "partsB_joint_fix",
+      "direction": "B",
+      "output": "r4b_parts.png",
+      "prompt": "Edit this parts board, retaining all sixteen parts, their exact layout, captions, colors, textures, identities and blue pivot dots. Change ONLY cell 04 TORSO: REMOVE both pauldrons and ALL attached arms/sleeves from the torso (they already exist in cells 06/07); paint the underlying rounded blue-cloth shoulder sockets as smooth solid overlapping caps with no holes. Paint a FULL natural skin-colored neck extending up out of the tunic collar under the head/hair, with solid rounded top and no open hole. Torso must contain chest armor, blue upper tunic, neck and covered shoulder sockets only, no arms or pauldrons. Keep its waist pivot dot. Also move the small cyan pivot dots on 08 FOREARM R and 09 FOREARM L to their proximal ELBOW ends at the blue sleeves, instead of the distal wrist ends. Everything else unchanged. Preserve the same hand-painted 2D source artwork, no new characters.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/.codex/generated_images/01a11ea2-4930-7282-bf57-55c765b4bd03/exec-d20f837e-c7f7-4ba6-aef0-f913a8219232.png"
+      ],
+      "transparent_background": false,
+      "record_number": 14,
+      "selected": true
+    },
+    {
+      "id": "spriteA",
+      "direction": "A",
+      "output": "sources/r4a_hero_cutout.png",
+      "prompt": "Use case: background-extraction. Extract the entire character AND sword from this master painting onto REAL transparent background with alpha. Remove only ivory paper background and ground shadow. Do not redesign, repaint, change pose, change body proportions, recolor hair, change which hand holds sword or change costume. Preserve all original painted pixels and contours as closely as possible, entire hair stray lock, sash and blade. One full-body character only, same original scale, no text, no additions.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round4/r4a_hero.png"
+      ],
+      "transparent_background": true,
+      "record_number": 15,
+      "selected": false
+    },
+    {
+      "id": "spriteB",
+      "direction": "B",
+      "output": "sources/r4b_hero_cutout.png",
+      "prompt": "Use case: background-extraction. Extract the entire character AND sword from this master painting onto REAL transparent background with alpha. Remove only ivory paper background and ground shadow. Do not redesign, repaint, change pose, change body proportions, recolor hair, change which hand holds sword or change costume. Preserve all original painted pixels and contours as closely as possible, entire hair stray lock, sash and blade. One full-body character only, same original scale, no text, no additions.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round4/r4b_hero.png"
+      ],
+      "transparent_background": true,
+      "record_number": 16,
+      "selected": false
+    },
+    {
+      "id": "forestA",
+      "direction": "A",
+      "output": "sources/r4a_forest.png",
+      "prompt": "Use case: stylized-concept. Original hand-painted 2D mobile fantasy RPG forest field background for an EXACT 390x844 portrait phone viewport (render at twice that size if possible, same tall 195:422 aspect ratio). Rich European fantasy forest clearing: ancient tree trunks framing sides, atmospheric woodland path, soft brushwork on moss, layered foliage and grass, open low-detail readable warm ground through the middle-lower play area. Bold rich harmonious greens, chunky rounded trees, heavier matte gouache texture, golden dappled rim light, sturdy storybook shapes.\nThere are exactly TWO additional party members painted as SIMPLE low-detail colored silhouettes, with thin colored edges and matte shading matching the field: a hooded ranger in moss green at 12% canvas width, feet at 55% height, character height 13% of canvas; and a staff-bearing cloaked mage in muted plum at 26% width, feet at 65% height, character height 14% of canvas. Both face right; keep them subdued, simple faces without detail, NOT black solid blobs. ONE SMALL soft jade slime with simple face at 82% width, feet at 67% height, height only 5% of canvas, matte softly brushed body with subdued pale highlight, NOT shiny 3D. Leave center position at 48% width/67% height feet EMPTY: main heroine will be composited here later. NO other creatures or main heroine. No UI, text, letters, phone frame, inset, panels, watermark. Entire canvas is the forest field, no border. Original IP, do not copy any existing game's assets.",
+      "transparent_background": false,
+      "record_number": 17,
+      "selected": true
+    },
+    {
+      "id": "forestB",
+      "direction": "B",
+      "output": "sources/r4b_forest.png",
+      "prompt": "Use case: stylized-concept. Original hand-painted 2D mobile fantasy RPG forest field background for an EXACT 390x844 portrait phone viewport (render at twice that size if possible, same tall 195:422 aspect ratio). Rich European fantasy forest clearing: ancient tree trunks framing sides, atmospheric woodland path, soft brushwork on moss, layered foliage and grass, open low-detail readable warm ground through the middle-lower play area. Soft airy hazy light, delicate foliage brushwork, muted harmonious sage/teal greens and cool distance, elegant softly realistic painted forms.\nThere are exactly TWO additional party members painted as SIMPLE low-detail colored silhouettes, with thin colored edges and matte shading matching the field: a hooded ranger in moss green at 12% canvas width, feet at 55% height, character height 13% of canvas; and a staff-bearing cloaked mage in muted plum at 26% width, feet at 65% height, character height 14% of canvas. Both face right; keep them subdued, simple faces without detail, NOT black solid blobs. ONE SMALL soft jade slime with simple face at 82% width, feet at 67% height, height only 5% of canvas, matte softly brushed body with subdued pale highlight, NOT shiny 3D. Leave center position at 48% width/67% height feet EMPTY: main heroine will be composited here later. NO other creatures or main heroine. No UI, text, letters, phone frame, inset, panels, watermark. Entire canvas is the forest field, no border. Original IP, do not copy any existing game's assets.",
+      "transparent_background": false,
+      "record_number": 18,
+      "selected": true
+    },
+    {
+      "id": "motionA_weapon_fix",
+      "direction": "A",
+      "output": "r4a_motion.png",
+      "prompt": "Correct this exact four-pose board, preserving all faces, costumes, proportions, labels and painted style. CRITICAL: every figure must wield exactly ONE sword in the anatomical RIGHT hand, the arm CLOSEST to viewer. In the WALK CONTACT pose the sword hand at screen-left of torso is correct. Use that same anatomical near arm in ALL FOUR poses. In IDLE, remove the sword from the far arm at screen-right; put one sword into the near hand at screen-left of torso, angled down-right across front of legs, exactly matching the WALK CONTACT grip logic. The far hand hangs empty.  Preserve the good near-arm sword in walk, wind-up and strike. Increase exterior blank margins a little so attack strike blade TIP and all parts are fully inside the canvas with at least 40px breathing space. Wind-up and strike must retain dynamic shapes. No additional swords or scabbards. Do not flip or mirror figures.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/.codex/generated_images/01a11ea2-4930-7282-bf57-55c765b4bd03/exec-0c161437-be58-4881-ad48-b43ae96a19d1.png"
+      ],
+      "transparent_background": false,
+      "record_number": 19,
+      "selected": true
+    },
+    {
+      "id": "motionB_weapon_fix",
+      "direction": "B",
+      "output": "r4b_motion.png",
+      "prompt": "Correct this exact four-pose board, preserving all faces, costumes, proportions, labels and painted style. CRITICAL: every figure must wield exactly ONE sword in the anatomical RIGHT hand, the arm CLOSEST to viewer. In the WALK CONTACT pose the sword hand at screen-left of torso is correct. Use that same anatomical near arm in ALL FOUR poses. In IDLE, remove the sword from the far arm at screen-right; put one sword into the near hand at screen-left of torso, angled down-right across front of legs, exactly matching the WALK CONTACT grip logic. The far hand hangs empty. The current IDLE has TWO swords; remove the far/screen-right sword completely. Preserve the good near-arm sword in walk, wind-up and strike. Increase exterior blank margins a little so attack strike blade TIP and all parts are fully inside the canvas with at least 40px breathing space. Wind-up and strike must retain dynamic shapes. No additional swords or scabbards. Do not flip or mirror figures.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/.codex/generated_images/01a11ea2-4930-7282-bf57-55c765b4bd03/exec-916382be-5e10-4a9b-9baa-574aca58b4ab.png"
+      ],
+      "transparent_background": false,
+      "record_number": 20,
+      "selected": false
+    },
+    {
+      "id": "heroA_near_hand_fix",
+      "direction": "A",
+      "output": "r4a_hero.png",
+      "prompt": "Precise small edit to this original hero painting. Keep the entire painting, head, proportions, pose, costume, textures, brushwork and plain light background exactly unchanged EXCEPT the sword grip. Put the ONE sword in her anatomical RIGHT, near-side hand: the glove that is currently EMPTY at the SCREEN-LEFT side of her torso. The near arm and glove must overlap the body in front. Sword guard held at that screen-left hip; entire blade angles diagonally down-right across front of legs, no cropping. The far hand at SCREEN-RIGHT must be empty and relaxed. Remove the old sword from that far hand completely. Do not duplicate swords or add a scabbard. Same silver blade and golden guard. Adult swordswoman faces screen right in 3/4. Preserve current compact four-and-a-half-head proportions exactly.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round4/r4a_hero.png"
+      ],
+      "transparent_background": false,
+      "record_number": 21,
+      "selected": true
+    },
+    {
+      "id": "heroB_near_hand_fix",
+      "direction": "B",
+      "output": "r4b_hero.png",
+      "prompt": "Precise small edit to this original hero painting. Keep the entire painting, head, proportions, pose, costume, textures, brushwork and plain light background exactly unchanged EXCEPT the sword grip. Put the ONE sword in her anatomical RIGHT, near-side hand: the glove that is currently EMPTY at the SCREEN-LEFT side of her torso. The near arm and glove must overlap the body in front. Sword guard held at that screen-left hip; entire blade angles diagonally down-right across front of legs, no cropping. The far hand at SCREEN-RIGHT must be empty and relaxed. Remove the old sword from that far hand completely. Do not duplicate swords or add a scabbard. Same silver blade and golden guard. Adult swordswoman faces screen right in 3/4. Preserve current slender six-head proportions exactly.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round4/r4b_hero.png"
+      ],
+      "transparent_background": false,
+      "record_number": 22,
+      "selected": false
+    },
+    {
+      "id": "heroB_head_scale",
+      "direction": "B",
+      "output": "r4b_hero.png",
+      "prompt": "Edit only the HEAD AND HAIR of this painting: enlarge the complete head and hair group by 25 percent around the neck attachment point, keeping neck connection natural. Head must be visibly substantially larger. Do not change the torso, arms, legs, boots, sword, hands, waist, pose, background, costume design or colors at all. Current figure is close to seven heads tall; enlarged head must make it exactly about six heads tall. Preserve adult facial identity, natural blue eyes, light ash blonde shoulder-length hair, matte painted brush texture. No text.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/.codex/generated_images/01a11ea2-4930-7282-bf57-55c765b4bd03/exec-314c5ed0-88e0-47c6-ad8f-545f7191ccd6.png"
+      ],
+      "transparent_background": false,
+      "record_number": 23,
+      "selected": true
+    },
+    {
+      "id": "spriteA_final",
+      "direction": "A",
+      "output": "sources/r4a_hero_cutout.png",
+      "prompt": "Use case: background-extraction. Remove ONLY the cream paper background and ground shadow from this exact painting. Real transparent alpha, no colored backdrop, no glow or cast shadow. Preserve the compact four-and-a-half-head figure, visible matte brush marks, pose and ALL costume details exactly. Preserve ONE sword held by near anatomical right hand at screen-left hip, blade across legs toward lower screen-right; the far screen-right hand remains empty. Do not move either hand, resize body, smooth paint, crop sword or invent any details. Full-body original painted character on transparency.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round4/r4a_hero.png"
+      ],
+      "transparent_background": true,
+      "record_number": 24,
+      "selected": true
+    },
+    {
+      "id": "spriteB_final",
+      "direction": "B",
+      "output": "sources/r4b_hero_cutout.png",
+      "prompt": "Use case: background-extraction. Remove ONLY cream paper background and ground shadow from this supplied final painting, real transparent alpha. Preserve the six-head body proportions and the enlarged head EXACTLY; do not revert to a smaller head or longer legs. Keep original matte painted brushwork, face, costume, pose and sword. ONE sword in near right hand at SCREEN-LEFT hip with blade crossing front of legs down-right. Far screen-right hand empty. No glow, no cast shadow, no redesign, no cropped hair or sword, entire painted character.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round4/r4b_hero.png"
+      ],
+      "transparent_background": true,
+      "record_number": 25,
+      "selected": true
+    },
+    {
+      "id": "motionB_head_scale",
+      "direction": "B",
+      "output": "r4b_motion.png",
+      "prompt": "Edit ONLY the first supplied four-pose motion board to match the slightly larger head-to-body proportion in the SECOND supplied final master character. Enlarge each of the four figures' head-and-hair groups by 18% around their neck attachment, yielding about six-head adult proportions. Keep their faces consistent with the final master. Preserve ALL four body poses, exact costume design, hand positions, right/near hand sword grip, ONE sword per figure, other hand empty, cloth folds, sash, labels and painted texture. No other change. Do not swap weapons between hands. Make sure entire strike sword tip is inside frame; add a small blank margin if necessary.",
+      "referenced_image_paths": [
+        "/Users/oreocookie03/.codex/generated_images/01a11ea2-4930-7282-bf57-55c765b4bd03/exec-69d26595-bc88-4689-8635-14005cd69745.png",
+        "/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round4/r4b_hero.png"
+      ],
+      "transparent_background": false,
+      "record_number": 26,
+      "selected": true
+    }
+  ],
+  "layout": {
+    "method": "Swift AppKit deterministic layout, scaling and typography only",
+    "script": "sources/compose.swift",
+    "metrics": "sources/layout_metrics.json",
+    "board_pixels": [
+      930,
+      960
+    ],
+    "phone_pixels": [
+      390,
+      844
+    ],
+    "inset_hero_heights": [
+      120,
+      200
+    ],
+    "field_hero_heights": {
+      "A": 144,
+      "B": 168
+    }
+  }
+}

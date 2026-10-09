@@ -1,0 +1,47 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "reference_policy": "Tree of Savior named directly; no game images stored or provided as image inputs. Only our generated r5_lineup is used as a visual input.",
+  "calls": [
+    {
+      "id": "r5_lineup",
+      "prompt": "Use case: stylized-concept. Create a large landscape character lineup, 1536x1024. Match the actual original PC Tree of Savior (IMC Games) in-game character art look as closely as possible. Tree of Savior is the primary visual reference, not a generic watercolor storybook. Four original designs side by side on a plain light ivory background, full bodies uncropped, all in three-quarter view facing screen right: (1) Cookie, female swordsman, shoulder-length light blonde hair, blue tunic, light silver breastplate, red waist sash, brown belt and boots, one-handed straight sword held in her anatomical RIGHT hand; (2) female mage in a purple robe carrying a staff with a blue orb; (3) male archer wearing a green hood and cape over leather clothing, carrying a bow; (4) a small green slime monster. Match the game's delicate faces, slender compact playable-character proportions, fine drawing and richly nuanced hand-painted sprite rendering. Large readable figures with space between them and aligned ground level. Keep costumes original and simple; no copied Tree of Savior characters, class costumes, logos or UI. No text. Avoid glossy gacha illustration, western storybook painting, thick-outlined chibi.",
+      "transparent_background": false,
+      "output": "r5_lineup.png"
+    },
+    {
+      "id": "r5_turn",
+      "prompt": "Use case: stylized-concept. Input image is the approved original character design and exact rendering reference. Create a large landscape four-pose character action sheet, 1536x1024, showing ONLY Cookie, the blonde swordswoman at the left of the reference. Preserve exactly her face, shoulder-length light blonde hair, blue tunic, light silver breastplate, red waist sash, brown belt, boots, gloves, sword, costume details and proportions. Render in the actual original PC Tree of Savior character art look, matching the reference's fine drawing and subtle hand-painted colors. Four full-body poses in one evenly spaced horizontal row, same scale, plain light ivory background, all directed screen right in a readable three-quarter view: idle with sword lowered; walking with one foot forward and restrained arm swing; attack wind-up with sword drawn back above her own RIGHT shoulder and torso coiled; attack strike with a decisive forward step and her own RIGHT arm extending the sword towards screen right. In ALL four panels the same anatomical RIGHT hand grips the sword; LEFT hand is empty and balances the body. Show the grip and arm connection clearly, never mirror the character. All swords and feet fully inside their panels, no overlap between figures. Tiny understated labels below the figures exactly 'IDLE', 'WALK', 'WIND-UP', 'STRIKE'. No additional characters, logos, UI, glossy gacha shading, western storybook paint, or thick chibi outlines.",
+      "referenced_image_paths": [
+        "docs/art/concepts/round5/r5_lineup.png"
+      ],
+      "transparent_background": false,
+      "output": "sources/r5_turn_initial.png",
+      "review": "Strike sword tip clipped; replaced by composition fix."
+    },
+    {
+      "id": "r5_field",
+      "prompt": "Use case: ui-mockup. Input image is the original character design reference; preserve these three heroes and green slime, their costumes, colors and faces. Create an in-game mockup closely matching the ACTUAL ORIGINAL PC TREE OF SAVIOR (IMC Games) gameplay art look, adapted to a 390x844 portrait phone viewport. Full-bleed vertical screen image, aspect ratio 390:844, preferably 780x1688 pixels; no device frame. A high oblique overhead painted green meadow field with weathered stone path and small ruined stonework, flowering plants, rocks, leafy trees framing the edges; detailed painterly terrain receding across the whole screen, no horizon or sky. Three SMALL sprite-like hand-painted characters are fighting ONE small green slime in a clearing near the middle: Cookie blonde swordswoman in blue and silver with red waist sash stepping and striking screen right with sword in anatomical RIGHT hand; purple-robed female mage behind her casting a restrained blue orb spell from staff at the slime; green-hooded male archer drawing his bow toward the same slime. Keep the original PC Tree of Savior's actual delicate sprite character look and environment relationship. This is a zoomed-out gameplay view: each standing hero's head-to-foot height is about 8 to 9 percent of viewport height (about 70 pixels at final 390x844 resolution), slime about 32px high; generous traversable scenery around the party, all three heroes clearly separate and readable. Small ground contact shadows, modest attack effects that do not obscure the characters. Minimal ORIGINAL mobile HUD: three tiny party health bars in the upper left and a translucent movement circle lower left with three understated round action buttons lower right. Do not reproduce Tree of Savior UI, logos, text, characters or class costume designs. No giant foreground character, no cinematic splash art, no glossy gacha, western storybook figures, or thick-outlined chibi.",
+      "referenced_image_paths": [
+        "docs/art/concepts/round5/r5_lineup.png"
+      ],
+      "transparent_background": false,
+      "output": "sources/r5_field_generated.png"
+    },
+    {
+      "id": "r5_turn_composition_fix",
+      "prompt": "Edit this four-pose Cookie action sheet. Fix ONLY the composition so the entire sword in the fourth STRIKE pose is visible, including its pointed tip, with generous blank margin to the right. Widen the light ivory canvas horizontally to approximately 1920x1024 and give each figure enough room. Keep all four existing poses, faces, costume details, colors, labels and the delicate original PC Tree of Savior character rendering unchanged. Preserve the sword in her anatomical RIGHT hand in every pose, with her LEFT hand empty. Do not crop any sword, foot, hand or label. Keep the four figures the same scale relative to one another and the same ground line. No other changes.",
+      "referenced_image_paths": [
+        "docs/art/concepts/round5/sources/r5_turn_initial.png"
+      ],
+      "transparent_background": false,
+      "output": "r5_turn.png"
+    }
+  ],
+  "postprocess": [
+    {
+      "input": "sources/r5_field_generated.png",
+      "output": "r5_field.png",
+      "operation": "sips --resampleHeightWidth 844 390; only final pixel dimensions normalized, no repainting or compositing."
+    }
+  ]
+}

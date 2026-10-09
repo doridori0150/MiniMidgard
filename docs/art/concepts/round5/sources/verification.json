@@ -1,0 +1,22 @@
+{
+  "images": {
+    "r5_lineup.png": {
+      "width": 1536,
+      "height": 1024,
+      "sha256": "8d494ff6590e726a6811485279aad7d7698546c781549e25fcde7310edcd3c53"
+    },
+    "r5_field.png": {
+      "width": 390,
+      "height": 844,
+      "sha256": "c4107755acb7bba34eb5dd32ebdf5f64b83b45e642e06451d980664c01767bf1"
+    },
+    "r5_turn.png": {
+      "width": 1717,
+      "height": 916,
+      "sha256": "8e85d4e1a8892a2114180130f90d2e2dd62b73cd6dd02852a63f9d1d406a2471"
+    }
+  },
+  "prompt_calls": 4,
+  "notes_item_1_written_before_generation": true,
+  "review": "All three final boards visually inspected; clipped strike sword corrected and re-inspected."
+}

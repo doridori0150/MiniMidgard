@@ -1,0 +1,87 @@
+{
+  "boards": [
+    {
+      "file": "r4a_hero.png",
+      "pixels": [
+        1024,
+        1536
+      ],
+      "sha256": "51e5efe410399c0d3e4b49fd36550ad45cd83ee10ab6a730c86b9d8da67a47d9",
+      "visually_reviewed": true
+    },
+    {
+      "file": "r4a_parts.png",
+      "pixels": [
+        1374,
+        1145
+      ],
+      "sha256": "f1e163b7d235f809fdee5be9773b7a1b324440d5a898603e45b11b695c47ccbd",
+      "visually_reviewed": true
+    },
+    {
+      "file": "r4a_field.png",
+      "pixels": [
+        930,
+        960
+      ],
+      "sha256": "209a743f58f7bd5c0b2fadf866a607cbc1a1a73616ff93903eb015905f247c1d",
+      "visually_reviewed": true
+    },
+    {
+      "file": "r4a_motion.png",
+      "pixels": [
+        1882,
+        836
+      ],
+      "sha256": "5b8e8d302350342ac1959373144769c88a5cf2fa0a68e0e2a0300e82e67d675a",
+      "visually_reviewed": true
+    },
+    {
+      "file": "r4b_hero.png",
+      "pixels": [
+        1024,
+        1536
+      ],
+      "sha256": "061bdfab24bff13ee07c54e6c317a651e3b8cbf9ca1a162282bcf967b1907b96",
+      "visually_reviewed": true
+    },
+    {
+      "file": "r4b_parts.png",
+      "pixels": [
+        1536,
+        1024
+      ],
+      "sha256": "15d7edd77963949dd0b5e4c567566de51aee10ddbb6b7d79f51e5cc003b7e6a0",
+      "visually_reviewed": true
+    },
+    {
+      "file": "r4b_field.png",
+      "pixels": [
+        930,
+        960
+      ],
+      "sha256": "b5fa8d9385787c71ccd0809e02e77afce99d2e04b5072e733c85822f058780f3",
+      "visually_reviewed": true
+    },
+    {
+      "file": "r4b_motion.png",
+      "pixels": [
+        1774,
+        887
+      ],
+      "sha256": "180fc6f4ee26de100e7b16b0439999aceac05d440cc94565dd6a8299e4076fc2",
+      "visually_reviewed": true
+    }
+  ],
+  "phone_pixels": [
+    390,
+    844
+  ],
+  "inset_heights": [
+    120,
+    200
+  ],
+  "prompt_count": 26,
+  "scope": "docs/art/concepts/round4 only",
+  "limitation": "Parts sheets use reference-based generative editing, not pixel-identical layer extraction; actual rig seams are not runtime-verified."
+}

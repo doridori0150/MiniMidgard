@@ -1,0 +1,52 @@
+[
+  {
+    "board_size" : [
+      930,
+      960
+    ],
+    "direction" : "a",
+    "field_hero_height" : 144,
+    "hero_alpha_bbox" : [
+      11,
+      44,
+      908,
+      1417
+    ],
+    "inset_heights" : [
+      120,
+      200
+    ],
+    "phone_rect" : [
+      32,
+      80,
+      390,
+      844
+    ],
+    "transparent_pixels" : 865084
+  },
+  {
+    "board_size" : [
+      930,
+      960
+    ],
+    "direction" : "b",
+    "field_hero_height" : 168,
+    "hero_alpha_bbox" : [
+      51,
+      18,
+      740,
+      1443
+    ],
+    "inset_heights" : [
+      120,
+      200
+    ],
+    "phone_rect" : [
+      32,
+      80,
+      390,
+      844
+    ],
+    "transparent_pixels" : 1097245
+  }
+]
