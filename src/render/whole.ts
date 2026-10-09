@@ -38,6 +38,7 @@ export function loadWhole(): Promise<void> {
 const LINE: Partial<Record<string, string>> = {
   novice: 'novice', swordsman: 'swordsman', knight: 'swordsman',
   mage: 'mage', wizard: 'mage', acolyte: 'acolyte', priest: 'acolyte', archer: 'archer', hunter: 'archer',
+  thief: 'thief', assassin: 'thief', merchant: 'merchant', blacksmith: 'merchant',
 };
 const WEAPON: Partial<Record<WeaponType, string | null>> = {
   none: null, dagger: 'dagger', katar: 'dagger', sword: 'sword', sword2h: 'sword', staff: 'staff', mace: 'mace', bow: 'bow', axe: 'axe',
