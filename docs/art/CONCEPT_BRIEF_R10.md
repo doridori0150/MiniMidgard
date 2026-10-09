@@ -1,4 +1,4 @@
-상태: 준비 (2026-10-09). 9라운드에서 사용자가 시안을 고르면 의뢰합니다. 요청: 사용자 → Claude. 제작: Codex(아스트라). 결과물: `docs/art-production/pixel-hero-r10/`.
+상태: 의뢰 (2026-10-09). 사용자가 9라운드 시안 C를 골랐습니다. 요청: 사용자 → Claude. 제작: Codex(아스트라). 결과물: `docs/art-production/pixel-hero-r10/`.
 
 # 10라운드 — 고른 2등신 도트 쿠키의 전체 모션 (레퍼런스 기반)
 
@@ -7,14 +7,17 @@
 - "모션의 경우 어디 사이트에서 레퍼런스라도 찾아서 만들었으면 좋겠어. 아니면 라그나로크, 트리오브세이비어를 참고하던가."
 
 ## 기준
-- 디자인: 9라운드에서 사용자가 고른 시안 `<A|B|C>` (`docs/art/concepts/round9/`).
+- 디자인: **9라운드 시안 C "물결 천옷"** (`docs/art/concepts/round9/r9c_idle.png`, `r9c_pose.png`, `r9c_*_6x.png`).
+  - 사용자 말: "C가 가장 나은데? 액션도 오른손 → 오른손 타격에 제대로 되어 있고."
+  - 얼굴·머리·옷·색은 C 그대로 둡니다. 다만 얼굴과 머리카락에 섞인 분홍·붉은 잡점(격자 정리에서 남은 것)은 지웁니다.
+- 방향: 이번에는 지금과 같은 **앞 3/4(오른쪽 아래를 보는) 방향 하나**만 만듭니다. 게임이 좌우로 뒤집어 씁니다. 뒷모습(뒤 3/4) 방향은 사용자가 방향 수를 정한 뒤 다음 라운드에서 같은 방식으로 더합니다.
 - 모션: **`docs/art/MOTION_REFERENCE.md`**를 따릅니다. 트리 오브 세이비어 공식 GIF, 라그나로크 스프라이트, Slynyrd 도트 근접 공격 튜토리얼에서 잰 장수와 시간을 담고 있습니다. 이 문서의 표가 이 요청서의 다른 말보다 우선합니다.
 
 ---
 
 ## REQUEST (for Codex)
 
-Animate the round-9 design the user picked as genuine pixel art, following `docs/art/MOTION_REFERENCE.md` exactly:
+Animate round-9 design **C** ("wavy cloth", the user's pick; keep its face, hair, outfit and colours, and clean the stray pink/red specks left in its face and hair by grid snapping) as genuine pixel art, in the current front three-quarter view facing right only,, following `docs/art/MOTION_REFERENCE.md` exactly:
 - idle 4;
 - walk 8;
 - **sword attack 6** with `hitFrame: 4`;
