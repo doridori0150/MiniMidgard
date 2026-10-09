@@ -251,6 +251,8 @@ export type Unit = HeroUnit | MobUnit;
 const STEP = 50;
 /** when a swing / melee skill / bow release lands, in ms after the action starts (poses are timed to these) */
 export const MELEE_CONTACT = 140;
+/** heroes are drawn facing left or right only (the Dungeon & Fighter rule), so they line up beside targets: vertical part of a stand-off line kept */
+const SIDE_BIAS = 0.35;
 export const SKILL_CONTACT = 130;
 export const BOW_RELEASE = 120;
 const HP_TICK = 3000;
@@ -1440,6 +1442,10 @@ export class World {
     let dx = ref.x - t.x, dy = ref.y - t.y;
     let d = Math.hypot(dx, dy);
     if (d < 1) { dx = h.x - t.x; dy = h.y - t.y; d = Math.hypot(dx, dy) || 1; }
+    // side-view rule (heroes are drawn facing left or right only): flatten the line so the spot is beside the target, not above it
+    dy *= SIDE_BIAS;
+    if (Math.abs(dx) < 1) dx = h.x >= t.x ? 1 : -1;
+    d = Math.hypot(dx, dy);
     dx /= d; dy /= d;
     const i = this.heroes.indexOf(h);
     const side = (i % 2 ? 1 : -1) * 26;
@@ -1493,10 +1499,15 @@ export class World {
     }
 
     if (pos === 'front' || (melee && !front)) {
-      if (edge > reach) { this.moveTo(h, t.x, t.y, h.d.moveSpd, dt, reach * 0.85); return true; }
+      if (melee) {
+        // side-view rule: come in from the left or right of the target and fight level with it
+        const side = Math.sign(h.x - t.x) || -h.facing || -1;
+        const slot = { x: clamp(t.x + side * (this.bodyR(t) + reach * 0.6), 24, this.zone.w - 24), y: t.y };
+        if (edge > reach) { this.moveTo(h, slot.x, slot.y, h.d.moveSpd, dt, 4); return true; }
+      } else if (edge > reach) { this.moveTo(h, t.x, t.y, h.d.moveSpd, dt, reach * 0.85); return true; }
       // melee damage dealers take the far side of the target when the tank already holds it
       if (this.roleOf(h) === 'melee' && front && this.roleOf(front) === 'tank' && front.target === t.uid && dist(front, t) < 70) {
-        const fx = t.x - front.x, fy = t.y - front.y, fd = Math.hypot(fx, fy) || 1;
+        const fx = t.x - front.x, fy = (t.y - front.y) * SIDE_BIAS, fd = Math.hypot(fx, fy) || 1;
         const off = this.bodyR(t) + 14;
         const D = { x: t.x + fx / fd * off, y: t.y + fy / fd * off * 0.8 };
         // already swinging: only walk round when well off the flank, so small shoves don't keep it shuffling
