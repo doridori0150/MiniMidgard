@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>궁수 · 픽셀 애니메이션 검토</title>
+<style>body{margin:0;background:#17222e;color:#eef0df;font:16px system-ui}main{max-width:1200px;margin:auto;padding:32px}p{line-height:1.7;color:#c1cbd1}a{color:#efd196}img{max-width:100%;image-rendering:pixelated}article{border:1px solid #455566;background:#25313e;padding:20px;border-radius:12px;margin:24px 0}button,select{padding:8px 14px;background:#354737;color:#fff;border:1px solid #6b8265;border-radius:6px}canvas{width:512px;max-width:100%;image-rendering:pixelated}input{width:240px}.gif{width:384px}h1{font-size:28px}h2{font-size:21px}</style>
+<main><h1>궁수 · archer_male_p2</h1><p>짧은 옆가르마 · 숲색 튜닉 · 가죽 보호구 · 왼손 활<br>2등신 · 대기 키 48px · 캔버스 128×120 · 발 기준점 (64,112)</p>
+<p><a href="manifest.json">매니페스트</a> · <a href="PLAN.md">사전 계획</a> · <a href="NOTES.md">제작 노트</a> · <a href="verification/validation.json">검증 결과</a></p>
+<article><h2>동일 배율 비교 · 쿠키 / 기사 / 궁수</h2><img src="comparison_4x.png" alt="같은 배율과 발 높이에 나란히 선 쿠키, 기사, 궁수"><p><a href="comparison_1x.png">원래 1배 크기</a> · <a href="comparison_4x.png">4배 크기</a></p></article>
+<article><h2>프레임별 확인</h2><select id="action" aria-label="동작"><option value="idle">대기</option><option value="walk">걷기</option><option value="attack" selected>활 쏘기</option><option value="hurt">피격</option><option value="dead">쓰러짐</option><option value="sit">앉기</option></select><br><canvas id="sprite" width="128" height="120"></canvas><p><button id="play">일시 정지</button> <input id="frame" type="range" min="0" max="6" value="0" aria-label="프레임"> <span id="label"></span></p><p>활 올리기 → 당기기 → 완전 당김 → 놓기 → 시위 진동 → 유지 → 회수<br>공격 600ms · 3번 프레임에서 발사(360ms, 60%) · 비행 화살은 게임이 별도로 표시합니다.</p></article>
+<article><h2>6개 동작 · 검토용 반복 GIF</h2><div id="gifs"></div><p>GIF는 검토를 위해 반복합니다. 매니페스트에서 공격·피격은 한 번 재생하고 쓰러짐·앉기는 마지막 자세를 유지합니다.</p></article>
+<article><h2>전체 22장</h2><img src="contact_sheet.png" alt="대기, 걷기, 공격, 피격, 쓰러짐, 앉기 순서의 전체 프레임"><p>0–2 대기 · 3–8 걷기 · 9–15 공격 · 16–17 피격 · 18–20 쓰러짐 · 21 앉기</p></article></main>
+<script>
+const times={idle:[280,280,280],walk:[100,100,100,100,100,100],attack:[100,120,140,40,70,70,60],hurt:[80,160],dead:[100,160,1000],sit:[1000]};
+const names={idle:'대기',walk:'걷기',attack:'활 쏘기',hurt:'피격',dead:'쓰러짐',sit:'앉기'};
+const cache={};for(const a in times){cache[a]=times[a].map((_,i)=>{const im=new Image;im.src=`composite/${a}_${i}.png`;return im});const p=document.createElement('p');p.innerHTML=`${names[a]} · <a href="${a}_1x.gif">1배</a> · <a href="${a}_4x.gif">4배</a><br><img class="gif" src="${a}_4x.gif" alt="${names[a]} 애니메이션">`;document.querySelector('#gifs').append(p);}
+const ctx=document.querySelector('canvas').getContext('2d'),slider=document.querySelector('#frame'),label=document.querySelector('#label'),button=document.querySelector('#play');let action='attack',index=0,playing=true,last=0;
+function draw(){ctx.fillStyle='#25313e';ctx.fillRect(0,0,128,120);if(cache[action][index].complete)ctx.drawImage(cache[action][index],0,0);slider.value=index;label.textContent=`${index}번 · ${times[action][index]}ms${action==='attack'&&index===3?' · 발사':''}`;}
+document.querySelector('#action').onchange=e=>{action=e.target.value;index=0;last=performance.now();slider.max=times[action].length-1;draw()};button.onclick=()=>{playing=!playing;button.textContent=playing?'일시 정지':'재생';last=performance.now()};slider.oninput=()=>{playing=false;button.textContent='재생';index=+slider.value;draw()};function tick(t){if(!last)last=t;if(playing)while(t-last>=times[action][index]){last+=times[action][index];index=(index+1)%times[action].length}draw();requestAnimationFrame(tick)}requestAnimationFrame(tick);
+</script></html>

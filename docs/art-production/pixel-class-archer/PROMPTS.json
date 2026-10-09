@@ -1,0 +1,310 @@
+[
+  {
+    "frame": "attack_0",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/idle_0.png"
+    ],
+    "source": "sources/attack_0.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 finished idle is pose start and immutable design. Begin bow ATTACK frame 0 RAISING/Nocking. Feet spread moderately, both grounded, torso still upright. Lift same anatomical LEFT bow hand upward and slightly farther to screen RIGHT, from waist toward upper chest. Bow remains vertical in front-right, wooden curve bulging right, SAME SMALL BOW size about ONE head high (24 native pixels), never a longbow. Right free hand brings ONE short nocked arrow to the string near center of chest. Arrow lies HORIZONTALLY aimed screen RIGHT across bow, still attached, not flying; pale small arrowhead. Do not pull fully yet. Bow hand and string hand must be visibly different hands: bow grip on RIGHT, drawing hand nearer chest on LEFT. Right-facing 3/4 camera, same giant head, short body, no larger limbs. Pixel string should be a continuous ONE native-pixel thick dark-tan line, not subpixel hairline. Full sprite, no effects."
+  },
+  {
+    "frame": "attack_1",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/attack_0.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/attack_1.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous raising/nocking frame, image2 immutable idle identity. Next bow attack HALF DRAW. Extend anatomical LEFT arm farther horizontally toward screen RIGHT at shoulder height; SAME left hand grips bow CENTER on right. Raise bow a little so arrow level is at bottom of face/chin. Pull anatomical RIGHT drawing hand BACK toward cheek on screen LEFT of bow, elbow bent and moving out to screen LEFT. Bowstring MUST form a visible V: top bow tip to RIGHT drawing fingers/nock near cheek/chin, then back to bottom bow tip; arrow nock and string vertex coincide in drawing fingers. ONE arrow remains nocked horizontally toward screen RIGHT, rests above bow grip, arrowhead barely protrudes past bow. Bow bends with tension, same small height one head. Knees slightly bent feet stay same two positions. Open torso slightly toward viewer, face watches right. Same short cream head, no head growth. Continuous full native-pixel-width string, no thin hairline, no effects."
+  },
+  {
+    "frame": "attack_2",
+    "attempt": 1,
+    "accepted": false,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/attack_1.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/attack_2_rejected_low_draw.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous partially drawn bow, image2 original design. Next FULL DRAW/AIM, the final anticipation before release. Keep both feet at previous exact positions. Extend SAME LEFT bow arm fully toward screen RIGHT, hand at shoulder height slightly lower than chin, elbow almost straight. Pull RIGHT drawing hand a little farther BACK to beside visible EAR on screen LEFT, right elbow opens farther LEFT behind shoulder. The nock is held beside cheek/ear, arrow points HORIZONTALLY RIGHT; arrow nock coincides EXACTLY with the V-shaped bowstring vertex. Bowstring top limb->drawing fingers->bottom limb continuous. Keep actual bow compact: same wooden recurved bow, its top-to-bottom size MUST equal the original idle bow, only one head height, do NOT enlarge it while drawing. Bow limbs flex inward a little under full tension. Body opens/rotates subtly, knees dip just one native pixel, face still watches right with unchanged thick straight brows. One nocked arrow only, no loose arrows. Same HUGE head and tiny 2-head body; no head or costume changes. String must be visible in native pixels but only ONE pixel thick, not a thick rope."
+  },
+  {
+    "frame": "attack_2",
+    "attempt": 2,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/attack_2_rejected_low_draw.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/attack_2.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Targeted CORRECTION of image1 full draw pose; image2 original design. Previous drawing hand was too LOW near chin. Lift BOTH arms and bow/arrow about FOUR native pixels while preserving head, torso, feet, clothing and exact head size. Anatomical RIGHT drawing fingers must touch BESIDE visible EAR at screen LEFT side of face, at lower-eye/ear level, NOT under chin; move drawing elbow farther screen LEFT. Anatomical LEFT bow arm on screen RIGHT remains fully extended to target, hand now raised to lower-eye height so nocked arrow remains HORIZONTAL toward RIGHT. Arrow nock and V-string vertex exactly at drawing fingers beside EAR. Bow grip is just below arrow. Bowstring tips connect continuously to nock. Same compact wooden recurved bow, maintain original IDLE bow height 24 native pixels, do not enlarge bow. Archer opens chest with slight twist, keeps knees bent and both soles grounded. This is FULL DRAW just before release. One nocked arrow, no flight. One frame, crisp native pixels, transparent, no effects. DO NOT leave drawing hand at chin again."
+  },
+  {
+    "frame": "attack_3",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/attack_2.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/attack_3.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous approved FULL DRAW. Image2 original identity. ONE immediate RELEASE/HIT frame. Keep BOTH FEET, knees, torso, head and fully extended LEFT bow arm at EXACT previous positions; SAME left hand holds bow toward screen right. RIGHT fingers beside ear OPEN and flick BACK toward screen LEFT just 1-2 native pixels after letting go, right elbow stays behind. REMOVE THE ENTIRE NOCKED ARROW: it has JUST left the bow and is now drawn separately by game. NO flying arrow, no horizontal arrow shaft, no arrowhead, no fletching floating near hand. Quiver arrows on back remain. Bowstring SNAPS FORWARD, now a nearly straight line connecting TOP and BOTTOM bow tips on screen right, no longer stretched back across face to right fingers. Compact bow flexes forward slightly, curve bulges right. A single subtle doubled tan pixel line near string may show release vibration, no magic or glow. This is the exact shot-release frame: open drawing hand, straight released string, NO arrow. Same huge head/pixel style, transparent."
+  },
+  {
+    "frame": "attack_4",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/attack_3.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/attack_4.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous RELEASE frame, image2 identity. ONE next FOLLOW-THROUGH/VIBRATION frame. Preserve exact head, torso, feet, knee bend, fully extended left bow arm position. Left hand stays on bow right, right drawing hand remains OPEN beside left ear/back shoulder. Just tiny changes: bow limbs rebound about ONE native pixel toward screen LEFT, string moves a single pixel back then straightens between bow tips; right fingers relax slightly after release; scarf settles one pixel. Bow unchanged in size. NO arrow in hands or bow or air, only quiver arrows stay. Do not lower the bow yet; HOLD the shot pose. No effects, no magic, no extra limbs. Same original short pixel body and huge head."
+  },
+  {
+    "frame": "attack_5",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/attack_4.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/attack_5.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous shot follow-through, image2 idle design. ONE next LINGER/SETTLE frame after shot. Hold same wide planted stance and fully extended anatomical LEFT bow arm toward screen RIGHT. Settle left wrist and bow DOWN by only ONE native pixel; bowstring now completely still straight between tips, bow compact same size. Right hand beside ear begins relaxing fingers and lowers only ONE pixel toward shoulder, elbow still back. Head exactly same size and orientation, tiny breathing relaxation in shoulder/scarf. DO NOT return to idle yet; keep the strong shot silhouette. NO arrow in bow or hand or air, quiver unchanged. Same costume, transparent, one frame."
+  },
+  {
+    "frame": "attack_6",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/attack_5.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/attack_6.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous held shot, image2 immutable original idle AND exact destination pose. ONE final RECOVERY frame after bow shot. Lower same anatomical LEFT bow arm from shoulder to beside front-right waist, bending elbow softly, wooden bow vertical low as in image2. Return right drawing hand from ear to near chest as in image2, fingers relaxed. Straighten knees and bring feet back inward into original idle stance, almost exactly image2. Head same original size and position, shoulders relaxed, ochre scarf and quiver settle. Match image2 original costume/face/pose closely so the next idle frame connects with no jump. NO nocked arrow or flying arrow. Bow still SAME LEFT hand on screen RIGHT, never swap. No effects."
+  },
+  {
+    "frame": "dead_0",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/hurt_1.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/dead_0.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 preceding hurt/recoil character, image2 original identity. New DEATH/FALL sequence frame0 KNEES GIVE WAY. Continue backward recoil: knees collapse deeply, hips drop about FIVE native pixels, torso tilts BACK toward screen LEFT, head moves down and left, eyes close. BOTH feet still touch ground, knees visibly bent forward to screen RIGHT. Same large 24px head, do not shrink character/head, no extra hair. Right empty hand drops from chest, same anatomical LEFT hand still holds bow on screen RIGHT; bow lowers with hips and tilts clockwise slightly, keep its complete silhouette inside frame. Preparing to fall onto BACK, not kneeling/bowing forward. Same green tunic, ochre scarf, brown leather strap, quiver and boots. No arrow outside quiver, no blood, no effects. Full body transparent, coarse pixels."
+  },
+  {
+    "frame": "dead_1",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/dead_0.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/dead_1.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous knees-buckling backward fall, image2 original identity. ONE NEXT FALLING frame. Continue falling BACK toward screen LEFT and DOWN: hips have reached the ground, torso reclines diagonally back-left about 45 degrees, head now MUCH LOWER and farther LEFT. Same head physically the SAME size (24 native pixels), do not shrink it to fit. Eyes closed. Bent knees and both boots extend toward screen RIGHT, one heel starts sliding forward. Right arm falls loosely beside torso. SAME anatomical LEFT hand remains visible at front/right, still holding wooden bow, which rotates clockwise into a DIAGONAL shallow angle across lower right of body as arm lowers. Bow tips both clear, same short bow size, no new arrow. This is midway between upright collapse and lying flat on BACK, not sitting upright and not face-down. Preserve short swept hair, scarf, green tunic, chest strap, quiver, bracers and boots. Coarse pixel clusters, generous transparent margins."
+  },
+  {
+    "frame": "dead_2",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/dead_1.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/dead_2.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous halfway backward fall, image2 immutable character. ONE FINAL DEATH frame, held still. COMPLETE the fall onto BACK: whole figure lies almost HORIZONTALLY along ground from HEAD on screen LEFT to BOOTS on screen RIGHT, shoulders and back resting down, face turned upward/slightly toward viewer, eyes closed. Head physically SAME large size as earlier, same short swept cream hair, no shrink or elongation. Torso green tunic/scarf/chest strap readable; legs loosely extended right with a small natural knee bend, boots soles angled up. Right empty arm relaxed near ground by left side. SAME anatomical LEFT hand (the arm on front/right side of torso) loosely retains SAME compact wooden bow resting diagonally/horizontally over lower torso/hip and beside legs; bow must stay connected to this hand, do not switch hands or put it in right hand. Entire bow visible, no arrow outside quiver. This is lying on BACK, NOT seated or propped upright, NOT face down. No blood or effects or ground plane. Full sprite transparent, crisp coarse pixel clusters, generous margins."
+  },
+  {
+    "frame": "hurt_0",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/idle_0.png"
+    ],
+    "source": "sources/hurt_0.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 original idle character, new action HURT impact frame 0. A hit comes from screen RIGHT, making head and upper torso RECOIL BACK toward screen LEFT: tilt upper body back about 15 degrees, head shifts left about THREE native pixels, shoulders draw back, knees buckle slightly forward. Both boots remain grounded, front right boot extends a little for balance. SAME anatomical LEFT hand still holds bow low on screen RIGHT; bow drops/tilts a little with that hand, never swaps. Right empty hand recoils against chest. Close eyes briefly in pain using simple straight pixel slits, thick straight brows retained, mouth small tense dash. SAME face/hair identity, cream short swept hair, no extra hair growth, no earrings, exact same tunic/scarf/strap/quiver/boots. Not a new character. No arrow, blood, impact graphics, stars or glow. Full body transparent, TWO-head ratio, head size unchanged. Clear backward lean rather than idle."
+  },
+  {
+    "frame": "hurt_1",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/hurt_0.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/hurt_1.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous hurt impact leaning back screen LEFT, image2 original idle. ONE next recoil RECOVERY frame, not fully idle. Bring head/shoulders about HALFWAY back toward upright from previous backward lean; still slightly leaned back, knees begin straightening, both boots stay grounded in same positions. Right hand stays braced near chest, SAME LEFT bow hand stays low on screen RIGHT and brings bow a little nearer body. Eyes reopen narrowly/dazed, thick straight male brows, mouth tiny tense line. Preserve same short swept cream hairstyle, same exact head size and forest tunic/scarf/quiver, no new accessories, no arrow or effects. Show reduced lean rather than identical impact or a fully new stance. Transparent, one coarse pixel frame."
+  },
+  {
+    "frame": "idle_0",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "../pixel-knight-r15/knight_idle_4x.png",
+      "../pixel-hero-r12/attack_contact_sheet.png"
+    ],
+    "source": "sources/idle_0.png",
+    "prompt": "Use case: stylized-concept. Create ONLY ONE idle animation frame of a NEW male archer for this pixel game. Input images are STYLE and PROPORTION references only: knight and swordswoman, do not reproduce either costume. Match their very coarse low-resolution 2-HEADS-TALL chibi pixel sprite look, huge 24px head above tiny 24px body, intended native standing height exactly 48 pixels, enlarged nearest-neighbor square pixel clusters. Right-facing three-quarter view. New design: short swept cream-blond hair with visible cropped nape, no braid, thick STRAIGHT dark eyebrows, simple dark dot eyes with NO eyelashes, warm skin; forest green short tunic, ochre neck scarf, brown leather diagonal chest strap and wrist bracer, dark brown trousers and cuffed brown boots, small quiver behind left shoulder. Hair only cream #faf0d7, tan #e1cdb8, shade #b49b91, outline #49342f. Male face, confident neutral expression. Own rustic small recurved bow made from golden brown wood, NO sword or cape or armor. Anatomical LEFT hand, arm on screen RIGHT reaching toward right target, holds bow relaxed low in front-right of waist. Bow vertical, curve bulges screen RIGHT, string behind curve screen LEFT. Anatomical right free hand rests near chest. No nocked arrow in idle. Both feet grounded. Entire body and bow inside generous transparent margins. NO floor shadow, no ground, no text, no panels, no effects. ONE SPRITE ONLY. Transparent background. Crisp large square pixels, no antialiasing, same simple pixel density and proportion as references; do NOT create a detailed high-res illustration."
+  },
+  {
+    "frame": "idle_1",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/idle_0.png"
+    ],
+    "source": "sources/idle_1.png",
+    "prompt": "Use case: identity-preserve. Create ONE next sequential idle frame editing image1. SAME male archer exactly, 2 heads tall, short swept cream hair, thick straight male eyebrows without eyelashes, forest green tunic, ochre scarf, brown leather strap bracers boots, quiver, wooden recurved bow. Crisp COARSE square pixel sprite, transparent, one character. Preserve head and face pixel design, body size, camera right-facing 3/4, same anatomical LEFT bow hand at screen RIGHT; right hand at chest. Continue a TINY breath from previous: chest and head lift ONE native pixel, feet remain at exactly same ground level and stance, bow hand rises just one pixel with shoulder; scarf tip lifts slightly. No arrow, no shadows, no new gear, no larger eyes, no pose redesign. Bow curve bulges screen right. Same cropping/layout as image1. Keep native-height proportion 48 pixels, NOT high-res illustration."
+  },
+  {
+    "frame": "idle_2",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/idle_1.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/idle_2.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 is previous inhaled idle, image2 original idle. Exhale gently: shoulders/head return DOWN one native pixel to original height; right free hand at chest relaxes a little, scarf tip settles. Feet stay planted in exact same stance. Left bow hand stays low to screen right, bow slightly settles down. No arrow. Keep change tiny. This closes the three-frame breathing loop back to image2."
+  },
+  {
+    "frame": "sit_0",
+    "attempt": 1,
+    "accepted": false,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/idle_0.png"
+    ],
+    "source": "sources/sit_0_rejected_tall.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 original idle identity. ONE stable SITTING/rest frame, a separate action. Same male archer sits on ground with knees bent and folded naturally in front, one knee slightly raised, boots visible below. Upright relaxed torso, head right-facing 3/4 and SAME EXACT head size/design as idle, open simple eyes, thick straight brows no lashes. Physical head stays 24 native pixels even though overall seated silhouette becomes about 34 native pixels high. Same green tunic, ochre scarf, brown leather chest strap, bracers, quiver and boots. Anatomical LEFT hand still owns bow on screen RIGHT, now rests it low diagonally across lap/knees, both wooden bow tips visible and same bow size; right empty hand rests on raised knee on screen LEFT/center. NO arrow nocked or flying. Not kneeling to attack, not standing crouch, not dead: comfortably seated and alert. Preserve original proportions, no head growth or tiny new body style. Full sprite with generous transparent margins, coarse crisp square pixels."
+  },
+  {
+    "frame": "sit_0",
+    "attempt": 2,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/sit_0_rejected_tall.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/sit_0.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Targeted correction of image1 SITTING pose, image2 immutable standing design. Previous seated body was too tall. Keep head EXACT SAME PIXEL SIZE and FACE as image2, but fold body into a MUCH LOWER compact ground-sit. Large head must occupy about TWO THIRDS of entire seated silhouette height: if head is 24 native pixels high, the area from chin to ground is ONLY 12 native pixels. Standing height is 48, seated height should be 36, achieved by folded legs, not by shrinking head. Sit hips directly on ground, knees bent UP either side/front of torso, boots tucked tight underneath knees, shoulders almost touch raised knees. Tiny torso compressed behind knees, do not keep long standing waist or thighs. Right empty hand rests atop screen-left knee. SAME LEFT hand on screen RIGHT holds same bow LOW DIAGONALLY across lap, right end slightly up, other tip toward ground screen left; both bow tips visible, no arrow. Head upright, short swept cream hair same, calm open male eyes/thick straight brows, forest tunic/ochre scarf/strap/quiver unchanged. ONE transparent crisp coarse pixel frame. Keep head same size while LOWERING the whole pose significantly; no oversized knees."
+  },
+  {
+    "frame": "walk_0",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/idle_2.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/walk_0.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous completed idle; image2 original identity. Begin WALK cycle toward screen RIGHT. Native TWO-head ratio unchanged. First CONTACT pose: anatomical LEFT leg (screen right/front leg) reaches forward RIGHT and plants heel; anatomical RIGHT leg (screen left/back leg) extends back LEFT with toe touching ground. Moderate 12-native-pixel wide stride, knees bent slightly; torso stays upright above hips, head same size. Left arm still holds bow low toward screen right; right hand loosens near chest. Bow travels with left shoulder, no arrow. Quiver and scarf trail a little left. Do not change face. One frame full body. Match previous art, no mirrored character."
+  },
+  {
+    "frame": "walk_1",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/walk_0.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/walk_1.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous WALK contact, image2 idle design lock. Next sequential DOWN/PASSING walk pose: weight moves onto anatomical left leg currently forward screen RIGHT; bend this planted knee slightly, move its foot under torso. Rear anatomical right leg from screen LEFT lifts heel and swings toward center, knee bent, its boot near the other ankle but still behind. Bring feet closer together than previous wide stride. Head/chest dip ONE native pixel. Keep same bow low in left hand screen right, same right arm across chest, tiny opposite arm bob. Clearly different leg silhouette from previous. Full body, no arrow."
+  },
+  {
+    "frame": "walk_2",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/walk_1.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/walk_2.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous walk passing frame, image2 original identity. Continue SAME walking cycle: anatomical RIGHT leg (near leg that was lifted on screen left in previous) swings FORWARD to screen RIGHT, knee bent up in front, boot hovering just above ground to the RIGHT of support boot. Anatomical LEFT support leg extends more vertically under/back-left of hips, heel starts rising. This is UP/FORWARD SWING before next right-leg contact, not a jump: support toe grounded. Head rises one native pixel. Keep bow held low in SAME anatomical LEFT hand screen right, chest upright, no arrow. Same head/face and all costume details, generous transparent margins. Clearly show one forward raised knee and one planted leg."
+  },
+  {
+    "frame": "walk_3",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/walk_2.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/walk_3.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous raised forward-knee walking pose, image2 original idle design. Next OPPOSITE CONTACT: lower raised anatomical RIGHT near-leg boot to ground well FORWARD screen RIGHT, extend its knee; anatomical LEFT far leg travels BACK screen LEFT, rear heel raised and toe grounded. Stride widest, two boots well separated, opposite leg now in front compared with first walk contact. Tiny body, upright torso, head returns neutral native height. Left bow hand stays same on screen RIGHT, bow remains low beside waist and does not change hands. Scarf trails left. No arrow. Same head and face, no new outfit."
+  },
+  {
+    "frame": "walk_4",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/walk_3.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/walk_4.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous opposite contact walk, image2 original identity. Continue into second DOWN/PASSING pose. Anatomical RIGHT near leg now supports weight, its boot slides under hips planted near center/screen LEFT, its knee bends. Anatomical LEFT far leg swings from behind toward center with knee bent; show its lifted boot tucked behind/right of supporting calf, toe pointed downward, not a wide stride. Head and shoulders lower one native pixel, torso upright, feet close. Keep bow same LEFT hand on screen RIGHT slightly lower with shoulders. Right arm stays near chest. Same costume and face, no arrow, no floating support foot."
+  },
+  {
+    "frame": "walk_5",
+    "attempt": 1,
+    "accepted": true,
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "references": [
+      "sources/walk_4.png",
+      "sources/idle_0.png"
+    ],
+    "source": "sources/walk_5.png",
+    "prompt": "Use case: identity-preserve. ONE sequential frame only, transparent background, crisp coarse low-res square pixel sprite enlarged. Immutable character: SAME TWO-heads-tall male archer with huge short swept cream-blond head, thick straight male eyebrows and no eyelashes, forest green tunic, ochre scarf, brown leather diagonal chest strap wrist bracers and cuffed boots, quiver. Match original identity image and previous image exactly. Right-facing 3/4 view. Anatomical LEFT arm on screen RIGHT holds the wooden recurved bow throughout; anatomical right hand draws string. Bow curve bulges toward target screen RIGHT. No effects, no floor shadows, no text, no panels. Preserve head size and 48px native height proportion. Image1 previous second passing pose, image2 idle identity. Final sequential UP/SWING walk frame before loop: anatomical LEFT far leg swings forward screen RIGHT with knee up, boot hovering just above ground, far boot partly occluded by near shin; anatomical RIGHT near leg extends down under screen LEFT hip and supports weight on toe. The small far knee is visible on screen right, frontward boot only a little ahead of planted boot, less wide than full contact. Head and chest rise ONE native pixel. This connects to next left-leg forward contact. Same left bow hand low at screen right, right hand at chest, no arrow, scarf flutters very slightly backwards. No hand change, no size change, no jump."
+  }
+]

@@ -1,0 +1,149 @@
+[
+  {
+    "frame": "idle_0",
+    "accepted": true,
+    "review": "새 남성 디자인, 큰 머리와 작은 몸, 굵은 눈썹·가죽 보호구·오른쪽 활을 확인. 48px 최근접 시안에서 얼굴과 활 판독 가능."
+  },
+  {
+    "frame": "idle_1",
+    "previous": "idle_0",
+    "accepted": true,
+    "review": "얼굴·복장·활 쥔 손 유지. 가슴과 손이 미세 상승. 생성 바닥 위치 차이는 내보내기 때 (64,112) 접지로 정렬."
+  },
+  {
+    "frame": "idle_2",
+    "previous": "idle_1",
+    "accepted": true,
+    "review": "호흡이 내려오며 첫 대기 자세에 연결. 같은 짧은 머리, 가죽띠, 왼손 활 유지."
+  },
+  {
+    "frame": "walk_0",
+    "previous": "idle_2",
+    "accepted": true,
+    "review": "오른쪽 앞발과 왼쪽 뒤발의 보폭이 생겼으며 얼굴·왼손 활·튜닉 유지. 이동 중 스카프가 왼쪽으로 뒤따름."
+  },
+  {
+    "frame": "walk_1",
+    "previous": "walk_0",
+    "accepted": true,
+    "review": "넓은 보폭에서 지지발 아래로 다리가 모이고 반대 부츠가 들림. 활 손과 얼굴 유지. 다음 장에서 든 발을 오른쪽 앞으로 넘길 것."
+  },
+  {
+    "frame": "walk_2",
+    "previous": "walk_1",
+    "accepted": true,
+    "review": "들린 무릎이 앞으로 넘어가며 지지발과 분리. 이전 접지발 유지, 반대 발이 앞으로 착지할 수 있는 연결."
+  },
+  {
+    "frame": "walk_3",
+    "previous": "walk_2",
+    "accepted": true,
+    "review": "들었던 앞 부츠가 내려오고 뒤발은 뒤로 뻗음. 머리·복장·활 손 유지. 0번과는 앞 부츠 방향과 무릎 겹침이 다른 반대 착지."
+  },
+  {
+    "frame": "walk_4",
+    "previous": "walk_3",
+    "accepted": true,
+    "review": "넓은 착지에서 다리가 다시 좁아짐. 가까운 부츠가 지지하고 뒤 부츠가 접힘. 얼굴과 활 손 유지."
+  },
+  {
+    "frame": "walk_5",
+    "previous": "walk_4",
+    "accepted": true,
+    "review": "지지발을 남겨 둔 채 반대 무릎을 앞으로 넘김. 0번 앞발 착지로 이어지는 자세. 얼굴·복장·활 손 유지."
+  },
+  {
+    "frame": "attack_0",
+    "previous": "idle_0",
+    "accepted": true,
+    "review": "왼손이 활을 가슴 높이로 올리고 오른손은 화살을 얹음. 양손 구분·넓어진 발 지지·활 크기 유지. 다음 장에서 시위를 오른손까지 당겨 연결."
+  },
+  {
+    "frame": "attack_1",
+    "previous": "attack_0",
+    "accepted": true,
+    "review": "시위가 실제 오른손의 화살 오늬까지 V자로 이어지고 왼팔은 오른쪽으로 뻗음. 얼굴 앞 시위를 별도로 추출해 머리 고정 때 지워지지 않게 할 것."
+  },
+  {
+    "frame": "attack_2",
+    "attempt": 1,
+    "previous": "attack_1",
+    "accepted": false,
+    "review": "완전 당김에서도 오른손이 턱 아래에 머물러 귀 옆까지 당기는 변화가 약함. 양손과 조준선을 함께 올려 재생성."
+  },
+  {
+    "frame": "attack_2",
+    "attempt": 2,
+    "previous": "attack_1",
+    "accepted": true,
+    "review": "오른손을 귀 아래 옆으로 끌어올려 이전 장보다 완전 당김이 분명함. 같은 왼팔 활 지지와 수평 화살, 발 위치 유지. 발사 직전 장으로 채택."
+  },
+  {
+    "frame": "attack_3",
+    "previous": "attack_2",
+    "accepted": true,
+    "review": "화살이 완전히 사라지고 시위가 활 양끝 사이로 복귀. 오른손 손가락은 귀 옆에서 펴지고 뒤로 이동, 왼팔과 발 지지는 유지. hitFrame=3 채택."
+  },
+  {
+    "frame": "attack_4",
+    "previous": "attack_3",
+    "accepted": true,
+    "review": "발사 자세와 열린 오른손을 유지하며 활 윗대와 시위만 반동 후 정착. 장전 화살·비행 화살 없음."
+  },
+  {
+    "frame": "attack_5",
+    "previous": "attack_4",
+    "accepted": true,
+    "review": "쏜 자세를 유지한 채 활과 오른손을 조금 내리고 시위가 안정됨. 비행 화살 없음. 다음 장에서 활을 허리 아래로 회수."
+  },
+  {
+    "frame": "attack_6",
+    "previous": "attack_5",
+    "accepted": true,
+    "review": "같은 왼손으로 활을 허리 아래로 내리고 오른손은 가슴으로 복귀. 얼굴·몸 크기·발 기준은 대기와 맞춰 마무리."
+  },
+  {
+    "frame": "hurt_0",
+    "previous": "idle_0",
+    "accepted": true,
+    "review": "충격 방향 반대로 머리와 상체가 화면 왼쪽으로 젖혀짐. 눈을 감고 무릎이 풀렸으며 활은 기존 왼손에 남아 있음. 기울어진 머리는 해당 원화로 분리."
+  },
+  {
+    "frame": "hurt_1",
+    "previous": "hurt_0",
+    "accepted": true,
+    "review": "감겼던 눈을 조금 뜨고 활을 몸 쪽으로 회수하며 뒤로 젖힘을 완화. 같은 왼손과 가죽 보호구 유지."
+  },
+  {
+    "frame": "dead_0",
+    "previous": "hurt_1",
+    "accepted": true,
+    "review": "무릎이 꺾이며 상체가 더 뒤로 기울고 오른손이 아래로 풀림. 왼손은 활을 계속 쥠. 기울어진 머리의 원화 크기를 25px 안팎으로 맞춰 납품."
+  },
+  {
+    "frame": "dead_1",
+    "previous": "dead_0",
+    "accepted": true,
+    "review": "엉덩이가 내려앉고 머리·가슴은 뒤로 기울며 두 부츠가 오른쪽으로 미끄러짐. 활은 같은 왼손에 붙어 기울어지고 오른손은 지면 쪽으로 내려감."
+  },
+  {
+    "frame": "dead_2",
+    "previous": "dead_1",
+    "accepted": true,
+    "review": "머리 왼쪽·부츠 오른쪽으로 등을 대고 누운 종결 자세. 오른손은 바닥에 풀리고 위쪽 왼손은 활을 유지. 눈 감음과 복장·화살통 연속 확인."
+  },
+  {
+    "frame": "sit_0",
+    "attempt": 1,
+    "previous": "idle_0",
+    "accepted": false,
+    "review": "무릎은 접혔으나 앉은 전체 높이가 대기와 거의 같음. 머리 크기를 유지하고 상체·무릎을 더 가깝게 접은 낮은 앉기로 재생성."
+  },
+  {
+    "frame": "sit_0",
+    "attempt": 2,
+    "previous": "idle_0",
+    "accepted": true,
+    "review": "무릎을 더 접은 새 원화 채택. 기준 머리와 목 스카프를 보존해 머리 축소 없이 전체 높이 38px의 낮은 앉기로 정렬. 같은 왼손 활·오른손 무릎 받침 확인."
+  }
+]

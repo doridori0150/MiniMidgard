@@ -1,0 +1,1043 @@
+{
+  "schema": "minimidgard.pixel/1",
+  "canvas": {
+    "size": [
+      128,
+      120
+    ],
+    "origin": [
+      64,
+      112
+    ],
+    "bodyHeight": 48
+  },
+  "animations": {
+    "idle": {
+      "frames": [
+        "idle_0",
+        "idle_1",
+        "idle_2"
+      ],
+      "durations": [
+        280,
+        280,
+        280
+      ],
+      "duration": 840,
+      "loop": true
+    },
+    "walk": {
+      "frames": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "walk_4",
+        "walk_5"
+      ],
+      "durations": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "duration": 600,
+      "loop": true
+    },
+    "attack": {
+      "frames": [
+        "attack_0",
+        "attack_1",
+        "attack_2",
+        "attack_3",
+        "attack_4",
+        "attack_5",
+        "attack_6"
+      ],
+      "durations": [
+        100,
+        120,
+        140,
+        40,
+        70,
+        70,
+        60
+      ],
+      "duration": 600,
+      "loop": false,
+      "hitFrame": 3
+    },
+    "hurt": {
+      "frames": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durations": [
+        80,
+        160
+      ],
+      "duration": 240,
+      "loop": false
+    },
+    "dead": {
+      "frames": [
+        "dead_0",
+        "dead_1",
+        "dead_2"
+      ],
+      "durations": [
+        100,
+        160,
+        1000
+      ],
+      "duration": 1260,
+      "loop": false,
+      "holdLast": true
+    },
+    "sit": {
+      "frames": [
+        "sit_0"
+      ],
+      "durations": [
+        1000
+      ],
+      "duration": 1000,
+      "loop": false,
+      "holdLast": true
+    }
+  },
+  "hairKeys": [
+    "#faf0d7",
+    "#e1cdb8",
+    "#b49b91",
+    "#49342f"
+  ],
+  "characters": {
+    "archer_male_p2": {
+      "class": "archer",
+      "gender": "male",
+      "bodyHeight": 48,
+      "headHeight": 25,
+      "proportion": 2,
+      "defaultWeapon": "bow",
+      "defaultHair": "swept_crop_p2",
+      "hairStyles": [
+        "swept_crop_p2"
+      ],
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle_0",
+            "idle_1",
+            "idle_2"
+          ],
+          "durations": [
+            280,
+            280,
+            280
+          ],
+          "duration": 840,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            "walk_0",
+            "walk_1",
+            "walk_2",
+            "walk_3",
+            "walk_4",
+            "walk_5"
+          ],
+          "durations": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ],
+          "duration": 600,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            "attack_0",
+            "attack_1",
+            "attack_2",
+            "attack_3",
+            "attack_4",
+            "attack_5",
+            "attack_6"
+          ],
+          "durations": [
+            100,
+            120,
+            140,
+            40,
+            70,
+            70,
+            60
+          ],
+          "duration": 600,
+          "loop": false,
+          "hitFrame": 3
+        },
+        "hurt": {
+          "frames": [
+            "hurt_0",
+            "hurt_1"
+          ],
+          "durations": [
+            80,
+            160
+          ],
+          "duration": 240,
+          "loop": false
+        },
+        "dead": {
+          "frames": [
+            "dead_0",
+            "dead_1",
+            "dead_2"
+          ],
+          "durations": [
+            100,
+            160,
+            1000
+          ],
+          "duration": 1260,
+          "loop": false,
+          "holdLast": true
+        },
+        "sit": {
+          "frames": [
+            "sit_0"
+          ],
+          "durations": [
+            1000
+          ],
+          "duration": 1000,
+          "loop": false,
+          "holdLast": true
+        }
+      },
+      "frames": {
+        "idle_0": {
+          "image": "body/archer_male_p2/idle_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              99
+            ],
+            "tipPoint": [
+              76,
+              84
+            ],
+            "angleDegrees": -90.0
+          },
+          "grip": "grips/archer_male_p2/idle_0.png"
+        },
+        "idle_1": {
+          "image": "body/archer_male_p2/idle_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              98
+            ],
+            "tipPoint": [
+              76,
+              83
+            ],
+            "angleDegrees": -90.0
+          },
+          "grip": "grips/archer_male_p2/idle_1.png"
+        },
+        "idle_2": {
+          "image": "body/archer_male_p2/idle_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              99
+            ],
+            "tipPoint": [
+              76,
+              84
+            ],
+            "angleDegrees": -90.0
+          },
+          "grip": "grips/archer_male_p2/idle_2.png"
+        },
+        "walk_0": {
+          "image": "body/archer_male_p2/walk_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              99
+            ],
+            "tipPoint": [
+              76,
+              84
+            ],
+            "angleDegrees": -90.0
+          },
+          "grip": "grips/archer_male_p2/walk_0.png"
+        },
+        "walk_1": {
+          "image": "body/archer_male_p2/walk_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              100
+            ],
+            "tipPoint": [
+              76,
+              85
+            ],
+            "angleDegrees": -90.0
+          },
+          "grip": "grips/archer_male_p2/walk_1.png"
+        },
+        "walk_2": {
+          "image": "body/archer_male_p2/walk_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              98
+            ],
+            "tipPoint": [
+              76,
+              83
+            ],
+            "angleDegrees": -90.0
+          },
+          "grip": "grips/archer_male_p2/walk_2.png"
+        },
+        "walk_3": {
+          "image": "body/archer_male_p2/walk_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              99
+            ],
+            "tipPoint": [
+              76,
+              84
+            ],
+            "angleDegrees": -90.0
+          },
+          "grip": "grips/archer_male_p2/walk_3.png"
+        },
+        "walk_4": {
+          "image": "body/archer_male_p2/walk_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              100
+            ],
+            "tipPoint": [
+              76,
+              85
+            ],
+            "angleDegrees": -90.0
+          },
+          "grip": "grips/archer_male_p2/walk_4.png"
+        },
+        "walk_5": {
+          "image": "body/archer_male_p2/walk_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              98
+            ],
+            "tipPoint": [
+              76,
+              83
+            ],
+            "angleDegrees": -90.0
+          },
+          "grip": "grips/archer_male_p2/walk_5.png"
+        },
+        "attack_0": {
+          "image": "body/archer_male_p2/attack_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              79,
+              93
+            ],
+            "tipPoint": [
+              77,
+              79
+            ],
+            "angleDegrees": -98.13
+          },
+          "grip": "grips/archer_male_p2/attack_0.png"
+        },
+        "attack_1": {
+          "image": "body/archer_male_p2/attack_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              81,
+              89
+            ],
+            "tipPoint": [
+              78,
+              74
+            ],
+            "angleDegrees": -101.31
+          },
+          "grip": "grips/archer_male_p2/attack_1.png"
+        },
+        "attack_2": {
+          "image": "body/archer_male_p2/attack_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              82,
+              87
+            ],
+            "tipPoint": [
+              79,
+              74
+            ],
+            "angleDegrees": -102.99
+          },
+          "grip": "grips/archer_male_p2/attack_2.png"
+        },
+        "attack_3": {
+          "image": "body/archer_male_p2/attack_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              81,
+              87
+            ],
+            "tipPoint": [
+              77,
+              74
+            ],
+            "angleDegrees": -107.1
+          },
+          "grip": "grips/archer_male_p2/attack_3.png"
+        },
+        "attack_4": {
+          "image": "body/archer_male_p2/attack_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              80,
+              87
+            ],
+            "tipPoint": [
+              76,
+              74
+            ],
+            "angleDegrees": -107.1
+          },
+          "grip": "grips/archer_male_p2/attack_4.png"
+        },
+        "attack_5": {
+          "image": "body/archer_male_p2/attack_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              81,
+              89
+            ],
+            "tipPoint": [
+              78,
+              76
+            ],
+            "angleDegrees": -102.99
+          },
+          "grip": "grips/archer_male_p2/attack_5.png"
+        },
+        "attack_6": {
+          "image": "body/archer_male_p2/attack_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              99
+            ],
+            "tipPoint": [
+              76,
+              84
+            ],
+            "angleDegrees": -90.0
+          },
+          "grip": "grips/archer_male_p2/attack_6.png"
+        },
+        "hurt_0": {
+          "image": "body/archer_male_p2/hurt_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              78,
+              100
+            ],
+            "tipPoint": [
+              79,
+              84
+            ],
+            "angleDegrees": -86.42
+          },
+          "grip": "grips/archer_male_p2/hurt_0.png"
+        },
+        "hurt_1": {
+          "image": "body/archer_male_p2/hurt_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              74,
+              99
+            ],
+            "tipPoint": [
+              71,
+              84
+            ],
+            "angleDegrees": -101.31
+          },
+          "grip": "grips/archer_male_p2/hurt_1.png"
+        },
+        "dead_0": {
+          "image": "body/archer_male_p2/dead_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              101
+            ],
+            "tipPoint": [
+              79,
+              87
+            ],
+            "angleDegrees": -77.91
+          },
+          "grip": "grips/archer_male_p2/dead_0.png"
+        },
+        "dead_1": {
+          "image": "body/archer_male_p2/dead_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              73,
+              101
+            ],
+            "tipPoint": [
+              82,
+              90
+            ],
+            "angleDegrees": -50.71
+          },
+          "grip": "grips/archer_male_p2/dead_1.png"
+        },
+        "dead_2": {
+          "image": "body/archer_male_p2/dead_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_2",
+            "basePose": "down"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              80,
+              101
+            ],
+            "tipPoint": [
+              90,
+              92
+            ],
+            "angleDegrees": -41.99
+          },
+          "grip": "grips/archer_male_p2/dead_2.png"
+        },
+        "sit_0": {
+          "image": "body/archer_male_p2/sit_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "sit_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              71,
+              106
+            ],
+            "tipPoint": [
+              78,
+              96
+            ],
+            "angleDegrees": -55.01
+          },
+          "grip": "grips/archer_male_p2/sit_0.png"
+        }
+      }
+    }
+  },
+  "hair": {
+    "swept_crop_p2": {
+      "gender": "male",
+      "style": "swept_crop",
+      "proportion": "p2",
+      "pivot": [
+        0,
+        0
+      ],
+      "poses": {
+        "idle_0": {
+          "front": "hair/swept_crop_p2/idle_0_front.png",
+          "back": "hair/swept_crop_p2/idle_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_1": {
+          "front": "hair/swept_crop_p2/idle_1_front.png",
+          "back": "hair/swept_crop_p2/idle_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_2": {
+          "front": "hair/swept_crop_p2/idle_2_front.png",
+          "back": "hair/swept_crop_p2/idle_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_0": {
+          "front": "hair/swept_crop_p2/walk_0_front.png",
+          "back": "hair/swept_crop_p2/walk_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_1": {
+          "front": "hair/swept_crop_p2/walk_1_front.png",
+          "back": "hair/swept_crop_p2/walk_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_2": {
+          "front": "hair/swept_crop_p2/walk_2_front.png",
+          "back": "hair/swept_crop_p2/walk_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_3": {
+          "front": "hair/swept_crop_p2/walk_3_front.png",
+          "back": "hair/swept_crop_p2/walk_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_4": {
+          "front": "hair/swept_crop_p2/walk_4_front.png",
+          "back": "hair/swept_crop_p2/walk_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_5": {
+          "front": "hair/swept_crop_p2/walk_5_front.png",
+          "back": "hair/swept_crop_p2/walk_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_0": {
+          "front": "hair/swept_crop_p2/attack_0_front.png",
+          "back": "hair/swept_crop_p2/attack_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_1": {
+          "front": "hair/swept_crop_p2/attack_1_front.png",
+          "back": "hair/swept_crop_p2/attack_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_2": {
+          "front": "hair/swept_crop_p2/attack_2_front.png",
+          "back": "hair/swept_crop_p2/attack_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_3": {
+          "front": "hair/swept_crop_p2/attack_3_front.png",
+          "back": "hair/swept_crop_p2/attack_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_4": {
+          "front": "hair/swept_crop_p2/attack_4_front.png",
+          "back": "hair/swept_crop_p2/attack_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_5": {
+          "front": "hair/swept_crop_p2/attack_5_front.png",
+          "back": "hair/swept_crop_p2/attack_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_6": {
+          "front": "hair/swept_crop_p2/attack_6_front.png",
+          "back": "hair/swept_crop_p2/attack_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_0": {
+          "front": "hair/swept_crop_p2/hurt_0_front.png",
+          "back": "hair/swept_crop_p2/hurt_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_1": {
+          "front": "hair/swept_crop_p2/hurt_1_front.png",
+          "back": "hair/swept_crop_p2/hurt_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_0": {
+          "front": "hair/swept_crop_p2/dead_0_front.png",
+          "back": "hair/swept_crop_p2/dead_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_1": {
+          "front": "hair/swept_crop_p2/dead_1_front.png",
+          "back": "hair/swept_crop_p2/dead_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_2": {
+          "front": "hair/swept_crop_p2/dead_2_front.png",
+          "back": "hair/swept_crop_p2/dead_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "sit_0": {
+          "front": "hair/swept_crop_p2/sit_0_front.png",
+          "back": "hair/swept_crop_p2/sit_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      }
+    }
+  },
+  "weapons": {
+    "bow": {
+      "frames": {
+        "archer_male_p2": {
+          "idle_0": "weapons/bow/archer_male_p2/idle_0.png",
+          "idle_1": "weapons/bow/archer_male_p2/idle_1.png",
+          "idle_2": "weapons/bow/archer_male_p2/idle_2.png",
+          "walk_0": "weapons/bow/archer_male_p2/walk_0.png",
+          "walk_1": "weapons/bow/archer_male_p2/walk_1.png",
+          "walk_2": "weapons/bow/archer_male_p2/walk_2.png",
+          "walk_3": "weapons/bow/archer_male_p2/walk_3.png",
+          "walk_4": "weapons/bow/archer_male_p2/walk_4.png",
+          "walk_5": "weapons/bow/archer_male_p2/walk_5.png",
+          "attack_0": "weapons/bow/archer_male_p2/attack_0.png",
+          "attack_1": "weapons/bow/archer_male_p2/attack_1.png",
+          "attack_2": "weapons/bow/archer_male_p2/attack_2.png",
+          "attack_3": "weapons/bow/archer_male_p2/attack_3.png",
+          "attack_4": "weapons/bow/archer_male_p2/attack_4.png",
+          "attack_5": "weapons/bow/archer_male_p2/attack_5.png",
+          "attack_6": "weapons/bow/archer_male_p2/attack_6.png",
+          "hurt_0": "weapons/bow/archer_male_p2/hurt_0.png",
+          "hurt_1": "weapons/bow/archer_male_p2/hurt_1.png",
+          "dead_0": "weapons/bow/archer_male_p2/dead_0.png",
+          "dead_1": "weapons/bow/archer_male_p2/dead_1.png",
+          "dead_2": "weapons/bow/archer_male_p2/dead_2.png",
+          "sit_0": "weapons/bow/archer_male_p2/sit_0.png"
+        }
+      }
+    }
+  }
+}
