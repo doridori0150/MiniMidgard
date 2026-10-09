@@ -2,7 +2,7 @@
 
 `wizard_female_p2` · 여성 · `staff` · `wizard_crescent_braid_p2`
 
-[미리보기](preview.html)에서 18개 동작을 재생하고 프레임별로 확인할 수 있다. 기본 8종, 스킬 모션 10종, 28개 스킬을 모두 포함한다. 내장 imagegen으로 원화를 한 장씩 제작했다. 29개 승인 포즈를 79개 재생 프레임에 배치했으며 시작·유지·회수 자세는 공유한다. 원화·프롬프트는 `authored/`, `PROMPTS.json`, 순서별 등록 기록은 `FRAME_REVIEWS.json`에 있다.
+[미리보기](preview.html)에서 18개 동작을 재생하고 프레임별로 확인할 수 있다. 기본 8종, 스킬 모션 10종, 28개 스킬을 모두 포함한다. 내장 imagegen으로 원화를 한 장씩 제작했다. 걷기 보강 후 33개 승인 포즈를 83개 재생 프레임에 배치했으며 시작·유지·회수 자세는 공유한다. 원화·프롬프트는 `authored/`, `PROMPTS.json`, 걷기 보강 프롬프트는 `WALK_PROMPTS.json`, 순서별 등록 기록은 `FRAME_REVIEWS.json`에 있다.
 
 ## 계획과 연결
 
@@ -41,3 +41,11 @@
 검증 결과는 [verification/validation.json](verification/validation.json). 레이어 전체의 크기·알파·머리 팔레트·합성 일치·그립 위치·잘림, 28개 스킬 매핑, 타격 시간, 시전 연결을 검사한다. 1×/4× 및 일반 공격 비교 GIF 56개는 무손실 압축 후 Apple ImageIO로 모든 프레임을 디코딩해 크기·시간을 확인했다. 브라우저에서 미리보기 재생·스킬 선택·프레임 이동을 확인했다.
 
 재생성: `prepare_specs.py` → `register.py` → `build.py` → `compact_gifs.py` → `verify_gif.swift` → `make_preview.py` → `validate.py`. Python은 `PYTHONDONTWRITEBYTECODE=1`로 실행하고, Swift 모듈 캐시는 검사 후 제거한다. 게임 소스 수정, 커밋, 푸시는 하지 않았다.
+
+## 보강 1 — 걷기 (2026-10-10)
+
+[WALK_PLAN.md](WALK_PLAN.md)에 양발 각각 접지→하중→통과→전진을 먼저 정하고, RO 위저드 시트 두 번째 줄의 8장 교대·작은 상하 움직임을 참고했다. 두 접지 원화를 살리고 중간 6장을 내장 imagegen으로 한 장씩 그렸다. 매번 직전 원화와 48px 등록본의 다리·두상·무기 손을 확인했다. 3번의 첫 후보는 같은 발 전진을 반복해 제외하고 교차 자세로 다시 그렸다. 마지막 7→0 접지도 확대 시트로 확인했다.
+
+걷기는 서로 다른 8장, 각 100ms, 총 800ms다. 2등신·기준 키 48px·128×120 캔버스·발 원점 (64,112)과 가까운 화면 오른쪽 손의 지팡이를 유지했다. 매니페스트, 걷기 GIF 1×/4×, 걷기·전체 컨택트 시트와 미리보기 데이터를 갱신했다. [걷기 검사](verification/walk_validation.json)에서 하체 실루엣 8장 구별, 비걷기 매니페스트 동일, 보호 파일 743개 바이트 일치를 확인했다. Apple ImageIO로 GIF 프레임·시간·크기를 재검증했다. 이번 세션은 연결된 브라우저가 없어 UI 재생 검수는 하지 못했다. 디자인·나머지 동작·28개 스킬은 그대로다.
+
+걷기만 재포장: `PYTHONDONTWRITEBYTECODE=1 python3 build_walk.py` → `compact_gifs.py` → `verify_gif.swift` → `make_preview.py` → `validate.py`. 신규 원화별 등록값은 `registration.json`, 프롬프트·전후 검토는 [WALK_PROMPTS.json](WALK_PROMPTS.json)에 남겼다. 빌드 캐시는 제거했으며 `src/` 수정·커밋·푸시는 하지 않았다.

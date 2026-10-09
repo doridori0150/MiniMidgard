@@ -1,0 +1,67 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "sequential; original and registered previous frame reviewed before next",
+  "frames": [
+    {
+      "name": "walk_0",
+      "source": "authored/walk_contact_a.png",
+      "reused": true,
+      "review": "가까운 발 전진 접지. 기존 디자인·비율과 손 유지 기준."
+    },
+    {
+      "name": "walk_r1_1",
+      "previous": "walk_contact_a",
+      "review": "기존 접지 A: 가까운 발 화면 오른쪽 앞, 먼 발 뒤, 가까운 손 지팡이 확인.",
+      "prompt": "Use case: identity-preserve. Edit exactly ONE next walking animation frame of the supplied original female wizard. Image 1 is locked identity, image 2 is preceding frame 0 (near foot forward contact). Frame 1 DOWN/RECOIL: weight settles onto the near leg, front boot now FLAT beneath the forward bent knee, rear far heel lifts, rear knee bends and rear toe still brushes ground behind. Narrow the stride a little from image 2. This is a small consecutive walking change, not running. Same face/head, ivory bob/braid, teal crescent ornament, plum cape, gold trimmed indigo split robe, cream underdress, brown boots. Preserve precise proportions and framing. Keep upper body and staff nearly identical to image 2; staff stays in same near SCREEN RIGHT hand, tilt unchanged. Body sinks slightly, cloth follows behind. Crisp pixel art clusters intended for 48px height, no antialiasing, no redesigned details, no shadow, no text, no FX. ONE full uncropped character and staff on transparent background. Only one frame."
+    },
+    {
+      "name": "walk_r1_2",
+      "previous": "walk_r1_1",
+      "review": "원화와 4배 등록본 확인: 앞발 하중, 뒤 무릎 굽힘, 두상 고정과 같은 지팡이 손. 다음은 좁은 통과 보폭.",
+      "prompt": "Use case identity-preserve. ONE next animation frame only. Image 1 locks original wizard design, image 2 is previous walking down pose. Draw frame 2 PASSING A: near leg is supporting body nearly VERTICAL, boot firmly planted under torso. Far leg swings from behind with knee bent, its boot OFF ground and passing closely behind supporting shin, toe pointing downward. Clearly CLOSE the stride into a narrow silhouette; do not repeat spread feet. Torso gently rises from previous down pose. Empty arm swings a little forward; braid and cloak softly follow. Same compact two-head proportions and exact head size, ivory bob/braid, teal crescent jewel, plum cloak, indigo gold-trim robe, cream tunic, brown boots. Staff stays in SAME near SCREEN RIGHT hand with original gentle forward tilt, hand around waist level. No mirror, no redesign, no extra accessories. Original crisp pixel-art clusters intended for 48px height. Full character and staff same framing on transparent background, no shadow/text/FX. Keep head and upper body almost identical. One frame."
+    },
+    {
+      "name": "walk_r1_3_rejected",
+      "previous": "walk_r1_2",
+      "review": "통과 A: 좁아진 보폭, 먼 발 들림, 수직 가까운 지지 다리 확인. 등록본 두상 48px 기준 유지. 다음은 먼 발 앞으로.",
+      "prompt": "Use case identity-preserve. ONE single next walk frame. Reference 1 original wizard identity, reference 2 previous frame 2 raised far foot. Frame 3 RISING / FAR LEG FORWARD SWING: far leg which was behind robe at screen-left now swings FORWARD ACROSS THE BODY, bent far knee advances toward SCREEN RIGHT and far boot reaches forward off the ground. Near bare-thigh leg moves BACKWARD toward screen-left, supporting on its toe; its shin visibly angles down-left across the far shin. This must reverse the two legs, not keep near knee forward. Reveal crossed diagonal legs below split robe, with dark farther boot ahead on screen-right and lighter near boot behind screen-left. Keep staff in same near screen-right hand, upright slight forward tilt, hand waist high. Empty arm moves forward a little. Same face, head size, two-head proportions, ivory hair/braid, teal crescent jewel, plum cape and gold trimmed indigo robe/boots. Keep upper body almost exact from previous. Walking not running, modest stride. Crisp pixel clusters for 48px sprite; transparent background, full character/staff no shadow no text no FX. ONE pose only; no mirroring.",
+      "accepted": false
+    },
+    {
+      "name": "walk_r1_3",
+      "previous": "walk_r1_2",
+      "review": "이전 3번 후보는 가까운 다리 전진 반복으로 제외. 기존 walk_cross 원화의 교차 구조를 추가 참고하여 먼 발 전진 수정.",
+      "prompt": "Edit ONE walk frame, identity-preserve. Image 1 is previous frame (passing), image 2 is correct opposite-leg contact TARGET. Create the in-between immediately BEFORE image 2. Use image 2's crossed legs as your anatomical guide: large exposed foreground thigh angles DOWN-LEFT from robe, its boot at screen-left supporting on TOE (heel lifted); background thigh and boot extend toward screen-right, that forward boot lifted a little before heel contact. Preserve the actual crossed two-leg anatomy of image 2, DO NOT return big foreground thigh to screen-right. Slightly less spread than image 2. Head and torso design exactly same, match their relative size to image 1. Staff stays in same screen-right hand at waist, upright, no hand swap. Free hand slightly forward of belt, same ivory braid, plum cape, gold indigo robe, cream underdress, crescent ornaments. Crisp square pixel art intended at 48px, transparent background, no ground shadow, no FX or text. One entire uncropped sprite only."
+    },
+    {
+      "name": "walk_r1_4",
+      "previous": "walk_r1_3",
+      "review": "3번의 앞쪽 먼 부츠에서 기존 walk_cross의 먼 발 접지로 연결 확인. 가까운 큰 허벅지와 부츠는 왼쪽 뒤. 기존 원화를 재사용하고 x 중심만 공통 등록.",
+      "source": "authored/walk_cross.png",
+      "reused": true
+    },
+    {
+      "name": "walk_r1_5",
+      "previous": "walk_r1_4",
+      "review": "반대 접지 등록본: 가까운 다리는 화면 왼쪽 뒤로 교차, 먼 부츠 오른쪽 앞 접지. 손과 얼굴 유지. 다음 반대 하중.",
+      "prompt": "Use case identity-preserve. Edit this exact sprite into ONE following walking frame 5, opposite DOWN/RECOIL. The current pose has large bare foreground thigh angling down-left and far leg extending down-right; PRESERVE this leg identity. Far SCREEN RIGHT boot takes the weight and plants FLAT while its knee bends a little. Near SCREEN LEFT boot lifts its heel and rolls onto its toe, near knee bends behind; stride slightly closes. Foreground near thigh MUST remain diagonally down-left from the robe, not move forward/right. Upper body sinks very slightly; free hand begins to lower, cloth settles. Staff remains in EXACT same near screen-right hand at waist, gentle forward tilt unchanged. Same face/head size, ivory bob and braid, plum cape, teal crescent ornaments, cream tunic and gold indigo split robe, brown boots. Same two-head proportions, crisp pixel art, not taller. Frame after the provided opposite contact, not repeated contact. Whole body and staff transparent background no shadows text FX. Exactly ONE frame."
+    },
+    {
+      "name": "walk_r1_6",
+      "previous": "walk_r1_5",
+      "review": "반대 하중: 먼 앞발 접지와 가까운 뒷꿈치 들기, 내려간 상체 확인. 다음은 가까운 발을 들어 통과.",
+      "prompt": "Use case identity-preserve. ONE next walking frame 6 PASSING B from provided prior opposite-down frame. Keep all identity, costume, head size and view. CHANGE LEGS clearly: the FAR leg becomes straight vertical SUPPORT under the body with darker boot flat on ground just right of body center. The NEAR foreground leg with large bare thigh now lifts, knee bends, and its boot is curled backward OFF THE GROUND on screen-left, approaching the supporting shin. Foreground near boot sole is visible tilted down/back, higher than planted far boot. Close stride into narrow passing pose, do NOT leave both feet planted or splayed. Foreground bent thigh crosses in front of far supporting shin. Torso rises slightly, free hand lowers toward hip as arm begins to swing backward. Same near SCREEN RIGHT hand firmly holding upright staff at waist; same tilt and length. Ivory bob/braid, teal crescent ornament, plum cape, gold-trim indigo split robe, cream tunic, brown boots unchanged. Same compact two-head proportions and crisp pixel clusters intended for 48px. Transparent background full uncropped sprite/staff no shadow text FX. Single pose."
+    },
+    {
+      "name": "walk_r1_7",
+      "previous": "walk_r1_6",
+      "review": "반대 통과 B: 큰 가까운 허벅지 굽힘·가까운 부츠 들림, 먼 다리 수직 지지 확인. 다음 7번은 0번의 가까운 발 접지로 연결.",
+      "prompt": "Use case identity-preserve. ONE next frame of walking loop: frame 7 NEAR LEG FORWARD SWING, between image 1 previous passing B and image 2 next near-leg contact. Near foreground bent leg from image 1 unfolds FORWARD toward screen-right, large visible bare knee raised slightly ahead and near boot extending forward with heel just off ground, toe tipped upward. Far support leg travels diagonally BACK to screen-left, its heel raised and toe pushing off ground. Less spread than next contact image 2. The near thigh now goes down-right again (opposite previous frame), opening robe flap naturally. Free arm swings down and backward, its fist beside hip approaching image 2. Same head and face size, compact two-head original wizard design, ivory bob/braid and crescent ornament, plum cape, gold indigo split robe and brown boots. Keep staff in same near SCREEN RIGHT hand, same waist-high grip and upright forward tilt, don't shift hand. Full uncropped transparent-background pixel sprite, 48px intended crisp pixel clusters, no FX shadow text, one pose only. Preserve outfit exactly."
+    },
+    {
+      "name": "loop_review",
+      "previous": "walk_r1_7",
+      "review": "7번의 가까운 발 전진→0번 접지 연결. 8장 4배 시트에서 접지·하중·통과·전진과 반대쪽 교대 확인."
+    }
+  ]
+}

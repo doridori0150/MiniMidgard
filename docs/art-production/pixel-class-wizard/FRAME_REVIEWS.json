@@ -61,7 +61,7 @@
     "frame": 0,
     "source": "walk_contact_a",
     "previous": null,
-    "duration": 120,
+    "duration": 100,
     "bounds": [
       45,
       65,
@@ -78,11 +78,30 @@
   {
     "animation": "walk",
     "frame": 1,
-    "source": "walk_pass_a",
+    "source": "walk_r1_1",
     "previous": "walk_contact_a",
     "duration": 100,
     "bounds": [
-      44,
+      47,
+      66,
+      84,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      2
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "walk",
+    "frame": 2,
+    "source": "walk_r1_2",
+    "previous": "walk_r1_1",
+    "duration": 100,
+    "bounds": [
+      46,
       64,
       86,
       112
@@ -96,28 +115,66 @@
   },
   {
     "animation": "walk",
-    "frame": 2,
-    "source": "walk_cross",
-    "previous": "walk_pass_a",
-    "duration": 120,
+    "frame": 3,
+    "source": "walk_r1_3",
+    "previous": "walk_r1_2",
+    "duration": 100,
     "bounds": [
-      45,
-      65,
-      85,
+      46,
+      64,
+      86,
       112
     ],
     "hand": "near",
     "headOffset": [
-      0,
+      1,
+      0
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "walk",
+    "frame": 4,
+    "source": "walk_r1_4",
+    "previous": "walk_r1_3",
+    "duration": 100,
+    "bounds": [
+      46,
+      65,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
       1
     ],
     "sourceReused": false
   },
   {
     "animation": "walk",
-    "frame": 3,
-    "source": "walk_opposite",
-    "previous": "walk_cross",
+    "frame": 5,
+    "source": "walk_r1_5",
+    "previous": "walk_r1_4",
+    "duration": 100,
+    "bounds": [
+      47,
+      66,
+      85,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
+      2
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "walk",
+    "frame": 6,
+    "source": "walk_r1_6",
+    "previous": "walk_r1_5",
     "duration": 100,
     "bounds": [
       47,
@@ -127,7 +184,26 @@
     ],
     "hand": "near",
     "headOffset": [
-      0,
+      1,
+      0
+    ],
+    "sourceReused": false
+  },
+  {
+    "animation": "walk",
+    "frame": 7,
+    "source": "walk_r1_7",
+    "previous": "walk_r1_6",
+    "duration": 100,
+    "bounds": [
+      45,
+      64,
+      86,
+      112
+    ],
+    "hand": "near",
+    "headOffset": [
+      1,
       0
     ],
     "sourceReused": false

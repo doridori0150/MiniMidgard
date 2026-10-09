@@ -32,6 +32,11 @@ for name,a in aa.items():
 check(not aa['cast_start']['loop'] and aa['cast']['loop'],'시전 시작 1회·유지 반복')
 check(read(R/f"composite/{aa['cast_start']['frames'][-1]}.png")==read(R/f"composite/{aa['cast']['frames'][0]}.png"),'시전 시작→유지 연결')
 check(c['frames']['cast_0']['weapon']['gripPoint']==c['frames']['cast_1']['weapon']['gripPoint'],'시전 유지 중 손 고정')
+walk=aa['walk'];walk_images=[read(R/f'composite/{n}.png') for n in walk['frames']]
+check(6<=len(walk_images)<=8 and walk['loop'],'걷기 6~8장 반복')
+check(len({tuple(im[2]) for im in walk_images})==len(walk_images),'걷기 전체 프레임 중복 없음')
+check(len({tuple(p[3] for p in crop(im,(45,99,81,113))[2]) for im in walk_images})==len(walk_images),'걷기 하체 실루엣 8장 모두 구별')
+check(walk==m['animations']['walk'],'전역·캐릭터 걷기 정의 일치')
 decode=json.loads((R/'verification/gif_decode.json').read_text())
 check(len(decode)==56,'Apple ImageIO로 GIF 56개 전체 디코딩')
 for name,a in aa.items():

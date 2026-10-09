@@ -31,15 +31,23 @@
         "walk_0",
         "walk_1",
         "walk_2",
-        "walk_3"
+        "walk_3",
+        "walk_4",
+        "walk_5",
+        "walk_6",
+        "walk_7"
       ],
       "durations": [
-        120,
         100,
-        120,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
         100
       ],
-      "duration": 440,
+      "duration": 800,
       "loop": true
     },
     "attack": {
@@ -364,15 +372,23 @@
             "walk_0",
             "walk_1",
             "walk_2",
-            "walk_3"
+            "walk_3",
+            "walk_4",
+            "walk_5",
+            "walk_6",
+            "walk_7"
           ],
           "durations": [
-            120,
             100,
-            120,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
             100
           ],
-          "duration": 440,
+          "duration": 800,
           "loop": true
         },
         "attack": {
@@ -809,14 +825,14 @@
             "visible": true,
             "hand": "near",
             "gripPoint": [
-              78,
-              95
+              76,
+              97
             ],
             "tipPoint": [
-              83,
-              81
+              81,
+              84
             ],
-            "angleDegrees": -70.35
+            "angleDegrees": -68.96
           },
           "grip": "grips/wizard_female_p2/walk_1.png"
         },
@@ -839,10 +855,10 @@
               96
             ],
             "tipPoint": [
-              82,
+              83,
               82
             ],
-            "angleDegrees": -70.35
+            "angleDegrees": -66.8
           },
           "grip": "grips/wizard_female_p2/walk_2.png"
         },
@@ -862,15 +878,119 @@
             "hand": "near",
             "gripPoint": [
               77,
+              95
+            ],
+            "tipPoint": [
+              83,
+              82
+            ],
+            "angleDegrees": -65.22
+          },
+          "grip": "grips/wizard_female_p2/walk_3.png"
+        },
+        "walk_4": {
+          "image": "body/wizard_female_p2/walk_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              78,
               96
             ],
             "tipPoint": [
+              83,
+              82
+            ],
+            "angleDegrees": -70.35
+          },
+          "grip": "grips/wizard_female_p2/walk_4.png"
+        },
+        "walk_5": {
+          "image": "body/wizard_female_p2/walk_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              77,
+              97
+            ],
+            "tipPoint": [
               82,
-              83
+              84
             ],
             "angleDegrees": -68.96
           },
-          "grip": "grips/wizard_female_p2/walk_3.png"
+          "grip": "grips/wizard_female_p2/walk_5.png"
+        },
+        "walk_6": {
+          "image": "body/wizard_female_p2/walk_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              78,
+              95
+            ],
+            "tipPoint": [
+              82,
+              81
+            ],
+            "angleDegrees": -74.05
+          },
+          "grip": "grips/wizard_female_p2/walk_6.png"
+        },
+        "walk_7": {
+          "image": "body/wizard_female_p2/walk_7.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_7",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              78,
+              95
+            ],
+            "tipPoint": [
+              83,
+              81
+            ],
+            "angleDegrees": -70.35
+          },
+          "grip": "grips/wizard_female_p2/walk_7.png"
         },
         "attack_0": {
           "image": "body/wizard_female_p2/attack_0.png",
@@ -2813,6 +2933,38 @@
             0
           ]
         },
+        "walk_4": {
+          "front": "hair/wizard_crescent_braid_p2/walk_4_front.png",
+          "back": "hair/wizard_crescent_braid_p2/walk_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_5": {
+          "front": "hair/wizard_crescent_braid_p2/walk_5_front.png",
+          "back": "hair/wizard_crescent_braid_p2/walk_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_6": {
+          "front": "hair/wizard_crescent_braid_p2/walk_6_front.png",
+          "back": "hair/wizard_crescent_braid_p2/walk_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_7": {
+          "front": "hair/wizard_crescent_braid_p2/walk_7_front.png",
+          "back": "hair/wizard_crescent_braid_p2/walk_7_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
         "attack_0": {
           "front": "hair/wizard_crescent_braid_p2/attack_0_front.png",
           "back": "hair/wizard_crescent_braid_p2/attack_0_back.png",
@@ -3403,6 +3555,10 @@
           "walk_1": "weapons/staff/wizard_female_p2/walk_1.png",
           "walk_2": "weapons/staff/wizard_female_p2/walk_2.png",
           "walk_3": "weapons/staff/wizard_female_p2/walk_3.png",
+          "walk_4": "weapons/staff/wizard_female_p2/walk_4.png",
+          "walk_5": "weapons/staff/wizard_female_p2/walk_5.png",
+          "walk_6": "weapons/staff/wizard_female_p2/walk_6.png",
+          "walk_7": "weapons/staff/wizard_female_p2/walk_7.png",
           "attack_0": "weapons/staff/wizard_female_p2/attack_0.png",
           "attack_1": "weapons/staff/wizard_female_p2/attack_1.png",
           "attack_2": "weapons/staff/wizard_female_p2/attack_2.png",

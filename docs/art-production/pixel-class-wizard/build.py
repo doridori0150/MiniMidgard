@@ -13,7 +13,7 @@ MAPPING={s:a for a,ids in GROUPS.items() for s in ids}
 # Source pose, exposure in ms. Reused poses are intentional, never synthesized in-betweens.
 ANIMS={
  'idle':([('idle_0',220),('idle_breath',220),('idle_0',220)],None),
- 'walk':([('walk_contact_a',120),('walk_pass_a',100),('walk_cross',120),('walk_opposite',100)],None),
+ 'walk':([('walk_contact_a',100)]+[(f'walk_r1_{i}',100) for i in range(1,8)],None),
  'attack':([('idle_0',60),('attack_ready',150),('attack_hit',60),('attack_hold',150),('recover',100),('idle_0',80)],2),
  'cast_start':([('cast_gather',90),('cast_hold',100)],None),
  'cast':([('cast_hold',170),('cast_breath_fix',170),('cast_hold',170)],None),
