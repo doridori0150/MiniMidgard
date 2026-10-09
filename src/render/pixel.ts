@@ -4,7 +4,7 @@
 // colours for a ramp (a palette swap, as old MMOs did). Drawn without smoothing. 설정 → 캐릭터 그림 C.
 import type { WeaponType } from '../game/types.ts';
 import type { HeroLookDraw, Pose } from './hero.ts';
-import { LINE, clip, pickFrame } from './whole.ts';
+import { HAIR_TINT, LINE, clip, pickFrame } from './whole.ts';
 
 type V2 = [number, number];
 interface Frame { image: string; head: { point: V2; pose: string }; weapon?: { z: 'front' | 'behind'; visible: boolean }; grip?: string }
@@ -31,8 +31,7 @@ const HEIGHT = 76;
 const WEAPON: Partial<Record<WeaponType, string | null>> = { none: null, sword: 'sword', sword2h: 'sword' };
 /** look.hair (0..7) picks a style by index among the character's gender's styles, in this order */
 const STYLE_ORDER = ['ponytail', 'bob', 'long'];
-/** state.ts HAIR_COLORS, same order; index 3 (cream) keeps the painted keys */
-const HAIR_HEX = ['#3a2a24', '#8a4a2a', '#e8c070', '#f4f0e8', '#d84a4a', '#4a6ad8', '#6ac46a', '#c46ad8', '#ff9ac0', '#2a2a3a'];
+/* hair colours: the same per-colour multipliers the B sprites use over their cream hair (whole.ts HAIR_TINT), applied to the four cream keys */
 
 export function setPixelEnabled(on: boolean) { enabled = on; }
 export const pixelCharacters = () => Object.values(M?.characters ?? {}).map((c) => ({ cls: c.class, gender: c.gender === 'male' ? 'm' : 'f' }));
@@ -64,13 +63,12 @@ function styleFor(L: HeroLookDraw, gender: string): string | undefined {
   return names.length ? names[L.hair % names.length] : undefined;
 }
 
-// ── hair palette swap: the four key colours → a light / mid / shadow / deep ramp of the chosen hair colour
+// ── hair palette swap: each of the four cream key colours × the hair colour's multipliers (so C matches B's hair colours)
 const hex = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
-const mix = (a: number[], b: number[], t: number) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
 function ramp(color: number): number[][] | null {
-  if (color % HAIR_HEX.length === 3) return null;
-  const base = hex(HAIR_HEX[color % HAIR_HEX.length]);
-  return [mix(base, [255, 255, 255], 0.35), base, mix(base, [0, 0, 0], 0.28), mix(base, [0, 0, 0], 0.55)];
+  const t = HAIR_TINT[color % HAIR_TINT.length];
+  if (!t) return null;
+  return M!.hairKeys.map(hex).map((k) => k.map((v, i) => Math.round(v * t[i])));
 }
 const swapped = new Map<string, HTMLCanvasElement>();
 function layer(file: string | undefined, color: number): CanvasImageSource | undefined {

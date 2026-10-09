@@ -45,7 +45,7 @@ const WEAPON: Partial<Record<WeaponType, string | null>> = {
 };
 const HEADGEAR: Record<string, string> = { leaf: 'leaf', hairpin: 'hairpin' };
 /** game hair colour index (state.ts HAIR_COLORS order) → RGB multipliers over the cream hair; null = as painted */
-const HAIR_TINT: (number[] | null)[] = [
+export const HAIR_TINT: (number[] | null)[] = [
   [0.42, 0.31, 0.27], [0.66, 0.39, 0.24], [0.93, 0.73, 0.38], null, [0.85, 0.32, 0.31],
   [0.39, 0.6, 0.79], [0.52, 0.69, 0.42], [0.67, 0.42, 0.77], [0.91, 0.53, 0.64], [0.35, 0.36, 0.38],
 ];

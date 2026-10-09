@@ -1,0 +1,413 @@
+{
+  "schema": "minimidgard.pixel/1",
+  "canvas": {
+    "size": [
+      128,
+      120
+    ],
+    "origin": [
+      64,
+      112
+    ],
+    "bodyHeight": 76
+  },
+  "animations": {
+    "idle": {
+      "frames": [
+        "idle_0",
+        "idle_1"
+      ],
+      "durations": [
+        800,
+        800
+      ],
+      "duration": 1600,
+      "loop": true
+    },
+    "walk": {
+      "frames": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durations": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "duration": 720,
+      "loop": true
+    },
+    "attack": {
+      "frames": [
+        "attack_0",
+        "attack_1",
+        "attack_2"
+      ],
+      "durations": [
+        100,
+        80,
+        100
+      ],
+      "duration": 280,
+      "loop": false
+    },
+    "cast": {
+      "frames": [
+        "cast_0",
+        "cast_1"
+      ],
+      "durations": [
+        360,
+        360
+      ],
+      "duration": 720,
+      "loop": true
+    },
+    "sit": {
+      "frames": [
+        "sit_0"
+      ],
+      "durations": [
+        1
+      ],
+      "duration": 1,
+      "loop": false
+    },
+    "hurt": {
+      "frames": [
+        "hurt_0"
+      ],
+      "durations": [
+        1
+      ],
+      "duration": 1,
+      "loop": false
+    },
+    "dead": {
+      "frames": [
+        "dead_0"
+      ],
+      "durations": [
+        1
+      ],
+      "duration": 1,
+      "loop": false
+    }
+  },
+  "hairKeys": [
+    "#F8F0E0",
+    "#E8D0B0",
+    "#C8A880",
+    "#8A6A50"
+  ],
+  "characters": {
+    "swordsman_female": {
+      "class": "swordsman",
+      "gender": "female",
+      "defaultWeapon": "sword",
+      "defaultHair": "bob",
+      "frames": {
+        "idle_0": {
+          "image": "body/swordsman_female/idle_0.png",
+          "head": {
+            "point": [
+              66,
+              72
+            ],
+            "pose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true
+          },
+          "grip": "grips/swordsman_female/idle_0.png"
+        },
+        "idle_1": {
+          "image": "body/swordsman_female/idle_1.png",
+          "head": {
+            "point": [
+              66,
+              73
+            ],
+            "pose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true
+          },
+          "grip": "grips/swordsman_female/idle_1.png"
+        },
+        "walk_0": {
+          "image": "body/swordsman_female/walk_0.png",
+          "head": {
+            "point": [
+              69,
+              69
+            ],
+            "pose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true
+          },
+          "grip": "grips/swordsman_female/walk_0.png"
+        },
+        "walk_1": {
+          "image": "body/swordsman_female/walk_1.png",
+          "head": {
+            "point": [
+              68,
+              71
+            ],
+            "pose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true
+          },
+          "grip": "grips/swordsman_female/walk_1.png"
+        },
+        "walk_2": {
+          "image": "body/swordsman_female/walk_2.png",
+          "head": {
+            "point": [
+              70,
+              69
+            ],
+            "pose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true
+          },
+          "grip": "grips/swordsman_female/walk_2.png"
+        },
+        "walk_3": {
+          "image": "body/swordsman_female/walk_3.png",
+          "head": {
+            "point": [
+              69,
+              71
+            ],
+            "pose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true
+          },
+          "grip": "grips/swordsman_female/walk_3.png"
+        },
+        "attack_0": {
+          "image": "body/swordsman_female/attack_0.png",
+          "head": {
+            "point": [
+              64,
+              72
+            ],
+            "pose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true
+          },
+          "grip": "grips/swordsman_female/attack_0.png"
+        },
+        "attack_1": {
+          "image": "body/swordsman_female/attack_1.png",
+          "head": {
+            "point": [
+              67,
+              73
+            ],
+            "pose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true
+          },
+          "grip": "grips/swordsman_female/attack_1.png"
+        },
+        "attack_2": {
+          "image": "body/swordsman_female/attack_2.png",
+          "head": {
+            "point": [
+              68,
+              76
+            ],
+            "pose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true
+          },
+          "grip": "grips/swordsman_female/attack_2.png"
+        },
+        "cast_0": {
+          "image": "body/swordsman_female/cast_0.png",
+          "head": {
+            "point": [
+              65,
+              72
+            ],
+            "pose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true
+          },
+          "grip": "grips/swordsman_female/cast_0.png"
+        },
+        "cast_1": {
+          "image": "body/swordsman_female/cast_1.png",
+          "head": {
+            "point": [
+              65,
+              73
+            ],
+            "pose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true
+          },
+          "grip": "grips/swordsman_female/cast_1.png"
+        },
+        "sit_0": {
+          "image": "body/swordsman_female/sit_0.png",
+          "head": {
+            "point": [
+              61,
+              86
+            ],
+            "pose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": false
+          },
+          "grip": "grips/swordsman_female/sit_0.png"
+        },
+        "hurt_0": {
+          "image": "body/swordsman_female/hurt_0.png",
+          "head": {
+            "point": [
+              52,
+              79
+            ],
+            "pose": "hurt"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true
+          },
+          "grip": "grips/swordsman_female/hurt_0.png"
+        },
+        "dead_0": {
+          "image": "body/swordsman_female/dead_0.png",
+          "head": {
+            "point": [
+              53,
+              99
+            ],
+            "pose": "down"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": false
+          },
+          "grip": "grips/swordsman_female/dead_0.png"
+        }
+      }
+    }
+  },
+  "hair": {
+    "ponytail": {
+      "gender": "female",
+      "pivot": [
+        48,
+        48
+      ],
+      "poses": {
+        "up": {
+          "front": "hair/ponytail/up_front.png",
+          "back": "hair/ponytail/up_back.png"
+        },
+        "hurt": {
+          "front": "hair/ponytail/hurt_front.png",
+          "back": "hair/ponytail/hurt_back.png"
+        },
+        "down": {
+          "front": "hair/ponytail/down_front.png",
+          "back": "hair/ponytail/down_back.png"
+        }
+      }
+    },
+    "bob": {
+      "gender": "female",
+      "pivot": [
+        48,
+        48
+      ],
+      "poses": {
+        "up": {
+          "front": "hair/bob/up_front.png",
+          "back": "hair/bob/up_back.png"
+        },
+        "hurt": {
+          "front": "hair/bob/hurt_front.png",
+          "back": "hair/bob/hurt_back.png"
+        },
+        "down": {
+          "front": "hair/bob/down_front.png",
+          "back": "hair/bob/down_back.png"
+        }
+      }
+    },
+    "long": {
+      "gender": "female",
+      "pivot": [
+        48,
+        48
+      ],
+      "poses": {
+        "up": {
+          "front": "hair/long/up_front.png",
+          "back": "hair/long/up_back.png"
+        },
+        "hurt": {
+          "front": "hair/long/hurt_front.png",
+          "back": "hair/long/hurt_back.png"
+        },
+        "down": {
+          "front": "hair/long/down_front.png",
+          "back": "hair/long/down_back.png"
+        }
+      }
+    }
+  },
+  "weapons": {
+    "sword": {
+      "frames": {
+        "swordsman_female": {
+          "idle_0": "weapons/sword/swordsman_female/idle_0.png",
+          "idle_1": "weapons/sword/swordsman_female/idle_1.png",
+          "walk_0": "weapons/sword/swordsman_female/walk_0.png",
+          "walk_1": "weapons/sword/swordsman_female/walk_1.png",
+          "walk_2": "weapons/sword/swordsman_female/walk_2.png",
+          "walk_3": "weapons/sword/swordsman_female/walk_3.png",
+          "attack_0": "weapons/sword/swordsman_female/attack_0.png",
+          "attack_1": "weapons/sword/swordsman_female/attack_1.png",
+          "attack_2": "weapons/sword/swordsman_female/attack_2.png",
+          "cast_0": "weapons/sword/swordsman_female/cast_0.png",
+          "cast_1": "weapons/sword/swordsman_female/cast_1.png",
+          "sit_0": "weapons/sword/swordsman_female/sit_0.png",
+          "hurt_0": "weapons/sword/swordsman_female/hurt_0.png",
+          "dead_0": "weapons/sword/swordsman_female/dead_0.png"
+        }
+      }
+    }
+  }
+}
