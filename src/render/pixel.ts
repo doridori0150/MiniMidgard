@@ -127,7 +127,9 @@ export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: 
     const a = table.attack as typeof table.attack & { hitFrame?: number };
     const hi = a.hitFrame ?? (a.frames.length >= 8 ? 4 : -1);
     const hit = hi >= 0 ? a.durations.slice(0, hi).reduce((x, y) => x + y, 0) : a.duration / 2;
-    t = pose.t / Math.max(1, pose.dur ?? 280) * 2 * hit;
+    // world.ts lands a sword hit at half the swing, a bow release at 0.6 and a spear thrust at 0.47 of it
+    const contact = L.wtype === 'bow' ? 0.6 : L.wtype === 'spear' ? 0.47 : 0.5;
+    t = pose.t / Math.max(1, pose.dur ?? 280) / contact * hit;
   }
   if (state === 'dead') t = pose.t; // play the fall, then hold the last frame
   if (state === 'cast' && table.cast_start) {
