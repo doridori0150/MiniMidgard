@@ -1,0 +1,209 @@
+{
+  "method": "직전 원화를 육안 확인하고 다음 이미지 요청의 previousReview에 기록. 최종 픽셀 시트 추가 검수.",
+  "rejected": {
+    "dead_2": "무기 손 전환",
+    "dead_3": "비율과 발광",
+    "sonic_impact": "무기 손 전환",
+    "throw_follow": "팔 소속 전환",
+    "roll_land": "천 꼬리 중복"
+  },
+  "authoredSources": [
+    "idle_0",
+    "idle_1",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "walk_4",
+    "walk_5",
+    "walk_6",
+    "walk_7",
+    "attack_0",
+    "attack_1",
+    "attack_2",
+    "attack_3",
+    "attack_4",
+    "attack_5",
+    "hurt_0",
+    "hurt_1",
+    "dead_1",
+    "dead_2_fix",
+    "dead_3_fix",
+    "sit_0",
+    "cast_0",
+    "cast_1",
+    "sonic_impact_fix",
+    "sonic_retract",
+    "sonic_low",
+    "grim_down",
+    "grim_hit",
+    "scatter_ready",
+    "scatter_release",
+    "pickup_touch",
+    "pickup_rise",
+    "plant_contact",
+    "detox_palm",
+    "coat_start",
+    "coat_end",
+    "guard_hold",
+    "hide_low",
+    "roll_tuck",
+    "roll_invert",
+    "roll_land_fix",
+    "throw_ready",
+    "throw_release",
+    "throw_follow_fix"
+  ],
+  "sequences": {
+    "idle": [
+      "idle_0",
+      "idle_1",
+      "idle_0"
+    ],
+    "walk": [
+      "walk_0",
+      "walk_1",
+      "walk_2",
+      "walk_3",
+      "walk_4",
+      "walk_5",
+      "walk_6",
+      "walk_7"
+    ],
+    "attack": [
+      "attack_0",
+      "attack_1",
+      "attack_2",
+      "attack_3",
+      "attack_4",
+      "attack_5",
+      "idle_1",
+      "idle_0"
+    ],
+    "hurt": [
+      "hurt_0",
+      "hurt_1",
+      "idle_0"
+    ],
+    "dead": [
+      "hurt_1",
+      "dead_1",
+      "dead_2_fix",
+      "dead_3_fix"
+    ],
+    "sit": [
+      "sit_0"
+    ],
+    "cast": [
+      "cast_0",
+      "cast_1",
+      "cast_0"
+    ],
+    "skill_sonic": [
+      "attack_0",
+      "sonic_retract",
+      "sonic_impact_fix",
+      "sonic_retract",
+      "sonic_low",
+      "sonic_retract",
+      "sonic_impact_fix",
+      "sonic_retract",
+      "sonic_low",
+      "sonic_retract",
+      "sonic_impact_fix",
+      "sonic_retract",
+      "sonic_low",
+      "sonic_retract",
+      "sonic_impact_fix",
+      "sonic_retract",
+      "sonic_low",
+      "attack_5",
+      "idle_0"
+    ],
+    "skill_grimtooth": [
+      "attack_0",
+      "grim_down",
+      "grim_hit",
+      "grim_down",
+      "pickup_rise",
+      "idle_0"
+    ],
+    "skill_envenom": [
+      "attack_0",
+      "sonic_retract",
+      "sonic_impact_fix",
+      "sonic_retract",
+      "attack_5",
+      "idle_0"
+    ],
+    "skill_scatter": [
+      "idle_0",
+      "scatter_ready",
+      "scatter_release",
+      "plant_contact",
+      "scatter_ready",
+      "idle_0"
+    ],
+    "skill_throw": [
+      "attack_0",
+      "throw_ready",
+      "throw_release",
+      "throw_follow_fix",
+      "attack_5",
+      "idle_0"
+    ],
+    "skill_pickup": [
+      "cast_0",
+      "grim_down",
+      "pickup_touch",
+      "pickup_rise",
+      "scatter_ready",
+      "idle_0"
+    ],
+    "skill_plant": [
+      "cast_0",
+      "scatter_ready",
+      "plant_contact",
+      "scatter_release",
+      "cast_0",
+      "idle_0"
+    ],
+    "skill_coat": [
+      "idle_0",
+      "coat_start",
+      "coat_end",
+      "coat_start",
+      "idle_0"
+    ],
+    "skill_guard": [
+      "idle_0",
+      "coat_start",
+      "guard_hold",
+      "coat_start",
+      "idle_0"
+    ],
+    "skill_detox": [
+      "cast_0",
+      "cast_1",
+      "detox_palm",
+      "cast_0",
+      "idle_0"
+    ],
+    "skill_hide": [
+      "idle_0",
+      "cast_0",
+      "attack_0",
+      "hide_low"
+    ],
+    "skill_backslide": [
+      "attack_0",
+      "hide_low",
+      "roll_tuck",
+      "roll_invert",
+      "roll_land_fix",
+      "pickup_rise",
+      "idle_0"
+    ]
+  },
+  "prompts": "PROMPTS.json"
+}

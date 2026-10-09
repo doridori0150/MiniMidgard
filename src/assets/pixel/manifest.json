@@ -16608,6 +16608,3309 @@
           "grip": "grips/priest_female_p2/skill_water_5.png"
         }
       }
+    },
+    "assassin_male_p2": {
+      "class": "assassin",
+      "gender": "male",
+      "bodyHeight": 48,
+      "headHeight": 24,
+      "proportion": 2,
+      "defaultWeapon": "katar",
+      "defaultHair": "assassin_swept_crop_p2",
+      "hairStyles": [
+        "assassin_swept_crop_p2"
+      ],
+      "animations": {
+        "idle": {
+          "durations": [
+            240,
+            260,
+            240
+          ],
+          "duration": 740,
+          "loop": true,
+          "frames": [
+            "idle_0",
+            "idle_1",
+            "idle_2"
+          ]
+        },
+        "walk": {
+          "durations": [
+            80,
+            80,
+            80,
+            80,
+            80,
+            80,
+            80,
+            80
+          ],
+          "duration": 640,
+          "loop": true,
+          "frames": [
+            "walk_0",
+            "walk_1",
+            "walk_2",
+            "walk_3",
+            "walk_4",
+            "walk_5",
+            "walk_6",
+            "walk_7"
+          ]
+        },
+        "attack": {
+          "durations": [
+            70,
+            90,
+            60,
+            50,
+            130,
+            90,
+            70,
+            60
+          ],
+          "duration": 620,
+          "loop": false,
+          "hitFrame": 3,
+          "frames": [
+            "attack_0",
+            "attack_1",
+            "attack_2",
+            "attack_3",
+            "attack_4",
+            "attack_5",
+            "attack_6",
+            "attack_7"
+          ]
+        },
+        "hurt": {
+          "durations": [
+            80,
+            140,
+            100
+          ],
+          "duration": 320,
+          "loop": false,
+          "frames": [
+            "hurt_0",
+            "hurt_1",
+            "hurt_2"
+          ]
+        },
+        "dead": {
+          "durations": [
+            90,
+            120,
+            140,
+            1000
+          ],
+          "duration": 1350,
+          "loop": false,
+          "holdLast": true,
+          "frames": [
+            "dead_0",
+            "dead_1",
+            "dead_2",
+            "dead_3"
+          ]
+        },
+        "sit": {
+          "durations": [
+            1000
+          ],
+          "duration": 1000,
+          "loop": false,
+          "holdLast": true,
+          "frames": [
+            "sit_0"
+          ]
+        },
+        "cast": {
+          "durations": [
+            160,
+            180,
+            160
+          ],
+          "duration": 500,
+          "loop": true,
+          "frames": [
+            "cast_0",
+            "cast_1",
+            "cast_2"
+          ]
+        },
+        "skill_sonic": {
+          "durations": [
+            70,
+            60,
+            30,
+            30,
+            30,
+            30,
+            30,
+            30,
+            30,
+            30,
+            30,
+            30,
+            30,
+            30,
+            30,
+            30,
+            60,
+            100,
+            90
+          ],
+          "duration": 800,
+          "loop": false,
+          "hitFrame": 2,
+          "frames": [
+            "skill_sonic_0",
+            "skill_sonic_1",
+            "skill_sonic_2",
+            "skill_sonic_3",
+            "skill_sonic_4",
+            "skill_sonic_5",
+            "skill_sonic_6",
+            "skill_sonic_7",
+            "skill_sonic_8",
+            "skill_sonic_9",
+            "skill_sonic_10",
+            "skill_sonic_11",
+            "skill_sonic_12",
+            "skill_sonic_13",
+            "skill_sonic_14",
+            "skill_sonic_15",
+            "skill_sonic_16",
+            "skill_sonic_17",
+            "skill_sonic_18"
+          ]
+        },
+        "skill_grimtooth": {
+          "durations": [
+            60,
+            70,
+            180,
+            100,
+            110,
+            90
+          ],
+          "duration": 610,
+          "loop": false,
+          "hitFrame": 2,
+          "frames": [
+            "skill_grimtooth_0",
+            "skill_grimtooth_1",
+            "skill_grimtooth_2",
+            "skill_grimtooth_3",
+            "skill_grimtooth_4",
+            "skill_grimtooth_5"
+          ]
+        },
+        "skill_envenom": {
+          "durations": [
+            60,
+            70,
+            170,
+            100,
+            100,
+            80
+          ],
+          "duration": 580,
+          "loop": false,
+          "hitFrame": 2,
+          "frames": [
+            "skill_envenom_0",
+            "skill_envenom_1",
+            "skill_envenom_2",
+            "skill_envenom_3",
+            "skill_envenom_4",
+            "skill_envenom_5"
+          ]
+        },
+        "skill_scatter": {
+          "durations": [
+            50,
+            80,
+            140,
+            90,
+            100,
+            90
+          ],
+          "duration": 550,
+          "loop": false,
+          "hitFrame": 2,
+          "frames": [
+            "skill_scatter_0",
+            "skill_scatter_1",
+            "skill_scatter_2",
+            "skill_scatter_3",
+            "skill_scatter_4",
+            "skill_scatter_5"
+          ]
+        },
+        "skill_throw": {
+          "durations": [
+            50,
+            80,
+            90,
+            130,
+            130,
+            100
+          ],
+          "duration": 580,
+          "loop": false,
+          "hitFrame": 2,
+          "frames": [
+            "skill_throw_0",
+            "skill_throw_1",
+            "skill_throw_2",
+            "skill_throw_3",
+            "skill_throw_4",
+            "skill_throw_5"
+          ]
+        },
+        "skill_pickup": {
+          "durations": [
+            70,
+            90,
+            140,
+            130,
+            100,
+            80
+          ],
+          "duration": 610,
+          "loop": false,
+          "frames": [
+            "skill_pickup_0",
+            "skill_pickup_1",
+            "skill_pickup_2",
+            "skill_pickup_3",
+            "skill_pickup_4",
+            "skill_pickup_5"
+          ]
+        },
+        "skill_plant": {
+          "durations": [
+            60,
+            70,
+            180,
+            80,
+            100,
+            80
+          ],
+          "duration": 570,
+          "loop": false,
+          "hitFrame": 2,
+          "frames": [
+            "skill_plant_0",
+            "skill_plant_1",
+            "skill_plant_2",
+            "skill_plant_3",
+            "skill_plant_4",
+            "skill_plant_5"
+          ]
+        },
+        "skill_coat": {
+          "durations": [
+            80,
+            140,
+            190,
+            120,
+            110
+          ],
+          "duration": 640,
+          "loop": false,
+          "frames": [
+            "skill_coat_0",
+            "skill_coat_1",
+            "skill_coat_2",
+            "skill_coat_3",
+            "skill_coat_4"
+          ]
+        },
+        "skill_guard": {
+          "durations": [
+            70,
+            100,
+            260,
+            100,
+            90
+          ],
+          "duration": 620,
+          "loop": false,
+          "frames": [
+            "skill_guard_0",
+            "skill_guard_1",
+            "skill_guard_2",
+            "skill_guard_3",
+            "skill_guard_4"
+          ]
+        },
+        "skill_detox": {
+          "durations": [
+            90,
+            90,
+            220,
+            120,
+            90
+          ],
+          "duration": 610,
+          "loop": false,
+          "frames": [
+            "skill_detox_0",
+            "skill_detox_1",
+            "skill_detox_2",
+            "skill_detox_3",
+            "skill_detox_4"
+          ]
+        },
+        "skill_hide": {
+          "durations": [
+            70,
+            100,
+            100,
+            310
+          ],
+          "duration": 580,
+          "loop": false,
+          "holdLast": true,
+          "frames": [
+            "skill_hide_0",
+            "skill_hide_1",
+            "skill_hide_2",
+            "skill_hide_3"
+          ]
+        },
+        "skill_backslide": {
+          "durations": [
+            70,
+            80,
+            90,
+            90,
+            110,
+            100,
+            100
+          ],
+          "duration": 640,
+          "loop": false,
+          "frames": [
+            "skill_backslide_0",
+            "skill_backslide_1",
+            "skill_backslide_2",
+            "skill_backslide_3",
+            "skill_backslide_4",
+            "skill_backslide_5",
+            "skill_backslide_6"
+          ]
+        }
+      },
+      "skillMotions": {
+        "sonic_blow": "skill_sonic",
+        "grimtooth": "skill_grimtooth",
+        "envenom": "skill_envenom",
+        "sand_attack": "skill_scatter",
+        "throw_stone": "skill_throw",
+        "find_stone": "skill_pickup",
+        "venom_knife": "skill_throw",
+        "venom_splasher": "skill_plant",
+        "venom_dust": "skill_scatter",
+        "enchant_poison": "skill_coat",
+        "poison_react": "skill_guard",
+        "detoxify": "skill_detox",
+        "hiding": "skill_hide",
+        "cloaking": "skill_hide",
+        "back_slide": "skill_backslide"
+      },
+      "frames": {
+        "idle_0": {
+          "image": "body/assassin_male_p2/idle_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/idle_0.png"
+        },
+        "idle_1": {
+          "image": "body/assassin_male_p2/idle_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              94
+            ],
+            "tipPoint": [
+              69,
+              99
+            ],
+            "angleDegrees": 27.49
+          },
+          "grip": "grips/assassin_male_p2/idle_1.png"
+        },
+        "idle_2": {
+          "image": "body/assassin_male_p2/idle_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/idle_2.png"
+        },
+        "walk_0": {
+          "image": "body/assassin_male_p2/walk_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              53,
+              95
+            ],
+            "tipPoint": [
+              61,
+              102
+            ],
+            "angleDegrees": 40.83
+          },
+          "grip": "grips/assassin_male_p2/walk_0.png"
+        },
+        "walk_1": {
+          "image": "body/assassin_male_p2/walk_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              58,
+              97
+            ],
+            "tipPoint": [
+              68,
+              102
+            ],
+            "angleDegrees": 27.15
+          },
+          "grip": "grips/assassin_male_p2/walk_1.png"
+        },
+        "walk_2": {
+          "image": "body/assassin_male_p2/walk_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              96
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 18.64
+          },
+          "grip": "grips/assassin_male_p2/walk_2.png"
+        },
+        "walk_3": {
+          "image": "body/assassin_male_p2/walk_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              61,
+              95
+            ],
+            "tipPoint": [
+              72,
+              97
+            ],
+            "angleDegrees": 11.05
+          },
+          "grip": "grips/assassin_male_p2/walk_3.png"
+        },
+        "walk_4": {
+          "image": "body/assassin_male_p2/walk_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              62,
+              96
+            ],
+            "tipPoint": [
+              73,
+              98
+            ],
+            "angleDegrees": 9.63
+          },
+          "grip": "grips/assassin_male_p2/walk_4.png"
+        },
+        "walk_5": {
+          "image": "body/assassin_male_p2/walk_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              55,
+              95
+            ],
+            "tipPoint": [
+              64,
+              101
+            ],
+            "angleDegrees": 33.4
+          },
+          "grip": "grips/assassin_male_p2/walk_5.png"
+        },
+        "walk_6": {
+          "image": "body/assassin_male_p2/walk_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              53,
+              95
+            ],
+            "tipPoint": [
+              53,
+              106
+            ],
+            "angleDegrees": 89.63
+          },
+          "grip": "grips/assassin_male_p2/walk_6.png"
+        },
+        "walk_7": {
+          "image": "body/assassin_male_p2/walk_7.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_7",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              58,
+              95
+            ],
+            "tipPoint": [
+              67,
+              102
+            ],
+            "angleDegrees": 38.16
+          },
+          "grip": "grips/assassin_male_p2/walk_7.png"
+        },
+        "attack_0": {
+          "image": "body/assassin_male_p2/attack_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              52,
+              94
+            ],
+            "tipPoint": [
+              62,
+              97
+            ],
+            "angleDegrees": 17.64
+          },
+          "grip": "grips/assassin_male_p2/attack_0.png"
+        },
+        "attack_1": {
+          "image": "body/assassin_male_p2/attack_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              44,
+              83
+            ],
+            "tipPoint": [
+              36,
+              75
+            ],
+            "angleDegrees": -135.73
+          },
+          "grip": "grips/assassin_male_p2/attack_1.png"
+        },
+        "attack_2": {
+          "image": "body/assassin_male_p2/attack_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              77,
+              99
+            ],
+            "angleDegrees": 17.58
+          },
+          "grip": "grips/assassin_male_p2/attack_2.png"
+        },
+        "attack_3": {
+          "image": "body/assassin_male_p2/attack_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              101
+            ],
+            "tipPoint": [
+              80,
+              107
+            ],
+            "angleDegrees": 31.29
+          },
+          "grip": "grips/assassin_male_p2/attack_3.png"
+        },
+        "attack_4": {
+          "image": "body/assassin_male_p2/attack_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              101
+            ],
+            "tipPoint": [
+              82,
+              107
+            ],
+            "angleDegrees": 31.28
+          },
+          "grip": "grips/assassin_male_p2/attack_4.png"
+        },
+        "attack_5": {
+          "image": "body/assassin_male_p2/attack_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              58,
+              94
+            ],
+            "tipPoint": [
+              68,
+              99
+            ],
+            "angleDegrees": 26.05
+          },
+          "grip": "grips/assassin_male_p2/attack_5.png"
+        },
+        "attack_6": {
+          "image": "body/assassin_male_p2/attack_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              94
+            ],
+            "tipPoint": [
+              69,
+              99
+            ],
+            "angleDegrees": 27.49
+          },
+          "grip": "grips/assassin_male_p2/attack_6.png"
+        },
+        "attack_7": {
+          "image": "body/assassin_male_p2/attack_7.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_7",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/attack_7.png"
+        },
+        "hurt_0": {
+          "image": "body/assassin_male_p2/hurt_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              58,
+              100
+            ],
+            "tipPoint": [
+              64,
+              110
+            ],
+            "angleDegrees": 59.85
+          },
+          "grip": "grips/assassin_male_p2/hurt_0.png"
+        },
+        "hurt_1": {
+          "image": "body/assassin_male_p2/hurt_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              51,
+              98
+            ],
+            "tipPoint": [
+              55,
+              108
+            ],
+            "angleDegrees": 66.76
+          },
+          "grip": "grips/assassin_male_p2/hurt_1.png"
+        },
+        "hurt_2": {
+          "image": "body/assassin_male_p2/hurt_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/hurt_2.png"
+        },
+        "dead_0": {
+          "image": "body/assassin_male_p2/dead_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              51,
+              98
+            ],
+            "tipPoint": [
+              55,
+              108
+            ],
+            "angleDegrees": 66.76
+          },
+          "grip": "grips/assassin_male_p2/dead_0.png"
+        },
+        "dead_1": {
+          "image": "body/assassin_male_p2/dead_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              55,
+              101
+            ],
+            "tipPoint": [
+              62,
+              110
+            ],
+            "angleDegrees": 51.16
+          },
+          "grip": "grips/assassin_male_p2/dead_1.png"
+        },
+        "dead_2": {
+          "image": "body/assassin_male_p2/dead_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              56,
+              100
+            ],
+            "tipPoint": [
+              61,
+              110
+            ],
+            "angleDegrees": 60.75
+          },
+          "grip": "grips/assassin_male_p2/dead_2.png"
+        },
+        "dead_3": {
+          "image": "body/assassin_male_p2/dead_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              98
+            ],
+            "tipPoint": [
+              70,
+              101
+            ],
+            "angleDegrees": 13.57
+          },
+          "grip": "grips/assassin_male_p2/dead_3.png"
+        },
+        "sit_0": {
+          "image": "body/assassin_male_p2/sit_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "sit_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              61,
+              105
+            ],
+            "tipPoint": [
+              71,
+              110
+            ],
+            "angleDegrees": 25.33
+          },
+          "grip": "grips/assassin_male_p2/sit_0.png"
+        },
+        "cast_0": {
+          "image": "body/assassin_male_p2/cast_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              57,
+              97
+            ],
+            "tipPoint": [
+              65,
+              105
+            ],
+            "angleDegrees": 43.41
+          },
+          "grip": "grips/assassin_male_p2/cast_0.png"
+        },
+        "cast_1": {
+          "image": "body/assassin_male_p2/cast_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              57,
+              96
+            ],
+            "tipPoint": [
+              65,
+              104
+            ],
+            "angleDegrees": 43.41
+          },
+          "grip": "grips/assassin_male_p2/cast_1.png"
+        },
+        "cast_2": {
+          "image": "body/assassin_male_p2/cast_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              57,
+              97
+            ],
+            "tipPoint": [
+              65,
+              105
+            ],
+            "angleDegrees": 43.41
+          },
+          "grip": "grips/assassin_male_p2/cast_2.png"
+        },
+        "skill_sonic_0": {
+          "image": "body/assassin_male_p2/skill_sonic_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              52,
+              94
+            ],
+            "tipPoint": [
+              62,
+              97
+            ],
+            "angleDegrees": 17.64
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_0.png"
+        },
+        "skill_sonic_1": {
+          "image": "body/assassin_male_p2/skill_sonic_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              64,
+              96
+            ],
+            "tipPoint": [
+              75,
+              96
+            ],
+            "angleDegrees": 0.99
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_1.png"
+        },
+        "skill_sonic_2": {
+          "image": "body/assassin_male_p2/skill_sonic_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              97
+            ],
+            "tipPoint": [
+              84,
+              97
+            ],
+            "angleDegrees": -0.41
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_2.png"
+        },
+        "skill_sonic_3": {
+          "image": "body/assassin_male_p2/skill_sonic_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              64,
+              96
+            ],
+            "tipPoint": [
+              75,
+              96
+            ],
+            "angleDegrees": 0.99
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_3.png"
+        },
+        "skill_sonic_4": {
+          "image": "body/assassin_male_p2/skill_sonic_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              99
+            ],
+            "tipPoint": [
+              82,
+              99
+            ],
+            "angleDegrees": 0.67
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_4.png"
+        },
+        "skill_sonic_5": {
+          "image": "body/assassin_male_p2/skill_sonic_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              64,
+              96
+            ],
+            "tipPoint": [
+              75,
+              96
+            ],
+            "angleDegrees": 0.99
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_5.png"
+        },
+        "skill_sonic_6": {
+          "image": "body/assassin_male_p2/skill_sonic_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              97
+            ],
+            "tipPoint": [
+              84,
+              97
+            ],
+            "angleDegrees": -0.41
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_6.png"
+        },
+        "skill_sonic_7": {
+          "image": "body/assassin_male_p2/skill_sonic_7.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_7",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              64,
+              96
+            ],
+            "tipPoint": [
+              75,
+              96
+            ],
+            "angleDegrees": 0.99
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_7.png"
+        },
+        "skill_sonic_8": {
+          "image": "body/assassin_male_p2/skill_sonic_8.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_8",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              99
+            ],
+            "tipPoint": [
+              82,
+              99
+            ],
+            "angleDegrees": 0.67
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_8.png"
+        },
+        "skill_sonic_9": {
+          "image": "body/assassin_male_p2/skill_sonic_9.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_9",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              64,
+              96
+            ],
+            "tipPoint": [
+              75,
+              96
+            ],
+            "angleDegrees": 0.99
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_9.png"
+        },
+        "skill_sonic_10": {
+          "image": "body/assassin_male_p2/skill_sonic_10.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_10",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              97
+            ],
+            "tipPoint": [
+              84,
+              97
+            ],
+            "angleDegrees": -0.41
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_10.png"
+        },
+        "skill_sonic_11": {
+          "image": "body/assassin_male_p2/skill_sonic_11.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_11",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              64,
+              96
+            ],
+            "tipPoint": [
+              75,
+              96
+            ],
+            "angleDegrees": 0.99
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_11.png"
+        },
+        "skill_sonic_12": {
+          "image": "body/assassin_male_p2/skill_sonic_12.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_12",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              99
+            ],
+            "tipPoint": [
+              82,
+              99
+            ],
+            "angleDegrees": 0.67
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_12.png"
+        },
+        "skill_sonic_13": {
+          "image": "body/assassin_male_p2/skill_sonic_13.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_13",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              64,
+              96
+            ],
+            "tipPoint": [
+              75,
+              96
+            ],
+            "angleDegrees": 0.99
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_13.png"
+        },
+        "skill_sonic_14": {
+          "image": "body/assassin_male_p2/skill_sonic_14.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_14",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              97
+            ],
+            "tipPoint": [
+              84,
+              97
+            ],
+            "angleDegrees": -0.41
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_14.png"
+        },
+        "skill_sonic_15": {
+          "image": "body/assassin_male_p2/skill_sonic_15.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_15",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              64,
+              96
+            ],
+            "tipPoint": [
+              75,
+              96
+            ],
+            "angleDegrees": 0.99
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_15.png"
+        },
+        "skill_sonic_16": {
+          "image": "body/assassin_male_p2/skill_sonic_16.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_16",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              99
+            ],
+            "tipPoint": [
+              82,
+              99
+            ],
+            "angleDegrees": 0.67
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_16.png"
+        },
+        "skill_sonic_17": {
+          "image": "body/assassin_male_p2/skill_sonic_17.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_17",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              58,
+              94
+            ],
+            "tipPoint": [
+              68,
+              99
+            ],
+            "angleDegrees": 26.05
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_17.png"
+        },
+        "skill_sonic_18": {
+          "image": "body/assassin_male_p2/skill_sonic_18.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_sonic_18",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_sonic_18.png"
+        },
+        "skill_grimtooth_0": {
+          "image": "body/assassin_male_p2/skill_grimtooth_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_grimtooth_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              52,
+              94
+            ],
+            "tipPoint": [
+              62,
+              97
+            ],
+            "angleDegrees": 17.64
+          },
+          "grip": "grips/assassin_male_p2/skill_grimtooth_0.png"
+        },
+        "skill_grimtooth_1": {
+          "image": "body/assassin_male_p2/skill_grimtooth_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_grimtooth_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              61,
+              104
+            ],
+            "tipPoint": [
+              67,
+              113
+            ],
+            "angleDegrees": 56.82
+          },
+          "grip": "grips/assassin_male_p2/skill_grimtooth_1.png"
+        },
+        "skill_grimtooth_2": {
+          "image": "body/assassin_male_p2/skill_grimtooth_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_grimtooth_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              62,
+              106
+            ],
+            "tipPoint": [
+              67,
+              116
+            ],
+            "angleDegrees": 60.85
+          },
+          "grip": "grips/assassin_male_p2/skill_grimtooth_2.png"
+        },
+        "skill_grimtooth_3": {
+          "image": "body/assassin_male_p2/skill_grimtooth_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_grimtooth_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              61,
+              104
+            ],
+            "tipPoint": [
+              67,
+              113
+            ],
+            "angleDegrees": 56.82
+          },
+          "grip": "grips/assassin_male_p2/skill_grimtooth_3.png"
+        },
+        "skill_grimtooth_4": {
+          "image": "body/assassin_male_p2/skill_grimtooth_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_grimtooth_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              56,
+              99
+            ],
+            "tipPoint": [
+              66,
+              103
+            ],
+            "angleDegrees": 23.42
+          },
+          "grip": "grips/assassin_male_p2/skill_grimtooth_4.png"
+        },
+        "skill_grimtooth_5": {
+          "image": "body/assassin_male_p2/skill_grimtooth_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_grimtooth_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_grimtooth_5.png"
+        },
+        "skill_envenom_0": {
+          "image": "body/assassin_male_p2/skill_envenom_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_envenom_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              52,
+              94
+            ],
+            "tipPoint": [
+              62,
+              97
+            ],
+            "angleDegrees": 17.64
+          },
+          "grip": "grips/assassin_male_p2/skill_envenom_0.png"
+        },
+        "skill_envenom_1": {
+          "image": "body/assassin_male_p2/skill_envenom_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_envenom_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              64,
+              96
+            ],
+            "tipPoint": [
+              75,
+              96
+            ],
+            "angleDegrees": 0.99
+          },
+          "grip": "grips/assassin_male_p2/skill_envenom_1.png"
+        },
+        "skill_envenom_2": {
+          "image": "body/assassin_male_p2/skill_envenom_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_envenom_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              97
+            ],
+            "tipPoint": [
+              84,
+              97
+            ],
+            "angleDegrees": -0.41
+          },
+          "grip": "grips/assassin_male_p2/skill_envenom_2.png"
+        },
+        "skill_envenom_3": {
+          "image": "body/assassin_male_p2/skill_envenom_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_envenom_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              64,
+              96
+            ],
+            "tipPoint": [
+              75,
+              96
+            ],
+            "angleDegrees": 0.99
+          },
+          "grip": "grips/assassin_male_p2/skill_envenom_3.png"
+        },
+        "skill_envenom_4": {
+          "image": "body/assassin_male_p2/skill_envenom_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_envenom_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              58,
+              94
+            ],
+            "tipPoint": [
+              68,
+              99
+            ],
+            "angleDegrees": 26.05
+          },
+          "grip": "grips/assassin_male_p2/skill_envenom_4.png"
+        },
+        "skill_envenom_5": {
+          "image": "body/assassin_male_p2/skill_envenom_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_envenom_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_envenom_5.png"
+        },
+        "skill_scatter_0": {
+          "image": "body/assassin_male_p2/skill_scatter_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_scatter_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_scatter_0.png"
+        },
+        "skill_scatter_1": {
+          "image": "body/assassin_male_p2/skill_scatter_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_scatter_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              50,
+              98
+            ],
+            "tipPoint": [
+              44,
+              107
+            ],
+            "angleDegrees": 121.37
+          },
+          "grip": "grips/assassin_male_p2/skill_scatter_1.png"
+        },
+        "skill_scatter_2": {
+          "image": "body/assassin_male_p2/skill_scatter_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_scatter_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              52,
+              98
+            ],
+            "tipPoint": [
+              46,
+              107
+            ],
+            "angleDegrees": 124.14
+          },
+          "grip": "grips/assassin_male_p2/skill_scatter_2.png"
+        },
+        "skill_scatter_3": {
+          "image": "body/assassin_male_p2/skill_scatter_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_scatter_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              56,
+              96
+            ],
+            "tipPoint": [
+              62,
+              105
+            ],
+            "angleDegrees": 54.21
+          },
+          "grip": "grips/assassin_male_p2/skill_scatter_3.png"
+        },
+        "skill_scatter_4": {
+          "image": "body/assassin_male_p2/skill_scatter_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_scatter_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              50,
+              98
+            ],
+            "tipPoint": [
+              44,
+              107
+            ],
+            "angleDegrees": 121.37
+          },
+          "grip": "grips/assassin_male_p2/skill_scatter_4.png"
+        },
+        "skill_scatter_5": {
+          "image": "body/assassin_male_p2/skill_scatter_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_scatter_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_scatter_5.png"
+        },
+        "skill_throw_0": {
+          "image": "body/assassin_male_p2/skill_throw_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_throw_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              52,
+              94
+            ],
+            "tipPoint": [
+              62,
+              97
+            ],
+            "angleDegrees": 17.64
+          },
+          "grip": "grips/assassin_male_p2/skill_throw_0.png"
+        },
+        "skill_throw_1": {
+          "image": "body/assassin_male_p2/skill_throw_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_throw_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              48,
+              79
+            ],
+            "tipPoint": [
+              42,
+              70
+            ],
+            "angleDegrees": -125.42
+          },
+          "grip": "grips/assassin_male_p2/skill_throw_1.png"
+        },
+        "skill_throw_2": {
+          "image": "body/assassin_male_p2/skill_throw_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_throw_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": false,
+            "hand": "near",
+            "gripPoint": [
+              83,
+              92
+            ],
+            "tipPoint": [
+              94,
+              92
+            ],
+            "angleDegrees": 0
+          },
+          "grip": "grips/assassin_male_p2/skill_throw_2.png"
+        },
+        "skill_throw_3": {
+          "image": "body/assassin_male_p2/skill_throw_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_throw_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": false,
+            "hand": "near",
+            "gripPoint": [
+              78,
+              99
+            ],
+            "tipPoint": [
+              88,
+              103
+            ],
+            "angleDegrees": 21.71
+          },
+          "grip": "grips/assassin_male_p2/skill_throw_3.png"
+        },
+        "skill_throw_4": {
+          "image": "body/assassin_male_p2/skill_throw_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_throw_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              58,
+              94
+            ],
+            "tipPoint": [
+              68,
+              99
+            ],
+            "angleDegrees": 26.05
+          },
+          "grip": "grips/assassin_male_p2/skill_throw_4.png"
+        },
+        "skill_throw_5": {
+          "image": "body/assassin_male_p2/skill_throw_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_throw_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_throw_5.png"
+        },
+        "skill_pickup_0": {
+          "image": "body/assassin_male_p2/skill_pickup_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_pickup_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              57,
+              97
+            ],
+            "tipPoint": [
+              65,
+              105
+            ],
+            "angleDegrees": 43.41
+          },
+          "grip": "grips/assassin_male_p2/skill_pickup_0.png"
+        },
+        "skill_pickup_1": {
+          "image": "body/assassin_male_p2/skill_pickup_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_pickup_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              61,
+              104
+            ],
+            "tipPoint": [
+              67,
+              113
+            ],
+            "angleDegrees": 56.82
+          },
+          "grip": "grips/assassin_male_p2/skill_pickup_1.png"
+        },
+        "skill_pickup_2": {
+          "image": "body/assassin_male_p2/skill_pickup_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_pickup_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              57,
+              101
+            ],
+            "tipPoint": [
+              67,
+              106
+            ],
+            "angleDegrees": 27.03
+          },
+          "grip": "grips/assassin_male_p2/skill_pickup_2.png"
+        },
+        "skill_pickup_3": {
+          "image": "body/assassin_male_p2/skill_pickup_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_pickup_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              56,
+              99
+            ],
+            "tipPoint": [
+              66,
+              103
+            ],
+            "angleDegrees": 23.42
+          },
+          "grip": "grips/assassin_male_p2/skill_pickup_3.png"
+        },
+        "skill_pickup_4": {
+          "image": "body/assassin_male_p2/skill_pickup_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_pickup_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              50,
+              98
+            ],
+            "tipPoint": [
+              44,
+              107
+            ],
+            "angleDegrees": 121.37
+          },
+          "grip": "grips/assassin_male_p2/skill_pickup_4.png"
+        },
+        "skill_pickup_5": {
+          "image": "body/assassin_male_p2/skill_pickup_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_pickup_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_pickup_5.png"
+        },
+        "skill_plant_0": {
+          "image": "body/assassin_male_p2/skill_plant_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_plant_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              57,
+              97
+            ],
+            "tipPoint": [
+              65,
+              105
+            ],
+            "angleDegrees": 43.41
+          },
+          "grip": "grips/assassin_male_p2/skill_plant_0.png"
+        },
+        "skill_plant_1": {
+          "image": "body/assassin_male_p2/skill_plant_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_plant_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              50,
+              98
+            ],
+            "tipPoint": [
+              44,
+              107
+            ],
+            "angleDegrees": 121.37
+          },
+          "grip": "grips/assassin_male_p2/skill_plant_1.png"
+        },
+        "skill_plant_2": {
+          "image": "body/assassin_male_p2/skill_plant_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_plant_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              56,
+              96
+            ],
+            "tipPoint": [
+              62,
+              105
+            ],
+            "angleDegrees": 54.21
+          },
+          "grip": "grips/assassin_male_p2/skill_plant_2.png"
+        },
+        "skill_plant_3": {
+          "image": "body/assassin_male_p2/skill_plant_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_plant_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              52,
+              98
+            ],
+            "tipPoint": [
+              46,
+              107
+            ],
+            "angleDegrees": 124.14
+          },
+          "grip": "grips/assassin_male_p2/skill_plant_3.png"
+        },
+        "skill_plant_4": {
+          "image": "body/assassin_male_p2/skill_plant_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_plant_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              57,
+              97
+            ],
+            "tipPoint": [
+              65,
+              105
+            ],
+            "angleDegrees": 43.41
+          },
+          "grip": "grips/assassin_male_p2/skill_plant_4.png"
+        },
+        "skill_plant_5": {
+          "image": "body/assassin_male_p2/skill_plant_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_plant_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_plant_5.png"
+        },
+        "skill_coat_0": {
+          "image": "body/assassin_male_p2/skill_coat_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_coat_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_coat_0.png"
+        },
+        "skill_coat_1": {
+          "image": "body/assassin_male_p2/skill_coat_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_coat_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              65,
+              93
+            ],
+            "tipPoint": [
+              76,
+              93
+            ],
+            "angleDegrees": 0.54
+          },
+          "grip": "grips/assassin_male_p2/skill_coat_1.png"
+        },
+        "skill_coat_2": {
+          "image": "body/assassin_male_p2/skill_coat_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_coat_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              65,
+              93
+            ],
+            "tipPoint": [
+              76,
+              93
+            ],
+            "angleDegrees": 0.54
+          },
+          "grip": "grips/assassin_male_p2/skill_coat_2.png"
+        },
+        "skill_coat_3": {
+          "image": "body/assassin_male_p2/skill_coat_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_coat_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              65,
+              93
+            ],
+            "tipPoint": [
+              76,
+              93
+            ],
+            "angleDegrees": 0.54
+          },
+          "grip": "grips/assassin_male_p2/skill_coat_3.png"
+        },
+        "skill_coat_4": {
+          "image": "body/assassin_male_p2/skill_coat_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_coat_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_coat_4.png"
+        },
+        "skill_guard_0": {
+          "image": "body/assassin_male_p2/skill_guard_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_guard_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_guard_0.png"
+        },
+        "skill_guard_1": {
+          "image": "body/assassin_male_p2/skill_guard_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_guard_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              65,
+              93
+            ],
+            "tipPoint": [
+              76,
+              93
+            ],
+            "angleDegrees": 0.54
+          },
+          "grip": "grips/assassin_male_p2/skill_guard_1.png"
+        },
+        "skill_guard_2": {
+          "image": "body/assassin_male_p2/skill_guard_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_guard_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              68,
+              89
+            ],
+            "tipPoint": [
+              76,
+              81
+            ],
+            "angleDegrees": -43.1
+          },
+          "grip": "grips/assassin_male_p2/skill_guard_2.png"
+        },
+        "skill_guard_3": {
+          "image": "body/assassin_male_p2/skill_guard_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_guard_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              65,
+              93
+            ],
+            "tipPoint": [
+              76,
+              93
+            ],
+            "angleDegrees": 0.54
+          },
+          "grip": "grips/assassin_male_p2/skill_guard_3.png"
+        },
+        "skill_guard_4": {
+          "image": "body/assassin_male_p2/skill_guard_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_guard_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_guard_4.png"
+        },
+        "skill_detox_0": {
+          "image": "body/assassin_male_p2/skill_detox_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_detox_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              57,
+              97
+            ],
+            "tipPoint": [
+              65,
+              105
+            ],
+            "angleDegrees": 43.41
+          },
+          "grip": "grips/assassin_male_p2/skill_detox_0.png"
+        },
+        "skill_detox_1": {
+          "image": "body/assassin_male_p2/skill_detox_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_detox_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              57,
+              96
+            ],
+            "tipPoint": [
+              65,
+              104
+            ],
+            "angleDegrees": 43.41
+          },
+          "grip": "grips/assassin_male_p2/skill_detox_1.png"
+        },
+        "skill_detox_2": {
+          "image": "body/assassin_male_p2/skill_detox_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_detox_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              54,
+              97
+            ],
+            "tipPoint": [
+              60,
+              106
+            ],
+            "angleDegrees": 55.24
+          },
+          "grip": "grips/assassin_male_p2/skill_detox_2.png"
+        },
+        "skill_detox_3": {
+          "image": "body/assassin_male_p2/skill_detox_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_detox_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              57,
+              97
+            ],
+            "tipPoint": [
+              65,
+              105
+            ],
+            "angleDegrees": 43.41
+          },
+          "grip": "grips/assassin_male_p2/skill_detox_3.png"
+        },
+        "skill_detox_4": {
+          "image": "body/assassin_male_p2/skill_detox_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_detox_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_detox_4.png"
+        },
+        "skill_hide_0": {
+          "image": "body/assassin_male_p2/skill_hide_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_hide_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_hide_0.png"
+        },
+        "skill_hide_1": {
+          "image": "body/assassin_male_p2/skill_hide_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_hide_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              57,
+              97
+            ],
+            "tipPoint": [
+              65,
+              105
+            ],
+            "angleDegrees": 43.41
+          },
+          "grip": "grips/assassin_male_p2/skill_hide_1.png"
+        },
+        "skill_hide_2": {
+          "image": "body/assassin_male_p2/skill_hide_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_hide_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              52,
+              94
+            ],
+            "tipPoint": [
+              62,
+              97
+            ],
+            "angleDegrees": 17.64
+          },
+          "grip": "grips/assassin_male_p2/skill_hide_2.png"
+        },
+        "skill_hide_3": {
+          "image": "body/assassin_male_p2/skill_hide_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_hide_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              60,
+              103
+            ],
+            "tipPoint": [
+              69,
+              109
+            ],
+            "angleDegrees": 31.21
+          },
+          "grip": "grips/assassin_male_p2/skill_hide_3.png"
+        },
+        "skill_backslide_0": {
+          "image": "body/assassin_male_p2/skill_backslide_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_backslide_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              52,
+              94
+            ],
+            "tipPoint": [
+              62,
+              97
+            ],
+            "angleDegrees": 17.64
+          },
+          "grip": "grips/assassin_male_p2/skill_backslide_0.png"
+        },
+        "skill_backslide_1": {
+          "image": "body/assassin_male_p2/skill_backslide_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_backslide_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              60,
+              103
+            ],
+            "tipPoint": [
+              69,
+              109
+            ],
+            "angleDegrees": 31.21
+          },
+          "grip": "grips/assassin_male_p2/skill_backslide_1.png"
+        },
+        "skill_backslide_2": {
+          "image": "body/assassin_male_p2/skill_backslide_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_backslide_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              61,
+              95
+            ],
+            "tipPoint": [
+              72,
+              97
+            ],
+            "angleDegrees": 11.07
+          },
+          "grip": "grips/assassin_male_p2/skill_backslide_2.png"
+        },
+        "skill_backslide_3": {
+          "image": "body/assassin_male_p2/skill_backslide_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_backslide_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              63,
+              95
+            ],
+            "tipPoint": [
+              74,
+              95
+            ],
+            "angleDegrees": -0.29
+          },
+          "grip": "grips/assassin_male_p2/skill_backslide_3.png"
+        },
+        "skill_backslide_4": {
+          "image": "body/assassin_male_p2/skill_backslide_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_backslide_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              50,
+              97
+            ],
+            "tipPoint": [
+              60,
+              102
+            ],
+            "angleDegrees": 25.86
+          },
+          "grip": "grips/assassin_male_p2/skill_backslide_4.png"
+        },
+        "skill_backslide_5": {
+          "image": "body/assassin_male_p2/skill_backslide_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_backslide_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              56,
+              99
+            ],
+            "tipPoint": [
+              66,
+              103
+            ],
+            "angleDegrees": 23.42
+          },
+          "grip": "grips/assassin_male_p2/skill_backslide_5.png"
+        },
+        "skill_backslide_6": {
+          "image": "body/assassin_male_p2/skill_backslide_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_backslide_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              59,
+              95
+            ],
+            "tipPoint": [
+              69,
+              100
+            ],
+            "angleDegrees": 26.92
+          },
+          "grip": "grips/assassin_male_p2/skill_backslide_6.png"
+        }
+      }
     }
   },
   "hair": {
@@ -20527,6 +23830,903 @@
           ]
         }
       }
+    },
+    "assassin_swept_crop_p2": {
+      "gender": "male",
+      "pivot": [
+        0,
+        0
+      ],
+      "poses": {
+        "idle_0": {
+          "front": "hair/assassin_swept_crop_p2/idle_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/idle_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_1": {
+          "front": "hair/assassin_swept_crop_p2/idle_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/idle_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_2": {
+          "front": "hair/assassin_swept_crop_p2/idle_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/idle_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_0": {
+          "front": "hair/assassin_swept_crop_p2/walk_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/walk_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_1": {
+          "front": "hair/assassin_swept_crop_p2/walk_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/walk_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_2": {
+          "front": "hair/assassin_swept_crop_p2/walk_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/walk_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_3": {
+          "front": "hair/assassin_swept_crop_p2/walk_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/walk_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_4": {
+          "front": "hair/assassin_swept_crop_p2/walk_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/walk_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_5": {
+          "front": "hair/assassin_swept_crop_p2/walk_5_front.png",
+          "back": "hair/assassin_swept_crop_p2/walk_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_6": {
+          "front": "hair/assassin_swept_crop_p2/walk_6_front.png",
+          "back": "hair/assassin_swept_crop_p2/walk_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_7": {
+          "front": "hair/assassin_swept_crop_p2/walk_7_front.png",
+          "back": "hair/assassin_swept_crop_p2/walk_7_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_0": {
+          "front": "hair/assassin_swept_crop_p2/attack_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/attack_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_1": {
+          "front": "hair/assassin_swept_crop_p2/attack_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/attack_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_2": {
+          "front": "hair/assassin_swept_crop_p2/attack_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/attack_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_3": {
+          "front": "hair/assassin_swept_crop_p2/attack_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/attack_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_4": {
+          "front": "hair/assassin_swept_crop_p2/attack_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/attack_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_5": {
+          "front": "hair/assassin_swept_crop_p2/attack_5_front.png",
+          "back": "hair/assassin_swept_crop_p2/attack_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_6": {
+          "front": "hair/assassin_swept_crop_p2/attack_6_front.png",
+          "back": "hair/assassin_swept_crop_p2/attack_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_7": {
+          "front": "hair/assassin_swept_crop_p2/attack_7_front.png",
+          "back": "hair/assassin_swept_crop_p2/attack_7_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_0": {
+          "front": "hair/assassin_swept_crop_p2/hurt_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/hurt_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_1": {
+          "front": "hair/assassin_swept_crop_p2/hurt_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/hurt_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_2": {
+          "front": "hair/assassin_swept_crop_p2/hurt_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/hurt_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_0": {
+          "front": "hair/assassin_swept_crop_p2/dead_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/dead_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_1": {
+          "front": "hair/assassin_swept_crop_p2/dead_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/dead_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_2": {
+          "front": "hair/assassin_swept_crop_p2/dead_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/dead_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_3": {
+          "front": "hair/assassin_swept_crop_p2/dead_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/dead_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "sit_0": {
+          "front": "hair/assassin_swept_crop_p2/sit_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/sit_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_0": {
+          "front": "hair/assassin_swept_crop_p2/cast_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/cast_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_1": {
+          "front": "hair/assassin_swept_crop_p2/cast_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/cast_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_2": {
+          "front": "hair/assassin_swept_crop_p2/cast_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/cast_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_0": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_1": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_2": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_3": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_4": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_5": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_5_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_6": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_6_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_7": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_7_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_7_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_8": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_8_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_8_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_9": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_9_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_9_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_10": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_10_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_10_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_11": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_11_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_11_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_12": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_12_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_12_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_13": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_13_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_13_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_14": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_14_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_14_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_15": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_15_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_15_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_16": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_16_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_16_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_17": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_17_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_17_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_sonic_18": {
+          "front": "hair/assassin_swept_crop_p2/skill_sonic_18_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_sonic_18_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_grimtooth_0": {
+          "front": "hair/assassin_swept_crop_p2/skill_grimtooth_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_grimtooth_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_grimtooth_1": {
+          "front": "hair/assassin_swept_crop_p2/skill_grimtooth_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_grimtooth_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_grimtooth_2": {
+          "front": "hair/assassin_swept_crop_p2/skill_grimtooth_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_grimtooth_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_grimtooth_3": {
+          "front": "hair/assassin_swept_crop_p2/skill_grimtooth_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_grimtooth_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_grimtooth_4": {
+          "front": "hair/assassin_swept_crop_p2/skill_grimtooth_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_grimtooth_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_grimtooth_5": {
+          "front": "hair/assassin_swept_crop_p2/skill_grimtooth_5_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_grimtooth_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_envenom_0": {
+          "front": "hair/assassin_swept_crop_p2/skill_envenom_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_envenom_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_envenom_1": {
+          "front": "hair/assassin_swept_crop_p2/skill_envenom_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_envenom_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_envenom_2": {
+          "front": "hair/assassin_swept_crop_p2/skill_envenom_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_envenom_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_envenom_3": {
+          "front": "hair/assassin_swept_crop_p2/skill_envenom_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_envenom_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_envenom_4": {
+          "front": "hair/assassin_swept_crop_p2/skill_envenom_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_envenom_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_envenom_5": {
+          "front": "hair/assassin_swept_crop_p2/skill_envenom_5_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_envenom_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_scatter_0": {
+          "front": "hair/assassin_swept_crop_p2/skill_scatter_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_scatter_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_scatter_1": {
+          "front": "hair/assassin_swept_crop_p2/skill_scatter_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_scatter_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_scatter_2": {
+          "front": "hair/assassin_swept_crop_p2/skill_scatter_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_scatter_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_scatter_3": {
+          "front": "hair/assassin_swept_crop_p2/skill_scatter_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_scatter_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_scatter_4": {
+          "front": "hair/assassin_swept_crop_p2/skill_scatter_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_scatter_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_scatter_5": {
+          "front": "hair/assassin_swept_crop_p2/skill_scatter_5_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_scatter_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_throw_0": {
+          "front": "hair/assassin_swept_crop_p2/skill_throw_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_throw_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_throw_1": {
+          "front": "hair/assassin_swept_crop_p2/skill_throw_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_throw_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_throw_2": {
+          "front": "hair/assassin_swept_crop_p2/skill_throw_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_throw_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_throw_3": {
+          "front": "hair/assassin_swept_crop_p2/skill_throw_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_throw_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_throw_4": {
+          "front": "hair/assassin_swept_crop_p2/skill_throw_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_throw_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_throw_5": {
+          "front": "hair/assassin_swept_crop_p2/skill_throw_5_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_throw_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_pickup_0": {
+          "front": "hair/assassin_swept_crop_p2/skill_pickup_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_pickup_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_pickup_1": {
+          "front": "hair/assassin_swept_crop_p2/skill_pickup_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_pickup_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_pickup_2": {
+          "front": "hair/assassin_swept_crop_p2/skill_pickup_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_pickup_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_pickup_3": {
+          "front": "hair/assassin_swept_crop_p2/skill_pickup_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_pickup_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_pickup_4": {
+          "front": "hair/assassin_swept_crop_p2/skill_pickup_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_pickup_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_pickup_5": {
+          "front": "hair/assassin_swept_crop_p2/skill_pickup_5_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_pickup_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_plant_0": {
+          "front": "hair/assassin_swept_crop_p2/skill_plant_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_plant_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_plant_1": {
+          "front": "hair/assassin_swept_crop_p2/skill_plant_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_plant_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_plant_2": {
+          "front": "hair/assassin_swept_crop_p2/skill_plant_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_plant_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_plant_3": {
+          "front": "hair/assassin_swept_crop_p2/skill_plant_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_plant_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_plant_4": {
+          "front": "hair/assassin_swept_crop_p2/skill_plant_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_plant_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_plant_5": {
+          "front": "hair/assassin_swept_crop_p2/skill_plant_5_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_plant_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_coat_0": {
+          "front": "hair/assassin_swept_crop_p2/skill_coat_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_coat_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_coat_1": {
+          "front": "hair/assassin_swept_crop_p2/skill_coat_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_coat_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_coat_2": {
+          "front": "hair/assassin_swept_crop_p2/skill_coat_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_coat_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_coat_3": {
+          "front": "hair/assassin_swept_crop_p2/skill_coat_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_coat_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_coat_4": {
+          "front": "hair/assassin_swept_crop_p2/skill_coat_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_coat_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_guard_0": {
+          "front": "hair/assassin_swept_crop_p2/skill_guard_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_guard_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_guard_1": {
+          "front": "hair/assassin_swept_crop_p2/skill_guard_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_guard_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_guard_2": {
+          "front": "hair/assassin_swept_crop_p2/skill_guard_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_guard_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_guard_3": {
+          "front": "hair/assassin_swept_crop_p2/skill_guard_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_guard_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_guard_4": {
+          "front": "hair/assassin_swept_crop_p2/skill_guard_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_guard_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_detox_0": {
+          "front": "hair/assassin_swept_crop_p2/skill_detox_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_detox_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_detox_1": {
+          "front": "hair/assassin_swept_crop_p2/skill_detox_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_detox_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_detox_2": {
+          "front": "hair/assassin_swept_crop_p2/skill_detox_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_detox_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_detox_3": {
+          "front": "hair/assassin_swept_crop_p2/skill_detox_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_detox_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_detox_4": {
+          "front": "hair/assassin_swept_crop_p2/skill_detox_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_detox_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_hide_0": {
+          "front": "hair/assassin_swept_crop_p2/skill_hide_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_hide_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_hide_1": {
+          "front": "hair/assassin_swept_crop_p2/skill_hide_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_hide_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_hide_2": {
+          "front": "hair/assassin_swept_crop_p2/skill_hide_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_hide_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_hide_3": {
+          "front": "hair/assassin_swept_crop_p2/skill_hide_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_hide_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_backslide_0": {
+          "front": "hair/assassin_swept_crop_p2/skill_backslide_0_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_backslide_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_backslide_1": {
+          "front": "hair/assassin_swept_crop_p2/skill_backslide_1_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_backslide_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_backslide_2": {
+          "front": "hair/assassin_swept_crop_p2/skill_backslide_2_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_backslide_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_backslide_3": {
+          "front": "hair/assassin_swept_crop_p2/skill_backslide_3_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_backslide_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_backslide_4": {
+          "front": "hair/assassin_swept_crop_p2/skill_backslide_4_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_backslide_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_backslide_5": {
+          "front": "hair/assassin_swept_crop_p2/skill_backslide_5_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_backslide_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_backslide_6": {
+          "front": "hair/assassin_swept_crop_p2/skill_backslide_6_front.png",
+          "back": "hair/assassin_swept_crop_p2/skill_backslide_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      }
     }
   },
   "weapons": {
@@ -21029,6 +25229,119 @@
           "dead_1": "weapons/dagger/novice_female_p2/dead_1.png",
           "dead_2": "weapons/dagger/novice_female_p2/dead_2.png",
           "sit_0": "weapons/dagger/novice_female_p2/sit_0.png"
+        },
+        "assassin_male_p2": {
+          "idle_0": "weapons/dagger/assassin_male_p2/idle_0.png",
+          "idle_1": "weapons/dagger/assassin_male_p2/idle_1.png",
+          "idle_2": "weapons/dagger/assassin_male_p2/idle_2.png",
+          "walk_0": "weapons/dagger/assassin_male_p2/walk_0.png",
+          "walk_1": "weapons/dagger/assassin_male_p2/walk_1.png",
+          "walk_2": "weapons/dagger/assassin_male_p2/walk_2.png",
+          "walk_3": "weapons/dagger/assassin_male_p2/walk_3.png",
+          "walk_4": "weapons/dagger/assassin_male_p2/walk_4.png",
+          "walk_5": "weapons/dagger/assassin_male_p2/walk_5.png",
+          "walk_6": "weapons/dagger/assassin_male_p2/walk_6.png",
+          "walk_7": "weapons/dagger/assassin_male_p2/walk_7.png",
+          "attack_0": "weapons/dagger/assassin_male_p2/attack_0.png",
+          "attack_1": "weapons/dagger/assassin_male_p2/attack_1.png",
+          "attack_2": "weapons/dagger/assassin_male_p2/attack_2.png",
+          "attack_3": "weapons/dagger/assassin_male_p2/attack_3.png",
+          "attack_4": "weapons/dagger/assassin_male_p2/attack_4.png",
+          "attack_5": "weapons/dagger/assassin_male_p2/attack_5.png",
+          "attack_6": "weapons/dagger/assassin_male_p2/attack_6.png",
+          "attack_7": "weapons/dagger/assassin_male_p2/attack_7.png",
+          "hurt_0": "weapons/dagger/assassin_male_p2/hurt_0.png",
+          "hurt_1": "weapons/dagger/assassin_male_p2/hurt_1.png",
+          "hurt_2": "weapons/dagger/assassin_male_p2/hurt_2.png",
+          "dead_0": "weapons/dagger/assassin_male_p2/dead_0.png",
+          "dead_1": "weapons/dagger/assassin_male_p2/dead_1.png",
+          "dead_2": "weapons/dagger/assassin_male_p2/dead_2.png",
+          "dead_3": "weapons/dagger/assassin_male_p2/dead_3.png",
+          "sit_0": "weapons/dagger/assassin_male_p2/sit_0.png",
+          "cast_0": "weapons/dagger/assassin_male_p2/cast_0.png",
+          "cast_1": "weapons/dagger/assassin_male_p2/cast_1.png",
+          "cast_2": "weapons/dagger/assassin_male_p2/cast_2.png",
+          "skill_sonic_0": "weapons/dagger/assassin_male_p2/skill_sonic_0.png",
+          "skill_sonic_1": "weapons/dagger/assassin_male_p2/skill_sonic_1.png",
+          "skill_sonic_2": "weapons/dagger/assassin_male_p2/skill_sonic_2.png",
+          "skill_sonic_3": "weapons/dagger/assassin_male_p2/skill_sonic_3.png",
+          "skill_sonic_4": "weapons/dagger/assassin_male_p2/skill_sonic_4.png",
+          "skill_sonic_5": "weapons/dagger/assassin_male_p2/skill_sonic_5.png",
+          "skill_sonic_6": "weapons/dagger/assassin_male_p2/skill_sonic_6.png",
+          "skill_sonic_7": "weapons/dagger/assassin_male_p2/skill_sonic_7.png",
+          "skill_sonic_8": "weapons/dagger/assassin_male_p2/skill_sonic_8.png",
+          "skill_sonic_9": "weapons/dagger/assassin_male_p2/skill_sonic_9.png",
+          "skill_sonic_10": "weapons/dagger/assassin_male_p2/skill_sonic_10.png",
+          "skill_sonic_11": "weapons/dagger/assassin_male_p2/skill_sonic_11.png",
+          "skill_sonic_12": "weapons/dagger/assassin_male_p2/skill_sonic_12.png",
+          "skill_sonic_13": "weapons/dagger/assassin_male_p2/skill_sonic_13.png",
+          "skill_sonic_14": "weapons/dagger/assassin_male_p2/skill_sonic_14.png",
+          "skill_sonic_15": "weapons/dagger/assassin_male_p2/skill_sonic_15.png",
+          "skill_sonic_16": "weapons/dagger/assassin_male_p2/skill_sonic_16.png",
+          "skill_sonic_17": "weapons/dagger/assassin_male_p2/skill_sonic_17.png",
+          "skill_sonic_18": "weapons/dagger/assassin_male_p2/skill_sonic_18.png",
+          "skill_grimtooth_0": "weapons/dagger/assassin_male_p2/skill_grimtooth_0.png",
+          "skill_grimtooth_1": "weapons/dagger/assassin_male_p2/skill_grimtooth_1.png",
+          "skill_grimtooth_2": "weapons/dagger/assassin_male_p2/skill_grimtooth_2.png",
+          "skill_grimtooth_3": "weapons/dagger/assassin_male_p2/skill_grimtooth_3.png",
+          "skill_grimtooth_4": "weapons/dagger/assassin_male_p2/skill_grimtooth_4.png",
+          "skill_grimtooth_5": "weapons/dagger/assassin_male_p2/skill_grimtooth_5.png",
+          "skill_envenom_0": "weapons/dagger/assassin_male_p2/skill_envenom_0.png",
+          "skill_envenom_1": "weapons/dagger/assassin_male_p2/skill_envenom_1.png",
+          "skill_envenom_2": "weapons/dagger/assassin_male_p2/skill_envenom_2.png",
+          "skill_envenom_3": "weapons/dagger/assassin_male_p2/skill_envenom_3.png",
+          "skill_envenom_4": "weapons/dagger/assassin_male_p2/skill_envenom_4.png",
+          "skill_envenom_5": "weapons/dagger/assassin_male_p2/skill_envenom_5.png",
+          "skill_scatter_0": "weapons/dagger/assassin_male_p2/skill_scatter_0.png",
+          "skill_scatter_1": "weapons/dagger/assassin_male_p2/skill_scatter_1.png",
+          "skill_scatter_2": "weapons/dagger/assassin_male_p2/skill_scatter_2.png",
+          "skill_scatter_3": "weapons/dagger/assassin_male_p2/skill_scatter_3.png",
+          "skill_scatter_4": "weapons/dagger/assassin_male_p2/skill_scatter_4.png",
+          "skill_scatter_5": "weapons/dagger/assassin_male_p2/skill_scatter_5.png",
+          "skill_throw_0": "weapons/dagger/assassin_male_p2/skill_throw_0.png",
+          "skill_throw_1": "weapons/dagger/assassin_male_p2/skill_throw_1.png",
+          "skill_throw_2": "weapons/dagger/assassin_male_p2/skill_throw_2.png",
+          "skill_throw_3": "weapons/dagger/assassin_male_p2/skill_throw_3.png",
+          "skill_throw_4": "weapons/dagger/assassin_male_p2/skill_throw_4.png",
+          "skill_throw_5": "weapons/dagger/assassin_male_p2/skill_throw_5.png",
+          "skill_pickup_0": "weapons/dagger/assassin_male_p2/skill_pickup_0.png",
+          "skill_pickup_1": "weapons/dagger/assassin_male_p2/skill_pickup_1.png",
+          "skill_pickup_2": "weapons/dagger/assassin_male_p2/skill_pickup_2.png",
+          "skill_pickup_3": "weapons/dagger/assassin_male_p2/skill_pickup_3.png",
+          "skill_pickup_4": "weapons/dagger/assassin_male_p2/skill_pickup_4.png",
+          "skill_pickup_5": "weapons/dagger/assassin_male_p2/skill_pickup_5.png",
+          "skill_plant_0": "weapons/dagger/assassin_male_p2/skill_plant_0.png",
+          "skill_plant_1": "weapons/dagger/assassin_male_p2/skill_plant_1.png",
+          "skill_plant_2": "weapons/dagger/assassin_male_p2/skill_plant_2.png",
+          "skill_plant_3": "weapons/dagger/assassin_male_p2/skill_plant_3.png",
+          "skill_plant_4": "weapons/dagger/assassin_male_p2/skill_plant_4.png",
+          "skill_plant_5": "weapons/dagger/assassin_male_p2/skill_plant_5.png",
+          "skill_coat_0": "weapons/dagger/assassin_male_p2/skill_coat_0.png",
+          "skill_coat_1": "weapons/dagger/assassin_male_p2/skill_coat_1.png",
+          "skill_coat_2": "weapons/dagger/assassin_male_p2/skill_coat_2.png",
+          "skill_coat_3": "weapons/dagger/assassin_male_p2/skill_coat_3.png",
+          "skill_coat_4": "weapons/dagger/assassin_male_p2/skill_coat_4.png",
+          "skill_guard_0": "weapons/dagger/assassin_male_p2/skill_guard_0.png",
+          "skill_guard_1": "weapons/dagger/assassin_male_p2/skill_guard_1.png",
+          "skill_guard_2": "weapons/dagger/assassin_male_p2/skill_guard_2.png",
+          "skill_guard_3": "weapons/dagger/assassin_male_p2/skill_guard_3.png",
+          "skill_guard_4": "weapons/dagger/assassin_male_p2/skill_guard_4.png",
+          "skill_detox_0": "weapons/dagger/assassin_male_p2/skill_detox_0.png",
+          "skill_detox_1": "weapons/dagger/assassin_male_p2/skill_detox_1.png",
+          "skill_detox_2": "weapons/dagger/assassin_male_p2/skill_detox_2.png",
+          "skill_detox_3": "weapons/dagger/assassin_male_p2/skill_detox_3.png",
+          "skill_detox_4": "weapons/dagger/assassin_male_p2/skill_detox_4.png",
+          "skill_hide_0": "weapons/dagger/assassin_male_p2/skill_hide_0.png",
+          "skill_hide_1": "weapons/dagger/assassin_male_p2/skill_hide_1.png",
+          "skill_hide_2": "weapons/dagger/assassin_male_p2/skill_hide_2.png",
+          "skill_hide_3": "weapons/dagger/assassin_male_p2/skill_hide_3.png",
+          "skill_backslide_0": "weapons/dagger/assassin_male_p2/skill_backslide_0.png",
+          "skill_backslide_1": "weapons/dagger/assassin_male_p2/skill_backslide_1.png",
+          "skill_backslide_2": "weapons/dagger/assassin_male_p2/skill_backslide_2.png",
+          "skill_backslide_3": "weapons/dagger/assassin_male_p2/skill_backslide_3.png",
+          "skill_backslide_4": "weapons/dagger/assassin_male_p2/skill_backslide_4.png",
+          "skill_backslide_5": "weapons/dagger/assassin_male_p2/skill_backslide_5.png",
+          "skill_backslide_6": "weapons/dagger/assassin_male_p2/skill_backslide_6.png"
         }
       }
     },
@@ -21152,6 +25465,123 @@
           "skill_charge_2": "weapons/spear/knight_female_p2/skill_charge_2.png",
           "skill_charge_3": "weapons/spear/knight_female_p2/skill_charge_3.png",
           "skill_charge_4": "weapons/spear/knight_female_p2/skill_charge_4.png"
+        }
+      }
+    },
+    "katar": {
+      "frames": {
+        "assassin_male_p2": {
+          "idle_0": "weapons/katar/assassin_male_p2/idle_0.png",
+          "idle_1": "weapons/katar/assassin_male_p2/idle_1.png",
+          "idle_2": "weapons/katar/assassin_male_p2/idle_2.png",
+          "walk_0": "weapons/katar/assassin_male_p2/walk_0.png",
+          "walk_1": "weapons/katar/assassin_male_p2/walk_1.png",
+          "walk_2": "weapons/katar/assassin_male_p2/walk_2.png",
+          "walk_3": "weapons/katar/assassin_male_p2/walk_3.png",
+          "walk_4": "weapons/katar/assassin_male_p2/walk_4.png",
+          "walk_5": "weapons/katar/assassin_male_p2/walk_5.png",
+          "walk_6": "weapons/katar/assassin_male_p2/walk_6.png",
+          "walk_7": "weapons/katar/assassin_male_p2/walk_7.png",
+          "attack_0": "weapons/katar/assassin_male_p2/attack_0.png",
+          "attack_1": "weapons/katar/assassin_male_p2/attack_1.png",
+          "attack_2": "weapons/katar/assassin_male_p2/attack_2.png",
+          "attack_3": "weapons/katar/assassin_male_p2/attack_3.png",
+          "attack_4": "weapons/katar/assassin_male_p2/attack_4.png",
+          "attack_5": "weapons/katar/assassin_male_p2/attack_5.png",
+          "attack_6": "weapons/katar/assassin_male_p2/attack_6.png",
+          "attack_7": "weapons/katar/assassin_male_p2/attack_7.png",
+          "hurt_0": "weapons/katar/assassin_male_p2/hurt_0.png",
+          "hurt_1": "weapons/katar/assassin_male_p2/hurt_1.png",
+          "hurt_2": "weapons/katar/assassin_male_p2/hurt_2.png",
+          "dead_0": "weapons/katar/assassin_male_p2/dead_0.png",
+          "dead_1": "weapons/katar/assassin_male_p2/dead_1.png",
+          "dead_2": "weapons/katar/assassin_male_p2/dead_2.png",
+          "dead_3": "weapons/katar/assassin_male_p2/dead_3.png",
+          "sit_0": "weapons/katar/assassin_male_p2/sit_0.png",
+          "cast_0": "weapons/katar/assassin_male_p2/cast_0.png",
+          "cast_1": "weapons/katar/assassin_male_p2/cast_1.png",
+          "cast_2": "weapons/katar/assassin_male_p2/cast_2.png",
+          "skill_sonic_0": "weapons/katar/assassin_male_p2/skill_sonic_0.png",
+          "skill_sonic_1": "weapons/katar/assassin_male_p2/skill_sonic_1.png",
+          "skill_sonic_2": "weapons/katar/assassin_male_p2/skill_sonic_2.png",
+          "skill_sonic_3": "weapons/katar/assassin_male_p2/skill_sonic_3.png",
+          "skill_sonic_4": "weapons/katar/assassin_male_p2/skill_sonic_4.png",
+          "skill_sonic_5": "weapons/katar/assassin_male_p2/skill_sonic_5.png",
+          "skill_sonic_6": "weapons/katar/assassin_male_p2/skill_sonic_6.png",
+          "skill_sonic_7": "weapons/katar/assassin_male_p2/skill_sonic_7.png",
+          "skill_sonic_8": "weapons/katar/assassin_male_p2/skill_sonic_8.png",
+          "skill_sonic_9": "weapons/katar/assassin_male_p2/skill_sonic_9.png",
+          "skill_sonic_10": "weapons/katar/assassin_male_p2/skill_sonic_10.png",
+          "skill_sonic_11": "weapons/katar/assassin_male_p2/skill_sonic_11.png",
+          "skill_sonic_12": "weapons/katar/assassin_male_p2/skill_sonic_12.png",
+          "skill_sonic_13": "weapons/katar/assassin_male_p2/skill_sonic_13.png",
+          "skill_sonic_14": "weapons/katar/assassin_male_p2/skill_sonic_14.png",
+          "skill_sonic_15": "weapons/katar/assassin_male_p2/skill_sonic_15.png",
+          "skill_sonic_16": "weapons/katar/assassin_male_p2/skill_sonic_16.png",
+          "skill_sonic_17": "weapons/katar/assassin_male_p2/skill_sonic_17.png",
+          "skill_sonic_18": "weapons/katar/assassin_male_p2/skill_sonic_18.png",
+          "skill_grimtooth_0": "weapons/katar/assassin_male_p2/skill_grimtooth_0.png",
+          "skill_grimtooth_1": "weapons/katar/assassin_male_p2/skill_grimtooth_1.png",
+          "skill_grimtooth_2": "weapons/katar/assassin_male_p2/skill_grimtooth_2.png",
+          "skill_grimtooth_3": "weapons/katar/assassin_male_p2/skill_grimtooth_3.png",
+          "skill_grimtooth_4": "weapons/katar/assassin_male_p2/skill_grimtooth_4.png",
+          "skill_grimtooth_5": "weapons/katar/assassin_male_p2/skill_grimtooth_5.png",
+          "skill_envenom_0": "weapons/katar/assassin_male_p2/skill_envenom_0.png",
+          "skill_envenom_1": "weapons/katar/assassin_male_p2/skill_envenom_1.png",
+          "skill_envenom_2": "weapons/katar/assassin_male_p2/skill_envenom_2.png",
+          "skill_envenom_3": "weapons/katar/assassin_male_p2/skill_envenom_3.png",
+          "skill_envenom_4": "weapons/katar/assassin_male_p2/skill_envenom_4.png",
+          "skill_envenom_5": "weapons/katar/assassin_male_p2/skill_envenom_5.png",
+          "skill_scatter_0": "weapons/katar/assassin_male_p2/skill_scatter_0.png",
+          "skill_scatter_1": "weapons/katar/assassin_male_p2/skill_scatter_1.png",
+          "skill_scatter_2": "weapons/katar/assassin_male_p2/skill_scatter_2.png",
+          "skill_scatter_3": "weapons/katar/assassin_male_p2/skill_scatter_3.png",
+          "skill_scatter_4": "weapons/katar/assassin_male_p2/skill_scatter_4.png",
+          "skill_scatter_5": "weapons/katar/assassin_male_p2/skill_scatter_5.png",
+          "skill_throw_0": "weapons/katar/assassin_male_p2/skill_throw_0.png",
+          "skill_throw_1": "weapons/katar/assassin_male_p2/skill_throw_1.png",
+          "skill_throw_2": "weapons/katar/assassin_male_p2/skill_throw_2.png",
+          "skill_throw_3": "weapons/katar/assassin_male_p2/skill_throw_3.png",
+          "skill_throw_4": "weapons/katar/assassin_male_p2/skill_throw_4.png",
+          "skill_throw_5": "weapons/katar/assassin_male_p2/skill_throw_5.png",
+          "skill_pickup_0": "weapons/katar/assassin_male_p2/skill_pickup_0.png",
+          "skill_pickup_1": "weapons/katar/assassin_male_p2/skill_pickup_1.png",
+          "skill_pickup_2": "weapons/katar/assassin_male_p2/skill_pickup_2.png",
+          "skill_pickup_3": "weapons/katar/assassin_male_p2/skill_pickup_3.png",
+          "skill_pickup_4": "weapons/katar/assassin_male_p2/skill_pickup_4.png",
+          "skill_pickup_5": "weapons/katar/assassin_male_p2/skill_pickup_5.png",
+          "skill_plant_0": "weapons/katar/assassin_male_p2/skill_plant_0.png",
+          "skill_plant_1": "weapons/katar/assassin_male_p2/skill_plant_1.png",
+          "skill_plant_2": "weapons/katar/assassin_male_p2/skill_plant_2.png",
+          "skill_plant_3": "weapons/katar/assassin_male_p2/skill_plant_3.png",
+          "skill_plant_4": "weapons/katar/assassin_male_p2/skill_plant_4.png",
+          "skill_plant_5": "weapons/katar/assassin_male_p2/skill_plant_5.png",
+          "skill_coat_0": "weapons/katar/assassin_male_p2/skill_coat_0.png",
+          "skill_coat_1": "weapons/katar/assassin_male_p2/skill_coat_1.png",
+          "skill_coat_2": "weapons/katar/assassin_male_p2/skill_coat_2.png",
+          "skill_coat_3": "weapons/katar/assassin_male_p2/skill_coat_3.png",
+          "skill_coat_4": "weapons/katar/assassin_male_p2/skill_coat_4.png",
+          "skill_guard_0": "weapons/katar/assassin_male_p2/skill_guard_0.png",
+          "skill_guard_1": "weapons/katar/assassin_male_p2/skill_guard_1.png",
+          "skill_guard_2": "weapons/katar/assassin_male_p2/skill_guard_2.png",
+          "skill_guard_3": "weapons/katar/assassin_male_p2/skill_guard_3.png",
+          "skill_guard_4": "weapons/katar/assassin_male_p2/skill_guard_4.png",
+          "skill_detox_0": "weapons/katar/assassin_male_p2/skill_detox_0.png",
+          "skill_detox_1": "weapons/katar/assassin_male_p2/skill_detox_1.png",
+          "skill_detox_2": "weapons/katar/assassin_male_p2/skill_detox_2.png",
+          "skill_detox_3": "weapons/katar/assassin_male_p2/skill_detox_3.png",
+          "skill_detox_4": "weapons/katar/assassin_male_p2/skill_detox_4.png",
+          "skill_hide_0": "weapons/katar/assassin_male_p2/skill_hide_0.png",
+          "skill_hide_1": "weapons/katar/assassin_male_p2/skill_hide_1.png",
+          "skill_hide_2": "weapons/katar/assassin_male_p2/skill_hide_2.png",
+          "skill_hide_3": "weapons/katar/assassin_male_p2/skill_hide_3.png",
+          "skill_backslide_0": "weapons/katar/assassin_male_p2/skill_backslide_0.png",
+          "skill_backslide_1": "weapons/katar/assassin_male_p2/skill_backslide_1.png",
+          "skill_backslide_2": "weapons/katar/assassin_male_p2/skill_backslide_2.png",
+          "skill_backslide_3": "weapons/katar/assassin_male_p2/skill_backslide_3.png",
+          "skill_backslide_4": "weapons/katar/assassin_male_p2/skill_backslide_4.png",
+          "skill_backslide_5": "weapons/katar/assassin_male_p2/skill_backslide_5.png",
+          "skill_backslide_6": "weapons/katar/assassin_male_p2/skill_backslide_6.png"
         }
       }
     }

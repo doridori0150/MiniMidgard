@@ -42,7 +42,7 @@ const key = (file: string) => '../assets/pixel/' + file;
 const HEIGHT = 76;
 /** game weapon → pixel weapon set; null = empty-handed; missing = no pixel art for it yet (another renderer draws) */
 const WEAPON: Partial<Record<WeaponType, string | null>> = {
-  none: null, sword: 'sword', sword2h: 'sword', spear: 'spear', staff: 'staff', bow: 'bow', mace: 'mace', dagger: 'dagger', katar: 'dagger', axe: 'axe',
+  none: null, sword: 'sword', sword2h: 'sword', spear: 'spear', staff: 'staff', bow: 'bow', mace: 'mace', dagger: 'dagger', katar: 'katar', axe: 'axe',
 };
 /** look.hair (0..7) picks a style by index among the character's gender's styles, in this order */
 const STYLE_ORDER = ['ponytail', 'bob', 'long'].flatMap((n) => [n, n + '_p2', n + '_p3']);

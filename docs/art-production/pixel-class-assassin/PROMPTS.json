@@ -1,0 +1,357 @@
+[
+  {
+    "frame": "idle_0",
+    "prompt": "Create ONE single idle animation frame of an original male assassin pixel hero for MiniMidgard. Reference images ONLY for exact 2-head chibi proportions, tiny crisp hand-pixelled RPG style and visual density, NOT their character design. Transparent background. Full body facing screen-right 3/4. Short asymmetrical platinum cropped hair, dark lower-face mask showing serious amber eyes, plum leather segmented armor, dark navy split hip scarf, subtle brass buckles, compact boots and bracers. ONE katar only: near arm (screen-left shoulder) hanging forward across waist, fist at waist, a short triangular steel push-dagger projecting forward screen-right from fist, two parallel rails around fist. Far hand empty and visible near chest. Relaxed low alert stance. Head HALF total height, short legs and compact torso, exactly two heads tall. Crisp pixel clusters no smooth painterly shading no gradients no shadows on floor. Single character isolated, no text, no sheet, no duplicate views. Draw character about 480px tall centered in image as a nearest-neighbor enlargement of a 48px tall sprite; sparse palette and visibly square pixels.",
+    "review": "2등신·마스크·자주 경갑·단일 카타르 확인. 근거리 손은 화면 왼쪽 어깨에서 이어져 허리 앞에 위치. 48px로 정합 예정."
+  },
+  {
+    "frame": "idle_1",
+    "previous": "idle_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Idle breathing in-between: torso rises a tiny amount, far empty fist relaxes a little and scarf tail lifts slightly. Same planted feet, same katar angle and hand.",
+    "previousReview": "대기 기준의 두 손·머리 크기·카타르 전방 정렬 확인.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-112a07d5-3275-4634-a147-971fb4abadf4.png"
+  },
+  {
+    "frame": "walk_0",
+    "previous": "idle_1",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Walk contact frame A: near leg (screen-left hip) steps forward toward screen-right, its foot clearly ahead. Far leg reaches behind screen-left. Knees soft. Near weapon arm swings slightly back, katar near left hip, still pointing right. Far empty arm forward. Low stealthy walk, no attack.",
+    "previousReview": "idle_1 외형 동일, 천 끝만 상승. 보행의 첫 접지로 전환.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-aed35438-75cd-4200-a860-a6062b6d22ef.png"
+  },
+  {
+    "frame": "walk_1",
+    "previous": "walk_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Next walk DOWN frame: shift weight onto forward screen-right foot, bend forward knee, head and torso sink slightly, trailing screen-left heel lifts and knee begins passing underneath hips. Keep weapon arm low on screen-left, far empty hand swinging back a little. Same scale and identity.",
+    "previousReview": "walk_0 앞뒤 발 분리와 같은 무기 손 확인. 다음은 접지 후 체중 하강.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-fc72abd7-9a4b-49a8-aad8-437220a7a344.png"
+  },
+  {
+    "frame": "walk_2",
+    "previous": "walk_1",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Next walk PASSING frame: legs come close together under pelvis. Screen-right support foot planted, opposite bent knee passes forward, lifted boot next to support calf. Upper body returns up slightly. Near weapon forearm swings a little forward across waist. Not a wide stance: feet close in this frame.",
+    "previousReview": "walk_1 뒤꿈치 들림과 낮아진 무릎 확인. 머리 디자인 유지.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-fe0d815a-6e2a-4c9a-aab5-78ae11367028.png"
+  },
+  {
+    "frame": "walk_3",
+    "previous": "walk_2",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Next walk UP frame: far knee lifts and extends toward screen-right, its boot just above ground ahead; near support leg straightens beneath body toward screen-left, heel raising. Narrow stride starting to open, not running. Katar fist forward at belt line; far empty arm goes back. Scarf tails begin settling.",
+    "previousReview": "walk_2 두 발이 골반 아래 통과, 팔은 허리 앞 유지. 다음 발 내밀기로 연결.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-c4e01297-cdf4-4cdf-9383-36bfed982c58.png"
+  },
+  {
+    "frame": "walk_4",
+    "previous": "walk_3",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Walk opposite CONTACT: the lifted forward screen-right boot now lands on heel in a clear wide stride, near leg trailing screen-left. Weapon fist forward across belt, empty far arm back. Do not mirror character or switch hands. Torso slightly forward, scarf two tails trail left.",
+    "previousReview": "walk_3 앞발 들림과 무기 팔 전진 확인. 좌우 반전 없이 반대 접지.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-c86a6696-14f0-45e4-bd09-91609db452a7.png"
+  },
+  {
+    "frame": "walk_5",
+    "previous": "walk_4",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Opposite walk DOWN: forward foot takes weight, bend both knees and lower pelvis; trailing near boot heel lifts, near knee advancing. Katar hand starts traveling back from forward position toward near hip. Empty far forearm starts coming forward. Maintain facing.",
+    "previousReview": "walk_4 반대 접지, 근거리 무기 팔과 반대 빈손이 구분됨.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-e2978d4a-0801-4ba8-afb8-999ea2692045.png"
+  },
+  {
+    "frame": "walk_6",
+    "previous": "walk_5",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Opposite PASSING walk frame. Feet close underneath pelvis, near bent knee crosses in front of far support leg; one boot lifted at calf height. Near katar hand lowered and swings back next to screen-left hip; far empty arm forward bent at elbow. Body rises slightly from previous low stance. Maintain exact head size.",
+    "previousReview": "walk_5 체중 하강과 팔 교대 확인. 근거리 카타르 유지.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-7529bae1-0ffe-48ec-99d4-0f235aeb6da6.png"
+  },
+  {
+    "frame": "walk_7",
+    "previous": "walk_6",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Final walk UP frame before first contact: near knee extends boot forward screen-right a short distance, far support heel lifted behind; stride opens from passing. Near weapon hand begins forward return from low hip with blade diagonal down-right rather than vertical; far hand slightly forward. Torso rises just a fraction. Scarf trails left.",
+    "previousReview": "walk_6 통과 자세 확인. 날이 수직으로 내려가므로 다음 장에서 자연스럽게 대각선으로 회수.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-0c32323d-bd4c-4811-b3f7-e63667b62103.png"
+  },
+  {
+    "frame": "attack_0",
+    "previous": "idle_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Basic attack anticipation: slightly crouch, plant feet wider, tuck chin, twist shoulders a little toward screen-left while eyes stay right. Draw near weapon fist back to left waist with blade pointing right, empty far hand up near chest. Hair same size.",
+    "previousReview": "대기 기준 손·발 위치 확인 후 낮은 준비 자세로 연결.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-e24c15a6-bf88-4b55-8c4a-89f9ef3c8078.png"
+  },
+  {
+    "frame": "attack_1",
+    "previous": "attack_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Basic attack maximal short wind-up: near weapon elbow and fist pull MUCH farther back screen-left, blade held diagonally up-left in preparation for horizontal arc. Head stays watching right. Chest twists and weight sits on back screen-left leg, forward foot light. Far hand stays close chest. No smear yet.",
+    "previousReview": "attack_0 무릎 압축·허리 높이 카타르 확인. 다음 장은 실제 팔 당김을 크게 구분.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-afb1e639-0598-462a-bf9d-9d54481a4144.png"
+  },
+  {
+    "frame": "attack_2",
+    "previous": "attack_1",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Basic attack SWING: near arm from screen-left shoulder sweeps ACROSS front of torso toward screen-right, fist now just in front of center waist. Body leans forward, front knee deepens. Add a short broad pale lavender crescent attached to the steel katar sweeping from back upper-left through waist to right, BELOW face only, not a huge magical effect. Far empty arm retracts behind shoulder. One weapon.",
+    "previousReview": "attack_1 카타르가 가까운 손에 유지되고 뒤 위로 당겨짐. 베기 궤적 시작점 확보.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-657eec00-d462-41e9-bfaf-c75722fef542.png"
+  },
+  {
+    "frame": "attack_3",
+    "previous": "attack_2",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Basic attack IMPACT/end of slash: lean lower forward, front screen-right knee deeply bent, back leg extended left. Near weapon arm extended across body toward lower-right, katar fist ahead of knee, blade down-right. Lavender swing smear now only a short tapering crescent ahead and below fist, previous back-left arc gone. Empty far hand behind shoulder. Same head size.",
+    "previousReview": "attack_2 허리 앞 가로 잔상과 손 연결 확인. 접촉 장은 궤적을 앞 아래로 진행.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-230cabe2-3475-4ca3-a813-b7c5f2cd7633.png"
+  },
+  {
+    "frame": "attack_4",
+    "previous": "attack_3",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: After-impact HOLD: same low forward lunge and feet, near weapon arm still reaching down-right, remove ALL lavender smear, actual short katar clearly visible. Scarf tails settle slightly lower. Empty far arm begins lowering from behind. Do not straighten body yet.",
+    "previousReview": "attack_3 몸 전진·낮은 무릎·앞 아래 접촉 확인. 잔상 제거 후 정착.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-ca8e2a9c-ff6d-4d46-a036-0653e78758ac.png"
+  },
+  {
+    "frame": "attack_5",
+    "previous": "attack_4",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Attack recovery halfway: bend near weapon elbow, pull SAME katar fist back toward middle waist; raise torso halfway and bring rear foot closer, knees still bent. Far empty hand comes back beside chest. Scarf tails fall lower. Not a new attack; no smear.",
+    "previousReview": "attack_4 잔상 소멸·동일 전진 자세 확인. 무기 팔 굽혀 회수.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-0d6b619c-9d99-4fa9-85c0-5413ea37c3f3.png"
+  },
+  {
+    "frame": "hurt_0",
+    "previous": "idle_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Hurt first recoil: body recoils backward screen-left, head tilts back slightly, eyes narrow from impact. Knees bend, empty far hand protects abdomen, near weapon hand drops low beside hip still holding katar pointing down-right. No blood or impact effects.",
+    "previousReview": "대기에서 뒤로 반동할 때 무기 손 고정, 빈손 복부 보호 계획.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-2f901d24-0e66-4325-9968-030225bb7b5c.png"
+  },
+  {
+    "frame": "hurt_1",
+    "previous": "hurt_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Hurt second frame: knees buckle deeper, torso folds forward while empty far hand clutches stomach; head lowers and eyes briefly squeezed shut, same mask. Near katar hand remains lowered at near hip with blade down-right. Both feet stay planted.",
+    "previousReview": "hurt_0 뒤로 반동·복부 손 확인. 다음 장은 무릎 압축으로 충격 흡수.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-243a15ac-5fe2-49bd-be97-0a6484e34535.png"
+  },
+  {
+    "frame": "dead_1",
+    "previous": "hurt_1",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Death collapse next frame: one knee on ground, other bent forward, torso slumped and head bowed. Empty far hand reaches to ground beside forward knee for support. Near weapon hand loosely holds katar low across lap pointing down-right. Clearly kneeling, silhouette much shorter but head same size. Eyes closed.",
+    "previousReview": "hurt_1 접힌 무릎과 숙인 머리에서 한 무릎 접지로 연결.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-e0f3c29f-a4e9-4a96-bbde-05e01ed3fee7.png"
+  },
+  {
+    "frame": "dead_2",
+    "previous": "dead_1",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Next collapse frame: supporting far hand/elbow buckles; body tipping strongly onto screen-left side, head now low at screen-left, hips and bent legs toward right. Near weapon hand across stomach holding katar away from face. Sideways falling diagonal silhouette, no longer upright kneeling. Eyes closed. Keep head same size relative armor.",
+    "previousReview": "dead_1 무릎과 빈손 접지 확인. 접지한 팔이 꺾이며 옆으로 넘어짐.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-ea99cef8-01f1-43a6-9767-afe782bf8182.png"
+  },
+  {
+    "frame": "dead_2_fix",
+    "previous": "dead_1",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Collapse sideways with HEAD moving SCREEN-RIGHT, feet toward SCREEN-LEFT, as the FAR EMPTY hand (right side of picture) buckles to ground. Near weapon arm remains on viewer-facing LEFT shoulder, lowered diagonally across thighs, fist with katar near lower-left abdomen. Do NOT swap hands. Body diagonal only 35 degrees toward right, not fully horizontal yet. Eyes closed. Need exact continuation of first reference, NOT mirrored pose.",
+    "previousReview": "직전 dead_2는 무기 손 교체로 제외. dead_1의 먼 빈손이 오른쪽 지면에 있으므로 그쪽으로 넘어지게 방향 수정.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-905a882e-7271-4266-b20e-c79770b945af.png"
+  },
+  {
+    "frame": "dead_3",
+    "previous": "dead_2_fix",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Final death pose continuing same fall RIGHT: completely lying on side on ground, HEAD SCREEN-RIGHT and boots SCREEN-LEFT. Empty far arm folded under head. Near weapon arm visible on top across waist, same fist holding katar horizontally toward right away from face. Legs relaxed bent, scarf settled along floor, eyes closed. Horizontal low silhouette, no shadow.",
+    "previousReview": "dead_2_fix 기존 가까운 무기 손 유지·먼손 지면 지지 확인. 같은 방향으로 정착.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-45be53b0-4e6f-4d7c-ab97-f5af724bf70e.png"
+  },
+  {
+    "frame": "dead_3_fix",
+    "previous": "dead_2_fix",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Final death, compact CHIBI TWO HEADS LONG silhouette: curl fully on side, head on right on empty far forearm, both knees tucked close to belly, tiny boots left, spine horizontal. HEAD must occupy HALF entire left-to-right character length, body+legs together only one head width. Near weapon arm rests atop abdomen, same katar held horizontally right. Eyes closed. Preserve tiny square chunky pixel clusters as first image. Absolutely transparent empty background, no glow, no ground shadow. Don't elongate torso or legs.",
+    "previousReview": "dead_3 제외: 누운 전체 길이가 2등신 기준보다 길고 바깥 발광 있음. 웅크린 짧은 실루엣으로 재제작.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-bf3a2e31-90db-4aae-bfcb-69dbfa892b7f.png"
+  },
+  {
+    "frame": "sit_0",
+    "previous": "idle_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Resting SIT pose: sitting on ground with legs folded cross-legged, relaxed upright torso, head same size, eyes open watching screen-right. Near katar hand rests on top of near thigh blade pointing diagonally right away from body, empty far hand on other knee. Scarf tails lie on ground behind. Compact silhouette, no ground shadow.",
+    "previousReview": "누운 장과 독립된 앉기. 대기 머리와 장비를 유지한 채 양 무릎 접기.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-0a600e28-f767-42d4-9032-a67182b944f2.png"
+  },
+  {
+    "frame": "cast_0",
+    "previous": "idle_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: CAST charging loop first pose: feet planted shoulder width, slight knee bend. Near weapon hand lowered at left hip, katar angled down-right. Far EMPTY hand raised before sternum with two fingertips together in quiet preparation gesture. Eyes focus on hand, head still right 3/4. No magic or glow or bottle.",
+    "previousReview": "대기와 동일한 근거리 무기 손. 먼 빈손만 가슴 앞 준비.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-d66a7071-51f0-4f97-b55e-0eb21619cca1.png"
+  },
+  {
+    "frame": "cast_1",
+    "previous": "cast_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Next CAST loop pose: breathe inward with shoulders slightly higher, far empty hand draws closer sternum and fingertips curl a little inward, eyes half close in concentration. Katar still down at near left hip, feet exactly same stance, scarf tips slightly lift. Very small controlled motion, no spell effects.",
+    "previousReview": "cast_0 두 손 역할 분리 확인. 다음은 호흡과 손가락만 작게 변화.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-2795ad4e-8d0b-450d-aaef-9eff9e600c55.png"
+  },
+  {
+    "frame": "sonic_impact",
+    "previous": "attack_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Signature SONIC BLOW first fast straight punch: near shoulder drives FORWARD across body, near katar fist fully extended horizontally SCREEN-RIGHT at chest height; triangular push blade straight right aligned forearm. Very low wide forward lunge, head leaned forward looking right, empty far arm pulled back. Tiny straight pale motion streak directly behind blade only, no arc or explosions. TWO HEADS tall short compact body.",
+    "previousReview": "attack_0 압축 자세를 연격의 준비로 사용. 수평 찌르기로 일반 가로베기와 구분.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-b0ed9002-e391-4538-86c8-ea7c4bdcdd77.png"
+  },
+  {
+    "frame": "sonic_impact_fix",
+    "previous": "attack_2",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Change slash to STRAIGHT thrust, preserving exact SAME ARM placement from first reference: viewer-facing weapon shoulder at SCREEN-LEFT BELOW EAR connects diagonally ACROSS CHEST to extended near forearm and katar fist screen-right at lower-chest height. That near forearm visibly crosses in FRONT of torso. Far empty arm remains raised BEHIND head/left edge as in reference. Low lunge. Remove entire crescent. Blade horizontal right, small short white streak BEHIND fist, no detached streak ahead. Never attach katar to screen-right far shoulder.",
+    "previousReview": "sonic_impact 제외: 카타르가 먼 어깨에 붙음. attack_2의 명확한 가로질러 나온 가까운 팔을 기준으로 재생성.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-3d47cd83-c5be-4e4d-b329-fb93e55af89e.png"
+  },
+  {
+    "frame": "sonic_retract",
+    "previous": "sonic_impact_fix",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Rapid combo recoil IN-BETWEEN: preserve low wide legs and shoulder twist, bend the SAME viewer-facing weapon elbow to retract fist halfway to ribs, blade still horizontal right. Empty far hand behind stays visible. No smear. Head holds same tilt/size, don't stand up. This is halfway between consecutive thrusts.",
+    "previousReview": "sonic_impact_fix 가까운 어깨→팔꿈치→주먹 연결 정상, 이 구조 그대로 짧게 회수.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-d6ac31e7-27be-452d-ac9b-6c9f902a0905.png"
+  },
+  {
+    "frame": "sonic_low",
+    "previous": "sonic_retract",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Next combo strike LOW: same near weapon arm crosses torso again and drives fist forward at BELT height toward right, blade horizontal right. Bend knees deeper and lower head a little, far empty hand behind. Preserve same stance and hand chain, make downward change readable. No arc; only tiny horizontal trail attached behind blade.",
+    "previousReview": "sonic_retract 낮은 자세·팔꿈치 회수 확인. 다음 찌르기는 허리 높이로 내려 리듬 변화.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-5b8c5089-f421-4c0c-b051-8dc8b8e64ecb.png"
+  },
+  {
+    "frame": "grim_down",
+    "previous": "attack_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Grimtooth ground strike preparation: drop to one-knee crouch, near screen-left weapon arm folds so katar fist is above near knee and blade points diagonally DOWN toward ground in front of body. Empty far hand out to side for balance. Eyes open forward, keep head same size. No dust, ground blades, glow or effects.",
+    "previousReview": "attack_0의 무릎 압축을 더 낮춰 지면 공격 준비. 무기 손 유지.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-2a59c569-7a4a-449c-9f94-e178fdb03641.png"
+  },
+  {
+    "frame": "grim_hit",
+    "previous": "grim_down",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Ground strike CONTACT: same kneeling pose but torso folds forward lower and near weapon arm drives down until katar tip touches ground between knees, fist almost on ground. Blade nearly vertical down, same near arm from left shoulder. Far empty arm held sideways balancing. Head lowers but stays same size, eyes still open. No ground effects.",
+    "previousReview": "grim_down 한 무릎 자세와 아래 향한 카타르 확인. 날끝을 접지하는 타격 장으로 연결.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-a99b8b54-30c6-46b1-a0f5-a401ad61c06b.png"
+  },
+  {
+    "frame": "scatter_ready",
+    "previous": "idle_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Scatter sand/poison preparation: bend knees moderately, far EMPTY hand reaches to belt pouch at screen-right hip, fingers scooping. Near weapon arm on screen-left holds katar low and safely away pointing diagonal down-left. Head watches forward. Only change pose, no particles.",
+    "previousReview": "대기→빈손 주머니 접근. 무기 손과 뿌리는 손 분리.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-bef7a638-723a-4e3d-8c46-2eb5c4597f0a.png"
+  },
+  {
+    "frame": "scatter_release",
+    "previous": "scatter_ready",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Scatter release: far EMPTY hand sweeps broadly from belt out to SCREEN-RIGHT at waist height, palm down with open fingers; torso bends forward and knees lower. Near weapon hand remains screen-left down holding katar away from action, unchanged hand. Scarf swings left. NO sand, gas, sparkles, dust or thrown objects; just body and weapon.",
+    "previousReview": "scatter_ready 먼손이 주머니에 있고 무기는 왼쪽으로 안전하게 내려짐. 빈손 전방 쓸기.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-835efba1-da71-49f4-adc1-c61f3d01823d.png"
+  },
+  {
+    "frame": "throw_ready",
+    "previous": "attack_1",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Throw wind-up: SAME near weapon arm from left shoulder bends at elbow, fist draws close beside LEFT EAR rather than fully extended behind; katar blade angled up-left. Torso twists backward, front foot pointed right, empty far hand extends a little right to aim. This is a compact overhand throwing preparation, preserve character face/hair.",
+    "previousReview": "attack_1 뒤로 든 같은 손을 투척 준비로 굽힘. 팔과 얼굴 겹침을 최소화.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-bbbfc2c0-9c39-4414-9ea8-be90e0621a37.png"
+  },
+  {
+    "frame": "throw_release",
+    "previous": "throw_ready",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Throw RELEASE frame: near arm from LEFT shoulder swings across FRONT of chest to screen-right, straight forearm ending in OPEN gloved palm at chest height. REMOVE KATAR COMPLETELY: weapon has just left this hand, draw NO projectile. Far arm retracts behind torso left. Lean forward, front knee bent, back foot pushes off. Keep near arm visibly crossing chest so hands are not swapped. Both hands empty in this frame.",
+    "previousReview": "throw_ready 가까운 어깨 옆 준비 정상. 방출 장은 같은 팔을 몸 앞에 뻗고 무기를 숨김.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-e6248644-fce5-4c40-8b5c-1a7c15a659aa.png"
+  },
+  {
+    "frame": "throw_follow",
+    "previous": "throw_release",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Throw follow-through: SAME near open hand travels diagonally down across torso to opposite screen-right knee, elbow starting to bend. Torso leans lower and head forward. Far empty hand returns near ribs. Both hands still EMPTY, no katar or dagger or rails beyond glove, no projectile. Preserve short proportions and feet.",
+    "previousReview": "throw_release 가까운 팔이 몸 앞을 가로지르는 방출 확인. 팔의 관성을 아래로 연결.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-18bc66ae-1eb5-43c1-ae7b-14857990a850.png"
+  },
+  {
+    "frame": "throw_follow_fix",
+    "previous": "throw_release",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Keep EXACT torso rotation and arm ownership of first reference. Move ONLY the already-extended FRONT arm down about 25 degrees, bending its elbow slightly so its open palm is at WAIST HEIGHT in front of right abdomen. This front arm still crosses chest from large foreground shoulder at center-left. Rear empty arm stays pointing back LEFT, not raised to chest. Both hands empty. No weapon. Slightly lower head, same legs. Very small follow-through change, not a new pose or rotation.",
+    "previousReview": "throw_follow 제외: 후속 장에서 팔 소속 뒤바뀜. release의 몸통 방향 그대로 팔만 내려 재생성.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-84b449a8-4588-4165-93e3-d35d576fb45a.png"
+  },
+  {
+    "frame": "pickup_touch",
+    "previous": "grim_down",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Pick up stone gesture: same one-knee crouch, near weapon hand keeps katar safely sideways across LEFT thigh, not stabbing ground. Far empty hand reaches DOWN to ground on SCREEN-RIGHT by front boot, fingers pinch an invisible small object. Eyes look down slightly. No stone drawn. This is deliberate pickup, no injury, eyes open.",
+    "previousReview": "grim_down 한 무릎 자세에서 무기를 옆으로 빼고 빈손만 바닥에 접근.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-a3177021-1000-4894-9fb1-f459b237c11f.png"
+  },
+  {
+    "frame": "pickup_rise",
+    "previous": "pickup_touch",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Pickup recovery: lift far closed hand from floor to just above right knee, torso rising halfway from kneel into low squat, back knee lifting off ground. Near katar stays across left thigh pointing right, head lifts watching forward. No stone or particles. Same scale.",
+    "previousReview": "pickup_touch 빈손 바닥 접촉·카타르 대각선 유지 확인. 쥔 손을 올리며 일어나기.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-76aeb394-456b-4190-b8b4-2d08e53e850d.png"
+  },
+  {
+    "frame": "plant_contact",
+    "previous": "cast_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Plant poison charge on enemy: step short forward into low bent-knee stance, FAR empty arm (screen-right shoulder) reaches ahead at LOWER waist height, palm presses forward/down with fingers together, body leans toward hand. Near katar remains lowered beside LEFT hip. Do not draw bomb or effects. Same head size and face.",
+    "previousReview": "cast_0 빈손 가슴 앞에서 적 허리 아래로 내밀어 부착. 무기는 내려 유지.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-55c31a72-124b-46a6-af76-006dbb8b62a7.png"
+  },
+  {
+    "frame": "detox_palm",
+    "previous": "cast_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Detoxify support gesture: remain upright and grounded, FAR EMPTY hand from screen-right shoulder extends gently forward at CHEST height palm outward, fingers open upward. Near katar lowered at screen-left hip pointing down. Calm focused eyes, no lunge, no particles or magical aura. The open palm and upright body distinguish healing from attack.",
+    "previousReview": "cast_0에서 빈손을 가슴 높이로 펼침. 독 폭탄의 낮은 내딛기와 다르게 서서 지원.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-41279656-2fd4-4efe-a0ad-ef25f4064973.png"
+  },
+  {
+    "frame": "coat_start",
+    "previous": "idle_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Apply poison preparation: stand steady, near weapon forearm lifts horizontally across lower chest, fist centered and short katar blade points right. Far EMPTY hand reaches down above blade root, fingertips close together as if applying invisible coating. Head inclines to look at blade. Both hands clearly separate. No liquid, vial, glow or particles.",
+    "previousReview": "대기 가까운 손을 가슴 앞으로 올리고 먼손만 날 뿌리 위 접근.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-679a2e72-04d8-4778-ad82-909dd7577c56.png"
+  },
+  {
+    "frame": "coat_end",
+    "previous": "coat_start",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Next poison coating frame: keep near weapon arm and horizontal katar absolutely steady, FAR empty hand slides from blade ROOT to near TIP at screen-right, fingers together above the blade, elbow extends outward. Head follows the fingertips slightly, feet same. No particles, no liquid, no extra props. Hand never grips blade.",
+    "previousReview": "coat_start 2개 손과 수평 무기 분리 정상. 빈손이 날끝까지 이동하는 핵심 장.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-d3beee0b-3a79-4419-8dce-dcfb0eb5b05d.png"
+  },
+  {
+    "frame": "guard_hold",
+    "previous": "coat_start",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Poison counter GUARD: near weapon forearm lifted diagonally in front of chest, katar blade points UP-RIGHT beside face but not covering eyes. Far empty fist tucked near sternum behind weapon arm. Weight shifts onto back screen-left leg, front foot light, knees bent. Alert defensive stance, not attacking or coating, no effects.",
+    "previousReview": "coat_start 같은 팔 구조를 가슴 앞 방어로 들어 올림. 무기와 얼굴 분리.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-1bd4ac1f-058d-4908-9644-d9d198bb1679.png"
+  },
+  {
+    "frame": "hide_low",
+    "previous": "cast_0",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Stealth vanish preparation: deep compact crouch on both feet, hips almost heel level, chin tucked yet eyes watching right. Near katar hand pulled close across knees pointing diagonally right, far empty hand draws scarf toward chest in quiet sign. Scarf tails wrap closer body. No transparency fading, no smoke or magic. Head same size, short silhouette.",
+    "previousReview": "cast_0 준비 손동작에서 몸 전체를 낮춰 은신 전 자세로 연결.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-f826e0ee-d95d-45c4-a38f-ec886cb6ab61.png"
+  },
+  {
+    "frame": "roll_tuck",
+    "previous": "hide_low",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Backward roll first rotation toward SCREEN-LEFT: drop hips backward, round back, tuck both knees to chest with boots lifting toward screen-right. Head/shoulders now near ground at screen-left, face still partly visible looking right. Same NEAR weapon hand clenched against outer chest, blade pointing outward away from body, far hand tucked. Compact ball shape, not lying dead. Body diagonally reclining, no motion effects.",
+    "previousReview": "hide_low 낮은 중심에서 뒤로 체중 이동. 팔을 모으고 두 발을 들어 실제 구르기 시작.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-4981146b-e72a-46cd-9a42-0e3c72c9375e.png"
+  },
+  {
+    "frame": "roll_invert",
+    "previous": "roll_tuck",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Next backward somersault: body rotates another quarter turn BACK toward SCREEN-LEFT. Head near bottom-left ground, shoulders down, hips ABOVE head at center, both tucked boots over head toward upper-left. Show inverted compact ball with scarf trailing up-right. Near weapon hand still pressed across outer chest, same katar points away to screen-right, far arm braced close. Not a flat rotation of standing pose: knees tightly tucked, spine rounded. Keep head size.",
+    "previousReview": "roll_tuck 무릎 모음과 가까운 무기 팔 유지 확인. 어깨로 체중 이동하며 골반이 머리 위 통과.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-f4dcb7c6-575a-472f-a3ec-4886a1a6aa7c.png"
+  },
+  {
+    "frame": "roll_land",
+    "previous": "roll_invert",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Backward roll LANDING back to upright right-facing 3/4: both feet land in low crouch, one knee almost ground, head rises looking right. FAR EMPTY hand touches ground on screen-right to stabilize. NEAR weapon arm at screen-left remains folded across waist holding katar diagonal right. Scarf tails fly up-right from rotation. Same compact anatomy and head as original, not mirrored.",
+    "previousReview": "roll_invert 등/어깨 축 회전과 근거리 무기 손 유지. 오른쪽 시선으로 낮게 착지.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-b947cc8a-1075-49fa-8a63-47a58dba1686.png"
+  },
+  {
+    "frame": "roll_land_fix",
+    "previous": "roll_land",
+    "prompt": "Edit the reference into ONE next animation frame, NOT a sheet. Original MiniMidgard male assassin. Preserve EXACT same character, 2-head proportions, short platinum hair, amber eyes, lower face navy mask, plum armor, navy scarf tails, brass fittings, same pixel scale, same right-facing 3/4 viewpoint. Keep near hand attached to screen-left shoulder as sole weapon hand, far hand empty. Single steel triangular katar push-blade aligned FORWARD with fist, no sword. Transparent background, crisp enlarged pixel art. No text, ground shadow, extra character, or external spell effects. Keep entire body visible. Change only pose: Keep exact character pose and anatomy of first reference. Correct scarf continuity ONLY: there must be exactly TWO short navy scarf tails, both originating at back of waist and trailing to screen-left at knee height as in original idle. REMOVE the two huge floating tails extending behind/above head on upper-right entirely. Transparent empty upper background. No other changes.",
+    "previousReview": "roll_land 착지·무기 손 정상이나 천 꼬리가 네 개로 증식해 제외. 상단 두 개 제거 재생성.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-618500da-89d9-4cc0-9648-ab142d7748cd.png"
+  },
+  {
+    "frame": "dagger_design",
+    "previous": "idle_0",
+    "prompt": "Edit ONLY weapon of this original MiniMidgard assassin idle frame. Preserve every body, hand, head, armor, feet pixel and pose. Replace katar push blade and gold rectangular fist rails with ONE conventional short dagger held in the SAME near hand at waist. Dagger has narrow straight double-edged silver blade, tiny straight brass crossguard, dark grip inside closed fist. Blade points diagonally down-right and is about 1.5 times existing triangular blade length, slim rather than triangular broad katar. Do not add sheath or second weapon, do not swap hands. Same pixel art, transparent background, one single full body character, no text. This output is for extracting the dagger weapon layer.",
+    "previousReview": "기본 대기 가까운 손을 유지하고 카타르 레일을 단검 손잡이로 교체.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a1229b-cc09-70c1-83a8-d78ba1c90183/exec-b5d166d8-7f94-4e98-8d17-9d3030efea86.png"
+  }
+]
