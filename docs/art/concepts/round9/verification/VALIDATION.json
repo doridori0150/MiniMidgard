@@ -1,0 +1,109 @@
+{
+  "status": "PASS",
+  "sprites": {
+    "r9a_idle": {
+      "opaque_colors": 29,
+      "colors_including_transparency": 30,
+      "alpha": [
+        0,
+        255
+      ],
+      "visible_height": 48,
+      "exact_6x_nearest": true,
+      "connected_components": [
+        1178
+      ],
+      "sha256": "dc14d2c16cb11f7a1fe4582c0057261e6627a79ce8172a31571a68b40675ff80"
+    },
+    "r9a_pose": {
+      "opaque_colors": 29,
+      "colors_including_transparency": 30,
+      "alpha": [
+        0,
+        255
+      ],
+      "visible_height": 54,
+      "exact_6x_nearest": true,
+      "connected_components": [
+        1766
+      ],
+      "sha256": "557dc82da184257c5db1b67be4542de542b2f9959522eadb9ac7012d7a8df806"
+    },
+    "r9b_idle": {
+      "opaque_colors": 28,
+      "colors_including_transparency": 29,
+      "alpha": [
+        0,
+        255
+      ],
+      "visible_height": 48,
+      "exact_6x_nearest": true,
+      "connected_components": [
+        1099
+      ],
+      "sha256": "b55215cb95251ce1a3ab7086ed37beb684019cbea37d96fa9e3b481c005aade1"
+    },
+    "r9b_pose": {
+      "opaque_colors": 29,
+      "colors_including_transparency": 30,
+      "alpha": [
+        0,
+        255
+      ],
+      "visible_height": 51,
+      "exact_6x_nearest": true,
+      "connected_components": [
+        1569
+      ],
+      "sha256": "e0b42b8fddcdc28230167db2bb127435f267f2b948eda04f229f1a6090464ae5"
+    },
+    "r9c_idle": {
+      "opaque_colors": 28,
+      "colors_including_transparency": 29,
+      "alpha": [
+        0,
+        255
+      ],
+      "visible_height": 48,
+      "exact_6x_nearest": true,
+      "connected_components": [
+        1030
+      ],
+      "sha256": "82a823d7668b86eec146f1b679cb16008456e190ec8fccb049104c33bb5f74ee"
+    },
+    "r9c_pose": {
+      "opaque_colors": 29,
+      "colors_including_transparency": 30,
+      "alpha": [
+        0,
+        255
+      ],
+      "visible_height": 50,
+      "exact_6x_nearest": true,
+      "connected_components": [
+        1498
+      ],
+      "sha256": "cbae3edf50ea11392863e412b282e4d4098eb6814c34985cc9c9d36cc7d79867"
+    }
+  },
+  "deliverables": [
+    "r9_compare.png",
+    "NOTES.md",
+    "PROMPTS.json",
+    "r9a_field.png",
+    "r9a_idle.png",
+    "r9a_idle_6x.png",
+    "r9a_pose.png",
+    "r9a_pose_6x.png",
+    "r9b_field.png",
+    "r9b_idle.png",
+    "r9b_idle_6x.png",
+    "r9b_pose.png",
+    "r9b_pose_6x.png",
+    "r9c_field.png",
+    "r9c_idle.png",
+    "r9c_idle_6x.png",
+    "r9c_pose.png",
+    "r9c_pose_6x.png"
+  ]
+}

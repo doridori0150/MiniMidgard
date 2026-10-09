@@ -1,0 +1,179 @@
+{
+  "method": "one center sample per square cell; no interpolation; explicit palette; alpha >= 200 -> 255",
+  "sprites": {
+    "r9a_idle": {
+      "canvas": [
+        64,
+        64
+      ],
+      "source_bounds": [
+        82,
+        291,
+        550,
+        937
+      ],
+      "source_cell_pitch": 13.458333333333334,
+      "grid_size": [
+        35,
+        48
+      ],
+      "opaque_bbox": [
+        14,
+        10,
+        49,
+        58
+      ],
+      "opaque_colors": 29,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "manual_pixel_edits": 537
+    },
+    "r9a_pose": {
+      "canvas": [
+        96,
+        80
+      ],
+      "source_bounds": [
+        645,
+        205,
+        1508,
+        934
+      ],
+      "source_cell_pitch": 13.458333333333334,
+      "grid_size": [
+        64,
+        54
+      ],
+      "opaque_bbox": [
+        16,
+        16,
+        80,
+        70
+      ],
+      "opaque_colors": 29,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "manual_pixel_edits": 591
+    },
+    "r9b_idle": {
+      "canvas": [
+        64,
+        64
+      ],
+      "source_bounds": [
+        33,
+        201,
+        622,
+        895
+      ],
+      "source_cell_pitch": 14.458333333333334,
+      "grid_size": [
+        41,
+        48
+      ],
+      "opaque_bbox": [
+        11,
+        10,
+        52,
+        58
+      ],
+      "opaque_colors": 28,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "manual_pixel_edits": 107
+    },
+    "r9b_pose": {
+      "canvas": [
+        96,
+        80
+      ],
+      "source_bounds": [
+        689,
+        160,
+        1514,
+        898
+      ],
+      "source_cell_pitch": 14.458333333333334,
+      "grid_size": [
+        57,
+        51
+      ],
+      "opaque_bbox": [
+        19,
+        19,
+        76,
+        70
+      ],
+      "opaque_colors": 29,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "manual_pixel_edits": 120
+    },
+    "r9c_idle": {
+      "canvas": [
+        64,
+        64
+      ],
+      "source_bounds": [
+        33,
+        185,
+        521,
+        888
+      ],
+      "source_cell_pitch": 14.645833333333334,
+      "grid_size": [
+        33,
+        48
+      ],
+      "opaque_bbox": [
+        15,
+        10,
+        48,
+        58
+      ],
+      "opaque_colors": 28,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "manual_pixel_edits": 368
+    },
+    "r9c_pose": {
+      "canvas": [
+        96,
+        80
+      ],
+      "source_bounds": [
+        637,
+        154,
+        1511,
+        910
+      ],
+      "source_cell_pitch": 14.645833333333334,
+      "grid_size": [
+        60,
+        52
+      ],
+      "opaque_bbox": [
+        18,
+        18,
+        78,
+        68
+      ],
+      "opaque_colors": 29,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "manual_pixel_edits": 340
+    }
+  }
+}
