@@ -10,6 +10,7 @@
   2. 레퍼런스를 체크할 것
   3. 스프라이트 애니메이션을 사전에 어떤 동작을 할지 고려하여, 1장씩 생성하고, 연결할 것 (다음 그림을 그리기 전에 이전 그림을 체크해서 연결되게)
 - 기사 15라운드를 보고: "저 정도면 훌륭해"
+- 장 수: "그리고 지금 이동 공격이 3프레임이라서 아무래도 어색한 거 같은데 보통 몇 프레임 정도를 쓰나? 스프라이트를 8장정도 쓰려나", "모션은 최소 6~8장은 써야 할 거 같아." 지금 영웅들의 걷기는 6~8장입니다.
 
 ## 기준
 - **크기·스타일:** 지금 게임 속 도트 영웅에 맞춥니다.
@@ -36,7 +37,7 @@ Actions:
 - idle, walk, attack, hurt, dead, sit;
 - also **cast** if the class brief says so.
 
-You decide frame counts and timing from the RO reference, adapted to our game. The attack's hit lands about halfway through a short swing; put `hitFrame` on that frame.
+You decide frame counts and timing from the RO reference, adapted to our game, keeping the user's rule above: walk and attack use at least 6–8 frames (our heroes' walks have 6–8). The attack's hit lands about halfway through a short swing; put `hitFrame` on that frame.
 
 Deliver into `docs/art-production/pixel-class-<class>/`:
 - a `manifest.json` in the `minimidgard.pixel/1` format of r15:

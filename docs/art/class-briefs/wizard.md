@@ -68,3 +68,14 @@ Class: **Wizard**, character `wizard_female_p2` (female, like our mage line). It
 References: the attached Ragnarok Online Wizard sheet first, then Tree of Savior's magic classes for skill-specific body motions, then Sword of Convallaria. Take the motion only.
 
 Deliver into `docs/art-production/pixel-class-wizard/`.
+
+---
+
+## 보강 1 — 걷기 (2026-10-10)
+위저드 걷기가 4장(0·2장, 1·3장이 거의 같음)이라 사용자가 정한 장 수보다 적습니다.
+- 사용자 말: "그리고 지금 이동 공격이 3프레임이라서 아무래도 어색한 거 같은데 보통 몇 프레임 정도를 쓰나? 스프라이트를 8장정도 쓰려나", "모션은 최소 6~8장은 써야 할 거 같아."
+- 지금 다른 영웅들의 걷기: 쿠키·기사·도둑 8장, 마법사·궁수·복사·상인·초보자 6장.
+- 라그나로크 위저드 걷기는 8장입니다(첨부 시트 2번째 줄).
+
+### REQUEST (for Codex)
+Redo only the **walk** of `wizard_female_p2` in `docs/art-production/pixel-class-wizard/` with 6–8 distinct frames (the user's rule above), a proper alternating stride, the staff in the same hand throughout. Keep the user's three rules: same proportion/style/size, check the reference (the RO Wizard walk row), plan the cycle first and draw one frame at a time, checking the previous frame before the next. Keep every other action, the design and the skill motions unchanged. Update `manifest.json`, the walk GIFs and contact sheet, and add a short section to `NOTES.md`. Write only inside that folder; no build caches. Do not change `src/`, commit or push. End with a short Korean summary.
