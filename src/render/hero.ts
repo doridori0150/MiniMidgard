@@ -53,6 +53,8 @@ export interface Pose {
   t: number;
   dur?: number;
   facing: 1 | -1;
+  /** ms since the unit entered this state (loops such as cast keep `t` on the shared clock) */
+  since?: number;
 }
 
 interface Outfit { main: string; second: string; pants: string; shoes: string; trim: string; robe?: boolean; skirt?: boolean }

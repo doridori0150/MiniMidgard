@@ -130,6 +130,11 @@ export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: 
     t = pose.t / Math.max(1, pose.dur ?? 280) * 2 * hit;
   }
   if (state === 'dead') t = pose.t; // play the fall, then hold the last frame
+  if (state === 'cast' && table.cast_start) {
+    // a one-shot lead-in (hands come together) before the looping cast; pose.t runs from when the cast began
+    const since = pose.since ?? pose.t;
+    if (since < table.cast_start.duration) { state = 'cast_start'; t = since; } else t = since - table.cast_start.duration;
+  }
   const name = pickFrame(table, state, t);
   const f = c.frames[name];
   if (!f) return false;

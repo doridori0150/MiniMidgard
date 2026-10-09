@@ -1158,7 +1158,7 @@ export class FieldRenderer {
     ctx.translate(sm.x, sm.y);
     // swing length chosen so the blade/spear/katar passes straight ahead at MELEE_CONTACT and the bow releases at BOW_RELEASE
     const dur = h.state === 'attack' ? (h.d.wtype === 'bow' ? BOW_RELEASE / 0.6 : h.d.wtype === 'spear' ? MELEE_CONTACT / 0.47 : MELEE_CONTACT / 0.5) : undefined;
-    const pose = { state: flash > 0.5 && (state === 'idle' || state === 'ready') ? 'hurt' : state, t: state === 'idle' || state === 'ready' || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing };
+    const pose = { state: flash > 0.5 && (state === 'idle' || state === 'ready') ? 'hurt' : state, t: state === 'idle' || state === 'ready' || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing, since: t };
     this.lastPose.set(h.uid, pose);
     // a merchant's pushcart rolls along behind it (카트 교체: the flowered one)
     if ((h.hero.skills.pushcart ?? 0) > 0 && state !== 'dead') drawCart(ctx, 0, 0, h.facing, (h.hero.skills.change_cart ?? 0) > 0 && !h.hero.skillOff?.change_cart, now, state === 'walk');

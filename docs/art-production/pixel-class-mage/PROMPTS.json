@@ -1,0 +1,111 @@
+[
+  {
+    "frame": "idle_0",
+    "prompt": "Use case: stylized-concept. Make ONE original female mage pixel-game animation frame idle_0, not a sheet. References are our Knight and Cookie ONLY for pixel style and proportions, do not copy outfit. Transparent background. Character looks southeast (screen right 3/4), tiny adult chibi two-head proportions, head is HALF full height, short legs, visually 48 logical pixels tall. Crisp low-resolution pixel clusters, nearest-neighbor enlarged appearance, limited flat palette, no smooth paint/antialiasing, no text. New design: softly waved cream bob with curled side locks and small side braid, no hat. Four hair tones #faf0d7 #e1cdb8 #b49b91 #49342f. Plum-purple short mage robe, cream collar, small gold brooch and gold hems, dark plum boots. Bright warm small face dark eyes. Own wooden staff, slim amber shaft, small mint faceted crystal in gold fork. The SCREEN-RIGHT near hand grips the staff at hip height, staff head diagonally up/right, staff bottom diagonally down/left, length about 34 logical pixels; never taller than character in idle. Other hand relaxed. Feet lightly separated resting on same baseline. Full character centered with ample transparent margins, no ground/shadow. ONE FRAME ONLY. Keep character width, large head, tiny body and pixel density closely matched to references."
+  },
+  {
+    "frame": "idle_1",
+    "prompt": "Use case: identity-preserve. ONE next pixel sprite frame only, transparent. Reference is previous idle_0 and locked mage design. Change only subtle breathing: shoulders and chest rise ONE logical pixel, free sleeve slightly inward. Boots stay exactly grounded, head same size and same position. Same cream waved bob and side braid, plum robe cream/gold trims, mint crystal staff in SAME screen-right near hand at hip. Staff tilts just a touch more upright. Keep huge half-height head, 48px two-head body, same crisp low-resolution enlarged pixel clusters, same southeast camera. No text, ground, shadow or extra effects. Keep image canvas and character placement exactly as reference; do not zoom."
+  },
+  {
+    "frame": "idle_2",
+    "prompt": "Use case: identity-preserve. ONE next idle pixel sprite frame, transparent, same canvas composition and character scale. First reference previous inhale, second locked idle design. Exhale shoulders gently down by one logical pixel, free sleeve settles outward halfway towards idle_0; same feet and head silhouette. Same female mage cream wavy bob/braid, big half-height head, plum cream gold short robe, dark boots. SAME screen-right near hand holds same wood staff mint crystal, tilts back a touch toward idle_0. Exact same southeast view and low-resolution pixel clusters. No text, background, glow or shadow. Tiny motion only, no zoom."
+  },
+  {
+    "frame": "walk_0",
+    "prompt": "Use case: identity-preserve. ONE walking animation frame contact A of the exact mage. Reference1 previous idle, reference2 identity anchor. Same 2-head 48-logical-pixel female mage and same clothes, hair, staff and camera. Walk toward screen-right. Rightmost NEAR boot steps forward to screen-right by ~4 logical px; far boot extends back left, both feet near baseline. Torso drops ONE pixel, robe hems separate to show the stride. Free left-screen hand swings gently backward. Staff remains in same screen-right near hand, angled up-right. Head unchanged scale and same calm face. Full transparent canvas and identical framing, pixel clusters crisp. No text/shadow/effects."
+  },
+  {
+    "frame": "walk_1",
+    "prompt": "Use case: identity-preserve. ONE next walk frame after reference1, reference2 locked idle design. Passing pose A: planted near boot screen-right comes under torso; the rear far boot lifts and bends, beginning to pass behind near shin. Narrow stance clearly different from preceding wide step. Body rises one logical pixel, loose robe trails screen-left. Free left-screen hand starts swinging toward chest. SAME staff held by same screen-right near hand, same hip grip and angle. Same exact cream bob, face, plum cream gold clothes, 2-head 48px chibi proportions and crisp chunky pixel art. Transparent, same framing, no ground/text/effects, no zoom."
+  },
+  {
+    "frame": "walk_2",
+    "prompt": "Use case: identity-preserve. ONE next walk frame, reference1 previous narrow passing, reference2 identity. Swing-through A: previously lifted FAR leg now comes forward towards screen-right with toe still 2 logical pixels above ground; NEAR leg supports body underneath and starts trailing. Show two distinguishable boots crossing, not a standing pose. Free hand remains forward. Torso near top of small walk bob, robe opens a little ahead. Same staff same screen-right near hand, slightly more vertical, same exact big cream bob/head and plum robe, 48 logical px two-head sprite, southeast. Transparent, same framing, crisp pixel blocks; no shadow/text."
+  },
+  {
+    "frame": "walk_3",
+    "prompt": "Use case: identity-preserve. ONE walk frame opposite contact B. Reference1 previous swing-through. Reference2 original identity. IMPORTANT REVERSE LEG STRIDE relative to initial walk: near thigh under screen-right robe goes diagonally DOWN-LEFT to boot at screen-left/back. Far leg emerges behind it and stretches diagonally DOWN-RIGHT to front boot at screen-right. Crossed thighs readable, BOTH soles near baseline. Wide opposing stance, body settles down 1px. Free sleeve reaches slightly forward. Same cream bob/braid and face, plum cream gold short robe, dark boots, same staff held in SAME screen-right near hand. Exact 2-head 48px chunky pixel aesthetic. Transparent, same framing, no text/shadow."
+  },
+  {
+    "frame": "walk_3",
+    "attempt": 2,
+    "prompt": "Use case: identity-preserve. Redraw ONLY the lower body and free sleeve for a SINGLE opposite-stride walking sprite. Previous attempt did NOT swap legs, so make this unmistakable. SAME original mage in first reference, second reference previous walk for continuity. Put the visible NEAR bare knee at x=690 directly under right robe, then its plum boot slants DOWN-LEFT across the center, ending around x=570 at the back. Put the FAR knee at x=620, then far shin slants DOWN-RIGHT BEHIND near leg, ending at x=735 toe pointing right. This creates an X-shaped crossing of shins, opposite to spread uncrossed legs in reference. Keep both boots on same bottom line. Do not copy reference leg positions. Free left-screen arm extended forward over waist. Upper body, head, same staff in screen-right near hand completely unchanged. Crisp pixel clusters, tiny two-head sprite, transparent canvas. One frame, no text."
+  },
+  {
+    "frame": "walk_4",
+    "prompt": "Use case: identity-preserve. ONE NEXT walk passing B frame, first reference previous opposite contact, second idle identity. Keep far boot planted under body at screen-left of center, NEAR boot visibly raised and folded BACK toward screen-left, foot off ground about 4 logical pixels. Make a narrow one-legged support pose, opposite support leg to earlier pass A. Free left-screen arm begins swinging backward/down. Robe hem settles close to legs. Body rises 1 pixel, head same size and face. Staff same screen-right near hand no change of hands. Exact mage design and crisp tiny 2-head pixel art, transparent same canvas framing, no text."
+  },
+  {
+    "frame": "walk_5",
+    "prompt": "Use case: identity-preserve. ONE final walking frame before returning to reference3 contact A. First reference previous passing frame, second locked identity, third next loop contact. Move lifted near knee forward with near boot reaching toward screen-right but not yet fully planted; trailing far boot under screen-left hip. Stance halfway between passing and wide contact, boots clearly separate. Free arm swings back toward first stride. Torso lowers halfway, same head and scale, same staff same screen-right near hand. Crisp chunky 48px two-head pixel mage, transparent same framing no text/shadow/effects. This must join next contact without a sudden head or staff jump."
+  },
+  {
+    "frame": "attack_0",
+    "prompt": "Use case: identity-preserve. ONE first melee staff attack wind-up frame of this exact female mage, after idle. First reference locked idle and immediate previous attack stance. Raise the SAME screen-right NEAR hand from hip to beside cheek, pulling staff up: staff is nearly vertical screen-right of face, crystal high above hand and a little above crown. Far hand comes up at chest to brace the near wrist, not swapping weapon hands. Knees slightly bent, feet firm, eyes focused right. Same cream wavy bob, half-height large head, plum short robe cream gold, tiny boots. SAME length wooden mint-crystal staff. Clear pixel-art two-head 48px, transparent, same placement/scale with room above, no effects/text."
+  },
+  {
+    "frame": "attack_1",
+    "prompt": "Use case: identity-preserve. ONE next staff attack apex anticipation frame, after first reference. Lift both arms above forehead, SAME near hand remains upper grip. Staff rotates backward over head, mint crystal points upper-LEFT, shaft extends diagonally down-right through joined hands just above/right of crown. Clearly OVERHEAD wind-up for downward strike, not holding upright at side. Chest leans back slightly, knees compressed, toes on same ground line, robe trails right a little. Same mage head/cream bob, plum robe, short two-head proportions, staff exact design and length. Reference2 identity anchor. Transparent same framing, no text/shadow/smear yet, crisp pixel blocks."
+  },
+  {
+    "frame": "attack_2",
+    "prompt": "Use case: identity-preserve. ONE next FAST DOWNSWING sprite after overhead windup reference1, identity reference2. Swing same staff in a VERTICAL ARC from upper-left ABOVE head towards upper-right/front. At this frame staff crystal is at screen-right shoulder height, staff shaft diagonal from joined hands at upper chest to crystal up-right. Near hand remains the grip nearer crystal throughout. Both arms drive forward, body pitches forward slightly and front boot steps right. A narrow pale mint pixel arc traces overhead to front, no gigantic sword blade, no extra staff, no detached hand. Keep same wooden shaft length, mint crystal shape, plum robe cream/gold, cream bob and exact two-head proportions. Transparent same canvas and scale, crisp small pixel clusters, no text."
+  },
+  {
+    "frame": "attack_3",
+    "prompt": "Use case: identity-preserve. ONE impact frame continuing staff downward strike. Reference1 immediately preceding downswing, reference2 identity. Drive crystal end DOWN-RIGHT to near ground far in front of right foot, hands now at waist/chest forward, shaft slopes clearly down-right from hands to crystal at shin height. Near hand stays closer to crystal, far hand behind it. Bend torso FORWARD and lower head about 5 logical pixels, front knee bent, rear boot braced. Keep same huge head size. Narrow pale mint streak descending along right side ending in tiny 2-pixel impact spark at crystal; not an explosion. Same mint crystal wooden staff length, same cream bob plum robe gold cream trims. One sprite transparent, same framing and crisp 2-head pixel clusters, no text or ground shadow."
+  },
+  {
+    "frame": "attack_4",
+    "prompt": "Use case: identity-preserve. ONE follow-through held low frame after impact reference1. REMOVE ALL mint arc/spark effects; keep real staff mint crystal. Stay in SAME deep forward-bent stance, settle head and shoulders down ONE more logical pixel, wrists at low front waist and same staff sloping down-right to shin height. Same feet positions, both hands same grips, near hand closest crystal. Robe rear tail settles downward. This is long recovery HOLD, not a new attack or return to standing. Same exact mage head size face cream bob plum robe design and staff length from reference2. Transparent same framing, crisp low-resolution pixel art. No text/shadow/glow."
+  },
+  {
+    "frame": "attack_5",
+    "prompt": "Use case: identity-preserve. ONE recovery frame between first reference low staff hit follow-through and second reference idle. Rise HALFWAY upright, head moves up 2 logical pixels and slightly back, front foot retracts halfway. SAME screen-right near hand draws staff back to hip, crystal sweeps from low right to approximately hand-height farther right so staff is almost HORIZONTAL with slight up-right angle. Far supporting hand releases and returns toward chest, only near hand grips. Robe settles, same face head scale cream bob and plum cream gold design, same staff size. Preserve low-resolution two-head 48px pixel clusters. Transparent same framing; no magic trail, no text/shadow."
+  },
+  {
+    "frame": "cast_start_0",
+    "prompt": "Use case: identity-preserve. ONE casting preparation frame after idle reference. SAME female mage: cream waved bob side braid, huge half-height head, plum cream gold robe. Bring BOTH hands together at upper chest: same screen-right near hand still grips wooden staff at chest-height; free hand comes across with open palm just beside gripping hand. Staff remains nearly vertical screen-right of face, mint crystal above hand but below crown. Elbows close to body, knees relaxed, gaze focused right. Clearly gathering spell at chest, NOT raising staff to attack. Keep same staff length, same hand and 2-head 48px pixel style. Transparent same canvas composition, no particles yet, no text/shadow."
+  },
+  {
+    "frame": "cast_start_1",
+    "prompt": "Use case: identity-preserve. ONE next spell preparation-to-extension frame. Reference1 gathered hands at chest, reference2 identity. Move both hands halfway forward toward screen-right at chest height, elbows begin straightening. Near screen-right hand still holds SAME staff nearly vertical but tilted forward slightly, free hand palm faces outward beside it. Tiny mint 2px glimmer between hands, no halo. Lean body forward one logical pixel, feet unchanged. Same huge cream bob, face, plum gold cream short robe, 2-head 48px chunky pixel art. Transparent same framing, no text/ground/shadow. This bridges hands-gathered to arms-extended HOLD."
+  },
+  {
+    "frame": "cast_0",
+    "prompt": "Use case: identity-preserve. ONE first sustained casting HOLD frame, after reference1 halfway extension, second design anchor. Extend BOTH arms another small step forward, almost straight at chest height toward screen-right. Near hand still grips same upright staff, free palm open beside staff, fingers pointed up-right. Lean forward gently and bend knees a little; feet remain fixed. A SMALL crisp mint diamond glimmer above open palm, about 3 logical pixels, no large halo. Keep exactly same face and head size, cream bob, plum cream gold robe, dark boots, staff. Two-head 48px pixel-game sprite transparent same framing; no text or shadow."
+  },
+  {
+    "frame": "cast_1",
+    "prompt": "Use case: identity-preserve. ONE middle sustained cast LOOP frame. Reference1 is previous hold, reference2 locked identity. Maintain extended arms and same planted feet, same grip and staff position. Only shoulders/sleeves rise ONE logical pixel on breath and small mint diamond above free palm grows from 3 to 4 logical pixels with a single tiny spark beside it. Head same exact size and placement, no change pose direction or hand. Keep cream bob plum cream gold mage design, 48px two-head crisp pixel clusters. Transparent same canvas no glow blur/text/shadow. Very subtle hold motion."
+  },
+  {
+    "frame": "cast_2",
+    "prompt": "Use case: identity-preserve. ONE final cast-hold loop frame bridging reference1 pulse peak back to reference2 loop start. Keep arms extended and staff same screen-right near hand, exactly same boots and posture. Relax sleeves ONE logical pixel, tiny mint palm glimmer shrinks halfway back to reference2 and moves 1 logical pixel down. No retracting arms or returning to idle. Same exact female mage cream bob plum cream gold robe and same head size. Transparent same framing crisp two-head 48px pixel clusters no text/shadow/blur. Make loop end very close to loop start reference2."
+  },
+  {
+    "frame": "hurt_0",
+    "prompt": "Use case: identity-preserve. ONE hit-reaction recoil frame of same mage, after idle. Lean upper body and big head BACK toward screen-left by about 5 logical pixels, chin slightly raised, eyebrows pinch and eyes squeeze briefly. Knees bend, forward right boot stays planted, back boot braces. Same screen-right near hand still grips staff, arm recoils so staff tilts out to screen-right, free hand opens in surprise near waist. DO NOT change weapon hands. Same cream waved bob and braid, plum cream gold robe, same staff and huge head size, two-head 48px crisp pixel art. Transparent same canvas placement, no blood/text/shadow/impact effect."
+  },
+  {
+    "frame": "hurt_1",
+    "prompt": "Use case: identity-preserve. ONE next hit-reaction settling frame, after reference1 maximum recoil, reference2 idle identity. Recover halfway toward upright, head still tilted back but less, eyes half-open pained. Knees still softly bent, free hand settles closer to body and staff-bearing same screen-right near hand lowers back toward idle grip. Same feet baseline, same cream bob braid and head size, plum robe cream gold, staff unchanged. Do not return completely idle yet. Crisp two-head 48 logical px pixel art, transparent same framing, no effects/text/shadow."
+  },
+  {
+    "frame": "dead_0",
+    "prompt": "Use case: identity-preserve. ONE first collapse frame, continuation after hurt reference1, identity reference2. Knees BUCKLE down onto ground, hips descend about 8 logical px, huge head drops with body but retains exact size. Torso begins tipping forward screen-right, eyelids closed, free hand reaching low to brace. Same near hand still grips staff, lowered diagonally down-right with crystal near ground. Same cream waved bob braid, plum cream gold robe crumples around knees. Do not draw seated relaxed pose; show collapsing forward, both knees low, boots behind. Tiny 2-head pixel game sprite crisp pixel blocks transparent same framing, no text/blood/shadow."
+  },
+  {
+    "frame": "dead_1",
+    "prompt": "Use case: identity-preserve. ONE next collapse frame after kneeling reference1, reference2 identity. Lose support and tip body FORWARD toward screen-right, torso almost horizontal, huge head lowered near ground but not yet fully down. Free forearm buckles beneath chest, hips still slightly raised, folded boots trail to screen-left. SAME near hand loosely holds staff lying diagonally almost horizontal to screen-right on ground, crystal far right. Eyes shut, no injury/blood. Same cream wavy bob braid, head size, plum cream gold robe and boots, two-head pixel aesthetic. Transparent same framing, keep whole character and staff inside canvas, crisp pixels no text/shadow."
+  },
+  {
+    "frame": "dead_2",
+    "prompt": "Use case: identity-preserve. ONE final defeated prone still frame following reference1. COMPLETE the fall: chest and belly REST FLAT on ground, hips flat, legs extend left behind, head at screen-right rests face-down/cheek on bent forearm at ground level. Eyes closed. Huge head retains same dimensions but tilted down, crown low; no kneeling, no raised torso, no sitting. SAME cream bob braid and plum cream gold robe, same boots. Near hand remains touching wooden staff lying horizontal along ground in front, mint crystal at far screen-right. Staff stays same length. One small pixel-game sprite, transparent ample margin same framing, crisp two-head style, no shadow/text/blood."
+  },
+  {
+    "frame": "sit_0",
+    "prompt": "Use case: identity-preserve. ONE relaxed sitting game sprite of the exact mage from reference1 idle. Same 3/4 southeast view. Sit on ground with knees bent together forward screen-right, boots tucked neatly ahead, torso upright and calm alert open eyes. Head same huge size and exact cream wavy bob/braid, crown lower because seated but do not shrink character. Plum cream gold short robe drapes over thighs, free hand rests on knee. SAME screen-right near hand rests lightly on wooden staff laid diagonally across lap toward ground screen-right with small mint crystal at far right. Same staff length, no change of hand. Two-head 48px standing-equivalent pixel art crisp clusters, transparent same framing baseline, no text/shadow. Distinct from kneeling collapsed death."
+  }
+]

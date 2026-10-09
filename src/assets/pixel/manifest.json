@@ -1710,6 +1710,845 @@
           "grip": "grips/knight_female_p2/attack_7.png"
         }
       }
+    },
+    "mage_female_p2": {
+      "gender": "female",
+      "bodyHeight": 48,
+      "headHeight": 26,
+      "proportion": 2,
+      "defaultWeapon": "staff",
+      "defaultHair": "waved_braid_mage_p2",
+      "hairStyles": [
+        "waved_braid_mage_p2"
+      ],
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle_0",
+            "idle_1",
+            "idle_2"
+          ],
+          "durations": [
+            240,
+            240,
+            240
+          ],
+          "duration": 720,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            "walk_0",
+            "walk_1",
+            "walk_2",
+            "walk_3",
+            "walk_4",
+            "walk_5"
+          ],
+          "durations": [
+            90,
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "duration": 540,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            "attack_0",
+            "attack_1",
+            "attack_2",
+            "attack_3",
+            "attack_4",
+            "attack_5",
+            "attack_6"
+          ],
+          "durations": [
+            100,
+            120,
+            60,
+            60,
+            160,
+            100,
+            60
+          ],
+          "duration": 660,
+          "loop": false,
+          "hitFrame": 3
+        },
+        "cast_start": {
+          "frames": [
+            "cast_start_0",
+            "cast_start_1"
+          ],
+          "durations": [
+            100,
+            120
+          ],
+          "duration": 220,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            "cast_0",
+            "cast_1",
+            "cast_2"
+          ],
+          "durations": [
+            160,
+            160,
+            160
+          ],
+          "duration": 480,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt_0",
+            "hurt_1"
+          ],
+          "durations": [
+            90,
+            170
+          ],
+          "duration": 260,
+          "loop": false
+        },
+        "dead": {
+          "frames": [
+            "dead_0",
+            "dead_1",
+            "dead_2"
+          ],
+          "durations": [
+            120,
+            140,
+            1000
+          ],
+          "duration": 1260,
+          "loop": false,
+          "holdLast": true
+        },
+        "sit": {
+          "frames": [
+            "sit_0"
+          ],
+          "durations": [
+            1000
+          ],
+          "duration": 1000,
+          "loop": false,
+          "holdLast": true
+        }
+      },
+      "frames": {
+        "idle_0": {
+          "image": "body/mage_female_p2/idle_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              96
+            ],
+            "tipPoint": [
+              89,
+              73
+            ],
+            "angleDegrees": -60.52
+          },
+          "grip": "grips/mage_female_p2/idle_0.png"
+        },
+        "idle_1": {
+          "image": "body/mage_female_p2/idle_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              96
+            ],
+            "tipPoint": [
+              88,
+              73
+            ],
+            "angleDegrees": -62.45
+          },
+          "grip": "grips/mage_female_p2/idle_1.png"
+        },
+        "idle_2": {
+          "image": "body/mage_female_p2/idle_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              96
+            ],
+            "tipPoint": [
+              87,
+              72
+            ],
+            "angleDegrees": -65.38
+          },
+          "grip": "grips/mage_female_p2/idle_2.png"
+        },
+        "walk_0": {
+          "image": "body/mage_female_p2/walk_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              96
+            ],
+            "tipPoint": [
+              86,
+              74
+            ],
+            "angleDegrees": -65.56
+          },
+          "grip": "grips/mage_female_p2/walk_0.png"
+        },
+        "walk_1": {
+          "image": "body/mage_female_p2/walk_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              95
+            ],
+            "tipPoint": [
+              88,
+              71
+            ],
+            "angleDegrees": -63.43
+          },
+          "grip": "grips/mage_female_p2/walk_1.png"
+        },
+        "walk_2": {
+          "image": "body/mage_female_p2/walk_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              75,
+              95
+            ],
+            "tipPoint": [
+              86,
+              71
+            ],
+            "angleDegrees": -65.38
+          },
+          "grip": "grips/mage_female_p2/walk_2.png"
+        },
+        "walk_3": {
+          "image": "body/mage_female_p2/walk_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              96
+            ],
+            "tipPoint": [
+              88,
+              74
+            ],
+            "angleDegrees": -61.39
+          },
+          "grip": "grips/mage_female_p2/walk_3.png"
+        },
+        "walk_4": {
+          "image": "body/mage_female_p2/walk_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              95
+            ],
+            "tipPoint": [
+              88,
+              73
+            ],
+            "angleDegrees": -61.39
+          },
+          "grip": "grips/mage_female_p2/walk_4.png"
+        },
+        "walk_5": {
+          "image": "body/mage_female_p2/walk_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              95
+            ],
+            "tipPoint": [
+              89,
+              73
+            ],
+            "angleDegrees": -59.42
+          },
+          "grip": "grips/mage_female_p2/walk_5.png"
+        },
+        "attack_0": {
+          "image": "body/mage_female_p2/attack_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              77,
+              80
+            ],
+            "tipPoint": [
+              75,
+              58
+            ],
+            "angleDegrees": -95.19
+          },
+          "grip": "grips/mage_female_p2/attack_0.png"
+        },
+        "attack_1": {
+          "image": "body/mage_female_p2/attack_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              70,
+              69
+            ],
+            "tipPoint": [
+              54,
+              56
+            ],
+            "angleDegrees": -140.91
+          },
+          "grip": "grips/mage_female_p2/attack_1.png"
+        },
+        "attack_2": {
+          "image": "body/mage_female_p2/attack_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              78,
+              91
+            ],
+            "tipPoint": [
+              92,
+              78
+            ],
+            "angleDegrees": -42.88
+          },
+          "grip": "grips/mage_female_p2/attack_2.png"
+        },
+        "attack_3": {
+          "image": "body/mage_female_p2/attack_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              100
+            ],
+            "tipPoint": [
+              96,
+              111
+            ],
+            "angleDegrees": 26.57
+          },
+          "grip": "grips/mage_female_p2/attack_3.png"
+        },
+        "attack_4": {
+          "image": "body/mage_female_p2/attack_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              101
+            ],
+            "tipPoint": [
+              94,
+              110
+            ],
+            "angleDegrees": 24.23
+          },
+          "grip": "grips/mage_female_p2/attack_4.png"
+        },
+        "attack_5": {
+          "image": "body/mage_female_p2/attack_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              98
+            ],
+            "tipPoint": [
+              95,
+              93
+            ],
+            "angleDegrees": -13.39
+          },
+          "grip": "grips/mage_female_p2/attack_5.png"
+        },
+        "attack_6": {
+          "image": "body/mage_female_p2/attack_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              96
+            ],
+            "tipPoint": [
+              89,
+              73
+            ],
+            "angleDegrees": -60.52
+          },
+          "grip": "grips/mage_female_p2/attack_6.png"
+        },
+        "cast_start_0": {
+          "image": "body/mage_female_p2/cast_start_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_start_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              94
+            ],
+            "tipPoint": [
+              79,
+              72
+            ],
+            "angleDegrees": -74.74
+          },
+          "grip": "grips/mage_female_p2/cast_start_0.png"
+        },
+        "cast_start_1": {
+          "image": "body/mage_female_p2/cast_start_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_start_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              84,
+              91
+            ],
+            "tipPoint": [
+              88,
+              72
+            ],
+            "angleDegrees": -78.11
+          },
+          "grip": "grips/mage_female_p2/cast_start_1.png"
+        },
+        "cast_0": {
+          "image": "body/mage_female_p2/cast_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              88,
+              91
+            ],
+            "tipPoint": [
+              92,
+              73
+            ],
+            "angleDegrees": -77.47
+          },
+          "grip": "grips/mage_female_p2/cast_0.png"
+        },
+        "cast_1": {
+          "image": "body/mage_female_p2/cast_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              88,
+              90
+            ],
+            "tipPoint": [
+              92,
+              72
+            ],
+            "angleDegrees": -77.47
+          },
+          "grip": "grips/mage_female_p2/cast_1.png"
+        },
+        "cast_2": {
+          "image": "body/mage_female_p2/cast_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              88,
+              90
+            ],
+            "tipPoint": [
+              92,
+              73
+            ],
+            "angleDegrees": -76.76
+          },
+          "grip": "grips/mage_female_p2/cast_2.png"
+        },
+        "hurt_0": {
+          "image": "body/mage_female_p2/hurt_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              78,
+              96
+            ],
+            "tipPoint": [
+              92,
+              75
+            ],
+            "angleDegrees": -56.31
+          },
+          "grip": "grips/mage_female_p2/hurt_0.png"
+        },
+        "hurt_1": {
+          "image": "body/mage_female_p2/hurt_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              79,
+              97
+            ],
+            "tipPoint": [
+              93,
+              77
+            ],
+            "angleDegrees": -55.01
+          },
+          "grip": "grips/mage_female_p2/hurt_1.png"
+        },
+        "dead_0": {
+          "image": "body/mage_female_p2/dead_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              75,
+              104
+            ],
+            "tipPoint": [
+              89,
+              109
+            ],
+            "angleDegrees": 19.65
+          },
+          "grip": "grips/mage_female_p2/dead_0.png"
+        },
+        "dead_1": {
+          "image": "body/mage_female_p2/dead_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              109
+            ],
+            "tipPoint": [
+              99,
+              109
+            ],
+            "angleDegrees": 0
+          },
+          "grip": "grips/mage_female_p2/dead_1.png"
+        },
+        "dead_2": {
+          "image": "body/mage_female_p2/dead_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              81,
+              109
+            ],
+            "tipPoint": [
+              106,
+              109
+            ],
+            "angleDegrees": 0
+          },
+          "grip": "grips/mage_female_p2/dead_2.png"
+        },
+        "sit_0": {
+          "image": "body/mage_female_p2/sit_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "sit_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              75,
+              104
+            ],
+            "tipPoint": [
+              96,
+              110
+            ],
+            "angleDegrees": 15.95
+          },
+          "grip": "grips/mage_female_p2/sit_0.png"
+        }
+      },
+      "class": "mage"
     }
   },
   "hair": {
@@ -2066,6 +2905,233 @@
           ]
         }
       }
+    },
+    "waved_braid_mage_p2": {
+      "gender": "female",
+      "style": "waved_braid_mage",
+      "proportion": "p2",
+      "pivot": [
+        0,
+        0
+      ],
+      "poses": {
+        "idle_0": {
+          "front": "hair/waved_braid_mage_p2/idle_0_front.png",
+          "back": "hair/waved_braid_mage_p2/idle_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_1": {
+          "front": "hair/waved_braid_mage_p2/idle_1_front.png",
+          "back": "hair/waved_braid_mage_p2/idle_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_2": {
+          "front": "hair/waved_braid_mage_p2/idle_2_front.png",
+          "back": "hair/waved_braid_mage_p2/idle_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_0": {
+          "front": "hair/waved_braid_mage_p2/walk_0_front.png",
+          "back": "hair/waved_braid_mage_p2/walk_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_1": {
+          "front": "hair/waved_braid_mage_p2/walk_1_front.png",
+          "back": "hair/waved_braid_mage_p2/walk_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_2": {
+          "front": "hair/waved_braid_mage_p2/walk_2_front.png",
+          "back": "hair/waved_braid_mage_p2/walk_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_3": {
+          "front": "hair/waved_braid_mage_p2/walk_3_front.png",
+          "back": "hair/waved_braid_mage_p2/walk_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_4": {
+          "front": "hair/waved_braid_mage_p2/walk_4_front.png",
+          "back": "hair/waved_braid_mage_p2/walk_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_5": {
+          "front": "hair/waved_braid_mage_p2/walk_5_front.png",
+          "back": "hair/waved_braid_mage_p2/walk_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_0": {
+          "front": "hair/waved_braid_mage_p2/attack_0_front.png",
+          "back": "hair/waved_braid_mage_p2/attack_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_1": {
+          "front": "hair/waved_braid_mage_p2/attack_1_front.png",
+          "back": "hair/waved_braid_mage_p2/attack_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_2": {
+          "front": "hair/waved_braid_mage_p2/attack_2_front.png",
+          "back": "hair/waved_braid_mage_p2/attack_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_3": {
+          "front": "hair/waved_braid_mage_p2/attack_3_front.png",
+          "back": "hair/waved_braid_mage_p2/attack_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_4": {
+          "front": "hair/waved_braid_mage_p2/attack_4_front.png",
+          "back": "hair/waved_braid_mage_p2/attack_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_5": {
+          "front": "hair/waved_braid_mage_p2/attack_5_front.png",
+          "back": "hair/waved_braid_mage_p2/attack_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_6": {
+          "front": "hair/waved_braid_mage_p2/attack_6_front.png",
+          "back": "hair/waved_braid_mage_p2/attack_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_start_0": {
+          "front": "hair/waved_braid_mage_p2/cast_start_0_front.png",
+          "back": "hair/waved_braid_mage_p2/cast_start_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_start_1": {
+          "front": "hair/waved_braid_mage_p2/cast_start_1_front.png",
+          "back": "hair/waved_braid_mage_p2/cast_start_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_0": {
+          "front": "hair/waved_braid_mage_p2/cast_0_front.png",
+          "back": "hair/waved_braid_mage_p2/cast_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_1": {
+          "front": "hair/waved_braid_mage_p2/cast_1_front.png",
+          "back": "hair/waved_braid_mage_p2/cast_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_2": {
+          "front": "hair/waved_braid_mage_p2/cast_2_front.png",
+          "back": "hair/waved_braid_mage_p2/cast_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_0": {
+          "front": "hair/waved_braid_mage_p2/hurt_0_front.png",
+          "back": "hair/waved_braid_mage_p2/hurt_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_1": {
+          "front": "hair/waved_braid_mage_p2/hurt_1_front.png",
+          "back": "hair/waved_braid_mage_p2/hurt_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_0": {
+          "front": "hair/waved_braid_mage_p2/dead_0_front.png",
+          "back": "hair/waved_braid_mage_p2/dead_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_1": {
+          "front": "hair/waved_braid_mage_p2/dead_1_front.png",
+          "back": "hair/waved_braid_mage_p2/dead_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_2": {
+          "front": "hair/waved_braid_mage_p2/dead_2_front.png",
+          "back": "hair/waved_braid_mage_p2/dead_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "sit_0": {
+          "front": "hair/waved_braid_mage_p2/sit_0_front.png",
+          "back": "hair/waved_braid_mage_p2/sit_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      }
     }
   },
   "weapons": {
@@ -2126,6 +3192,39 @@
           "sit_0": "weapons/sword/knight_female_p2/sit_0.png",
           "attack_6": "weapons/sword/knight_female_p2/attack_6.png",
           "attack_7": "weapons/sword/knight_female_p2/attack_7.png"
+        }
+      }
+    },
+    "staff": {
+      "frames": {
+        "mage_female_p2": {
+          "idle_0": "weapons/staff/mage_female_p2/idle_0.png",
+          "idle_1": "weapons/staff/mage_female_p2/idle_1.png",
+          "idle_2": "weapons/staff/mage_female_p2/idle_2.png",
+          "walk_0": "weapons/staff/mage_female_p2/walk_0.png",
+          "walk_1": "weapons/staff/mage_female_p2/walk_1.png",
+          "walk_2": "weapons/staff/mage_female_p2/walk_2.png",
+          "walk_3": "weapons/staff/mage_female_p2/walk_3.png",
+          "walk_4": "weapons/staff/mage_female_p2/walk_4.png",
+          "walk_5": "weapons/staff/mage_female_p2/walk_5.png",
+          "attack_0": "weapons/staff/mage_female_p2/attack_0.png",
+          "attack_1": "weapons/staff/mage_female_p2/attack_1.png",
+          "attack_2": "weapons/staff/mage_female_p2/attack_2.png",
+          "attack_3": "weapons/staff/mage_female_p2/attack_3.png",
+          "attack_4": "weapons/staff/mage_female_p2/attack_4.png",
+          "attack_5": "weapons/staff/mage_female_p2/attack_5.png",
+          "attack_6": "weapons/staff/mage_female_p2/attack_6.png",
+          "cast_start_0": "weapons/staff/mage_female_p2/cast_start_0.png",
+          "cast_start_1": "weapons/staff/mage_female_p2/cast_start_1.png",
+          "cast_0": "weapons/staff/mage_female_p2/cast_0.png",
+          "cast_1": "weapons/staff/mage_female_p2/cast_1.png",
+          "cast_2": "weapons/staff/mage_female_p2/cast_2.png",
+          "hurt_0": "weapons/staff/mage_female_p2/hurt_0.png",
+          "hurt_1": "weapons/staff/mage_female_p2/hurt_1.png",
+          "dead_0": "weapons/staff/mage_female_p2/dead_0.png",
+          "dead_1": "weapons/staff/mage_female_p2/dead_1.png",
+          "dead_2": "weapons/staff/mage_female_p2/dead_2.png",
+          "sit_0": "weapons/staff/mage_female_p2/sit_0.png"
         }
       }
     }
