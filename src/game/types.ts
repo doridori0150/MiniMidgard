@@ -300,6 +300,8 @@ export interface Settings {
   notify?: boolean;
   /** 저전력 모드: draw at ~30 fps (an unfocused window always drops to ~10 fps) */
   powerSave?: boolean;
+  /** hero art A/B: 'rig' = the assembled parts renderer (A); absent = whole-figure sprites wherever a class×gender has them (B) */
+  heroArt?: 'rig';
 }
 
 export interface GameState {

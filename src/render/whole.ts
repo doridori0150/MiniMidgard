@@ -50,8 +50,14 @@ const HAIR_TINT: (number[] | null)[] = [
   [0.39, 0.6, 0.79], [0.52, 0.69, 0.42], [0.67, 0.42, 0.77], [0.91, 0.53, 0.64], [0.35, 0.36, 0.38],
 ];
 
+/** A/B switch (설정 → 캐릭터 그림): off = every hero falls back to the assembled renderer */
+let enabled = true;
+export function setWholeEnabled(on: boolean) { enabled = on; }
+/** the first-job lines × genders that have whole-figure frames (for the settings note) */
+export const wholeCharacters = () => Object.values(M?.characters ?? {}).map((c) => ({ cls: c.class, gender: c.gender === 'male' ? 'm' : 'f' }));
+
 function character(L: HeroLookDraw): string | undefined {
-  if (!M) return undefined;
+  if (!M || !enabled) return undefined;
   const line = LINE[L.cls];
   const want = `${line}_${L.gender === 'm' ? 'male' : 'female'}`;
   return line && M.characters[want] ? want : undefined;
