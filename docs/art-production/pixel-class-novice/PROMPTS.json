@@ -1,0 +1,108 @@
+[
+  {
+    "frame": "idle_0",
+    "prompt": "Create ONE single idle animation frame of an original female novice adventurer for MiniMidgard. Input images are STYLE AND PROPORTION references ONLY: match the tiny two-head-tall pixel heroes, not their costumes. New design: cream blonde short hair with side fringe and one short low ponytail behind on screen-left, small warm face with two dark eyes looking southeast/right three-quarter; plain ivory linen rolled-sleeve shirt, muted olive sleeveless vest, tiny ochre neckerchief, brown shorts, brown ankle boots, simple belt. No armor, cape, ornate jewelry or bag. A SHORT steel dagger held down diagonally toward screen-right by the NEAR hand at the screen-right hip, far hand relaxed screen-left. Cheerful but modest beginner. Pixel art true 48-pixel-tall character, head approximately 24 pixels and chin-to-sole 24 pixels, same density and soft earthy outlined palette as references. Render as a clean large nearest-neighbor enlargement with discrete solid square pixel clusters, no antialias, no brush texture. One character only centered on transparent square canvas with generous margin. Full body, standing feet on one ground line. Hair only these colors #faf0d7 #e1cdb8 #b49b91 #49342f; clothes distinctly olive/ivory/brown. Keep dagger blade only about 10 game pixels long, visibly shorter than a sword. No text, grid, ground shadow, effects, sheet or additional poses."
+  },
+  {
+    "frame": "idle_1",
+    "prompt": "Edit the attached single novice sprite into the NEXT idle breathing frame. ONE frame only. Preserve exactly the same girl, short low ponytail, face, ivory shirt, olive vest, ochre scarf, brown shorts/boots, two-head proportions, pixel size and near-hand short dagger. Very small inhale: chest and shoulders rise by approximately ONE game pixel, arms softly bend; feet stay exactly planted and head almost fixed. Same southeast/right three-quarter view, same near hand on screen-right holding dagger downward-right. Do not lengthen dagger. Hard square pixel art, no smooth edges. Transparent background, same canvas composition and scale. No labels, shadows, effects, sheet."
+  },
+  {
+    "frame": "idle_2",
+    "prompt": "Create ONLY the next single idle frame after reference 1 of the SAME original novice girl. Reference 2 is original identity. Exhale: shoulders relax back down, eyes softly closed for one blink, mouth gentle neutral. Everything else preserved: identical head and short screen-left low ponytail silhouette, same 2-head proportions, linen shirt olive vest ochre scarf brown shorts ankle boots, short dagger held in SAME near hand at screen-right hip pointing down-right. Feet remain fixed. Tiny calm movement only. Same hard square-pixel art, scale and transparent canvas, no shadow text sheet or extra poses."
+  },
+  {
+    "frame": "walk_0",
+    "prompt": "Generate ONE walking contact frame of the exact original novice in reference 1 (identity/idle). Reference 2 is the preceding idle blink; eyes now open. Same girl, face, low short ponytail, linen shirt/olive vest/ochre scarf/brown shorts/brown boots. RIGHTWARD southeast three-quarter walking in place: near leg reaches FORWARD screen-right, far leg stretches BACK screen-left, both boots contact ground in a clearly readable stride. Near arm swings back a little but still holds the SAME short dagger securely by hip, blade down-right. Far empty arm counter-swings forward. Friendly brisk beginner walk, no running. Same big head/tiny body proportions and square pixel art, same scale as original, transparent background. One full-body pose only, no shadow text or sheet."
+  },
+  {
+    "frame": "walk_0",
+    "attempt": 2,
+    "prompt": "Edit this ORIGINAL IDLE image into one walking frame. CRITICAL: keep BOTH ARMS AND DAGGER in exactly their original places: the DAGGER IS HELD BY THE HAND ON SCREEN-RIGHT beside the right edge of the torso, pointing down-right. SCREEN-LEFT HAND MUST STAY EMPTY. DO NOT SWAP HANDS. Change primarily the LEGS: screen-right leg and boot reach forward to screen-right, screen-left leg stretches back left. A modest walking stride with both boot soles at the original ground level. Same face hair head scale, clothes and two-head proportions. All costume identity locked. One pose only, no extra pose, no text, no ground shadow, transparent background. Strict crisp pixel art."
+  },
+  {
+    "frame": "walk_1",
+    "prompt": "Next single frame in this novice WALK cycle, immediately after reference 1. Preserve identity exactly, face/hair scale and costume, short DAGGER IN SCREEN-RIGHT HAND pointing downward-right, screen-left hand empty. Leg motion: weight settles over forward screen-right boot, that boot now closer under the hip; screen-left rear heel lifts, rear knee bends and starts swinging under the body. Stride narrower than previous. Torso sinks just one logical pixel, ponytail follows slightly. Keep boots anatomy clear. Arms only subtly follow, NO hand switching. Same 2-head sprite scale, hard square pixels, transparent canvas, one pose only no text or shadows. Reference 2 anchors idle identity."
+  },
+  {
+    "frame": "walk_2",
+    "prompt": "ONE NEXT walk frame after image 1. Exact same novice female character and pixel-art style. She walks southeast/right. Advance swing: previously rear FAR LEG now swings FORWARD toward screen-right, knee slightly raised and its boot hovering ahead just above ground; near supporting leg now extends back toward screen-left, its boot stays planted. Far leg should visibly pass behind the near thigh at crossing. Torso rises one game pixel. Small relaxed counter-swing of EMPTY screen-left arm. IMPORTANT dagger stays in SCREEN-RIGHT hand adjacent right edge of torso, blade down-right; don't switch hands. Keep original head size, face, short low ponytail and all clothing. Ref2 identity. Transparent, no shadow/text, one pose."
+  },
+  {
+    "frame": "walk_3",
+    "prompt": "ONE next walk contact frame. Reference1 previous crossing frame, Reference2 identity. CRUCIAL opposite stride: the leg attached to SCREEN-LEFT SIDE OF SHORTS reaches diagonally across to the FAR screen-right forward boot, and is PARTLY OCCLUDED by the other thigh. The NEAR leg attached to SCREEN-RIGHT SIDE OF SHORTS now extends backward diagonally to SCREEN-LEFT with near boot landing at left. Thus the foreground thigh slopes down LEFT, not down right. Both boots grounded, readable opposite step. Head same position and size. Exact same original novice costume face ponytail. DAGGER always in SCREEN-RIGHT HAND, blade down-right; screen-left hand empty. Same hard square pixels, transparent, no shadows or text. No new accessories."
+  },
+  {
+    "frame": "walk_3",
+    "attempt": 2,
+    "prompt": "Use this image ONLY as character identity. Draw a distinctly DIFFERENT opposite-step walking pose, one frame. Legs MUST CROSS: FRONT/VISIBLE thigh starts at right hip and sweeps strongly diagonally DOWN-LEFT across the other thigh, ending in a large foreground boot at screen-left. BACK leg emerges from left hip and reaches diagonally DOWN-RIGHT, with its boot smaller/farther and partly hidden behind crossing near leg. Make the X-shaped thigh overlap unmistakable. Near knee bends a little, far forward heel plants. Torso rotates mildly to follow hips, empty screen-left hand swings forward beside vest. Weapon-holding SCREEN-RIGHT arm stays beside right torso with same short dagger pointed down-right, NOT hand swap. Identical face blonde short tail, ivory shirt olive vest scarf shorts boots and pixel style. No new accessories. Same scale, full body on transparent canvas, no text/shadow."
+  },
+  {
+    "frame": "walk_4",
+    "prompt": "Make ONE next walking passing frame following reference1 opposite contact, same novice exactly. Pull the large foreground screen-left boot back underneath pelvis; this near leg now BENDS at knee, foot lifts slightly behind. Far support leg straight under body, its boot on ground. Legs close together passing, not spread. Empty screen-left hand begins swinging back down. SCREEN-RIGHT hand still holds the exact short dagger down-right. Keep same face, short ponytail, olive vest ivory sleeves ochre scarf brown shorts boots. Reference2 is original identity and correct head/body scale: don't enlarge or stretch limbs. Calm brisk walk, same southeast 3/4 view, pixel art square edges, one fullbody sprite transparent no text/shadows."
+  },
+  {
+    "frame": "walk_5",
+    "prompt": "ONE next walk frame after ref1, preparing to loop into ref2 (first contact). SAME exact novice girl and scale. Bring lifted near boot forward to screen-right, bent near knee ahead, boot slightly above ground and about to land. Far boot trails to screen-left on toe, far leg stretched. This is an up/advance pose just BEFORE the broad contact in ref2, not duplicate contact. Torso lifted subtly, short ponytail lags behind left. Both eyes open, same face. DAGGER stays in screen-right hand close to right hip pointing down-right, screen-left empty hand slightly back. Lock costume/color/design. Square pixel art transparent background, one fullbody pose, no text/shadow."
+  },
+  {
+    "frame": "attack_0",
+    "prompt": "Create one FIRST PREPARATION frame for a short DAGGER THRUST animation of this exact novice girl. Ref1 idle identity. NOT a sword slash. She raises the SAME SCREEN-RIGHT weapon hand from hip to chest level with elbow bent, dagger pointing forward-right slightly upward, held IN FRONT of torso below face. Screen-left hand remains EMPTY and loosely raised for balance. Feet take a small ready stance, knees slightly flexed. Determined but inexperienced beginner. Same exact face, short ponytail, olive vest/ivory sleeves/ochre scarf/brown shorts/boots, 2-head proportions. Dagger very short identical length to idle, one hand only, no large arcs or effects. Same crisp square pixel art, scale and transparent background; full body, single pose no text shadow."
+  },
+  {
+    "frame": "attack_0",
+    "attempt": 2,
+    "prompt": "Precise pose edit of attached idle. ABSOLUTELY KEEP THE SCREEN-LEFT ARM AND EMPTY HAND UNCHANGED HANGING DOWN on left. Move ONLY SCREEN-RIGHT ARM: start at the SMALL WHITE SLEEVE ON SCREEN-RIGHT EDGE OF VEST, bend that elbow upward, raise its hand with its existing dagger to the RIGHT of chest at lower-rib height. The weapon hand must stay OUTSIDE THE RIGHT EDGE OF TORSO, around x=790 in this 1280 image, not cross center. Blade points RIGHT and slightly upward away from body. The screen-left arm remains visibly empty and lowered. A beginner preparing a short stab. Feet a little wider. Exactly same head face hair clothes and pixel art. Dagger same short length. Transparent background, one pose, no effects/text/shadow."
+  },
+  {
+    "frame": "attack_1",
+    "prompt": "ONE next anticipation frame after reference1, dagger thrust preparation. Preserve same novice and SAME weapon arm originating from SCREEN-RIGHT WHITE SLEEVE, hand still to RIGHT of torso, screen-left hand empty. Pull dagger hand slightly BACK toward right ribs, blade nearly horizontal pointing screen-right; bend knees and lower torso/head by about 2 logical game pixels; shift weight onto rear screen-left leg, forward screen-right heel edges ahead. Slight determined forward lean. This is tension before short forward stab, NOT a slash. No overhead sword arc. Same face short blonde tail costume and short blade proportions. Reference2 idle identity. Single fullbody sharp square pixel sprite transparent, no shadow/text/effects."
+  },
+  {
+    "frame": "attack_1",
+    "attempt": 2,
+    "prompt": "Make a MINIMAL edit to this attached frame. KEEP BOTH ARMS, BOTH HANDS AND DAGGER ABSOLUTELY IDENTICAL IN POSITION AND CONNECTION. In particular the hand on SCREEN-RIGHT holds the dagger to the right of chest and the screen-left hand hangs EMPTY. DO NOT MOVE THE DAGGER TO THE LEFT. Change ONLY lower body stance and whole upper-body height: bend both knees a little, shift hips toward screen-left, lower entire head and torso a little without changing head size. Forward screen-right foot inches ahead. Slight anticipation before stab. Arms remain exactly as input! Same clothes, same pixel art, one transparent sprite, no extra marks."
+  },
+  {
+    "frame": "attack_2",
+    "prompt": "NEXT single HIT frame after this exact anticipation pose. Same novice. Extend ONLY THE DAGGER ARM ON SCREEN-RIGHT straight toward screen-right, from its SCREEN-RIGHT white sleeve, with the same hand and short dagger. The SCREEN-LEFT EMPTY ARM stays down/back beside left hip, NEVER holds anything. Step screen-right boot forward and bend that front knee deeply, rear screen-left leg stretches back. Whole torso and head lean and shift right, lowered about 5 logical pixels versus idle. Short brave horizontal forward DAGGER STAB at waist level, blade pointing right slightly down (not slash). Small straight pale steel speed streak behind blade ONLY, no curved arcs, no magic. SAME hair/face/outfit/colors and 2-head size. Do not lengthen dagger. Crisp square pixel art single fullbody sprite on transparent canvas with enough right margin. No text/shadow."
+  },
+  {
+    "frame": "attack_3",
+    "prompt": "ONE next FOLLOW THROUGH HOLD frame after this dagger thrust HIT. Preserve the EXACT same foot placements, outstretched SCREEN-RIGHT dagger arm, low lunge and face scale. Remove ALL floating speed streaks beyond blade. Dagger remains short and horizontal pointing right; same hand still firmly holds hilt. Settle body/head one tiny game pixel lower, ponytail and scarf settle slightly, determined expression unchanged. Screen-left arm stays empty extended down-left. This is a held short stab, no extra swing no new attack. All original clothes and hair unchanged, hard square pixel art transparent background one fullbody pose, no ground shadow/text."
+  },
+  {
+    "frame": "attack_4",
+    "prompt": "ONE RECOVERY frame immediately after reference1 held stab, moving toward reference2 idle. SAME girl and weapon hand. Retract the SCREEN-RIGHT dagger hand toward SCREEN-RIGHT HIP, bending only that right-edge elbow, blade now angled down-right. Screen-left arm remains EMPTY and relaxed down. Rise halfway from low lunge and pull forward screen-right boot halfway back, rear knee softens. Not fully idle yet. Same short dagger, same face/head size, short low ponytail and exactly same clothes. Must show continuous sleeve-to-forearm-to-grip connection on screen-right. No hand switching or extra weapon. Sharp pixel art original scale, transparent, single fullbody pose no effects/text/shadow."
+  },
+  {
+    "frame": "attack_4",
+    "attempt": 2,
+    "prompt": "Minimal edit of this idle sprite into a recovery half-crouch. KEEP BOTH ARMS AND HANDS EXACTLY AS THEY ARE IN INPUT. THE SCREEN-RIGHT HAND HOLDS DAGGER OUTSIDE RIGHT HIP. SCREEN-LEFT HAND IS EMPTY. DO NOT CHANGE WHICH HAND. Keep entire head face and hair exactly same. Change only lower body: screen-right knee more bent and foot slightly forward, screen-left leg slightly back, torso/head slightly lowered and shifted forward-right. Dagger and its arm follow torso translation unchanged, still down-right outside the body. This is the halfway return after a lunge, same girl same costume same pixel art same proportions. Single sprite transparent, no text shadow effects."
+  },
+  {
+    "frame": "hurt_0",
+    "prompt": "One single HURT recoil frame of this exact novice sprite. Keep exact head size ponytail clothes and proportions. Character recoils BACK toward screen-left: torso leans back, head shifts left, shoulders hunch, eyes squeezed shut, mouth small wince. Knees slightly bend, both feet stay close to original ground positions. CRITICAL BOTH ARMS KEEP ORIGINAL SIDES: screen-left hand is EMPTY and pulls toward belly; SCREEN-RIGHT HAND holds short dagger outside right hip pointed down-right. No hand swap. Dagger stays securely in same original right-edge hand. Gentle non-graphic game hit reaction, no blood/injury/effects. Hard square pixel art, transparent, one fullbody pose no shadow/text."
+  },
+  {
+    "frame": "hurt_1",
+    "prompt": "ONE next easing/recovery HURT frame after reference1 of same novice. Recoil relaxes halfway back toward reference2 idle: head and torso less tilted to left, knees begin straightening, eyes half open with small worried expression; empty screen-left hand lowers from belly. Screen-right hand CONTINUES holding dagger outside right hip down-right exactly as both images. No hand swap. Same hair size silhouette costume proportions and scale. Preserve ivory shirt olive vest ochre scarf shorts boots. Square pixel art, transparent background, single fullbody pose no text effects/shadow."
+  },
+  {
+    "frame": "dead_0",
+    "prompt": "One FIRST COLLAPSE frame after reference1 recoil for exact same novice. Knees give way: BOTH knees bend deeply, one knee almost touches ground, torso bows forward slightly, head lowers significantly but head SIZE unchanged. Eyes closed, tired expression, not graphic. SCREEN-RIGHT HAND STILL HOLDS DAGGER low outside right knee pointing down-right; SCREEN-LEFT HAND EMPTY reaching down toward floor for support. Same short blonde ponytail, ivory sleeves olive vest ochre scarf brown shorts and boots. Ref2 identity only. Character is folding down toward a prone fall, not sitting casually. Keep same limb lengths and two-head proportions; no blood effects or extra objects. Hard square pixel art, transparent fullbody single pose no text/shadow."
+  },
+  {
+    "frame": "dead_1",
+    "prompt": "ONE next collapse frame immediately after attached kneeling fall. Same novice loses arm support and tips FORWARD toward screen-right/down. Torso now very diagonally near horizontal, hips still slightly raised, both knees on ground behind screen-left; EMPTY screen-left support arm bends at elbow close to floor. Head lowered near floor in front on screen-right, eyes closed, short ponytail drapes behind to left. Weapon arm from right sleeve still reaches forward-right, SAME hand loosely grips the short dagger along ground pointing right. Clear transitional fall, not sitting; do not mirror or swap hands. Same head size and small body proportions, olive vest ivory shirt ochre scarf shorts boots. Crisp pixel art transparent single fullbody pose, no shadow text injury effects."
+  },
+  {
+    "frame": "dead_2",
+    "prompt": "ONE FINAL PRONE fallen pose immediately after attached collapse. Lower hips, belly and chest fully onto ground, body lies face-down with head at SCREEN-RIGHT and boots trailing SCREEN-LEFT. Head rests sideways on near forearm with closed eyes, short ponytail lies down, no floating head; same head size. Empty arm folds under face. SAME screen-right weapon arm remains extended near ground to right, hand loosely touching/gripping same short dagger lying horizontal pointing right. Both legs relax backward, boots ground level. Completely settled horizontal silhouette, not kneeling not seated not crawling. Exact same novice outfit olive vest ivory sleeves ochre scarf brown shorts boots, crisp pixel art original scale. Transparent background, single fullbody pose no shadow/text/blood/effects."
+  },
+  {
+    "frame": "sit_0",
+    "prompt": "One restful SITTING ON HEELS / KNEELING pose of this exact original novice girl. SAME face with open gentle eyes, same short low ponytail and size. Both knees forward toward screen-right, shins folded under thighs, boots tucked behind to screen-left; butt rests on heels, torso upright calm, hands near lap. EMPTY screen-left hand rests on thigh. SCREEN-RIGHT hand still holds same SHORT dagger gently low outside right knee with blade down-right away from body. Keep correct original weapon side, no swapping. Original ivory shirt olive vest ochre scarf brown shorts ankle boots, no added props. Same two-head anatomy though sitting reduces height, same southeast/right 3/4 view and crisp square pixel art. Single fullbody sprite transparent no shadow/text."
+  }
+]
+

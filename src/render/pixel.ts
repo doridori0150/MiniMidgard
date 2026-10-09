@@ -4,6 +4,7 @@
 // colours for a ramp (a palette swap, as old MMOs did). Drawn without smoothing. 설정 → 캐릭터 그림 C.
 import type { WeaponType } from '../game/types.ts';
 import type { HeroLookDraw, Pose } from './hero.ts';
+import { SKILL_CONTACT } from '../game/world.ts';
 import { HAIR_TINT, LINE, clip, pickFrame } from './whole.ts';
 
 type V2 = [number, number];
@@ -18,6 +19,8 @@ interface Manifest {
     bodyHeight?: number;
     animations?: Manifest['animations'];
     hairStyles?: string[];
+    /** skill id → animation name in `animations` (2nd-job skill motions) */
+    skillMotions?: Record<string, string>;
   }>;
   hair: Record<string, { gender?: string; pivot?: V2; poses: Record<string, { front?: string; back?: string; pivot?: V2 }> }>;
   weapons: Record<string, { frames: Record<string, Record<string, string>> }>;
@@ -132,6 +135,16 @@ export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: 
     t = pose.t / Math.max(1, pose.dur ?? 280) / contact * hit;
   }
   if (state === 'dead') t = pose.t; // play the fall, then hold the last frame
+  const sm = pose.skill ? c.skillMotions?.[pose.skill] : undefined;
+  if (sm && table[sm]) {
+    // a skill's own motion, played once from its release; the sim lands the hit SKILL_CONTACT ms in, so the art's wind-up
+    // (frames before `hitFrame`) is fitted into that and the follow-through plays at its own pace
+    const a = table[sm] as typeof table.attack & { hitFrame?: number };
+    const st = pose.skillT ?? 0;
+    const hit = a.hitFrame != null ? a.durations.slice(0, a.hitFrame).reduce((x, y) => x + y, 0) : 0;
+    const at = hit > 0 ? (st < SKILL_CONTACT ? st / SKILL_CONTACT * hit : hit + st - SKILL_CONTACT) : st;
+    if (at < a.duration) { state = sm; t = at; }
+  }
   if (state === 'cast' && table.cast_start) {
     // a one-shot lead-in (hands come together) before the looping cast; pose.t runs from when the cast began
     const since = pose.since ?? pose.t;

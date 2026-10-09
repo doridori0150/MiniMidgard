@@ -1,0 +1,167 @@
+[
+  {
+    "frame": "idle_0",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "새 짧은 묶음머리·올리브 조끼·짧은 단검 확인. 오른쪽 가까운 손에 무기, 시선 오른쪽 3/4. 원화의 머리 대비 하체가 약간 길어 최종 24+24px 정규화 예정."
+  },
+  {
+    "frame": "idle_1",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "어깨가 소폭 올라가고 발·시선·가까운 단검 손 유지. 다음은 어깨 이완과 눈깜빡임."
+  },
+  {
+    "frame": "idle_2",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "눈깜빡임 확인, 발과 단검 방향 유지. 눈감음은 최종120ms로 짧게 조정."
+  },
+  {
+    "frame": "walk_0",
+    "attempt": 1,
+    "accepted": false,
+    "review": "단검이 대기의 화면 오른쪽 손에서 왼쪽 손으로 바뀜. 폐기."
+  },
+  {
+    "frame": "walk_0",
+    "attempt": 2,
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "단검 오른쪽 손 유지 수정 확인. 오른발 전진·왼발 뒤쪽 접지, 다음 통과 자세로."
+  },
+  {
+    "frame": "walk_1",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "앞발 지지·뒤꿈치 들어올림, 단검 같은 손 유지. 다음 반대발 전진."
+  },
+  {
+    "frame": "walk_2",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "발 통과 후 전방 부츠 들림 확인. 상체·단검 손 유지. 가장자리 반투명 노이즈는 이진 알파 정규화에서 제거."
+  },
+  {
+    "frame": "walk_3",
+    "attempt": 1,
+    "accepted": false,
+    "review": "walk_0와 전후 다리 실루엣이 거의 같아 교대 부족. 교차된 반대 보폭 재생성."
+  },
+  {
+    "frame": "walk_3",
+    "attempt": 2,
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "앞쪽 다리의 왼쪽 대각선 교차, 반대 발 가림, 빈손 전진과 같은 단검 손 확인. 원화 크기 변화는 머리·몸 정규화로 고정."
+  },
+  {
+    "frame": "walk_4",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "교차 보폭에서 다리가 몸 아래 모이고 뒤 부츠가 높게 들림. 단검 오른쪽 손과 고정 복장 유지."
+  },
+  {
+    "frame": "walk_5",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "앞부츠가 들렸다 walk_0 접지로 이어질 자세 확인. 같은 손·짧은 단검·복장 유지."
+  },
+  {
+    "frame": "attack_0",
+    "attempt": 1,
+    "accepted": false,
+    "review": "화면 왼쪽 소매에서 단검 팔이 시작되어 기존 오른쪽 무기손과 불일치. 수정."
+  },
+  {
+    "frame": "attack_0",
+    "attempt": 2,
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "오른쪽 소매→굽힌 팔→단검 손 연결 수정 확인. 왼손 빈손. 칼은 몸 앞 오른쪽."
+  },
+  {
+    "frame": "attack_1",
+    "attempt": 1,
+    "accepted": false,
+    "review": "동작 생성에서 또 왼손으로 무기 변경. 팔을 고정한 하체 변화 방식으로 재생성."
+  },
+  {
+    "frame": "attack_1",
+    "attempt": 2,
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "오른손/오른 소매 유지, 무릎 하강과 준비 체중 확인. 다음 같은 팔만 앞으로 신전."
+  },
+  {
+    "frame": "attack_2",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "오른쪽 소매에서 같은 무기손 전방 신전, 앞무릎 하강·뒷다리 신전 확인. 짧은 직선 잔상, 타격 장으로 채택."
+  },
+  {
+    "frame": "attack_3",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "잔상 사라짐, 같은 손과 두 발 위치 유지, 낮은 찌르기 멈춤 확인."
+  },
+  {
+    "frame": "attack_4",
+    "attempt": 1,
+    "accepted": false,
+    "review": "회수에서 단검 왼손 변경. 대기 원본 팔 구조 고정해서 중간 하체만 제작."
+  },
+  {
+    "frame": "attack_4",
+    "attempt": 2,
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "오른쪽 손잡이 연결 수정 확인. 무릎 펴는 중간 자세 채택. attack_5는 idle_0 원본 레이어 복귀 예정."
+  },
+  {
+    "frame": "attack_5",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "idle_0 재사용, 종료→대기 연결 동일 픽셀."
+  },
+  {
+    "frame": "hurt_0",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "머리 왼쪽 후퇴·몸 뒤로 젖힘·무릎 굽힘과 오른손 단검 유지 확인."
+  },
+  {
+    "frame": "hurt_1",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "기울기 감소·눈 뜸·왼손 내려감·동일 단검 손 유지 확인."
+  },
+  {
+    "frame": "dead_0",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "무릎 꺾임·빈손 접지·머리 전방 하강, 오른손 단검 유지. 다음 팔꿈치로 내려앉음."
+  },
+  {
+    "frame": "dead_1",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "무릎에서 팔꿈치 쪽으로 무게 이동·상체 전방 하강·머리 오른쪽 이동 확인. 단검 손 바닥 접촉 유지."
+  },
+  {
+    "frame": "dead_2",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "복부·가슴·머리 접지된 엎드림 확인. 부츠 왼쪽·머리 오른쪽 방향과 단검 손 연속. 최종 몸 길이/머리 크기 정규화 필요."
+  },
+  {
+    "frame": "sit_0",
+    "accepted": true,
+    "checkedBeforeNext": true,
+    "review": "무릎 앞으로·부츠 뒤로 접힌 정좌 확인. 빈손 무릎 위, 단검 오른손 유지."
+  },
+  {
+    "stage": "normalized_review",
+    "review": "48px 대기·고정 머리 크기·2등신·접지와 3인 비교 확인. 10px 단검 길이 통일, 엎드림 머리 폭 보정, Chrome 확대에서 발견한 얼굴 경계 올리브색을 전용 얼굴 팔레트로 수정. 공격 손 교체 3회와 걷기 손/보폭 오류 총5개 시도 제외."
+  }
+]

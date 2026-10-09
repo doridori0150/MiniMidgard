@@ -65,6 +65,8 @@ export interface HeroUnit {
   atkReady: number;
   target: number | null;
   cast: CastInfo | null;
+  /** the last skill released and when (sprites with per-skill motions play it instead of the plain attack / cast) */
+  skillAnim: { id: string; at: number } | null;
   buffs: ActiveBuff[];
   cds: Record<string, number>;
   deadUntil: number;
@@ -341,7 +343,7 @@ export class World {
       return {
         kind: 'hero', uid: this.uidSeq++, hero, x: sx - i * 26, y: sy + (i % 2 ? 22 : -10), facing: 1,
         hp: d.maxHp, sp: d.maxSp, d, dAt: 0, state: 'idle', stateT: 0, lockUntil: 0, atkReady: 0,
-        target: null, cast: null, buffs: [], cds: {}, deadUntil: 0, hpTickAt: HP_TICK, spTickAt: SP_TICK, potAt: 0,
+        target: null, cast: null, skillAnim: null, buffs: [], cds: {}, deadUntil: 0, hpTickAt: HP_TICK, spTickAt: SP_TICK, potAt: 0,
         poisonUntil: 0, poisonNext: 0, hurtAt: -9999, sitting: false, thinkAt: 0, kiteUntil: 0, kiteNext: 0, backOff: false, doing: '',
         counterUntil: 0, slowPoisonUntil: 0, hideDrainAt: 0, prCounters: 0, utilAt: 0,
         gale: 0, flurryUntil: 0, lastEl: null, reso: 0, auraAt: 0,
@@ -2529,6 +2531,7 @@ export class World {
     // a cloaked assassin's swing gives it away
     if (this.hasBuff(h, 'cloak')) this.unhide(h);
     this.setState(h, 'attack');
+    h.skillAnim = null; // a plain swing ends any skill motion
     const delay = d.delay * (h.flurryUntil > this.time && d.wtype === 'none' ? 0.5 : 1); // 맨주먹 연타
     h.atkReady = this.time + delay;
     h.lockUntil = this.time + Math.min(320, delay * 0.8);
@@ -2967,6 +2970,7 @@ export class World {
       h.lockUntil = this.time + delay;
       h.atkReady = Math.max(h.atkReady, this.time + Math.min(delay, h.d.delay));
       this.setState(h, sk.magic || sk.kind === 'heal' || sk.kind === 'buff' || sk.kind === 'selfBuff' || sk.kind === 'ground' || sk.kind === 'cure' ? 'cast' : 'attack');
+      h.skillAnim = { id: sk.id, at: this.time };
       this.stateHold(h, Math.min(delay, 450));
     }
     // a cloaked assassin shows itself when it acts — except grimtooth (RO)

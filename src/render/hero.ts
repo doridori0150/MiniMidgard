@@ -55,6 +55,9 @@ export interface Pose {
   facing: 1 | -1;
   /** ms since the unit entered this state (loops such as cast keep `t` on the shared clock) */
   since?: number;
+  /** a skill being released (its id) and ms since release: sprites with a motion for it play that instead */
+  skill?: string;
+  skillT?: number;
 }
 
 interface Outfit { main: string; second: string; pants: string; shoes: string; trim: string; robe?: boolean; skirt?: boolean }
