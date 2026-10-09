@@ -267,6 +267,33 @@
       },
       "line": "merchant",
       "weapon": "손도끼"
+    },
+    {
+      "id": "swordsman_female",
+      "name": "검사(여)",
+      "bodyHeight": 310,
+      "identity": "검사(남) 통짜 프레임과 같은 옷: 은빛 흉갑과 둥근 어깨 보호대, 파란 튜닉(얼룩무늬 질감), 붉은 허리 천, 갈색 허리띠, 흰 바지, 갈색 장화·손목 보호대. 얼굴과 머리는 초보자(여)와 같다(초보자에서 전직한 같은 사람): 크림색 어깨 길이 단발과 바보털, 큰 파란 눈, 여성 얼굴",
+      "notCopy": [
+        "기사의 투구·망토(2차 직업)",
+        "검사(남)의 짧게 뻗친 남자 머리"
+      ],
+      "refs": [
+        {
+          "path": "docs/art-production/hero-sprites/frames/swordsman/idle_0.png",
+          "role": "옷·갑옷·색 기준(검사 남)"
+        },
+        {
+          "path": "docs/art-production/hero-sprites/frames/novice/idle_0.png",
+          "role": "얼굴·머리 기준(초보자 여)"
+        }
+      ],
+      "assets": {
+        "hero": {
+          "concept": "씩씩한 여검사. 공격은 한 손 검을 위에서 비스듬히 내려베기"
+        }
+      },
+      "line": "swordsman",
+      "weapon": "검(기존 sword 무기 그림)"
     }
   ],
   "batches": [
@@ -295,6 +322,15 @@
       "common": [
         "axe"
       ]
+    },
+    {
+      "id": "c",
+      "title": "A/B 시험 — 여검사(사용자 캐릭터 쿠키)",
+      "note": "라인업에 여검사가 없으므로 옷은 검사(남) 프레임, 얼굴·머리는 초보자(여) 프레임을 기준으로 한다",
+      "subjects": [
+        "swordsman_female"
+      ],
+      "common": []
     }
   ],
   "retryLimit": 2,
