@@ -47,8 +47,8 @@ export const pixelCharacters = () => {
   return Object.values(M?.characters ?? {}).map((c) => ({ cls: c.class, gender: c.gender === 'male' || c.gender === 'm' ? 'm' : 'f' }))
     .filter((c) => !seen.has(c.cls + c.gender) && seen.add(c.cls + c.gender));
 };
-/** art pixels → field units: the tallest variant stands HEIGHT tall, every other one keeps the same pixel size (so a 2-head hero is shorter) */
-const unitPerPx = () => HEIGHT / Math.max(1, ...Object.values(M?.characters ?? {}).map((c) => c.bodyHeight ?? M!.canvas.bodyHeight ?? 76));
+/** art pixels → field units: one fixed pixel size for every pixel hero (a 62 px figure stands HEIGHT tall), so a 2-head hero is shorter */
+const unitPerPx = () => HEIGHT / 62;
 
 export function loadPixel(): Promise<void> {
   if (!M) return Promise.resolve();
@@ -76,6 +76,8 @@ export function pixelSupports(L: HeroLookDraw) {
 function styleFor(L: HeroLookDraw, c: Manifest['characters'][string]): string | undefined {
   // a character may list its own styles (proportion variants have their own hair pieces); else every style of its gender
   const names = c.hairStyles?.filter((n) => M!.hair[n]) ?? Object.keys(M!.hair).filter((n) => !M!.hair[n].gender || M!.hair[n].gender === c.gender);
+  // the design's own hair comes first (look.hair 0), the rest follow
+  if (c.defaultHair && names.includes(c.defaultHair)) return [c.defaultHair, ...names.filter((n) => n !== c.defaultHair)][L.hair % names.length];
   names.sort((a, b) => (STYLE_ORDER.indexOf(a) + 99) % 99 - (STYLE_ORDER.indexOf(b) + 99) % 99);
   return names.length ? names[L.hair % names.length] : undefined;
 }
@@ -137,12 +139,16 @@ export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: 
   const hp = style ? M!.hair[style].poses[f.head.pose] : undefined;
   const piv = hp?.pivot ?? (style ? M!.hair[style].pivot : undefined) ?? [0, 0];
   const hx = f.head.point[0] - piv[0], hy = f.head.point[1] - piv[1];
-  const k = unitPerPx();
   const put = (src: CanvasImageSource | undefined, x = 0, y = 0) => { if (src) ctx.drawImage(src, x, y); };
   ctx.save();
   ctx.imageSmoothingEnabled = false;
+  // crisp pixels: one art pixel covers a whole number of device pixels, and the sprite sits on the device pixel grid
+  const m0 = ctx.getTransform(), dev = Math.hypot(m0.a, m0.b) || 1;
+  const k = Math.max(1, Math.round(dev * unitPerPx())) / dev;
   ctx.scale(pose.facing * k, k);
   ctx.translate(-M!.canvas.origin[0], -M!.canvas.origin[1]);
+  const m1 = ctx.getTransform();
+  ctx.setTransform(m1.a, m1.b, m1.c, m1.d, Math.round(m1.e), Math.round(m1.f));
   put(layer(hp?.back, L.hairColor), hx, hy);
   if (showW && f.weapon?.z === 'behind') put(imgs.get(key(wfile!)));
   put(layer(f.image, L.hairColor));

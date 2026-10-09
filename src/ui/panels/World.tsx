@@ -320,12 +320,12 @@ export function SettingsPanel() {
           {Sw('배경 2.5D (시험, 햇살 평원)', st.bgArt === 'hd', () => { st.bgArt = st.bgArt === 'hd' ? undefined : 'hd'; setKitHd(st.bgArt === 'hd'); })}
           <div class="row" style={{ margin: '8px 0 4px' }}><span>캐릭터 그림</span></div>
           <div class="tabs">
-            {([['rig', 'A 조립형'], [undefined, 'B 통짜'], ['pixel', 'C 도트 3~4등신'], ['pixel2', 'D 도트 2등신']] as const).map(([v, label]) => (
-              <button class={st.heroArt === v ? 'on' : ''} onClick={() => set(() => { st.heroArt = v; setWholeEnabled(v !== 'rig'); setPixelEnabled(v === 'pixel' || v === 'pixel2', v === 'pixel2' ? 'p2' : 'p3'); })}>{label}</button>
+            {([['rig', 'A 조립형'], [undefined, 'B 통짜'], ['pixel2', 'C 도트']] as const).map(([v, label]) => (
+              <button class={st.heroArt === v || (v === 'pixel2' && st.heroArt === 'pixel') ? 'on' : ''} onClick={() => set(() => { st.heroArt = v; setWholeEnabled(v !== 'rig'); setPixelEnabled(v === 'pixel2', 'p2'); })}>{label}</button>
             ))}
           </div>
           <div class="small muted" style={{ margin: '4px 0 6px' }}>
-            B: {artList(wholeCharacters())}. C·D(시험): {artList(pixelCharacters()) || '아직 없음'}. 2차 직업은 1차 그림을 입고, 그림이 없는 직업은 도트 → B → A 순서로 있는 그림을 씁니다.
+            B: {artList(wholeCharacters())}. C 도트(시험): {artList(pixelCharacters()) || '아직 없음'}. 2차 직업은 1차 그림을 입고, 그림이 없는 직업은 도트 → B → A 순서로 있는 그림을 씁니다.
           </div>
           {Sw('잡템 자동 판매', st.autoSellEtc, () => { st.autoSellEtc = !st.autoSellEtc; })}
           {Sw('보스·MVP 자동 소환', st.autoBoss, () => { st.autoBoss = !st.autoBoss; })}

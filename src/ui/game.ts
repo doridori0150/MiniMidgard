@@ -96,7 +96,7 @@ class Game {
   begin(s: GameState, fresh: boolean) {
     this.s = s;
     setWholeEnabled(s.settings.heroArt !== 'rig');
-    setPixelEnabled(s.settings.heroArt === 'pixel' || s.settings.heroArt === 'pixel2', s.settings.heroArt === 'pixel2' ? 'p2' : 'p3');
+    setPixelEnabled(s.settings.heroArt === 'pixel' || s.settings.heroArt === 'pixel2', 'p2'); // the 3–4-head trial (round 8 P3) was dropped
     setKitHd(s.settings.bgArt === 'hd');
     if (!fresh) {
       const away = Date.now() - s.lastSave;
