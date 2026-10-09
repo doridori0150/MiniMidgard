@@ -40,7 +40,7 @@ const LINE: Partial<Record<string, string>> = {
   mage: 'mage', wizard: 'mage', acolyte: 'acolyte', priest: 'acolyte', archer: 'archer', hunter: 'archer',
 };
 const WEAPON: Partial<Record<WeaponType, string | null>> = {
-  none: null, dagger: 'dagger', katar: 'dagger', sword: 'sword', sword2h: 'sword', staff: 'staff', mace: 'mace', bow: 'bow',
+  none: null, dagger: 'dagger', katar: 'dagger', sword: 'sword', sword2h: 'sword', staff: 'staff', mace: 'mace', bow: 'bow', axe: 'axe',
 };
 const HEADGEAR: Record<string, string> = { leaf: 'leaf', hairpin: 'hairpin' };
 /** game hair colour index (state.ts HAIR_COLORS order) → RGB multipliers over the cream hair; null = as painted */

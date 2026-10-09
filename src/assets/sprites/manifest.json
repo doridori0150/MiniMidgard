@@ -1412,10 +1412,11 @@
         "walk_1": {
           "image": "frames/novice/walk_1.png",
           "hairMask": "masks/novice/walk_1.png",
+          "gripOverlay": "grips/novice/walk_1.png",
           "hand": {
             "point": [
-              271.789,
-              293.266
+              285.802,
+              259.104
             ],
             "angle": -48,
             "z": "front",
@@ -1423,19 +1424,18 @@
           },
           "crown": {
             "point": [
-              218.856,
-              87.621
+              224.874,
+              84.119
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              272.707,
-              138.301
+              277.516,
+              128.962
             ],
             "angle": 0
-          },
-          "gripOverlay": "grips/novice/walk_1.png"
+          }
         },
         "walk_2": {
           "image": "frames/novice/walk_2.png",
@@ -1524,10 +1524,11 @@
         "attack_1": {
           "image": "frames/novice/attack_1.png",
           "hairMask": "masks/novice/attack_1.png",
+          "gripOverlay": "grips/novice/attack_1.png",
           "hand": {
             "point": [
-              305.195,
-              242.78
+              318.947,
+              228.396
             ],
             "angle": 0,
             "z": "front",
@@ -1535,19 +1536,18 @@
           },
           "crown": {
             "point": [
-              212.077,
-              99.148
+              231.698,
+              90.943
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              266.218,
-              149.828
+              284.827,
+              136.274
             ],
             "angle": 0
-          },
-          "gripOverlay": "grips/novice/attack_1.png"
+          }
         },
         "attack_2": {
           "image": "frames/novice/attack_2.png",
@@ -1555,24 +1555,24 @@
           "gripOverlay": "grips/novice/attack_2.png",
           "hand": {
             "point": [
-              313.982,
-              282.149
+              313.097,
+              273.726
             ],
-            "angle": -25,
+            "angle": 35,
             "z": "front",
             "visible": true
           },
           "crown": {
             "point": [
-              251,
-              95
+              243.396,
+              95.818
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              306,
-              146
+              296.038,
+              139.686
             ],
             "angle": 0
           }
@@ -1950,30 +1950,30 @@
         "attack_2": {
           "image": "frames/swordsman/attack_2.png",
           "hairMask": "masks/swordsman/attack_2.png",
+          "gripOverlay": "grips/swordsman/attack_2.png",
           "hand": {
             "point": [
-              302.119,
-              290.066
+              317.25,
+              260.209
             ],
-            "angle": 42,
+            "angle": 35,
             "z": "front",
             "visible": true
           },
           "crown": {
             "point": [
-              239.391,
-              94.887
+              232.243,
+              95.738
             ],
             "angle": 0
           },
           "side": {
             "point": [
-              295.232,
-              146.511
+              282.139,
+              143.785
             ],
             "angle": 0
-          },
-          "gripOverlay": "grips/swordsman/attack_2.png"
+          }
         },
         "cast_0": {
           "image": "frames/swordsman/cast_0.png",
@@ -2170,6 +2170,17 @@
       "tip": [
         120.5,
         18.5
+      ]
+    },
+    "axe": {
+      "image": "equipment/axe.png",
+      "pivot": [
+        56,
+        128
+      ],
+      "tip": [
+        140.714,
+        128
       ]
     }
   },
