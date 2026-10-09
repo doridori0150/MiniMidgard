@@ -1,0 +1,239 @@
+{
+  "requiredFiles": [
+    {
+      "file": "r6_lineup.png",
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "file": "r6_dot_strength.png",
+      "size": [
+        720,
+        460
+      ]
+    },
+    {
+      "file": "r6_walk.png",
+      "size": [
+        3456,
+        382
+      ]
+    },
+    {
+      "file": "r6_attack.png",
+      "size": [
+        3456,
+        382
+      ]
+    },
+    {
+      "file": "r6_walk.gif"
+    },
+    {
+      "file": "r6_attack.gif"
+    },
+    {
+      "file": "r6_field.png",
+      "size": [
+        390,
+        844
+      ]
+    },
+    {
+      "file": "NOTES.md"
+    },
+    {
+      "file": "PROMPTS.json"
+    }
+  ],
+  "motion": {
+    "walk": {
+      "frameCount": 8,
+      "size": [
+        432,
+        348
+      ],
+      "ptsMs": [
+        0,
+        90,
+        180,
+        270,
+        360,
+        450,
+        540,
+        630
+      ],
+      "durationMs": 720,
+      "frames": [
+        {
+          "frame": 1,
+          "contentBounds": [
+            40,
+            21,
+            90,
+            102
+          ]
+        },
+        {
+          "frame": 2,
+          "contentBounds": [
+            41,
+            21,
+            85,
+            102
+          ]
+        },
+        {
+          "frame": 3,
+          "contentBounds": [
+            41,
+            21,
+            79,
+            102
+          ]
+        },
+        {
+          "frame": 4,
+          "contentBounds": [
+            41,
+            22,
+            88,
+            102
+          ]
+        },
+        {
+          "frame": 5,
+          "contentBounds": [
+            42,
+            21,
+            84,
+            102
+          ]
+        },
+        {
+          "frame": 6,
+          "contentBounds": [
+            41,
+            21,
+            80,
+            102
+          ]
+        },
+        {
+          "frame": 7,
+          "contentBounds": [
+            41,
+            21,
+            79,
+            102
+          ]
+        },
+        {
+          "frame": 8,
+          "contentBounds": [
+            42,
+            22,
+            92,
+            102
+          ]
+        }
+      ]
+    },
+    "attack": {
+      "frameCount": 8,
+      "size": [
+        432,
+        348
+      ],
+      "ptsMs": [
+        0,
+        50,
+        100,
+        140,
+        200,
+        270,
+        350,
+        440
+      ],
+      "durationMs": 580,
+      "frames": [
+        {
+          "frame": 1,
+          "contentBounds": [
+            37,
+            22,
+            86,
+            102
+          ]
+        },
+        {
+          "frame": 2,
+          "contentBounds": [
+            34,
+            27,
+            88,
+            102
+          ]
+        },
+        {
+          "frame": 3,
+          "contentBounds": [
+            35,
+            10,
+            90,
+            102
+          ]
+        },
+        {
+          "frame": 4,
+          "contentBounds": [
+            30,
+            25,
+            120,
+            102
+          ]
+        },
+        {
+          "frame": 5,
+          "contentBounds": [
+            30,
+            25,
+            115,
+            102
+          ]
+        },
+        {
+          "frame": 6,
+          "contentBounds": [
+            37,
+            23,
+            103,
+            102
+          ]
+        },
+        {
+          "frame": 7,
+          "contentBounds": [
+            36,
+            23,
+            101,
+            102
+          ]
+        },
+        {
+          "frame": 8,
+          "contentBounds": [
+            40,
+            22,
+            90,
+            102
+          ]
+        }
+      ]
+    }
+  },
+  "automatedChecks": "pass",
+  "visualChecks": "See NOTES.md; hand/facing/leg order checked on every selected generated frame and final contact sheets."
+}

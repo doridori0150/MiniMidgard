@@ -1,0 +1,24 @@
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/walk_01_3x.png'
+option framerate 100
+duration 0.09
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/walk_02_3x.png'
+option framerate 100
+duration 0.09
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/walk_03_3x.png'
+option framerate 100
+duration 0.09
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/walk_04_3x.png'
+option framerate 100
+duration 0.09
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/walk_05_3x.png'
+option framerate 100
+duration 0.09
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/walk_06_3x.png'
+option framerate 100
+duration 0.09
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/walk_07_3x.png'
+option framerate 100
+duration 0.09
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/walk_08_3x.png'
+option framerate 100
+duration 0.09

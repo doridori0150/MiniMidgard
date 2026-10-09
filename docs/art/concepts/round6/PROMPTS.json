@@ -1,0 +1,94 @@
+{
+  "tool": "image_gen.imagegen",
+  "mode": "built-in edit",
+  "baseRound": 5,
+  "requests": [
+    {
+      "id": "lineup",
+      "prompt": "Use case: identity-preserve. Edit target: attached r5_lineup.png. Produce r6 lineup. Preserve this exact round5 Tree of Savior-like delicate painted character look, faces, thin brown linework, nuanced coloring, ALL costume designs, weapons and accessories, cream background and same left-to-right lineup layout (Cookie blonde female swordswoman, brown-haired female violet mage, male olive hooded archer, small green slime). CHANGE ONLY human body proportions to 3.5 heads total standing height (head crown to chin = 1/3.5 of head-to-sole height). Shorten torsos and legs while retaining slender wrists, recognizable knees and elegant detailed faces; not 2-head babies. Keep blonde shoulder length hair, blue embroidered tunic, silver breastplate, red waist sash, cream leggings, brown high boots, sword in anatomical RIGHT hand, same sword design. Mage keeps purple robe and blue orb wooden staff. Archer keeps same green hood, bow and quiver. Add ONLY a very subtle pixel feel to edge and shadow clusters, preserving the painterly interior and original palette; no heavy outlines or retro redesign. Three quarter facing screen right. All bodies and complete weapons in frame. Wide 1536x1024 landscape. No text. Slime unchanged.",
+      "inputs": [
+        "docs/art/concepts/round5/r5_lineup.png"
+      ],
+      "status": "selected"
+    },
+    {
+      "id": "walk",
+      "prompt": "Use case: identity-preserve. Input1 r6_lineup is exact character/proportions/color design master; input2 r5_turn is costume and anatomical right-hand sword reference only, DO NOT copy its tall proportions. Make an animation asset sheet of EXACTLY EIGHT DISTINCT walking poses of Cookie, the blonde swordswoman from input1. 4 columns by 2 rows equal cells, pure flat WHITE background, no shadows, NO numbers/text/grid. 2048x1024 wide. Each cell 512x512. Keep all full bodies, hair and sword inside their own cells with generous margins. Crown approximately y=110 and soles y=440 in each row; body about 330 px tall, head about 92px tall, SAME anatomical scale all frames. Torso and face continuously in SAME 3/4 orientation looking screen RIGHT, near side is her anatomical RIGHT side. Sword always held in anatomical RIGHT near-side hand (the screen-left hand at rest), pointed down-forward at 45 degrees, same blade length and gold guard in every cell. Far LEFT arm hangs/swings only behind far body silhouette NEVER crosses chest. Faces identical. Same hair, blue embroidered tunic, silver breastplate, red sash, cream leggings, brown boots. Preserve delicate Tree of Savior painted face, brown fine lines, nuanced painted cloth and metal. LIGHT pixel texture only.\nREAD left-to-right top row frames1-4 then bottom row frames5-8. Real 8-frame walk cycle, NOT 8 near-identical poses. Frame1 near RIGHT leg reaches screen-right forward heel contact, far LEFT leg behind screen-left. Frame2 same lead absorbing weight with knee bend. Frame3 near right stance leg vertical, far left lifted passing forward. Frame4 far left raised knee advances in front, near right extends backward. Frame5 far LEFT leg forward screen-right heel contact, near RIGHT leg back screen-left (opposite legs from frame1, without flipping upper body!). Frame6 left lead absorbs weight. Frame7 far left stance vertical, near right lifted passing forward. Frame8 near right raised knee advances, far left backward, leading into frame1. The second half swaps LEGS relative to first, never mirror entire character. Boots show distinct overlapping leg order. Keep upper body stable, only tiny walking bob, not growth/shrinking. No facial specks, no debris under feet. Not running. No extra swords or extra limbs.",
+      "inputs": [
+        "docs/art/concepts/round6/r6_lineup.png",
+        "docs/art/concepts/round5/r5_turn.png"
+      ],
+      "status": "rejected: repeated leg lead"
+    },
+    {
+      "id": "attack",
+      "prompt": "Use case: identity-preserve. Input1 r6_lineup is exact identity, color, costume and 3.5-4-head proportions master; input2 r5_turn is RIGHT sword hand and attack reference only, do not use its tall proportions. Create EXACTLY EIGHT successive frames of ONE Cookie sword attack. Sheet 4 columns by 2 rows equal cells, plain pure WHITE background, NO shadows/grid/text/numbers. Wide 2048x1024. Each cell 512x512, crown about y=130, feet ground at y=450 (relative to row); body about 320 px tall, head about 90 px. Allow room overhead for sword. Exact same scale, face, hair, clothes and single sword every frame. Same 3/4-facing SCREEN RIGHT upper body throughout. Delicate fine brown line, detailed painted face, painted fabric/metal, original Tree of Savior-like style, slight pixel cluster feel, NOT generic chibi or coarse retro.\nCookie retains shoulder length blonde hair, blue gold embroidered tunic, silver breastplate, red waist sash, cream leggings, brown gloves and boots. SWORD ALWAYS in anatomical RIGHT hand which is NEAR-side arm; left FAR arm stays entirely behind/along far body, never crosses in front of chest. Do not change weapon hand when striking. Near right shoulder/arm comes in front of breastplate when strike extends; far left arm trails behind. Same sword with straight silver blade gold guard brown grip; no extra weapons or motion effects. Complete sword tip visible in all cells.\nFrames read top row1-4 then bottom5-8. 1 ready, sword low diagonally forward/right. 2 anticipation, knees compress, right hand lifts sword beside near shoulder. 3 wind-up right elbow lifted, sword above and behind head, same right facing chest. 4 STRIKE, right arm drives forward toward screen right, sword fully extended nearly horizontal at chest level; front leg planted. 5 follow-through, right-hand blade slopes down-forward about 25deg. 6 finish of arc, right-hand blade slopes down-forward about 55deg, weight settles. 7 recovery bring right hand and sword back toward ready. 8 returned ready almost frame1. This is an overhead-to-forward cut, no flipping torso or whole body. Left foot remains toward screen right, near right foot behind throughout attack, modest grounded lunge. No stray face specks or marks under feet.",
+      "inputs": [
+        "docs/art/concepts/round6/r6_lineup.png",
+        "docs/art/concepts/round5/r5_turn.png"
+      ],
+      "status": "selected"
+    },
+    {
+      "id": "field",
+      "prompt": "Use case: precise-object-edit. Image1 r5_field is EDIT TARGET; image2 r6_lineup is proportion and character identity reference. Return SAME portrait mobile game mockup, same 390:844 aspect ratio (output can be larger but exact aspect requested). Preserve image1 environment composition, stone path, arch and blue flag, flowers, trees, grass, ruins, lighting and palette, exact existing minimalist HUD positions (3 portraits/bars top left, joystick bottom left, 3 action buttons bottom right). Do not redesign or add UI. Change ONLY the three player characters to shorter 3.5-4-head body proportions as shown in image2 and LIGHT pixel-art edges/shadow clusters while retaining fine painted faces, thin brown line and nuanced painterly clothes. Keep characters at approximately same game-size footprint, 75-85px high on final 390x844 image, positions exactly mage upper-left of center, Cookie sword attack central aiming right at green slime, archer lower-left firing right. Cookie keeps blonde shoulder length hair, blue embroidered tunic, silver chestplate, red sash, cream leggings, brown boots and sword anatomical RIGHT hand. Female mage same long brown hair purple robe blue orb staff, archer male same olive hood/cloak/quiver/bow. Slime same existing small green translucent design/location. Same sword slash, spell projectile, arrow. Background remains painterly, never globally mosaic/pixelate. All characters within world and camera distance stays same, not enlarged portraits. Do not copy any third-party game art or new logos.",
+      "inputs": [
+        "docs/art/concepts/round5/r5_field.png",
+        "docs/art/concepts/round6/r6_lineup.png"
+      ],
+      "status": "selected"
+    },
+    {
+      "id": "walk_leg_correction",
+      "prompt": "Use case: precise-object-edit. FIX THIS 4x2 EIGHT FRAME WALK SHEET, preserving exactly its face, hair, clothing, sword, colors, white background and 3/4 SCREEN RIGHT torso. The current sheet incorrectly shows the screen-RIGHT / far leg forward in nearly every frame; both rows repeat the same step. Correct legs ONLY to form an actual alternating walk, AND shorten legs slightly for 3.5-4 heads total height. Keep same scale in all cells. No labels. No ground shadows or facial spots.\nUpper row1: keep far LEFT leg leading toward screen-right, near RIGHT leg trailing screen-left.\nUpper row2: far LEFT foot flat ahead, near RIGHT heel lifts behind.\nUpper row3: far LEFT leg straight beneath pelvis, near RIGHT thigh passes in FRONT of it, near boot just above ground beneath body.\nUpper row4: far LEFT leg behind, near RIGHT knee advances toward screen right, right boot low, not high stepping.\nBOTTOM ROW1/frame5 MOST IMPORTANT: NEAR RIGHT thigh (originating at screen-LEFT hip, underneath sword-side half of skirt) crosses visibly diagonally IN FRONT of the far thigh toward SCREEN RIGHT and ends in the forward boot. FAR LEFT thigh (originating at screen-RIGHT hip under red sash) angles backward toward SCREEN LEFT BEHIND near leg. This is the OPPOSITE leg lead from upper row1. Sword still stays same right hand near-side screen-left of body. Do not mirror upper body.\nBottom row2/frame6: same near RIGHT forward leg supporting, far left heel lifts behind.\nBottom row3/frame7: near RIGHT leg supports vertically under pelvis, far LEFT passes BEHIND the near thigh with lifted boot.\nBottom row4/frame8: near RIGHT leg trails behind while far LEFT knee moves forward/right low to prepare frame1.\nNever flip the entire image. Same chest direction all eight. Far arm stays behind body and never across chest. Restore normal modest WALK spacing, not a march with high knees. All swords complete and same length.",
+      "inputs": [
+        "docs/art/concepts/round6/sources/walk_initial.png"
+      ],
+      "status": "rejected: repeated leg lead"
+    },
+    {
+      "id": "walk_leg_correction2",
+      "prompt": "Use case: identity-preserve. Reference image is the LOCKED UPPER BODY of Cookie. Complete her below the skirt as an EIGHT FRAME walking animation sheet 4 columns x2 rows, 2048x1024 pure white background. Keep this upper body absolutely identical in direction and design each cell: face looks screen right, back at screen left, right hand at screen left holds sword down diagonally toward screen right, blade full length about torso+legs, no other sword. Fine painted brown linework, painted blonde hair and face, blue embroidered tunic, silver armor, red sash on screen RIGHT. Same 3.5-head body proportions and small/slender brown boots each frame. No text/shadows.\nCRITICAL WALK MECHANICS: CAMERA-NEAR LEG attaches under SCREEN-LEFT HALF of skirt. CAMERA-FAR LEG attaches under SCREEN-RIGHT RED SASH. They must move like a pendulum with opposite phases; do not keep near leg permanently pointing backwards!\nTOP1: NEAR LEG extends strongly FORWARD toward SCREEN RIGHT, diagonally crossing in front of far thigh; NEAR boot is RIGHTMOST boot. FAR leg goes BACK SCREEN LEFT and is occluded behind NEAR leg.\nTOP2: same NEAR forward leg bends under weight, FAR back heel rises.\nTOP3: NEAR leg supports straight down beneath pelvis, FAR knee passes behind it toward viewer's right, feet close together.\nTOP4: NEAR leg extends BACK toward SCREEN LEFT, FAR knee reaches FORWARD RIGHT, lifted boot almost touching floor.\nBOTTOM1: NEAR leg goes BACK SCREEN LEFT, FAR leg extends FORWARD SCREEN RIGHT (opposite of top1). Far boot rightmost now, near boot leftmost. \nBOTTOM2: FAR forward leg bends to support weight, NEAR heel lifts behind.\nBOTTOM3: FAR leg supports beneath pelvis, NEAR knee passes IN FRONT of far thigh, toes low above floor.\nBOTTOM4: NEAR knee reaches FORWARD RIGHT, FAR leg trails BACK LEFT, prepares TOP1.\nAnatomical leg crossing must be obvious from thigh overlap. Exactly eight different sequential poses, two opposite leading feet. Same upper body can be nearly static, do not rotate torso or change sword hand. No specks. Each row ground baseline same, crown and soles about same height, bodies all same anatomical scale. Full boots visible.",
+      "inputs": [
+        "docs/art/concepts/round6/sources/cookie_upper_reference.png"
+      ],
+      "status": "rejected: repeated leg lead and changed boot design"
+    },
+    {
+      "id": "walk_opposite_contact",
+      "prompt": "Edit this single image. ONLY CHANGE THE LEGS to the opposite walking step. Upper body, head, hair, face, hands, sword, skirt, armor, sash, style and white background stay identical. Keep body facing screen right. The leg attached to the LEFT side of the image must now stretch diagonally FORWARD to the RIGHT side of the image, passing IN FRONT of the other thigh. Its heel plants in front at screen right. The leg attached to the RIGHT side of the image must stretch diagonally BACKWARD to the LEFT side of the image, BEHIND the first leg. Its heel lifts at the back. The thighs CROSS below the skirt. This is the reverse leg lead from the supplied pose, do not reproduce the source legs! Camera-near right leg in front. Keep same embroidered tall brown boots and cream trousers, same limb length. Keep sword in same right hand. Full body single pose, no text or shadow, portrait.",
+      "inputs": [
+        "docs/art/concepts/round6/sources/walk_pose_reference.png"
+      ],
+      "status": "rejected: opposite lead not sufficiently clear"
+    },
+    {
+      "id": "walk_pose_guided",
+      "prompt": "Create a finished eight-frame WALK animation sheet, 4 columns x2rows. Input1 is EXACT costume/face/hair/painted style reference of Cookie. Input2 is the REQUIRED LEG POSE GUIDE, not an art style reference. FOLLOW THE LEG GEOMETRY OF INPUT2 EXACTLY in each corresponding cell. Red guide leg = near anatomical right leg, blue guide leg = far anatomical left leg. In finished art BOTH legs wear the SAME CREAM TROUSERS and TALL EMBROIDERED BROWN BOOTS from input1, no red/blue coloring. Draw blue-guide leg BEHIND red-guide leg. In frames4,5,6 red-guide thigh clearly crosses diagonally in front of blue-guide thigh, and that leg extends to screen right. In frames1,2 red-guide leg is behind toward screen left. Frame3 and7 passing feet close together. Frame4 and8 reaching foot raised just above floor. Accurate alternating legs are mandatory.\nDraw identical upper body facing 3/4 SCREEN RIGHT all eight cells, matching input1 exactly, with same face, blonde hair, blue embroidered tunic, silver plate, red sash, gloves, same anatomical right hand at screen left holding same silver sword/gold hilt pointed down-forward. Never mirror torso. Far empty arm stays behind body, not across chest. Retain source tall boot design, not short boots. 3.5-4 heads total height; do NOT stretch torso or legs to follow guide literal scale, guide specifies joint angles only. Fine painted colors and brown lines, subtle pixel feel. Stable size/crown/ground within equal cells. White flat background, no shadows/specks, no numbers/labels. All swords entirely in own cells. Draw eight different poses matching guide; do NOT duplicate first row as second.",
+      "inputs": [
+        "docs/art/concepts/round6/sources/walk_pose_reference.png",
+        "docs/art/concepts/round6/sources/walk_pose_guide.png"
+      ],
+      "status": "rejected: repeated leg lead"
+    },
+    {
+      "id": "walk_guide_primary",
+      "prompt": "Image1 is a STRICT eight-frame animation layout and joint-position guide. Transform THIS guide into painted Cookie characters, preserving its precise leg positions and overlaps in all eight cells. Image2 is face/upper-body/costume reference ONLY. Image3 is tall boot material/design reference ONLY. Do NOT repeat one identical striding pose. Do NOT invent new leg positions.\nThe red limb in image1 must be followed joint for joint as the near RIGHT leg, and blue limb followed as far LEFT leg; paint both cream trousers and brown tall boots afterward. Especially frame5 bottom-left: the near thigh from left hip crosses diagonally to the RIGHT knee and RIGHTMOST forward boot, occluding the other leg whose foot is on LEFT. Match that crossing exactly. Frame1 has reversed geometry. Frame3 and7 knees/feet come together. Draw far leg first behind near leg. No red/blue in final image.\nAdd the precise same upper body from image2 to all eight poses, same 3/4 right-facing head/chest, right sword-hand on screen left, sword pointed down-right, original blue-gold tunic, silver breastplate, red sash. All faces and proportions identical. Short 3.5-head body, slender limbs, tall boots. Fine painted warm lines and nuanced shaded clothes, same reference style. Eight complete full figures, 4x2 grid, pure white, no text/shadows, all sword tips inside cells. Top row and bottom row MUST use different leading legs like guide image1. Prioritize guide leg geometry over generic walking illustration templates.",
+      "inputs": [
+        "docs/art/concepts/round6/sources/walk_pose_guide.png",
+        "docs/art/concepts/round6/sources/cookie_upper_reference.png",
+        "docs/art/concepts/round6/sources/boot_reference.png"
+      ],
+      "status": "accepted geometry; one boot-color correction needed"
+    },
+    {
+      "id": "walk_boot_color_cleanup",
+      "prompt": "Precise color correction ONLY. In this 4 columns by 2 rows animation sheet, the THIRD character in the BOTTOM ROW (frame7) has an unwanted BLUE/PURPLE patch on the rear boot/shin, behind the near brown boot. Repaint ONLY that blue/purple patch as the same BROWN LEATHER as all the other boots with matching shaded material. Keep ALL eight poses, legs and their overlaps, face, hair, costume, right sword hand, sword shapes, colors elsewhere, proportions, scale, positions and white background pixel-identical in intent. Do not redraw or reinterpret any pose. In particular preserve the crossed near forward leg in frames4-6 and opposite leg lead in first row vs second row. NO other changes. Same exact canvas size.",
+      "inputs": [
+        "docs/art/concepts/round6/sources/walk_guide_primary.png"
+      ],
+      "status": "selected final walk"
+    }
+  ],
+  "postprocess": "assemble.mjs: crop/register frames, generate requested pixel-strength sampling comparison, nearest-neighbour 3x, GIF encoding. No source art copied from third-party games."
+}

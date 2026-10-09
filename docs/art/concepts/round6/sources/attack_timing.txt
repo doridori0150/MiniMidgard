@@ -1,0 +1,24 @@
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/attack_01_3x.png'
+option framerate 100
+duration 0.05
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/attack_02_3x.png'
+option framerate 100
+duration 0.05
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/attack_03_3x.png'
+option framerate 100
+duration 0.04
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/attack_04_3x.png'
+option framerate 100
+duration 0.06
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/attack_05_3x.png'
+option framerate 100
+duration 0.07
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/attack_06_3x.png'
+option framerate 100
+duration 0.08
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/attack_07_3x.png'
+option framerate 100
+duration 0.09
+file '/Users/oreocookie03/Projects/MiniMidgard/docs/art/concepts/round6/frames/attack_08_3x.png'
+option framerate 100
+duration 0.14

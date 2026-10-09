@@ -1,0 +1,316 @@
+{
+  "pixelMethod": {
+    "none": "Lanczos to 80px, full RGB",
+    "light": "Area to about 80px, 96 adaptive colors, no dithering",
+    "medium": "Area to 40px, 48 adaptive colors, nearest to 80px",
+    "zoom": "3x nearest, no interpolation"
+  },
+  "attack": [
+    {
+      "frame": 1,
+      "sourceCell": [
+        90,
+        65,
+        240,
+        375
+      ],
+      "sourceAnchor": 217,
+      "sourceGround": 437,
+      "scale": 0.219,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 0,
+      "durationMs": 50
+    },
+    {
+      "frame": 2,
+      "sourceCell": [
+        520,
+        90,
+        265,
+        350
+      ],
+      "sourceAnchor": 661,
+      "sourceGround": 438,
+      "scale": 0.219,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 1,
+      "durationMs": 50
+    },
+    {
+      "frame": 3,
+      "sourceCell": [
+        940,
+        10,
+        265,
+        430
+      ],
+      "sourceAnchor": 1074,
+      "sourceGround": 438,
+      "scale": 0.219,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 1,
+      "durationMs": 40
+    },
+    {
+      "frame": 4,
+      "sourceCell": [
+        1340,
+        70,
+        430,
+        372
+      ],
+      "sourceAnchor": 1500,
+      "sourceGround": 440,
+      "scale": 0.219,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 1,
+      "durationMs": 60
+    },
+    {
+      "frame": 5,
+      "sourceCell": [
+        50,
+        475,
+        400,
+        376
+      ],
+      "sourceAnchor": 211,
+      "sourceGround": 848,
+      "scale": 0.219,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 1,
+      "durationMs": 70
+    },
+    {
+      "frame": 6,
+      "sourceCell": [
+        520,
+        475,
+        325,
+        377
+      ],
+      "sourceAnchor": 654,
+      "sourceGround": 848,
+      "scale": 0.219,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 1,
+      "durationMs": 80
+    },
+    {
+      "frame": 7,
+      "sourceCell": [
+        940,
+        470,
+        325,
+        384
+      ],
+      "sourceAnchor": 1082,
+      "sourceGround": 850,
+      "scale": 0.219,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 1,
+      "durationMs": 90
+    },
+    {
+      "frame": 8,
+      "sourceCell": [
+        1390,
+        470,
+        250,
+        385
+      ],
+      "sourceAnchor": 1510,
+      "sourceGround": 850,
+      "scale": 0.219,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 1,
+      "durationMs": 140
+    }
+  ],
+  "walk": [
+    {
+      "frame": 1,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceAnchor": 217,
+      "sourceGround": 426,
+      "scale": 0.195,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 0,
+      "durationMs": 90
+    },
+    {
+      "frame": 2,
+      "sourceCell": [
+        444,
+        0,
+        443,
+        444
+      ],
+      "sourceAnchor": 662,
+      "sourceGround": 427,
+      "scale": 0.195,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 1,
+      "durationMs": 90
+    },
+    {
+      "frame": 3,
+      "sourceCell": [
+        887,
+        0,
+        444,
+        444
+      ],
+      "sourceAnchor": 1105,
+      "sourceGround": 429,
+      "scale": 0.195,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 1,
+      "durationMs": 90
+    },
+    {
+      "frame": 4,
+      "sourceCell": [
+        1331,
+        0,
+        443,
+        444
+      ],
+      "sourceAnchor": 1548,
+      "sourceGround": 425,
+      "scale": 0.195,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 1,
+      "durationMs": 90
+    },
+    {
+      "frame": 5,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        443
+      ],
+      "sourceAnchor": 218,
+      "sourceGround": 866,
+      "scale": 0.195,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 0,
+      "durationMs": 90
+    },
+    {
+      "frame": 6,
+      "sourceCell": [
+        444,
+        444,
+        443,
+        443
+      ],
+      "sourceAnchor": 663,
+      "sourceGround": 866,
+      "scale": 0.195,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 0,
+      "durationMs": 90
+    },
+    {
+      "frame": 7,
+      "sourceCell": [
+        887,
+        444,
+        444,
+        443
+      ],
+      "sourceAnchor": 1106,
+      "sourceGround": 869,
+      "scale": 0.195,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 1,
+      "durationMs": 90
+    },
+    {
+      "frame": 8,
+      "sourceCell": [
+        1331,
+        444,
+        443,
+        443
+      ],
+      "sourceAnchor": 1548,
+      "sourceGround": 868,
+      "scale": 0.195,
+      "canvas": [
+        144,
+        116
+      ],
+      "groundY": 102,
+      "roundingCorrectionY": 0,
+      "durationMs": 90
+    }
+  ]
+}
