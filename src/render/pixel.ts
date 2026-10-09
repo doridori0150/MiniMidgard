@@ -36,7 +36,9 @@ const key = (file: string) => '../assets/pixel/' + file;
 /** field units the hero stands (matches the other hero renderers) */
 const HEIGHT = 76;
 /** game weapon → pixel weapon set; null = empty-handed; missing = no pixel art for it yet (another renderer draws) */
-const WEAPON: Partial<Record<WeaponType, string | null>> = { none: null, sword: 'sword', sword2h: 'sword' };
+const WEAPON: Partial<Record<WeaponType, string | null>> = {
+  none: null, sword: 'sword', sword2h: 'sword', staff: 'staff', bow: 'bow', mace: 'mace', dagger: 'dagger', katar: 'dagger', axe: 'axe',
+};
 /** look.hair (0..7) picks a style by index among the character's gender's styles, in this order */
 const STYLE_ORDER = ['ponytail', 'bob', 'long'].flatMap((n) => [n, n + '_p2', n + '_p3']);
 /* hair colours: the same per-colour multipliers the B sprites use over their cream hair (whole.ts HAIR_TINT), applied to the four cream keys */
