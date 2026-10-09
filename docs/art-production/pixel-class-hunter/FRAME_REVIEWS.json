@@ -1,0 +1,247 @@
+[
+  {
+    "name": "idle_1",
+    "previous": "idle_0",
+    "review": "수정 원화는 머리 약 절반 비율, 화면 오른쪽 활 손 유지. 호흡은 발 고정.",
+    "accepted": true,
+    "source": "authored/idle_1.png"
+  },
+  {
+    "name": "idle_2",
+    "previous": "idle_1",
+    "review": "호흡 프레임에서 부츠와 활 손 유지, 망토 아래 윤곽만 변화 확인.",
+    "accepted": true,
+    "source": "authored/idle_2.png"
+  },
+  {
+    "name": "walk_0",
+    "previous": "idle_0",
+    "review": "대기 마지막 눈 깜빡임과 고정된 활 확인. 걷기는 열린 눈과 오른쪽 진행으로 전환.",
+    "accepted": true,
+    "source": "authored/walk_0.png"
+  },
+  {
+    "name": "walk_1",
+    "previous": "walk_0",
+    "review": "접지에서 화면 오른쪽 부츠 전진·반대 발 후방 확인. 다음은 보폭 축소와 하중.",
+    "accepted": true,
+    "source": "authored/walk_1.png"
+  },
+  {
+    "name": "walk_2",
+    "previous": "walk_1",
+    "review": "하중 장에서 앞발이 몸 아래로 가까워지고 뒤꿈치 상승 확인. 다음은 다리 겹침.",
+    "accepted": true,
+    "source": "authored/walk_2.png"
+  },
+  {
+    "name": "walk_3",
+    "previous": "walk_2",
+    "review": "통과 자세에서 다리 겹침과 지지발 확인. 반대 무릎이 앞으로 나오는 상승 단계.",
+    "accepted": true,
+    "source": "authored/walk_3.png"
+  },
+  {
+    "name": "walk_4",
+    "previous": "walk_3",
+    "review": "전진한 무릎과 뒤 지지발 확인. 다음 접지는 가까운 다리가 뒤로 가도록 교차.",
+    "accepted": true,
+    "source": "authored/walk_4.png"
+  },
+  {
+    "name": "walk_5",
+    "previous": "walk_4",
+    "review": "반대 접지 장은 뒤쪽 가까운 다리와 앞으로 뻗은 먼 다리 분리. 후반 하중으로 전환.",
+    "accepted": true,
+    "source": "authored/walk_5.png"
+  },
+  {
+    "name": "walk_6",
+    "previous": "walk_5",
+    "review": "후반 하중에서 좁아진 보폭과 낮은 중심 확인. 가까운 무릎이 앞으로 교차.",
+    "accepted": true,
+    "source": "authored/walk_6.png"
+  },
+  {
+    "name": "walk_7",
+    "previous": "walk_6",
+    "review": "후반 통과에서 발 간격이 좁아짐 확인. 첫 접지 직전으로 가까운 발을 앞으로 뻗음.",
+    "accepted": true,
+    "source": "authored/walk_7.png"
+  },
+  {
+    "name": "attack_0",
+    "previous": "idle_0",
+    "review": "walk_7 발 전진에서 walk_0 접지로 연결 가능. 공격 시작은 대기 기준으로 양발 접지.",
+    "accepted": true,
+    "source": "authored/attack_0.png"
+  },
+  {
+    "name": "attack_1",
+    "previous": "attack_0",
+    "review": "준비 장에서 왼팔 활과 오른손 가슴 앞 위치 확인. 시위를 잡는 단계로 이어감.",
+    "accepted": true,
+    "source": "authored/attack_1.png"
+  },
+  {
+    "name": "attack_2",
+    "previous": "attack_1",
+    "review": "시위 V와 오른손 접촉, 활 쥔 왼손 유지 확인. 당기는 손을 턱 쪽으로 이동.",
+    "accepted": true,
+    "source": "authored/attack_2.png"
+  },
+  {
+    "name": "attack_3",
+    "previous": "attack_2",
+    "review": "부분 당김은 턱 아래 손과 뒤로 열린 팔꿈치가 연결됨. 완전 당김에서 손을 볼 옆으로.",
+    "accepted": true,
+    "source": "authored/attack_3.png"
+  },
+  {
+    "name": "attack_4",
+    "previous": "attack_3",
+    "review": "완전 당김에서 볼 옆 오른손, 시위 V, 고정 왼팔 확인. 발사는 시위 펴짐과 오른손 이탈로 구분.",
+    "accepted": true,
+    "source": "authored/attack_4.png"
+  },
+  {
+    "name": "attack_5",
+    "previous": "attack_4",
+    "review": "발사 장에서 시위 직선 복귀와 오른손 뒤로 열림 확인. 잔여 반동을 작게 정리.",
+    "accepted": true,
+    "source": "authored/attack_5.png"
+  },
+  {
+    "name": "attack_6",
+    "previous": "attack_5",
+    "review": "반동 장의 활 높이 감소와 오른손 이완 확인. 대기로 가기 위한 중간 회수.",
+    "accepted": true,
+    "source": "authored/attack_6.png"
+  },
+  {
+    "name": "hurt_0",
+    "previous": "idle_0",
+    "review": "회수 장에서 대기 복귀 가능 확인. 피격은 뒤로 젖힘과 가슴 손으로 별도 표현.",
+    "accepted": true,
+    "source": "authored/hurt_0.png"
+  },
+  {
+    "name": "hurt_1",
+    "previous": "hurt_0",
+    "review": "피격 장에서 상체 왼쪽 기울기·찡그림·활 손 유지 확인. 버티는 회복 단계.",
+    "accepted": true,
+    "source": "authored/hurt_1.png"
+  },
+  {
+    "name": "dead_kneel",
+    "previous": "hurt_0",
+    "review": "피격 회복은 안정된 발 접지. 쓰러짐은 무릎이 꺾이고 지면을 짚는 별도 자세.",
+    "accepted": true,
+    "source": "authored/dead_kneel.png"
+  },
+  {
+    "name": "dead_floor",
+    "previous": "dead_kneel",
+    "review": "무릎 자세에서 오른손 접지와 같은 왼손 활 확인. 몸을 옆으로 낮추어 최종 정지.",
+    "accepted": true,
+    "source": "authored/dead_floor.png"
+  },
+  {
+    "name": "sit_0",
+    "previous": "idle_0",
+    "review": "누운 최종 장의 몸 수평과 지면 활 확인. 앉기는 별도 대기 기준으로 편안한 자세.",
+    "accepted": true,
+    "source": "authored/sit_0.png"
+  },
+  {
+    "name": "cast_0",
+    "previous": "idle_0",
+    "review": "앉기에서 머리 크기와 복장 일치 확인. 시전은 대기 기준으로 가슴 손과 눈 감음.",
+    "accepted": true,
+    "source": "authored/cast_0.png"
+  },
+  {
+    "name": "cast_1",
+    "previous": "cast_0",
+    "review": "시전 장은 감은 눈·가슴 오른손·왼손 활 일관. 루프는 작은 호흡만 추가.",
+    "accepted": true,
+    "source": "authored/cast_1.png"
+  },
+  {
+    "name": "sky_draw",
+    "previous": "attack_3",
+    "review": "시전 호흡은 활 손 고정 확인. 화살비는 완전 당김과 같은 손 배치에서 위쪽 조준.",
+    "accepted": true,
+    "source": "authored/sky_draw.png"
+  },
+  {
+    "name": "sky_release",
+    "previous": "sky_draw",
+    "review": "상향 당김의 왼팔 높이·시선 위쪽 확인. 발사에서 시위 직선과 오른손 이탈.",
+    "accepted": true,
+    "source": "authored/sky_release.png"
+  },
+  {
+    "name": "power_draw",
+    "previous": "attack_3",
+    "review": "상향 발사 시위 복귀 확인. 강한 사격은 일반 완전 당김에서 넓은 보폭과 낮은 중심으로.",
+    "accepted": false,
+    "source": "authored/power_draw.png"
+  },
+  {
+    "name": "power_release",
+    "previous": "power_draw",
+    "review": "강한 당김의 넓은 보폭 확인. 원화에 수평 화살선이 남아 환영 스킬 준비 장은 별도 수정 필요. 발사부터 시위와 화살 분리.",
+    "accepted": true,
+    "source": "authored/power_release.png"
+  },
+  {
+    "name": "power_draw_fix",
+    "previous": "power_draw",
+    "review": "power_draw의 얼굴 가로선은 불필요한 실물 화살로 보임. 대각 시위를 보존하며 그 선만 제거.",
+    "accepted": true,
+    "source": "authored/power_draw_fix.png"
+  },
+  {
+    "name": "falcon_raise",
+    "previous": "idle_0",
+    "review": "강한 당김 가로선 제거 확인. 매 지시는 대기에서 오른손을 머리 옆으로 들어 준비.",
+    "accepted": true,
+    "source": "authored/falcon_raise.png"
+  },
+  {
+    "name": "falcon_point",
+    "previous": "falcon_raise",
+    "review": "신호 준비에서 빈 오른손이 머리 옆에 들림 확인. 지시 순간은 목표로 팔을 내뻗음.",
+    "accepted": true,
+    "source": "authored/falcon_point.png"
+  },
+  {
+    "name": "scout",
+    "previous": "falcon_raise",
+    "review": "매 지시에서 위쪽 오른팔과 아래 활 손이 분리됨 확인. 탐지는 이마 손으로 명확히 구분.",
+    "accepted": true,
+    "source": "authored/scout.png"
+  },
+  {
+    "name": "whistle",
+    "previous": "attack_6",
+    "review": "탐지의 이마 손과 얼굴 가림 범위 확인. 호각은 가슴 준비에서 입으로 오른손 이동.",
+    "accepted": true,
+    "source": "authored/whistle.png"
+  },
+  {
+    "name": "trap_crouch",
+    "previous": "idle_0",
+    "review": "호각은 입 앞 오른손·왼손 활로 구분됨. 덫 준비는 반쯤 앉아 오른손을 아래로.",
+    "accepted": true,
+    "source": "authored/trap_crouch.png"
+  },
+  {
+    "name": "trap_place",
+    "previous": "trap_crouch",
+    "review": "반쯤 앉은 준비에서 오른손이 무릎 아래까지 내려옴 확인. 설치 장에서 지면 접촉.",
+    "accepted": true,
+    "source": "authored/trap_place.png"
+  }
+]

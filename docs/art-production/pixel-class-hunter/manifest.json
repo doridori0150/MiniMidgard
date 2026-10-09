@@ -1,0 +1,1913 @@
+{
+  "schema": "minimidgard.pixel/1",
+  "canvas": {
+    "size": [
+      128,
+      120
+    ],
+    "origin": [
+      64,
+      112
+    ],
+    "bodyHeight": 48
+  },
+  "animations": {
+    "idle": {
+      "frames": [
+        "idle_0",
+        "idle_1",
+        "idle_2"
+      ],
+      "durations": [
+        300,
+        300,
+        200
+      ],
+      "duration": 800,
+      "loop": true
+    },
+    "walk": {
+      "frames": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "walk_4",
+        "walk_5",
+        "walk_6",
+        "walk_7"
+      ],
+      "durations": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "duration": 800,
+      "loop": true
+    },
+    "attack": {
+      "frames": [
+        "attack_0",
+        "attack_1",
+        "attack_2",
+        "attack_3",
+        "attack_4",
+        "attack_5",
+        "attack_6",
+        "idle_0"
+      ],
+      "durations": [
+        60,
+        70,
+        80,
+        110,
+        50,
+        90,
+        100,
+        80
+      ],
+      "duration": 640,
+      "loop": false,
+      "hitFrame": 4
+    },
+    "hurt": {
+      "frames": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durations": [
+        90,
+        170
+      ],
+      "duration": 260,
+      "loop": false
+    },
+    "dead": {
+      "frames": [
+        "hurt_0",
+        "dead_kneel",
+        "dead_floor"
+      ],
+      "durations": [
+        100,
+        150,
+        1000
+      ],
+      "duration": 1250,
+      "loop": false,
+      "holdLast": true
+    },
+    "sit": {
+      "frames": [
+        "sit_0"
+      ],
+      "durations": [
+        1000
+      ],
+      "duration": 1000,
+      "loop": false,
+      "holdLast": true
+    },
+    "cast": {
+      "frames": [
+        "cast_0",
+        "cast_1"
+      ],
+      "durations": [
+        250,
+        250
+      ],
+      "duration": 500,
+      "loop": true
+    },
+    "skill_double": {
+      "frames": [
+        "attack_1",
+        "attack_3",
+        "attack_4",
+        "attack_2",
+        "attack_3",
+        "attack_4",
+        "attack_5",
+        "attack_6",
+        "idle_0"
+      ],
+      "durations": [
+        50,
+        80,
+        60,
+        70,
+        60,
+        60,
+        90,
+        90,
+        80
+      ],
+      "duration": 640,
+      "loop": false,
+      "hitFrame": 2
+    },
+    "skill_sky": {
+      "frames": [
+        "attack_0",
+        "sky_draw",
+        "sky_release",
+        "sky_release",
+        "attack_5",
+        "attack_6",
+        "idle_0"
+      ],
+      "durations": [
+        50,
+        80,
+        90,
+        120,
+        100,
+        100,
+        80
+      ],
+      "duration": 620,
+      "loop": false,
+      "hitFrame": 2
+    },
+    "skill_power": {
+      "frames": [
+        "attack_2",
+        "power_draw_fix",
+        "power_release",
+        "power_release",
+        "attack_5",
+        "attack_6",
+        "idle_0"
+      ],
+      "durations": [
+        50,
+        80,
+        100,
+        140,
+        100,
+        100,
+        80
+      ],
+      "duration": 650,
+      "loop": false,
+      "hitFrame": 2
+    },
+    "skill_focus": {
+      "frames": [
+        "attack_6",
+        "cast_0",
+        "cast_1",
+        "cast_0",
+        "attack_6",
+        "idle_0"
+      ],
+      "durations": [
+        90,
+        130,
+        150,
+        130,
+        80,
+        80
+      ],
+      "duration": 660,
+      "loop": false
+    },
+    "skill_falcon": {
+      "frames": [
+        "attack_6",
+        "falcon_raise",
+        "falcon_point",
+        "falcon_point",
+        "attack_6",
+        "idle_0"
+      ],
+      "durations": [
+        50,
+        80,
+        110,
+        160,
+        120,
+        100
+      ],
+      "duration": 620,
+      "loop": false,
+      "hitFrame": 2
+    },
+    "skill_scout": {
+      "frames": [
+        "attack_6",
+        "falcon_raise",
+        "scout",
+        "scout",
+        "attack_6",
+        "idle_0"
+      ],
+      "durations": [
+        80,
+        90,
+        160,
+        160,
+        100,
+        100
+      ],
+      "duration": 690,
+      "loop": false
+    },
+    "skill_whistle": {
+      "frames": [
+        "attack_6",
+        "whistle",
+        "whistle",
+        "attack_6",
+        "idle_0"
+      ],
+      "durations": [
+        100,
+        180,
+        180,
+        100,
+        100
+      ],
+      "duration": 660,
+      "loop": false
+    },
+    "skill_trap": {
+      "frames": [
+        "trap_crouch",
+        "trap_place",
+        "trap_place",
+        "trap_crouch",
+        "attack_6",
+        "idle_0"
+      ],
+      "durations": [
+        130,
+        100,
+        160,
+        130,
+        100,
+        100
+      ],
+      "duration": 720,
+      "loop": false,
+      "hitFrame": 1
+    }
+  },
+  "hairKeys": [
+    "#faf0d7",
+    "#e1cdb8",
+    "#b49b91",
+    "#49342f"
+  ],
+  "characters": {
+    "hunter_male_p2": {
+      "class": "hunter",
+      "gender": "male",
+      "bodyHeight": 48,
+      "headHeight": 25,
+      "proportion": 2,
+      "defaultWeapon": "bow",
+      "defaultHair": "hunter_swept_crop_p2",
+      "hairStyles": [
+        "hunter_swept_crop_p2"
+      ],
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle_0",
+            "idle_1",
+            "idle_2"
+          ],
+          "durations": [
+            300,
+            300,
+            200
+          ],
+          "duration": 800,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            "walk_0",
+            "walk_1",
+            "walk_2",
+            "walk_3",
+            "walk_4",
+            "walk_5",
+            "walk_6",
+            "walk_7"
+          ],
+          "durations": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ],
+          "duration": 800,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            "attack_0",
+            "attack_1",
+            "attack_2",
+            "attack_3",
+            "attack_4",
+            "attack_5",
+            "attack_6",
+            "idle_0"
+          ],
+          "durations": [
+            60,
+            70,
+            80,
+            110,
+            50,
+            90,
+            100,
+            80
+          ],
+          "duration": 640,
+          "loop": false,
+          "hitFrame": 4
+        },
+        "hurt": {
+          "frames": [
+            "hurt_0",
+            "hurt_1"
+          ],
+          "durations": [
+            90,
+            170
+          ],
+          "duration": 260,
+          "loop": false
+        },
+        "dead": {
+          "frames": [
+            "hurt_0",
+            "dead_kneel",
+            "dead_floor"
+          ],
+          "durations": [
+            100,
+            150,
+            1000
+          ],
+          "duration": 1250,
+          "loop": false,
+          "holdLast": true
+        },
+        "sit": {
+          "frames": [
+            "sit_0"
+          ],
+          "durations": [
+            1000
+          ],
+          "duration": 1000,
+          "loop": false,
+          "holdLast": true
+        },
+        "cast": {
+          "frames": [
+            "cast_0",
+            "cast_1"
+          ],
+          "durations": [
+            250,
+            250
+          ],
+          "duration": 500,
+          "loop": true
+        },
+        "skill_double": {
+          "frames": [
+            "attack_1",
+            "attack_3",
+            "attack_4",
+            "attack_2",
+            "attack_3",
+            "attack_4",
+            "attack_5",
+            "attack_6",
+            "idle_0"
+          ],
+          "durations": [
+            50,
+            80,
+            60,
+            70,
+            60,
+            60,
+            90,
+            90,
+            80
+          ],
+          "duration": 640,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_sky": {
+          "frames": [
+            "attack_0",
+            "sky_draw",
+            "sky_release",
+            "sky_release",
+            "attack_5",
+            "attack_6",
+            "idle_0"
+          ],
+          "durations": [
+            50,
+            80,
+            90,
+            120,
+            100,
+            100,
+            80
+          ],
+          "duration": 620,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_power": {
+          "frames": [
+            "attack_2",
+            "power_draw_fix",
+            "power_release",
+            "power_release",
+            "attack_5",
+            "attack_6",
+            "idle_0"
+          ],
+          "durations": [
+            50,
+            80,
+            100,
+            140,
+            100,
+            100,
+            80
+          ],
+          "duration": 650,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_focus": {
+          "frames": [
+            "attack_6",
+            "cast_0",
+            "cast_1",
+            "cast_0",
+            "attack_6",
+            "idle_0"
+          ],
+          "durations": [
+            90,
+            130,
+            150,
+            130,
+            80,
+            80
+          ],
+          "duration": 660,
+          "loop": false
+        },
+        "skill_falcon": {
+          "frames": [
+            "attack_6",
+            "falcon_raise",
+            "falcon_point",
+            "falcon_point",
+            "attack_6",
+            "idle_0"
+          ],
+          "durations": [
+            50,
+            80,
+            110,
+            160,
+            120,
+            100
+          ],
+          "duration": 620,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_scout": {
+          "frames": [
+            "attack_6",
+            "falcon_raise",
+            "scout",
+            "scout",
+            "attack_6",
+            "idle_0"
+          ],
+          "durations": [
+            80,
+            90,
+            160,
+            160,
+            100,
+            100
+          ],
+          "duration": 690,
+          "loop": false
+        },
+        "skill_whistle": {
+          "frames": [
+            "attack_6",
+            "whistle",
+            "whistle",
+            "attack_6",
+            "idle_0"
+          ],
+          "durations": [
+            100,
+            180,
+            180,
+            100,
+            100
+          ],
+          "duration": 660,
+          "loop": false
+        },
+        "skill_trap": {
+          "frames": [
+            "trap_crouch",
+            "trap_place",
+            "trap_place",
+            "trap_crouch",
+            "attack_6",
+            "idle_0"
+          ],
+          "durations": [
+            130,
+            100,
+            160,
+            130,
+            100,
+            100
+          ],
+          "duration": 720,
+          "loop": false,
+          "hitFrame": 1
+        }
+      },
+      "skillMotions": {
+        "double_strafe": "skill_double",
+        "arrow_shower": "skill_sky",
+        "arrow_repel": "skill_power",
+        "phantasmic": "skill_power",
+        "improve_conc": "skill_focus",
+        "blitz_beat": "skill_falcon",
+        "falcon_strike": "skill_falcon",
+        "detect": "skill_scout",
+        "drover_whistle": "skill_whistle",
+        "skid_trap": "skill_trap",
+        "land_mine": "skill_trap",
+        "ankle_snare": "skill_trap",
+        "shockwave_trap": "skill_trap",
+        "sandman": "skill_trap",
+        "flasher": "skill_trap",
+        "freezing_trap": "skill_trap",
+        "blast_mine": "skill_trap",
+        "claymore_trap": "skill_trap"
+      },
+      "frames": {
+        "idle_0": {
+          "image": "body/hunter_male_p2/idle_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              79,
+              84
+            ],
+            "angleDegrees": -82.41
+          },
+          "grip": "grips/hunter_male_p2/idle_0.png"
+        },
+        "idle_1": {
+          "image": "body/hunter_male_p2/idle_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              79,
+              84
+            ],
+            "angleDegrees": -82.41
+          },
+          "grip": "grips/hunter_male_p2/idle_1.png"
+        },
+        "idle_2": {
+          "image": "body/hunter_male_p2/idle_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              79,
+              84
+            ],
+            "angleDegrees": -82.41
+          },
+          "grip": "grips/hunter_male_p2/idle_2.png"
+        },
+        "walk_0": {
+          "image": "body/hunter_male_p2/walk_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              99
+            ],
+            "tipPoint": [
+              78,
+              84
+            ],
+            "angleDegrees": -82.41
+          },
+          "grip": "grips/hunter_male_p2/walk_0.png"
+        },
+        "walk_1": {
+          "image": "body/hunter_male_p2/walk_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              78,
+              84
+            ],
+            "angleDegrees": -86.19
+          },
+          "grip": "grips/hunter_male_p2/walk_1.png"
+        },
+        "walk_2": {
+          "image": "body/hunter_male_p2/walk_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              76,
+              98
+            ],
+            "tipPoint": [
+              77,
+              84
+            ],
+            "angleDegrees": -85.91
+          },
+          "grip": "grips/hunter_male_p2/walk_2.png"
+        },
+        "walk_3": {
+          "image": "body/hunter_male_p2/walk_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              98
+            ],
+            "tipPoint": [
+              78,
+              84
+            ],
+            "angleDegrees": -85.91
+          },
+          "grip": "grips/hunter_male_p2/walk_3.png"
+        },
+        "walk_4": {
+          "image": "body/hunter_male_p2/walk_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              98
+            ],
+            "tipPoint": [
+              78,
+              84
+            ],
+            "angleDegrees": -85.91
+          },
+          "grip": "grips/hunter_male_p2/walk_4.png"
+        },
+        "walk_5": {
+          "image": "body/hunter_male_p2/walk_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              79,
+              85
+            ],
+            "angleDegrees": -81.87
+          },
+          "grip": "grips/hunter_male_p2/walk_5.png"
+        },
+        "walk_6": {
+          "image": "body/hunter_male_p2/walk_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              78,
+              85
+            ],
+            "angleDegrees": -85.91
+          },
+          "grip": "grips/hunter_male_p2/walk_6.png"
+        },
+        "walk_7": {
+          "image": "body/hunter_male_p2/walk_7.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_7",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              97
+            ],
+            "tipPoint": [
+              78,
+              84
+            ],
+            "angleDegrees": -85.6
+          },
+          "grip": "grips/hunter_male_p2/walk_7.png"
+        },
+        "attack_0": {
+          "image": "body/hunter_male_p2/attack_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              80,
+              91
+            ],
+            "tipPoint": [
+              79,
+              74
+            ],
+            "angleDegrees": -93.37
+          },
+          "grip": "grips/hunter_male_p2/attack_0.png"
+        },
+        "attack_1": {
+          "image": "body/hunter_male_p2/attack_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              84,
+              92
+            ],
+            "tipPoint": [
+              81,
+              74
+            ],
+            "angleDegrees": -99.46
+          },
+          "grip": "grips/hunter_male_p2/attack_1.png"
+        },
+        "attack_2": {
+          "image": "body/hunter_male_p2/attack_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              84,
+              92
+            ],
+            "tipPoint": [
+              81,
+              74
+            ],
+            "angleDegrees": -99.46
+          },
+          "grip": "grips/hunter_male_p2/attack_2.png"
+        },
+        "attack_3": {
+          "image": "body/hunter_male_p2/attack_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              85,
+              91
+            ],
+            "tipPoint": [
+              82,
+              72
+            ],
+            "angleDegrees": -98.97
+          },
+          "grip": "grips/hunter_male_p2/attack_3.png"
+        },
+        "attack_4": {
+          "image": "body/hunter_male_p2/attack_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              87,
+              91
+            ],
+            "tipPoint": [
+              83,
+              72
+            ],
+            "angleDegrees": -101.89
+          },
+          "grip": "grips/hunter_male_p2/attack_4.png"
+        },
+        "attack_5": {
+          "image": "body/hunter_male_p2/attack_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              85,
+              96
+            ],
+            "tipPoint": [
+              83,
+              81
+            ],
+            "angleDegrees": -97.59
+          },
+          "grip": "grips/hunter_male_p2/attack_5.png"
+        },
+        "attack_6": {
+          "image": "body/hunter_male_p2/attack_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              78,
+              100
+            ],
+            "tipPoint": [
+              79,
+              86
+            ],
+            "angleDegrees": -85.91
+          },
+          "grip": "grips/hunter_male_p2/attack_6.png"
+        },
+        "hurt_0": {
+          "image": "body/hunter_male_p2/hurt_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              94
+            ],
+            "tipPoint": [
+              75,
+              79
+            ],
+            "angleDegrees": -97.59
+          },
+          "grip": "grips/hunter_male_p2/hurt_0.png"
+        },
+        "hurt_1": {
+          "image": "body/hunter_male_p2/hurt_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              100
+            ],
+            "tipPoint": [
+              78,
+              85
+            ],
+            "angleDegrees": -86.19
+          },
+          "grip": "grips/hunter_male_p2/hurt_1.png"
+        },
+        "dead_kneel": {
+          "image": "body/hunter_male_p2/dead_kneel.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_kneel",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              79,
+              98
+            ],
+            "tipPoint": [
+              78,
+              83
+            ],
+            "angleDegrees": -93.81
+          },
+          "grip": "grips/hunter_male_p2/dead_kneel.png"
+        },
+        "dead_floor": {
+          "image": "body/hunter_male_p2/dead_floor.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_floor",
+            "basePose": "down"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              73,
+              109
+            ],
+            "tipPoint": [
+              93,
+              107
+            ],
+            "angleDegrees": -5.71
+          },
+          "grip": "grips/hunter_male_p2/dead_floor.png"
+        },
+        "sit_0": {
+          "image": "body/hunter_male_p2/sit_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "sit_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              78,
+              84
+            ],
+            "angleDegrees": -86.19
+          },
+          "grip": "grips/hunter_male_p2/sit_0.png"
+        },
+        "cast_0": {
+          "image": "body/hunter_male_p2/cast_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              79,
+              85
+            ],
+            "angleDegrees": -81.87
+          },
+          "grip": "grips/hunter_male_p2/cast_0.png"
+        },
+        "cast_1": {
+          "image": "body/hunter_male_p2/cast_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              79,
+              84
+            ],
+            "angleDegrees": -82.41
+          },
+          "grip": "grips/hunter_male_p2/cast_1.png"
+        },
+        "sky_draw": {
+          "image": "body/hunter_male_p2/sky_draw.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "sky_draw",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              86,
+              83
+            ],
+            "tipPoint": [
+              79,
+              65
+            ],
+            "angleDegrees": -111.25
+          },
+          "grip": "grips/hunter_male_p2/sky_draw.png"
+        },
+        "sky_release": {
+          "image": "body/hunter_male_p2/sky_release.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "sky_release",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              87,
+              83
+            ],
+            "tipPoint": [
+              79,
+              65
+            ],
+            "angleDegrees": -113.96
+          },
+          "grip": "grips/hunter_male_p2/sky_release.png"
+        },
+        "power_draw_fix": {
+          "image": "body/hunter_male_p2/power_draw_fix.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "power_draw_fix",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              89,
+              90
+            ],
+            "tipPoint": [
+              86,
+              70
+            ],
+            "angleDegrees": -98.53
+          },
+          "grip": "grips/hunter_male_p2/power_draw_fix.png"
+        },
+        "power_release": {
+          "image": "body/hunter_male_p2/power_release.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "power_release",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              90,
+              91
+            ],
+            "tipPoint": [
+              87,
+              71
+            ],
+            "angleDegrees": -98.53
+          },
+          "grip": "grips/hunter_male_p2/power_release.png"
+        },
+        "falcon_raise": {
+          "image": "body/hunter_male_p2/falcon_raise.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "falcon_raise",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              79,
+              85
+            ],
+            "angleDegrees": -81.87
+          },
+          "grip": "grips/hunter_male_p2/falcon_raise.png"
+        },
+        "falcon_point": {
+          "image": "body/hunter_male_p2/falcon_point.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "falcon_point",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              79,
+              85
+            ],
+            "angleDegrees": -81.87
+          },
+          "grip": "grips/hunter_male_p2/falcon_point.png"
+        },
+        "scout": {
+          "image": "body/hunter_male_p2/scout.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "scout",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              79,
+              85
+            ],
+            "angleDegrees": -81.87
+          },
+          "grip": "grips/hunter_male_p2/scout.png"
+        },
+        "whistle": {
+          "image": "body/hunter_male_p2/whistle.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "whistle",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              78,
+              100
+            ],
+            "tipPoint": [
+              79,
+              86
+            ],
+            "angleDegrees": -85.91
+          },
+          "grip": "grips/hunter_male_p2/whistle.png"
+        },
+        "trap_crouch": {
+          "image": "body/hunter_male_p2/trap_crouch.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "trap_crouch",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              79,
+              100
+            ],
+            "tipPoint": [
+              80,
+              85
+            ],
+            "angleDegrees": -86.19
+          },
+          "grip": "grips/hunter_male_p2/trap_crouch.png"
+        },
+        "trap_place": {
+          "image": "body/hunter_male_p2/trap_place.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "trap_place",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "far",
+            "anatomicalHand": "left",
+            "gripPoint": [
+              79,
+              99
+            ],
+            "tipPoint": [
+              81,
+              84
+            ],
+            "angleDegrees": -82.41
+          },
+          "grip": "grips/hunter_male_p2/trap_place.png"
+        }
+      }
+    }
+  },
+  "hair": {
+    "hunter_swept_crop_p2": {
+      "gender": "male",
+      "style": "swept_crop",
+      "proportion": "p2",
+      "pivot": [
+        0,
+        0
+      ],
+      "poses": {
+        "idle_0": {
+          "front": "hair/hunter_swept_crop_p2/idle_0_front.png",
+          "back": "hair/hunter_swept_crop_p2/idle_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_1": {
+          "front": "hair/hunter_swept_crop_p2/idle_1_front.png",
+          "back": "hair/hunter_swept_crop_p2/idle_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_2": {
+          "front": "hair/hunter_swept_crop_p2/idle_2_front.png",
+          "back": "hair/hunter_swept_crop_p2/idle_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_0": {
+          "front": "hair/hunter_swept_crop_p2/walk_0_front.png",
+          "back": "hair/hunter_swept_crop_p2/walk_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_1": {
+          "front": "hair/hunter_swept_crop_p2/walk_1_front.png",
+          "back": "hair/hunter_swept_crop_p2/walk_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_2": {
+          "front": "hair/hunter_swept_crop_p2/walk_2_front.png",
+          "back": "hair/hunter_swept_crop_p2/walk_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_3": {
+          "front": "hair/hunter_swept_crop_p2/walk_3_front.png",
+          "back": "hair/hunter_swept_crop_p2/walk_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_4": {
+          "front": "hair/hunter_swept_crop_p2/walk_4_front.png",
+          "back": "hair/hunter_swept_crop_p2/walk_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_5": {
+          "front": "hair/hunter_swept_crop_p2/walk_5_front.png",
+          "back": "hair/hunter_swept_crop_p2/walk_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_6": {
+          "front": "hair/hunter_swept_crop_p2/walk_6_front.png",
+          "back": "hair/hunter_swept_crop_p2/walk_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_7": {
+          "front": "hair/hunter_swept_crop_p2/walk_7_front.png",
+          "back": "hair/hunter_swept_crop_p2/walk_7_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_0": {
+          "front": "hair/hunter_swept_crop_p2/attack_0_front.png",
+          "back": "hair/hunter_swept_crop_p2/attack_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_1": {
+          "front": "hair/hunter_swept_crop_p2/attack_1_front.png",
+          "back": "hair/hunter_swept_crop_p2/attack_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_2": {
+          "front": "hair/hunter_swept_crop_p2/attack_2_front.png",
+          "back": "hair/hunter_swept_crop_p2/attack_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_3": {
+          "front": "hair/hunter_swept_crop_p2/attack_3_front.png",
+          "back": "hair/hunter_swept_crop_p2/attack_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_4": {
+          "front": "hair/hunter_swept_crop_p2/attack_4_front.png",
+          "back": "hair/hunter_swept_crop_p2/attack_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_5": {
+          "front": "hair/hunter_swept_crop_p2/attack_5_front.png",
+          "back": "hair/hunter_swept_crop_p2/attack_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_6": {
+          "front": "hair/hunter_swept_crop_p2/attack_6_front.png",
+          "back": "hair/hunter_swept_crop_p2/attack_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_0": {
+          "front": "hair/hunter_swept_crop_p2/hurt_0_front.png",
+          "back": "hair/hunter_swept_crop_p2/hurt_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_1": {
+          "front": "hair/hunter_swept_crop_p2/hurt_1_front.png",
+          "back": "hair/hunter_swept_crop_p2/hurt_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_kneel": {
+          "front": "hair/hunter_swept_crop_p2/dead_kneel_front.png",
+          "back": "hair/hunter_swept_crop_p2/dead_kneel_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_floor": {
+          "front": "hair/hunter_swept_crop_p2/dead_floor_front.png",
+          "back": "hair/hunter_swept_crop_p2/dead_floor_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "sit_0": {
+          "front": "hair/hunter_swept_crop_p2/sit_0_front.png",
+          "back": "hair/hunter_swept_crop_p2/sit_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_0": {
+          "front": "hair/hunter_swept_crop_p2/cast_0_front.png",
+          "back": "hair/hunter_swept_crop_p2/cast_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_1": {
+          "front": "hair/hunter_swept_crop_p2/cast_1_front.png",
+          "back": "hair/hunter_swept_crop_p2/cast_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "sky_draw": {
+          "front": "hair/hunter_swept_crop_p2/sky_draw_front.png",
+          "back": "hair/hunter_swept_crop_p2/sky_draw_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "sky_release": {
+          "front": "hair/hunter_swept_crop_p2/sky_release_front.png",
+          "back": "hair/hunter_swept_crop_p2/sky_release_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "power_draw_fix": {
+          "front": "hair/hunter_swept_crop_p2/power_draw_fix_front.png",
+          "back": "hair/hunter_swept_crop_p2/power_draw_fix_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "power_release": {
+          "front": "hair/hunter_swept_crop_p2/power_release_front.png",
+          "back": "hair/hunter_swept_crop_p2/power_release_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "falcon_raise": {
+          "front": "hair/hunter_swept_crop_p2/falcon_raise_front.png",
+          "back": "hair/hunter_swept_crop_p2/falcon_raise_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "falcon_point": {
+          "front": "hair/hunter_swept_crop_p2/falcon_point_front.png",
+          "back": "hair/hunter_swept_crop_p2/falcon_point_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "scout": {
+          "front": "hair/hunter_swept_crop_p2/scout_front.png",
+          "back": "hair/hunter_swept_crop_p2/scout_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "whistle": {
+          "front": "hair/hunter_swept_crop_p2/whistle_front.png",
+          "back": "hair/hunter_swept_crop_p2/whistle_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "trap_crouch": {
+          "front": "hair/hunter_swept_crop_p2/trap_crouch_front.png",
+          "back": "hair/hunter_swept_crop_p2/trap_crouch_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "trap_place": {
+          "front": "hair/hunter_swept_crop_p2/trap_place_front.png",
+          "back": "hair/hunter_swept_crop_p2/trap_place_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      }
+    }
+  },
+  "weapons": {
+    "bow": {
+      "frames": {
+        "hunter_male_p2": {
+          "idle_0": "weapons/bow/hunter_male_p2/idle_0.png",
+          "idle_1": "weapons/bow/hunter_male_p2/idle_1.png",
+          "idle_2": "weapons/bow/hunter_male_p2/idle_2.png",
+          "walk_0": "weapons/bow/hunter_male_p2/walk_0.png",
+          "walk_1": "weapons/bow/hunter_male_p2/walk_1.png",
+          "walk_2": "weapons/bow/hunter_male_p2/walk_2.png",
+          "walk_3": "weapons/bow/hunter_male_p2/walk_3.png",
+          "walk_4": "weapons/bow/hunter_male_p2/walk_4.png",
+          "walk_5": "weapons/bow/hunter_male_p2/walk_5.png",
+          "walk_6": "weapons/bow/hunter_male_p2/walk_6.png",
+          "walk_7": "weapons/bow/hunter_male_p2/walk_7.png",
+          "attack_0": "weapons/bow/hunter_male_p2/attack_0.png",
+          "attack_1": "weapons/bow/hunter_male_p2/attack_1.png",
+          "attack_2": "weapons/bow/hunter_male_p2/attack_2.png",
+          "attack_3": "weapons/bow/hunter_male_p2/attack_3.png",
+          "attack_4": "weapons/bow/hunter_male_p2/attack_4.png",
+          "attack_5": "weapons/bow/hunter_male_p2/attack_5.png",
+          "attack_6": "weapons/bow/hunter_male_p2/attack_6.png",
+          "hurt_0": "weapons/bow/hunter_male_p2/hurt_0.png",
+          "hurt_1": "weapons/bow/hunter_male_p2/hurt_1.png",
+          "dead_kneel": "weapons/bow/hunter_male_p2/dead_kneel.png",
+          "dead_floor": "weapons/bow/hunter_male_p2/dead_floor.png",
+          "sit_0": "weapons/bow/hunter_male_p2/sit_0.png",
+          "cast_0": "weapons/bow/hunter_male_p2/cast_0.png",
+          "cast_1": "weapons/bow/hunter_male_p2/cast_1.png",
+          "sky_draw": "weapons/bow/hunter_male_p2/sky_draw.png",
+          "sky_release": "weapons/bow/hunter_male_p2/sky_release.png",
+          "power_draw_fix": "weapons/bow/hunter_male_p2/power_draw_fix.png",
+          "power_release": "weapons/bow/hunter_male_p2/power_release.png",
+          "falcon_raise": "weapons/bow/hunter_male_p2/falcon_raise.png",
+          "falcon_point": "weapons/bow/hunter_male_p2/falcon_point.png",
+          "scout": "weapons/bow/hunter_male_p2/scout.png",
+          "whistle": "weapons/bow/hunter_male_p2/whistle.png",
+          "trap_crouch": "weapons/bow/hunter_male_p2/trap_crouch.png",
+          "trap_place": "weapons/bow/hunter_male_p2/trap_place.png"
+        }
+      }
+    }
+  }
+}

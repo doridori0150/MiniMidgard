@@ -1,0 +1,255 @@
+[
+  {
+    "name": "idle_0",
+    "prompt": "Create ONE original game sprite, not a sheet. Use the attached Knight and Cookie images only as pixel density, adorable 2-head proportion and palette craftsmanship references. New male Hunter: ivory short side-swept hair, small forest-green shoulder cape, cream collar, brown leather vest, brass buckle, fitted tan trousers, dark brown gloves and boots. Same 2-head silhouette, head half full standing height. Right-facing three-quarter view. Idle standing balanced. Anatomical LEFT arm is far arm extending to SCREEN RIGHT holding a simple wooden recurve bow at its center grip at waist height; right near arm relaxed. Bow always in this same left hand. No arrow, hawk, effects, scenery, shadow, text. Crisp intentional pixel clusters, limited 24-colour palette, dark warm outlines, no antialias. Enlarge a roughly 48-pixel-tall sprite with nearest neighbor look; transparent background. Entire sprite including bow fully inside image, generous margin. This is idle_0, the canonical character for sequential animation. Only one character and one pose."
+  },
+  {
+    "name": "idle_0_fix",
+    "prompt": "Edit the Hunter (first reference) to match the proportions and pixel simplicity of the Knight (second reference). Hunter currently too tall: shorten body BELOW chin by 35 percent, keep entire large head same. Exactly TWO HEADS tall total from hair top to boots bottom. Tiny torso and short legs. Keep forest-green cape, brown vest, cream sleeves, ivory short swept hair and male face. Simplify to crisp low-resolution pixel art as if drawn at 48 pixels tall, not detailed illustration. Maintain idle pose and anatomical LEFT hand gripping bow on SCREEN RIGHT; right hand relaxed on screen left. Reduce bow length with shortened body. Fully transparent background. One full-body sprite, no grid/text/arrow/bird/effects. This replaces idle_0."
+  },
+  {
+    "name": "idle_1",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Idle breath: chest and shoulders rise only slightly, boots unchanged planted and bow in same hand. Head same size and angle, cape lifted a little at left edge.",
+    "previous": "idle_0",
+    "previousReview": "수정 원화는 머리 약 절반 비율, 화면 오른쪽 활 손 유지. 호흡은 발 고정.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-1a5462ed-3714-4004-a646-2ba1f4aa9aac.png"
+  },
+  {
+    "name": "idle_2",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Idle settle: chest lowers slightly from prior frame, cape settles, eyelids half closed for a gentle blink. Boots and bow fixed. Same scale and head.",
+    "previous": "idle_1",
+    "previousReview": "호흡 프레임에서 부츠와 활 손 유지, 망토 아래 윤곽만 변화 확인.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-716dd8de-ea1d-4a32-bbf9-9f86441af88c.png"
+  },
+  {
+    "name": "walk_0",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Walking toward right, first CONTACT pose. Near right leg extends FORWARD toward screen right, far left leg extends BACK screen left. Wide but natural short stride. Both boot soles near baseline. Right arm swings back screen left. Bow stays low in left far hand screen right. Eyes open. Same large head and short legs.",
+    "previous": "idle_0",
+    "previousReview": "대기 마지막 눈 깜빡임과 고정된 활 확인. 걷기는 열린 눈과 오른쪽 진행으로 전환.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-8b724541-2425-4c3b-8438-6e0758870a7b.png"
+  },
+  {
+    "name": "walk_1",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Next walking DOWN / WEIGHT pose after the contact: forward screen-right boot plants flat and slides closer under hips, that knee bends; trailing screen-left heel rises with toe behind. Torso sinks slightly, feet closer than previous. Keep identical upper body and bow hand.",
+    "previous": "walk_0",
+    "previousReview": "접지에서 화면 오른쪽 부츠 전진·반대 발 후방 확인. 다음은 보폭 축소와 하중.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-eba65475-baa7-4b81-b4fc-9e00056fa318.png"
+  },
+  {
+    "name": "walk_2",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Next walk PASSING pose: supporting right boot directly below pelvis planted; far left thigh swings forward, knee bent, its boot lifted behind and beside supporting ankle. Legs overlap narrowly, NOT spread apart. Right free hand moves toward belt. Head same and bow low.",
+    "previous": "walk_1",
+    "previousReview": "하중 장에서 앞발이 몸 아래로 가까워지고 뒤꿈치 상승 확인. 다음은 다리 겹침.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-bebb0d56-7665-48d0-bad1-56579f4d3afd.png"
+  },
+  {
+    "name": "walk_3",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Next walk UP pose: far left knee now lifts forward toward screen right, boot visibly airborne in front. Near right leg supports under body slightly toward screen left, heel lifting. Right free arm swings a little forward, cape trails screen left. Keep feet distinctly different from passing pose.",
+    "previous": "walk_2",
+    "previousReview": "통과 자세에서 다리 겹침과 지지발 확인. 반대 무릎이 앞으로 나오는 상승 단계.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-fb4de8d7-8483-4713-833c-cbec049eb4af.png"
+  },
+  {
+    "name": "walk_4",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Next walk OPPOSITE CONTACT: far LEFT leg forward to screen right now plants its heel. NEAR right leg extends BACK to screen left and is clearly visible IN FRONT of far leg at hip crossing. Right free arm forward bent. Wide stride opposite the initial contact, cape trails left. Do not flip character or bow.",
+    "previous": "walk_3",
+    "previousReview": "전진한 무릎과 뒤 지지발 확인. 다음 접지는 가까운 다리가 뒤로 가도록 교차.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-35f17391-525d-4617-b4ce-e7c35ff2f4d9.png"
+  },
+  {
+    "name": "walk_5",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Next walk opposite DOWN: far left forward boot planted closer under hips, knee bends absorbing weight. Near right trailing foot heel up and knee begins swinging inward. Torso sinks subtly. Right free arm begins swinging back, cape drops partway. Must advance from previous wide stride to narrower bent-knee stride.",
+    "previous": "walk_4",
+    "previousReview": "반대 접지 장은 뒤쪽 가까운 다리와 앞으로 뻗은 먼 다리 분리. 후반 하중으로 전환.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-deee6cb8-f1c0-46f0-bf34-94edec331d62.png"
+  },
+  {
+    "name": "walk_6",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Next opposite PASSING: far LEFT support boot below body planted. NEAR right knee crosses visibly IN FRONT of support leg, its boot lifted just off floor to screen left of supporting shin. Knees overlap narrowly. Right arm hangs back screen left. Maintain bow hand and face.",
+    "previous": "walk_5",
+    "previousReview": "후반 하중에서 좁아진 보폭과 낮은 중심 확인. 가까운 무릎이 앞으로 교차.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-46373e99-98ad-4ad2-bfbd-14e413b2eeb0.png"
+  },
+  {
+    "name": "walk_7",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Final walk UP transition toward first contact: NEAR right thigh lifts and extends diagonally FORWARD screen right, boot airborne toe up, clearly drawn in front of other shin. FAR left leg extends backward screen left and supports toe on ground. Right free arm swings back and cape begins settle. This is clearly different from narrow passing stance.",
+    "previous": "walk_6",
+    "previousReview": "후반 통과에서 발 간격이 좁아짐 확인. 첫 접지 직전으로 가까운 발을 앞으로 뻗음.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-4bb61535-6bb9-407e-9ea1-479ea2d6e431.png"
+  },
+  {
+    "name": "attack_0",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Begin bow shot: feet spread moderately grounded, left far hand raises bow from waist to chest on screen right, bow vertical. Right near hand comes from hip to just below the string at center chest, preparing to grasp it. Face aims right. No arrow. Same short body, same head.",
+    "previous": "idle_0",
+    "previousReview": "walk_7 발 전진에서 walk_0 접지로 연결 가능. 공격 시작은 대기 기준으로 양발 접지.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-5120c566-ae86-4052-983f-d83253e3414b.png"
+  },
+  {
+    "name": "attack_1",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Next shot frame: left arm extends bow farther right at shoulder height. Right gloved hand reaches across body and grasps CENTER of string, only slight pull so string forms shallow V toward chest. Same feet fixed. No arrow. Clear hand-string contact.",
+    "previous": "attack_0",
+    "previousReview": "준비 장에서 왼팔 활과 오른손 가슴 앞 위치 확인. 시위를 잡는 단계로 이어감.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-462aadbe-e719-482f-a6b2-898370acb873.png"
+  },
+  {
+    "name": "attack_2",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Next partial DRAW: right hand pulls string up and back toward chin, right elbow opens toward SCREEN LEFT. Left arm remains extended screen RIGHT with bow. String V center exactly touches right glove under chin. Torso rotates slightly left, feet fixed. Keep bow same length and head same size.",
+    "previous": "attack_1",
+    "previousReview": "시위 V와 오른손 접촉, 활 쥔 왼손 유지 확인. 당기는 손을 턱 쪽으로 이동.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-8b2446b9-bc13-492e-b657-b777baa76a8f.png"
+  },
+  {
+    "name": "attack_3",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Next FULL DRAW / AIM: right glove at cheek just below ear, elbow extended horizontally further SCREEN LEFT. Left arm locked at shoulder level to right, bow slightly bent under tension, V string centered on drawing glove. Chest turned, knees slightly bent and grounded. No arrow, same size.",
+    "previous": "attack_2",
+    "previousReview": "부분 당김은 턱 아래 손과 뒤로 열린 팔꿈치가 연결됨. 완전 당김에서 손을 볼 옆으로.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-af89dc46-7bc6-4db7-b8fc-d8f9ee1e781c.png"
+  },
+  {
+    "name": "attack_4",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. RELEASE frame: string has SNAPPED FORWARD into a single nearly straight line connecting bow tips on screen right, no V toward face. Right drawing hand opens and recoils BACK toward screen left beside ear, away from string. Left arm still fully extends bow to right. Remove horizontal arrow/line entirely; arrow already left, show NO projectile. Same planted feet, chest slightly recoils.",
+    "previous": "attack_3",
+    "previousReview": "완전 당김에서 볼 옆 오른손, 시위 V, 고정 왼팔 확인. 발사는 시위 펴짐과 오른손 이탈로 구분.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-3263e905-b6d2-485d-839e-18260a79efac.png"
+  },
+  {
+    "name": "attack_5",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Shot FOLLOW THROUGH: keep string straight, lower bow hand a small amount from shoulder. Drawing right hand relaxes from ear toward shoulder, fingers half closed, elbow drops slightly. Chest settles, knees still flexed. No arrows. Only small change after release.",
+    "previous": "attack_4",
+    "previousReview": "발사 장에서 시위 직선 복귀와 오른손 뒤로 열림 확인. 잔여 반동을 작게 정리.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-5a6abdf7-d3d0-46a4-905f-0413d2afbbd6.png"
+  },
+  {
+    "name": "attack_6",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Recovery: bow lowered to waist but a little ahead of canonical idle, right hand lowered to mid chest, elbow tucking in, feet draw slightly closer. Blend prior followthrough into idle, same head and body size.",
+    "previous": "attack_5",
+    "previousReview": "반동 장의 활 높이 감소와 오른손 이완 확인. 대기로 가기 위한 중간 회수.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-477cf1ee-07ab-4569-bb87-e3559a140b69.png"
+  },
+  {
+    "name": "hurt_0",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. HURT recoil pose: upper body and head tilt backward toward screen LEFT, eyes squeeze shut, right free hand clutches chest. Knees bend, one heel lifts. Left bow hand remains attached screen right and bow tilts with arm. No blood/effects, same tiny body and large head.",
+    "previous": "idle_0",
+    "previousReview": "회수 장에서 대기 복귀 가능 확인. 피격은 뒤로 젖힘과 가슴 손으로 별도 표현.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-51bdd332-3dff-4882-a9cd-f9f4981ed77b.png"
+  },
+  {
+    "name": "hurt_1",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Recover from hurt: torso comes halfway upright, head less tilted, eyes half open, right hand still over chest but lowering slightly. Both boots firmly planted, knees flexed. Bow lowers toward idle. Same character and scale.",
+    "previous": "hurt_0",
+    "previousReview": "피격 장에서 상체 왼쪽 기울기·찡그림·활 손 유지 확인. 버티는 회복 단계.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-71abbde9-d4bf-46f9-a3e2-3213ef34cb57.png"
+  },
+  {
+    "name": "dead_kneel",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Defeat transition: knees buckle and hunter sinks onto ONE KNEE. Head bows forward, eyes closed, right glove reaches toward ground for support. Left hand still holds bow now lowered and tilted diagonally beside him screen right. Big head same absolute size; body is genuinely crouched, not shrunk. Full sprite no cropping.",
+    "previous": "hurt_0",
+    "previousReview": "피격 회복은 안정된 발 접지. 쓰러짐은 무릎이 꺾이고 지면을 짚는 별도 자세.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-2a41162b-7e0c-4464-b037-9d6bc5c9784f.png"
+  },
+  {
+    "name": "dead_floor",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Final defeated pose: hunter lies on his SIDE on ground, head at SCREEN LEFT, torso horizontal, bent short legs and boots at SCREEN RIGHT. Eyes closed. Right arm under head, LEFT hand still resting on bow grip in front of torso, bow lies nearly horizontal along floor toward right. Same big head absolute size and costume. No standing/kneeling, no effects. Entire body visible.",
+    "previous": "dead_kneel",
+    "previousReview": "무릎 자세에서 오른손 접지와 같은 왼손 활 확인. 몸을 옆으로 낮추어 최종 정지.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-96dc7beb-14d6-45c8-ba57-4d76ade5e3d7.png"
+  },
+  {
+    "name": "sit_0",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Seated REST pose, eyes open peaceful: sit on ground with both knees bent, boots forward to right, torso upright. Right glove rests on near knee. Left far hand keeps bow grip screen right, bow tilted diagonally beside seated legs. Same head size as idle, only body posture lower. No chair or ground shadow.",
+    "previous": "idle_0",
+    "previousReview": "누운 최종 장의 몸 수평과 지면 활 확인. 앉기는 별도 대기 기준으로 편안한 자세.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-7c9b5013-17cd-4375-9734-ba6c0c3390a2.png"
+  },
+  {
+    "name": "cast_0",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Charging / concentration stance: standing feet firmly set, knees lightly flexed. Left hand holds bow low vertically on screen right. Right glove pressed flat to center of chest under collar, elbow out a little. Eyes gently closed concentrating. Head upright same size, cape calm. No aura or effects.",
+    "previous": "idle_0",
+    "previousReview": "앉기에서 머리 크기와 복장 일치 확인. 시전은 대기 기준으로 가슴 손과 눈 감음.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-44cec76d-1268-44c3-bca9-68640bd74048.png"
+  },
+  {
+    "name": "cast_1",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Next subtle charging breath: SAME planted feet, SAME bow hand position, SAME closed eyes and right glove on chest. Chest expands a little and cape screen-left edge rises a small amount. No other pose change, loop seamlessly into previous.",
+    "previous": "cast_0",
+    "previousReview": "시전 장은 감은 눈·가슴 오른손·왼손 활 일관. 루프는 작은 호흡만 추가.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-d6f5d8b3-8afa-435c-b77a-b82cd51b1e22.png"
+  },
+  {
+    "name": "sky_draw",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Arrow shower preparation: left bow arm extends diagonally UP-RIGHT, entire bow rotated so shooting direction is 45 degrees UP-RIGHT. Right hand pulls string near chin, right elbow down-left. Head looks slightly up without changing size; legs planted. Bow geometry rotates with aim. No arrow/effects.",
+    "previous": "attack_3",
+    "previousReview": "시전 호흡은 활 손 고정 확인. 화살비는 완전 당김과 같은 손 배치에서 위쪽 조준.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-6c42ffc1-e37f-4853-b004-5547f4587597.png"
+  },
+  {
+    "name": "sky_release",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Arrow shower RELEASE: maintain elevated left arm and tilted bow pointed up-right. String snaps straight BETWEEN BOW TIPS, no string toward face. Right glove opens and moves down-left away from chin after release, elbow back. Eyes look up-right. Same planted feet, no arrow projectile or effects.",
+    "previous": "sky_draw",
+    "previousReview": "상향 당김의 왼팔 높이·시선 위쪽 확인. 발사에서 시위 직선과 오른손 이탈.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-166c9297-f60e-436e-bf0f-7924fa86b8f6.png"
+  },
+  {
+    "name": "power_draw",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. POWER SHOT full draw: much wider grounded stance, forward screen-right knee bent low, rear screen-left leg braced straight. Torso lowered and twisted back, right hand pulls string fully to cheek, right elbow far left. Left bow arm rigid to right. Same head size. No physical arrow or horizontal shaft, ONLY V bowstring. Strong body tension, no effects.",
+    "previous": "attack_3",
+    "previousReview": "상향 발사 시위 복귀 확인. 강한 사격은 일반 완전 당김에서 넓은 보폭과 낮은 중심으로.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-3dd53baa-0a4c-488c-b5c3-0eeb89ef854f.png"
+  },
+  {
+    "name": "power_release",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. POWER RELEASE: keep wide low stance from previous. Bowstring snaps straight at bow tips; ABSOLUTELY no line crossing face or horizontal arrow shaft. Right hand opens recoiling to screen LEFT past shoulder, torso leans back slightly from strong release. Left hand holds bow right. Cape flares left a little. Same head scale.",
+    "previous": "power_draw",
+    "previousReview": "강한 당김의 넓은 보폭 확인. 원화에 수평 화살선이 남아 환영 스킬 준비 장은 별도 수정 필요. 발사부터 시위와 화살 분리.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-f89a8c74-565c-4f7a-b14c-c7326ca7fc0e.png"
+  },
+  {
+    "name": "power_draw_fix",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Precise correction ONLY: remove the HORIZONTAL gray line across mouth from glove toward screen right (the arrow shaft). Restore normal skin and mouth underneath. Keep both DIAGONAL V bowstring segments, glove at cheek, low wide stance and every other pixel design unchanged. Drawing an EMPTY bow with NO ARROW. Do not remove diagonal string.",
+    "previous": "power_draw",
+    "previousReview": "power_draw의 얼굴 가로선은 불필요한 실물 화살로 보임. 대각 시위를 보존하며 그 선만 제거.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-d6aed552-84d3-4a6a-b1ad-460fd585f2f3.png"
+  },
+  {
+    "name": "falcon_raise",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Falcon command windup: left hand holds bow LOW at right as idle. Right near hand raises beside head on screen LEFT, palm open, elbow bent, preparing to signal forward. Eyes open looking right, knees balanced. No bird or effects.",
+    "previous": "idle_0",
+    "previousReview": "강한 당김 가로선 제거 확인. 매 지시는 대기에서 오른손을 머리 옆으로 들어 준비.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-22c3028d-7332-4d74-8138-bab65bd66cb5.png"
+  },
+  {
+    "name": "falcon_point",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Falcon command IMPACT: right near arm sweeps from raised position FORWARD across upper chest, extending diagonally toward SCREEN RIGHT, index finger pointing to distant target ABOVE low bow. Left far hand STILL grips bow at waist screen right, distinguish two arms clearly. Slight forward lean, eyes tracking target. No bird/effects.",
+    "previous": "falcon_raise",
+    "previousReview": "신호 준비에서 빈 오른손이 머리 옆에 들림 확인. 지시 순간은 목표로 팔을 내뻗음.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-7ec3ce62-1314-4e33-8eaf-cc88f95b98f5.png"
+  },
+  {
+    "name": "scout",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Detection scanning pose: right near hand moves to FOREHEAD, palm horizontal shielding eyes, elbow screen left. Looking intently far right under hand. Bow remains LOW in left far hand screen right. Feet idle planted. Same face/hair and two-head proportion, no effects.",
+    "previous": "falcon_raise",
+    "previousReview": "매 지시에서 위쪽 오른팔과 아래 활 손이 분리됨 확인. 탐지는 이마 손으로 명확히 구분.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-385dda21-cfc3-433a-9e77-2438969ee83f.png"
+  },
+  {
+    "name": "whistle",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Whistle gesture: right near glove moves from chest up to MOUTH, thumb and index near lips as if blowing a tiny brass whistle, elbow bent out left. Lips pursed, eyes open, chest slightly expanded. Left far hand holds bow low screen right, same stance. No sound marks/effects.",
+    "previous": "attack_6",
+    "previousReview": "탐지의 이마 손과 얼굴 가림 범위 확인. 호각은 가슴 준비에서 입으로 오른손 이동.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-7de59b7c-a219-43c7-9f7b-c521c19d2d6c.png"
+  },
+  {
+    "name": "trap_crouch",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Trap placement WINDUP: bend both knees to half crouch, torso leans forward, right near glove reaches down from belt toward knee, left hand holds bow outward screen RIGHT to keep it clear of legs. Eyes look at ground in front. Head same size, no trap/device drawn.",
+    "previous": "idle_0",
+    "previousReview": "호각은 입 앞 오른손·왼손 활로 구분됨. 덫 준비는 반쯤 앉아 오른손을 아래로.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-42dfb405-1046-49a7-a642-ded827f6cd77.png"
+  },
+  {
+    "name": "trap_place",
+    "prompt": "Edit reference 1 (previous frame) into ONE NEXT animation frame. Reference 2 is canonical idle design. Preserve EXACT same male Hunter, big head, TWO-head proportions, ivory swept hair, green cape/cream sleeves/brown vest/tan pants/brown gloves boots, bow and pixel style. No redesign, no sheet, no text. Transparent background. Left far hand ALWAYS holds bow on screen RIGHT; right near hand performs gestures/draws string. No flying arrow/hawk/trap/effects. Crisp low-resolution pixels intended for a 48px-tall game sprite. Trap placement CONTACT: sink into deep one-knee crouch. Right glove palm DOWN touches ground just IN FRONT of boots, releasing an unseen trap. Eyes open looking at contact. Left hand keeps bow upright outward to screen right, same hand. Head tilts down, same size. No actual trap or effect.",
+    "previous": "trap_crouch",
+    "previousReview": "반쯤 앉은 준비에서 오른손이 무릎 아래까지 내려옴 확인. 설치 장에서 지면 접촉.",
+    "source": "/Users/oreocookie03/.codex/generated_images/01a12245-5829-7aa1-983c-7d7b083af6da/exec-c4343c14-25df-4347-9ba7-781c44e905a3.png"
+  }
+]
