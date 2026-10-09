@@ -13297,6 +13297,3317 @@
           "grip": "grips/hunter_male_p2/trap_place.png"
         }
       }
+    },
+    "priest_female_p2": {
+      "gender": "female",
+      "class": "priest",
+      "bodyHeight": 48,
+      "headHeight": 24,
+      "proportion": 2,
+      "defaultWeapon": "mace",
+      "defaultHair": "priest_crown_braid_p2",
+      "hairStyles": [
+        "priest_crown_braid_p2"
+      ],
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle_0",
+            "idle_1",
+            "idle_2"
+          ],
+          "durations": [
+            240,
+            240,
+            240
+          ],
+          "duration": 720,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            "walk_0",
+            "walk_1",
+            "walk_2",
+            "walk_3",
+            "walk_4",
+            "walk_5",
+            "walk_6",
+            "walk_7"
+          ],
+          "durations": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ],
+          "duration": 800,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            "attack_0",
+            "attack_1",
+            "attack_2",
+            "attack_3",
+            "attack_4",
+            "attack_5",
+            "attack_6",
+            "attack_7"
+          ],
+          "durations": [
+            70,
+            90,
+            90,
+            50,
+            60,
+            160,
+            70,
+            60
+          ],
+          "duration": 650,
+          "loop": false,
+          "hitFrame": 4
+        },
+        "cast_start": {
+          "frames": [
+            "cast_start_0",
+            "cast_start_1"
+          ],
+          "durations": [
+            90,
+            100
+          ],
+          "duration": 190,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            "cast_0",
+            "cast_1",
+            "cast_2"
+          ],
+          "durations": [
+            180,
+            180,
+            180
+          ],
+          "duration": 540,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt_0",
+            "hurt_1",
+            "hurt_2"
+          ],
+          "durations": [
+            100,
+            130,
+            100
+          ],
+          "duration": 330,
+          "loop": false
+        },
+        "dead": {
+          "frames": [
+            "dead_0",
+            "dead_1",
+            "dead_2"
+          ],
+          "durations": [
+            100,
+            150,
+            1000
+          ],
+          "duration": 1250,
+          "loop": false,
+          "holdLast": true
+        },
+        "sit": {
+          "frames": [
+            "sit_0"
+          ],
+          "durations": [
+            1000
+          ],
+          "duration": 1000,
+          "loop": false,
+          "holdLast": true
+        },
+        "skill_mend": {
+          "frames": [
+            "skill_mend_0",
+            "skill_mend_1",
+            "skill_mend_2",
+            "skill_mend_3",
+            "skill_mend_4"
+          ],
+          "durations": [
+            60,
+            70,
+            180,
+            100,
+            100
+          ],
+          "duration": 510,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_bless": {
+          "frames": [
+            "skill_bless_0",
+            "skill_bless_1",
+            "skill_bless_2",
+            "skill_bless_3",
+            "skill_bless_4"
+          ],
+          "durations": [
+            100,
+            140,
+            160,
+            100,
+            100
+          ],
+          "duration": 600,
+          "loop": false
+        },
+        "skill_hymn": {
+          "frames": [
+            "skill_hymn_0",
+            "skill_hymn_1",
+            "skill_hymn_2",
+            "skill_hymn_3",
+            "skill_hymn_4",
+            "skill_hymn_5"
+          ],
+          "durations": [
+            100,
+            90,
+            240,
+            100,
+            80,
+            90
+          ],
+          "duration": 700,
+          "loop": false
+        },
+        "skill_judgment": {
+          "frames": [
+            "skill_judgment_0",
+            "skill_judgment_1",
+            "skill_judgment_2",
+            "skill_judgment_3",
+            "skill_judgment_4",
+            "skill_judgment_5"
+          ],
+          "durations": [
+            60,
+            70,
+            150,
+            110,
+            110,
+            100
+          ],
+          "duration": 600,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_light": {
+          "frames": [
+            "skill_light_0",
+            "skill_light_1",
+            "skill_light_2",
+            "skill_light_3",
+            "skill_light_4",
+            "skill_light_5"
+          ],
+          "durations": [
+            60,
+            70,
+            200,
+            100,
+            100,
+            100
+          ],
+          "duration": 630,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_holy_strike": {
+          "frames": [
+            "skill_holy_strike_0",
+            "skill_holy_strike_1",
+            "skill_holy_strike_2",
+            "skill_holy_strike_3",
+            "skill_holy_strike_4",
+            "skill_holy_strike_5",
+            "skill_holy_strike_6",
+            "skill_holy_strike_7",
+            "skill_holy_strike_8"
+          ],
+          "durations": [
+            50,
+            80,
+            50,
+            70,
+            40,
+            60,
+            150,
+            90,
+            90
+          ],
+          "duration": 680,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_aura": {
+          "frames": [
+            "skill_aura_0",
+            "skill_aura_1",
+            "skill_aura_2",
+            "skill_aura_3",
+            "skill_aura_4",
+            "skill_aura_5"
+          ],
+          "durations": [
+            100,
+            80,
+            240,
+            100,
+            80,
+            100
+          ],
+          "duration": 700,
+          "loop": false
+        },
+        "skill_ground": {
+          "frames": [
+            "skill_ground_0",
+            "skill_ground_1",
+            "skill_ground_2",
+            "skill_ground_3",
+            "skill_ground_4",
+            "skill_ground_5"
+          ],
+          "durations": [
+            60,
+            70,
+            180,
+            100,
+            100,
+            100
+          ],
+          "duration": 610,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_magnus": {
+          "frames": [
+            "skill_magnus_0",
+            "skill_magnus_1",
+            "skill_magnus_2",
+            "skill_magnus_3",
+            "skill_magnus_4",
+            "skill_magnus_5"
+          ],
+          "durations": [
+            60,
+            70,
+            230,
+            130,
+            130,
+            100
+          ],
+          "duration": 720,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_resurrection": {
+          "frames": [
+            "skill_resurrection_0",
+            "skill_resurrection_1",
+            "skill_resurrection_2",
+            "skill_resurrection_3",
+            "skill_resurrection_4",
+            "skill_resurrection_5"
+          ],
+          "durations": [
+            60,
+            70,
+            240,
+            100,
+            130,
+            100
+          ],
+          "duration": 700,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_redemptio": {
+          "frames": [
+            "skill_redemptio_0",
+            "skill_redemptio_1",
+            "skill_redemptio_2",
+            "skill_redemptio_3",
+            "skill_redemptio_4",
+            "skill_redemptio_5"
+          ],
+          "durations": [
+            60,
+            70,
+            220,
+            180,
+            130,
+            100
+          ],
+          "duration": 760,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_portal": {
+          "frames": [
+            "skill_portal_0",
+            "skill_portal_1",
+            "skill_portal_2",
+            "skill_portal_3",
+            "skill_portal_4",
+            "skill_portal_5"
+          ],
+          "durations": [
+            60,
+            70,
+            190,
+            120,
+            100,
+            100
+          ],
+          "duration": 640,
+          "loop": false,
+          "hitFrame": 2
+        },
+        "skill_water": {
+          "frames": [
+            "skill_water_0",
+            "skill_water_1",
+            "skill_water_2",
+            "skill_water_3",
+            "skill_water_4",
+            "skill_water_5"
+          ],
+          "durations": [
+            50,
+            80,
+            220,
+            150,
+            100,
+            100
+          ],
+          "duration": 700,
+          "loop": false,
+          "hitFrame": 2
+        }
+      },
+      "skillMotions": {
+        "heal": "skill_mend",
+        "cure": "skill_mend",
+        "slow_poison": "skill_mend",
+        "status_recovery": "skill_mend",
+        "blessing": "skill_bless",
+        "increase_agi": "skill_bless",
+        "impositio": "skill_bless",
+        "suffragium": "skill_bless",
+        "aspersio": "skill_bless",
+        "kyrie": "skill_bless",
+        "angelus": "skill_hymn",
+        "sacrament": "skill_hymn",
+        "magnificat": "skill_hymn",
+        "gloria": "skill_hymn",
+        "decrease_agi": "skill_judgment",
+        "signum_crucis": "skill_judgment",
+        "lex_divina": "skill_judgment",
+        "lex_aeterna": "skill_judgment",
+        "holy_light": "skill_light",
+        "turn_undead": "skill_light",
+        "holy_strike": "skill_holy_strike",
+        "ruwach": "skill_aura",
+        "sanct_aura": "skill_aura",
+        "pneuma": "skill_ground",
+        "pr_safety_wall": "skill_ground",
+        "sanctuary": "skill_ground",
+        "magnus": "skill_magnus",
+        "resurrection": "skill_resurrection",
+        "redemptio": "skill_redemptio",
+        "teleport": "skill_portal",
+        "warp_portal": "skill_portal",
+        "aqua_benedicta": "skill_water"
+      },
+      "frames": {
+        "idle_0": {
+          "image": "body/priest_female_p2/idle_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/idle_0.png"
+        },
+        "idle_1": {
+          "image": "body/priest_female_p2/idle_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              97
+            ],
+            "tipPoint": [
+              80,
+              102
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/idle_1.png"
+        },
+        "idle_2": {
+          "image": "body/priest_female_p2/idle_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/idle_2.png"
+        },
+        "walk_0": {
+          "image": "body/priest_female_p2/walk_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/walk_0.png"
+        },
+        "walk_1": {
+          "image": "body/priest_female_p2/walk_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              99
+            ],
+            "tipPoint": [
+              80,
+              104
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/walk_1.png"
+        },
+        "walk_2": {
+          "image": "body/priest_female_p2/walk_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              99
+            ],
+            "tipPoint": [
+              80,
+              104
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/walk_2.png"
+        },
+        "walk_3": {
+          "image": "body/priest_female_p2/walk_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/walk_3.png"
+        },
+        "walk_4": {
+          "image": "body/priest_female_p2/walk_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              99
+            ],
+            "tipPoint": [
+              80,
+              104
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/walk_4.png"
+        },
+        "walk_5": {
+          "image": "body/priest_female_p2/walk_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              99
+            ],
+            "tipPoint": [
+              80,
+              104
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/walk_5.png"
+        },
+        "walk_6": {
+          "image": "body/priest_female_p2/walk_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              99
+            ],
+            "tipPoint": [
+              80,
+              104
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/walk_6.png"
+        },
+        "walk_7": {
+          "image": "body/priest_female_p2/walk_7.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_7",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              104
+            ],
+            "angleDegrees": 36.87
+          },
+          "grip": "grips/priest_female_p2/walk_7.png"
+        },
+        "attack_0": {
+          "image": "body/priest_female_p2/attack_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              87
+            ],
+            "tipPoint": [
+              78,
+              75
+            ],
+            "angleDegrees": -80.54
+          },
+          "grip": "grips/priest_female_p2/attack_0.png"
+        },
+        "attack_1": {
+          "image": "body/priest_female_p2/attack_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              71
+            ],
+            "tipPoint": [
+              67,
+              63
+            ],
+            "angleDegrees": -138.37
+          },
+          "grip": "grips/priest_female_p2/attack_1.png"
+        },
+        "attack_2": {
+          "image": "body/priest_female_p2/attack_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              86,
+              78
+            ],
+            "tipPoint": [
+              81,
+              70
+            ],
+            "angleDegrees": -122.01
+          },
+          "grip": "grips/priest_female_p2/attack_2.png"
+        },
+        "attack_3": {
+          "image": "body/priest_female_p2/attack_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              88,
+              106
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/attack_3.png"
+        },
+        "attack_4": {
+          "image": "body/priest_female_p2/attack_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              75,
+              103
+            ],
+            "tipPoint": [
+              85,
+              110
+            ],
+            "angleDegrees": 34.99
+          },
+          "grip": "grips/priest_female_p2/attack_4.png"
+        },
+        "attack_5": {
+          "image": "body/priest_female_p2/attack_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              75,
+              103
+            ],
+            "tipPoint": [
+              85,
+              110
+            ],
+            "angleDegrees": 34.99
+          },
+          "grip": "grips/priest_female_p2/attack_5.png"
+        },
+        "attack_6": {
+          "image": "body/priest_female_p2/attack_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              100
+            ],
+            "tipPoint": [
+              83,
+              106
+            ],
+            "angleDegrees": 33.69
+          },
+          "grip": "grips/priest_female_p2/attack_6.png"
+        },
+        "attack_7": {
+          "image": "body/priest_female_p2/attack_7.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_7",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/attack_7.png"
+        },
+        "cast_start_0": {
+          "image": "body/priest_female_p2/cast_start_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_start_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/cast_start_0.png"
+        },
+        "cast_start_1": {
+          "image": "body/priest_female_p2/cast_start_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_start_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/cast_start_1.png"
+        },
+        "cast_0": {
+          "image": "body/priest_female_p2/cast_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/cast_0.png"
+        },
+        "cast_1": {
+          "image": "body/priest_female_p2/cast_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/cast_1.png"
+        },
+        "cast_2": {
+          "image": "body/priest_female_p2/cast_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/cast_2.png"
+        },
+        "hurt_0": {
+          "image": "body/priest_female_p2/hurt_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              97
+            ],
+            "tipPoint": [
+              83,
+              101
+            ],
+            "angleDegrees": 23.96
+          },
+          "grip": "grips/priest_female_p2/hurt_0.png"
+        },
+        "hurt_1": {
+          "image": "body/priest_female_p2/hurt_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              100
+            ],
+            "tipPoint": [
+              83,
+              106
+            ],
+            "angleDegrees": 33.69
+          },
+          "grip": "grips/priest_female_p2/hurt_1.png"
+        },
+        "hurt_2": {
+          "image": "body/priest_female_p2/hurt_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/hurt_2.png"
+        },
+        "dead_0": {
+          "image": "body/priest_female_p2/dead_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              97
+            ],
+            "tipPoint": [
+              83,
+              101
+            ],
+            "angleDegrees": 23.96
+          },
+          "grip": "grips/priest_female_p2/dead_0.png"
+        },
+        "dead_1": {
+          "image": "body/priest_female_p2/dead_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              106
+            ],
+            "tipPoint": [
+              80,
+              109
+            ],
+            "angleDegrees": 18.43
+          },
+          "grip": "grips/priest_female_p2/dead_1.png"
+        },
+        "dead_2": {
+          "image": "body/priest_female_p2/dead_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_2",
+            "basePose": "down"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              110
+            ],
+            "tipPoint": [
+              79,
+              113
+            ],
+            "angleDegrees": 14.04
+          },
+          "grip": "grips/priest_female_p2/dead_2.png"
+        },
+        "sit_0": {
+          "image": "body/priest_female_p2/sit_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "sit_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              107
+            ],
+            "tipPoint": [
+              82,
+              110
+            ],
+            "angleDegrees": 16.7
+          },
+          "grip": "grips/priest_female_p2/sit_0.png"
+        },
+        "skill_mend_0": {
+          "image": "body/priest_female_p2/skill_mend_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_mend_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/skill_mend_0.png"
+        },
+        "skill_mend_1": {
+          "image": "body/priest_female_p2/skill_mend_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_mend_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_mend_1.png"
+        },
+        "skill_mend_2": {
+          "image": "body/priest_female_p2/skill_mend_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_mend_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 29.05
+          },
+          "grip": "grips/priest_female_p2/skill_mend_2.png"
+        },
+        "skill_mend_3": {
+          "image": "body/priest_female_p2/skill_mend_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_mend_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_mend_3.png"
+        },
+        "skill_mend_4": {
+          "image": "body/priest_female_p2/skill_mend_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_mend_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_mend_4.png"
+        },
+        "skill_bless_0": {
+          "image": "body/priest_female_p2/skill_bless_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_bless_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_bless_0.png"
+        },
+        "skill_bless_1": {
+          "image": "body/priest_female_p2/skill_bless_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_bless_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 29.05
+          },
+          "grip": "grips/priest_female_p2/skill_bless_1.png"
+        },
+        "skill_bless_2": {
+          "image": "body/priest_female_p2/skill_bless_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_bless_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 29.05
+          },
+          "grip": "grips/priest_female_p2/skill_bless_2.png"
+        },
+        "skill_bless_3": {
+          "image": "body/priest_female_p2/skill_bless_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_bless_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_bless_3.png"
+        },
+        "skill_bless_4": {
+          "image": "body/priest_female_p2/skill_bless_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_bless_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_bless_4.png"
+        },
+        "skill_hymn_0": {
+          "image": "body/priest_female_p2/skill_hymn_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_hymn_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_hymn_0.png"
+        },
+        "skill_hymn_1": {
+          "image": "body/priest_female_p2/skill_hymn_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_hymn_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              96
+            ],
+            "tipPoint": [
+              84,
+              101
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_hymn_1.png"
+        },
+        "skill_hymn_2": {
+          "image": "body/priest_female_p2/skill_hymn_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_hymn_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              97
+            ],
+            "tipPoint": [
+              81,
+              102
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_hymn_2.png"
+        },
+        "skill_hymn_3": {
+          "image": "body/priest_female_p2/skill_hymn_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_hymn_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              96
+            ],
+            "tipPoint": [
+              84,
+              101
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_hymn_3.png"
+        },
+        "skill_hymn_4": {
+          "image": "body/priest_female_p2/skill_hymn_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_hymn_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_hymn_4.png"
+        },
+        "skill_hymn_5": {
+          "image": "body/priest_female_p2/skill_hymn_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_hymn_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_hymn_5.png"
+        },
+        "skill_judgment_0": {
+          "image": "body/priest_female_p2/skill_judgment_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_judgment_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 29.05
+          },
+          "grip": "grips/priest_female_p2/skill_judgment_0.png"
+        },
+        "skill_judgment_1": {
+          "image": "body/priest_female_p2/skill_judgment_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_judgment_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 29.05
+          },
+          "grip": "grips/priest_female_p2/skill_judgment_1.png"
+        },
+        "skill_judgment_2": {
+          "image": "body/priest_female_p2/skill_judgment_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_judgment_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_judgment_2.png"
+        },
+        "skill_judgment_3": {
+          "image": "body/priest_female_p2/skill_judgment_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_judgment_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 29.05
+          },
+          "grip": "grips/priest_female_p2/skill_judgment_3.png"
+        },
+        "skill_judgment_4": {
+          "image": "body/priest_female_p2/skill_judgment_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_judgment_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_judgment_4.png"
+        },
+        "skill_judgment_5": {
+          "image": "body/priest_female_p2/skill_judgment_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_judgment_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_judgment_5.png"
+        },
+        "skill_light_0": {
+          "image": "body/priest_female_p2/skill_light_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_light_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/skill_light_0.png"
+        },
+        "skill_light_1": {
+          "image": "body/priest_female_p2/skill_light_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_light_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 29.05
+          },
+          "grip": "grips/priest_female_p2/skill_light_1.png"
+        },
+        "skill_light_2": {
+          "image": "body/priest_female_p2/skill_light_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_light_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_light_2.png"
+        },
+        "skill_light_3": {
+          "image": "body/priest_female_p2/skill_light_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_light_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 29.05
+          },
+          "grip": "grips/priest_female_p2/skill_light_3.png"
+        },
+        "skill_light_4": {
+          "image": "body/priest_female_p2/skill_light_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_light_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_light_4.png"
+        },
+        "skill_light_5": {
+          "image": "body/priest_female_p2/skill_light_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_light_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_light_5.png"
+        },
+        "skill_holy_strike_0": {
+          "image": "body/priest_female_p2/skill_holy_strike_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_holy_strike_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              87
+            ],
+            "tipPoint": [
+              78,
+              75
+            ],
+            "angleDegrees": -80.54
+          },
+          "grip": "grips/priest_female_p2/skill_holy_strike_0.png"
+        },
+        "skill_holy_strike_1": {
+          "image": "body/priest_female_p2/skill_holy_strike_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_holy_strike_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              71
+            ],
+            "tipPoint": [
+              67,
+              63
+            ],
+            "angleDegrees": -138.37
+          },
+          "grip": "grips/priest_female_p2/skill_holy_strike_1.png"
+        },
+        "skill_holy_strike_2": {
+          "image": "body/priest_female_p2/skill_holy_strike_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_holy_strike_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              75,
+              103
+            ],
+            "tipPoint": [
+              85,
+              110
+            ],
+            "angleDegrees": 34.99
+          },
+          "grip": "grips/priest_female_p2/skill_holy_strike_2.png"
+        },
+        "skill_holy_strike_3": {
+          "image": "body/priest_female_p2/skill_holy_strike_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_holy_strike_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              86,
+              78
+            ],
+            "tipPoint": [
+              81,
+              70
+            ],
+            "angleDegrees": -122.01
+          },
+          "grip": "grips/priest_female_p2/skill_holy_strike_3.png"
+        },
+        "skill_holy_strike_4": {
+          "image": "body/priest_female_p2/skill_holy_strike_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_holy_strike_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              77,
+              99
+            ],
+            "tipPoint": [
+              88,
+              106
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/skill_holy_strike_4.png"
+        },
+        "skill_holy_strike_5": {
+          "image": "body/priest_female_p2/skill_holy_strike_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_holy_strike_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              75,
+              103
+            ],
+            "tipPoint": [
+              85,
+              110
+            ],
+            "angleDegrees": 34.99
+          },
+          "grip": "grips/priest_female_p2/skill_holy_strike_5.png"
+        },
+        "skill_holy_strike_6": {
+          "image": "body/priest_female_p2/skill_holy_strike_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_holy_strike_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              75,
+              103
+            ],
+            "tipPoint": [
+              85,
+              110
+            ],
+            "angleDegrees": 34.99
+          },
+          "grip": "grips/priest_female_p2/skill_holy_strike_6.png"
+        },
+        "skill_holy_strike_7": {
+          "image": "body/priest_female_p2/skill_holy_strike_7.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_holy_strike_7",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              100
+            ],
+            "tipPoint": [
+              83,
+              106
+            ],
+            "angleDegrees": 33.69
+          },
+          "grip": "grips/priest_female_p2/skill_holy_strike_7.png"
+        },
+        "skill_holy_strike_8": {
+          "image": "body/priest_female_p2/skill_holy_strike_8.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_holy_strike_8",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_holy_strike_8.png"
+        },
+        "skill_aura_0": {
+          "image": "body/priest_female_p2/skill_aura_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_aura_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_aura_0.png"
+        },
+        "skill_aura_1": {
+          "image": "body/priest_female_p2/skill_aura_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_aura_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/skill_aura_1.png"
+        },
+        "skill_aura_2": {
+          "image": "body/priest_female_p2/skill_aura_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_aura_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              96
+            ],
+            "tipPoint": [
+              84,
+              101
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_aura_2.png"
+        },
+        "skill_aura_3": {
+          "image": "body/priest_female_p2/skill_aura_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_aura_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/skill_aura_3.png"
+        },
+        "skill_aura_4": {
+          "image": "body/priest_female_p2/skill_aura_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_aura_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_aura_4.png"
+        },
+        "skill_aura_5": {
+          "image": "body/priest_female_p2/skill_aura_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_aura_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_aura_5.png"
+        },
+        "skill_ground_0": {
+          "image": "body/priest_female_p2/skill_ground_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_ground_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/skill_ground_0.png"
+        },
+        "skill_ground_1": {
+          "image": "body/priest_female_p2/skill_ground_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_ground_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              101
+            ],
+            "tipPoint": [
+              81,
+              105
+            ],
+            "angleDegrees": 23.96
+          },
+          "grip": "grips/priest_female_p2/skill_ground_1.png"
+        },
+        "skill_ground_2": {
+          "image": "body/priest_female_p2/skill_ground_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_ground_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              100
+            ],
+            "tipPoint": [
+              80,
+              105
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_ground_2.png"
+        },
+        "skill_ground_3": {
+          "image": "body/priest_female_p2/skill_ground_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_ground_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              101
+            ],
+            "tipPoint": [
+              81,
+              105
+            ],
+            "angleDegrees": 23.96
+          },
+          "grip": "grips/priest_female_p2/skill_ground_3.png"
+        },
+        "skill_ground_4": {
+          "image": "body/priest_female_p2/skill_ground_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_ground_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              100
+            ],
+            "tipPoint": [
+              83,
+              106
+            ],
+            "angleDegrees": 33.69
+          },
+          "grip": "grips/priest_female_p2/skill_ground_4.png"
+        },
+        "skill_ground_5": {
+          "image": "body/priest_female_p2/skill_ground_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_ground_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_ground_5.png"
+        },
+        "skill_magnus_0": {
+          "image": "body/priest_female_p2/skill_magnus_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_magnus_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              87
+            ],
+            "tipPoint": [
+              78,
+              75
+            ],
+            "angleDegrees": -80.54
+          },
+          "grip": "grips/priest_female_p2/skill_magnus_0.png"
+        },
+        "skill_magnus_1": {
+          "image": "body/priest_female_p2/skill_magnus_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_magnus_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              100
+            ],
+            "tipPoint": [
+              80,
+              105
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_magnus_1.png"
+        },
+        "skill_magnus_2": {
+          "image": "body/priest_female_p2/skill_magnus_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_magnus_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              98
+            ],
+            "tipPoint": [
+              76,
+              109
+            ],
+            "angleDegrees": 90
+          },
+          "grip": "grips/priest_female_p2/skill_magnus_2.png"
+        },
+        "skill_magnus_3": {
+          "image": "body/priest_female_p2/skill_magnus_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_magnus_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              100
+            ],
+            "tipPoint": [
+              80,
+              105
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_magnus_3.png"
+        },
+        "skill_magnus_4": {
+          "image": "body/priest_female_p2/skill_magnus_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_magnus_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              100
+            ],
+            "tipPoint": [
+              83,
+              106
+            ],
+            "angleDegrees": 33.69
+          },
+          "grip": "grips/priest_female_p2/skill_magnus_4.png"
+        },
+        "skill_magnus_5": {
+          "image": "body/priest_female_p2/skill_magnus_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_magnus_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_magnus_5.png"
+        },
+        "skill_resurrection_0": {
+          "image": "body/priest_female_p2/skill_resurrection_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_resurrection_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              101
+            ],
+            "tipPoint": [
+              81,
+              105
+            ],
+            "angleDegrees": 23.96
+          },
+          "grip": "grips/priest_female_p2/skill_resurrection_0.png"
+        },
+        "skill_resurrection_1": {
+          "image": "body/priest_female_p2/skill_resurrection_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_resurrection_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              98
+            ],
+            "tipPoint": [
+              79,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_resurrection_1.png"
+        },
+        "skill_resurrection_2": {
+          "image": "body/priest_female_p2/skill_resurrection_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_resurrection_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              98
+            ],
+            "tipPoint": [
+              81,
+              102
+            ],
+            "angleDegrees": 26.57
+          },
+          "grip": "grips/priest_female_p2/skill_resurrection_2.png"
+        },
+        "skill_resurrection_3": {
+          "image": "body/priest_female_p2/skill_resurrection_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_resurrection_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              97
+            ],
+            "tipPoint": [
+              81,
+              102
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_resurrection_3.png"
+        },
+        "skill_resurrection_4": {
+          "image": "body/priest_female_p2/skill_resurrection_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_resurrection_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_resurrection_4.png"
+        },
+        "skill_resurrection_5": {
+          "image": "body/priest_female_p2/skill_resurrection_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_resurrection_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_resurrection_5.png"
+        },
+        "skill_redemptio_0": {
+          "image": "body/priest_female_p2/skill_redemptio_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_redemptio_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_redemptio_0.png"
+        },
+        "skill_redemptio_1": {
+          "image": "body/priest_female_p2/skill_redemptio_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_redemptio_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              106
+            ],
+            "tipPoint": [
+              80,
+              109
+            ],
+            "angleDegrees": 18.43
+          },
+          "grip": "grips/priest_female_p2/skill_redemptio_1.png"
+        },
+        "skill_redemptio_2": {
+          "image": "body/priest_female_p2/skill_redemptio_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_redemptio_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              105
+            ],
+            "tipPoint": [
+              85,
+              109
+            ],
+            "angleDegrees": 23.96
+          },
+          "grip": "grips/priest_female_p2/skill_redemptio_2.png"
+        },
+        "skill_redemptio_3": {
+          "image": "body/priest_female_p2/skill_redemptio_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_redemptio_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              106
+            ],
+            "tipPoint": [
+              80,
+              109
+            ],
+            "angleDegrees": 18.43
+          },
+          "grip": "grips/priest_female_p2/skill_redemptio_3.png"
+        },
+        "skill_redemptio_4": {
+          "image": "body/priest_female_p2/skill_redemptio_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_redemptio_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              100
+            ],
+            "tipPoint": [
+              83,
+              106
+            ],
+            "angleDegrees": 33.69
+          },
+          "grip": "grips/priest_female_p2/skill_redemptio_4.png"
+        },
+        "skill_redemptio_5": {
+          "image": "body/priest_female_p2/skill_redemptio_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_redemptio_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_redemptio_5.png"
+        },
+        "skill_portal_0": {
+          "image": "body/priest_female_p2/skill_portal_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_portal_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/skill_portal_0.png"
+        },
+        "skill_portal_1": {
+          "image": "body/priest_female_p2/skill_portal_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_portal_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 29.05
+          },
+          "grip": "grips/priest_female_p2/skill_portal_1.png"
+        },
+        "skill_portal_2": {
+          "image": "body/priest_female_p2/skill_portal_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_portal_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              73,
+              98
+            ],
+            "tipPoint": [
+              81,
+              102
+            ],
+            "angleDegrees": 26.57
+          },
+          "grip": "grips/priest_female_p2/skill_portal_2.png"
+        },
+        "skill_portal_3": {
+          "image": "body/priest_female_p2/skill_portal_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_portal_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              76,
+              96
+            ],
+            "tipPoint": [
+              84,
+              101
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_portal_3.png"
+        },
+        "skill_portal_4": {
+          "image": "body/priest_female_p2/skill_portal_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_portal_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_portal_4.png"
+        },
+        "skill_portal_5": {
+          "image": "body/priest_female_p2/skill_portal_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_portal_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_portal_5.png"
+        },
+        "skill_water_0": {
+          "image": "body/priest_female_p2/skill_water_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_water_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/skill_water_0.png"
+        },
+        "skill_water_1": {
+          "image": "body/priest_female_p2/skill_water_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_water_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              101
+            ],
+            "tipPoint": [
+              81,
+              105
+            ],
+            "angleDegrees": 23.96
+          },
+          "grip": "grips/priest_female_p2/skill_water_1.png"
+        },
+        "skill_water_2": {
+          "image": "body/priest_female_p2/skill_water_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_water_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              98
+            ],
+            "tipPoint": [
+              79,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_water_2.png"
+        },
+        "skill_water_3": {
+          "image": "body/priest_female_p2/skill_water_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_water_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/priest_female_p2/skill_water_3.png"
+        },
+        "skill_water_4": {
+          "image": "body/priest_female_p2/skill_water_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_water_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_water_4.png"
+        },
+        "skill_water_5": {
+          "image": "body/priest_female_p2/skill_water_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_water_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_water_5.png"
+        }
+      }
     }
   },
   "hair": {
@@ -16325,6 +19636,897 @@
           ]
         }
       }
+    },
+    "priest_crown_braid_p2": {
+      "gender": "female",
+      "style": "priest_crown_braid",
+      "proportion": "p2",
+      "pivot": [
+        0,
+        0
+      ],
+      "poses": {
+        "idle_0": {
+          "front": "hair/priest_crown_braid_p2/idle_0_front.png",
+          "back": "hair/priest_crown_braid_p2/idle_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_1": {
+          "front": "hair/priest_crown_braid_p2/idle_1_front.png",
+          "back": "hair/priest_crown_braid_p2/idle_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_2": {
+          "front": "hair/priest_crown_braid_p2/idle_2_front.png",
+          "back": "hair/priest_crown_braid_p2/idle_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_0": {
+          "front": "hair/priest_crown_braid_p2/walk_0_front.png",
+          "back": "hair/priest_crown_braid_p2/walk_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_1": {
+          "front": "hair/priest_crown_braid_p2/walk_1_front.png",
+          "back": "hair/priest_crown_braid_p2/walk_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_2": {
+          "front": "hair/priest_crown_braid_p2/walk_2_front.png",
+          "back": "hair/priest_crown_braid_p2/walk_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_3": {
+          "front": "hair/priest_crown_braid_p2/walk_3_front.png",
+          "back": "hair/priest_crown_braid_p2/walk_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_4": {
+          "front": "hair/priest_crown_braid_p2/walk_4_front.png",
+          "back": "hair/priest_crown_braid_p2/walk_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_5": {
+          "front": "hair/priest_crown_braid_p2/walk_5_front.png",
+          "back": "hair/priest_crown_braid_p2/walk_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_6": {
+          "front": "hair/priest_crown_braid_p2/walk_6_front.png",
+          "back": "hair/priest_crown_braid_p2/walk_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_7": {
+          "front": "hair/priest_crown_braid_p2/walk_7_front.png",
+          "back": "hair/priest_crown_braid_p2/walk_7_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_0": {
+          "front": "hair/priest_crown_braid_p2/attack_0_front.png",
+          "back": "hair/priest_crown_braid_p2/attack_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_1": {
+          "front": "hair/priest_crown_braid_p2/attack_1_front.png",
+          "back": "hair/priest_crown_braid_p2/attack_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_2": {
+          "front": "hair/priest_crown_braid_p2/attack_2_front.png",
+          "back": "hair/priest_crown_braid_p2/attack_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_3": {
+          "front": "hair/priest_crown_braid_p2/attack_3_front.png",
+          "back": "hair/priest_crown_braid_p2/attack_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_4": {
+          "front": "hair/priest_crown_braid_p2/attack_4_front.png",
+          "back": "hair/priest_crown_braid_p2/attack_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_5": {
+          "front": "hair/priest_crown_braid_p2/attack_5_front.png",
+          "back": "hair/priest_crown_braid_p2/attack_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_6": {
+          "front": "hair/priest_crown_braid_p2/attack_6_front.png",
+          "back": "hair/priest_crown_braid_p2/attack_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_7": {
+          "front": "hair/priest_crown_braid_p2/attack_7_front.png",
+          "back": "hair/priest_crown_braid_p2/attack_7_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_start_0": {
+          "front": "hair/priest_crown_braid_p2/cast_start_0_front.png",
+          "back": "hair/priest_crown_braid_p2/cast_start_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_start_1": {
+          "front": "hair/priest_crown_braid_p2/cast_start_1_front.png",
+          "back": "hair/priest_crown_braid_p2/cast_start_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_0": {
+          "front": "hair/priest_crown_braid_p2/cast_0_front.png",
+          "back": "hair/priest_crown_braid_p2/cast_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_1": {
+          "front": "hair/priest_crown_braid_p2/cast_1_front.png",
+          "back": "hair/priest_crown_braid_p2/cast_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_2": {
+          "front": "hair/priest_crown_braid_p2/cast_2_front.png",
+          "back": "hair/priest_crown_braid_p2/cast_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_0": {
+          "front": "hair/priest_crown_braid_p2/hurt_0_front.png",
+          "back": "hair/priest_crown_braid_p2/hurt_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_1": {
+          "front": "hair/priest_crown_braid_p2/hurt_1_front.png",
+          "back": "hair/priest_crown_braid_p2/hurt_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_2": {
+          "front": "hair/priest_crown_braid_p2/hurt_2_front.png",
+          "back": "hair/priest_crown_braid_p2/hurt_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_0": {
+          "front": "hair/priest_crown_braid_p2/dead_0_front.png",
+          "back": "hair/priest_crown_braid_p2/dead_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_1": {
+          "front": "hair/priest_crown_braid_p2/dead_1_front.png",
+          "back": "hair/priest_crown_braid_p2/dead_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_2": {
+          "front": "hair/priest_crown_braid_p2/dead_2_front.png",
+          "back": "hair/priest_crown_braid_p2/dead_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "sit_0": {
+          "front": "hair/priest_crown_braid_p2/sit_0_front.png",
+          "back": "hair/priest_crown_braid_p2/sit_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_mend_0": {
+          "front": "hair/priest_crown_braid_p2/skill_mend_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_mend_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_mend_1": {
+          "front": "hair/priest_crown_braid_p2/skill_mend_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_mend_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_mend_2": {
+          "front": "hair/priest_crown_braid_p2/skill_mend_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_mend_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_mend_3": {
+          "front": "hair/priest_crown_braid_p2/skill_mend_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_mend_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_mend_4": {
+          "front": "hair/priest_crown_braid_p2/skill_mend_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_mend_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_bless_0": {
+          "front": "hair/priest_crown_braid_p2/skill_bless_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_bless_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_bless_1": {
+          "front": "hair/priest_crown_braid_p2/skill_bless_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_bless_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_bless_2": {
+          "front": "hair/priest_crown_braid_p2/skill_bless_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_bless_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_bless_3": {
+          "front": "hair/priest_crown_braid_p2/skill_bless_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_bless_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_bless_4": {
+          "front": "hair/priest_crown_braid_p2/skill_bless_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_bless_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_hymn_0": {
+          "front": "hair/priest_crown_braid_p2/skill_hymn_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_hymn_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_hymn_1": {
+          "front": "hair/priest_crown_braid_p2/skill_hymn_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_hymn_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_hymn_2": {
+          "front": "hair/priest_crown_braid_p2/skill_hymn_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_hymn_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_hymn_3": {
+          "front": "hair/priest_crown_braid_p2/skill_hymn_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_hymn_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_hymn_4": {
+          "front": "hair/priest_crown_braid_p2/skill_hymn_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_hymn_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_hymn_5": {
+          "front": "hair/priest_crown_braid_p2/skill_hymn_5_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_hymn_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_judgment_0": {
+          "front": "hair/priest_crown_braid_p2/skill_judgment_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_judgment_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_judgment_1": {
+          "front": "hair/priest_crown_braid_p2/skill_judgment_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_judgment_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_judgment_2": {
+          "front": "hair/priest_crown_braid_p2/skill_judgment_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_judgment_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_judgment_3": {
+          "front": "hair/priest_crown_braid_p2/skill_judgment_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_judgment_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_judgment_4": {
+          "front": "hair/priest_crown_braid_p2/skill_judgment_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_judgment_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_judgment_5": {
+          "front": "hair/priest_crown_braid_p2/skill_judgment_5_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_judgment_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_light_0": {
+          "front": "hair/priest_crown_braid_p2/skill_light_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_light_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_light_1": {
+          "front": "hair/priest_crown_braid_p2/skill_light_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_light_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_light_2": {
+          "front": "hair/priest_crown_braid_p2/skill_light_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_light_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_light_3": {
+          "front": "hair/priest_crown_braid_p2/skill_light_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_light_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_light_4": {
+          "front": "hair/priest_crown_braid_p2/skill_light_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_light_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_light_5": {
+          "front": "hair/priest_crown_braid_p2/skill_light_5_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_light_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_holy_strike_0": {
+          "front": "hair/priest_crown_braid_p2/skill_holy_strike_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_holy_strike_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_holy_strike_1": {
+          "front": "hair/priest_crown_braid_p2/skill_holy_strike_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_holy_strike_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_holy_strike_2": {
+          "front": "hair/priest_crown_braid_p2/skill_holy_strike_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_holy_strike_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_holy_strike_3": {
+          "front": "hair/priest_crown_braid_p2/skill_holy_strike_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_holy_strike_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_holy_strike_4": {
+          "front": "hair/priest_crown_braid_p2/skill_holy_strike_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_holy_strike_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_holy_strike_5": {
+          "front": "hair/priest_crown_braid_p2/skill_holy_strike_5_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_holy_strike_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_holy_strike_6": {
+          "front": "hair/priest_crown_braid_p2/skill_holy_strike_6_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_holy_strike_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_holy_strike_7": {
+          "front": "hair/priest_crown_braid_p2/skill_holy_strike_7_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_holy_strike_7_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_holy_strike_8": {
+          "front": "hair/priest_crown_braid_p2/skill_holy_strike_8_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_holy_strike_8_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_aura_0": {
+          "front": "hair/priest_crown_braid_p2/skill_aura_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_aura_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_aura_1": {
+          "front": "hair/priest_crown_braid_p2/skill_aura_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_aura_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_aura_2": {
+          "front": "hair/priest_crown_braid_p2/skill_aura_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_aura_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_aura_3": {
+          "front": "hair/priest_crown_braid_p2/skill_aura_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_aura_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_aura_4": {
+          "front": "hair/priest_crown_braid_p2/skill_aura_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_aura_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_aura_5": {
+          "front": "hair/priest_crown_braid_p2/skill_aura_5_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_aura_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_ground_0": {
+          "front": "hair/priest_crown_braid_p2/skill_ground_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_ground_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_ground_1": {
+          "front": "hair/priest_crown_braid_p2/skill_ground_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_ground_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_ground_2": {
+          "front": "hair/priest_crown_braid_p2/skill_ground_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_ground_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_ground_3": {
+          "front": "hair/priest_crown_braid_p2/skill_ground_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_ground_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_ground_4": {
+          "front": "hair/priest_crown_braid_p2/skill_ground_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_ground_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_ground_5": {
+          "front": "hair/priest_crown_braid_p2/skill_ground_5_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_ground_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_magnus_0": {
+          "front": "hair/priest_crown_braid_p2/skill_magnus_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_magnus_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_magnus_1": {
+          "front": "hair/priest_crown_braid_p2/skill_magnus_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_magnus_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_magnus_2": {
+          "front": "hair/priest_crown_braid_p2/skill_magnus_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_magnus_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_magnus_3": {
+          "front": "hair/priest_crown_braid_p2/skill_magnus_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_magnus_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_magnus_4": {
+          "front": "hair/priest_crown_braid_p2/skill_magnus_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_magnus_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_magnus_5": {
+          "front": "hair/priest_crown_braid_p2/skill_magnus_5_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_magnus_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_resurrection_0": {
+          "front": "hair/priest_crown_braid_p2/skill_resurrection_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_resurrection_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_resurrection_1": {
+          "front": "hair/priest_crown_braid_p2/skill_resurrection_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_resurrection_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_resurrection_2": {
+          "front": "hair/priest_crown_braid_p2/skill_resurrection_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_resurrection_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_resurrection_3": {
+          "front": "hair/priest_crown_braid_p2/skill_resurrection_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_resurrection_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_resurrection_4": {
+          "front": "hair/priest_crown_braid_p2/skill_resurrection_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_resurrection_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_resurrection_5": {
+          "front": "hair/priest_crown_braid_p2/skill_resurrection_5_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_resurrection_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_redemptio_0": {
+          "front": "hair/priest_crown_braid_p2/skill_redemptio_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_redemptio_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_redemptio_1": {
+          "front": "hair/priest_crown_braid_p2/skill_redemptio_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_redemptio_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_redemptio_2": {
+          "front": "hair/priest_crown_braid_p2/skill_redemptio_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_redemptio_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_redemptio_3": {
+          "front": "hair/priest_crown_braid_p2/skill_redemptio_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_redemptio_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_redemptio_4": {
+          "front": "hair/priest_crown_braid_p2/skill_redemptio_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_redemptio_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_redemptio_5": {
+          "front": "hair/priest_crown_braid_p2/skill_redemptio_5_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_redemptio_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_portal_0": {
+          "front": "hair/priest_crown_braid_p2/skill_portal_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_portal_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_portal_1": {
+          "front": "hair/priest_crown_braid_p2/skill_portal_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_portal_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_portal_2": {
+          "front": "hair/priest_crown_braid_p2/skill_portal_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_portal_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_portal_3": {
+          "front": "hair/priest_crown_braid_p2/skill_portal_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_portal_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_portal_4": {
+          "front": "hair/priest_crown_braid_p2/skill_portal_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_portal_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_portal_5": {
+          "front": "hair/priest_crown_braid_p2/skill_portal_5_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_portal_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_water_0": {
+          "front": "hair/priest_crown_braid_p2/skill_water_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_water_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_water_1": {
+          "front": "hair/priest_crown_braid_p2/skill_water_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_water_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_water_2": {
+          "front": "hair/priest_crown_braid_p2/skill_water_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_water_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_water_3": {
+          "front": "hair/priest_crown_braid_p2/skill_water_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_water_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_water_4": {
+          "front": "hair/priest_crown_braid_p2/skill_water_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_water_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_water_5": {
+          "front": "hair/priest_crown_braid_p2/skill_water_5_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_water_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      }
     }
   },
   "weapons": {
@@ -16661,6 +20863,118 @@
           "dead_1": "weapons/mace/acolyte_female_p2/dead_1.png",
           "dead_2": "weapons/mace/acolyte_female_p2/dead_2.png",
           "sit_0": "weapons/mace/acolyte_female_p2/sit_0.png"
+        },
+        "priest_female_p2": {
+          "idle_0": "weapons/mace/priest_female_p2/idle_0.png",
+          "idle_1": "weapons/mace/priest_female_p2/idle_1.png",
+          "idle_2": "weapons/mace/priest_female_p2/idle_2.png",
+          "walk_0": "weapons/mace/priest_female_p2/walk_0.png",
+          "walk_1": "weapons/mace/priest_female_p2/walk_1.png",
+          "walk_2": "weapons/mace/priest_female_p2/walk_2.png",
+          "walk_3": "weapons/mace/priest_female_p2/walk_3.png",
+          "walk_4": "weapons/mace/priest_female_p2/walk_4.png",
+          "walk_5": "weapons/mace/priest_female_p2/walk_5.png",
+          "walk_6": "weapons/mace/priest_female_p2/walk_6.png",
+          "walk_7": "weapons/mace/priest_female_p2/walk_7.png",
+          "attack_0": "weapons/mace/priest_female_p2/attack_0.png",
+          "attack_1": "weapons/mace/priest_female_p2/attack_1.png",
+          "attack_2": "weapons/mace/priest_female_p2/attack_2.png",
+          "attack_3": "weapons/mace/priest_female_p2/attack_3.png",
+          "attack_4": "weapons/mace/priest_female_p2/attack_4.png",
+          "attack_5": "weapons/mace/priest_female_p2/attack_5.png",
+          "attack_6": "weapons/mace/priest_female_p2/attack_6.png",
+          "attack_7": "weapons/mace/priest_female_p2/attack_7.png",
+          "cast_start_0": "weapons/mace/priest_female_p2/cast_start_0.png",
+          "cast_start_1": "weapons/mace/priest_female_p2/cast_start_1.png",
+          "cast_0": "weapons/mace/priest_female_p2/cast_0.png",
+          "cast_1": "weapons/mace/priest_female_p2/cast_1.png",
+          "cast_2": "weapons/mace/priest_female_p2/cast_2.png",
+          "hurt_0": "weapons/mace/priest_female_p2/hurt_0.png",
+          "hurt_1": "weapons/mace/priest_female_p2/hurt_1.png",
+          "hurt_2": "weapons/mace/priest_female_p2/hurt_2.png",
+          "dead_0": "weapons/mace/priest_female_p2/dead_0.png",
+          "dead_1": "weapons/mace/priest_female_p2/dead_1.png",
+          "dead_2": "weapons/mace/priest_female_p2/dead_2.png",
+          "sit_0": "weapons/mace/priest_female_p2/sit_0.png",
+          "skill_mend_0": "weapons/mace/priest_female_p2/skill_mend_0.png",
+          "skill_mend_1": "weapons/mace/priest_female_p2/skill_mend_1.png",
+          "skill_mend_2": "weapons/mace/priest_female_p2/skill_mend_2.png",
+          "skill_mend_3": "weapons/mace/priest_female_p2/skill_mend_3.png",
+          "skill_mend_4": "weapons/mace/priest_female_p2/skill_mend_4.png",
+          "skill_bless_0": "weapons/mace/priest_female_p2/skill_bless_0.png",
+          "skill_bless_1": "weapons/mace/priest_female_p2/skill_bless_1.png",
+          "skill_bless_2": "weapons/mace/priest_female_p2/skill_bless_2.png",
+          "skill_bless_3": "weapons/mace/priest_female_p2/skill_bless_3.png",
+          "skill_bless_4": "weapons/mace/priest_female_p2/skill_bless_4.png",
+          "skill_hymn_0": "weapons/mace/priest_female_p2/skill_hymn_0.png",
+          "skill_hymn_1": "weapons/mace/priest_female_p2/skill_hymn_1.png",
+          "skill_hymn_2": "weapons/mace/priest_female_p2/skill_hymn_2.png",
+          "skill_hymn_3": "weapons/mace/priest_female_p2/skill_hymn_3.png",
+          "skill_hymn_4": "weapons/mace/priest_female_p2/skill_hymn_4.png",
+          "skill_hymn_5": "weapons/mace/priest_female_p2/skill_hymn_5.png",
+          "skill_judgment_0": "weapons/mace/priest_female_p2/skill_judgment_0.png",
+          "skill_judgment_1": "weapons/mace/priest_female_p2/skill_judgment_1.png",
+          "skill_judgment_2": "weapons/mace/priest_female_p2/skill_judgment_2.png",
+          "skill_judgment_3": "weapons/mace/priest_female_p2/skill_judgment_3.png",
+          "skill_judgment_4": "weapons/mace/priest_female_p2/skill_judgment_4.png",
+          "skill_judgment_5": "weapons/mace/priest_female_p2/skill_judgment_5.png",
+          "skill_light_0": "weapons/mace/priest_female_p2/skill_light_0.png",
+          "skill_light_1": "weapons/mace/priest_female_p2/skill_light_1.png",
+          "skill_light_2": "weapons/mace/priest_female_p2/skill_light_2.png",
+          "skill_light_3": "weapons/mace/priest_female_p2/skill_light_3.png",
+          "skill_light_4": "weapons/mace/priest_female_p2/skill_light_4.png",
+          "skill_light_5": "weapons/mace/priest_female_p2/skill_light_5.png",
+          "skill_holy_strike_0": "weapons/mace/priest_female_p2/skill_holy_strike_0.png",
+          "skill_holy_strike_1": "weapons/mace/priest_female_p2/skill_holy_strike_1.png",
+          "skill_holy_strike_2": "weapons/mace/priest_female_p2/skill_holy_strike_2.png",
+          "skill_holy_strike_3": "weapons/mace/priest_female_p2/skill_holy_strike_3.png",
+          "skill_holy_strike_4": "weapons/mace/priest_female_p2/skill_holy_strike_4.png",
+          "skill_holy_strike_5": "weapons/mace/priest_female_p2/skill_holy_strike_5.png",
+          "skill_holy_strike_6": "weapons/mace/priest_female_p2/skill_holy_strike_6.png",
+          "skill_holy_strike_7": "weapons/mace/priest_female_p2/skill_holy_strike_7.png",
+          "skill_holy_strike_8": "weapons/mace/priest_female_p2/skill_holy_strike_8.png",
+          "skill_aura_0": "weapons/mace/priest_female_p2/skill_aura_0.png",
+          "skill_aura_1": "weapons/mace/priest_female_p2/skill_aura_1.png",
+          "skill_aura_2": "weapons/mace/priest_female_p2/skill_aura_2.png",
+          "skill_aura_3": "weapons/mace/priest_female_p2/skill_aura_3.png",
+          "skill_aura_4": "weapons/mace/priest_female_p2/skill_aura_4.png",
+          "skill_aura_5": "weapons/mace/priest_female_p2/skill_aura_5.png",
+          "skill_ground_0": "weapons/mace/priest_female_p2/skill_ground_0.png",
+          "skill_ground_1": "weapons/mace/priest_female_p2/skill_ground_1.png",
+          "skill_ground_2": "weapons/mace/priest_female_p2/skill_ground_2.png",
+          "skill_ground_3": "weapons/mace/priest_female_p2/skill_ground_3.png",
+          "skill_ground_4": "weapons/mace/priest_female_p2/skill_ground_4.png",
+          "skill_ground_5": "weapons/mace/priest_female_p2/skill_ground_5.png",
+          "skill_magnus_0": "weapons/mace/priest_female_p2/skill_magnus_0.png",
+          "skill_magnus_1": "weapons/mace/priest_female_p2/skill_magnus_1.png",
+          "skill_magnus_2": "weapons/mace/priest_female_p2/skill_magnus_2.png",
+          "skill_magnus_3": "weapons/mace/priest_female_p2/skill_magnus_3.png",
+          "skill_magnus_4": "weapons/mace/priest_female_p2/skill_magnus_4.png",
+          "skill_magnus_5": "weapons/mace/priest_female_p2/skill_magnus_5.png",
+          "skill_resurrection_0": "weapons/mace/priest_female_p2/skill_resurrection_0.png",
+          "skill_resurrection_1": "weapons/mace/priest_female_p2/skill_resurrection_1.png",
+          "skill_resurrection_2": "weapons/mace/priest_female_p2/skill_resurrection_2.png",
+          "skill_resurrection_3": "weapons/mace/priest_female_p2/skill_resurrection_3.png",
+          "skill_resurrection_4": "weapons/mace/priest_female_p2/skill_resurrection_4.png",
+          "skill_resurrection_5": "weapons/mace/priest_female_p2/skill_resurrection_5.png",
+          "skill_redemptio_0": "weapons/mace/priest_female_p2/skill_redemptio_0.png",
+          "skill_redemptio_1": "weapons/mace/priest_female_p2/skill_redemptio_1.png",
+          "skill_redemptio_2": "weapons/mace/priest_female_p2/skill_redemptio_2.png",
+          "skill_redemptio_3": "weapons/mace/priest_female_p2/skill_redemptio_3.png",
+          "skill_redemptio_4": "weapons/mace/priest_female_p2/skill_redemptio_4.png",
+          "skill_redemptio_5": "weapons/mace/priest_female_p2/skill_redemptio_5.png",
+          "skill_portal_0": "weapons/mace/priest_female_p2/skill_portal_0.png",
+          "skill_portal_1": "weapons/mace/priest_female_p2/skill_portal_1.png",
+          "skill_portal_2": "weapons/mace/priest_female_p2/skill_portal_2.png",
+          "skill_portal_3": "weapons/mace/priest_female_p2/skill_portal_3.png",
+          "skill_portal_4": "weapons/mace/priest_female_p2/skill_portal_4.png",
+          "skill_portal_5": "weapons/mace/priest_female_p2/skill_portal_5.png",
+          "skill_water_0": "weapons/mace/priest_female_p2/skill_water_0.png",
+          "skill_water_1": "weapons/mace/priest_female_p2/skill_water_1.png",
+          "skill_water_2": "weapons/mace/priest_female_p2/skill_water_2.png",
+          "skill_water_3": "weapons/mace/priest_female_p2/skill_water_3.png",
+          "skill_water_4": "weapons/mace/priest_female_p2/skill_water_4.png",
+          "skill_water_5": "weapons/mace/priest_female_p2/skill_water_5.png"
         }
       }
     },

@@ -1,0 +1,400 @@
+[
+  {
+    "name": "idle",
+    "prompt": "Create ONE SINGLE standalone pixel art sprite, not sheet. Original female fantasy Priest for MiniMidgard. Match the attached Knight r15 and Cookie r12 pixel sprite visual style: true tiny 2-head chibi, large head occupies exactly half full standing height, only 48 logical pixels tall excluding weapon, crisp clustered pixel art with no antialiasing. Draw enlarged with visibly square pixel clusters. RIGHT-facing three quarter southeast view. NEW design: ivory blonde crown braid circling top of short bob, small braid loop at back screen left, no hat. Deep plum clerical robe split below knees, ivory short shoulder cape, twin ivory front stole strips with subtle gold hem, tiny teal throat gem, brown short boots. Face expressive dark warm brown eyes. Near arm on SCREEN RIGHT of torso holds a small flanged silver-and-gold mace by brown shaft, diagonally lowered toward screen right, far empty hand screen left resting at waist. Mace short, from grip to metal head about 15 logical pixels. Full character with relaxed two-foot stance, idle key frame. Same delicate shaded pixel clusters and clean dark-brown outline as reference knight, very compact body NOT tall proportions. Ivory hair tint palette #faf0d7 #e1cdb8 #b49b91 #49342f. Transparent background, no ground shadow, no glow, no effects, no text, no grid. Keep generous transparent border. Single frame only.",
+    "review": "상아색 왕관 땋은머리, 자주 예복, 가까운 오른쪽 철퇴 손 확인. 등록 시 머리24/몸24로 정합."
+  },
+  {
+    "name": "idle_breath",
+    "prompt": "Edit the provided priest into next single animation frame IDLE BREATH. Preserve exactly same character design, pixel density, 2-head proportions, canvas placement, face and crown braid, robe details, boots and mace. Only a tiny relaxed breathing change: shoulders/empty sleeve one logical pixel higher, stole tips slightly inward, gaze same. Near hand SCREEN RIGHT continues holding same lowered mace; no hand swap. Transparent, no effects, one frame only.",
+    "previous": "idle",
+    "review": "호흡 장의 동일 얼굴·의상·손과 미세한 스톨/어깨 변화 확인."
+  },
+  {
+    "name": "walk_0",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Walk cycle frame 0 CONTACT A. Near boot (the larger boot attached to near screen-right hip) steps well FORWARD toward screen RIGHT, heel touches ground, toe raised slightly. Far boot stays behind to screen LEFT, toe touching. Feet clearly spread horizontally, visible under parted robe hem. Body upright, hips centered, empty arm swings backward screen left, same mace low screen right. This is walking not combat, no lunge.",
+    "previous": "idle_breath",
+    "references": [
+      "idle_breath.png",
+      "idle.png"
+    ],
+    "review": "접지 A에서 가까운 발 전진·반대 발 뒤, 철퇴 손 고정 확인."
+  },
+  {
+    "name": "walk_1",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Walking frame 1 DOWN / WEIGHT on near forward foot from previous. The near large boot on screen right now flat firmly planted, near knee bends; pelvis and head sink just ONE logical pixel. Rear far foot screen left lifts its heel, starts moving inward toward center. Robe hem compresses over planted leg, empty arm starts returning inward. Not a duplicate contact pose: narrower distance between boots, bent near knee. Keep same mace.",
+    "previous": "walk_0",
+    "references": [
+      "walk_0.png",
+      "idle.png"
+    ],
+    "review": "하중 장의 보폭 축소와 뒤꿈치 들림 확인. 머리 높이 편차는 등록에서 고정 예정."
+  },
+  {
+    "name": "walk_2",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Walking frame 2 PASSING A. Near supporting boot directly under body center flat on ground. FAR leg passes forward BEHIND the planted leg, bent knee and raised small boot visible just screen RIGHT and above the supporting ankle. Boots overlap horizontally, distinctly not spread stance. Torso upright one logical pixel higher than preceding down pose; robe hem hangs nearly vertical. Empty arm forward slightly. Mace same near hand and low angle. Keep face exact.",
+    "previous": "walk_1",
+    "references": [
+      "walk_1.png",
+      "idle.png"
+    ],
+    "review": "통과 장은 뒤쪽 발이 들리고 지지발 아래로 좁혀짐 확인. 다음 장에서 반대 발이 앞으로 나오도록 명시."
+  },
+  {
+    "name": "walk_3",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Walking frame 3 RISING / FAR LEG SWING. Near supporting leg now pushes backwards towards screen LEFT; its large boot stays on ground left of pelvis. Far leg has moved ahead toward screen RIGHT with bent raised knee and SMALL far boot lifted in front, toes aimed right. Clear crossing of legs, far boot about 3 logical pixels above ground. Empty arm swings forward across body, same near weapon hand low right. Robe hem starts flaring screen right. Head exactly same size/position as idle.",
+    "previous": "walk_2",
+    "references": [
+      "walk_2.png",
+      "idle.png"
+    ],
+    "review": "교차 전진 장에서 뒤쪽 발이 앞에서 들리고 가까운 발이 뒤에서 지지하는 순서 확인."
+  },
+  {
+    "name": "walk_4",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Walking frame 4 CONTACT B, the OPPOSITE stride to frame0. FAR leg reaches ahead screen RIGHT, small far boot heel contacts ground in front. NEAR leg extends backward screen LEFT, larger near boot toe contacts behind and near robe flap overlays that leg. Far arm (empty screen-left arm) swung forward across chest, near mace arm slightly back but remains visible on right. Both boots separated, front smaller/back larger. Keep original robe length and head size. Not the same leg contact as walk0.",
+    "previous": "walk_3",
+    "references": [
+      "walk_3.png",
+      "idle.png"
+    ],
+    "review": "반대 접지에서 작은 앞발과 큰 뒷발·빈손 전진으로 0번과 구별됨."
+  },
+  {
+    "name": "walk_5",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Walking frame 5 DOWN B. Weight settles on FAR forward foot near screen-right/center, knee flexes. NEAR large boot at screen LEFT lifts heel and bends knee starting forward, just its toe below the left robe hem. Body one logical pixel lower. Narrower stance than previous, left robe tail swings slightly behind. Empty arm begins dropping, same near mace hand. This is opposite down pose to frame1: large near boot is the lifted rear foot now.",
+    "previous": "walk_4",
+    "references": [
+      "walk_4.png",
+      "idle.png"
+    ],
+    "review": "반대 하중 장의 뒤꿈치 들림·빈손 후퇴 확인. 철퇴 위치·두상 유지."
+  },
+  {
+    "name": "walk_6",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Walking frame 6 PASSING B. Small FAR supporting boot is centered and on ground. Large NEAR leg now swings ACROSS IN FRONT of supporting leg, near knee bent, boot lifted just in front of other shin toward screen right. Legs visibly overlap, near boot lifted 3 pixels, body upright. Robe close to legs, near side skirt slightly raised by forward knee. Empty arm backward screen left, mace low unchanged. Make this clearly distinct from wide stance and from frame2.",
+    "previous": "walk_5",
+    "references": [
+      "walk_5.png",
+      "idle.png"
+    ],
+    "review": "가까운 발이 지지발 앞으로 올라오는 6번 확인. 2번과 하체·소매 실루엣 구별됨."
+  },
+  {
+    "name": "walk_7",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Walking frame 7 UP BEFORE CONTACT A. Near large boot swings forward screen RIGHT, knee begins straightening, heel hovering just ONE logical pixel above ground, toe up. Far boot left/back pushes off with raised heel and toe still down. Stance is reopening toward walk0. Empty arm backward left, robe near panel fans toward right slightly. Mace same hand. Do not turn or mirror body. Head position unchanged from idle, slight upward breathing only.",
+    "previous": "walk_6",
+    "references": [
+      "walk_6.png",
+      "walk_0.png",
+      "idle.png"
+    ],
+    "review": "7번의 들린 앞발→0번 접지 연결과 머리/철퇴 손 유지 확인."
+  },
+  {
+    "name": "attack_ready",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Start new attack animation frame0. Feet open into modest braced stance. Near weapon arm screen RIGHT bends at elbow lifting the SAME mace upright beside right shoulder, hand at upper chest height, mace head beside upper right face but NOT covering face. Shaft vertical/diagonal up right. Far empty hand held in a small fist close to sternum. Torso subtly turns backward preparing overhead strike, eyes determined. Original standing size, short legs, no magical effects.",
+    "previous": "walk_7",
+    "references": [
+      "idle.png"
+    ],
+    "review": "공격 준비의 오른쪽 그립·철퇴 세우기·가슴 앞 빈손과 넓힌 발 확인."
+  },
+  {
+    "name": "attack_back",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Attack frame1 WIND BACK from upright mace. Near right elbow lifts, weapon hand above screen-right temple; same mace tilts diagonally BACK over crown toward screen LEFT, flanged head just above crown-left. Arm remains connected to screen-right shoulder. Torso leans back slightly, knees flex, weight on rear boot. Far empty fist stays by chest. Mace is same short length not long staff. One mace only, no smears yet.",
+    "previous": "attack_ready",
+    "references": [
+      "attack_ready.png",
+      "idle.png"
+    ],
+    "review": "거절: 머리 위 준비 장의 그립~철퇴 머리 거리가 대기의 약 두 배로 늘어남. 자루를 줄여 재제작."
+  },
+  {
+    "name": "attack_back_fix",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: CORRECT ONLY THE MACE LENGTH in first reference. Keep identical raised near-arm pose, character face, body and canvas. Current mace shaft is much TOO LONG. Shorten total distance from holding fist to metal head by 45 percent: the metal head must sit immediately ABOVE THE RIGHT HALF OF HER CROWN (near x700 y290 if fist x840 y390), NOT above the left half. Keep same metal head size. Remove the long portion extending left. It is a compact ONE HANDED mace, roughly half the width of her head from grip to mace head. One single frame. No other changes.",
+    "previous": "attack_back",
+    "references": [
+      "attack_back.png",
+      "idle.png"
+    ],
+    "review": "수정 장의 짧은 철퇴·오른쪽 팔 연결 확인. 머리 위 공간 확보됨."
+  },
+  {
+    "name": "attack_apex",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Attack frame2 APEX / START FORWARD. From corrected raised mace rotate near wrist forward so compact mace points UP RIGHT, metal head just outside upper-right of hair, fist next to right temple. Grip-to-metal-head distance same short distance as idle (about 10 logical pixels), not long shaft. Near elbow starts leading forward, torso shifts right, front knee bends slightly, far fist by chest. Head same silhouette, eyes determined. No smear yet.",
+    "previous": "attack_back_fix",
+    "references": [
+      "attack_back_fix.png",
+      "idle.png"
+    ],
+    "review": "정점 장에서 철퇴 짧은 길이 유지, 오른쪽 팔이 전방으로 이동하는 연속성 확인."
+  },
+  {
+    "name": "attack_down",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Attack frame3 FAST DOWNSWING. Near arm sweeps down forward to screen RIGHT, fist at shoulder/chest height, short mace angles down-right with head at waist height ahead of body. Body leans forward, front knee bends, rear leg stretched back. Add ONE narrow curved tan/silver motion smear attached behind mace head tracing upper-right downward trajectory, NOT magical light, no giant effect. Hair silhouette same size tilted forward only slightly, stole swings back screen left. Same short mace, no extra weapon.",
+    "previous": "attack_apex",
+    "references": [
+      "attack_apex.png",
+      "idle.png"
+    ],
+    "review": "하강 장의 작은 무기 잔상, 오른손·전방 하중·뒤로 날리는 스톨 확인."
+  },
+  {
+    "name": "attack_hit",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Attack frame4 IMPACT. Continue downward movement from previous, lower near weapon fist toward bent front knee, mace head now LOW SCREEN RIGHT near ground just beyond front boot. Same short mace, near hand grip-to-head same length. Torso leans forward more, hips lower, front knee deeply flexed, rear foot stays planted left. Smear is only a very SHORT tail attached just above mace head, dying away. Far fist by chest, same face, crown braid. Keep total head size constant, do not enlarge body.",
+    "previous": "attack_down",
+    "references": [
+      "attack_down.png",
+      "idle.png"
+    ],
+    "review": "낮은 타격 장에서 그립·짧은 철퇴와 전방 무릎 연결 확인. 잔상 축소됨."
+  },
+  {
+    "name": "attack_hold",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Attack frame5 FOLLOW THROUGH HOLD. Same low forward lunge as preceding impact, same feet, same near fist low and mace head down-right. REMOVE all smear/arc completely. Shoulders settle slightly, empty fist loosens, hanging stole falls slightly downward instead of flying. Keep head same size and low position. This frame must read stable planted recovery after hitting, no magical effect, no dust.",
+    "previous": "attack_hit",
+    "references": [
+      "attack_hit.png",
+      "idle.png"
+    ],
+    "review": "버팀 장에서 잔상 제거, 낮은 발 접지와 그립 연속성 확인. 대기48px 등록본도 육안 확인."
+  },
+  {
+    "name": "recover",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Attack frame6 RECOVER halfway back toward idle. Raise torso from low lunge to mostly upright but knees still softly bent, front foot draws inward half way. Near hand lowers compact mace to familiar idle diagonal down-right, hand beside waist. Empty far hand returns near waist. Head rises to just 2 logical pixels below idle, same face/braid. Stole settles vertically with small backward curl. This is intermediate standing recovery, not full idle and not low lunge.",
+    "previous": "attack_hold",
+    "references": [
+      "attack_hold.png",
+      "idle.png"
+    ],
+    "review": "회수 자세의 무릎 펴짐과 철퇴 대기 방향 복귀 확인. 신규 시전은 대기 원화를 기준으로 얼굴 드리프트 방지."
+  },
+  {
+    "name": "cast_gather",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Casting START frame0. Same neutral standing feet and face as idle. Bring empty FAR hand from screen LEFT waist up to center chest, palm turned inward just below teal gem. Near SCREEN RIGHT hand continues gripping lowered mace at right hip, same diagonal mace as idle, NEVER switch mace to other hand. Shoulders slightly draw inward, focused eyes. This is the halfway gathering pose, not fully clasped hands. Crisp square pixel clusters, no smooth painting.",
+    "previous": "recover",
+    "references": [
+      "idle.png"
+    ],
+    "review": "시전 준비의 빈손 가슴 접근·철퇴 고정·기준 얼굴 동일성 확인."
+  },
+  {
+    "name": "cast_hold",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Casting START final / LOOP key. From empty palm on chest, near weapon hand raises a little to stomach height, keeping mace diagonally lowered screen right. Empty FAR hand crosses gently toward the near weapon fist, fingertips resting just ABOVE that fist in prayer at center-right torso, two hands close but mace still clearly gripped by NEAR right hand. Eyes gently half-lowered, chin slightly tucked, calm concentration. Feet same as idle. No light or cross effects, no floating objects. Head size fixed.",
+    "previous": "cast_gather",
+    "references": [
+      "cast_gather.png",
+      "idle.png"
+    ],
+    "review": "기도 자세의 양손 위치와 가까운 철퇴 손 확인. cast_start 마지막과 cast 첫 프레임 공유 예정."
+  },
+  {
+    "name": "cast_breath",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Casting LOOP breathing frame. Keep EXACT same clasped prayer hand coordinates, same mace coordinates and angle, same feet, head position and size as first reference cast_hold. Only a tiny breath in shoulders and slight sleeves/stole fold change, eyelids a little more relaxed. Do NOT move the hands or mace, no new pose, no effects. This must loop smoothly back to cast_hold.",
+    "previous": "cast_hold",
+    "references": [
+      "cast_hold.png",
+      "idle.png"
+    ],
+    "review": "기도 호흡의 손 좌표·발 위치 유지, 소매 작은 변화 확인."
+  },
+  {
+    "name": "hurt",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: HURT recoil frame. Chest leans BACK toward screen LEFT, head tilts back slightly eyes squeezed closed in pain, knees bend forward, far empty hand presses chest. Near SCREEN RIGHT hand still firmly holds same lowered short mace which trails slightly forward-right at hip level. Feet remain planted, no blood, no impact graphics, not falling yet. Same 2-head size, same costume and hair silhouette, do not make her taller.",
+    "previous": "cast_breath",
+    "references": [
+      "idle.png"
+    ],
+    "review": "피격 장의 뒤로 기울기·감은 눈·철퇴 손 유지 확인."
+  },
+  {
+    "name": "kneel",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: DEATH transition frame: knees collapse onto ground, torso bows forward, eyes closed softly (no exaggerated mouth), head lowers but same size. Both knees folded under plum robe, boots tucked behind screen left, robe pools on ground. Near right hand holds same short mace lowered with head resting ground screen right, far empty hand braced on thigh. Same character, compact crouched height about 38 logical pixels versus standing48, NOT scaled smaller, head remains24. No blood/no effects.",
+    "previous": "hurt",
+    "references": [
+      "hurt.png",
+      "idle.png"
+    ],
+    "review": "무릎 장에서 두상 유지·의복 접힘·철퇴 손 연속성 확인."
+  },
+  {
+    "name": "fallen",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: DEATH final frame following kneel: priest lies fully on her SIDE on ground, head at SCREEN LEFT, folded legs/boots extending SCREEN RIGHT. Face with closed eyes rests sideways, crown braid and same hair remain recognizable, same head size NOT tiny. Plum robe with ivory gold stole drapes horizontally. Near arm lies in foreground still touching/gripping short mace laid along ground toward lower screen RIGHT. Body horizontal, no upright torso, no blood. Character fits generous transparent canvas. Do not rotate a standing sprite rigidly: draw natural folded knees and resting arm.",
+    "previous": "kneel",
+    "references": [
+      "kneel.png",
+      "idle.png"
+    ],
+    "review": "사망 최종 장의 옆으로 누운 자세·접힌 무릎은 승인, 배경 갈색 번짐은 거절하여 제거 요청."
+  },
+  {
+    "name": "fallen_clean",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: PRECISE CLEANUP ONLY. Keep the lying priest and mace pixel-for-pixel in same pose and same size. REMOVE ALL black/brown background and glow/halo/shadow around sprite. Genuine completely transparent pixels outside crisp character silhouette. No soft translucent brown halo, no lighting haze, no floor shadow. Do not redraw face, hair, clothes or pose. Keep the entire body lying on side head left, legs right, mace foreground. Single transparent cutout.",
+    "previous": "fallen",
+    "references": [
+      "fallen.png"
+    ],
+    "review": "fallen_clean은 배경 번짐이 남아 제외. 기존 fallen의 알파 확인 후 불투명하면 새 사망 원화로 교체 예정."
+  },
+  {
+    "name": "sit",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: SITTING REST pose. Priest sits upright on ground, both legs folded neatly to screen LEFT under robe, near knees toward right, relaxed eyes OPEN. Head remains exact size and design of idle, torso vertical, no smile exaggeration. Far empty hand rests on lap. Near right hand still holds same lowered compact mace, metal head resting ground to right. Total sitting height ~36 logical pixels, head24, torso shorter because seated. True transparent empty background without shadow or glow, NO gradient behind character. Crisp pixel sprite.",
+    "previous": "fallen_clean",
+    "references": [
+      "idle.png",
+      "kneel.png"
+    ],
+    "review": "앉기 장의 열린 눈·세운 상체·접힌 다리 구별 확인. 사망 첫 원화는 배경 알파가 투명임을 확인하여 등록 시 불투명 경계만 추출 예정."
+  },
+  {
+    "name": "mend",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Skill HEAL / CURE release key. From prayer, extend EMPTY FAR hand from left shoulder ACROSS FRONT OF CHEST toward screen RIGHT at chest height, palm upward gently offering healing to ally. The forearm visibly crosses chest. NEAR mace hand remains LOWER screen right at hip holding same compact lowered mace, clearly separate below open hand. Two hands total, no swapped weapon. Torso slight forward lean, compassionate open eyes, feet idle. No glowing spell or particles. Crisp pixels like idle.",
+    "previous": "sit",
+    "references": [
+      "cast_hold.png",
+      "idle.png"
+    ],
+    "review": "회복 방출에서 빈팔이 가슴을 가로질러 뻗고 그 아래 오른손 철퇴가 유지됨."
+  },
+  {
+    "name": "bless_raise",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: BENEDICTION raise / sign-of-cross top key. Continue empty far hand from offered chest-height palm upward until it is beside forehead screen RIGHT, palm upright, index and middle finger loosely together giving blessing. Far elbow bent across chest, upper arm clearly from screen-left shoulder. Near mace hand stays low right at hip exactly idle, same short mace. Head looks gently toward hand, feet planted. No effect or halo. Single compact sprite.",
+    "previous": "mend",
+    "references": [
+      "mend.png",
+      "idle.png"
+    ],
+    "review": "축복 올림 장의 빈손 이마 높이·오른쪽 철퇴 손 유지 확인. 얼굴과 손 겹침은 레이어 분리 시 보호."
+  },
+  {
+    "name": "judgment_cross",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: SIGN OF CROSS middle / horizontal stroke key. Lower raised empty far hand from forehead to sternum then extend it horizontally a little toward screen LEFT, index+middle fingers together pointing left at chest height, far elbow outward. Wrist at left edge of chest, readable sideways stroke across her body. Eyes now firm. Near weapon hand remains low screen RIGHT with exact same mace as idle. Feet stable, torso faces same right3/4. No drawn cross symbol, only body gesture.",
+    "previous": "bless_raise",
+    "references": [
+      "bless_raise.png",
+      "idle.png"
+    ],
+    "review": "성호 중간 장에서 이마→가슴 가로 이동, 철퇴 고정 확인."
+  },
+  {
+    "name": "light_release",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: HOLY LIGHT / TURN UNDEAD strong forward release. Empty FAR arm crosses chest and THRUSTS straight forward screen RIGHT at shoulder height, palm vertical facing target with fingers together. Hand well beyond right face edge. Near mace hand remains LOW right at hip, short mace angled down right. Torso leans forward slightly, front knee bends, back foot anchors, determined eyes. This is strong pushing gesture, visibly different from gentle palm-up heal. No light beam/effect. Same head24/body24 proportions.",
+    "previous": "judgment_cross",
+    "references": [
+      "judgment_cross.png",
+      "idle.png"
+    ],
+    "review": "거절: 정화 후보가 가까운 팔로 손바닥을 뻗고 철퇴가 떠 있음. 회복 원화의 팔 연결을 기준으로 수정."
+  },
+  {
+    "name": "light_release_fix",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: Edit ONLY the EMPTY extended palm of this heal reference: rotate its palm from upward to VERTICAL facing screen RIGHT, extend its crossing forearm 2 logical pixels further right. Keep the arm crossing in front of chest from SCREEN LEFT shoulder exactly as reference. KEEP LOWER NEAR RIGHT HAND AND MACE EXACTLY UNCHANGED in place, hand visibly grips the brown shaft at right hip. The mace must NOT float; no arm swap. Body leans a tiny bit toward target, serious eyes. Do not move other hand or weapon. This is forceful purification release. No effects.",
+    "previous": "light_release",
+    "references": [
+      "mend.png"
+    ],
+    "review": "정화 수정본 승인: 가슴을 가로지르는 빈팔·그 아래 철퇴 그립이 분명함."
+  },
+  {
+    "name": "hymn",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: HYMN / party blessing signature key. Far EMPTY arm opens diagonally up toward SCREEN LEFT, palm upward beside left of head at ear height (not crossing face). Near SCREEN RIGHT hand holds mace at waist as idle, slightly opened away from body but SAME short mace diagonal down-right. Chin lifts gently, eyes half closed, tiny open singing mouth, chest expands. Feet grounded close stance. Ivory stole parts softly, no wind storm. No music notes, halo, light or particles. Original face/braid proportions and crisp pixel clusters.",
+    "previous": "light_release_fix",
+    "references": [
+      "cast_gather.png",
+      "idle.png"
+    ],
+    "review": "찬가의 입·고개·높은 빈손 자세와 낮은 철퇴 구별 확인."
+  },
+  {
+    "name": "aura",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: SELF AURA release. Lower the far raised hand out to SCREEN LEFT at waist/chest level, open palm up; both elbows now open outward around body's center. Near right weapon hand opens sideways to right slightly but still grips SAME mace pointed diagonally downward, head not raised. Calm CLOSED eyes, mouth closed, chin level. Symmetric gentle chest expansion (weapon makes silhouette asymmetric). Feet stable, no magical aura drawn. Whole figure same size; hair and cape unchanged.",
+    "previous": "hymn",
+    "references": [
+      "hymn.png",
+      "idle.png"
+    ],
+    "review": "오라 장의 낮게 열린 양팔·감은 눈·오른손 철퇴 그립 확인."
+  },
+  {
+    "name": "ground",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: GROUND SANCTUARY / WALL placement key. Bend knees into half crouch with feet planted, torso leans gently forward and head lowers about 4 logical pixels without changing size. Empty FAR arm from left shoulder reaches diagonally across body DOWN to screen RIGHT in front of knees, palm facing DOWN toward ground. Near mace hand remains on near right hip, slightly pulled back, visibly gripping same lowered compact mace to right side. Keep two hands visibly separate, empty palm in front of knees, mace fist farther right. No ground symbol or magic graphics.",
+    "previous": "aura",
+    "references": [
+      "cast_hold.png",
+      "idle.png"
+    ],
+    "review": "설치 자세의 낮은 손바닥·반쯤 굽힌 무릎·그립 분리 확인."
+  },
+  {
+    "name": "magnus",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: MAGNUS exorcism ground consecration key. From previous ground pose, sink into ONE KNEE kneel, torso bowed slightly. Near RIGHT hand drives same compact mace almost VERTICALLY DOWN beside front knee, metal mace head planted on ground screen RIGHT, short handle above head with hand gripping its top. Far EMPTY hand extends palm-down across toward ground in front of body, clearly separate from weapon. Head same size lowered, determined eyes. Ivory stole drapes onto bent knee. No cross, circle, spell, impact or glow, only grounded body and mace. Keep original short weapon length.",
+    "previous": "ground",
+    "references": [
+      "ground.png",
+      "idle.png"
+    ],
+    "review": "대퇴마의 한쪽 무릎·세로 철퇴·빈손 지면 지시 확인. 설치 모션과 실루엣 구별됨."
+  },
+  {
+    "name": "water_scoop",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: HOLY WATER scooping / resurrection low preparation. Half crouch from ground reference, empty FAR hand low in front of knees but now palm UP and fingers CUPPED as if scooping water, hand around shin height. Near right hand still holding original mace diagonally down right at hip. Head slightly bowed looking at cupped empty palm, eyes open. Feet planted, no actual water drops/bowl/effects. Same costume and face as idle, same short mace, no swapped hand.",
+    "previous": "magnus",
+    "references": [
+      "ground.png",
+      "idle.png"
+    ],
+    "review": "성수 뜨기 장의 손바닥 위 방향·낮은 몸·무기 손 유지 확인."
+  },
+  {
+    "name": "water_cup",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: HOLY WATER lift / consecration key. Rise from previous scooping pose to upright, lift SAME EMPTY FAR cupped palm close to sternum under teal gem as if offering water, fingers curled gently upward, not open thrust. Head inclines watching that palm. Near right hand still grips compact mace low diagonally right at hip, same as idle. Feet settle neutral. Calm focused eyes. No water, cup, glow or particles, only ritual hand/body gesture. Maintain exact original face, costume, hair and size.",
+    "previous": "water_scoop",
+    "references": [
+      "water_scoop.png",
+      "idle.png"
+    ],
+    "review": "성수 받침 장의 낮은 손→가슴 손 이동과 기도 복귀 경로 확인."
+  },
+  {
+    "name": "resurrection",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: RESURRECTION upward calling key. Stand fully upright from scooping, EMPTY FAR arm sweeps from chest up diagonally screen LEFT, palm up ABOVE left shoulder and a little above forehead height, beckoning someone to rise. Near SCREEN RIGHT hand keeps same compact mace low at right hip. Chin and gaze lift following empty hand, hopeful determined expression, feet stay grounded. Far shoulder and elbow raised, but head stays original size and hair design. No angels, rays, halos, or resurrection effects. Transparent single frame.",
+    "previous": "water_cup",
+    "references": [
+      "water_cup.png",
+      "idle.png"
+    ],
+    "review": "거절: 부활 후보 얼굴이 왼쪽으로 돌아가 가르마와 시점이 달라짐. 찬가의 오른쪽 얼굴을 유지해 수정."
+  },
+  {
+    "name": "resurrection_fix",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: RESURRECTION key using hymn pose as base. Keep FACE and HEAD facing SCREEN RIGHT 3/4 EXACTLY like hymn and idle; do NOT look left, do NOT reverse braid or hair part. Only raise EMPTY left-side arm further so open palm is ABOVE screen-left crown, elbow bent high, palm offered upward. Eyes open facing right, chin slightly raised but face direction unchanged. Right-side near hand/mace stays low right unchanged. Mouth closed. Entire original character design locked. NO MIRRORING. No magic effects.",
+    "previous": "resurrection",
+    "references": [
+      "hymn.png",
+      "idle.png"
+    ],
+    "review": "부활 수정본에서 오른쪽 얼굴·같은 가르마 복귀 확인. 높은 빈손과 낮은 무기 손 구별됨."
+  },
+  {
+    "name": "redemptio",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: REDEMPTIO sacrificial prayer key. Kneel on BOTH knees as kneel reference, boots tucked behind screen LEFT, body upright on knees. Far empty arm opens outward SCREEN LEFT at shoulder height palm upward offering herself, near RIGHT mace hand opens a little outward but holds same compact mace lowered right with its head near ground. Eyes CLOSED, chin gently lifted, solemn closed mouth. Arms open wider than kneel but NOT stretched long, 2-head short limbs and identical robe/cape. No light/halo/effect. This is active prayer not death or sitting.",
+    "previous": "resurrection_fix",
+    "references": [
+      "kneel.png",
+      "aura.png",
+      "idle.png"
+    ],
+    "review": "속죄의 양무릎·팔 펼침·감은 눈과 낮은 무기 손 확인. 무릎 고개숙임으로 후속 연결 가능."
+  },
+  {
+    "name": "portal",
+    "prompt": "ONE single next frame, transparent background. Edit the reference Priest, keep identical face/crown braid, ivory short cape with teal gem, gold-edged plum robe and ivory stole, brown boots, same short flanged silver-gold mace. Exact same 2-head chibi scale and pixel density, not taller. Right-facing 3/4. Near hand on screen RIGHT is always weapon hand, far hand empty; NEVER swap. No text, shadow, glow or spell effects. Keep head silhouette unchanged unless pose explicitly tilts it. Pose: PORTAL opening gesture key. From heal palm offered across chest, empty FAR arm sweeps sideways outward to SCREEN LEFT, fully open palm facing forward/outward at chest height, elbow softly bent. Torso twists very slightly right but face stays right3/4, eyes OPEN looking ahead. Near right hand still holds mace low right exactly idle. Wider stance than idle, near foot half-step right, robe tips drift with horizontal sweep. Distinct from aura: alert open eyes, palm vertical facing out, arm extends farther sideways and body turns. No portal graphics/effects.",
+    "previous": "redemptio",
+    "references": [
+      "mend.png",
+      "idle.png"
+    ],
+    "review": "차원문 장의 수평 빈팔·열린 눈·넓힌 발과 오른쪽 철퇴 손 승인."
+  }
+]
