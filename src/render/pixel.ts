@@ -60,11 +60,10 @@ export function loadPixel(): Promise<void> {
 
 function character(L: HeroLookDraw): string | undefined {
   if (!M || !enabled) return undefined;
-  const line = LINE[L.cls];
-  if (!line) return undefined;
-  const base = `${line}_${L.gender === 'm' ? 'male' : 'female'}`;
-  for (const id of variant ? [`${base}_${variant}`, base] : [base]) if (M.characters[id]) return id;
-  return undefined;
+  const g = L.gender === 'm' ? 'male' : 'female';
+  // a class's own art first (e.g. knight_female_p2), else its 1st-job line's (a knight wears the swordsman set)
+  const ids = [L.cls, LINE[L.cls]].filter(Boolean).flatMap((k) => (variant ? [`${k}_${g}_${variant}`, `${k}_${g}`] : [`${k}_${g}`]));
+  return ids.find((id) => M.characters[id]);
 }
 export function pixelSupports(L: HeroLookDraw) {
   const id = ready ? character(L) : undefined;

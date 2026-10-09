@@ -1,0 +1,109 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "frames": [
+    {
+      "frame": "idle_0",
+      "prompt": "Use case: stylized-concept. Generate exactly ONE animation frame, idle_0, of an original female KNIGHT pixel-art game sprite. Transparent background. Use attached Cookie image as SIZE/PROPORTION/PIXEL STYLE reference only, not costume or identity. A true tiny 48-pixel-tall sprite with large 26-pixel head and short armored body, right-facing three-quarter view, charming Korean MMO pixel art, crisp large square pixel clusters, restrained warm dark outlines, no smoothing or painterly gradients. New design: cream blunt bob with a side braid tuck, amber eyes, silver steel plate pauldrons, breastplate and greaves, muted teal waist tabard and short teal back cape, small aged gold clasps. No helmet. One straight silver arming sword with gold crossguard in her near hand, held down-right; far hand a small closed gauntlet. Stable relaxed combat stance, boots on same baseline. Figure body roughly 30px wide and 48px tall; sword may extend to right, no shield. Render as a nearest-neighbor 8x enlarged pixel sprite in a spacious transparent 1024x960 canvas corresponding to logical 128x120; logical feet anchor (64,112), logical head top y64. No text, no floor, no shadow, no contact sheet. Match the attached Cookie's large face, small torso and chunky pixel scale, but completely original knight outfit and hair silhouette."
+    },
+    {
+      "frame": "idle_1",
+      "prompt": "Create ONE next animation frame idle_1 by editing the attached knight idle_0. Preserve exactly the character, pixel cluster style, cream bob, face, plate armor, teal cape and tabard, sword in screen-right near hand, canvas, head size, body size, boots baseline and position. This is subtle inhaling: raise shoulder plates/chest one logical pixel, raise sword tip one logical pixel, hair ends lag behind. Keep head and feet almost unchanged. No effects. True transparent background. One single sprite only, no sheet, no words."
+    },
+    {
+      "frame": "idle_2",
+      "prompt": "ONE frame idle_2 continuing attached idle_1 knight. Exactly preserve identity, head silhouette, face, silver plate, gold trim, teal tabard/cape, sword in near screen-right hand and boots in same place. Exhale subtly: shoulders/chest lower ONE logical pixel versus previous, sword tip relax down ONE pixel; cape hem drifts one pixel left as delayed motion. Tiny 2-head chunky pixel sprite, transparent background, same framing and pixel scale. No new details or effects, no sheet."
+    },
+    {
+      "frame": "idle_3",
+      "prompt": "ONE frame idle_3 continuing attached idle_2 and looping toward original idle_0 (second reference). Same knight identity and all gear, exact head/body proportions and tiny chunky pixel style. Settle shoulders to neutral, let cape swing back toward body, very subtle breathing change only. Boots remain planted. Sword still in near screen-right hand pointing down-right. Same framing. Transparent background, no text, only one sprite."
+    },
+    {
+      "frame": "walk_0_rejected_hand",
+      "prompt": "Create exactly ONE frame walk_0 of the SAME attached knight starting a rightward walk. Keep the identical cream bob, amber eyes, silver/gold plate, teal tabard/cape, right-facing three-quarter face and huge 2-head proportions. This is contact pose: near bright armored leg extends diagonally forward screen-right, heel on baseline; far darker leg extends back screen-left, toe on baseline. Clear separated short legs, walking not running. Near sword hand swings a little BACK, sword still points down-right and stays in that same near hand. Far empty gauntlet swings forward. Torso/head same size as reference, steady gaze. Single sprite, transparent, chunky pixel art same logical pixel size. Full figure and weapon fit."
+    },
+    {
+      "frame": "walk_0",
+      "prompt": "Edit attached ORIGINAL IDLE knight into ONE walking contact frame walk_0. CRITICAL retain sword in SAME HAND AT SCREEN RIGHT, grip x about 830 of 1280, sword extends OUT TO RIGHT away from body. SCREEN LEFT hand is EMPTY. DO NOT switch weapon hand. Keep upper body/hair/face/equipment exactly unchanged. Change ONLY short legs into walking contact: screen-right bright leg extends 3 logical pixels to right, screen-left dark leg extends 2 pixels left, both feet on baseline. Teal cape slightly trails left. Tiny chunky pixel sprite two heads tall, identical framing and transparent background. No sheet."
+    },
+    {
+      "frame": "walk_1",
+      "prompt": "ONE next frame walk_1 from attached knight walk_0. Keep SAME sword in screen RIGHT gauntlet, pointing down-right OUTSIDE body; screen-left gauntlet empty. Same face, hair, armor, color, tiny chunky pixel scale. Walking DOWN pose: bend front screen-right knee slightly, lower hips/torso/head by about 2 logical pixels without shrinking head; trailing screen-left heel lifts with toe near ground. Bring feet slightly closer as body passes over planted front foot. Cape lags left. Not a run. Same full canvas, transparency, one sprite only."
+    },
+    {
+      "frame": "walk_2",
+      "prompt": "ONE next frame walk_2 continuing attached walk_1 knight. PASSING pose of WALK: legs close together under hips; planted bright near leg nearly straight under body, far leg bends and passes forward behind it with foot lifted. Raise body from prior crouch one logical pixel. Do not enlarge head or alter face/costume. Keep sword in screen-right SAME hand, silver blade pointing outward down-right, empty hand screen-left. Teal cape trailing gently. Same chunky 2-head pixel style, all original equipment details, transparent background, single full sprite."
+    },
+    {
+      "frame": "walk_3",
+      "prompt": "ONE next frame walk_3 from attached walk_2. Walk UP phase: planted near bright leg pushes body upward one logical pixel, heel slightly raised; far darker leg now swings forward to screen-right, knee gently bent and foot preparing to land. Legs start to separate again. Do not change head size or identity. Keep sword held by SCREEN RIGHT gauntlet, blade outward down-right, never switch hands. Same silver gold armor, teal cape and tabard, cream bob. Same chunky pixel style, transparent background, full single sprite."
+    },
+    {
+      "frame": "walk_4",
+      "prompt": "ONE walk_4 frame continuing walk_3 attached. OPPOSITE CONTACT: far darker armored leg lands FORWARD screen-right while near brighter armored leg extends BACK screen-left. Clearly change which leg leads; keep the same right-facing three-quarter view, do not mirror the character. Both feet contact baseline, knees short and chunky. Keep all head, face, cream hair and silver/gold/teal outfit EXACTLY the same. Sword stays in screen-right near gauntlet pointing down-right outside body, never transferred. Single tiny 2-head pixel sprite, transparent background and same scale."
+    },
+    {
+      "frame": "walk_5",
+      "prompt": "ONE next walk_5 frame of identical knight attached walk_4: opposite DOWN phase, darker forward screen-right leg flexes and bears weight, brighter trailing screen-left heel lifts and begins to move under hips. Lower whole head/torso 1-2 logical pixels, maintain exact head size. Same cream bob, face, silver armor, gold clasps, teal cloth. Sword remains in SCREEN-RIGHT hand angled outward down-right, other hand empty. No redesign or mirroring. Single sprite on transparent, same pixel size and framing."
+    },
+    {
+      "frame": "walk_6",
+      "prompt": "ONE next walk_6 frame continuing attached walk_5: opposite PASSING pose. Dark far leg stands beneath hips; bright near leg bends at knee and passes forward across its front, foot lifted. Narrow leg spacing, torso rises one logical pixel from last pose, head same size. Preserve exact knight face/hair/armor/teal cape and tabard. Sword remains at SCREEN RIGHT in SAME hand pointed outward down-right, never crosses body or swaps hands. Tiny chunky pixel art, transparent, single full sprite."
+    },
+    {
+      "frame": "walk_7",
+      "prompt": "ONE next frame walk_7, last frame before looping to walk_0. First reference is previous walk_6, second is target contact walk_0. Bright near leg extends forward screen-right from raised knee, heel still just above floor preparing contact. Dark far leg pushes off behind screen-left, body rises one logical pixel. Preserve identical knight head size, face, cream hair, silver armor and teal cloth. Sword always in screen-right hand pointing outward down-right. Never mirror. Same chunky pixel scale and transparent canvas. One full sprite only."
+    },
+    {
+      "frame": "attack_0",
+      "prompt": "ONE frame attack_0 of attached original knight idle. ANTICIPATION for a clockwise overhead downward sword cut toward screen-right. Same cream bob/face/silver plate/teal gold costume and 2-head proportions. Widen short-legged stance, weight on back screen-left foot, torso twists back slightly. SAME near arm previously at screen-right now bends upward, SAME near gauntlet grips gold sword hilt beside screen-right temple at about (850,520). Silver blade points diagonally UP-LEFT from that grip, tip above head around (600,170), for winding up. Far screen-left hand stays EMPTY near chest. Do not switch hands. Full blade visible, no smear or effects yet. One crisp chunky pixel sprite transparent background, enough margin above."
+    },
+    {
+      "frame": "attack_1",
+      "prompt": "ONE next attack_1 frame continuing attached attack_0 knight. Begin clockwise overhead cut: near gauntlet remains above screen-right shoulder, sword rotates from upper-left diagonal to nearly VERTICAL UP above hand, tip up. Torso starts rotating toward right before arm. Small thin WHITE/PALE CYAN pixel smear follows only immediately behind sword tip from upper-left to overhead. Keep face/hair/armor/teal cloth and head size identical. Far hand empty. Short grounded legs, shift weight slightly forward. Keep sword a short one-handed arming sword, not giant. Transparent background, full sprite and sword with margin, chunky pixel art, only one frame."
+    },
+    {
+      "frame": "attack_2",
+      "prompt": "ONE next attack_2 frame of attached attack_1 knight, continue SAME clockwise overhead slash. Sword near-hand gauntlet travels down and forward toward screen-right shoulder/chest height, arm begins extending; blade NOW POINTS UP-RIGHT at 40 degrees above horizontal (not vertical, not left). Head and torso lean 1-2 logical pixels forward right, front right knee bends, rear heel starts lifting. A pale cyan/white crisp pixel smear arc follows behind blade from overhead into upper-right quadrant; keep face readable. SAME cream bob, amber eyes, silver/gold armor, teal tabard/cape. Same head size/tiny pixel style. Sword always same near hand, far hand empty. Full single sprite on transparent, no cropping."
+    },
+    {
+      "frame": "attack_3",
+      "prompt": "ONE next attack_3 frame continuing attached attack_2. Continue CLOCKWISE cut: near sword arm extends forward SCREEN RIGHT at lower chest height; blade now points almost horizontal slightly DOWN-RIGHT about 10 degrees below horizontal. Advance front foot right by 2 logical pixels; torso leans forward, rear heel raised. Pale cyan white pixel arc trails from upper-right down to blade along OUTSIDE right side, no giant circle, face unobscured. Same exact knight identity, cream bob, face, silver/gold plate, teal cloth, head size, 2-head pixel proportions. Keep sword in same near hand, far hand empty by chest. Transparent full single sprite with right margin, no text."
+    },
+    {
+      "frame": "attack_4",
+      "prompt": "ONE next attack_4 CONTACT frame continuing attached attack_3. Finish clockwise cut slightly further: silver sword points DOWN-RIGHT at 25 degrees below horizontal, same near sword arm fully extended forward right. Lunge front foot a little farther, rear heel raised, hold impact posture. REMOVE ALL large blue/white smear arcs, only 2 tiny pale wind flecks beyond sword tip allowed. SAME knight face/hair/plate/cape, same head and body scale. Far hand empty, same near hand grips sword. Entire sword tip and whole body INSIDE canvas with generous right margin; character can be centered with extra transparent space. One chunky pixel sprite on true transparency, no text."
+    },
+    {
+      "frame": "attack_5",
+      "prompt": "ONE next frame attack_5 RECOVERY. First attached image is previous attack_4, second is idle target. Same knight identity and equipment. Draw intermediate between full lunge and idle: torso upright again, front foot pulled halfway back, near elbow bends bringing sword gauntlet toward screen-right hip. Sword remains same near hand and points diagonally down-right about 35 degrees. No smear or wind flecks. Keep exact large head size, cream bob, face, silver/gold armor and teal cloth. Do not mirror or switch hands. Tiny 2-head crisp pixel character, transparent canvas, one complete sprite."
+    },
+    {
+      "frame": "hurt_0",
+      "prompt": "ONE hurt_0 frame of attached idle knight. Same exact character face/hair/armor, same huge head and short 2-head pixel proportion. A small non-gory hit recoil from screen-right: lean torso/head back screen-left by 2 logical pixels, knees flex, eyes briefly squeeze shut, near sword hand pulls slightly inward but stays SCREEN RIGHT and blade down-right. Far empty gauntlet braces chest. Feet still grounded. Cape trails right slightly from recoil. No damage effects, no blood, no stars. Full single crisp chunky pixel sprite, transparent background, same scale."
+    },
+    {
+      "frame": "hurt_1",
+      "prompt": "ONE next hurt_1 recovery frame continuing attached hurt_0, second reference idle target. Ease recoil halfway back toward upright: head still a tiny bit tilted back, eyes reopening with determined expression, knees still slightly bent, empty far hand lowers from chest. Keep same near SCREEN RIGHT hand on sword, blade down-right. Cape settles behind left again with a slight delayed flick. Identical original cream bob, head size, armor and teal/gold costume. Chunky tiny 2-head pixel art, transparent, full single sprite only."
+    },
+    {
+      "frame": "dead_0",
+      "prompt": "ONE dead_0 frame of same attached idle knight, first stage of non-gory defeat collapse. Knees buckle inward, hips lower about 4 logical pixels, torso hunches forward, head bows slightly with eyes shut. Keep same head size and original cream bob, silver/gold armor, teal cape/tabard. SAME near screen-right hand still holds sword lowered down-right, tip near ground; far empty hand lowers. Feet remain on same baseline. Not lying yet. Tiny chunky 2-head pixel sprite on true transparency, single full figure only."
+    },
+    {
+      "frame": "dead_1",
+      "prompt": "ONE next dead_1 frame continuing attached dead_0. Defeat collapse next stage: sink deeply down ONTO BOTH KNEES, lower torso and head considerably while keeping HEAD EXACT SAME SIZE. Short boots fold behind, armored knees on baseline. Head bowed eyes closed, upper body begins tipping screen-left. Same near screen-right gauntlet still holds sword, lowered almost horizontal down-right near floor. Far empty hand starts reaching down left to brace. Same cream bob, silver/gold plate, teal cloth, chunky pixels. Entire single sprite transparent, no floor/shadow, no blood."
+    },
+    {
+      "frame": "dead_2",
+      "prompt": "ONE next dead_2 frame continuing attached kneeling dead_1. Collapse sideways SCREEN LEFT: head and torso tilt strongly about 40 degrees left, left empty forearm reaches floor supporting weight, hips still near kneeling center, knees/boots fold toward right. Head is nearer floor at left but not fully lying yet. Keep SAME head size, cream bob, closed eyes, silver/gold armor and teal fabric. SAME near sword hand now low beside right hip, still touching hilt; sword rests almost horizontal extending screen-right along ground. Do not transfer hands. Single crisp chunky pixel sprite transparent background, no floor/shadow/blood, whole character visible."
+    },
+    {
+      "frame": "dead_3",
+      "prompt": "ONE final dead_3 frame continuing attached dead_2: finish falling toward SCREEN LEFT. Knight now LYING FULLY ON HER LEFT SIDE on ground, head at left, torso horizontal, bent armored legs extend to right. Eyes closed; same cream bob and same head SIZE, no enlarged portrait. Empty left forearm tucked under or beside head. Near sword gauntlet rests in front of waist still touching SAME gold hilt; silver sword lies along ground extending to screen-right. Teal cape pools behind torso. Keep silver/gold plate armor and tiny chunky pixel-art style. Whole body, boots and sword visible, transparent background, no ground/shadow/text/blood. One sprite only."
+    },
+    {
+      "frame": "sit_0",
+      "prompt": "ONE sit_0 resting frame of attached original idle knight. Same exact cream bob, amber eyes open, head size, silver plate/gold trim, teal tabard and cape, tiny two-head chunky pixel art. Calm SEATED pose facing right three-quarter: hips on ground, short knees bent forward, boots visible, torso relaxed upright, empty far hand on knee. SAME near screen-right gauntlet rests on sword hilt beside hip; sword lies safely almost horizontal extending RIGHT on ground. Cape pools behind screen-left. Whole single sprite on transparent canvas, no floor/shadow/text. Preserve identity and proportional head size; sitting reduces height by bending legs, not shrinking body."
+    }
+  ]
+}
