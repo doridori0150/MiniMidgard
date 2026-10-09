@@ -6,6 +6,7 @@ import { save, load, expForLevels, applyExp } from '../game/state.ts';
 import { applyOffline, type OfflineReport } from '../game/offline.ts';
 import { FieldRenderer } from '../render/field.ts';
 import { setWholeEnabled } from '../render/whole.ts';
+import { setPixelEnabled } from '../render/pixel.ts';
 import { audio } from '../audio/audio.ts';
 import { zone } from '../game/data/zones.ts';
 import { Notifier } from './notify.ts';
@@ -94,6 +95,7 @@ class Game {
   begin(s: GameState, fresh: boolean) {
     this.s = s;
     setWholeEnabled(s.settings.heroArt !== 'rig');
+    setPixelEnabled(s.settings.heroArt === 'pixel');
     if (!fresh) {
       const away = Date.now() - s.lastSave;
       const rep = applyOffline(s, away);

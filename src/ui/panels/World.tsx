@@ -9,6 +9,9 @@ import { RACE_KO, SIZE_KO } from '../../game/data/elements.ts';
 import { ITEMS, SHOPS } from '../../game/data/items.ts';
 import { CLASSES } from '../../game/data/classes.ts';
 import { setWholeEnabled, wholeCharacters } from '../../render/whole.ts';
+import { setPixelEnabled, pixelCharacters } from '../../render/pixel.ts';
+
+const artList = (cs: { cls: string; gender: string }[]) => cs.map((c) => `${CLASSES[c.cls as keyof typeof CLASSES]?.name ?? c.cls}(${c.gender === 'm' ? '남' : '여'})`).join(' · ');
 import { NPC_LOOKS } from '../../render/field.ts';
 import { itemIconURL } from '../../render/icons.ts';
 import { audio } from '../../audio/audio.ts';
@@ -313,9 +316,14 @@ export function SettingsPanel() {
           {Sw('CRT 모니터 필터', st.crt !== false, () => { st.crt = st.crt === false; })}
           {Sw('저전력 모드 (30fps, 발열 감소)', !!st.powerSave, () => { st.powerSave = !st.powerSave; })}
           {Sw('도트 모드 (레트로 픽셀)', !!st.pixel, () => { st.pixel = !st.pixel; if (g.renderer) { g.renderer.pixelMode = !!st.pixel; g.renderer.resize(); } })}
-          {Sw('캐릭터 그림 B: 통짜 스프라이트 (끄면 A: 조립형)', st.heroArt !== 'rig', () => { st.heroArt = st.heroArt === 'rig' ? undefined : 'rig'; setWholeEnabled(st.heroArt !== 'rig'); })}
-          <div class="small muted" style={{ margin: '2px 0 6px' }}>
-            B 그림이 있는 직업: {wholeCharacters().map((c) => `${CLASSES[c.cls as keyof typeof CLASSES]?.name ?? c.cls}(${c.gender === 'm' ? '남' : '여'})`).join(' · ')}. 2차 직업은 1차 그림을 입습니다. 나머지는 A로 그려집니다.
+          <div class="row" style={{ margin: '8px 0 4px' }}><span>캐릭터 그림</span></div>
+          <div class="tabs">
+            {([['rig', 'A 조립형'], [undefined, 'B 통짜'], ['pixel', 'C 도트']] as const).map(([v, label]) => (
+              <button class={st.heroArt === v ? 'on' : ''} onClick={() => set(() => { st.heroArt = v; setWholeEnabled(v !== 'rig'); setPixelEnabled(v === 'pixel'); })}>{label}</button>
+            ))}
+          </div>
+          <div class="small muted" style={{ margin: '4px 0 6px' }}>
+            B: {artList(wholeCharacters())}. C(시험): {artList(pixelCharacters()) || '아직 없음'}. 2차 직업은 1차 그림을 입고, 그림이 없는 직업은 C → B → A 순서로 있는 그림을 씁니다.
           </div>
           {Sw('잡템 자동 판매', st.autoSellEtc, () => { st.autoSellEtc = !st.autoSellEtc; })}
           {Sw('보스·MVP 자동 소환', st.autoBoss, () => { st.autoBoss = !st.autoBoss; })}

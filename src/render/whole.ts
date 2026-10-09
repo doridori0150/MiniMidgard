@@ -35,7 +35,7 @@ export function loadWhole(): Promise<void> {
 }
 
 /** game class line → painted character (2nd jobs wear their 1st job's set until they have their own) */
-const LINE: Partial<Record<string, string>> = {
+export const LINE: Partial<Record<string, string>> = {
   novice: 'novice', swordsman: 'swordsman', knight: 'swordsman',
   mage: 'mage', wizard: 'mage', acolyte: 'acolyte', priest: 'acolyte', archer: 'archer', hunter: 'archer',
   thief: 'thief', assassin: 'thief', merchant: 'merchant', blacksmith: 'merchant',
@@ -70,15 +70,17 @@ const matrix = (p: V2, angle = 0, pivot: V2 = [0, 0]): Mat => {
   const r = angle * Math.PI / 180, c = Math.cos(r), s = Math.sin(r);
   return [c, s, -s, c, p[0] - c * pivot[0] + s * pivot[1], p[1] - s * pivot[0] - c * pivot[1]];
 };
-function selectFrame(m: Manifest, state: string, time: number) {
-  const a = m.animations[state] ?? m.animations.idle;
+function selectFrame(m: Manifest, state: string, time: number) { return pickFrame(m.animations, state, time); }
+/** frame name at `time` ms into `state` (shared with the pixel heroes, which use the same animation table) */
+export function pickFrame(animations: Manifest['animations'], state: string, time: number) {
+  const a = animations[state] ?? animations.idle;
   let t = Math.max(0, Math.floor(time));
   t = a.loop ? t % a.duration : Math.min(t, a.duration - 1);
   for (let i = 0; i < a.frames.length; i++) { if (t < a.durations[i]) return a.frames[i]; t -= a.durations[i]; }
   return a.frames[a.frames.length - 1];
 }
 /** game pose → animation and time (the attack is 280 ms with its hit at 140 ms, as in the sim) */
-function clip(pose: Pose): [string, number] {
+export function clip(pose: Pose): [string, number] {
   switch (pose.state) {
     case 'walk': return ['walk', pose.t];
     case 'attack': return ['attack', pose.t * 280 / Math.max(1, pose.dur ?? 280)];

@@ -66,7 +66,8 @@ export async function qaBoot(): Promise<boolean> {
   // open everything up to the party's level so the world map shows a realistic mid-game state
   for (const z of ZONES) if (!z.gate && z.lv[0] <= lv + 4 && !s.unlocked.includes(z.id)) s.unlocked.push(z.id);
   s.zone = q.get('zone') ?? 'meadow';
-  if (q.get('art') === 'a') s.settings.heroArt = 'rig'; // &art=a: assembled heroes (A/B check)
+  if (q.get('art') === 'a') s.settings.heroArt = 'rig'; // &art=a: assembled heroes, &art=c: pixel heroes (A/B/C check)
+  if (q.get('art') === 'c') s.settings.heroArt = 'pixel';
   game.qa = true;
   game.begin(s, true);
   // ?panel=<legacy id> or ?page=<tab>&sub=<inner tab>, ?sel=<hero index>, ?band=closed
