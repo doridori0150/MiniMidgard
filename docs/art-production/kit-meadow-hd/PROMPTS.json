@@ -1,0 +1,121 @@
+{
+  "tool": "built-in image_gen",
+  "generated_at": "2026-10-09",
+  "reference": "BG_BRIEF_R3.md and user attachments, no external game images accessed",
+  "prompts": [
+    {
+      "asset": "tree",
+      "prompt": "Use case: stylized-concept. Production game sprite: one mature broadleaf meadow tree, full object only, isolated true transparent background. High three-quarter orthographic camera about 45 degrees above ground, visible crown top and front. Rendered softly lit 2.5D with rich realistic hand-painted textures, no outlines, no cartoon contour, no pixel art. Muted sage/olive green dense foliage clustered in irregular volumetric lobes; warm brown textured trunk, modest roots. Sun upper left, cooler shaded lower right, dark contact at feet. No ground, no cast shadow (separate engine pass), no grass base, no other objects, no text. Tree upright centred with trunk foot bottom centre, generous transparent margins, entire silhouette visible. Crown must be well separated from visible trunk for extracting canopy overlay. Fantasy meadow, original design.",
+      "status": "superseded"
+    },
+    {
+      "asset": "pine",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. A compact tall Scots pine with dense volumetric layered green needle crown, visible top of crown, short exposed bark trunk, crown hides the upper branches. Broad top-down view of spreading needle tiers.",
+      "status": "selected"
+    },
+    {
+      "asset": "bush",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. A low rounded meadow shrub, irregular dense small sage green leaves, domed top brightly lit, right front side cooler, no trunk visible.",
+      "status": "selected"
+    },
+    {
+      "asset": "rock",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. A small cluster of three weathered warm gray stones, one main rounded angular rock and two small supporting rocks, visible broad top planes with fine flecks of moss.",
+      "status": "selected"
+    },
+    {
+      "asset": "flowers",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. A small low clump of meadow wildflowers, cream daisies and a few pale lavender flowers, fine sage leaves; sparse natural asymmetric grouping, no soil base.",
+      "revision": 1,
+      "status": "selected"
+    },
+    {
+      "asset": "stump",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. A weathered short cut oak stump with conspicuous elliptical cut top showing growth rings and one split, rough warm brown bark and short roots. Broad top face, squat proportions.",
+      "revision": 1,
+      "status": "selected"
+    },
+    {
+      "asset": "fence",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. A rustic low wooden fence section, two sturdy short posts and two horizontal rails, slight diagonal orientation showing top surfaces and thickness, aged warm gray-brown wood, no foliage.",
+      "revision": 1,
+      "status": "superseded"
+    },
+    {
+      "asset": "tree",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. A compact mature broadleaf tree with a BROAD DENSE DOMED CROWN, canopy occupying 85 percent of the tree, short trunk partly concealed under foliage. Camera looking STEEPLY DOWN onto the crown so the branches are HIDDEN by crown top. Small layered clusters of sage olive leaves, warm textured short trunk and modest roots. No eye-level tree, no exposed branching skeleton.",
+      "revision": 2,
+      "status": "selected"
+    },
+    {
+      "asset": "grass",
+      "prompt": "Use case: stylized-concept. Production seamless square game ground texture, orthographic straight TOP DOWN, material fills every edge, no border. Rich realistic hand-painted 2.5D fantasy meadow material, subtle diffuse upper-left light but uniform exposure across entire tile, low contrast muted natural colour. Tileable on all four sides, tiny detail scale for ground under small game characters. No objects, no large shadows, no vignette, no text, no horizon. Dense SHORT meadow grass blades, sage and soft olive greens with subtle green-gold variation and very occasional tiny tan pebbles. Even fine grass coverage, no large tufts or bald patches.",
+      "status": "selected"
+    },
+    {
+      "asset": "dirt",
+      "prompt": "Use case: stylized-concept. Production seamless square game ground texture, orthographic straight TOP DOWN, material fills every edge, no border. Rich realistic hand-painted 2.5D fantasy meadow material, subtle diffuse upper-left light but uniform exposure across entire tile, low contrast muted natural colour. Tileable on all four sides, tiny detail scale for ground under small game characters. No objects, no large shadows, no vignette, no text, no horizon. Warm pale ochre packed earth, very fine gritty grains and scattered tiny rounded pebbles, faint irregular wear, soft earth colour variation. No large stones, no cracks grid, no grass.",
+      "status": "selected"
+    },
+    {
+      "asset": "path",
+      "prompt": "Use case: stylized-concept. Production seamless square game ground texture, orthographic straight TOP DOWN, material fills every edge, no border. Rich realistic hand-painted 2.5D fantasy meadow material, subtle diffuse upper-left light but uniform exposure across entire tile, low contrast muted natural colour. Tileable on all four sides, tiny detail scale for ground under small game characters. No objects, no large shadows, no vignette, no text, no horizon. Weathered rustic footpath surface: small irregular flat warm gray stones embedded in tan packed earth, softly rounded edges flush with soil, about 40 percent small stone coverage, fine grit between. Organic random layout, no regular paving grid, no giant slabs.",
+      "status": "selected"
+    },
+    {
+      "asset": "foreground_branch",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. A single gently curving leafy oak bough entering from UPPER LEFT screen corner and tapering toward lower right, wide landscape silhouette, muted sage olive leaves, warm sun top left, intentionally OUT OF FOCUS with soft optical blur and feathered edges. No ground, no background colour, transparent outside branch. Wide horizontal composition.",
+      "status": "superseded"
+    },
+    {
+      "asset": "foreground_branch",
+      "prompt": "Use case: stylized-concept. A botanical game overlay asset consisting ONLY of one leafy oak branch. Nothing else. No animals, no people, no creatures. Branch enters from upper left, stretches diagonally toward right, leaves concentrated in upper left quadrant with open transparent space lower right. Muted sage green oak foliage, warm upper left sunlight, realistic hand-painted 2.5D fantasy game rendering. Soft slightly out-of-focus leaves with feathered silhouette. Entire background genuinely transparent, NO glow, NO mist, NO scenery, no text. Wide horizontal framing.",
+      "revision": 2,
+      "status": "selected"
+    },
+    {
+      "asset": "fence",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. A low rustic WOOD FENCE SECTION, viewed at 45 degrees down, TWO SHORT POSTS with TWO RAILS between them, wide horizontal silhouette. No light glow around object, NO halos, NO background haze or cast shadows. Alpha zero in every empty region including openings between rails. Weathered neutral brown timber.",
+      "revision": 2,
+      "status": "selected"
+    },
+    {
+      "asset": "sign",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. A simple rustic wooden signpost, single short upright post and one thick blank arrow-shaped plank pointing right. Clear top and side edges, warm weathered wood. Blank, no lettering.",
+      "status": "selected"
+    },
+    {
+      "asset": "well",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. A small roofless circular medieval stone well with low timber posts and horizontal wooden windlass crossbar, a simple rope hanging into dark open well, no bucket outside. Oval stone rim clearly seen from above, warm gray roughly dressed stones, aged oak. Compact shape.",
+      "status": "selected"
+    },
+    {
+      "asset": "cart",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. An empty small rustic two-wheeled wooden handcart, long handles toward lower left, visible INSIDE wooden plank bed viewed from above, two round spoked wheels, aged warm brown timber and subdued iron fittings.",
+      "status": "selected"
+    },
+    {
+      "asset": "haystack",
+      "prompt": "Use case: stylized-concept. One original fantasy meadow game sprite, isolated true transparent background. Orthographic 2.5D CAMERA LOOKING DOWN AT 45 DEGREES, conspicuous visible TOP surfaces, compressed vertical faces; NOT eye level. High quality hand-painted 3D render appearance, rich believable texture, muted natural colours, no black or brown outlines, no flat cartoon shapes. Sun upper left, cool soft shading lower right, modest dark contact at foot. NO cast shadow, NO ground platform, no grass base, no labels. Entire object centered with generous clear margins, foot bottom centre. A squat small loose conical haystack, straw golden beige and muted ochre, textured individual straw fibers and irregular fringed base, rounded pointed top, no rope, no tools.",
+      "status": "selected"
+    }
+  ],
+  "selected_sources": {
+    "tree": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-249e4359-3064-4ba0-ab77-311a95e0ae69.png",
+    "pine": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-b7f35c83-2c7e-4192-be6b-8e6fe3dcecc8.png",
+    "bush": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-002444cc-82d8-4d00-a67a-176c10477c05.png",
+    "rock": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-057ffffc-20c7-42fb-b893-71a6c5790189.png",
+    "flowers": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-ad23c43f-d175-462d-a870-aa04ca41a8ea.png",
+    "stump": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-c3dfed24-02f8-4561-93c1-cd8b09037187.png",
+    "fence": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-7ce096a4-087b-429e-b9dd-75adf3a0ede0.png",
+    "sign": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-1b1d580b-2636-4710-b249-0d8bf298c6f7.png",
+    "well": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-a52fce49-1095-4cbd-8138-ae4ef2c37719.png",
+    "cart": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-4bb12d1e-8209-4f40-9bad-f7e8eadcd45c.png",
+    "grass": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-f872e924-1cfe-4d68-8282-316383320f8b.png",
+    "dirt": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-35d4c5af-60df-4e79-a826-b4ca56699e5d.png",
+    "path": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-1ac2253c-0ed3-4525-8677-50a8a8ffe2b6.png",
+    "foreground_branch": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-85aada08-8b9c-4e92-82a6-4eb5a538ca19.png",
+    "haystack": "/Users/oreocookie03/.codex/generated_images/01a12040-36f7-71f0-99ea-8f2602d3a08f/exec-bbd7369b-d6f5-4c42-98cc-afcb1aced254.png"
+  },
+  "postprocessing": "build_kit.py: alpha-preserving resize, art-directed canopy masks from identical prop pixels, deterministic black alpha shadows, periodic ground tile finishing, assembled previews"
+}

@@ -69,6 +69,7 @@ export async function qaBoot(): Promise<boolean> {
   if (q.get('art') === 'a') s.settings.heroArt = 'rig'; // &art=a: assembled heroes, &art=c: pixel heroes (A/B/C check)
   if (q.get('art') === 'c') s.settings.heroArt = 'pixel';
   if (q.get('art') === 'd') s.settings.heroArt = 'pixel2';
+  if (q.get('bg') === 'hd') s.settings.bgArt = 'hd'; // &bg=hd: layered 2.5D field kit
   game.qa = true;
   game.begin(s, true);
   // ?panel=<legacy id> or ?page=<tab>&sub=<inner tab>, ?sel=<hero index>, ?band=closed

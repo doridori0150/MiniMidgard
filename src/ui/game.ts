@@ -7,6 +7,7 @@ import { applyOffline, type OfflineReport } from '../game/offline.ts';
 import { FieldRenderer } from '../render/field.ts';
 import { setWholeEnabled } from '../render/whole.ts';
 import { setPixelEnabled } from '../render/pixel.ts';
+import { setKitHd } from '../render/bg.ts';
 import { audio } from '../audio/audio.ts';
 import { zone } from '../game/data/zones.ts';
 import { Notifier } from './notify.ts';
@@ -96,6 +97,7 @@ class Game {
     this.s = s;
     setWholeEnabled(s.settings.heroArt !== 'rig');
     setPixelEnabled(s.settings.heroArt === 'pixel' || s.settings.heroArt === 'pixel2', s.settings.heroArt === 'pixel2' ? 'p2' : 'p3');
+    setKitHd(s.settings.bgArt === 'hd');
     if (!fresh) {
       const away = Date.now() - s.lastSave;
       const rep = applyOffline(s, away);

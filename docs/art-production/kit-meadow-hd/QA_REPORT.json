@@ -1,0 +1,267 @@
+{
+  "tiles": {
+    "grass": {
+      "size": [
+        512,
+        512
+      ],
+      "jpegEdgeMeanDifference": 1.614,
+      "interiorMeanDifference": 18.516
+    },
+    "dirt": {
+      "size": [
+        512,
+        512
+      ],
+      "jpegEdgeMeanDifference": 1.406,
+      "interiorMeanDifference": 9.465
+    },
+    "path": {
+      "size": [
+        512,
+        512
+      ],
+      "jpegEdgeMeanDifference": 1.435,
+      "interiorMeanDifference": 13.673
+    }
+  },
+  "props": {
+    "tree": {
+      "canvasPx": [
+        248,
+        234
+      ],
+      "anchorPx": [
+        124,
+        232
+      ],
+      "shadowCoreAlpha": 0.486,
+      "shadowCentroidPx": [
+        167.42,
+        266.39
+      ]
+    },
+    "pine": {
+      "canvasPx": [
+        190,
+        262
+      ],
+      "anchorPx": [
+        95,
+        260
+      ],
+      "shadowCoreAlpha": 0.486,
+      "shadowCentroidPx": [
+        138.67,
+        294.99
+      ]
+    },
+    "bush": {
+      "canvasPx": [
+        98,
+        73
+      ],
+      "anchorPx": [
+        49,
+        71
+      ],
+      "shadowCoreAlpha": 0.486,
+      "shadowCentroidPx": [
+        60.92,
+        80.17
+      ]
+    },
+    "rock": {
+      "canvasPx": [
+        66,
+        61
+      ],
+      "anchorPx": [
+        33,
+        59
+      ],
+      "shadowCoreAlpha": 0.486,
+      "shadowCentroidPx": [
+        43.04,
+        66.6
+      ]
+    },
+    "flowers": {
+      "canvasPx": [
+        44,
+        41
+      ],
+      "anchorPx": [
+        22,
+        39
+      ],
+      "shadowCoreAlpha": 0.486,
+      "shadowCentroidPx": [
+        27.19,
+        43.63
+      ]
+    },
+    "stump": {
+      "canvasPx": [
+        74,
+        59
+      ],
+      "anchorPx": [
+        37,
+        57
+      ],
+      "shadowCoreAlpha": 0.486,
+      "shadowCentroidPx": [
+        47.88,
+        64.99
+      ]
+    },
+    "fence": {
+      "canvasPx": [
+        142,
+        68
+      ],
+      "anchorPx": [
+        71,
+        66
+      ],
+      "shadowCoreAlpha": 0.486,
+      "shadowCentroidPx": [
+        82.58,
+        74.45
+      ]
+    },
+    "sign": {
+      "canvasPx": [
+        104,
+        105
+      ],
+      "anchorPx": [
+        52,
+        103
+      ],
+      "shadowCoreAlpha": 0.486,
+      "shadowCentroidPx": [
+        68.79,
+        118.59
+      ]
+    },
+    "well": {
+      "canvasPx": [
+        130,
+        142
+      ],
+      "anchorPx": [
+        65,
+        140
+      ],
+      "shadowCoreAlpha": 0.486,
+      "shadowCentroidPx": [
+        86.24,
+        159.26
+      ]
+    },
+    "cart": {
+      "canvasPx": [
+        114,
+        96
+      ],
+      "anchorPx": [
+        57,
+        94
+      ],
+      "shadowCoreAlpha": 0.486,
+      "shadowCentroidPx": [
+        88.05,
+        107.52
+      ]
+    },
+    "haystack": {
+      "canvasPx": [
+        84,
+        82
+      ],
+      "anchorPx": [
+        42,
+        80
+      ],
+      "shadowCoreAlpha": 0.486,
+      "shadowCentroidPx": [
+        55.25,
+        89.92
+      ]
+    }
+  },
+  "canopies": {
+    "tree": {
+      "sameCanvas": true,
+      "retainedPixelsIdentical": true,
+      "noAlphaOutsideProp": true
+    },
+    "pine": {
+      "sameCanvas": true,
+      "retainedPixelsIdentical": true,
+      "noAlphaOutsideProp": true
+    }
+  },
+  "previews": {
+    "field": [
+      390,
+      844
+    ],
+    "sheet": [
+      1200,
+      1050
+    ]
+  },
+  "passed": true,
+  "sourceSha256": {
+    "fence.png": "da495e634c26d8912592b1a4bf64571996fe0c112dee029c3184019fd249ea44",
+    "cart.png": "0a6318bd00caaab0cb0ca8846ea90319d6bcf73c16a5078ea374214e926c5591",
+    "dirt.png": "28678284f6f22c545e80f9647c3c83b09d4bd86555009bd35446fdd69a92fb8f",
+    "flowers.png": "cae2177718eac0f102f277597c6946bc4fed970f39fd78db37e44e36af1a7c56",
+    "stump.png": "9b4fee60b1ff54cc194b77b5c839a513e151b99edda03675e7555e21fb0ce775",
+    "rock.png": "73b5095f0f18ae865251497a65479ad5d6c0e518cd47e713788973885e448e9f",
+    "path.png": "2ebb05873f0b4676b8a0a7282b24e1c900f7b4e9886bd48d9705010fcf952e33",
+    "haystack.png": "ce370fd10fd2e9c9121c187351554dafc48479b76e8e34557af9f577cc0fc2a7",
+    "sign.png": "0e0d4fec8f26fde5d31036fe6bb7c55b2aa1535f04186af7ec9434a21ee4023c",
+    "well.png": "95cb7dc599783224f388f971c868b6e87ed9e9f1e1c68acbdd6a0eb8ad73d463",
+    "grass.png": "923b489ff919496a0bdf1515a655402932c070a16ec48d79f7f8a58b91c90ead",
+    "foreground_branch.png": "2e45d1a204a7b7591e39cf3d5e2257c32905516882bd55f3164eb10fce8107a0",
+    "tree.png": "c43ba6dc63b6a6d9fbd0bebe1cc11d7863834f63b65e53b954230ea1d3c92da8",
+    "pine.png": "c2a973bcc86b8fdd2c57cd1a5529e1645579cc319cd64c3fb2833427fb8bc9c1",
+    "bush.png": "1be8934abe2872c9c5fc070a0fb5a8b41fa51ce6b3ece490352b244b1913ee58"
+  },
+  "sha256": {
+    "fence.png": "626b5a1535a40db3d8351cf1d3f342d543acdfcf0705b53421b5e1123d24b522",
+    "bush_shadow.png": "29febc6c95c8efd795e61c62ad26f50948dcf0a6c548a01a363ada2cb029dbd6",
+    "haystack_shadow.png": "9f4d5ebe96d3c733176de46aa1e5ac5e950d8923c2e7e8b6b71b8c1866b15c8f",
+    "well_shadow.png": "9cfe6151f110b0c9ace534350668bd51427038dbca31fcb5671aa7a246613281",
+    "cart.png": "860eab412a0bdb21cecc6607ed29db919199a1e9432b5305b09a0b8f68c443b4",
+    "dirt.jpg": "f35f9a6c4b1147f1c1902324924209dc7a203658cac8ebef4a3a4bd1aa29fd1e",
+    "flowers.png": "5d331e032a194584f16eaec0d04b64b9c4c16c1279dc87f32e5f796001a5b1ef",
+    "tree_shadow.png": "1ae287d8bab2b3c420f900aa90e5dcda26448d1753c965281ced044afb1b1f07",
+    "pine_shadow.png": "279113399b073defa3e02a04c185516a632b3641f3e52924ef2ef99eaa390fa6",
+    "stump.png": "52bb9d522cb90bd2fb0c5f151715a633200fa557d7654ea4a2d47b087a82a5d0",
+    "pine_top.png": "7ee39a3c767b907c66a166be2b93edc4a4cd37fe95d88f2e59f956982901f364",
+    "cart_shadow.png": "d3ad1bdd31c614f714d12329df219666fe35f9c4ec53b3d0bceb78133380d3eb",
+    "rock.png": "c226d6ce6e61026084163bb4678ae8e41828eea0b94bcfe8b1866eddbf41fc11",
+    "tree_top.png": "58568a113f83fcd0e0cb4d1eef241252aadfc3a863e6f54c42f0ad075a1fd23e",
+    "haystack.png": "54a3a9ffd07c27aeceac1e5b241bf6f98143e974568aab8a02320a5b0a910403",
+    "path.jpg": "850ee71b8c8f565d28c5b4497a6051c1611264369b25051ae814d55f5d39cf35",
+    "sign.png": "436a4ce688b849ebb609f9dfb37642c99ac1deee311ccb1aa099f16da08e8d5f",
+    "well.png": "0aaf5f9b8137eff1651347b1092386a527cf33b4986567b172199676cab2e81b",
+    "grass.jpg": "9f3afecb77054c484f5a045e81796c6bde91363f830c340fcebe50c11a9049dd",
+    "foreground_branch.png": "d564ca6fc577f52c990bbbf13df8eeffdad3169567e3102a54ed65654c77b891",
+    "rock_shadow.png": "394e6641b2e261df45b05ace82010df98a0604184c471eedfb3aeb4821187ae5",
+    "tree.png": "37ff2ca7bfce57d74b2df49878047df775cd143978ed3248869520238629dd32",
+    "pine.png": "423c0cee17d9656f0abc6bb753f361db5e8a861bb54a018074de8acf530fec27",
+    "preview_field.png": "8f0c1cfade88d6914a4456dd75ba3bd7db9c0bee09b17d2d27da871f10f4f35e",
+    "preview_sheet.png": "c1e9ae3370f1eab03ff1f35ef5db528481b774351a735872bee7d41804862b81",
+    "fence_shadow.png": "e5053936597324e31644938e5713d717dc3617a9f701274b3f02f81ac66eb23f",
+    "sign_shadow.png": "42ad3bb99a89e4261f48e2c5e0707ddd8502f6f2da80d84706762de6034725c9",
+    "flowers_shadow.png": "8b892c669bd1c5841447c616bdc9a7c5b88f8151e4e77d357b1c60ac53010ccb",
+    "stump_shadow.png": "957eff4a1e012e210a1436272e3758241a9e8f8674d70ba85444c51eabd5f9b9",
+    "bush.png": "d99435196892eb7791d2d68faa7d801501ab8562e0ec64fa37731f127baf8979"
+  }
+}

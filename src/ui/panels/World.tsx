@@ -10,6 +10,7 @@ import { ITEMS, SHOPS } from '../../game/data/items.ts';
 import { CLASSES } from '../../game/data/classes.ts';
 import { setWholeEnabled, wholeCharacters } from '../../render/whole.ts';
 import { setPixelEnabled, pixelCharacters } from '../../render/pixel.ts';
+import { setKitHd } from '../../render/bg.ts';
 
 const artList = (cs: { cls: string; gender: string }[]) => cs.map((c) => `${CLASSES[c.cls as keyof typeof CLASSES]?.name ?? c.cls}(${c.gender === 'm' ? '남' : '여'})`).join(' · ');
 import { NPC_LOOKS } from '../../render/field.ts';
@@ -316,6 +317,7 @@ export function SettingsPanel() {
           {Sw('CRT 모니터 필터', st.crt !== false, () => { st.crt = st.crt === false; })}
           {Sw('저전력 모드 (30fps, 발열 감소)', !!st.powerSave, () => { st.powerSave = !st.powerSave; })}
           {Sw('도트 모드 (레트로 픽셀)', !!st.pixel, () => { st.pixel = !st.pixel; if (g.renderer) { g.renderer.pixelMode = !!st.pixel; g.renderer.resize(); } })}
+          {Sw('배경 2.5D (시험, 햇살 평원)', st.bgArt === 'hd', () => { st.bgArt = st.bgArt === 'hd' ? undefined : 'hd'; setKitHd(st.bgArt === 'hd'); })}
           <div class="row" style={{ margin: '8px 0 4px' }}><span>캐릭터 그림</span></div>
           <div class="tabs">
             {([['rig', 'A 조립형'], [undefined, 'B 통짜'], ['pixel', 'C 도트 3~4등신'], ['pixel2', 'D 도트 2등신']] as const).map(([v, label]) => (

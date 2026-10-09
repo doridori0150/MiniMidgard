@@ -4,9 +4,17 @@ import { shade, rgba } from './color.ts';
 
 // ───── image kits: painted ground tiles + props per theme (src/assets/kits/<theme>/), used when loaded
 const KIT_FILES = import.meta.glob('../assets/kits/*/*.{png,jpg}', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
-interface Kit { tiles: Record<string, HTMLImageElement>; props: Record<string, HTMLImageElement> }
+/** 2.5D kits (`<theme>_hd`, docs/art/BG_BRIEF_R3.md) carry anchors per prop and a colour grade */
+interface KitAnchor { canvasPx: [number, number]; anchorPx: [number, number] }
+interface KitManifest { tileWorldScale?: number; props: Record<string, KitAnchor & { worldHeight: number; drawScale: number; shadow?: KitAnchor & { file: string } }> }
+export interface KitGrade { shadowTint?: string; lightTint?: string; saturation?: number; vignette?: number }
+const KIT_JSON = import.meta.glob('../assets/kits/*/{manifest,grade}.json', { eager: true, import: 'default' }) as Record<string, unknown>;
+interface Kit { name: string; tiles: Record<string, HTMLImageElement>; props: Record<string, HTMLImageElement>; hd?: KitManifest; grade?: KitGrade }
 const kits = new Map<string, Kit>();
 let kitVer = 0;
+/** 설정 → 배경 2.5D (시험): themes with a `<theme>_hd` kit use it */
+let hdOn = false;
+export function setKitHd(on: boolean) { if (hdOn !== on) { hdOn = on; kitVer++; } }
 /** bumps whenever a kit finishes loading, so the field rebuilds its pre-rendered ground */
 export function kitVersion() { return kitVer; }
 /** world-unit heights of kit props (a hero is ~72 tall) */
@@ -26,22 +34,35 @@ export function loadKits(): Promise<void> {
     const m = path.match(/kits\/([^/]+)\/([^/.]+)\.(png|jpg)$/);
     if (!m) continue;
     const [, theme, name] = m;
-    const kit = kits.get(theme) ?? { tiles: {}, props: {} };
+    const kit = kits.get(theme) ?? { name: theme, tiles: {}, props: {} };
     kits.set(theme, kit);
     const img = new Image();
     img.src = url;
-    const bag = name === 'grass' || name === 'dirt' ? kit.tiles : kit.props;
+    const bag = name === 'grass' || name === 'dirt' || name === 'path' ? kit.tiles : kit.props;
     jobs.push(img.decode().then(() => { bag[name] = img; }, () => {}));
+  }
+  for (const [path, json] of Object.entries(KIT_JSON)) {
+    const m = path.match(/kits\/([^/]+)\/(manifest|grade)\.json$/);
+    const kit = m && kits.get(m[1]);
+    if (!kit) continue;
+    if (m[2] === 'manifest') kit.hd = json as KitManifest; else kit.grade = json as KitGrade;
   }
   return Promise.all(jobs).then(() => { kitVer++; });
 }
 export function kitFor(theme: string): Kit | undefined {
+  const hd = hdOn ? kits.get(theme + '_hd') : undefined;
+  if (hd && hd.tiles.grass && hd.hd) return hd;
   const k = kits.get(theme);
   return k && k.tiles.grass ? k : undefined;
 }
+/** colour grade and foreground branch of the kit a zone theme is drawn with now (2.5D kits only) */
+export function kitLook(theme: string): { grade: KitGrade; branch?: HTMLImageElement } | undefined {
+  const k = kitFor(theme);
+  return k?.hd && k.grade ? { grade: k.grade, branch: k.props.foreground_branch } : undefined;
+}
 /** occlusion box of a kit-drawn prop (for the see-through fade), or null for code-drawn props */
 export function kitPropBox(p: Prop): { r: number; h: number } | null {
-  const h = p.kit ? KIT_PROP_H[p.kind] : undefined;
+  const h = p.kit ? kits.get(p.kit)?.hd?.props[p.kind]?.worldHeight ?? KIT_PROP_H[p.kind] : undefined;
   return h ? { r: h * 0.3 * p.s, h: h * 0.9 * p.s } : null;
 }
 
@@ -99,8 +120,17 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
     // pond
     const px = W * 0.74, py = H * 0.28;
     ctx.save(); ctx.translate(px, py);
+    if (kit?.hd) {
+      // soft lit water: damp bank, depth gradient, a highlight along the far edge (no ink outline)
+      const bank = ctx.createRadialGradient(0, 0, 60, 0, 0, 92); bank.addColorStop(0, 'rgba(70,60,35,0.55)'); bank.addColorStop(1, 'rgba(70,60,35,0)');
+      ctx.fillStyle = bank; ctx.beginPath(); ctx.ellipse(0, 0, 92, 52, 0.1, 0, Math.PI * 2); ctx.fill();
+      const wg = ctx.createRadialGradient(-18, -14, 6, 0, 0, 82); wg.addColorStop(0, '#7fb7bd'); wg.addColorStop(0.6, '#4d8a95'); wg.addColorStop(1, '#2f5f6c');
+      ctx.fillStyle = wg; ctx.beginPath(); ctx.ellipse(0, 0, 76, 40, 0.1, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = 'rgba(255,250,225,0.35)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(0, 0, 74, 38, 0.1, Math.PI * 1.05, Math.PI * 1.75); ctx.stroke();
+    } else {
     ctx.fillStyle = kit ? '#d9c9a0' : '#c8b88a'; ctx.beginPath(); ctx.ellipse(0, 0, 84, 46, 0.1, 0, Math.PI * 2); ctx.fill();
-    if (kit) {
+    }
+    if (kit?.hd) { /* drawn above */ } else if (kit) {
       // flat cartoon water with an ink outline, like the painted props
       ctx.fillStyle = '#8fcfe6'; ctx.strokeStyle = '#4a3a2a'; ctx.lineWidth = 2.2;
       ctx.beginPath(); ctx.ellipse(0, 0, 76, 40, 0.1, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
@@ -118,7 +148,11 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
     // dirt road
     const road = () => { ctx.beginPath(); ctx.moveTo(-20, H * 0.62); ctx.bezierCurveTo(W * 0.25, H * 0.45, W * 0.45, H * 0.78, W * 0.62, H * 0.6); ctx.bezierCurveTo(W * 0.78, H * 0.45, W * 0.9, H * 0.7, W + 20, H * 0.55); };
     ctx.lineCap = 'round';
-    if (kit) {
+    if (kit?.hd) {
+      // feathered packed-earth road: a faint wide pass, then the core
+      ctx.globalAlpha = 0.45; road(); ctx.strokeStyle = kitPattern(ctx, kit.tiles.dirt); ctx.lineWidth = 62; ctx.stroke();
+      ctx.globalAlpha = 1; road(); ctx.lineWidth = 46; ctx.stroke();
+    } else if (kit) {
       road(); ctx.strokeStyle = 'rgba(150,120,70,0.25)'; ctx.lineWidth = 54; ctx.stroke();
       road(); ctx.strokeStyle = kitPattern(ctx, kit.tiles.dirt); ctx.lineWidth = 48; ctx.stroke();
     } else {
@@ -142,7 +176,8 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
       }
     }
     for (let i = 0; i < (kit ? 0 : 40); i++) { ctx.fillStyle = rgba('#8a8070', 0.6); ctx.beginPath(); ctx.ellipse(R() * W, R() * H, 2 + R() * 2, 1.4, 0, 0, Math.PI * 2); ctx.fill(); }
-    edgeProps('tree', 34, 70, 3);
+    // the 2.5D trees are full crowns about twice as wide as the cartoon ones: fewer at the edges, mixed with pines
+    if (kit?.hd) { edgeProps('tree', 14, 60, 3, 0.85, 1.05); edgeProps('pine', 8, 60, 2, 0.85, 1.05); } else edgeProps('tree', 34, 70, 3);
     const roadY = (x: number) => {
       // rough sample of the bezier road so props avoid it
       const t = Math.max(0, Math.min(1, x / W));
@@ -157,7 +192,7 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
         i++;
       }
     };
-    place(6, 'tree', 3, 0.9, 1.2, 120);
+    place(kit?.hd ? 3 : 6, 'tree', 3, 0.9, 1.2, 120);
     place(18, 'bush', 3, 0.7, 1.2);
     place(10, 'rock', 3, 0.6, 1.2);
     props.push({ x: 90, y: H * 0.6 - 30, kind: 'sign', v: 0, s: 1 });
@@ -166,7 +201,8 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
       for (let i = 0; i < 3; i++) props.push({ x: W * 0.3 + i * 48, y: H * 0.2, kind: 'fence', v: i, s: 1 });
       place(12, 'flowers', 2, 0.8, 1.2);
       place(4, 'stump', 2, 0.85, 1.1);
-      place(3, 'pine', 2, 0.85, 1.05, 120);
+      if (!kit.hd) place(3, 'pine', 2, 0.85, 1.05, 120);
+      if (kit.hd) { place(1, 'well', 1, 1, 1, 160); place(2, 'cart', 1, 0.95, 1.05); place(3, 'haystack', 1, 0.9, 1.1); }
     } else for (let i = 0; i < 5; i++) props.push({ x: W * 0.3 + i * 22, y: H * 0.2, kind: 'fence', v: 0, s: 1 });
   } else if (z.theme === 'forest') {
     ctx.fillStyle = '#4f8a3a'; ctx.fillRect(0, 0, W, H);
@@ -306,13 +342,22 @@ export function buildZoneArt(z: ZoneDef, hiDpi: boolean): ZoneArt {
     for (let i = 0; i < 6; i++) props.push({ x: R() < 0.5 ? 30 : W - 30, y: 200 + R() * (H - 260), kind: 'tree', v: Math.floor(R() * 3), s: 1 });
     props.push({ x: 110, y: H * 0.58, kind: 'flag', v: 0, s: 1 }, { x: W - 110, y: H * 0.58, kind: 'flag', v: 1, s: 1 });
   }
+  if (kit) for (const p of props) if (kit.props[p.kind]) p.kit = kit.name;
+  if (kit?.hd) {
+    // 2.5D kits: each prop's soft cast shadow is baked into the ground at the prop's foot (lit from the upper left)
+    for (const p of props) {
+      const a = kit.hd.props[p.kind], sh = a?.shadow && kit.props[p.kind + '_shadow'];
+      if (!a?.shadow || !sh) continue;
+      const k = a.drawScale * p.s;
+      ctx.drawImage(sh, p.x - a.shadow.anchorPx[0] * k, p.y - a.shadow.anchorPx[1] * k, a.shadow.canvasPx[0] * k, a.shadow.canvasPx[1] * k);
+    }
+  }
   // dark rim so the border reads as "edge of map"
   const rim = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.4, W / 2, H / 2, Math.max(W, H) * 0.75);
   rim.addColorStop(0, 'rgba(0,0,0,0)');
   rim.addColorStop(1, z.theme === 'cave' ? 'rgba(0,0,0,0.6)' : z.theme === 'desert' ? 'rgba(90,50,10,0.3)' : z.theme === 'snow' ? 'rgba(40,70,120,0.25)' : 'rgba(10,30,10,0.35)');
   ctx.fillStyle = rim; ctx.fillRect(0, 0, W, H);
   props.sort((a, b) => a.y - b.y);
-  if (kit) for (const p of props) if (kit.props[p.kind]) p.kit = z.theme;
   // a map's own mood over the shared theme (e.g. a grey quarry on desert sand, a darker lower floor)
   if (z.tint) { ctx.setTransform(scale, 0, 0, scale, 0, 0); ctx.globalAlpha = 0.28; ctx.fillStyle = z.tint; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1; }
   return { ground: c, scale, props, lights, theme: z.theme };
@@ -368,7 +413,19 @@ function drawPine(ctx: CanvasRenderingContext2D, v: number) {
 }
 
 export function drawProp(ctx: CanvasRenderingContext2D, p: Prop, t: number) {
-  const kimg = p.kit ? kits.get(p.kit)?.props[p.kind] : undefined;
+  const kit = p.kit ? kits.get(p.kit) : undefined;
+  const kimg = kit?.props[p.kind];
+  const anchor = kit?.hd?.props[p.kind];
+  if (kimg && anchor) {
+    // 2.5D kit prop: lit from the upper left, so never mirrored; its shadow is already in the ground
+    const k = anchor.drawScale * p.s;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    if (p.kind === 'tree' || p.kind === 'pine') ctx.rotate(Math.sin(t / 1600 + p.x) * 0.008);
+    ctx.drawImage(kimg, -anchor.anchorPx[0] * k, -anchor.anchorPx[1] * k, anchor.canvasPx[0] * k, anchor.canvasPx[1] * k);
+    ctx.restore();
+    return;
+  }
   if (kimg) {
     // painted prop: ground contact at the bottom centre, a soft contact shadow, mirrored variants
     const h = KIT_PROP_H[p.kind] * p.s, w = kimg.width * h / kimg.height;

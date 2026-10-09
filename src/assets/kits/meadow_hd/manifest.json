@@ -1,0 +1,318 @@
+{
+  "pixelsPerWorldUnit": 2.3,
+  "tileWorldScale": 0.55,
+  "lightFrom": "upper-left",
+  "shadowToward": "lower-right",
+  "camera": "orthographic high three-quarter, approximately 45 degrees",
+  "anchorRule": "Place each file at worldFoot - anchorPx * drawScale. Do not recenter shadow canvases.",
+  "props": {
+    "tree": {
+      "worldHeight": 100,
+      "visibleHeightPx": 230,
+      "canvasPx": [
+        248,
+        234
+      ],
+      "anchorPx": [
+        124,
+        232
+      ],
+      "drawScale": 0.4347826086956522,
+      "file": "tree.png",
+      "shadow": {
+        "file": "tree_shadow.png",
+        "canvasPx": [
+          402,
+          361
+        ],
+        "anchorPx": [
+          124,
+          232
+        ],
+        "coreAlpha": 0.49
+      },
+      "canopy": {
+        "file": "tree_top.png",
+        "canvasPx": [
+          248,
+          234
+        ],
+        "anchorPx": [
+          124,
+          232
+        ]
+      }
+    },
+    "pine": {
+      "worldHeight": 112,
+      "visibleHeightPx": 258,
+      "canvasPx": [
+        190,
+        262
+      ],
+      "anchorPx": [
+        95,
+        260
+      ],
+      "drawScale": 0.4347826086956522,
+      "file": "pine.png",
+      "shadow": {
+        "file": "pine_shadow.png",
+        "canvasPx": [
+          361,
+          402
+        ],
+        "anchorPx": [
+          95,
+          260
+        ],
+        "coreAlpha": 0.49
+      },
+      "canopy": {
+        "file": "pine_top.png",
+        "canvasPx": [
+          190,
+          262
+        ],
+        "anchorPx": [
+          95,
+          260
+        ]
+      }
+    },
+    "bush": {
+      "worldHeight": 30,
+      "visibleHeightPx": 69,
+      "canvasPx": [
+        98,
+        73
+      ],
+      "anchorPx": [
+        49,
+        71
+      ],
+      "drawScale": 0.4347826086956522,
+      "file": "bush.png",
+      "shadow": {
+        "file": "bush_shadow.png",
+        "canvasPx": [
+          156,
+          123
+        ],
+        "anchorPx": [
+          49,
+          71
+        ],
+        "coreAlpha": 0.49
+      }
+    },
+    "rock": {
+      "worldHeight": 25,
+      "visibleHeightPx": 57,
+      "canvasPx": [
+        66,
+        61
+      ],
+      "anchorPx": [
+        33,
+        59
+      ],
+      "drawScale": 0.4347826086956522,
+      "file": "rock.png",
+      "shadow": {
+        "file": "rock_shadow.png",
+        "canvasPx": [
+          117,
+          105
+        ],
+        "anchorPx": [
+          33,
+          59
+        ],
+        "coreAlpha": 0.49
+      }
+    },
+    "flowers": {
+      "worldHeight": 16,
+      "visibleHeightPx": 37,
+      "canvasPx": [
+        44,
+        41
+      ],
+      "anchorPx": [
+        22,
+        39
+      ],
+      "drawScale": 0.4347826086956522,
+      "file": "flowers.png",
+      "shadow": {
+        "file": "flowers_shadow.png",
+        "canvasPx": [
+          83,
+          75
+        ],
+        "anchorPx": [
+          22,
+          39
+        ],
+        "coreAlpha": 0.49
+      }
+    },
+    "stump": {
+      "worldHeight": 24,
+      "visibleHeightPx": 55,
+      "canvasPx": [
+        74,
+        59
+      ],
+      "anchorPx": [
+        37,
+        57
+      ],
+      "drawScale": 0.4347826086956522,
+      "file": "stump.png",
+      "shadow": {
+        "file": "stump_shadow.png",
+        "canvasPx": [
+          123,
+          102
+        ],
+        "anchorPx": [
+          37,
+          57
+        ],
+        "coreAlpha": 0.49
+      }
+    },
+    "fence": {
+      "worldHeight": 28,
+      "visibleHeightPx": 64,
+      "canvasPx": [
+        142,
+        68
+      ],
+      "anchorPx": [
+        71,
+        66
+      ],
+      "drawScale": 0.4347826086956522,
+      "file": "fence.png",
+      "shadow": {
+        "file": "fence_shadow.png",
+        "canvasPx": [
+          197,
+          115
+        ],
+        "anchorPx": [
+          71,
+          66
+        ],
+        "coreAlpha": 0.49
+      }
+    },
+    "sign": {
+      "worldHeight": 44,
+      "visibleHeightPx": 101,
+      "canvasPx": [
+        104,
+        105
+      ],
+      "anchorPx": [
+        52,
+        103
+      ],
+      "drawScale": 0.4347826086956522,
+      "file": "sign.png",
+      "shadow": {
+        "file": "sign_shadow.png",
+        "canvasPx": [
+          181,
+          170
+        ],
+        "anchorPx": [
+          52,
+          103
+        ],
+        "coreAlpha": 0.49
+      }
+    },
+    "well": {
+      "worldHeight": 60,
+      "visibleHeightPx": 138,
+      "canvasPx": [
+        130,
+        142
+      ],
+      "anchorPx": [
+        65,
+        140
+      ],
+      "drawScale": 0.4347826086956522,
+      "file": "well.png",
+      "shadow": {
+        "file": "well_shadow.png",
+        "canvasPx": [
+          229,
+          225
+        ],
+        "anchorPx": [
+          65,
+          140
+        ],
+        "coreAlpha": 0.49
+      }
+    },
+    "cart": {
+      "worldHeight": 40,
+      "visibleHeightPx": 92,
+      "canvasPx": [
+        114,
+        96
+      ],
+      "anchorPx": [
+        57,
+        94
+      ],
+      "drawScale": 0.4347826086956522,
+      "file": "cart.png",
+      "shadow": {
+        "file": "cart_shadow.png",
+        "canvasPx": [
+          186,
+          157
+        ],
+        "anchorPx": [
+          57,
+          94
+        ],
+        "coreAlpha": 0.49
+      }
+    },
+    "haystack": {
+      "worldHeight": 34,
+      "visibleHeightPx": 78,
+      "canvasPx": [
+        84,
+        82
+      ],
+      "anchorPx": [
+        42,
+        80
+      ],
+      "drawScale": 0.4347826086956522,
+      "file": "haystack.png",
+      "shadow": {
+        "file": "haystack_shadow.png",
+        "canvasPx": [
+          147,
+          136
+        ],
+        "anchorPx": [
+          42,
+          80
+        ],
+        "coreAlpha": 0.49
+      }
+    }
+  }
+}

@@ -303,6 +303,8 @@ export interface Settings {
   /** hero art: 'rig' = the assembled parts renderer (A); absent = whole-figure sprites where a class×gender has them (B);
    *  'pixel' / 'pixel2' = pixel-art layered heroes about 3–4 / 2–2.5 heads tall where they exist (C / D, trial), else B */
   heroArt?: 'rig' | 'pixel' | 'pixel2';
+  /** field background: 'hd' = the layered 2.5D kits where a theme has one (trial) */
+  bgArt?: 'hd';
 }
 
 export interface GameState {

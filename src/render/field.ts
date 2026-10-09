@@ -2,7 +2,7 @@
 import type { World, FxEvent, HeroUnit, MobUnit, GroundItem, FieldChest } from '../game/world.ts';
 import { AFFIXES } from '../game/rift.ts';
 import type { Element, Hero, GameState } from '../game/types.ts';
-import { buildZoneArt, drawProp, kitPropBox, kitVersion, type ZoneArt, type Prop } from './bg.ts';
+import { buildZoneArt, drawProp, kitLook, kitPropBox, kitVersion, type KitGrade, type ZoneArt, type Prop } from './bg.ts';
 import { inked } from './ink.ts';
 import { drawRigHero, rigBounds, rigSupports } from './rig.ts';
 
@@ -1062,6 +1062,8 @@ export class FieldRenderer {
     if (art.theme === 'forest' && !this.lowFx) this.forestLight(ctx, nowMs);
     if (art.theme === 'snow' && !this.lowFx) this.snowfall(ctx, nowMs);
     if (art.theme === 'desert' && !this.lowFx) this.heat(ctx, nowMs);
+    const look = this.lowFx ? undefined : kitLook(art.theme);
+    if (look) this.gradeField(ctx, look.grade, look.branch, nowMs);
 
     // overhead UI in screen space
     ctx.setTransform(this.dpr, 0, 0, this.dpr, sx * this.dpr, sy * this.dpr);
@@ -1076,6 +1078,33 @@ export class FieldRenderer {
       ctx.fillStyle = 'rgba(30,0,0,0.35)';
       ctx.fillRect(0, 0, this.cssW, this.cssH);
     }
+  }
+
+  /** 2.5D kits: sunlight from the upper left, a cool shadow tint, slight desaturation, vignette, a soft foreground branch */
+  private gradeField(ctx: CanvasRenderingContext2D, g: KitGrade, branch: HTMLImageElement | undefined, now: number) {
+    const W = this.cssW, H = this.cssH;
+    ctx.save();
+    ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    if (g.shadowTint) { ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.1; ctx.fillStyle = g.shadowTint; ctx.fillRect(0, 0, W, H); }
+    if (g.lightTint) {
+      const sun = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.hypot(W, H) * 0.8);
+      sun.addColorStop(0, rgba(g.lightTint, 0.5)); sun.addColorStop(1, rgba(g.lightTint, 0));
+      ctx.globalCompositeOperation = 'soft-light'; ctx.globalAlpha = 0.6; ctx.fillStyle = sun; ctx.fillRect(0, 0, W, H);
+    }
+    if (g.saturation !== undefined && g.saturation < 1) { ctx.globalCompositeOperation = 'saturation'; ctx.globalAlpha = 1 - g.saturation; ctx.fillStyle = '#808080'; ctx.fillRect(0, 0, W, H); }
+    ctx.globalCompositeOperation = 'source-over';
+    if (g.vignette) {
+      const v = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.35, W / 2, H / 2, Math.hypot(W, H) * 0.6);
+      v.addColorStop(0, 'rgba(10,14,20,0)'); v.addColorStop(1, `rgba(10,14,20,${g.vignette * 2})`);
+      ctx.globalAlpha = 1; ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+    }
+    if (branch) {
+      // out-of-focus leaves hanging into the top-left corner, swaying a little
+      const bw = Math.min(300, W * 0.7), bh = bw * branch.height / branch.width;
+      ctx.globalAlpha = 0.92; ctx.translate(-bw * 0.12, 40); ctx.rotate(Math.sin(now / 2300) * 0.012);
+      ctx.drawImage(branch, 0, -bh * 0.2, bw, bh);
+    }
+    ctx.restore();
   }
 
   private runEffects(ctx: CanvasRenderingContext2D, layer: Effect['layer']) {
