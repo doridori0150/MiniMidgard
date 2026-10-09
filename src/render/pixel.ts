@@ -17,6 +17,7 @@ interface Manifest {
     /** standing height in art pixels (proportion variants differ); falls back to canvas.bodyHeight */
     bodyHeight?: number;
     animations?: Manifest['animations'];
+    hairStyles?: string[];
   }>;
   hair: Record<string, { gender?: string; pivot?: V2; poses: Record<string, { front?: string; back?: string; pivot?: V2 }> }>;
   weapons: Record<string, { frames: Record<string, Record<string, string>> }>;
@@ -37,7 +38,7 @@ const HEIGHT = 76;
 /** game weapon → pixel weapon set; null = empty-handed; missing = no pixel art for it yet (another renderer draws) */
 const WEAPON: Partial<Record<WeaponType, string | null>> = { none: null, sword: 'sword', sword2h: 'sword' };
 /** look.hair (0..7) picks a style by index among the character's gender's styles, in this order */
-const STYLE_ORDER = ['ponytail', 'bob', 'long'];
+const STYLE_ORDER = ['ponytail', 'bob', 'long'].flatMap((n) => [n, n + '_p2', n + '_p3']);
 /* hair colours: the same per-colour multipliers the B sprites use over their cream hair (whole.ts HAIR_TINT), applied to the four cream keys */
 
 export function setPixelEnabled(on: boolean, v = '') { enabled = on; variant = v; }
@@ -72,8 +73,9 @@ export function pixelSupports(L: HeroLookDraw) {
   return !w || !!M!.weapons[w]?.frames[id];
 }
 
-function styleFor(L: HeroLookDraw, gender: string): string | undefined {
-  const names = Object.keys(M!.hair).filter((n) => !M!.hair[n].gender || M!.hair[n].gender === gender);
+function styleFor(L: HeroLookDraw, c: Manifest['characters'][string]): string | undefined {
+  // a character may list its own styles (proportion variants have their own hair pieces); else every style of its gender
+  const names = c.hairStyles?.filter((n) => M!.hair[n]) ?? Object.keys(M!.hair).filter((n) => !M!.hair[n].gender || M!.hair[n].gender === c.gender);
   names.sort((a, b) => (STYLE_ORDER.indexOf(a) + 99) % 99 - (STYLE_ORDER.indexOf(b) + 99) % 99);
   return names.length ? names[L.hair % names.length] : undefined;
 }
@@ -114,14 +116,21 @@ export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: 
   if (!pixelSupports(L)) return false;
   const id = character(L)!;
   const c = M!.characters[id];
-  const [state, t] = clip(pose);
-  const name = pickFrame(c.animations ?? M!.animations, state, t);
+  const table = c.animations ?? M!.animations;
+  let [state, t] = clip(pose);
+  if (state === 'attack' && table.attack) {
+    // the game swings in pose.dur with the hit at half of it; this art's hit is the 5th of 8 frames (MOTION_SPEC), so map half → its start
+    const a = table.attack, hit = a.frames.length >= 8 ? a.durations.slice(0, 4).reduce((x, y) => x + y, 0) : a.duration / 2;
+    t = pose.t / Math.max(1, pose.dur ?? 280) * 2 * hit;
+  }
+  if (state === 'dead') t = pose.t; // play the fall, then hold the last frame
+  const name = pickFrame(table, state, t);
   const f = c.frames[name];
   if (!f) return false;
   const w = WEAPON[L.wtype];
   const wfile = w ? M!.weapons[w].frames[id]?.[name] : undefined;
   const showW = !!wfile && f.weapon?.visible !== false;
-  const style = styleFor(L, c.gender);
+  const style = styleFor(L, c);
   const hp = style ? M!.hair[style].poses[f.head.pose] : undefined;
   const piv = hp?.pivot ?? (style ? M!.hair[style].pivot : undefined) ?? [0, 0];
   const hx = f.head.point[0] - piv[0], hy = f.head.point[1] - piv[1];
