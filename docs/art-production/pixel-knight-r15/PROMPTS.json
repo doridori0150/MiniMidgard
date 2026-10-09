@@ -1,0 +1,66 @@
+[
+  {
+    "frame": 0,
+    "prompt": "Use case: identity-preserve. Edit the provided original pixel knight to create ONLY ONE animation frame, attack_0 windup. Preserve exactly this character: huge cream blonde braided bob head, TWO-heads-tall chibi proportions, tiny silver plate armor body, teal cloak with gold edging, dark leggings, silver boots, small simple straight one-handed sword. Same right-facing three-quarter camera. Transparent background. Sharp square pixels, very low resolution pixel sprite enlarged with nearest-neighbor, NOT a detailed illustration. Keep face, costume and size identical. Change pose: stands with feet planted, torso slightly twisted away from target right. Pull the SAME visible near sword hand backwards across the near hip/chest so sword points toward upper LEFT BEHIND her, blade visible extending left behind shoulder. This is beginning of a powerful sweeping sword CUT, not a thrust. Free far hand tucked near torso. Sword in ONE same near hand, no extra weapons, no shield. No smear yet. Full body including sword, generous transparent margins. Match original head-to-body ratio exactly and head pixel design. Only one character one frame no text no panel.",
+    "reference": "r14/knight_idle_4x.png",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": 1,
+    "prompt": "Use case: identity-preserve. ONE next sequential animation frame, attack_1, editing image1 previous approved windup; image2 original design lock. Transparent. Exact SAME cream blonde braided bob TWO-head-tall pixel knight, silver armor, teal gold-edged cape, dark tights and silver boots. Preserve face, pixel size, one simple sword, right-facing 3/4 view. Previous sword is in the NEAR hand crossing in front of her chest, retain that anatomical hand. Now coil MORE: bend knees slightly, lower head by about two native pixels, weight back over left rear leg. Twist torso back, tuck the SAME sword hand slightly further left and closer to shoulder, sword extending backwards LEFT almost horizontal, partly behind hair. Shoulders turn but face still watches right target. Front foot on right takes a small step right, back heel anchored. Far empty hand near chest on right. No slash trail yet. This is a windup for a huge sweeping cut, not a forward thrust. Keep entire sprite and blade visible. One frame only, no words, no panels, clean crisp enlarged nearest-neighbor pixel clusters.",
+    "references": [
+      "sources/attack_0.png",
+      "../pixel-knight-r14/knight_idle_4x.png"
+    ]
+  },
+  {
+    "frame": 2,
+    "prompt": "Use case: identity-preserve. Create ONLY ONE next sequential attack frame attack_2 from previous coiled knight image1, original identity image2. Preserve identical huge cream blonde braided bob head, TWO-head tall tiny silver-armored knight, teal/gold cape, dark leggings silver boots, simple one-handed sword, right-facing three-quarter camera. Transparent background, crisp coarse square pixel clusters like original sprite enlarged. Motion: torso unwinds FORWARD RIGHT, right/front knee bends, rear left leg pushes back. Same NEAR sword hand has swept from left shoulder toward front of chest (never change hands). Sword cutting down-right. Add a MASSIVE broad opaque PALE SILVER / muted violet FAN-SHAPED SWORDBLADE SMEAR: a curved fan starts BEHIND LEFT shoulder high up, sweeps around left of body and across waist to FRONT RIGHT below chest. Wide wedge and curved outer rim, broad flat pixel-art sectors (not thin neon lines, not glow, not magical halo, not a whole circle). Back upper-left portion is dark muted lavender, forward lower-right blade edge silver-white. This is the first fast sweep frame, fan wraps partly behind body and partly in front across waist, face must remain completely visible. Body beginning a deep forward lunge, head down 3 original pixels relative to previous, cloak trails LEFT. Same near hand connects to actual sword at front of smear. One sprite no text no panels. Match head and design exactly; do not lengthen legs.",
+    "references": [
+      "sources/attack_1.png",
+      "../pixel-knight-r14/knight_idle_4x.png"
+    ]
+  },
+  {
+    "frame": 3,
+    "prompt": "Use case: identity-preserve. ONE next attack frame attack_3 HIT after previous image1 sweep. Image2 is immutable character design. Transparent. Keep SAME cream blonde braided bob TWO-head tall pixel knight, same face and silver armor and teal/gold cloak, same simple sword, same right-facing 3/4 view. CRISP low-resolution square pixel art enlarged. Continue previous movement, not a new pose from scratch: head and torso travel a little RIGHT and DOWN, front RIGHT knee deeply bent, rear LEFT leg stretched back, grounded feet, no jumping. Same NEAR sword arm reaches across body and down-right, sword gripped in same hand visible in front right of waist, short straight blade points diagonally DOWN-RIGHT. The HUGE broad fan-shaped sword smear now LANDS ahead of character at lower right: previous high-left tail has mostly vanished, retain a muted lavender curl at back-left waist then a broad silver/lavender filled WEDGE sweeping from near hand to far RIGHT and DOWN, outer curved edge white. Front edge must be farther right than previous; a single coherent flattened forward/lower fan, not a thin line, not magic, not an aura, no extra sword. Face fully clear, head same exact size. Cloak trails far LEFT, deep low forward stance. One character one frame no labels no panels.",
+    "references": [
+      "sources/attack_2.png",
+      "../pixel-knight-r14/knight_idle_4x.png"
+    ]
+  },
+  {
+    "frame": 4,
+    "prompt": "Use case: identity-preserve. One next sequential sprite attack_4 FOLLOW-THROUGH editing previous hit pose image1. Original immutable character image2. Keep exactly same TWO-head tall chibi knight identity, cream blonde braided bob, silver plate, teal cape with gold edges, small body, right-facing 3/4 camera, one simple short straight sword, same near hand. Transparent background, sharp low-res square pixel clusters enlarged. REMOVE the entire large fan-shaped slash smear: it has dissipated. Show the actual short sword, gold guard at the SAME near hand at front-right of waist, blade pointing diagonally down-right approximately 25 degrees, not reaching ground, blade length about 0.8 head height. Stay in DEEP LOW forward lunge: head and chest leaning forward-right, RIGHT knee deeply bent, rear LEFT leg stretched back with toe planted, no standing up yet. Near sword arm extended down-right, far empty arm bent close chest. Head same size; pose height lower than windup. Teal cape trailing left like previous, beginning to drop. Entire body and sword visible, one frame, no panels or text. Do not add a shield, long sword, effects or floating particles.",
+    "references": [
+      "sources/attack_3.png",
+      "../pixel-knight-r14/knight_idle_4x.png"
+    ]
+  },
+  {
+    "frame": 5,
+    "prompt": "Use case: identity-preserve. ONE next frame attack_5 HOLD/SETTLE. Edit image1 previous low-lunge follow-through extremely conservatively. Image2 original design. SAME two-head tall cream blonde braided-bob pixel knight, same exact face/head size, silver plate, teal and gold cape, same boots, same right-facing camera, same near hand holding same short sword down-right. Keep both feet EXACTLY at previous positions; keep same deep low lunge and same sword angle/hand position. Only SMALL secondary motion: settle torso one native pixel lower, cape behind LEFT droops toward ground a little after the swing, front knee remains deeply bent. Do NOT start standing, do NOT switch hands, do NOT step. No effects. Crisp coarse pixel art enlarged with nearest-neighbor look, transparent background. Full character with generous margins. One sprite one frame, no text or panels.",
+    "references": [
+      "sources/attack_4.png",
+      "../pixel-knight-r14/knight_idle_4x.png"
+    ]
+  },
+  {
+    "frame": 6,
+    "attempt": 1,
+    "rejected": true,
+    "prompt": "Use case: identity-preserve. ONE next frame attack_6 RECOVERY, after low held lunge in image1, returning toward exact idle posture of image2. Same TWO-head-tall chibi cream-blonde braided bob knight, same silver armor teal/gold cape tiny body face and short sword; right-facing three-quarter view, same near hand. Transparent, crisp square low-res pixel art enlarged. Lift torso part way upright, head moving BACK LEFT and UP slightly toward original idle. Bring front RIGHT foot part way back in, stance still slightly wider than idle, rear LEFT foot pushes body upright. Sword stays in SAME near hand now relaxed next to right-front hip, blade pointing DOWN-RIGHT exactly like original idle image2 (31 degrees). Far empty hand close chest. Cape falls closer behind left side. This is relaxed recovery from the sweep, no slash effects, no attack thrust, no jump. Head same size; full figure with transparent margins. Only one frame no text no panels. Match original image2 proportions/style as closely as possible.",
+    "references": [
+      "sources/attack_5.png",
+      "../pixel-knight-r14/knight_idle_4x.png"
+    ]
+  },
+  {
+    "frame": 6,
+    "attempt": 2,
+    "prompt": "Use case: identity-preserve. Carefully edit this SINGLE previous low-lunge pixel knight into the NEXT recovery frame. Keep identical face, cream braided bob, huge head/tiny TWO-head tall body, silver armor teal cape gold trim. Transparent pixel art. CRITICAL anatomical continuity: in this image the NEAR sword arm begins at the big silver shoulder on screen LEFT under hair, then crosses DIAGONALLY ACROSS THE FRONT OF THE TORSO to the one sword-holding hand on screen RIGHT. KEEP THIS EXACT ARM AND HAND CONNECTION, with elbow clearly visible and forearm crossing in front of abdomen to sword hilt. Do NOT lower a second empty near hand. The far empty hand remains tucked at chest behind crossing sword arm. Now lift torso and head up slightly, bring forward right foot halfway inward, keep feet grounded. Sword hand draws back closer to waist, still in front of body on RIGHT, sword still diagonally DOWN RIGHT. Same short blade. Cape hangs more downward behind left. Recovery only, not fully standing yet. Preserve all details and head proportions, no effects no text no panels. One frame. The SAME near shoulder-elbow-wrist-sword chain must read continuously across front of body; never switch weapon to far hand.",
+    "references": [
+      "sources/attack_5.png"
+    ]
+  }
+]

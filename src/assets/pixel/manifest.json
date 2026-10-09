@@ -948,18 +948,20 @@
             "attack_3",
             "attack_4",
             "attack_5",
-            "attack_6"
+            "attack_6",
+            "attack_7"
           ],
           "durations": [
-            80,
             90,
+            120,
+            60,
             40,
-            130,
+            60,
+            160,
             70,
-            70,
-            80
+            60
           ],
-          "duration": 560,
+          "duration": 660,
           "loop": false,
           "hitFrame": 3
         },
@@ -1332,14 +1334,14 @@
             "visible": true,
             "hand": "near",
             "gripPoint": [
-              68,
-              94
+              54,
+              91
             ],
             "tipPoint": [
-              89,
-              92
+              37,
+              79
             ],
-            "angleDegrees": -5.44
+            "angleDegrees": -144.78
           },
           "grip": "grips/knight_female_p2/attack_0.png"
         },
@@ -1358,14 +1360,14 @@
             "visible": true,
             "hand": "near",
             "gripPoint": [
-              67,
-              96
+              51,
+              89
             ],
             "tipPoint": [
-              88,
-              96
+              30,
+              85
             ],
-            "angleDegrees": 0
+            "angleDegrees": -169.22
           },
           "grip": "grips/knight_female_p2/attack_1.png"
         },
@@ -1384,14 +1386,14 @@
             "visible": true,
             "hand": "near",
             "gripPoint": [
-              76,
-              95
+              66,
+              96
             ],
             "tipPoint": [
-              97,
-              95
+              84,
+              106
             ],
-            "angleDegrees": 0
+            "angleDegrees": 29.05
           },
           "grip": "grips/knight_female_p2/attack_2.png"
         },
@@ -1410,14 +1412,14 @@
             "visible": true,
             "hand": "near",
             "gripPoint": [
-              82,
-              94
+              69,
+              99
             ],
             "tipPoint": [
-              103,
-              94
+              87,
+              110
             ],
-            "angleDegrees": 0
+            "angleDegrees": 31.43
           },
           "grip": "grips/knight_female_p2/attack_3.png"
         },
@@ -1436,14 +1438,14 @@
             "visible": true,
             "hand": "near",
             "gripPoint": [
-              70,
-              94
+              73,
+              103
             ],
             "tipPoint": [
-              91,
-              94
+              92,
+              113
             ],
-            "angleDegrees": 0
+            "angleDegrees": 27.76
           },
           "grip": "grips/knight_female_p2/attack_4.png"
         },
@@ -1463,13 +1465,13 @@
             "hand": "near",
             "gripPoint": [
               72,
-              98
+              103
             ],
             "tipPoint": [
-              91,
-              107
+              90,
+              113
             ],
-            "angleDegrees": 25.35
+            "angleDegrees": 29.05
           },
           "grip": "grips/knight_female_p2/attack_5.png"
         },
@@ -1670,6 +1672,32 @@
             "visible": true,
             "hand": "near",
             "gripPoint": [
+              69,
+              100
+            ],
+            "tipPoint": [
+              85,
+              114
+            ],
+            "angleDegrees": 41.19
+          },
+          "grip": "grips/knight_female_p2/attack_6.png"
+        },
+        "attack_7": {
+          "image": "body/knight_female_p2/attack_7.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_7",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
               72,
               100
             ],
@@ -1679,7 +1707,7 @@
             ],
             "angleDegrees": 31.43
           },
-          "grip": "grips/knight_female_p2/attack_6.png"
+          "grip": "grips/knight_female_p2/attack_7.png"
         }
       }
     }
@@ -2028,6 +2056,14 @@
             0,
             0
           ]
+        },
+        "attack_7": {
+          "front": "hair/braided_bob_p2/attack_7_front.png",
+          "back": "hair/braided_bob_p2/attack_7_back.png",
+          "pivot": [
+            0,
+            0
+          ]
         }
       }
     }
@@ -2088,7 +2124,8 @@
           "dead_2": "weapons/sword/knight_female_p2/dead_2.png",
           "dead_3": "weapons/sword/knight_female_p2/dead_3.png",
           "sit_0": "weapons/sword/knight_female_p2/sit_0.png",
-          "attack_6": "weapons/sword/knight_female_p2/attack_6.png"
+          "attack_6": "weapons/sword/knight_female_p2/attack_6.png",
+          "attack_7": "weapons/sword/knight_female_p2/attack_7.png"
         }
       }
     }
