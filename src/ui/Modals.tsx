@@ -223,14 +223,22 @@ function JobModal(props: { heroIdx: number }) {
   const base = heroLookDraw(g.s, h);
   const c = CLASSES[pick];
   const second = c.tier === 2;
-  const look = (j: ClassId) => ({ ...base, cls: j, wtype: WEAPON_OF[j] ?? base.wtype, shield: j === 'swordsman', refine: second ? 7 : 0 });
+  // a weapon the new job can still use stays in hand (a sword knight keeps the sword); otherwise show the job's usual weapon
+  const keeps = (j: ClassId) => base.wtype !== 'none' && CLASSES[j].weapons.includes(base.wtype);
+  const look = (j: ClassId) => ({ ...base, cls: j, wtype: keeps(j) ? base.wtype : WEAPON_OF[j] ?? base.wtype, shield: j === 'swordsman', refine: second ? 7 : 0 });
   const gifts = JOB_GIFTS[pick] ?? [];
   const confirm = () => {
+    const kept = keeps(pick);
     const err = jobChange(g.s, h, pick);
     if (err) { g.toast(err, 'bad'); return; }
     for (const gift of gifts) {
       const it = ITEMS[gift];
-      if (it.kind === 'equip') { const inst = addEquip(g.s, gift); equip(g.s, h, inst.uid); continue; }
+      if (it.kind === 'equip') {
+        const inst = addEquip(g.s, gift);
+        if (it.loc === 'weapon' && kept) g.toast(`${it.name}은(는) 가방에 넣었습니다. 쓰던 무기를 그대로 듭니다.`);
+        else equip(g.s, h, inst.uid);
+        continue;
+      }
       g.s.stacks[gift] = (g.s.stacks[gift] ?? 0) + (it.kind === 'ammo' ? 1 : 5);
       if (it.kind === 'ammo') equipAmmo(g.s, h, gift);
     }
