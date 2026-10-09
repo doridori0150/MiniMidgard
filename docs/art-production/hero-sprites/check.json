@@ -1,12 +1,12 @@
 {
   "manifest": "docs/art-production/hero-sprites/manifest.json",
   "spec": "asset-specs/hero-sprites.json",
-  "at": "2026-10-09T00:46:24.574Z",
+  "at": "2026-10-09T01:11:33.278Z",
   "totals": {
     "error": 0,
-    "warn": 5,
-    "ok": 648,
-    "info": 28
+    "warn": 1,
+    "ok": 647,
+    "info": 27
   },
   "missing": [],
   "excluded": [],
@@ -702,15 +702,6 @@
           "cause": "배율",
           "level": "info",
           "msg": "생성본을 최대 114%로 늘렸습니다(상한 125%)"
-        },
-        {
-          "key": "bodyHeight",
-          "cause": "배율",
-          "level": "warn",
-          "msg": "선 자세(1번) 높이 260px, 기준 310px (83.9%)",
-          "frames": [
-            1
-          ]
         },
         {
           "key": "pivot",
@@ -1562,12 +1553,6 @@
           "msg": "생성본을 최대 120.2%로 늘렸습니다(상한 125%)"
         },
         {
-          "key": "bodyHeight",
-          "cause": "배율",
-          "level": "ok",
-          "msg": "선 자세(1번) 높이 282px, 기준 310px (91%)"
-        },
-        {
           "key": "pivot",
           "cause": "기준점",
           "level": "ok",
@@ -2415,15 +2400,6 @@
           "cause": "배율",
           "level": "info",
           "msg": "생성본을 최대 115.2%로 늘렸습니다(상한 125%)"
-        },
-        {
-          "key": "bodyHeight",
-          "cause": "배율",
-          "level": "warn",
-          "msg": "선 자세(1번) 높이 261px, 기준 310px (84.2%)",
-          "frames": [
-            1
-          ]
         },
         {
           "key": "pivot",
@@ -4372,7 +4348,7 @@
           "key": "baseline",
           "cause": "기준점",
           "level": "ok",
-          "msg": "발 기준선 흔들림 0px (허용 12px)"
+          "msg": "발 기준선 흔들림 1px (허용 12px)"
         },
         {
           "key": "pivot",
@@ -4448,16 +4424,16 @@
         },
         {
           "bounds": [
-            122,
-            57,
-            322,
-            361
+            118,
+            60,
+            323,
+            362
           ],
           "foot": [
-            221,
-            360
+            216,
+            361
           ],
-          "height": 303,
+          "height": 301,
           "guardHits": 0
         },
         {
@@ -4511,13 +4487,13 @@
           "key": "commonScale",
           "cause": "배율",
           "level": "ok",
-          "msg": "공통 배율 105.9%"
+          "msg": "공통 배율 32.4%"
         },
         {
           "key": "upscale",
           "cause": "배율",
           "level": "info",
-          "msg": "생성본을 최대 105.9%로 늘렸습니다(상한 125%)"
+          "msg": "생성본을 최대 105.4%로 늘렸습니다(상한 125%)"
         },
         {
           "key": "bodyHeight",
@@ -4581,16 +4557,16 @@
       "frames": [
         {
           "bounds": [
-            100,
-            17,
-            340,
+            113,
+            50,
+            328,
             360
           ],
           "foot": [
-            220,
+            221,
             360
           ],
-          "height": 343,
+          "height": 309,
           "guardHits": 0
         },
         {
@@ -4878,22 +4854,7 @@
           "key": "commonScale",
           "cause": "배율",
           "level": "ok",
-          "msg": "공통 배율 125%"
-        },
-        {
-          "key": "upscale",
-          "cause": "배율",
-          "level": "info",
-          "msg": "생성본을 최대 125%로 늘렸습니다(상한 125%)"
-        },
-        {
-          "key": "bodyHeight",
-          "cause": "배율",
-          "level": "warn",
-          "msg": "선 자세(1번) 높이 250px, 기준 310px (80.6%)",
-          "frames": [
-            1
-          ]
+          "msg": "공통 배율 92%"
         },
         {
           "key": "pivot",
@@ -4941,16 +4902,16 @@
       "frames": [
         {
           "bounds": [
-            81,
-            110,
-            362,
+            92,
+            130,
+            351,
             360
           ],
           "foot": [
             220,
             360
           ],
-          "height": 250,
+          "height": 230,
           "guardHits": 0
         }
       ]
@@ -5228,7 +5189,7 @@
           "key": "baseline",
           "cause": "기준점",
           "level": "ok",
-          "msg": "발 기준선 흔들림 0px (허용 12px)"
+          "msg": "발 기준선 흔들림 1px (허용 12px)"
         },
         {
           "key": "pivot",
@@ -5304,16 +5265,16 @@
         },
         {
           "bounds": [
-            107,
-            58,
-            316,
-            360
+            113,
+            59,
+            328,
+            361
           ],
           "foot": [
-            223,
-            360
+            234,
+            361
           ],
-          "height": 302,
+          "height": 301,
           "guardHits": 0
         },
         {
@@ -5367,7 +5328,7 @@
           "key": "commonScale",
           "cause": "배율",
           "level": "ok",
-          "msg": "공통 배율 55%"
+          "msg": "공통 배율 96.3%"
         },
         {
           "key": "upscale",
@@ -5433,16 +5394,16 @@
       "frames": [
         {
           "bounds": [
-            98,
-            38,
-            336,
+            102,
+            50,
+            332,
             360
           ],
           "foot": [
             220,
             360
           ],
-          "height": 322,
+          "height": 310,
           "guardHits": 0
         },
         {
@@ -5737,15 +5698,6 @@
           "cause": "배율",
           "level": "info",
           "msg": "생성본을 최대 107.6%로 늘렸습니다(상한 125%)"
-        },
-        {
-          "key": "bodyHeight",
-          "cause": "배율",
-          "level": "warn",
-          "msg": "선 자세(1번) 높이 251px, 기준 310px (81%)",
-          "frames": [
-            1
-          ]
         },
         {
           "key": "pivot",

@@ -1,0 +1,220 @@
+{
+  "request": "docs/art-requests/hero-sprites-fix5.md",
+  "status": "PARTIAL_WITH_ART_REJECTIONS",
+  "updates": [
+    {
+      "id": "thief_male",
+      "frame": "hurt_0",
+      "method": "uniform-reduction",
+      "scale": 0.92,
+      "origin": [
+        220,
+        360
+      ],
+      "bounds": [
+        92,
+        130,
+        350,
+        360
+      ],
+      "beforeAnchors": {
+        "hand": {
+          "point": [
+            281.947,
+            331.721
+          ],
+          "angle": -48,
+          "z": "front",
+          "visible": true
+        },
+        "crown": {
+          "point": [
+            279.472,
+            176.424
+          ],
+          "angle": -15
+        },
+        "side": {
+          "point": [
+            326.76,
+            234.187
+          ],
+          "angle": -15
+        }
+      },
+      "afterAnchors": {
+        "hand": {
+          "point": [
+            276.991,
+            333.983
+          ],
+          "angle": -48,
+          "z": "front",
+          "visible": true
+        },
+        "crown": {
+          "point": [
+            274.714,
+            191.11
+          ],
+          "angle": -15
+        },
+        "side": {
+          "point": [
+            318.219,
+            244.252
+          ],
+          "angle": -15
+        }
+      }
+    },
+    {
+      "id": "merchant_female",
+      "frame": "attack_0",
+      "method": "uniform-reduction",
+      "scale": 0.9627329192546584,
+      "origin": [
+        220,
+        360
+      ],
+      "bounds": [
+        102,
+        50,
+        332,
+        360
+      ],
+      "beforeAnchors": {
+        "hand": {
+          "point": [
+            311.025,
+            144.4
+          ],
+          "angle": -110,
+          "z": "front",
+          "visible": true
+        },
+        "crown": {
+          "point": [
+            212.025,
+            45.9
+          ],
+          "angle": 0
+        },
+        "side": {
+          "point": [
+            283.525,
+            130.1
+          ],
+          "angle": 0
+        }
+      },
+      "afterAnchors": {
+        "hand": {
+          "point": [
+            307.633,
+            152.435
+          ],
+          "angle": -110,
+          "z": "front",
+          "visible": true
+        },
+        "crown": {
+          "point": [
+            212.322,
+            57.606
+          ],
+          "angle": 0
+        },
+        "side": {
+          "point": [
+            281.158,
+            138.668
+          ],
+          "angle": 0
+        }
+      }
+    },
+    {
+      "id": "merchant_female",
+      "frame": "sit_0",
+      "method": "mask-only",
+      "operation": "fix5 extend connected cream ponytail coverage only",
+      "source": "source/fix5/before/masks/merchant/sit_0.png",
+      "region": [
+        93,
+        219,
+        143,
+        289
+      ],
+      "addedPixels": 197
+    },
+    {
+      "id": "merchant_female",
+      "frame": "dead_0",
+      "method": "mask-only",
+      "operation": "fix5 extend connected cream ponytail coverage only",
+      "source": "source/fix5/before/masks/merchant/dead_0.png",
+      "region": [
+        163,
+        231,
+        217,
+        267
+      ],
+      "addedPixels": 1100
+    },
+    {
+      "id": "thief_male",
+      "frame": "attack_0",
+      "method": "whole-figure-generation",
+      "bounds": [
+        114,
+        51,
+        328,
+        360
+      ],
+      "operation": "fix5 generated complete figure; uniform scale and foot registration",
+      "source": "source/fix5/thief-attack_0-attempt1.png",
+      "scale": 0.3242753623188406,
+      "translation": [
+        11.4909420289855,
+        1.648550724637687
+      ],
+      "sourceAnchors": {
+        "hand": [
+          915,
+          549
+        ],
+        "crown": [
+          721,
+          278
+        ],
+        "side": [
+          868,
+          465
+        ]
+      },
+      "noPartCompositing": true
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "thief_male",
+      "frame": "walk_2",
+      "attempts": 3,
+      "status": "rejected_after_initial_plus_two_retries",
+      "retainedPreviousFrame": true,
+      "reason": "전신 재생성 세 번 후에도 반대발 접지의 앞뒤 겹침이 명확하지 않아 채택하지 않음. 기존 fix4 프레임은 보존하며 승인 상태로 간주하지 않음."
+    },
+    {
+      "id": "merchant_female",
+      "frame": "walk_2",
+      "attempts": 3,
+      "status": "rejected_after_initial_plus_two_retries",
+      "retainedPreviousFrame": true,
+      "reason": "전신 재생성 세 번 후에도 반대발 접지의 앞뒤 겹침이 명확하지 않아 채택하지 않음. 기존 fix4 프레임은 보존하며 승인 상태로 간주하지 않음."
+    }
+  ],
+  "rejectedCandidates": "rejected/fix5/candidates.json",
+  "visualReview": "verification/fix5-checks.json",
+  "reference": "docs/art/concepts/round3/class_lineup.png"
+}

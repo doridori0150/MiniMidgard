@@ -47,3 +47,10 @@ verification/b-animation-frames/
 !verification/fix4-*.png
 !verification/fix4-*.json
 !verification/fix4-*.txt
+
+# Fix5 scoped revisions, original inputs, rejected candidates and review evidence.
+!source/fix5/
+!source/fix5/**
+!verification/fix5-*.png
+!verification/fix5-*.json
+!verification/fix5-*.txt

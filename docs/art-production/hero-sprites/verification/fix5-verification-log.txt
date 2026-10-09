@@ -1,0 +1,111 @@
+{
+  "status": "PARTIAL_WITH_ART_REJECTIONS_AND_CHECKER_ERROR",
+  "check": {
+    "error": 1,
+    "warn": 4,
+    "ok": 648,
+    "info": 27
+  },
+  "variants": 224,
+  "clipping": [],
+  "maskLeaks": [],
+  "changed": 11,
+  "headMetricExceptions": [
+    {
+      "id": "thief_male",
+      "frame": "walk_0",
+      "widthVsIdlePercent": -1.12,
+      "heightVsIdlePercent": -7.05
+    },
+    {
+      "id": "thief_male",
+      "frame": "walk_1",
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -6.41
+    },
+    {
+      "id": "thief_male",
+      "frame": "walk_2",
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -6.41
+    },
+    {
+      "id": "thief_male",
+      "frame": "walk_3",
+      "widthVsIdlePercent": -0.56,
+      "heightVsIdlePercent": -6.41
+    },
+    {
+      "id": "thief_male",
+      "frame": "attack_1",
+      "widthVsIdlePercent": -1.68,
+      "heightVsIdlePercent": -6.41
+    },
+    {
+      "id": "thief_male",
+      "frame": "attack_2",
+      "widthVsIdlePercent": -2.23,
+      "heightVsIdlePercent": -7.05
+    },
+    {
+      "id": "thief_male",
+      "frame": "cast_0",
+      "widthVsIdlePercent": 1.12,
+      "heightVsIdlePercent": -4.49
+    },
+    {
+      "id": "thief_male",
+      "frame": "cast_1",
+      "widthVsIdlePercent": 0.56,
+      "heightVsIdlePercent": -5.13
+    },
+    {
+      "id": "thief_male",
+      "frame": "sit_0",
+      "widthVsIdlePercent": -4.47,
+      "heightVsIdlePercent": -8.33
+    },
+    {
+      "id": "merchant_female",
+      "frame": "walk_0",
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -5.48
+    },
+    {
+      "id": "merchant_female",
+      "frame": "walk_1",
+      "widthVsIdlePercent": -1.89,
+      "heightVsIdlePercent": -5.48
+    },
+    {
+      "id": "merchant_female",
+      "frame": "walk_3",
+      "widthVsIdlePercent": -1.89,
+      "heightVsIdlePercent": -4.11
+    },
+    {
+      "id": "merchant_female",
+      "frame": "attack_2",
+      "widthVsIdlePercent": 0.63,
+      "heightVsIdlePercent": -4.79
+    },
+    {
+      "id": "merchant_female",
+      "frame": "cast_0",
+      "widthVsIdlePercent": -0.63,
+      "heightVsIdlePercent": -4.79
+    },
+    {
+      "id": "merchant_female",
+      "frame": "cast_1",
+      "widthVsIdlePercent": -1.26,
+      "heightVsIdlePercent": -5.48
+    },
+    {
+      "id": "merchant_female",
+      "frame": "sit_0",
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -4.11
+    }
+  ]
+}

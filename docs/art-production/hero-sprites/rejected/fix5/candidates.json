@@ -1,0 +1,368 @@
+[
+  {
+    "id": "thief_male",
+    "frame": "walk_2",
+    "attempt": 1,
+    "source": "source/fix5/thief-walk_2-attempt1.png",
+    "proposedFrame": {
+      "image": "rejected/fix5/thief/attempt1/frames/thief/walk_2.png",
+      "hairMask": "rejected/fix5/thief/attempt1/masks/thief/walk_2.png",
+      "hand": {
+        "point": [
+          303.238,
+          210
+        ],
+        "angle": -48,
+        "z": "front",
+        "visible": true
+      },
+      "crown": {
+        "point": [
+          220.343,
+          68.924
+        ],
+        "angle": 0
+      },
+      "side": {
+        "point": [
+          307.357,
+          140.835
+        ],
+        "angle": 0
+      },
+      "gripOverlay": "rejected/fix5/thief/attempt1/grips/thief/walk_2.png",
+      "source": "source/fix5/thief-walk_2-attempt1.png",
+      "uniform_scale": 0.34324942791762014,
+      "derivation": {
+        "operation": "fix5 generated complete figure; uniform scale and foot registration",
+        "source": "source/fix5/thief-walk_2-attempt1.png",
+        "scale": 0.34324942791762014,
+        "translation": [
+          -20.446224256292908,
+          14.00457665903889
+        ],
+        "sourceAnchors": {
+          "hand": [
+            943,
+            571
+          ],
+          "crown": [
+            701.5,
+            160
+          ],
+          "side": [
+            955,
+            369.5
+          ]
+        },
+        "noPartCompositing": true
+      }
+    },
+    "reason": "walk_0과 반대인 다리의 전후 겹침을 확인할 수 없음. 마지막 시도는 보폭이 넓어졌으나 색 변화만으로 반대발 접지를 입증하지 못함."
+  },
+  {
+    "id": "thief_male",
+    "frame": "walk_2",
+    "attempt": 2,
+    "source": "source/fix5/thief-walk_2-attempt2.png",
+    "proposedFrame": {
+      "image": "rejected/fix5/thief/attempt2/frames/thief/walk_2.png",
+      "hairMask": "rejected/fix5/thief/attempt2/masks/thief/walk_2.png",
+      "hand": {
+        "point": [
+          303.217,
+          210
+        ],
+        "angle": -48,
+        "z": "front",
+        "visible": true
+      },
+      "crown": {
+        "point": [
+          220.783,
+          67.304
+        ],
+        "angle": 0
+      },
+      "side": {
+        "point": [
+          305.043,
+          139.957
+        ],
+        "angle": 0
+      },
+      "gripOverlay": "rejected/fix5/thief/attempt2/grips/thief/walk_2.png",
+      "source": "source/fix5/thief-walk_2-attempt2.png",
+      "uniform_scale": 0.2608695652173913,
+      "derivation": {
+        "operation": "fix5 generated complete figure; uniform scale and foot registration",
+        "source": "source/fix5/thief-walk_2-attempt2.png",
+        "scale": 0.2608695652173913,
+        "translation": [
+          89.56521739130434,
+          -5.7391304347826235
+        ],
+        "sourceAnchors": {
+          "hand": [
+            819,
+            827
+          ],
+          "crown": [
+            503,
+            280
+          ],
+          "side": [
+            826,
+            558.5
+          ]
+        },
+        "noPartCompositing": true
+      }
+    },
+    "reason": "walk_0과 반대인 다리의 전후 겹침을 확인할 수 없음. 마지막 시도는 보폭이 넓어졌으나 색 변화만으로 반대발 접지를 입증하지 못함."
+  },
+  {
+    "id": "thief_male",
+    "frame": "walk_2",
+    "attempt": 3,
+    "source": "source/fix5/thief-walk_2-attempt3.png",
+    "proposedFrame": {
+      "image": "rejected/fix5/thief/attempt3/frames/thief/walk_2.png",
+      "hairMask": "rejected/fix5/thief/attempt3/masks/thief/walk_2.png",
+      "hand": {
+        "point": [
+          307.439,
+          210
+        ],
+        "angle": -48,
+        "z": "front",
+        "visible": true
+      },
+      "crown": {
+        "point": [
+          224.024,
+          69.146
+        ],
+        "angle": 0
+      },
+      "side": {
+        "point": [
+          310.732,
+          139.573
+        ],
+        "angle": 0
+      },
+      "gripOverlay": "rejected/fix5/thief/attempt3/grips/thief/walk_2.png",
+      "source": "source/fix5/thief-walk_2-attempt3.png",
+      "uniform_scale": 0.36585365853658536,
+      "derivation": {
+        "operation": "fix5 generated complete figure; uniform scale and foot registration",
+        "source": "source/fix5/thief-walk_2-attempt3.png",
+        "scale": 0.36585365853658536,
+        "translation": [
+          -35.73170731707316,
+          4.3902439024390105
+        ],
+        "sourceAnchors": {
+          "hand": [
+            938,
+            562
+          ],
+          "crown": [
+            710,
+            177
+          ],
+          "side": [
+            947,
+            369.5
+          ]
+        },
+        "noPartCompositing": true
+      }
+    },
+    "reason": "walk_0과 반대인 다리의 전후 겹침을 확인할 수 없음. 마지막 시도는 보폭이 넓어졌으나 색 변화만으로 반대발 접지를 입증하지 못함."
+  },
+  {
+    "id": "merchant_female",
+    "frame": "walk_2",
+    "attempt": 1,
+    "source": "source/fix5/merchant-walk_2-attempt1.png",
+    "proposedFrame": {
+      "image": "rejected/fix5/merchant/attempt1/frames/merchant/walk_2.png",
+      "hairMask": "rejected/fix5/merchant/attempt1/masks/merchant/walk_2.png",
+      "hand": {
+        "point": [
+          307.5,
+          210
+        ],
+        "angle": -48,
+        "z": "front",
+        "visible": true
+      },
+      "crown": {
+        "point": [
+          229.643,
+          69.286
+        ],
+        "angle": 0
+      },
+      "side": {
+        "point": [
+          304.643,
+          135
+        ],
+        "angle": 0
+      },
+      "gripOverlay": "rejected/fix5/merchant/attempt1/grips/merchant/walk_2.png",
+      "source": "source/fix5/merchant-walk_2-attempt1.png",
+      "uniform_scale": 0.35714285714285715,
+      "derivation": {
+        "operation": "fix5 generated complete figure; uniform scale and foot registration",
+        "source": "source/fix5/merchant-walk_2-attempt1.png",
+        "scale": 0.35714285714285715,
+        "translation": [
+          -22.5,
+          1.0714285714285552
+        ],
+        "sourceAnchors": {
+          "hand": [
+            924,
+            585
+          ],
+          "crown": [
+            706,
+            191
+          ],
+          "side": [
+            916,
+            375
+          ]
+        },
+        "noPartCompositing": true
+      }
+    },
+    "reason": "walk_0과 반대인 다리의 전후 겹침을 확인할 수 없음. 마지막 시도는 보폭이 넓어졌으나 색 변화만으로 반대발 접지를 입증하지 못함."
+  },
+  {
+    "id": "merchant_female",
+    "frame": "walk_2",
+    "attempt": 2,
+    "source": "source/fix5/merchant-walk_2-attempt2.png",
+    "proposedFrame": {
+      "image": "rejected/fix5/merchant/attempt2/frames/merchant/walk_2.png",
+      "hairMask": "rejected/fix5/merchant/attempt2/masks/merchant/walk_2.png",
+      "hand": {
+        "point": [
+          303.789,
+          210
+        ],
+        "angle": -48,
+        "z": "front",
+        "visible": true
+      },
+      "crown": {
+        "point": [
+          232.026,
+          67.665
+        ],
+        "angle": 0
+      },
+      "side": {
+        "point": [
+          305.903,
+          132.819
+        ],
+        "angle": 0
+      },
+      "gripOverlay": "rejected/fix5/merchant/attempt2/grips/merchant/walk_2.png",
+      "source": "source/fix5/merchant-walk_2-attempt2.png",
+      "uniform_scale": 0.2643171806167401,
+      "derivation": {
+        "operation": "fix5 generated complete figure; uniform scale and foot registration",
+        "source": "source/fix5/merchant-walk_2-attempt2.png",
+        "scale": 0.2643171806167401,
+        "translation": [
+          92.59911894273128,
+          12.687224669603552
+        ],
+        "sourceAnchors": {
+          "hand": [
+            799,
+            746.5
+          ],
+          "crown": [
+            527.5,
+            208
+          ],
+          "side": [
+            807,
+            454.5
+          ]
+        },
+        "noPartCompositing": true
+      }
+    },
+    "reason": "반대발 교대 불명확, 외곽 발광과 화풍 이탈"
+  },
+  {
+    "id": "merchant_female",
+    "frame": "walk_2",
+    "attempt": 3,
+    "source": "source/fix5/merchant-walk_2-attempt3.png",
+    "proposedFrame": {
+      "image": "rejected/fix5/merchant/attempt3/frames/merchant/walk_2.png",
+      "hairMask": "rejected/fix5/merchant/attempt3/masks/merchant/walk_2.png",
+      "hand": {
+        "point": [
+          311.81,
+          210
+        ],
+        "angle": -48,
+        "z": "front",
+        "visible": true
+      },
+      "crown": {
+        "point": [
+          232.746,
+          69.606
+        ],
+        "angle": 0
+      },
+      "side": {
+        "point": [
+          311.071,
+          135.185
+        ],
+        "angle": 0
+      },
+      "gripOverlay": "rejected/fix5/merchant/attempt3/grips/merchant/walk_2.png",
+      "source": "source/fix5/merchant-walk_2-attempt3.png",
+      "uniform_scale": 0.3694581280788177,
+      "derivation": {
+        "operation": "fix5 generated complete figure; uniform scale and foot registration",
+        "source": "source/fix5/merchant-walk_2-attempt3.png",
+        "scale": 0.3694581280788177,
+        "translation": [
+          -25.504926108374377,
+          -3.177339901477808
+        ],
+        "sourceAnchors": {
+          "hand": [
+            913,
+            577
+          ],
+          "crown": [
+            699,
+            197
+          ],
+          "side": [
+            911,
+            374.5
+          ]
+        },
+        "noPartCompositing": true
+      }
+    },
+    "reason": "walk_0과 반대인 다리의 전후 겹침을 확인할 수 없음. 마지막 시도는 보폭이 넓어졌으나 색 변화만으로 반대발 접지를 입증하지 못함."
+  }
+]

@@ -1,0 +1,867 @@
+{
+  "status": "PARTIAL_WITH_ART_REJECTIONS_AND_CHECKER_ERROR",
+  "automatedCheck": {
+    "error": 1,
+    "warn": 4,
+    "ok": 648,
+    "info": 27
+  },
+  "missing": [],
+  "excluded": [],
+  "layerAndPreservationStatus": "PASS",
+  "framesReviewed": 28,
+  "attachmentConfigurations": 224,
+  "clipping": [],
+  "maskLeaks": [],
+  "protectedFiles": 2162,
+  "changedFiles": [
+    "docs/art-production/hero-sprites/frames/merchant/attack_0.png",
+    "docs/art-production/hero-sprites/frames/thief/attack_0.png",
+    "docs/art-production/hero-sprites/frames/thief/hurt_0.png",
+    "docs/art-production/hero-sprites/masks/merchant/attack_0.png",
+    "docs/art-production/hero-sprites/masks/merchant/dead_0.png",
+    "docs/art-production/hero-sprites/masks/merchant/sit_0.png",
+    "docs/art-production/hero-sprites/masks/thief/attack_0.png",
+    "docs/art-production/hero-sprites/masks/thief/hurt_0.png",
+    "docs/art-production/hero-sprites/grips/merchant/attack_0.png",
+    "docs/art-production/hero-sprites/grips/thief/attack_0.png",
+    "docs/art-production/hero-sprites/grips/thief/hurt_0.png"
+  ],
+  "unexpectedChanges": [],
+  "originalFiveCharactersUnchanged": true,
+  "unresolved": [
+    {
+      "id": "thief_male",
+      "frame": "walk_2",
+      "attempts": 3,
+      "status": "rejected_after_initial_plus_two_retries",
+      "retainedPreviousFrame": true,
+      "reason": "전신 재생성 세 번 후에도 반대발 접지의 앞뒤 겹침이 명확하지 않아 채택하지 않음. 기존 fix4 프레임은 보존하며 승인 상태로 간주하지 않음."
+    },
+    {
+      "id": "merchant_female",
+      "frame": "walk_2",
+      "attempts": 3,
+      "status": "rejected_after_initial_plus_two_retries",
+      "retainedPreviousFrame": true,
+      "reason": "전신 재생성 세 번 후에도 반대발 접지의 앞뒤 겹침이 명확하지 않아 채택하지 않음. 기존 fix4 프레임은 보존하며 승인 상태로 간주하지 않음."
+    }
+  ],
+  "headMetrics": [
+    {
+      "id": "thief_male",
+      "frame": "idle_0",
+      "bodyBounds": [
+        121,
+        50,
+        316,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 179,
+        "height": 156,
+        "area": 12709,
+        "bounds": [
+          130,
+          56,
+          309,
+          212
+        ]
+      },
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": 0,
+      "areaEquivalentLinearScale": 1,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "thief_male",
+      "frame": "idle_1",
+      "bodyBounds": [
+        121,
+        52,
+        316,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 179,
+        "height": 155,
+        "area": 12559,
+        "bounds": [
+          130,
+          58,
+          309,
+          213
+        ]
+      },
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -0.64,
+      "areaEquivalentLinearScale": 0.9941,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "thief_male",
+      "frame": "walk_0",
+      "bodyBounds": [
+        128,
+        60,
+        321,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 177,
+        "height": 145,
+        "area": 12007,
+        "bounds": [
+          136,
+          66,
+          313,
+          211
+        ]
+      },
+      "widthVsIdlePercent": -1.12,
+      "heightVsIdlePercent": -7.05,
+      "areaEquivalentLinearScale": 0.972,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "thief_male",
+      "frame": "walk_1",
+      "bodyBounds": [
+        119,
+        64,
+        314,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 179,
+        "height": 146,
+        "area": 12303,
+        "bounds": [
+          127,
+          70,
+          306,
+          216
+        ]
+      },
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -6.41,
+      "areaEquivalentLinearScale": 0.9839,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "thief_male",
+      "frame": "walk_2",
+      "bodyBounds": [
+        122,
+        57,
+        322,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 179,
+        "height": 146,
+        "area": 12228,
+        "bounds": [
+          136,
+          63,
+          315,
+          209
+        ]
+      },
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -6.41,
+      "areaEquivalentLinearScale": 0.9809,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "thief_male",
+      "frame": "walk_3",
+      "bodyBounds": [
+        117,
+        64,
+        312,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 178,
+        "height": 146,
+        "area": 12301,
+        "bounds": [
+          126,
+          70,
+          304,
+          216
+        ]
+      },
+      "widthVsIdlePercent": -0.56,
+      "heightVsIdlePercent": -6.41,
+      "areaEquivalentLinearScale": 0.9838,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "thief_male",
+      "frame": "attack_0",
+      "bodyBounds": [
+        114,
+        51,
+        328,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 178,
+        "height": 154,
+        "area": 12731,
+        "bounds": [
+          124,
+          56,
+          302,
+          210
+        ]
+      },
+      "widthVsIdlePercent": -0.56,
+      "heightVsIdlePercent": -1.28,
+      "areaEquivalentLinearScale": 1.0009,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "thief_male",
+      "frame": "attack_1",
+      "bodyBounds": [
+        126,
+        108,
+        392,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 176,
+        "height": 146,
+        "area": 11978,
+        "bounds": [
+          192,
+          113,
+          368,
+          259
+        ]
+      },
+      "widthVsIdlePercent": -1.68,
+      "heightVsIdlePercent": -6.41,
+      "areaEquivalentLinearScale": 0.9708,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "thief_male",
+      "frame": "attack_2",
+      "bodyBounds": [
+        138,
+        73,
+        336,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 175,
+        "height": 145,
+        "area": 11976,
+        "bounds": [
+          149,
+          79,
+          324,
+          224
+        ]
+      },
+      "widthVsIdlePercent": -2.23,
+      "heightVsIdlePercent": -7.05,
+      "areaEquivalentLinearScale": 0.9707,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "thief_male",
+      "frame": "cast_0",
+      "bodyBounds": [
+        119,
+        67,
+        334,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 181,
+        "height": 149,
+        "area": 12483,
+        "bounds": [
+          127,
+          73,
+          308,
+          222
+        ]
+      },
+      "widthVsIdlePercent": 1.12,
+      "heightVsIdlePercent": -4.49,
+      "areaEquivalentLinearScale": 0.9911,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "thief_male",
+      "frame": "cast_1",
+      "bodyBounds": [
+        116,
+        68,
+        326,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 180,
+        "height": 148,
+        "area": 12442,
+        "bounds": [
+          125,
+          74,
+          305,
+          222
+        ]
+      },
+      "widthVsIdlePercent": 0.56,
+      "heightVsIdlePercent": -5.13,
+      "areaEquivalentLinearScale": 0.9894,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "thief_male",
+      "frame": "sit_0",
+      "bodyBounds": [
+        98,
+        114,
+        321,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 171,
+        "height": 143,
+        "area": 10928,
+        "bounds": [
+          118,
+          121,
+          289,
+          264
+        ]
+      },
+      "widthVsIdlePercent": -4.47,
+      "heightVsIdlePercent": -8.33,
+      "areaEquivalentLinearScale": 0.9273,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "thief_male",
+      "frame": "hurt_0",
+      "bodyBounds": [
+        92,
+        130,
+        350,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 172,
+        "height": 156,
+        "area": 13070,
+        "bounds": [
+          169,
+          138,
+          341,
+          294
+        ]
+      },
+      "widthVsIdlePercent": -3.91,
+      "heightVsIdlePercent": 0,
+      "areaEquivalentLinearScale": 1.0141,
+      "note": "기울어진 머리이므로 폭/높이 값은 보조 지표"
+    },
+    {
+      "id": "thief_male",
+      "frame": "dead_0",
+      "bodyBounds": [
+        62,
+        215,
+        376,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 151,
+        "height": 130,
+        "area": 9786,
+        "bounds": [
+          216,
+          223,
+          367,
+          353
+        ]
+      },
+      "widthVsIdlePercent": -15.64,
+      "heightVsIdlePercent": -16.67,
+      "areaEquivalentLinearScale": 0.8775,
+      "note": "회전한 머리의 축정렬 폭/높이는 직접 크기 판정에 쓸 수 없음"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "idle_0",
+      "bodyBounds": [
+        108,
+        50,
+        309,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 159,
+        "height": 146,
+        "area": 11209,
+        "bounds": [
+          143,
+          56,
+          302,
+          202
+        ]
+      },
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": 0,
+      "areaEquivalentLinearScale": 1,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "idle_1",
+      "bodyBounds": [
+        108,
+        52,
+        309,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 159,
+        "height": 145,
+        "area": 11094,
+        "bounds": [
+          143,
+          58,
+          302,
+          203
+        ]
+      },
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -0.68,
+      "areaEquivalentLinearScale": 0.9949,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "walk_0",
+      "bodyBounds": [
+        109,
+        61,
+        319,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 159,
+        "height": 138,
+        "area": 10730,
+        "bounds": [
+          144,
+          67,
+          303,
+          205
+        ]
+      },
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -5.48,
+      "areaEquivalentLinearScale": 0.9784,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "walk_1",
+      "bodyBounds": [
+        112,
+        60,
+        310,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 156,
+        "height": 138,
+        "area": 10680,
+        "bounds": [
+          147,
+          67,
+          303,
+          205
+        ]
+      },
+      "widthVsIdlePercent": -1.89,
+      "heightVsIdlePercent": -5.48,
+      "areaEquivalentLinearScale": 0.9761,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "walk_2",
+      "bodyBounds": [
+        107,
+        58,
+        316,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 160,
+        "height": 141,
+        "area": 10959,
+        "bounds": [
+          143,
+          64,
+          303,
+          205
+        ]
+      },
+      "widthVsIdlePercent": 0.63,
+      "heightVsIdlePercent": -3.42,
+      "areaEquivalentLinearScale": 0.9888,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "walk_3",
+      "bodyBounds": [
+        111,
+        58,
+        308,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 156,
+        "height": 140,
+        "area": 10730,
+        "bounds": [
+          145,
+          65,
+          301,
+          205
+        ]
+      },
+      "widthVsIdlePercent": -1.89,
+      "heightVsIdlePercent": -4.11,
+      "areaEquivalentLinearScale": 0.9784,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "attack_0",
+      "bodyBounds": [
+        102,
+        50,
+        332,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 156,
+        "height": 141,
+        "area": 10726,
+        "bounds": [
+          135,
+          55,
+          291,
+          196
+        ]
+      },
+      "widthVsIdlePercent": -1.89,
+      "heightVsIdlePercent": -3.42,
+      "areaEquivalentLinearScale": 0.9782,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "attack_1",
+      "bodyBounds": [
+        108,
+        55,
+        356,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 163,
+        "height": 143,
+        "area": 11381,
+        "bounds": [
+          147,
+          61,
+          310,
+          204
+        ]
+      },
+      "widthVsIdlePercent": 2.52,
+      "heightVsIdlePercent": -2.05,
+      "areaEquivalentLinearScale": 1.0076,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "attack_2",
+      "bodyBounds": [
+        106,
+        57,
+        333,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 160,
+        "height": 139,
+        "area": 10815,
+        "bounds": [
+          141,
+          63,
+          301,
+          202
+        ]
+      },
+      "widthVsIdlePercent": 0.63,
+      "heightVsIdlePercent": -4.79,
+      "areaEquivalentLinearScale": 0.9823,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "cast_0",
+      "bodyBounds": [
+        101,
+        58,
+        339,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 158,
+        "height": 139,
+        "area": 10622,
+        "bounds": [
+          139,
+          64,
+          297,
+          203
+        ]
+      },
+      "widthVsIdlePercent": -0.63,
+      "heightVsIdlePercent": -4.79,
+      "areaEquivalentLinearScale": 0.9735,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "cast_1",
+      "bodyBounds": [
+        96,
+        57,
+        332,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 157,
+        "height": 138,
+        "area": 10595,
+        "bounds": [
+          133,
+          64,
+          290,
+          202
+        ]
+      },
+      "widthVsIdlePercent": -1.26,
+      "heightVsIdlePercent": -5.48,
+      "areaEquivalentLinearScale": 0.9722,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "sit_0",
+      "bodyBounds": [
+        86,
+        110,
+        310,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 159,
+        "height": 140,
+        "area": 10973,
+        "bounds": [
+          128,
+          116,
+          287,
+          256
+        ]
+      },
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -4.11,
+      "areaEquivalentLinearScale": 0.9894,
+      "note": "마스크 주성분 크기 지표; 머리카락 모양 변화도 포함"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "hurt_0",
+      "bodyBounds": [
+        131,
+        109,
+        342,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 157,
+        "height": 154,
+        "area": 11978,
+        "bounds": [
+          179,
+          116,
+          336,
+          270
+        ]
+      },
+      "widthVsIdlePercent": -1.26,
+      "heightVsIdlePercent": 5.48,
+      "areaEquivalentLinearScale": 1.0337,
+      "note": "기울어진 머리이므로 폭/높이 값은 보조 지표"
+    },
+    {
+      "id": "merchant_female",
+      "frame": "dead_0",
+      "bodyBounds": [
+        78,
+        195,
+        388,
+        360
+      ],
+      "hairMainComponent": {
+        "width": 152,
+        "height": 147,
+        "area": 11237,
+        "bounds": [
+          230,
+          201,
+          382,
+          348
+        ]
+      },
+      "widthVsIdlePercent": -4.4,
+      "heightVsIdlePercent": 0.68,
+      "areaEquivalentLinearScale": 1.0012,
+      "note": "회전한 머리의 축정렬 폭/높이는 직접 크기 판정에 쓸 수 없음"
+    }
+  ],
+  "headMetricCaveat": "14프레임을 마스크 주성분으로 비교. 축정렬 폭/높이는 자세와 머리카락 변형을 포함하므로 머리 자체 크기의 완전한 측정이 아님. 전체 ±4% 통과라고 선언하지 않음.",
+  "headMetricExceptions": [
+    {
+      "id": "thief_male",
+      "frame": "walk_0",
+      "widthVsIdlePercent": -1.12,
+      "heightVsIdlePercent": -7.05
+    },
+    {
+      "id": "thief_male",
+      "frame": "walk_1",
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -6.41
+    },
+    {
+      "id": "thief_male",
+      "frame": "walk_2",
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -6.41
+    },
+    {
+      "id": "thief_male",
+      "frame": "walk_3",
+      "widthVsIdlePercent": -0.56,
+      "heightVsIdlePercent": -6.41
+    },
+    {
+      "id": "thief_male",
+      "frame": "attack_1",
+      "widthVsIdlePercent": -1.68,
+      "heightVsIdlePercent": -6.41
+    },
+    {
+      "id": "thief_male",
+      "frame": "attack_2",
+      "widthVsIdlePercent": -2.23,
+      "heightVsIdlePercent": -7.05
+    },
+    {
+      "id": "thief_male",
+      "frame": "cast_0",
+      "widthVsIdlePercent": 1.12,
+      "heightVsIdlePercent": -4.49
+    },
+    {
+      "id": "thief_male",
+      "frame": "cast_1",
+      "widthVsIdlePercent": 0.56,
+      "heightVsIdlePercent": -5.13
+    },
+    {
+      "id": "thief_male",
+      "frame": "sit_0",
+      "widthVsIdlePercent": -4.47,
+      "heightVsIdlePercent": -8.33
+    },
+    {
+      "id": "merchant_female",
+      "frame": "walk_0",
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -5.48
+    },
+    {
+      "id": "merchant_female",
+      "frame": "walk_1",
+      "widthVsIdlePercent": -1.89,
+      "heightVsIdlePercent": -5.48
+    },
+    {
+      "id": "merchant_female",
+      "frame": "walk_3",
+      "widthVsIdlePercent": -1.89,
+      "heightVsIdlePercent": -4.11
+    },
+    {
+      "id": "merchant_female",
+      "frame": "attack_2",
+      "widthVsIdlePercent": 0.63,
+      "heightVsIdlePercent": -4.79
+    },
+    {
+      "id": "merchant_female",
+      "frame": "cast_0",
+      "widthVsIdlePercent": -0.63,
+      "heightVsIdlePercent": -4.79
+    },
+    {
+      "id": "merchant_female",
+      "frame": "cast_1",
+      "widthVsIdlePercent": -1.26,
+      "heightVsIdlePercent": -5.48
+    },
+    {
+      "id": "merchant_female",
+      "frame": "sit_0",
+      "widthVsIdlePercent": 0,
+      "heightVsIdlePercent": -4.11
+    }
+  ],
+  "checkerConflict": {
+    "id": "thief_male",
+    "frame": "hurt_0",
+    "requestedApproxMinimumHeight": 220,
+    "deliveredHeight": 230,
+    "actualCheckerMinimumHeight": 248,
+    "reason": "spec bodyTol 0.1; two-tolerance error boundary 310*(1-0.2)=248. User asked uniform reduction, so head enlargement and checker threshold changes were not used."
+  },
+  "visualReview": {
+    "thiefAttack0": "같은 가까운 팔이 뒤로 위로 올라감. 전신 높이 309px, 머리 마스크 폭/높이 기준 ±4% 이내.",
+    "thiefHurt0": "머리 크기 축소, 발 원점 고정. 낮은 피격 자세 높이 230px.",
+    "merchantAttack0": "전신과 모든 레이어/기준점 동시 축소, 높이 310px.",
+    "merchantPonytails": "sit_0/dead_0 크림색 묶은 머리 연결 영역을 마스크에 추가. 원본 그림과 기준점은 보존.",
+    "walks": "최초 생성 + 재시도 2회 모두 반대발 교대가 확실하지 않아 반려. 기존 프레임을 보존하되 승인으로 취급하지 않음.",
+    "headgear": "두 장식과 무기를 얹은 14프레임 시트를 직접 확인함. 수정한 머리장식 위치와 같은 무기 팔을 확인했으며 첨부물 잘림은 0. 기존 walk_2 이음매/보폭 문제는 미해결 표시."
+  }
+}

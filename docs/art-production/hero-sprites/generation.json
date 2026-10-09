@@ -1896,5 +1896,344 @@
         "sha256": "d010e9a24ec61b1b2b8378f1145acd38b81c3b3e596e09329b78aaf67e8e72ce"
       }
     ]
+  },
+  "fix5": {
+    "request": "docs/art-requests/hero-sprites-fix5.md",
+    "status": "PARTIAL_WITH_ART_REJECTIONS",
+    "updates": [
+      {
+        "id": "thief_male",
+        "frame": "hurt_0",
+        "method": "uniform-reduction",
+        "scale": 0.92,
+        "origin": [
+          220,
+          360
+        ],
+        "bounds": [
+          92,
+          130,
+          350,
+          360
+        ],
+        "beforeAnchors": {
+          "hand": {
+            "point": [
+              281.947,
+              331.721
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              279.472,
+              176.424
+            ],
+            "angle": -15
+          },
+          "side": {
+            "point": [
+              326.76,
+              234.187
+            ],
+            "angle": -15
+          }
+        },
+        "afterAnchors": {
+          "hand": {
+            "point": [
+              276.991,
+              333.983
+            ],
+            "angle": -48,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              274.714,
+              191.11
+            ],
+            "angle": -15
+          },
+          "side": {
+            "point": [
+              318.219,
+              244.252
+            ],
+            "angle": -15
+          }
+        }
+      },
+      {
+        "id": "merchant_female",
+        "frame": "attack_0",
+        "method": "uniform-reduction",
+        "scale": 0.9627329192546584,
+        "origin": [
+          220,
+          360
+        ],
+        "bounds": [
+          102,
+          50,
+          332,
+          360
+        ],
+        "beforeAnchors": {
+          "hand": {
+            "point": [
+              311.025,
+              144.4
+            ],
+            "angle": -110,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              212.025,
+              45.9
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              283.525,
+              130.1
+            ],
+            "angle": 0
+          }
+        },
+        "afterAnchors": {
+          "hand": {
+            "point": [
+              307.633,
+              152.435
+            ],
+            "angle": -110,
+            "z": "front",
+            "visible": true
+          },
+          "crown": {
+            "point": [
+              212.322,
+              57.606
+            ],
+            "angle": 0
+          },
+          "side": {
+            "point": [
+              281.158,
+              138.668
+            ],
+            "angle": 0
+          }
+        }
+      },
+      {
+        "id": "merchant_female",
+        "frame": "sit_0",
+        "method": "mask-only",
+        "operation": "fix5 extend connected cream ponytail coverage only",
+        "source": "source/fix5/before/masks/merchant/sit_0.png",
+        "region": [
+          93,
+          219,
+          143,
+          289
+        ],
+        "addedPixels": 197
+      },
+      {
+        "id": "merchant_female",
+        "frame": "dead_0",
+        "method": "mask-only",
+        "operation": "fix5 extend connected cream ponytail coverage only",
+        "source": "source/fix5/before/masks/merchant/dead_0.png",
+        "region": [
+          163,
+          231,
+          217,
+          267
+        ],
+        "addedPixels": 1100
+      },
+      {
+        "id": "thief_male",
+        "frame": "attack_0",
+        "method": "whole-figure-generation",
+        "bounds": [
+          114,
+          51,
+          328,
+          360
+        ],
+        "operation": "fix5 generated complete figure; uniform scale and foot registration",
+        "source": "source/fix5/thief-attack_0-attempt1.png",
+        "scale": 0.3242753623188406,
+        "translation": [
+          11.4909420289855,
+          1.648550724637687
+        ],
+        "sourceAnchors": {
+          "hand": [
+            915,
+            549
+          ],
+          "crown": [
+            721,
+            278
+          ],
+          "side": [
+            868,
+            465
+          ]
+        },
+        "noPartCompositing": true
+      }
+    ],
+    "unresolved": [
+      {
+        "id": "thief_male",
+        "frame": "walk_2",
+        "attempts": 3,
+        "status": "rejected_after_initial_plus_two_retries",
+        "retainedPreviousFrame": true,
+        "reason": "전신 재생성 세 번 후에도 반대발 접지의 앞뒤 겹침이 명확하지 않아 채택하지 않음. 기존 fix4 프레임은 보존하며 승인 상태로 간주하지 않음."
+      },
+      {
+        "id": "merchant_female",
+        "frame": "walk_2",
+        "attempts": 3,
+        "status": "rejected_after_initial_plus_two_retries",
+        "retainedPreviousFrame": true,
+        "reason": "전신 재생성 세 번 후에도 반대발 접지의 앞뒤 겹침이 명확하지 않아 채택하지 않음. 기존 fix4 프레임은 보존하며 승인 상태로 간주하지 않음."
+      }
+    ],
+    "rejectedCandidates": "rejected/fix5/candidates.json",
+    "visualReview": "verification/fix5-checks.json",
+    "reference": "docs/art/concepts/round3/class_lineup.png",
+    "tool": "built-in image_gen; raster.mjs for authorized scaling, masks, registration and review",
+    "sources": [
+      {
+        "id": "thief_male",
+        "frame": "attack_0",
+        "attempt": 1,
+        "source": "source/fix5/thief-attack_0-attempt1.png",
+        "source_sha256": "0defef51dd2d74e6f31d240383bd23d1ef28035de9055f522a0a2e5d4da22a58",
+        "prompt": "prompts/thief_male-fix5-attempt1.txt",
+        "prompt_sha256": "a5a37b14e50798342510c0b80b9196d410d2a52a15d038d10f42634c36856ccd",
+        "tool": "built-in image_gen",
+        "transparent_background": true,
+        "inputs": [
+          "docs/art/concepts/round3/class_lineup.png",
+          "docs/art-production/hero-sprites/frames/thief/idle_0.png"
+        ],
+        "status": "accepted"
+      },
+      {
+        "id": "thief_male",
+        "frame": "walk_2",
+        "attempt": 1,
+        "source": "source/fix5/thief-walk_2-attempt1.png",
+        "source_sha256": "45a6aa34988c0255bab8880468c981d9dcfe25fd3ae6b9002eed1d8bee4950a7",
+        "prompt": "prompts/thief_male-fix5-attempt2.txt",
+        "prompt_sha256": "e1d72adcae348bd661ccafadb3859e45a4072b9e8f767f74d8cf8ee0a2c877bc",
+        "tool": "built-in image_gen",
+        "transparent_background": true,
+        "inputs": [
+          "docs/art/concepts/round3/class_lineup.png",
+          "docs/art-production/hero-sprites/frames/thief/idle_0.png",
+          "docs/art-production/hero-sprites/frames/thief/walk_0.png",
+          "docs/art-production/hero-sprites/frames/thief/walk_2.png"
+        ],
+        "status": "rejected"
+      },
+      {
+        "id": "thief_male",
+        "frame": "walk_2",
+        "attempt": 2,
+        "source": "source/fix5/thief-walk_2-attempt2.png",
+        "source_sha256": "ff9e50d21e31e888d8e4dc051305281185384d66a9f6e16ca04e6c6d6184f1cb",
+        "prompt": "prompts/thief_male-fix5-attempt3.txt",
+        "prompt_sha256": "73bf76a16928b116cced911b7989f74554b1ece8b4038bc3904fb8326c89f91c",
+        "tool": "built-in image_gen",
+        "transparent_background": true,
+        "inputs": [
+          "docs/art/concepts/round3/class_lineup.png",
+          "docs/art-production/hero-sprites/frames/thief/idle_0.png"
+        ],
+        "status": "rejected"
+      },
+      {
+        "id": "thief_male",
+        "frame": "walk_2",
+        "attempt": 3,
+        "source": "source/fix5/thief-walk_2-attempt3.png",
+        "source_sha256": "edd1dc2d6e4318e453d3bd6d2f88cb88daf9e8aab6c6d5e62ffef8deecbfcba1",
+        "prompt": "prompts/thief_male-fix5-attempt4.txt",
+        "prompt_sha256": "06c14a0b53d5b36bac5ff6476c03d6695f18fe09013ea3175d63268c963f7c1c",
+        "tool": "built-in image_gen",
+        "transparent_background": true,
+        "inputs": [
+          "docs/art/concepts/round3/class_lineup.png",
+          "docs/art-production/hero-sprites/frames/thief/walk_0.png"
+        ],
+        "status": "rejected"
+      },
+      {
+        "id": "merchant_female",
+        "frame": "walk_2",
+        "attempt": 1,
+        "source": "source/fix5/merchant-walk_2-attempt1.png",
+        "source_sha256": "13fde3236c8e74a193f326be1bdde10b9ad2f3c7eb51a3f6cfa637ccecc35d45",
+        "prompt": "prompts/merchant_female-fix5-attempt1.txt",
+        "prompt_sha256": "627ab8c774a87085cea835d6f830bcf996feacb639fede0b66d78c1496ba9107",
+        "tool": "built-in image_gen",
+        "transparent_background": true,
+        "inputs": [
+          "docs/art/concepts/round3/class_lineup.png",
+          "docs/art-production/hero-sprites/frames/merchant/idle_0.png",
+          "docs/art-production/hero-sprites/frames/merchant/walk_0.png",
+          "docs/art-production/hero-sprites/frames/merchant/walk_2.png"
+        ],
+        "status": "rejected"
+      },
+      {
+        "id": "merchant_female",
+        "frame": "walk_2",
+        "attempt": 2,
+        "source": "source/fix5/merchant-walk_2-attempt2.png",
+        "source_sha256": "255a7d27efbd59d67a6cc930107df6c3f2230cbd29dfaca88736ac49039b5ac0",
+        "prompt": "prompts/merchant_female-fix5-attempt2.txt",
+        "prompt_sha256": "ecc1f7296d963f234aa39aae4cd1583c8b8812986eb18bb9bef3cf0f0936046e",
+        "tool": "built-in image_gen",
+        "transparent_background": true,
+        "inputs": [
+          "docs/art/concepts/round3/class_lineup.png",
+          "docs/art-production/hero-sprites/frames/merchant/idle_0.png"
+        ],
+        "status": "rejected"
+      },
+      {
+        "id": "merchant_female",
+        "frame": "walk_2",
+        "attempt": 3,
+        "source": "source/fix5/merchant-walk_2-attempt3.png",
+        "source_sha256": "148be04a405fa1ece6cadb87f438bd87bd30929465dc16150afc41ba56bca3e9",
+        "prompt": "prompts/merchant_female-fix5-attempt3.txt",
+        "prompt_sha256": "dbb22ea1db39b75bfeaba01e18e3a29271e9eb17c0a226ac0d0ce4969811b96a",
+        "tool": "built-in image_gen",
+        "transparent_background": true,
+        "inputs": [
+          "docs/art/concepts/round3/class_lineup.png",
+          "docs/art-production/hero-sprites/frames/merchant/walk_0.png"
+        ],
+        "status": "rejected"
+      }
+    ]
   }
 }

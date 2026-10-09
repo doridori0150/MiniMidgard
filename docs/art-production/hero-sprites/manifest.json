@@ -4,7 +4,7 @@
     "schema": "minimidgard.sprites/1",
     "note": "변환기로 만든 표준 기록입니다. 원본은 게임 manifest입니다.",
     "gameManifest": "docs/art-production/hero-sprites/game-manifest.json",
-    "gameManifest_sha256": "3b7b2d71c8742f65610f54fdba18d6d6d1dfa846a08b162c8778d5b54953ebf3",
+    "gameManifest_sha256": "be00b78fadf212b9e6d2df41f0c2b1b6e499f2f811856ed7037d13990fba5dfb",
     "enrichment": "record.mjs: only source/scale, hashes, raster bounds, weapon sheets and bundle evidence added after standard converter."
   },
   "sheets": [
@@ -5246,8 +5246,8 @@
           "anchors": {
             "hand": {
               "point": [
-                295.225,
-                269.05
+                295.075,
+                264.65
               ],
               "angle": -48,
               "z": "front",
@@ -5255,15 +5255,15 @@
             },
             "crown": {
               "point": [
-                251.025,
-                101.45
+                251.175,
+                107.85
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                309.675,
-                159.4
+                307.275,
+                163.25
               ],
               "angle": 0
             }
@@ -5274,13 +5274,13 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/thief/walk_2.png"
           },
-          "sha256": "5c37bc42157d0448a0800faa487aeafe8a5692ca5f401282e61d2221a526d4d6",
-          "rgba_sha256": "cdd16101beb7003401785bbd43df329adaa0381f22e6066987fd97b4af6eb2ac",
+          "sha256": "f832c30a8bc6df6a44d2da58a4da76a786c7fcf639fa74c415f9b3b3626b550d",
+          "rgba_sha256": "58809eae7b9a7868dbb9b3deb689b7e3077381c7b3a60edd135adf442483c5e9",
           "bounds": [
-            122,
-            57,
-            322,
-            361
+            118,
+            60,
+            323,
+            362
           ],
           "rect": [
             0,
@@ -5288,11 +5288,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/rejected/b/frames/thief/walk_2.png",
-          "uniform_scale": 1,
+          "source": "docs/art-production/hero-sprites/source/fix5/thief-walk_2-attempt3.png",
+          "uniform_scale": 0.85,
           "layer_sha256": {
-            "hair": "73786e9963d89ae8571ccf792e0d263eb2d05c8a0e983f0bbd48a05d9918e698",
-            "grip": "729ccd800719ad37157e9c16a009761bb6f10ed09e22fd542cf2992b204560df"
+            "hair": "f54c596ee6cebcd2b866084ab8aa4bac2d83a3dae43990dd8c094469d69b86c0",
+            "grip": "0d7a0699ee4e869601c14b0e036d70bcb0d7d58f0297eac904752bf602a3900d"
           }
         },
         {
@@ -5388,8 +5388,8 @@
           "anchors": {
             "hand": {
               "point": [
-                311.168,
-                152.032
+                308.203,
+                179.676
               ],
               "angle": -110,
               "z": "front",
@@ -5397,15 +5397,15 @@
             },
             "crown": {
               "point": [
-                223.734,
-                68.198
+                245.293,
+                91.797
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                283.206,
-                129.895
+                292.962,
+                152.437
               ],
               "angle": 0
             }
@@ -5416,12 +5416,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/thief/attack_0.png"
           },
-          "sha256": "a222abb80d4828f528cde140666ef2cd3660370f313987d187c5e1589ae7f148",
-          "rgba_sha256": "57a87261b8dc2366dde19b12743594eaa2a83a1cfd25f7529536f098fc110c3d",
+          "sha256": "c6748f5062ec471a50d1dd857140d10abd0e396d16c6cc4a4e44fc82fdf12f17",
+          "rgba_sha256": "b49a69b62c4a6cfb1a578947be0ba3f10dac5e9a21981ffc7976cd1677ced482",
           "bounds": [
-            100,
-            17,
-            340,
+            113,
+            50,
+            328,
             360
           ],
           "rect": [
@@ -5430,11 +5430,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/rejected/b/frames/thief/attack_0.png",
-          "uniform_scale": 1.0591715976331362,
+          "source": "docs/art-production/hero-sprites/source/fix5/thief-attack_0-attempt1.png",
+          "uniform_scale": 0.3242753623188406,
           "layer_sha256": {
-            "hair": "56a7086d75bce10d280458865d526756e10c8a62fca827fc8d95dd38c69db921",
-            "grip": "686cbff03a075b23a21030af903eb8edaedca0971f550c656aa243d99ec4b57e"
+            "hair": "30b487aca45a71e1eb182bfc257a8d468e20255d33f3d1d5b99c01d13574b3ef",
+            "grip": "8737ecc134415f32eebe934bcb30b20c7523639b36742535e32f0763e5916406"
           }
         },
         {
@@ -5814,8 +5814,8 @@
           "anchors": {
             "hand": {
               "point": [
-                281.947,
-                331.721
+                276.991,
+                333.983
               ],
               "angle": -48,
               "z": "front",
@@ -5823,15 +5823,15 @@
             },
             "crown": {
               "point": [
-                279.472,
-                176.424
+                274.714,
+                191.11
               ],
               "angle": -15
             },
             "side": {
               "point": [
-                326.76,
-                234.187
+                318.219,
+                244.252
               ],
               "angle": -15
             }
@@ -5842,12 +5842,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/thief/hurt_0.png"
           },
-          "sha256": "6d5ef3c6b64de0e0d90d1118cdc8c4e37d8d69cfb753b26665394ec320f75e08",
-          "rgba_sha256": "e80b971094a3027bc0ac2c1b2b97c98158c766534f1f161258ba06fa2948bb9d",
+          "sha256": "7b9b1b615463ae0abf7eb22a201d34daefad97af74dac917f3284e44f0fe6573",
+          "rgba_sha256": "cac41cd384791a2112f1d31bab93613a8a8f7066a296d65b9a85c8f34e3dd308",
           "bounds": [
-            81,
-            110,
-            362,
+            92,
+            130,
+            351,
             360
           ],
           "rect": [
@@ -5856,11 +5856,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/rejected/b/frames/thief/hurt_0.png",
-          "uniform_scale": 1.25,
+          "source": "docs/art-production/hero-sprites/source/fix5/before/frames/thief/hurt_0.png",
+          "uniform_scale": 0.92,
           "layer_sha256": {
-            "hair": "7468dae90cfe8ca97cda66b8181823bb6989a8bd74ca9f26b8214422cce0adae",
-            "grip": "107ae1b0140b8b17b78dd6940dbec68d333e0eacc575991813cbc5595ee970fc"
+            "hair": "df4c74bd09c22e6677c0757e4be1382b282861b42e094f0e4a7c863bf739028e",
+            "grip": "67e3b738ff74701fe659c0653952d439deacf76d3554007e334bddce310f93cb"
           }
         }
       ],
@@ -6240,8 +6240,8 @@
           "anchors": {
             "hand": {
               "point": [
-                297.35,
-                255.45
+                310.175,
+                254.45
               ],
               "angle": -48,
               "z": "front",
@@ -6249,15 +6249,15 @@
             },
             "crown": {
               "point": [
-                227.65,
-                65.95
+                234.675,
+                67.5
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                295.65,
-                150.9
+                307.775,
+                149.9
               ],
               "angle": 0
             }
@@ -6268,13 +6268,13 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/merchant/walk_2.png"
           },
-          "sha256": "fc8e71b9740347ebc6b5e61063c7b1b3f7df9588a3a64f9845ffa2ab56b9cdf0",
-          "rgba_sha256": "5ffd44212cdbcc5edd407ebb413bb554f98d603d5e60b45fc02a48a8eda504c4",
+          "sha256": "d6a5f954bd2ae43c72c377bff196ee18e64e8464a354f2a8f0b6c5c3674df1d4",
+          "rgba_sha256": "5ce50e79d1d08db82818362e05e8a95ed77433bed8c8465172d091842290c727",
           "bounds": [
-            107,
-            58,
-            316,
-            360
+            113,
+            59,
+            328,
+            361
           ],
           "rect": [
             0,
@@ -6282,11 +6282,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/rejected/b/frames/merchant/walk_2.png",
-          "uniform_scale": 1,
+          "source": "docs/art-production/hero-sprites/source/fix5/merchant-walk_2-attempt3.png",
+          "uniform_scale": 0.85,
           "layer_sha256": {
-            "hair": "65be5d5a319f18a77ed594220751e485db3eb75002c6f8ab84642e593fcb4dd9",
-            "grip": "cb7a1289a55da4c64e095894afe4e9b269cd95c2ac1c89f995637b4e87e77335"
+            "hair": "313f34b9db509b945d09b08d0541e6aab5819809814b73e05c56cfa063d54343",
+            "grip": "3bd7b2a7f833ffc44984b31cd8fc7401f1e59922ebb099bdfe9c379c4d30a799"
           }
         },
         {
@@ -6382,8 +6382,8 @@
           "anchors": {
             "hand": {
               "point": [
-                311.025,
-                144.4
+                307.633,
+                152.435
               ],
               "angle": -110,
               "z": "front",
@@ -6391,15 +6391,15 @@
             },
             "crown": {
               "point": [
-                212.025,
-                45.9
+                212.322,
+                57.606
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                283.525,
-                130.1
+                281.158,
+                138.668
               ],
               "angle": 0
             }
@@ -6410,12 +6410,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/merchant/attack_0.png"
           },
-          "sha256": "aefea9cf36fc8b29b27891b42e835c9331851f45eca1a82b74432e891985085d",
-          "rgba_sha256": "6733a4fd0f07eb4ec773202af653d84e0a5c4282d46fca57a7d60ddf510dddc2",
+          "sha256": "3992e4592fef04d770e14bba1474766319b2e47cb70573fed8802f5d22d99874",
+          "rgba_sha256": "7cf843a5c5c5b5ba632b06f8dbd36cdac4ec04e7cdf306197461d8786c69ff4e",
           "bounds": [
-            98,
-            38,
-            336,
+            102,
+            50,
+            332,
             360
           ],
           "rect": [
@@ -6424,11 +6424,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt3.png",
-          "uniform_scale": 0.55,
+          "source": "docs/art-production/hero-sprites/source/fix5/before/frames/merchant/attack_0.png",
+          "uniform_scale": 0.9627329192546584,
           "layer_sha256": {
-            "hair": "277f72b068ce384eb380c49b3bc90ca7e8241a01160f7a7942c992e0c22ac3f8",
-            "grip": "cec198b5d05613315cb79e1ce2168e61716a6cfba08dbf1d4ec46ddbd4683ee1"
+            "hair": "ad366b3dc29890e901fe9639b733bc8197ac325147517b381194122fc5f31397",
+            "grip": "b0bd6ffc602e549b486b051003e39c672a6825e7c5125960cca30c03ea9cb0d4"
           }
         },
         {
@@ -6771,7 +6771,7 @@
           "source": "docs/art-production/hero-sprites/source/b/merchant-attempt1.png",
           "uniform_scale": 1.0763888888888888,
           "layer_sha256": {
-            "hair": "ceecdc083345b742203fdea264aeb56819e360cbec246a7b6fade337b8bdec70",
+            "hair": "c519bb58a55914870fc95223c5a4e851ffd493dfcbf506df5dda55ab93ce65ba",
             "grip": "dfeed6436ccd88002fb04611a1824dce3db3aea5f088383cd2175f92221749b3"
           }
         }
@@ -6935,7 +6935,7 @@
           "source": "docs/art-production/hero-sprites/source/b/merchant-attempt1.png",
           "uniform_scale": 1.0763888888888888,
           "layer_sha256": {
-            "hair": "996caccb40d798e2c4631351dc2c275458f588f893cd9a0e168983fbc33fb4c0",
+            "hair": "4a4b63dfc61b0e9eefd37da3c7d76660e01e1bf04b6085f6c597472eec98a4f3",
             "grip": "5f28503bf8cb31c303b900f057f382c1874130dd6116a53527b37db60413ec8c"
           }
         }
@@ -7492,7 +7492,7 @@
   ],
   "excluded": [],
   "scope": {
-    "request": "docs/art-requests/hero-sprites-fix4.md",
+    "request": "docs/art-requests/hero-sprites-fix5.md",
     "characters": [
       "mage_female",
       "acolyte_female",
@@ -7503,6 +7503,6 @@
       "merchant_female"
     ],
     "unresolved": [],
-    "note": "All seven characters and six weapons delivered. Earlier fix3/batch B rejection records are historical; current adoption is recorded in fix4."
+    "note": "Fix5 partial delivery: two walk_2 revisions rejected after two retries; previous frames retained but not visually approved. Technical checker does not certify art acceptance."
   }
 }

@@ -228,3 +228,50 @@ node ../asset-kit/tools/check.mjs --root . --manifest docs/art-production/hero-s
 node docs/art-production/hero-sprites/verify-fix4.mjs
 ffmpeg -hide_banner -loglevel error -y -framerate 50 -i docs/art-production/hero-sprites/verification/animation-frames/%03d.png -filter_complex '[0:v]split[a][b];[a]palettegen=stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=3' -loop 0 docs/art-production/hero-sprites/preview_animation.gif
 ```
+
+## 수정 5 — 부분 적용, 걷기 반려 및 검사 기준 충돌 (2026-10-09)
+
+요청서 `docs/art-requests/hero-sprites-fix5.md`에 따라 **thief_male·merchant_female만** 처리했다. 아래 결과는 전체 승인이나 게임 투입 완료를 뜻하지 않는다. 이전 수정 4의 승인 문구보다 이 절과 `game-manifest.json.fix5`의 미해결 상태가 우선한다.
+
+| 대상 | 결과 |
+|---|---|
+| 도둑 attack_0 | 내장 `image_gen`으로 전신 재생성 후 채택. 높이 309px, 머리 마스크 주성분 폭 179px 기준으로 균일 축소. 가까운 팔을 뒤·위로 젖힌 준비 자세. hand/crown/side 및 hairMask/gripOverlay 새로 작성 |
+| 도둑 hurt_0 | 원점 (220,360) 고정 **0.92배** 축소. 그림·마스크·그립·세 기준점을 같은 변환으로 이동. 높이 **230px**, 발 바닥 360 유지. 요청서의 약 220px 이상은 만족하지만 지정 검사에서는 오류 |
+| 상인 attack_0 | 원점 고정 **310/322 = 0.9627329배** 축소. 그림·레이어·기준점 동시 변환. 높이 **310px** |
+| 상인 sit_0·dead_0 | 기존 마스크에 묶은 머리 연결 영역만 추가: 각각 **197 / 1100픽셀**. 본체 그림·그립·기준점은 변경하지 않음 |
+| 두 캐릭터 walk_2 | 각각 최초 전신 생성 + 재시도 2회. 마지막 후보는 보폭이 넓어졌지만 walk_0과 반대인 다리의 겹침 순서가 확실하지 않아 **반려**. 기존 프레임은 보존했으며 미해결 표시. 다리 합성은 하지 않음 |
+
+모든 생성 호출에 승인 원본 `docs/art/concepts/round3/class_lineup.png`를 첨부했다. 실제 프롬프트는 `prompts/thief_male-fix5-attempt1.txt`(공격), `attempt2~4.txt`(걷기 3회), `prompts/merchant_female-fix5-attempt1~3.txt`(걷기 3회)다. 생성 원본은 `source/fix5/`, 반려 후보와 레이어는 `rejected/fix5/`, 호출별 참조·프롬프트·원본 해시는 `generation.json.fix5.sources`에 있다. 호출 직전 프롬프트 파일의 앞뒤 공백은 제거했다. 처리 재현 코드는 `fix5.mjs`, 처리 전 원본과 매니페스트는 `source/fix5/before/` 및 `source/fix5/game-manifest-before.json`에 보존했다.
+
+### 검사 결과와 완료하지 못한 항목
+
+- 표준 변환 → 기록 보강 → 지정 검사 실행: **오류 1 · 주의 4 · 통과 648 · 누락 0 · 제외 0**. 결과는 `check.json`, 로그는 `verification/fix5-check-log.txt`다. **오류 0을 달성하지 못했다.**
+- 유일한 오류는 도둑 hurt_0의 높이 230px. 요청서에는 약 220px 이상이면 된다고 되어 있으나, 현행 검사기는 피격 프레임도 서 있는 자세로 검사하고 `bodyTol=0.1`, 기준 310px의 두 배 허용오차 경계 **248px**를 적용한다. 머리 크기를 다시 키우거나, 프레임을 늘이거나, 기준을 완화하거나, 검사에서 제외해 통과시키지 않았다. 이를 해결하려면 요청서와 피격 자세 검사 기준의 정합성 결정이 필요하다.
+- 주의 4건: 마법사·궁수·상인의 기존 낮은 피격 높이 3건과 도둑 공격 준비→접촉의 손 이동 1건.
+- 별도 레이어·보존 검사 **PASS**: 28프레임, 장착 조합 224개, 장비 잘림 0, 머리 마스크 몸 밖 누출 0, 허용 범위 밖 변경 0. 기존 다섯 캐릭터의 그림·레이어·기준점과 장비 데이터는 보존했다.
+- 두 캐릭터의 14프레임 장비 검수 시트와 갈색 머리 시트를 직접 확인했다. 새 도둑 attack_0의 머리 마스크 폭·높이는 idle_0 대비 ±4% 이내. 전체 14프레임은 기존 머리카락 형태·회전 차이 때문에 단순 축정렬 마스크 치수에서 ±4%를 벗어나는 항목이 있어 **전체 머리 크기 통과라고 선언하지 않았다**. 프레임별 실제 치수와 측정 한계는 `verification/fix5-head-metrics.json` 및 `fix5-checks.json`에 남겼다.
+- 갱신한 `review_thief_male.png`, `review_merchant_female.png`에는 무기·정수리 leaf·옆머리 hairpin과 보이는 손의 빨간 기준점이 있다. 두 walk_2는 `UNRESOLVED / RETAINED` 표시다. 수정한 장식 위치와 같은 무기 팔을 직접 확인했다.
+- 추가 증거: `verification/fix5-legs-<캐릭터>.png`(walk_0·보존 walk_2·마지막 반려 후보의 다리 확대), `fix5-hair-<캐릭터>.png`(갈색 14장), `fix5-ponytails.png`, `fix5-size-comparison.png`, `fix5-attempts-<캐릭터>.png`.
+
+쓰기 범위는 이 제작 폴더뿐이다. `src/`, `tools/`, `asset-specs/`, 요청서, 승인 원화, `../asset-kit`은 수정하지 않았으며 커밋·푸시·런타임 반영도 하지 않았다. 이전 전체 preview 파일은 수정 4의 역사 자료이며 수정 5 결과는 위 전용 검수 파일을 사용한다.
+
+```sh
+node docs/art-production/hero-sprites/fix5.mjs
+node tools/asset-kit-sprites.mjs --root . --in docs/art-production/hero-sprites/game-manifest.json --out docs/art-production/hero-sprites/manifest.json
+node docs/art-production/hero-sprites/record.mjs
+node ../asset-kit/tools/check.mjs --root . --manifest docs/art-production/hero-sprites/manifest.json --spec asset-specs/hero-sprites.json --json docs/art-production/hero-sprites/check.json
+# 위 검사기는 알려진 hurt_0 높이 오류로 종료 코드 1을 반환한다.
+node docs/art-production/hero-sprites/verify-fix5.mjs
+```
+
+### 수정 5 후 검수 조정 (Claude, 2026-10-09)
+
+- **도둑·상인 walk_2:** 수정 4에서 다리를 붙여 만든 walk_2(이음매가 보임) 대신, 수정 5의 attempt3 전신 후보를 채택했다(`adopt-walk2.mjs`).
+  - 후보가 walk_0과 거의 같아서 기준점은 walk_0에서 템플릿 맞춤으로 옮겼다. 손 기준점과 손가락 오버레이는 손 부분, crown·side는 머리 부분을 맞췄다.
+  - 상인 후보 마스크에서 빠진 묶은 머리 끝은 크림색 픽셀로 채웠다(+3351px).
+  - 앞에 나온 발이 walk_0과 반대인지는 확실하지 않다. 80px 표시를 기준으로 받아들였다.
+- **요구서:** 피격(hurt)은 웅크리는 동작이므로 `standing: []`으로 바꿔 선 자세 높이 검사에서 뺐다.
+  - 그래서 도둑 hurt_0(230px) 오류가 사라졌다.
+  - 검사 결과는 오류 0, 주의 1, 통과 647이다.
+- **확인한 것:** 무기·leaf·hairpin을 얹은 14프레임 시트와 머리색 시트(갈색·빨강·파랑)로 머리 크기·몸 방향·무기 팔·머리장식·머리색을 확인했다.
+- 이 상태로 일곱 캐릭터 모두 게임에 들어갔다(`tools/sync-hero-sprites.mjs`).

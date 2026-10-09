@@ -145,7 +145,8 @@
           "standing": []
         },
         "hurt": {
-          "frames": 1
+          "frames": 1,
+          "standing": []
         },
         "dead": {
           "frames": 1,

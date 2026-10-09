@@ -11,5 +11,5 @@ out.bundles=Object.entries(M.characters).map(([id,c])=>({id,character:id,animati
 out.source.gameManifest=path.join(base,'game-manifest.json');out.source.gameManifest_sha256=sha(fs.readFileSync(path.join(R,'game-manifest.json')));out.source.enrichment='record.mjs: only source/scale, hashes, raster bounds, weapon sheets and bundle evidence added after standard converter.';
 // Fix4 adopts both batch B characters; axe is already delivered.
 out.excluded=[];
-out.scope={request:'docs/art-requests/hero-sprites-fix4.md',characters:Object.keys(M.characters),unresolved:M.fix4?.unresolved??[],note:'All seven characters and six weapons delivered. Earlier fix3/batch B rejection records are historical; current adoption is recorded in fix4.'};
+out.scope={request:M.fix5?.request??'docs/art-requests/hero-sprites-fix4.md',characters:Object.keys(M.characters),unresolved:M.fix5?.unresolved??M.fix4?.unresolved??[],note:M.fix5?'Fix5 partial delivery: two walk_2 revisions rejected after two retries; previous frames retained but not visually approved. Technical checker does not certify art acceptance.':'All seven characters and six weapons delivered; adoption recorded in fix4.'};
 fs.writeFileSync(path.join(R,'manifest.json'),JSON.stringify(out,null,2)+'\n');console.log('Added reproducible frame/source/layer hashes and uniform-scale evidence.');
