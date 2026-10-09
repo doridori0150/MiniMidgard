@@ -1,0 +1,47 @@
+{
+  "idle": {
+    "count": 4,
+    "durationsMs": [
+      250,
+      250,
+      250,
+      250
+    ],
+    "totalMs": 1000,
+    "loopExtension": 0,
+    "framesHaveAlpha": true
+  },
+  "attack": {
+    "count": 8,
+    "durationsMs": [
+      60,
+      80,
+      140,
+      40,
+      150,
+      90,
+      90,
+      80
+    ],
+    "totalMs": 730,
+    "loopExtension": null,
+    "framesHaveAlpha": true
+  },
+  "walk": {
+    "count": 8,
+    "durationsMs": [
+      90,
+      90,
+      90,
+      90,
+      90,
+      90,
+      90,
+      90
+    ],
+    "totalMs": 720,
+    "loopExtension": 0,
+    "framesHaveAlpha": true
+  },
+  "attack08EqualsIdle01": true
+}

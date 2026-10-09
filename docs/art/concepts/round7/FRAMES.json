@@ -1,0 +1,555 @@
+{
+  "character": "쿠키",
+  "processing": "NONE: RGBA PNG, uniform per-sheet Lanczos scaling; no pixelation, palette reduction, dithering or per-frame height normalization",
+  "canvas1x": [
+    144,
+    120
+  ],
+  "canvas3x": [
+    432,
+    360
+  ],
+  "groundLine1x": 106,
+  "groundLine3x": 318,
+  "motions": {
+    "idle": {
+      "loop": true,
+      "totalDurationMs": 1000,
+      "scale": 0.11095700416088766,
+      "frames": [
+        {
+          "frame": 1,
+          "durationMs": 250,
+          "source": "sources/idle_refined.png",
+          "sourceCrop": [
+            30,
+            80,
+            415,
+            840
+          ],
+          "sourceAnchorX": 216,
+          "sourceGroundY": 827,
+          "sourceToGameScale": 0.11095700416088766,
+          "extractionPolygon": null,
+          "translation1x": [
+            41,
+            23
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "기준",
+          "sourceOverride": null
+        },
+        {
+          "frame": 2,
+          "durationMs": 250,
+          "source": "sources/idle_refined.png",
+          "sourceCrop": [
+            475,
+            70,
+            880,
+            840
+          ],
+          "sourceAnchorX": 660,
+          "sourceGroundY": 827,
+          "sourceToGameScale": 0.11095700416088766,
+          "extractionPolygon": null,
+          "translation1x": [
+            41,
+            22
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "들숨",
+          "sourceOverride": null
+        },
+        {
+          "frame": 3,
+          "durationMs": 250,
+          "source": "sources/idle_refined.png",
+          "sourceCrop": [
+            910,
+            65,
+            1318,
+            840
+          ],
+          "sourceAnchorX": 1103,
+          "sourceGroundY": 827,
+          "sourceToGameScale": 0.11095700416088766,
+          "extractionPolygon": null,
+          "translation1x": [
+            41,
+            21
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "최고점",
+          "sourceOverride": null
+        },
+        {
+          "frame": 4,
+          "durationMs": 250,
+          "source": "sources/idle_refined.png",
+          "sourceCrop": [
+            1350,
+            80,
+            1745,
+            840
+          ],
+          "sourceAnchorX": 1546,
+          "sourceGroundY": 827,
+          "sourceToGameScale": 0.11095700416088766,
+          "extractionPolygon": null,
+          "translation1x": [
+            40,
+            23
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "날숨",
+          "sourceOverride": null
+        }
+      ]
+    },
+    "walk": {
+      "loop": true,
+      "totalDurationMs": 720,
+      "scale": 0.12102874432677761,
+      "frames": [
+        {
+          "frame": 1,
+          "durationMs": 90,
+          "source": "sources/walk_first_half_initial.png",
+          "sourceCrop": [
+            60,
+            15,
+            580,
+            715
+          ],
+          "sourceAnchorX": 335,
+          "sourceGroundY": 697,
+          "sourceToGameScale": 0.12102874432677761,
+          "extractionPolygon": null,
+          "translation1x": [
+            29,
+            23
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "접지 가까운 밝은 다리 앞",
+          "sourceOverride": null
+        },
+        {
+          "frame": 2,
+          "durationMs": 90,
+          "source": "sources/walk_camera_corrected.png",
+          "sourceCrop": [
+            455,
+            45,
+            715,
+            508
+          ],
+          "sourceAnchorX": 590,
+          "sourceGroundY": 496,
+          "sourceToGameScale": 0.17699115044247787,
+          "extractionPolygon": null,
+          "translation1x": [
+            38,
+            26
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "내려앉음 가까운 다리 지지",
+          "sourceOverride": null
+        },
+        {
+          "frame": 3,
+          "durationMs": 90,
+          "source": "sources/walk_first_half_initial.png",
+          "sourceCrop": [
+            1150,
+            12,
+            1520,
+            715
+          ],
+          "sourceAnchorX": 1340,
+          "sourceGroundY": 701,
+          "sourceToGameScale": 0.12102874432677761,
+          "extractionPolygon": null,
+          "translation1x": [
+            39,
+            23
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "지나감 먼 발 통과",
+          "sourceOverride": null
+        },
+        {
+          "frame": 4,
+          "durationMs": 90,
+          "source": "sources/walk_first_half_initial.png",
+          "sourceCrop": [
+            1655,
+            8,
+            2120,
+            715
+          ],
+          "sourceAnchorX": 1845,
+          "sourceGroundY": 699,
+          "sourceToGameScale": 0.12102874432677761,
+          "extractionPolygon": null,
+          "translation1x": [
+            39,
+            22
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "올라감 먼 무릎 앞",
+          "sourceOverride": null
+        },
+        {
+          "frame": 5,
+          "durationMs": 90,
+          "source": "sources/walk_second_half.png",
+          "sourceCrop": [
+            80,
+            0,
+            570,
+            715
+          ],
+          "sourceAnchorX": 335,
+          "sourceGroundY": 701,
+          "sourceToGameScale": 0.11477761836441894,
+          "extractionPolygon": null,
+          "translation1x": [
+            33,
+            26
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "접지 먼 어두운 다리 앞",
+          "sourceOverride": null
+        },
+        {
+          "frame": 6,
+          "durationMs": 90,
+          "source": "sources/walk_second_half.png",
+          "sourceCrop": [
+            640,
+            10,
+            1050,
+            720
+          ],
+          "sourceAnchorX": 850,
+          "sourceGroundY": 706,
+          "sourceToGameScale": 0.11477761836441894,
+          "extractionPolygon": null,
+          "translation1x": [
+            38,
+            26
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "내려앉음 먼 다리 지지",
+          "sourceOverride": null
+        },
+        {
+          "frame": 7,
+          "durationMs": 90,
+          "source": "sources/walk_second_half.png",
+          "sourceCrop": [
+            1200,
+            0,
+            1530,
+            715
+          ],
+          "sourceAnchorX": 1380,
+          "sourceGroundY": 704,
+          "sourceToGameScale": 0.11477761836441894,
+          "extractionPolygon": null,
+          "translation1x": [
+            41,
+            25
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "지나감 가까운 발 통과",
+          "sourceOverride": null
+        },
+        {
+          "frame": 8,
+          "durationMs": 90,
+          "source": "sources/walk_second_half.png",
+          "sourceCrop": [
+            1688,
+            0,
+            2120,
+            716
+          ],
+          "sourceAnchorX": 1875,
+          "sourceGroundY": 704,
+          "sourceToGameScale": 0.11477761836441894,
+          "extractionPolygon": null,
+          "translation1x": [
+            41,
+            25
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "올라감 가까운 무릎 앞",
+          "sourceOverride": null
+        }
+      ]
+    },
+    "attack": {
+      "loop": false,
+      "totalDurationMs": 730,
+      "scale": 0.23121387283236994,
+      "frames": [
+        {
+          "frame": 1,
+          "durationMs": 60,
+          "source": "sources/attack_portrait.png",
+          "sourceCrop": [
+            175,
+            30,
+            415,
+            400
+          ],
+          "sourceAnchorX": 295,
+          "sourceGroundY": 388,
+          "sourceToGameScale": 0.23121387283236994,
+          "extractionPolygon": null,
+          "translation1x": [
+            34,
+            23
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "뒤쪽으로 무게 준비",
+          "sourceOverride": null
+        },
+        {
+          "frame": 2,
+          "durationMs": 80,
+          "source": "sources/attack_portrait.png",
+          "sourceCrop": [
+            535,
+            10,
+            920,
+            400
+          ],
+          "sourceAnchorX": 788,
+          "sourceGroundY": 392,
+          "sourceToGameScale": 0.23121387283236994,
+          "extractionPolygon": null,
+          "translation1x": [
+            4,
+            18
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "검 머리 뒤로 준비",
+          "sourceOverride": null
+        },
+        {
+          "frame": 3,
+          "durationMs": 140,
+          "source": "sources/attack_portrait.png",
+          "sourceCrop": [
+            45,
+            400,
+            460,
+            808
+          ],
+          "sourceAnchorX": 317,
+          "sourceGroundY": 797,
+          "sourceToGameScale": 0.23121387283236994,
+          "extractionPolygon": null,
+          "translation1x": [
+            -1,
+            14
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "준비 끝 앞발 들기",
+          "sourceOverride": null
+        },
+        {
+          "frame": 4,
+          "durationMs": 40,
+          "source": "sources/attack_initial.png",
+          "sourceCrop": [
+            1090,
+            55,
+            1528,
+            570
+          ],
+          "sourceAnchorX": 1275,
+          "sourceGroundY": 560,
+          "sourceToGameScale": 0.18181818181818182,
+          "extractionPolygon": null,
+          "translation1x": [
+            28,
+            14
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "내려베기 중간 흐린 호 1개",
+          "sourceOverride": null
+        },
+        {
+          "frame": 5,
+          "durationMs": 150,
+          "source": "sources/attack_portrait.png",
+          "sourceCrop": [
+            40,
+            810,
+            625,
+            1110
+          ],
+          "sourceAnchorX": 270,
+          "sourceGroundY": 1100,
+          "sourceToGameScale": 0.23121387283236994,
+          "extractionPolygon": [
+            [
+              40,
+              810
+            ],
+            [
+              625,
+              810
+            ],
+            [
+              625,
+              990
+            ],
+            [
+              580,
+              990
+            ],
+            [
+              580,
+              1110
+            ],
+            [
+              40,
+              1110
+            ]
+          ],
+          "translation1x": [
+            9,
+            39
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "앞발 디디며 수평 아래 타격",
+          "sourceOverride": null
+        },
+        {
+          "frame": 6,
+          "durationMs": 90,
+          "source": "sources/attack_portrait.png",
+          "sourceCrop": [
+            600,
+            825,
+            995,
+            1125
+          ],
+          "sourceAnchorX": 790,
+          "sourceGroundY": 1103,
+          "sourceToGameScale": 0.23121387283236994,
+          "extractionPolygon": [
+            [
+              665,
+              825
+            ],
+            [
+              995,
+              825
+            ],
+            [
+              995,
+              1125
+            ],
+            [
+              940,
+              1125
+            ],
+            [
+              910,
+              1107
+            ],
+            [
+              600,
+              1107
+            ],
+            [
+              600,
+              1030
+            ],
+            [
+              665,
+              980
+            ]
+          ],
+          "translation1x": [
+            18,
+            42
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "앞아래 끝까지 후속 동작",
+          "sourceOverride": null
+        },
+        {
+          "frame": 7,
+          "durationMs": 90,
+          "source": "sources/attack_recovery.png",
+          "sourceCrop": [
+            45,
+            80,
+            430,
+            840
+          ],
+          "sourceAnchorX": 216,
+          "sourceGroundY": 827,
+          "sourceToGameScale": 0.11095700416088766,
+          "extractionPolygon": null,
+          "translation1x": [
+            43,
+            23
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "검끝 아래로 회수",
+          "sourceOverride": null
+        },
+        {
+          "frame": 8,
+          "durationMs": 80,
+          "source": "sources/attack_portrait.png",
+          "sourceCrop": [
+            650,
+            1110,
+            900,
+            1515
+          ],
+          "sourceAnchorX": 780,
+          "sourceGroundY": 1500,
+          "sourceToGameScale": 0.23121387283236994,
+          "extractionPolygon": null,
+          "translation1x": [
+            32,
+            16
+          ],
+          "groundLine1x": 106,
+          "groundLine3x": 318,
+          "pose": "대기 첫 장으로 복귀",
+          "sourceOverride": "frames/idle_01_1x.png"
+        }
+      ]
+    }
+  }
+}

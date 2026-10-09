@@ -1,0 +1,230 @@
+{
+  "idle": [
+    {
+      "frame": 1,
+      "alpha64Bounds1x": [
+        42,
+        26,
+        82,
+        106
+      ],
+      "sha256": "a19dd822e607f7da043bf519e18a497ef98e2a2ebd781c4bc384b770c3ef89e5"
+    },
+    {
+      "frame": 2,
+      "alpha64Bounds1x": [
+        42,
+        24,
+        85,
+        106
+      ],
+      "sha256": "abbdaaeba549bfc3d17aab7938c7b58f4e9fb4a68a3a7a0c34b58dcf6c2e87f9"
+    },
+    {
+      "frame": 3,
+      "alpha64Bounds1x": [
+        42,
+        23,
+        85,
+        106
+      ],
+      "sha256": "2ec93c06c884336335bedacd752f0d4771098e61a3c6ea2491dcbf40da890b01"
+    },
+    {
+      "frame": 4,
+      "alpha64Bounds1x": [
+        41,
+        25,
+        83,
+        106
+      ],
+      "sha256": "5c4c54b4d25467757d34db7d1bb4b9c37a6f5465ffa9331ffebaefcfaa4204f2"
+    }
+  ],
+  "walk": [
+    {
+      "frame": 1,
+      "alpha64Bounds1x": [
+        31,
+        25,
+        90,
+        106
+      ],
+      "sha256": "4599d2409e1c74def53ebcdfa169c96a6b1aeb408661ada4f751c3bc3d1d3d6a"
+    },
+    {
+      "frame": 2,
+      "alpha64Bounds1x": [
+        39,
+        29,
+        82,
+        106
+      ],
+      "sha256": "f360e0036571bb8078675027791cbdac3c7ae5901960be1c78688a655f1da5a8"
+    },
+    {
+      "frame": 3,
+      "alpha64Bounds1x": [
+        43,
+        25,
+        81,
+        107
+      ],
+      "sha256": "1cdd4e7d31e3e28a29f5d67073e4ee2f51622151a398a980b231f5458bfc17af"
+    },
+    {
+      "frame": 4,
+      "alpha64Bounds1x": [
+        41,
+        24,
+        88,
+        106
+      ],
+      "sha256": "1d2d275d92ec46102d18f141983c581beba022bd28725cc0382e9c2fc9010568"
+    },
+    {
+      "frame": 5,
+      "alpha64Bounds1x": [
+        35,
+        26,
+        87,
+        107
+      ],
+      "sha256": "68359e8e0889d4ff413df2de23e672a578c4d65e56b8b4134cf7a6a2c429107b"
+    },
+    {
+      "frame": 6,
+      "alpha64Bounds1x": [
+        41,
+        28,
+        84,
+        106
+      ],
+      "sha256": "a13a0643531820fb8c38faa83f1324307d601cdaa0dc782e77574728bff1f405"
+    },
+    {
+      "frame": 7,
+      "alpha64Bounds1x": [
+        43,
+        25,
+        77,
+        106
+      ],
+      "sha256": "b1bc2568c7fc5b50ca861860246b199b3fd7898241e006aa21620d2c60a738d5"
+    },
+    {
+      "frame": 8,
+      "alpha64Bounds1x": [
+        43,
+        25,
+        85,
+        106
+      ],
+      "sha256": "3a517b51a5a4fff3d0a3ea7ab03bb7bbee6903616dc0bf4fcaaa3d766790305f"
+    }
+  ],
+  "attack": [
+    {
+      "frame": 1,
+      "alpha64Bounds1x": [
+        35,
+        25,
+        87,
+        107
+      ],
+      "sha256": "62abb489fd6881e061629c9341000f8a63c35ee6e68324af9595916bff59f964"
+    },
+    {
+      "frame": 2,
+      "alpha64Bounds1x": [
+        7,
+        21,
+        91,
+        107
+      ],
+      "sha256": "fb4c3d4885ac931a54c4ae926a5a8e0a8c1bac72a34e4b6534890e409a176fe2"
+    },
+    {
+      "frame": 3,
+      "alpha64Bounds1x": [
+        2,
+        15,
+        93,
+        106
+      ],
+      "sha256": "44bc8eb6e0081699dc6397ed52dfaef503701ad39b057e4b7a74faa78245fbff"
+    },
+    {
+      "frame": 4,
+      "alpha64Bounds1x": [
+        29,
+        17,
+        103,
+        107
+      ],
+      "sha256": "50975d59d0cba7243ef51532be800aab2b5c26b1bf8a7e3405523f1086cb8f53"
+    },
+    {
+      "frame": 5,
+      "alpha64Bounds1x": [
+        11,
+        41,
+        140,
+        106
+      ],
+      "sha256": "06a4cebebfcab9545f2dee12cddd63131682574b5ceae63eb86bf713790437f1"
+    },
+    {
+      "frame": 6,
+      "alpha64Bounds1x": [
+        20,
+        46,
+        106,
+        110
+      ],
+      "sha256": "de84ff2eae7d0c0c0d392e5d6e5a348d38b31275926bd1550e2fccb93e064029"
+    },
+    {
+      "frame": 7,
+      "alpha64Bounds1x": [
+        45,
+        26,
+        84,
+        106
+      ],
+      "sha256": "1d6c57c8369a1cde5bea006434dbbcc9d1eea6c86b979d56660d3d02f3c59f52"
+    },
+    {
+      "frame": 8,
+      "alpha64Bounds1x": [
+        42,
+        26,
+        82,
+        106
+      ],
+      "sha256": "a19dd822e607f7da043bf519e18a497ef98e2a2ebd781c4bc384b770c3ef89e5"
+    }
+  ],
+  "walkMeasuredCrownDisplacementRelativeToFrame1Px": [
+    0,
+    4,
+    0,
+    -1,
+    1,
+    3,
+    0,
+    0
+  ],
+  "walkExpectedCrownDisplacementPx": [
+    0,
+    2,
+    0,
+    -1.5,
+    0,
+    2,
+    0,
+    -1.5
+  ],
+  "strictPoseTableMatch": false,
+  "reason": "Generated pose approximation remains: walk 2 down bob is about 4 px instead of 2 px; angles and secondary-motion lag are not quantitatively locked. See NOTES.md."
+}
