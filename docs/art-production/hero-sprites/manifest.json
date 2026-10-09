@@ -4,8 +4,8 @@
     "schema": "minimidgard.sprites/1",
     "note": "변환기로 만든 표준 기록입니다. 원본은 게임 manifest입니다.",
     "gameManifest": "docs/art-production/hero-sprites/game-manifest.json",
-    "gameManifest_sha256": "d261c703481cc135aa96770acdae905295fd467bc39ea007fa70cd7924223b05",
-    "enrichment": "record.mjs: only source/scale, hashes, raster bounds, weapon sheets and bundle evidence added after standard converter."
+    "gameManifest_sha256": "4eb63f35e9ff175167cc2f0777cc2b558e160304b4463bfc42b47d219a6c39d3",
+    "enrichment": "record-b.mjs: source scale, file/layer hashes, bounds and weapon sheets after standard converter"
   },
   "sheets": [
     {
@@ -3214,8 +3214,8 @@
           "anchors": {
             "hand": {
               "point": [
-                271.789,
-                293.266
+                285.802,
+                259.104
               ],
               "angle": -48,
               "z": "front",
@@ -3223,15 +3223,15 @@
             },
             "crown": {
               "point": [
-                218.856,
-                87.621
+                224.874,
+                84.119
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                272.707,
-                138.301
+                277.516,
+                128.962
               ],
               "angle": 0
             }
@@ -3242,13 +3242,13 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/novice/walk_1.png"
           },
-          "sha256": "93496af08384ef74e77cd43770c92450c5e22eacfe188a9664a83ec16b260d5e",
-          "rgba_sha256": "b74183780411c027430744d210c1595a8cd5434be8fda9cb3354ea92b0f8f4c8",
+          "sha256": "27b9c3e8af1007fe12ae3d49fa8d93b4cdcba39defa8355d720502288e6218a0",
+          "rgba_sha256": "533297f43c31b9b5b869021258d8c89d145a3bb2f36f8f5e076b65a5aba02b21",
           "bounds": [
-            125,
-            55,
-            301,
-            362
+            121,
+            50,
+            304,
+            360
           ],
           "rect": [
             0,
@@ -3256,11 +3256,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/fix1/imported/novice/walk_1.png",
-          "uniform_scale": 1,
+          "source": "docs/art-production/hero-sprites/source/fix3/novice-attempt2.png",
+          "uniform_scale": 0.48742138364779874,
           "layer_sha256": {
-            "hair": "81889e10193fee5d1f1647bd4d5ae71b943fea397714c621f48d1520f1c699d3",
-            "grip": "5f14b229c704bbe86f48dfa004008539df3b291a1a9579a388c64b77f4847b38"
+            "hair": "9701989f475b4bc88da66827c7eb3f6e000c6dcacb39fb128263357f37301c82",
+            "grip": "3dff682232e0323ab8906c0b6af6169db947b3f2b890401e3185fa1da606b753"
           }
         },
         {
@@ -3476,8 +3476,8 @@
           "anchors": {
             "hand": {
               "point": [
-                305.195,
-                242.78
+                318.947,
+                228.396
               ],
               "angle": 0,
               "z": "front",
@@ -3485,15 +3485,15 @@
             },
             "crown": {
               "point": [
-                212.077,
-                99.148
+                231.698,
+                90.943
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                266.218,
-                149.828
+                284.827,
+                136.274
               ],
               "angle": 0
             }
@@ -3504,13 +3504,13 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/novice/attack_1.png"
           },
-          "sha256": "187f4dac80e973ddd32040db6fd93572f1dd801d3e398babde09502f4b49c3f2",
-          "rgba_sha256": "73ca77fa665adb7fd2c4811bbb8c3e513f98dcca15053e69fe0cdd427c9b932b",
+          "sha256": "7ed97c5dcfe03265832f046ebcce8e6b51042bf18046f34b3ac2ef2bf3e1704e",
+          "rgba_sha256": "072689e7f38e394342e31daa61b5c13f64727c5e37ec71aff1a3aea287c4bd33",
           "bounds": [
-            117,
-            67,
-            326,
-            361
+            123,
+            56,
+            339,
+            360
           ],
           "rect": [
             0,
@@ -3518,11 +3518,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/fix1/imported/novice/attack_1.png",
-          "uniform_scale": 1,
+          "source": "docs/art-production/hero-sprites/source/fix3/novice-attempt2.png",
+          "uniform_scale": 0.48742138364779874,
           "layer_sha256": {
-            "hair": "4c1b737690731f5391d8512f551dbb491bd977b8efac2a115f7f6408efa0ff78",
-            "grip": "bb21e95445fa01670b074f9d60af2fd39d4e509c616767dd9d227d4a2d2ba7b8"
+            "hair": "3e232b144c6669271028478aef4e2cc5668fac819a60d043d4aa720d2ce19b33",
+            "grip": "a71b5c42ef4266fe7dc8f238f1e6ad8c875299c39ae29fba95e706e410afea41"
           }
         },
         {
@@ -3536,24 +3536,24 @@
           "anchors": {
             "hand": {
               "point": [
-                313.982,
-                282.149
+                313.097,
+                273.726
               ],
-              "angle": -25,
+              "angle": 35,
               "z": "front",
               "visible": true
             },
             "crown": {
               "point": [
-                251,
-                95
+                243.396,
+                95.818
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                306,
-                146
+                296.038,
+                139.686
               ],
               "angle": 0
             }
@@ -3564,12 +3564,12 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/novice/attack_2.png"
           },
-          "sha256": "c2bc84dc827a0f41d7ea66a0f46387e03b42e85035e2875061076337c268b62e",
-          "rgba_sha256": "5c2ca1e914c77e25e1f6a646525dd476396a9a72761e55bfa0f945e6d21e2d99",
+          "sha256": "469091c0f1af6f2b2ee1d70e211c8d8f1e32afaba90540e7a43cd6f7f17ed8a6",
+          "rgba_sha256": "cdfe7afce879be1459c81b2b0ef878698eb242cf8a649f5f0bce810cf9ae221f",
           "bounds": [
-            137,
-            68,
-            338,
+            131,
+            59,
+            333,
             360
           ],
           "rect": [
@@ -3578,11 +3578,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/fix1/novice-attempt1.png",
-          "uniform_scale": 0.7013574660633484,
+          "source": "docs/art-production/hero-sprites/source/fix3/novice-attempt2.png",
+          "uniform_scale": 0.48742138364779874,
           "layer_sha256": {
-            "hair": "38a4317ba1fece9dc776d7da9fbae40fbd1673a3f03e3c8ac2c2724f447ea1a7",
-            "grip": "aa54595b64a1067b9d9fcc46af7abc679a1da4155aa60ff4b599ef19ce7d243f"
+            "hair": "e10ba1e9e26430b4f35d2955564f01c4ac7e92a7077b5cb2cc9501fb2313299e",
+            "grip": "cb19a39b517ad927fd3637a941edfbae9df3a457b5e1e0e68a653f62111cbfb5"
           }
         }
       ],
@@ -4522,24 +4522,24 @@
           "anchors": {
             "hand": {
               "point": [
-                302.119,
-                290.066
+                317.25,
+                260.209
               ],
-              "angle": 42,
+              "angle": 35,
               "z": "front",
               "visible": true
             },
             "crown": {
               "point": [
-                239.391,
-                94.887
+                232.243,
+                95.738
               ],
               "angle": 0
             },
             "side": {
               "point": [
-                295.232,
-                146.511
+                282.139,
+                143.785
               ],
               "angle": 0
             }
@@ -4550,13 +4550,13 @@
           "overlays": {
             "grip": "docs/art-production/hero-sprites/grips/swordsman/attack_2.png"
           },
-          "sha256": "c6f5684a420450b2f07681abc8eaf377c94419c3de5ff41eda451e28a2497351",
-          "rgba_sha256": "daad769457c6f29bf7a1b48f0773e6212324c5b391d55f6adc4713127836f018",
+          "sha256": "defa9a71ab480ff6a89f92b47b8e9276435c51b7a2834639f194474e34d7cf46",
+          "rgba_sha256": "aa8af66ea5a6e67eac6cd3d9579a4708e27199ebaef1543560b1f2f845a8cd0d",
           "bounds": [
-            133,
-            64,
-            328,
-            362
+            127,
+            60,
+            338,
+            360
           ],
           "rect": [
             0,
@@ -4564,11 +4564,11 @@
             512,
             400
           ],
-          "source": "docs/art-production/hero-sprites/source/fix1/imported/swordsman/attack_2.png",
-          "uniform_scale": 1,
+          "source": "docs/art-production/hero-sprites/source/fix3/swordsman-attempt2.png",
+          "uniform_scale": 0.46199701937406856,
           "layer_sha256": {
-            "hair": "341950c470947abe6022b12a98c8bf09c8f843316532798750cde56040e7fe70",
-            "grip": "cdd1c6105671d85c3cde22f7e11687edd6c045bc92976781372ec97afa54bc88"
+            "hair": "bdce80769941e3129991c8bda9e9a81d77246ff16fe84962cb3d64baefc9f2c8",
+            "grip": "5bcd9fb28e9905ce99afde42dc6c2ce780dc66692cf16dc4b7a4bc2a2a558d44"
           }
         }
       ],
@@ -5176,6 +5176,49 @@
           "uniform_scale": 1
         }
       ]
+    },
+    {
+      "id": "axe",
+      "kind": "weapon",
+      "category": "image",
+      "file": "docs/art-production/hero-sprites/equipment/axe.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sha256": "b15c0dc5af29185c83701f10d71f601f199e2a877cd0bbad77767c5aefeb8d68",
+      "frames": [
+        {
+          "sha256": "b15c0dc5af29185c83701f10d71f601f199e2a877cd0bbad77767c5aefeb8d68",
+          "rgba_sha256": "6f3e6fb1635a162ba7513927e375cd5987f773994c3ce023c6955e916a302e0e",
+          "bounds": [
+            38,
+            115,
+            156,
+            178
+          ],
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            56,
+            128
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/axe-attempt1.png",
+          "uniform_scale": 0.115
+        }
+      ]
     }
   ],
   "attachments": {
@@ -5248,6 +5291,20 @@
       "anchor": "hand",
       "slot": "weapon",
       "sha256": "fe1892da4a836f18c6d959c4b87651807dbb3b1ae14bc495eecef13c37ffe199"
+    },
+    "axe": {
+      "file": "docs/art-production/hero-sprites/equipment/axe.png",
+      "pivot": [
+        56,
+        128
+      ],
+      "tip": [
+        140.714,
+        128
+      ],
+      "anchor": "hand",
+      "slot": "weapon",
+      "sha256": "b15c0dc5af29185c83701f10d71f601f199e2a877cd0bbad77767c5aefeb8d68"
     },
     "leaf": {
       "file": "docs/art-production/hero-sprites/equipment/leaf.png",
@@ -5409,93 +5466,16 @@
       ]
     }
   ],
-  "excluded": [
-    {
-      "id": "thief_male",
-      "kind": "idle",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "thief_male",
-      "kind": "walk",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "thief_male",
-      "kind": "attack",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "thief_male",
-      "kind": "cast",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "thief_male",
-      "kind": "sit",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "thief_male",
-      "kind": "hurt",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "thief_male",
-      "kind": "dead",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "merchant_female",
-      "kind": "idle",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "merchant_female",
-      "kind": "walk",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "merchant_female",
-      "kind": "attack",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "merchant_female",
-      "kind": "cast",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "merchant_female",
-      "kind": "sit",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "merchant_female",
-      "kind": "hurt",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "merchant_female",
-      "kind": "dead",
-      "reason": "Batch B; outside hero-sprites-a-fix2 requested scope, not produced or reviewed."
-    },
-    {
-      "id": "axe",
-      "kind": "weapon",
-      "reason": "Batch B; outside requested fix2 scope."
-    }
-  ],
   "scope": {
-    "request": "docs/art-requests/hero-sprites-a-fix2.md",
-    "characters": [
-      "mage_female",
-      "acolyte_female",
-      "archer_male",
-      "novice_female",
-      "swordsman_male"
+    "request": "docs/art-requests/hero-sprites-b.md",
+    "status": "PARTIAL_DELIVERY",
+    "accepted": [
+      "axe"
     ],
-    "unresolved": [],
-    "note": "Exclusions are future batch B, not rejected fix2 frames. Unscoped checker evidence preserved in verification/check-unscoped-spec.json."
+    "rejected": [
+      "thief_male",
+      "merchant_female"
+    ],
+    "note": "Two retries exhausted. Both walking contact frames repeat the same leading foot. No approved-exclusion entries: requested characters remain missing in batch B check."
   }
 }

@@ -1,0 +1,2461 @@
+{
+  "kit": 1,
+  "source": {
+    "schema": "minimidgard.sprites/1",
+    "note": "변환기로 만든 표준 기록입니다. 원본은 게임 manifest입니다.",
+    "gameManifest": "docs/art-production/hero-sprites/rejected/b/game-manifest.json",
+    "gameManifest_sha256": "2b3fa50152aad0e6f0a41c17c252beaa11dab5722f768c5bc88d36feaebe0869",
+    "enrichment": "record-b.mjs: source scale, file/layer hashes, bounds and weapon sheets after standard converter"
+  },
+  "sheets": [
+    {
+      "id": "thief_male",
+      "kind": "idle",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/idle_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                284.847,
+                285.136
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                237.527,
+                99.741
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                300.663,
+                161.769
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/idle_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/idle_0.png"
+          },
+          "sha256": "47a7fe431ee11d24be038c96183d34a37ec01d57f11b3aa798eced63b1cabc4e",
+          "rgba_sha256": "e83be55b197f47efc0eecb97a6980f0ae5a957369c69d51538bf980e40441ae0",
+          "bounds": [
+            121,
+            49,
+            317,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt1.png",
+          "uniform_scale": 1.054421768707483,
+          "layer_sha256": {
+            "hair": "53a1b8a55564bba952ea47ef5a55d6170e309231189970f862e03df6dd3196f6",
+            "grip": "e385c95510e97a8021089cc9a8ee65188d8e0236695edb38bea5065a44b4010a"
+          }
+        },
+        {
+          "name": "idle_1",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/idle_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                284.847,
+                285.619
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                237.527,
+                101.42
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                300.663,
+                163.048
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/idle_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/idle_1.png"
+          },
+          "sha256": "cd616476ec2ecbc40c50df40d137bd99263fe912ab08e7a105bad8457fe98ab2",
+          "rgba_sha256": "4c3483d67d8424c6c0a346abdb7e89cf39d5ae94c96b9e72b593af08eb0554e5",
+          "bounds": [
+            121,
+            51,
+            317,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt1.png",
+          "uniform_scale": 1.054421768707483,
+          "layer_sha256": {
+            "hair": "dfc593079339408a79c347f44f96587ba386fee34f0d63370b39a4ed205e5a7b",
+            "grip": "449be47b19c915d653b6a3904ec0d4435ddd8cb7627b5ff9527b92ef90159618"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        2,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "thief_male",
+      "kind": "walk",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/walk_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                296.075,
+                265.65
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                250.175,
+                104.85
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                306.275,
+                160.25
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/walk_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/walk_0.png"
+          },
+          "sha256": "ed1293db1f3c8e7b21b6e78b6d3ab0b25ff6ccc7b94d6a78b3bdc7b879ec0cdc",
+          "rgba_sha256": "4a9f8ee2a421d1f8094a17f10a377808f5f074d30f0773d99acaf21f67d28a4d",
+          "bounds": [
+            127,
+            60,
+            321,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "04aed284aeb1bfd3aac273dad10b4c00b528bf4259a3b47da00562391e27911b",
+            "grip": "807edf09d8e2b36adc43f58011908398f0abc557c6ded3b185e0b537eb05fe94"
+          }
+        },
+        {
+          "name": "walk_1",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/walk_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                272.7,
+                287.75
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                243.8,
+                109.1
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                299.9,
+                166.2
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/walk_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/walk_1.png"
+          },
+          "sha256": "5c8adb6dc67af04b3cfa79b1416432255002be0f0541bc5e63760c2b6fd45ddd",
+          "rgba_sha256": "d4e0086595b818dbd1031b8f03e4df6c7a0ccd81e6ff5bf690e0cd83629131e2",
+          "bounds": [
+            119,
+            64,
+            314,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "19149fbde997cd7ed6125120a5e8062e7e5c21c436eda56ebf2f2d6db852cf3c",
+            "grip": "b73dd3de920e2f1412e580dcb83eda8a8a774f585c91c576cb9c73b7bb5aca3e"
+          }
+        },
+        {
+          "name": "walk_2",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/walk_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                295.225,
+                269.05
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                251.025,
+                101.45
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                309.675,
+                159.4
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/walk_2.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/walk_2.png"
+          },
+          "sha256": "ba63e4750fd3e25f6dfe48acb9305cd1feb0f245f57957590326420a130242e4",
+          "rgba_sha256": "2621080bb64326b1af8e14252245632aa5566309efd8b8a798532c2bad16a6ba",
+          "bounds": [
+            122,
+            57,
+            322,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "73786e9963d89ae8571ccf792e0d263eb2d05c8a0e983f0bbd48a05d9918e698",
+            "grip": "729ccd800719ad37157e9c16a009761bb6f10ed09e22fd542cf2992b204560df"
+          }
+        },
+        {
+          "name": "walk_3",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/walk_3.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                272.7,
+                287.75
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                237.85,
+                109.1
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                300.75,
+                166.2
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/walk_3.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/walk_3.png"
+          },
+          "sha256": "a8ac4dcbc00cbdf918ff546f59c13553c56b31f5fc5c3e63bd6cfa9ecd17c0b2",
+          "rgba_sha256": "213080b45aacd148c45db9af0ac2fcf1c5f4aec5df57a3f8fda0867a753c8313",
+          "bounds": [
+            117,
+            64,
+            312,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "ae50b477182764944d6b7524d0f4aca951bdc6b0987060bcbc4f57c45835f020",
+            "grip": "14d97351333866c5ee59c8326f110765b47d1250907ddb229952ce6cbba99661"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        4,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "thief_male",
+      "kind": "attack",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/attack_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                306.075,
+                163.65
+              ],
+              "angle": -110,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                223.525,
+                84.5
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                279.675,
+                142.75
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/attack_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/attack_0.png"
+          },
+          "sha256": "de768b81e3b50959c33ec6168512cf7482ef33de347cad0fba3e35be7d0d9a11",
+          "rgba_sha256": "ed7122e1c955aecdfe0e9423482c4899670da61b806965a426552087b0259d41",
+          "bounds": [
+            107,
+            37,
+            333,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt3.png",
+          "uniform_scale": 0.55,
+          "layer_sha256": {
+            "hair": "824529a22befbeaa3aa0ddd3685293dc2da2be1e924bc109001e3b9951197558",
+            "grip": "d147e0bd351e38fa2d6f9bfb79aba7521074f81fd8d1d742bf04fe898643fe4f"
+          }
+        },
+        {
+          "name": "attack_1",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/attack_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 80,
+          "anchors": {
+            "hand": {
+              "point": [
+                372.891,
+                266.156
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                299.211,
+                158.789
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                360.238,
+                196.565
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/attack_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/attack_1.png"
+          },
+          "sha256": "ff9108a7c86bd32f13179d1f04eb00b2b7430d003b786a0b2e2ca88c09b6e994",
+          "rgba_sha256": "bb2a1ebbf856459f7c0ddb78ffa4528fda00a0215b686a2c22d4c4f73ba6e6eb",
+          "bounds": [
+            126,
+            107,
+            392,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt1.png",
+          "uniform_scale": 1.054421768707483,
+          "layer_sha256": {
+            "hair": "3eaafbed8db724cddf371d52c90dd2db7d0f3b832433b195e7fe58878fb450f2",
+            "grip": "9bb99de37bf9ae92414dbc8eaeae5f1663e69a7c2b2fa673fccacd8da5427acb"
+          }
+        },
+        {
+          "name": "attack_2",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/attack_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                318.175,
+                274.15
+              ],
+              "angle": 25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                256.975,
+                118.45
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                321.575,
+                177.25
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/attack_2.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/attack_2.png"
+          },
+          "sha256": "97c18e1656173a71af2965cc0f4349f736139183641e1d67ba505b907485c9df",
+          "rgba_sha256": "3dc1bcfed2c28f64df83dd50e3be7ae461115113f626c7ce1b14c567eecca468",
+          "bounds": [
+            138,
+            72,
+            336,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "b8f682818e36c205ce09b600c7b12ef2c985623dd82bbe1ec28c7cbe50887436",
+            "grip": "53c3e84017264f285714f51c223baad8342f3143c84b79426aa9396f63e58802"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        3,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "thief_male",
+      "kind": "cast",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "cast_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/cast_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                314.35,
+                246.1
+              ],
+              "angle": -25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                241.25,
+                114.2
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                301.6,
+                169.6
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/cast_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/cast_0.png"
+          },
+          "sha256": "4faa017c67829ddf13aae81c22731812272798231656529a2459f1abe7aa695b",
+          "rgba_sha256": "6b45a5a950fba45f06bfef46784a03114971adad04de5f090f31ca877e8f6117",
+          "bounds": [
+            119,
+            66,
+            334,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "2b5a7411755fef824492aee0d6d3e44e1c3b5cb0f6a7b3e2a037ae15371a3bde",
+            "grip": "bde4acfe58921f80c8bbc043007a08ed58228e387a84f91601f48f4a62b35c58"
+          }
+        },
+        {
+          "name": "cast_1",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/cast_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                307.55,
+                237.6
+              ],
+              "angle": -25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                226.8,
+                114.2
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                291.4,
+                169.6
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/cast_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/cast_1.png"
+          },
+          "sha256": "18cfca89b39996c2e07f6c1446c1d5a7d38e510cc13886729056e7975928b033",
+          "rgba_sha256": "00eee03a19d90dcaaa6386a56fd9b0b809f2d09ecd4e45a5a6e40f1a8e4422a7",
+          "bounds": [
+            116,
+            68,
+            326,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "7455ae3ade8468df8be7bd662b70e255e73d3b94dcd1dc6723ea8e09eceae65c",
+            "grip": "a2496031283c911467edb01e922466f458f7f879a949056b20c27588d2e966fc"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        2,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "thief_male",
+      "kind": "sit",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sit_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/sit_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                244.779,
+                331.531
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                221.711,
+                166.17
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                276.412,
+                211.327
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/sit_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/sit_0.png"
+          },
+          "sha256": "3b10decbd92c7f79f29c2a5ee56dbc771c5a87d37a638c6484576aade23b9c49",
+          "rgba_sha256": "0d4565b99f57528d04c71116898e0a237e3ff8837fd054175e6d4131fe301e58",
+          "bounds": [
+            98,
+            114,
+            321,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt1.png",
+          "uniform_scale": 1.054421768707483,
+          "layer_sha256": {
+            "hair": "1b7df4e67a0370c9b2a4057657807f1ca456733eceddbd75a3ef75c1d4f1f303",
+            "grip": "a91db5b304299deb91aec497bc31ad5b3fb4f45d043382e1e55cf5f2009b2743"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "thief_male",
+      "kind": "hurt",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hurt_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/hurt_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                269.558,
+                337.857
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                267.578,
+                213.619
+              ],
+              "angle": -15
+            },
+            "side": {
+              "point": [
+                305.408,
+                259.83
+              ],
+              "angle": -15
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/hurt_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/hurt_0.png"
+          },
+          "sha256": "9d3fce33285785a96c89c0d8868a30ae7377f2488393d215d50c303442dd38a2",
+          "rgba_sha256": "7490ea477465f55159d7c1b6578d2da18fbe343557621f6b1af3a267cf8be8fe",
+          "bounds": [
+            109,
+            161,
+            333,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt1.png",
+          "uniform_scale": 1.054421768707483,
+          "layer_sha256": {
+            "hair": "9c11fbfdf500b45e45085481200f49188400ccd7a68055b7a3367e61576e76fb",
+            "grip": "75ad88e20e275c423a876a62dde604a4a48a756b92c5f75c51ee7402cdcaac50"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "thief_male",
+      "kind": "dead",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "dead_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/thief/dead_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                233.18,
+                343.129
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                365.31,
+                268.265
+              ],
+              "angle": 90
+            },
+            "side": {
+              "point": [
+                304.881,
+                349.456
+              ],
+              "angle": 90
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/thief/dead_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/thief/dead_0.png"
+          },
+          "sha256": "8065cab17077672fe04d222b5627a59ea01efaad5fc79c8ba81a0bde224e8955",
+          "rgba_sha256": "64db68ca954b600c67f65b9637dd07e811bc99df973113e73d7749b254209e1f",
+          "bounds": [
+            62,
+            215,
+            376,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/thief-attempt1.png",
+          "uniform_scale": 1.054421768707483,
+          "layer_sha256": {
+            "hair": "40946e623e846e61b4d7ff5175d5ee06ff255c67fde0048fd17d9e4ce58b4ffe",
+            "grip": "36d1bdd5e33902b00a05a4713a4671de7e88eccc307d8c845cbb6c2c4c67ebcf"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "idle",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/idle_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                279.74,
+                269.583
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                220.538,
+                58.153
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                292.656,
+                145.799
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/idle_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/idle_0.png"
+          },
+          "sha256": "d010e9a24ec61b1b2b8378f1145acd38b81c3b3e596e09329b78aaf67e8e72ce",
+          "rgba_sha256": "d35b06e6e4b591cf572f3f654b64f2298ace6066e11d0ee3fb10c7052e1f2f28",
+          "bounds": [
+            108,
+            49,
+            309,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt1.png",
+          "uniform_scale": 1.0763888888888888,
+          "layer_sha256": {
+            "hair": "125a2496514da57e0fa49f6c8445c0a4abba454a467a94b4faeadd0d7b4c95a7",
+            "grip": "e2ae4aca0c66ad711d530abd85b4b592dbfc024021061b5d0c472ee3cb813033"
+          }
+        },
+        {
+          "name": "idle_1",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/idle_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                279.74,
+                270.166
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                220.538,
+                60.1
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                292.656,
+                147.181
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/idle_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/idle_1.png"
+          },
+          "sha256": "7b7d38c82ac37c1f6a7e1b22a4570201b90a62d15945f6330bd8dfa8bf6d2d31",
+          "rgba_sha256": "a6429f89c7fa888d3db04f654db9099d0562a1030078583842c73742fa43fc63",
+          "bounds": [
+            108,
+            51,
+            309,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt1.png",
+          "uniform_scale": 1.0763888888888888,
+          "layer_sha256": {
+            "hair": "3221d7a83cf2404caa9c19fe9d515bcff88ad77fbe7ac815f2d4b823003b905e",
+            "grip": "b1a11e4d706acee2ca3551de775415e1379062f31d44d37f497c4c7c06575acc"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        2,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "walk",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/walk_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                301.175,
+                255.45
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                224.675,
+                68.5
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                297.775,
+                150.9
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/walk_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/walk_0.png"
+          },
+          "sha256": "ea86fb2ba7aab791c773dd70df675608b82de22e96bc5fa1b0c37d6c06cadb95",
+          "rgba_sha256": "f7d5cbc3293b0199497b018fedf01eb4d071c7ac11f48dc2bf6c350af8493db9",
+          "bounds": [
+            109,
+            60,
+            319,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "73049c83c66410f059e9a46ec4b3807d8f07e0c8150dee93a9af1bcce8210587",
+            "grip": "05c3a3fcf12f7a4bafb23cd66b03349d6a5637cc25aaae6a15d941052283f45e"
+          }
+        },
+        {
+          "name": "walk_1",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/walk_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                279.5,
+                273.3
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                226.8,
+                67.65
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                293.95,
+                152.6
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/walk_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/walk_1.png"
+          },
+          "sha256": "54cbd4f7e2164cfeb2f24d656b3cd5be5fddaab01adbbb42baed296573f49a84",
+          "rgba_sha256": "8dba50ef5a5e67328d8185802447e6fe0f20012d74071057011363c23c876667",
+          "bounds": [
+            112,
+            60,
+            310,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "e5a9ee8dfa614b65a86ba1dcabe453ebce4ca286d221ef7c64b67e82c22d876d",
+            "grip": "740c5146d2cc688c1cb464a997ddb73b3501a0c21974c57462bfaea4f6ce76da"
+          }
+        },
+        {
+          "name": "walk_2",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/walk_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                297.35,
+                255.45
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                227.65,
+                65.95
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                295.65,
+                150.9
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/walk_2.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/walk_2.png"
+          },
+          "sha256": "c7d634564a99eff1824bacd7ce511a2cce39062c2c85871b9d336db85b31b168",
+          "rgba_sha256": "69208063f7cfa36fb4aaa9a50bc672b6985a3ef7e284cd40e05803dc09bc0e47",
+          "bounds": [
+            107,
+            58,
+            316,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "65be5d5a319f18a77ed594220751e485db3eb75002c6f8ab84642e593fcb4dd9",
+            "grip": "cb7a1289a55da4c64e095894afe4e9b269cd95c2ac1c89f995637b4e87e77335"
+          }
+        },
+        {
+          "name": "walk_3",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/walk_3.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                276.525,
+                272.45
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                222.975,
+                65.95
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                290.975,
+                150.9
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/walk_3.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/walk_3.png"
+          },
+          "sha256": "e18b08c79714bb2f65ab21c53a6258f27c8dd36f01e56cd27696e98fff20a291",
+          "rgba_sha256": "04b4849d788079564a0598f9c75e30722412723bd5b9fcdb21d0e6af40fbbaf7",
+          "bounds": [
+            110,
+            58,
+            308,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "ff3db5ca8fd1d1527689c2dc5103f46ca22c7e231a09434ee5a905f608cc769e",
+            "grip": "fbdfa37ea632fb178e0b6ad99bef4d91f57f79084984a21c53544d9c630d7e98"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        4,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "attack",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/attack_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                311.025,
+                144.4
+              ],
+              "angle": -110,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                212.025,
+                45.9
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                283.525,
+                130.1
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/attack_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/attack_0.png"
+          },
+          "sha256": "aefea9cf36fc8b29b27891b42e835c9331851f45eca1a82b74432e891985085d",
+          "rgba_sha256": "6733a4fd0f07eb4ec773202af653d84e0a5c4282d46fca57a7d60ddf510dddc2",
+          "bounds": [
+            98,
+            38,
+            336,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt3.png",
+          "uniform_scale": 0.55,
+          "layer_sha256": {
+            "hair": "277f72b068ce384eb380c49b3bc90ca7e8241a01160f7a7942c992e0c22ac3f8",
+            "grip": "cec198b5d05613315cb79e1ce2168e61716a6cfba08dbf1d4ec46ddbd4683ee1"
+          }
+        },
+        {
+          "name": "attack_1",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/attack_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 80,
+          "anchors": {
+            "hand": {
+              "point": [
+                333.559,
+                208.229
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                232.378,
+                62.458
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                293.733,
+                151.181
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/attack_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/attack_1.png"
+          },
+          "sha256": "ce8023d3d6d4cb46e6f070be14bd2dd10d459db4ea5867fc3db5ccba5877347b",
+          "rgba_sha256": "bfc40fa8a20a05b38a8c1a5c874e922d5d1ec1c58b231f29517bdf7d65bd9777",
+          "bounds": [
+            108,
+            55,
+            357,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt1.png",
+          "uniform_scale": 1.0763888888888888,
+          "layer_sha256": {
+            "hair": "95ef50a2f03bec943ef892b0f2d231351c6a8ad93014d73df472e841b55a8b35",
+            "grip": "430b5b836cba8ce089f09151d740a451630cbe0b02d47aadd0933bd6ff3d38c4"
+          }
+        },
+        {
+          "name": "attack_2",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/attack_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                314.35,
+                253.75
+              ],
+              "angle": 25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                214.9,
+                65.1
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                279.5,
+                148.35
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/attack_2.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/attack_2.png"
+          },
+          "sha256": "f07b1b23c8aa2055b375cf79ea938863eb68a47b7a0cad74c6aaa1d1ec221978",
+          "rgba_sha256": "1181d1fc73807677373d5256bacb3a9c024c64ce7c95b153db43406be0195352",
+          "bounds": [
+            106,
+            57,
+            333,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "c29a3a8de041f7125f0f791e637f9973c04f6850155b1bde0f3a344aab0ad4af",
+            "grip": "1951cd1420a0d5bbf9e8b469d4b40f17a1abbeb7e653c2fbfc17a8d1e81d2e1a"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        3,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "cast",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "cast_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/cast_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                319.875,
+                217.2
+              ],
+              "angle": -25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                215.325,
+                65.95
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                288.425,
+                148.35
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/cast_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/cast_0.png"
+          },
+          "sha256": "a1843e81a9e987d7cc4e93209fb0c3087fac3f4f531573aaad89be9c13a745af",
+          "rgba_sha256": "c110148d612708e9cc798540b939512eabfb2cf82d7a6d75d2085ca7b7b8d53f",
+          "bounds": [
+            101,
+            58,
+            339,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "d15246895646f0c0befb0e5d4cc6b6c6aee6b7b622e40061c434dd5193ee8604",
+            "grip": "335222244ee1e180d9e2592b4a811e58dc142140f18df1a0fabb24ba30325ff4"
+          }
+        },
+        {
+          "name": "cast_1",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/cast_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                311.8,
+                212.95
+              ],
+              "angle": -25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                214.9,
+                65.1
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                288.85,
+                149.2
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/cast_1.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/cast_1.png"
+          },
+          "sha256": "71e4646e595c93ddbb18f2ce9320bf5e5ae41352d6616747034320d463fa9f36",
+          "rgba_sha256": "db4cc7449f1c2971deead6c04785cc07f43d90fed324218754ecfd3cd1c240c0",
+          "bounds": [
+            96,
+            57,
+            332,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt2.png",
+          "uniform_scale": 0.85,
+          "layer_sha256": {
+            "hair": "cb04522637f1b5be71c36e72f28e0514c0e8b33ad1c85a064a4a55603882ea9c",
+            "grip": "c4942ebd9aba64e5a7321294148021f882327d73d711ab8f8a7bcee0031f2ca4"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        2,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "sit",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sit_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/sit_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                271.667,
+                292.188
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                208.16,
+                119.507
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                266.285,
+                201.771
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/sit_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/sit_0.png"
+          },
+          "sha256": "2a4b3cef99ec719731b9e3450d6cbdd553cc6fe2c52fc1204489b9d7c14ac08e",
+          "rgba_sha256": "6d21ce5a22e250e956535a337609c57ac7548c814ded8fd9ad113081dace79be",
+          "bounds": [
+            86,
+            110,
+            310,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt1.png",
+          "uniform_scale": 1.0763888888888888,
+          "layer_sha256": {
+            "hair": "ceecdc083345b742203fdea264aeb56819e360cbec246a7b6fade337b8bdec70",
+            "grip": "dfeed6436ccd88002fb04611a1824dce3db3aea5f088383cd2175f92221749b3"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "hurt",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hurt_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/hurt_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                221.615,
+                288.958
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                256.059,
+                122.736
+              ],
+              "angle": -15
+            },
+            "side": {
+              "point": [
+                309.878,
+                179.167
+              ],
+              "angle": -15
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/hurt_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/hurt_0.png"
+          },
+          "sha256": "7cfeef70a5a00ed226e7034e93d430a659a7b87c73eb2056dac36bede36e9abc",
+          "rgba_sha256": "5bddd49b2064fb3e3436e7d05b9c469b64e8ee04d32aa8317009c692326e9c50",
+          "bounds": [
+            131,
+            109,
+            343,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt1.png",
+          "uniform_scale": 1.0763888888888888,
+          "layer_sha256": {
+            "hair": "e577f7c878ddd9f49c6563439828e9cfcdaeb03e52c792b5e30256a8ffa59a01",
+            "grip": "021066ec4c8e66640d16e90bd6bded4b0c0966de84a24648348b1f501b280452"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "merchant_female",
+      "kind": "dead",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "dead_0",
+          "file": "docs/art-production/hero-sprites/rejected/b/frames/merchant/dead_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                267.899,
+                337.396
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                371.691,
+                252.361
+              ],
+              "angle": 90
+            },
+            "side": {
+              "point": [
+                330.33,
+                339.549
+              ],
+              "angle": 90
+            }
+          },
+          "masks": {
+            "hair": "docs/art-production/hero-sprites/rejected/b/masks/merchant/dead_0.png"
+          },
+          "overlays": {
+            "grip": "docs/art-production/hero-sprites/rejected/b/grips/merchant/dead_0.png"
+          },
+          "sha256": "a596ea9ba5e0f2686c6b7c4af7bf7e352ac433f905bfb3c8cd99dd894d8fc0ab",
+          "rgba_sha256": "a7d080bdca55335376fadfc588f9b5b621b20bbbcf2315d7cd5215fa2de3ae04",
+          "bounds": [
+            78,
+            195,
+            388,
+            360
+          ],
+          "rect": [
+            0,
+            0,
+            512,
+            400
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/merchant-attempt1.png",
+          "uniform_scale": 1.0763888888888888,
+          "layer_sha256": {
+            "hair": "996caccb40d798e2c4631351dc2c275458f588f893cd9a0e168983fbc33fb4c0",
+            "grip": "5f28503bf8cb31c303b900f057f382c1874130dd6116a53527b37db60413ec8c"
+          }
+        }
+      ],
+      "cell": [
+        512,
+        400
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "layout": "frames"
+    },
+    {
+      "id": "staff",
+      "kind": "weapon",
+      "category": "image",
+      "file": "docs/art-production/hero-sprites/equipment/staff.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sha256": "820679c0175964b2943dc9c91741449fce5d9ea3e0eae7ee585b5c6d34a73755",
+      "frames": [
+        {
+          "sha256": "820679c0175964b2943dc9c91741449fce5d9ea3e0eae7ee585b5c6d34a73755",
+          "rgba_sha256": "b92093d805861e602690ebb318caac0e8be3e7464fcfc214482ffe62737a3509",
+          "bounds": [
+            35,
+            108,
+            164,
+            147
+          ],
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            55,
+            128
+          ],
+          "source": "docs/art-production/hero-sprites/source/staff.png",
+          "uniform_scale": 0.175
+        }
+      ]
+    },
+    {
+      "id": "mace",
+      "kind": "weapon",
+      "category": "image",
+      "file": "docs/art-production/hero-sprites/equipment/mace.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sha256": "7d0f65bddd0730417b21702e9d754a7757edcce958b53bcfaf5b32ba3f17a76f",
+      "frames": [
+        {
+          "sha256": "7d0f65bddd0730417b21702e9d754a7757edcce958b53bcfaf5b32ba3f17a76f",
+          "rgba_sha256": "c738fbe77b4dabe2372119dfa24f84b67f184033efa929ed1ee934d0e7f3c505",
+          "bounds": [
+            33,
+            105,
+            137,
+            153
+          ],
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            55,
+            128
+          ],
+          "source": "docs/art-production/hero-sprites/source/mace.png",
+          "uniform_scale": 0.12
+        }
+      ]
+    },
+    {
+      "id": "bow",
+      "kind": "weapon",
+      "category": "image",
+      "file": "docs/art-production/hero-sprites/equipment/bow.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sha256": "2fc3cbc2e2a1e4dc19e9272a1aee41630191225fd6ff6df28ca6a8d44b86066f",
+      "frames": [
+        {
+          "sha256": "2fc3cbc2e2a1e4dc19e9272a1aee41630191225fd6ff6df28ca6a8d44b86066f",
+          "rgba_sha256": "3f385a46171e8fd87c112720803d4263e9c3b469bba3d3083ed55dd34bbf108e",
+          "bounds": [
+            103,
+            42,
+            157,
+            203
+          ],
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            140,
+            128
+          ],
+          "source": "docs/art-production/hero-sprites/source/bow.png",
+          "uniform_scale": 0.15
+        }
+      ]
+    },
+    {
+      "id": "dagger",
+      "kind": "weapon",
+      "category": "image",
+      "file": "docs/art-production/hero-sprites/equipment/dagger.png",
+      "size": [
+        84,
+        32
+      ],
+      "cell": [
+        84,
+        32
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sha256": "8479a4d8dad468cc9bb3a9babfff25d03a201faae185031fbffdb24a4f79a6b5",
+      "frames": [
+        {
+          "sha256": "8479a4d8dad468cc9bb3a9babfff25d03a201faae185031fbffdb24a4f79a6b5",
+          "rgba_sha256": "4885fb93752d4d2eb28ed217e44b9041666e51ac0d4c0ffdc288e54a15f3d02a",
+          "bounds": [
+            0,
+            0,
+            84,
+            32
+          ],
+          "rect": [
+            0,
+            0,
+            84,
+            32
+          ],
+          "pivot": [
+            16.5,
+            16.5
+          ],
+          "source": "docs/art-production/hero-sprites/equipment/dagger.png",
+          "uniform_scale": 1
+        }
+      ]
+    },
+    {
+      "id": "sword",
+      "kind": "weapon",
+      "category": "image",
+      "file": "docs/art-production/hero-sprites/equipment/sword.png",
+      "size": [
+        123,
+        37
+      ],
+      "cell": [
+        123,
+        37
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sha256": "fe1892da4a836f18c6d959c4b87651807dbb3b1ae14bc495eecef13c37ffe199",
+      "frames": [
+        {
+          "sha256": "fe1892da4a836f18c6d959c4b87651807dbb3b1ae14bc495eecef13c37ffe199",
+          "rgba_sha256": "1d069125bc30c6c71240cf2c17ea2647957f56844b745c6e16ad3c0d99f2ef9d",
+          "bounds": [
+            0,
+            0,
+            123,
+            37
+          ],
+          "rect": [
+            0,
+            0,
+            123,
+            37
+          ],
+          "pivot": [
+            23,
+            18.5
+          ],
+          "source": "docs/art-production/hero-sprites/equipment/sword.png",
+          "uniform_scale": 1
+        }
+      ]
+    },
+    {
+      "id": "axe",
+      "kind": "weapon",
+      "category": "image",
+      "file": "docs/art-production/hero-sprites/equipment/axe.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sha256": "b15c0dc5af29185c83701f10d71f601f199e2a877cd0bbad77767c5aefeb8d68",
+      "frames": [
+        {
+          "sha256": "b15c0dc5af29185c83701f10d71f601f199e2a877cd0bbad77767c5aefeb8d68",
+          "rgba_sha256": "6f3e6fb1635a162ba7513927e375cd5987f773994c3ce023c6955e916a302e0e",
+          "bounds": [
+            38,
+            115,
+            156,
+            178
+          ],
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            56,
+            128
+          ],
+          "source": "docs/art-production/hero-sprites/source/b/axe-attempt1.png",
+          "uniform_scale": 0.115
+        }
+      ]
+    }
+  ],
+  "attachments": {
+    "staff": {
+      "file": "docs/art-production/hero-sprites/equipment/staff.png",
+      "pivot": [
+        55,
+        128
+      ],
+      "tip": [
+        144.631,
+        128
+      ],
+      "anchor": "hand",
+      "slot": "weapon",
+      "sha256": "820679c0175964b2943dc9c91741449fce5d9ea3e0eae7ee585b5c6d34a73755"
+    },
+    "mace": {
+      "file": "docs/art-production/hero-sprites/equipment/mace.png",
+      "pivot": [
+        55,
+        128
+      ],
+      "tip": [
+        113.043,
+        128
+      ],
+      "anchor": "hand",
+      "slot": "weapon",
+      "sha256": "7d0f65bddd0730417b21702e9d754a7757edcce958b53bcfaf5b32ba3f17a76f"
+    },
+    "bow": {
+      "file": "docs/art-production/hero-sprites/equipment/bow.png",
+      "pivot": [
+        140,
+        128
+      ],
+      "tip": [
+        165.65,
+        128
+      ],
+      "anchor": "hand",
+      "slot": "weapon",
+      "sha256": "2fc3cbc2e2a1e4dc19e9272a1aee41630191225fd6ff6df28ca6a8d44b86066f"
+    },
+    "dagger": {
+      "file": "docs/art-production/hero-sprites/equipment/dagger.png",
+      "pivot": [
+        16.5,
+        16.5
+      ],
+      "tip": [
+        81.5,
+        16.5
+      ],
+      "anchor": "hand",
+      "slot": "weapon",
+      "sha256": "8479a4d8dad468cc9bb3a9babfff25d03a201faae185031fbffdb24a4f79a6b5"
+    },
+    "sword": {
+      "file": "docs/art-production/hero-sprites/equipment/sword.png",
+      "pivot": [
+        23,
+        18.5
+      ],
+      "tip": [
+        120.5,
+        18.5
+      ],
+      "anchor": "hand",
+      "slot": "weapon",
+      "sha256": "fe1892da4a836f18c6d959c4b87651807dbb3b1ae14bc495eecef13c37ffe199"
+    },
+    "axe": {
+      "file": "docs/art-production/hero-sprites/equipment/axe.png",
+      "pivot": [
+        56,
+        128
+      ],
+      "tip": [
+        140.714,
+        128
+      ],
+      "anchor": "hand",
+      "slot": "weapon",
+      "sha256": "b15c0dc5af29185c83701f10d71f601f199e2a877cd0bbad77767c5aefeb8d68"
+    },
+    "leaf": {
+      "file": "docs/art-production/hero-sprites/equipment/leaf.png",
+      "pivot": [
+        12,
+        20.5
+      ],
+      "anchor": "crown",
+      "slot": "headgear",
+      "sha256": "c778137ab0a6b0dd027a622dbffc5c245207f90395e5c7d3f10a8d1dc1080330"
+    },
+    "hairpin": {
+      "file": "docs/art-production/hero-sprites/equipment/hairpin.png",
+      "pivot": [
+        17,
+        10
+      ],
+      "anchor": "side",
+      "slot": "headgear",
+      "sha256": "d499dbb814cdf35ed660d4eb30325d4606fbf0982e682403c3c2e88fa8d53a37"
+    }
+  },
+  "tints": {
+    "hair": {
+      "cream": [
+        1,
+        1,
+        1
+      ],
+      "blue": [
+        0.3779527559055118,
+        0.575,
+        0.8590909090909091
+      ],
+      "auburn": [
+        0.62,
+        0.36,
+        0.23
+      ],
+      "brown": [
+        0.52,
+        0.32,
+        0.18
+      ],
+      "black": [
+        0.16,
+        0.15,
+        0.18
+      ],
+      "pink": [
+        1,
+        0.55,
+        0.76
+      ]
+    }
+  },
+  "display": {
+    "bodyPx": 80
+  },
+  "render": {
+    "order": [
+      "weaponBehind",
+      "figure",
+      "weaponFront",
+      "grip",
+      "headgear"
+    ],
+    "tint": "out = base × (1 − m + m × tint), tint는 0~1 배수"
+  },
+  "bundles": [
+    {
+      "id": "thief_male",
+      "character": "thief_male",
+      "animations": [
+        "idle",
+        "walk",
+        "attack",
+        "cast",
+        "sit",
+        "hurt",
+        "dead"
+      ],
+      "weapon": "dagger",
+      "headgear": [
+        "leaf",
+        "hairpin"
+      ]
+    },
+    {
+      "id": "merchant_female",
+      "character": "merchant_female",
+      "animations": [
+        "idle",
+        "walk",
+        "attack",
+        "cast",
+        "sit",
+        "hurt",
+        "dead"
+      ],
+      "weapon": "axe",
+      "headgear": [
+        "leaf",
+        "hairpin"
+      ]
+    }
+  ],
+  "scope": {
+    "request": "docs/art-requests/hero-sprites-b.md",
+    "status": "REJECTED_REVIEW_ONLY",
+    "accepted": [
+      "axe"
+    ],
+    "rejected": [
+      "thief_male",
+      "merchant_female"
+    ],
+    "note": "Two retries exhausted. Both walking contact frames repeat the same leading foot. No approved-exclusion entries: requested characters remain missing in batch B check."
+  }
+}

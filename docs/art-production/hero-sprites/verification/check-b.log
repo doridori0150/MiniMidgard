@@ -1,0 +1,35 @@
+✔ axe · weapon · docs/art-production/hero-sprites/equipment/axe.png  (오류 0 · 주의 0)
+    ✔ [기록] 해시 일치
+    ✔ [투명] 진짜 알파, 빈 프레임 없음
+✔ staff · 부속(weapon) · docs/art-production/hero-sprites/equipment/staff.png  (오류 0 · 주의 0)
+    ✔ [레이어] pivot·tip이 그림 안, 배경 투명
+✔ mace · 부속(weapon) · docs/art-production/hero-sprites/equipment/mace.png  (오류 0 · 주의 0)
+    ✔ [레이어] pivot·tip이 그림 안, 배경 투명
+✔ bow · 부속(weapon) · docs/art-production/hero-sprites/equipment/bow.png  (오류 0 · 주의 0)
+    ✔ [레이어] pivot·tip이 그림 안, 배경 투명
+✔ dagger · 부속(weapon) · docs/art-production/hero-sprites/equipment/dagger.png  (오류 0 · 주의 0)
+    ✔ [레이어] pivot·tip이 그림 안, 배경 투명
+✔ sword · 부속(weapon) · docs/art-production/hero-sprites/equipment/sword.png  (오류 0 · 주의 0)
+    ✔ [레이어] pivot·tip이 그림 안, 배경 투명
+✔ axe · 부속(weapon) · docs/art-production/hero-sprites/equipment/axe.png  (오류 0 · 주의 0)
+    ✔ [레이어] pivot·tip이 그림 안, 배경 투명
+✔ leaf · 부속(headgear) · docs/art-production/hero-sprites/equipment/leaf.png  (오류 0 · 주의 0)
+    ✔ [레이어] pivot이 그림 안, 배경 투명
+✔ hairpin · 부속(headgear) · docs/art-production/hero-sprites/equipment/hairpin.png  (오류 0 · 주의 0)
+    ✔ [레이어] pivot이 그림 안, 배경 투명
+✖ 납품 누락 14건
+    thief_male · hero/idle · frames/thief/{state}_{n}.png
+    thief_male · hero/walk · frames/thief/{state}_{n}.png
+    thief_male · hero/attack · frames/thief/{state}_{n}.png
+    thief_male · hero/cast · frames/thief/{state}_{n}.png
+    thief_male · hero/sit · frames/thief/{state}_{n}.png
+    thief_male · hero/hurt · frames/thief/{state}_{n}.png
+    thief_male · hero/dead · frames/thief/{state}_{n}.png
+    merchant_female · hero/idle · frames/merchant/{state}_{n}.png
+    merchant_female · hero/walk · frames/merchant/{state}_{n}.png
+    merchant_female · hero/attack · frames/merchant/{state}_{n}.png
+    merchant_female · hero/cast · frames/merchant/{state}_{n}.png
+    merchant_female · hero/sit · frames/merchant/{state}_{n}.png
+    merchant_female · hero/hurt · frames/merchant/{state}_{n}.png
+    merchant_female · hero/dead · frames/merchant/{state}_{n}.png
+합계: 시트 9 · 오류 14 · 주의 0 · 통과 10

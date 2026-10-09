@@ -1,0 +1,49 @@
+{
+  "artStatus": "PARTIAL_WITH_ART_REJECTION",
+  "accepted": [
+    {
+      "id": "novice_female",
+      "frame": "walk_1"
+    },
+    {
+      "id": "novice_female",
+      "frame": "attack_1"
+    },
+    {
+      "id": "novice_female",
+      "frame": "attack_2"
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "attack_2"
+    }
+  ],
+  "rejected": [
+    {
+      "id": "swordsman_male",
+      "frame": "walk_1",
+      "reason": "Torso reversal corrected, but shoulder/collar sits about 10-14px higher than unchanged walk_0/walk_2 at 310px scale. Reject to preserve required walking proportions."
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "walk_3",
+      "reason": "Torso reversal corrected, but shoulder/collar sits about 10-14px higher than unchanged walk_0/walk_2 at 310px scale. Reject to preserve required walking proportions."
+    }
+  ],
+  "visualChecks": [
+    "Reviewed both equipped 14-frame sheets, four walk poses and three attack poses at native and 80px size",
+    "Accepted frames keep weapon fist on screen-right shoulder; no far fist crosses chest",
+    "Accepted follow-through hands use +35 degrees, contact uses horizontal 0 degrees",
+    "Leaf and hairpin remain on skull contour and temple",
+    "Brown/black/pink masks reviewed: no skin/armor tint on accepted frames"
+  ],
+  "standardCheck": {
+    "error": 0,
+    "warn": 2,
+    "ok": 466,
+    "info": 18
+  },
+  "attachmentConfigurations": 560,
+  "changedRasterFiles": 12,
+  "scopeOutsideChanges": []
+}

@@ -23,3 +23,20 @@ verification/*
 source/fix2/*
 !source/fix2/archer-attempt1.png
 !source/fix2/*.json
+
+# fix3 whole-body sources, inputs, coordinate evidence and audit.
+!source/fix3/
+source/fix3/*
+!source/fix3/*-attempt*.png
+!source/fix3/*-reference.png
+!source/fix3/*.json
+!verification/fix3-*.png
+!verification/fix3-*.json
+!verification/check-fix3.log
+
+# Batch B accepted axe and rejected candidate evidence.
+!source/b/
+!source/b/**
+!verification/b-*
+verification/b-animation-frames/
+!verification/check-b.log

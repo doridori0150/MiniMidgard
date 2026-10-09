@@ -1,0 +1,209 @@
+{
+  "updates": [
+    {
+      "id": "novice_female",
+      "frame": "walk_1",
+      "source": "source/fix3/novice-attempt2.png",
+      "source_sha256": "fc259a1d6f7f174fc6d18fa15fb95669d9a67d642d15fb6ffeebe9c6c417c572",
+      "uniform_scale": 0.48742138364779874,
+      "sourceRect": [
+        0,
+        0,
+        686,
+        764
+      ],
+      "sourceBounds": [
+        187,
+        66,
+        563,
+        702
+      ],
+      "translation": [
+        29.418238993710702,
+        17.830188679245282
+      ],
+      "cellAnnotations": [
+        526,
+        495,
+        401,
+        136,
+        509,
+        228
+      ],
+      "prompt": "prompts/novice_female-fix3-attempt2.txt"
+    },
+    {
+      "id": "novice_female",
+      "frame": "attack_1",
+      "source": "source/fix3/novice-attempt2.png",
+      "source_sha256": "fc259a1d6f7f174fc6d18fa15fb95669d9a67d642d15fb6ffeebe9c6c417c572",
+      "uniform_scale": 0.48742138364779874,
+      "sourceRect": [
+        686,
+        0,
+        1372,
+        764
+      ],
+      "sourceBounds": [
+        145,
+        65,
+        588,
+        689
+      ],
+      "translation": [
+        51.839622641509436,
+        24.166666666666686
+      ],
+      "cellAnnotations": [
+        548,
+        419,
+        369,
+        137,
+        478,
+        230
+      ],
+      "prompt": "prompts/novice_female-fix3-attempt2.txt"
+    },
+    {
+      "id": "novice_female",
+      "frame": "attack_2",
+      "source": "source/fix3/novice-attempt2.png",
+      "source_sha256": "fc259a1d6f7f174fc6d18fa15fb95669d9a67d642d15fb6ffeebe9c6c417c572",
+      "uniform_scale": 0.48742138364779874,
+      "sourceRect": [
+        1372,
+        0,
+        2058,
+        764
+      ],
+      "sourceBounds": [
+        144,
+        68,
+        557,
+        686
+      ],
+      "translation": [
+        61.10062893081761,
+        25.62893081761007
+      ],
+      "cellAnnotations": [
+        517,
+        509,
+        374,
+        144,
+        482,
+        234
+      ],
+      "prompt": "prompts/novice_female-fix3-attempt2.txt"
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "attack_2",
+      "source": "source/fix3/swordsman-attempt2.png",
+      "source_sha256": "8d443daa1a8ea48608d7e12bdc89ffe584c2c51da82731d4ec03d40d59aab2d8",
+      "uniform_scale": 0.46199701937406856,
+      "sourceRect": [
+        1338,
+        0,
+        2007,
+        784
+      ],
+      "sourceBounds": [
+        128,
+        56,
+        583,
+        705
+      ],
+      "translation": [
+        68.23397913561848,
+        34.29210134128164
+      ],
+      "cellAnnotations": [
+        539,
+        489,
+        355,
+        133,
+        463,
+        237
+      ],
+      "prompt": "prompts/swordsman_male-fix3-attempt2.txt"
+    }
+  ],
+  "rejected": [
+    {
+      "id": "swordsman_male",
+      "frame": "walk_1",
+      "attempts": 2,
+      "reason": "Torso reversal corrected, but shoulder/collar sits about 10-14px higher than unchanged walk_0/walk_2 at 310px scale. Reject to preserve required walking proportions.",
+      "source": "source/fix3/swordsman-attempt2.png",
+      "proposedFrame": {
+        "image": "frames/swordsman/walk_1.png",
+        "hairMask": "masks/swordsman/walk_1.png",
+        "gripOverlay": "grips/swordsman/walk_1.png",
+        "hand": {
+          "point": [
+            282.37,
+            267.601
+          ],
+          "angle": -48,
+          "z": "front",
+          "visible": true
+        },
+        "crown": {
+          "point": [
+            225.082,
+            85.112
+          ],
+          "angle": 0
+        },
+        "side": {
+          "point": [
+            275.44,
+            131.311
+          ],
+          "angle": 0
+        },
+        "source": "source/fix3/swordsman-attempt2.png",
+        "uniform_scale": 0.46199701937406856
+      }
+    },
+    {
+      "id": "swordsman_male",
+      "frame": "walk_3",
+      "attempts": 2,
+      "reason": "Torso reversal corrected, but shoulder/collar sits about 10-14px higher than unchanged walk_0/walk_2 at 310px scale. Reject to preserve required walking proportions.",
+      "source": "source/fix3/swordsman-attempt2.png",
+      "proposedFrame": {
+        "image": "frames/swordsman/walk_3.png",
+        "hairMask": "masks/swordsman/walk_3.png",
+        "gripOverlay": "grips/swordsman/walk_3.png",
+        "hand": {
+          "point": [
+            285.373,
+            265.753
+          ],
+          "angle": -48,
+          "z": "front",
+          "visible": true
+        },
+        "crown": {
+          "point": [
+            227.623,
+            84.65
+          ],
+          "angle": 0
+        },
+        "side": {
+          "point": [
+            278.443,
+            131.773
+          ],
+          "angle": 0
+        },
+        "source": "source/fix3/swordsman-attempt2.png",
+        "uniform_scale": 0.46199701937406856
+      }
+    }
+  ],
+  "anchorMethod": "crown measured at skull contour/cowlick root, side on outer temple hair; verified with leaf and hairpin overlays."
+}

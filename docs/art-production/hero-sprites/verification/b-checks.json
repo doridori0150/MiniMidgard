@@ -1,0 +1,41 @@
+{
+  "candidateFrames": 28,
+  "originalFiveCharactersUnchanged": true,
+  "existingRasterAndSrcFilesUnchanged": true,
+  "protectedFiles": 616,
+  "changed": [],
+  "maskLeaks": [],
+  "clipping": [],
+  "visualStatus": "REJECTED",
+  "reasons": [
+    "walk_0 and walk_2 repeat the same leading foot; the alternate contact phase is missing after the initial generation and two retries.",
+    "Cross-source attack preparation has a visible proportion shift.",
+    "Candidate checker reports thief hurt_0 height 199px vs 310px as an error; merchant hurt_0 is 251px and warned."
+  ],
+  "sharedManifestChange": "axe weapon added only; exact deep equality for all other data",
+  "accepted": [
+    "axe"
+  ],
+  "rejected": [
+    "thief_male",
+    "merchant_female"
+  ],
+  "sharedBatchStatus": "FAIL_MISSING_14_MOTION_SHEETS",
+  "candidateTechnicalStatus": "FAIL_1_ERROR_2_WARNINGS",
+  "acceptance": {
+    "lineupIdentity": "PASS",
+    "allFramesIdentityAndProportions": "FAIL",
+    "display80ClassReadability": "PASS",
+    "weaponAttachmentAndHorizontalContact": "PASS",
+    "hairTintsBrownBlackPink": "PASS",
+    "hurtDeadHeadgear": "REVIEW_ONLY",
+    "sameWeaponArm": "PASS_ON_SELECTED_CANDIDATES",
+    "weaponVisibilityDuringWalkAttackCast": "PASS",
+    "detachedSpecksAndMaskLeaks": "PASS",
+    "headgearSkullAndTemple": "REVIEW_ONLY_NOT_ACCEPTED",
+    "walkAndAttackContinuity": "FAIL",
+    "axeShapeColor": "PASS",
+    "axeAt80px": "PASS"
+  },
+  "note": "Candidate artifacts are not production delivery. Missing characters were not marked as approved exclusions."
+}
