@@ -2937,6 +2937,7 @@ export class World {
     if (cast > 60) {
       h.cast = info;
       this.setState(h, 'cast');
+      h.stateT = this.time; // a new cast restarts its lead-in even straight after the last release (still 'cast')
       this.emit({ t: 'cast', uid: h.uid, dur: cast, element: sk.element ?? 'neutral', name: sk.name });
       this.sound('cast');
     } else {
