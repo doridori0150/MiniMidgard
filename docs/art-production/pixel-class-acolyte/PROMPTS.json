@@ -1,0 +1,157 @@
+[
+  {
+    "frame": "idle_0_rejected_tall",
+    "prompt": "Use case: stylized-concept. Make ONE animation frame idle_0, transparent background, no text, no sheet. References are STYLE AND PROPORTION ONLY. New original female ACOLYTE pixel RPG hero, two heads tall, head exactly half full height, facing screen right three-quarter. Ivory clerical robe with wide modest sleeves, burgundy stole with tiny gold edging, brown short boots, tiny gold clasp. Own hairstyle: pale cream side-parted bob with a small low round bun at screen-left back of head, no headpiece, calm brown eyes. Short silver flanged mace with brown handle held in her NEAR hand at screen-right waist, shaft diagonally down-right, other hand resting gently over the gripping hand in demure idle. Same crisp low-resolution square pixel clusters as reference. This will be normalized to 48 pixels tall with 24-pixel head; draw very simple readable shapes, not detailed illustration. Full body centered, plenty empty margins for animation. No shadow, floor, aura, other objects. Hair palette only #faf0d7 #e1cdb8 #b49b91 #49342f. Mace head compact, about 6 native pixels wide, total mace length 18 native pixels. Delicate readable face. Deliver single standalone sprite.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "idle_0",
+    "prompt": "Edit this ONE sprite frame idle_0. Keep EXACT same original ivory-robed burgundy-stole female acolyte, side-part bob with low bun, gentle face, small silver mace gripped by screen-right near hand with other hand over it, transparent background, crisp pixel art. Correct ONLY body proportions: head including hair must be exactly HALF total standing height, 24-pixel head plus only 24 pixels from chin to boot soles. Shorten torso and lower robe/legs significantly, adorable TWO HEADS tall like reference game sprites, not 2.5 or 3 heads. Head size unchanged. Keep single frame no text no grid, no shadow. No extra details.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "idle_1",
+    "prompt": "Make ONE next animation frame idle_1 from this approved idle_0. Exact identical female cleric identity, ivory robe burgundy stole, hair bun, near hand screen-right gripping mace with other hand resting over it. TWO heads tall, same head size and pixel clusters, transparent background. Gentle inhale: shoulders and joined hands rise only ONE native pixel, head and feet stay still, robe hem unchanged. Tiny change only, no new elements no text no shadow. Same scale and placement.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "idle_2",
+    "prompt": "ONE next frame idle_2 after first reference idle_1; second reference idle_0 is identity anchor. Same exact two-head female cleric, clothes, hair, mace same screen-right near hand, transparent background pixel art. Exhale settling: clasped hands lower one native pixel to waist, sleeves relax, head stays same with eyelids slightly softened, feet planted. Mace tracks gripping hand down one pixel. Maintain identical head size, total 2 heads height, no new detail or text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "walk_0",
+    "prompt": "ONE next animation frame walk_0. First reference previous idle_2, second identity idle_0. Same exact two-head female acolyte, unchanged face and hair size, ivory robe/burgundy stole and tiny gold trim, same small silver mace held near screen-right hand. Rightward 3/4 WALK, walking in place: screen-right near boot steps FORWARD right, far boot stays behind left, readable short stride. Let hands separate: free screen-left hand relax beside body; near mace hand stays at right waist, mace down-right. Robe swings a little backward left. Not running. Transparent, single pixel sprite, no shadow no text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "walk_1",
+    "prompt": "ONE next frame walk_1 after first reference walk_0; second is idle identity. Keep EXACT same two-head cleric, hair face robe mace scale and near screen-right weapon hand. Walking right IN PLACE passing pose: near boot now planted beneath body, far boot lifts behind and passes forward under robe. Body rises ONE native pixel, robe folds draw inward, free left arm swings a little forward. Head unchanged, no new details. Transparent crisp pixel sprite, no text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "walk_2",
+    "prompt": "ONE next frame walk_2 after previous walk_1. Second image fixed identity. Exact same female two-head acolyte, same hair face outfit weapon in screen-right NEAR hand. In-place walking right three-quarter: FAR foot swings forward to screen-right in front of near planted foot; near foot begins push-off toward screen-left. Show far boot protruding ahead from robe, near boot behind. Chest drops back one native pixel, burgundy stole sways right. Only this walking phase changes. No run, no shadow, no text, transparent pixel art.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "walk_3_rejected_hand",
+    "prompt": "ONE next walk_3 frame, previous walk_2 first image and idle identity second. Exact same two-head female cleric pixel art. Opposite footfall: far leg stretched FORWARD toward screen-right while NEAR LEG now trails far BACK to screen-left, clearly wider diagonal stride, near boot visible below left hem, far boot at right. Lower body ONE native pixel on contact, robe bell swings toward right, free hand forward at left waist, mace hand screen-right moves slightly back but same hand and same mace. Keep hair/face/head size exact. Transparent, no shadow text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "walk_3",
+    "prompt": "Correct this ONE walk_3 frame. First image is rejected ONLY because mace swapped hands. Keep all of its exact pose, feet, robe, head and face unchanged. REMOVE mace from screen-left hand, let that screen-left hand be empty. Put the SAME silver flanged mace into the hand currently visible at screen-right waist near the burgundy stole. Brown shaft goes from that screen-right fist DOWN-RIGHT, silver head ends to the right of robe. This is the same screen-right gripping hand in second approved walk_2 reference. No mace or object on screen left. Same two-head proportions, transparent pixel sprite.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "walk_4",
+    "prompt": "ONE walk_4 next frame after first image walk_3. Keep exact same two-head acolyte original face bob/bun ivory burgundy robe. Passing phase opposite leg: far boot planted under center, NEAR boot is lifted slightly and moves forward from screen-left to center, overlapping feet under robe, hem narrows. Body rises one native pixel. The hand AT SCREEN-RIGHT WAIST holds the mace with shaft extending DOWN-RIGHT and silver head at screen-right of body; screen-left hand EMPTY. Do not swap hands. Same head size, transparent crisp pixel art, no shadow text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "walk_5",
+    "prompt": "ONE next walk_5 frame. First image previous walk_4, second walk_0 loop target. Preserve exact original two-head female acolyte identity, pixel style, head size. Near boot swings forward screen-right just before touching down into second image pose; far boot pushes behind left. Slight wider hem sways left to prepare seamless loop to walk_0. Mace always held by screen-right waist hand, down-right, opposite screen-left hand empty and relaxed. Same framing transparent background, no text no shadow.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "attack_0_rejected_hand",
+    "prompt": "ONE attack_0 prep frame based on approved idle first image; second latest walk for design continuity. Same exact two-head acolyte head hair clothes. Stop feet shoulder width, begin mace overhead attack: SCREEN-RIGHT NEAR HAND rises to just beside right cheek/shoulder, elbow bent, holds same brown-handled silver flanged mace upright with head above screen-right shoulder. Free SCREEN-LEFT hand remains EMPTY near chest. Calm focused eyes, body slightly lowers. Same tiny mace size, don't swap hands. One transparent pixel sprite, no text no shadow no smear yet.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "attack_0",
+    "prompt": "Fix ONLY arms and mace in rejected attack_0 first image. The mace MUST be at SCREEN RIGHT OF HEAD, not left. Lower screen-left arm EMPTY at chest. Raise SCREEN-RIGHT sleeve/arm so its fist is immediately to the RIGHT of cheek. Brown handle extends UP from this RIGHT fist, silver mace head above RIGHT shoulder. Keep face facing right, DO NOT mirror whole sprite. Exact same ivory robe burgundy stole bob bun and two-head shape. Second image approved idle shows which right-side hand owns mace. Transparent, single pixel-art frame, no text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "attack_1",
+    "prompt": "ONE next attack_1 windup frame after first attack_0. Exact identical cleric two-head sprite, preserve face hair proportions outfit. SAME SCREEN-RIGHT ARM bends farther OVER TOP OF HEAD: its fist above right temple, its elbow sticks to screen-right. Mace shaft angles BACK toward screen-left above crown, silver head now above and behind crown screen-left. Free SCREEN-LEFT arm stays EMPTY tucked at chest. Lean torso slightly backward, weight back foot, feet unchanged. This is overhead backswing, no smear yet. Mace must not grow, compact head. Transparent pixel art single frame no text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "attack_2",
+    "prompt": "ONE next attack_2 frame after first windup attack_1, second idle identity. Same exact TWO HEAD female acolyte. DOWNWARD mace swing in progress: SAME SCREEN-RIGHT ARM drives forward, fist just in front of face at right, shaft slants up-right and small silver mace head at upper right. A broad tapered BROWN/TAN pixel motion trail curves from above back of head over crown to upper right mace, expressing fast overhead downstroke. Lean chest forward, knees bend, right/front foot plants ahead. Free screen-left hand EMPTY near chest. Preserve head size hairstyle outfit; no blue slash, no sword, transparent single sprite.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "attack_3",
+    "prompt": "ONE attack_3 HIT frame immediately after first attack_2. Second idle fixes identity. SAME TWO HEAD acolyte, same head size, white bob low bun, ivory burgundy robe. Complete powerful DOWNWARD mace strike: bend knees and lean torso/head forward screen-right, head about four native pixels lower than idle; SCREEN-RIGHT near fist now extended LOW in front at waist height, brown mace shaft angled DOWN-RIGHT, silver mace head at lower right near ground. Broad BROWN/TAN arc trails vertically DOWN along right side from upper-right to low-right mace, not a horizontal sword slash. Free screen-left hand EMPTY drawn back at chest. Right foot planted forward, robe flares back left. Transparent sprite no text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "attack_4",
+    "prompt": "ONE attack_4 follow-through HOLD frame immediately after first attack_3. Keep exact same crouched forward-leaning pose, same face/hair size, same feet planted, same screen-right hand extended low gripping brown mace handle down-right, silver mace near ground. REMOVE ALL brown motion trail; only solid mace remains. Settle robe and burgundy stole slightly downward but keep body low and arm fully extended. Same two-head acolyte original design, transparent, single crisp pixel sprite, no ground/shadow/text. Do not stand up yet. Weapon hand unchanged.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "attack_5",
+    "prompt": "ONE attack_5 recovery frame after first attack_4, second idle is target. Exact same two-head female cleric face hair outfit. Rise halfway from low forward lunge toward idle, knees still a bit bent, head lifts about 2 native pixels, near right elbow bends pulling mace hand BACK toward screen-right waist while mace continues diagonally down-right. Free screen-left hand moves toward center ready to cover gripping hand. Front foot steps partly back, robe/stole settle, no motion trail. Maintain same hand and small mace size. Transparent pixel art single frame no text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "cast_0",
+    "prompt": "ONE cast_0 animation frame from approved idle first and previous recovery second. Same exact two-head female cleric, ivory burgundy robes, pale side-part bob low bun, same head size. PRAYER casting: both hands meet together at CENTER CHEST below chin, free screen-left palm rests against near hand. SCREEN-RIGHT near hand STILL GRIPS brown mace handle; handle points diagonally DOWN-RIGHT along outside right sleeve, silver mace head hangs beside right hip. Keep handle visibly connected to praying fist. Head bows just a little, eyes half-lidded, feet together, no aura yet. Transparent pixel sprite no shadow/text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "cast_1",
+    "prompt": "ONE cast_1 frame after previous cast_0. Preserve EXACT same two-head cleric hair face clothing, clasped praying hands and small mace held by same near screen-right hand with shaft down-right. Slight inhale raises joined hands ONE native pixel, eyelids close gently, head bows ONE native pixel. Add only a tiny warm gold light BETWEEN palms, 2-3 native pixels, no large halo or particles. Feet and hem fixed, same scale position. Transparent crisp pixel sprite no text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "cast_2",
+    "prompt": "ONE cast_2 next frame from cast_1. Exact same head/hair, body robe scale, same praying hands same screen-right fist owning mace down-right. Sustained prayer peak: keep closed eyes, chin dips subtly ONE native pixel, joined hands settle at sternum, small gold light between hands brightens to pale warm yellow, tiny four-pixel sparkle just ABOVE clasped fingers but below chin. No external aura, no added objects. Boots and robe base unchanged. Transparent single crisp pixel sprite, no text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "cast_3",
+    "prompt": "ONE cast_3 next frame after first cast_2, returning toward second cast_0 loop. Same exact two-head cleric head/hair outfit, praying hands still together at chest with mace gripped screen-right near hand hanging diagonally down-right. Light between hands fades almost completely, remove sparkle. Head rises one native pixel and eyes become softly half-lidded again. Hands relax one native pixel lower. Feet fixed, same scale silhouette, transparent crisp pixel art no text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "hurt_0",
+    "prompt": "ONE hurt_0 frame from first approved idle sprite; second latest cast verifies identity. Exact same original TWO HEAD female cleric, same hair bun head size and ivory/burgundy robe. HIT REACTION: recoil backward to screen-left, shoulders and head lean back distinctly, eyes squeeze shut and mouth small pained expression, knees bend but boots stay on ground. SCREEN-RIGHT near hand STILL holds same mace down-right by hip, free screen-left hand draws defensively to chest. No blood no impact stars no effects. Transparent single pixel sprite, no text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "hurt_1",
+    "prompt": "ONE hurt_1 next recoil recovery after first hurt_0, second idle identity. Same two-head female cleric head/bun/robe/mace. Reduce backward lean halfway toward upright, shoulders lower, knees still flexed, eyes partly reopen with pained brow. Screen-right hand keeps SAME silver mace diagonally down-right at hip; empty screen-left hand still chest. Feet fixed and same head size. Transparent single crisp pixel sprite no text or effects.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "dead_0",
+    "prompt": "ONE dead_0 start collapsing frame after first hurt_1, second idle identity. Same exact female two-head acolyte face hair and clerical robe. Knees buckle to ground, torso folds forward, head lowered eyes closed, same head size not scaled down. Robe pools over bent knees, body now substantially shorter but head unchanged. Screen-right near hand holds mace low beside right knee, silver head nearly touches floor; empty left hand weakly at chest. No blood no effects no ground/shadow. Transparent crisp pixel sprite single frame.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "dead_1",
+    "prompt": "ONE dead_1 next collapse frame after dead_0. Same exact two-head female acolyte face and bob bun size, ivory burgundy robe. She tips over sideways toward SCREEN LEFT: head drops left and down, torso diagonal nearly horizontal, eyes closed. Legs fold toward screen-right beneath robe, left empty forearm catches floor under head. SAME NEAR hand visible in FRONT of torso still holds brown mace, shaft extends to screen-right along ground to silver head. Not sitting upright; falling sideways between kneeling and fully lying. Transparent crisp pixel sprite no shadow no text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "dead_2_rejected_mace",
+    "prompt": "ONE dead_2 FINAL lying frame after first dead_1. Keep SAME exact acolyte clothes and head size, two-head overall character proportions. Finish collapsing: head rests fully on left forearm at screen-left near ground, torso completely horizontal, bent legs extend screen-right, eyes fully closed and motionless. Same pale bob low bun seen rotated naturally, ivory robe and burgundy stole settled flat. Near hand remains in foreground loosely HOLDING SAME mace beside body along ground toward screen-right. IMPORTANT mace is short, grip-to-head same length as idle reference, not a long staff. No blood no shadow no text. Transparent crisp pixel sprite.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "dead_2",
+    "prompt": "Precise edit of ONE lying cleric frame. Keep ALL character pixels/pose/head/clothes unchanged. Correct ONLY the mace: shorten its horizontal brown shaft by HALF. The silver mace head currently at far right MUST move LEFT to immediately beside the gripping fist, about one-third of her head width to the right of fist. Entire fist-to-metal-head length should be approximately 120 source pixels, not 350. The weapon should end UNDER her robe hem, not beyond her boots. Keep same silver flanged head shape and size. Do not enlarge body or move hand. Transparent pixel art one frame.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "dead_1",
+    "prompt": "Precise edit ONE frame. First image falling cleric is target. Keep exact character pose, head, clothes, hands ALL unchanged. Shorten ONLY horizontal brown mace shaft: move silver head LEFT nearer fist, match second corrected lying frame's short mace. Fist-to-center of silver head only about 140 source pixels rather than 300. Metal head ends under right robe hem, not beyond feet. Same mace head size/style. Transparent crisp pixel sprite, no other changes.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "sit_0_rejected_tall",
+    "prompt": "ONE sit_0 resting frame. First image approved idle defines EXACT original acolyte face hair bob with low bun, ivory robe burgundy stole, two-head standing proportions. Second image kneeling death is only body folding reference, do NOT copy sad face. She sits peacefully upright on tucked knees, robe pooled neatly around bent legs, head upright same size as idle, open calm eyes looking screen-right 3/4. Hands rest gently on lap, SCREEN-RIGHT near hand holds same SHORT silver mace, shaft angles down-right beside lap, free left hand rests over near wrist. Clearly relaxed sitting, not collapsing. Transparent single crisp pixel sprite no shadow no text.",
+    "tool": "image_gen.imagegen"
+  },
+  {
+    "frame": "sit_0",
+    "prompt": "Correct ONE sitting cleric sprite. Keep HEAD AND HAIR EXACT same size and face. Make sitting body BELOW CHIN only HALF HEAD HEIGHT: very compact seated chibi with knees folded tight beneath her, short torso, ivory skirt pooled wide and flat. Head ~300 source pixels, everything below chin to ground ONLY ~150 source pixels, total seated height ~450. Do not shrink head. Same burgundy stole gold clasp, hands on lap and same short mace held by screen-right near hand pointing down-right. Keep relaxed open eyes and upright posture. Transparent pixel art no text.",
+    "tool": "image_gen.imagegen"
+  }
+]

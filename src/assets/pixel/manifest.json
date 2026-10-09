@@ -3254,6 +3254,809 @@
           "grip": "grips/archer_male_p2/sit_0.png"
         }
       }
+    },
+    "acolyte_female_p2": {
+      "class": "acolyte",
+      "gender": "female",
+      "bodyHeight": 48,
+      "headHeight": 24,
+      "proportion": 2,
+      "defaultWeapon": "mace",
+      "defaultHair": "side_bun_p2",
+      "hairStyles": [
+        "side_bun_p2"
+      ],
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle_0",
+            "idle_1",
+            "idle_2"
+          ],
+          "durations": [
+            240,
+            240,
+            240
+          ],
+          "duration": 720,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            "walk_0",
+            "walk_1",
+            "walk_2",
+            "walk_3",
+            "walk_4",
+            "walk_5"
+          ],
+          "durations": [
+            90,
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "duration": 540,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            "attack_0",
+            "attack_1",
+            "attack_2",
+            "attack_3",
+            "attack_4",
+            "attack_5",
+            "attack_6"
+          ],
+          "durations": [
+            90,
+            150,
+            60,
+            50,
+            160,
+            80,
+            70
+          ],
+          "duration": 660,
+          "loop": false,
+          "hitFrame": 3
+        },
+        "cast": {
+          "frames": [
+            "cast_0",
+            "cast_1",
+            "cast_2",
+            "cast_3"
+          ],
+          "durations": [
+            160,
+            200,
+            220,
+            180
+          ],
+          "duration": 760,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt_0",
+            "hurt_1"
+          ],
+          "durations": [
+            90,
+            170
+          ],
+          "duration": 260,
+          "loop": false
+        },
+        "dead": {
+          "frames": [
+            "dead_0",
+            "dead_1",
+            "dead_2"
+          ],
+          "durations": [
+            100,
+            140,
+            1000
+          ],
+          "duration": 1240,
+          "loop": false,
+          "holdLast": true
+        },
+        "sit": {
+          "frames": [
+            "sit_0"
+          ],
+          "durations": [
+            1000
+          ],
+          "duration": 1000,
+          "loop": false,
+          "holdLast": true
+        }
+      },
+      "frames": {
+        "idle_0": {
+          "image": "body/acolyte_female_p2/idle_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              66,
+              97
+            ],
+            "tipPoint": [
+              75,
+              104
+            ],
+            "angleDegrees": 37.87
+          },
+          "grip": "grips/acolyte_female_p2/idle_0.png"
+        },
+        "idle_1": {
+          "image": "body/acolyte_female_p2/idle_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              66,
+              96
+            ],
+            "tipPoint": [
+              75,
+              103
+            ],
+            "angleDegrees": 37.87
+          },
+          "grip": "grips/acolyte_female_p2/idle_1.png"
+        },
+        "idle_2": {
+          "image": "body/acolyte_female_p2/idle_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "idle_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              66,
+              99
+            ],
+            "tipPoint": [
+              76,
+              105
+            ],
+            "angleDegrees": 30.96
+          },
+          "grip": "grips/acolyte_female_p2/idle_2.png"
+        },
+        "walk_0": {
+          "image": "body/acolyte_female_p2/walk_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 39.81
+          },
+          "grip": "grips/acolyte_female_p2/walk_0.png"
+        },
+        "walk_1": {
+          "image": "body/acolyte_female_p2/walk_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              97
+            ],
+            "tipPoint": [
+              79,
+              103
+            ],
+            "angleDegrees": 36.87
+          },
+          "grip": "grips/acolyte_female_p2/walk_1.png"
+        },
+        "walk_2": {
+          "image": "body/acolyte_female_p2/walk_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              79,
+              103
+            ],
+            "angleDegrees": 35.54
+          },
+          "grip": "grips/acolyte_female_p2/walk_2.png"
+        },
+        "walk_3": {
+          "image": "body/acolyte_female_p2/walk_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              66,
+              97
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 26.57
+          },
+          "grip": "grips/acolyte_female_p2/walk_3.png"
+        },
+        "walk_4": {
+          "image": "body/acolyte_female_p2/walk_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              67,
+              96
+            ],
+            "tipPoint": [
+              77,
+              103
+            ],
+            "angleDegrees": 34.99
+          },
+          "grip": "grips/acolyte_female_p2/walk_4.png"
+        },
+        "walk_5": {
+          "image": "body/acolyte_female_p2/walk_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "walk_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              98
+            ],
+            "tipPoint": [
+              78,
+              103
+            ],
+            "angleDegrees": 35.54
+          },
+          "grip": "grips/acolyte_female_p2/walk_5.png"
+        },
+        "attack_0": {
+          "image": "body/acolyte_female_p2/attack_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              75,
+              77
+            ],
+            "tipPoint": [
+              76,
+              63
+            ],
+            "angleDegrees": -85.91
+          },
+          "grip": "grips/acolyte_female_p2/attack_0.png"
+        },
+        "attack_1": {
+          "image": "body/acolyte_female_p2/attack_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              70,
+              67
+            ],
+            "tipPoint": [
+              54,
+              61
+            ],
+            "angleDegrees": -159.44
+          },
+          "grip": "grips/acolyte_female_p2/attack_1.png"
+        },
+        "attack_2": {
+          "image": "body/acolyte_female_p2/attack_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              82,
+              78
+            ],
+            "tipPoint": [
+              93,
+              68
+            ],
+            "angleDegrees": -42.27
+          },
+          "grip": "grips/acolyte_female_p2/attack_2.png"
+        },
+        "attack_3": {
+          "image": "body/acolyte_female_p2/attack_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              81,
+              104
+            ],
+            "tipPoint": [
+              95,
+              109
+            ],
+            "angleDegrees": 19.65
+          },
+          "grip": "grips/acolyte_female_p2/attack_3.png"
+        },
+        "attack_4": {
+          "image": "body/acolyte_female_p2/attack_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              81,
+              104
+            ],
+            "tipPoint": [
+              96,
+              110
+            ],
+            "angleDegrees": 21.8
+          },
+          "grip": "grips/acolyte_female_p2/attack_4.png"
+        },
+        "attack_5": {
+          "image": "body/acolyte_female_p2/attack_5.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_5",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              65,
+              97
+            ],
+            "tipPoint": [
+              76,
+              104
+            ],
+            "angleDegrees": 32.47
+          },
+          "grip": "grips/acolyte_female_p2/attack_5.png"
+        },
+        "attack_6": {
+          "image": "body/acolyte_female_p2/attack_6.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "attack_6",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              66,
+              97
+            ],
+            "tipPoint": [
+              75,
+              104
+            ],
+            "angleDegrees": 37.87
+          },
+          "grip": "grips/acolyte_female_p2/attack_6.png"
+        },
+        "cast_0": {
+          "image": "body/acolyte_female_p2/cast_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              65,
+              94
+            ],
+            "tipPoint": [
+              76,
+              104
+            ],
+            "angleDegrees": 42.27
+          },
+          "grip": "grips/acolyte_female_p2/cast_0.png"
+        },
+        "cast_1": {
+          "image": "body/acolyte_female_p2/cast_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              65,
+              93
+            ],
+            "tipPoint": [
+              76,
+              104
+            ],
+            "angleDegrees": 45
+          },
+          "grip": "grips/acolyte_female_p2/cast_1.png"
+        },
+        "cast_2": {
+          "image": "body/acolyte_female_p2/cast_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              65,
+              94
+            ],
+            "tipPoint": [
+              76,
+              105
+            ],
+            "angleDegrees": 45
+          },
+          "grip": "grips/acolyte_female_p2/cast_2.png"
+        },
+        "cast_3": {
+          "image": "body/acolyte_female_p2/cast_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "cast_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              65,
+              94
+            ],
+            "tipPoint": [
+              76,
+              104
+            ],
+            "angleDegrees": 42.27
+          },
+          "grip": "grips/acolyte_female_p2/cast_3.png"
+        },
+        "hurt_0": {
+          "image": "body/acolyte_female_p2/hurt_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              99
+            ],
+            "tipPoint": [
+              81,
+              101
+            ],
+            "angleDegrees": 15.95
+          },
+          "grip": "grips/acolyte_female_p2/hurt_0.png"
+        },
+        "hurt_1": {
+          "image": "body/acolyte_female_p2/hurt_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "hurt_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              74,
+              99
+            ],
+            "tipPoint": [
+              81,
+              102
+            ],
+            "angleDegrees": 23.2
+          },
+          "grip": "grips/acolyte_female_p2/hurt_1.png"
+        },
+        "dead_0": {
+          "image": "body/acolyte_female_p2/dead_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_0",
+            "basePose": "down"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              105
+            ],
+            "tipPoint": [
+              79,
+              109
+            ],
+            "angleDegrees": 29.74
+          },
+          "grip": "grips/acolyte_female_p2/dead_0.png"
+        },
+        "dead_1": {
+          "image": "body/acolyte_female_p2/dead_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_1",
+            "basePose": "down"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              65,
+              109
+            ],
+            "tipPoint": [
+              75,
+              110
+            ],
+            "angleDegrees": 5.71
+          },
+          "grip": "grips/acolyte_female_p2/dead_1.png"
+        },
+        "dead_2": {
+          "image": "body/acolyte_female_p2/dead_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "dead_2",
+            "basePose": "down"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              68,
+              110
+            ],
+            "tipPoint": [
+              78,
+              111
+            ],
+            "angleDegrees": 5.71
+          },
+          "grip": "grips/acolyte_female_p2/dead_2.png"
+        },
+        "sit_0": {
+          "image": "body/acolyte_female_p2/sit_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "sit_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              66,
+              104
+            ],
+            "tipPoint": [
+              76,
+              109
+            ],
+            "angleDegrees": 26.57
+          },
+          "grip": "grips/acolyte_female_p2/sit_0.png"
+        }
+      }
     }
   },
   "hair": {
@@ -4024,6 +4827,225 @@
           ]
         }
       }
+    },
+    "side_bun_p2": {
+      "gender": "female",
+      "style": "side_bun",
+      "proportion": "p2",
+      "pivot": [
+        0,
+        0
+      ],
+      "poses": {
+        "idle_0": {
+          "front": "hair/side_bun_p2/idle_0_front.png",
+          "back": "hair/side_bun_p2/idle_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_1": {
+          "front": "hair/side_bun_p2/idle_1_front.png",
+          "back": "hair/side_bun_p2/idle_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "idle_2": {
+          "front": "hair/side_bun_p2/idle_2_front.png",
+          "back": "hair/side_bun_p2/idle_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_0": {
+          "front": "hair/side_bun_p2/walk_0_front.png",
+          "back": "hair/side_bun_p2/walk_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_1": {
+          "front": "hair/side_bun_p2/walk_1_front.png",
+          "back": "hair/side_bun_p2/walk_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_2": {
+          "front": "hair/side_bun_p2/walk_2_front.png",
+          "back": "hair/side_bun_p2/walk_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_3": {
+          "front": "hair/side_bun_p2/walk_3_front.png",
+          "back": "hair/side_bun_p2/walk_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_4": {
+          "front": "hair/side_bun_p2/walk_4_front.png",
+          "back": "hair/side_bun_p2/walk_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "walk_5": {
+          "front": "hair/side_bun_p2/walk_5_front.png",
+          "back": "hair/side_bun_p2/walk_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_0": {
+          "front": "hair/side_bun_p2/attack_0_front.png",
+          "back": "hair/side_bun_p2/attack_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_1": {
+          "front": "hair/side_bun_p2/attack_1_front.png",
+          "back": "hair/side_bun_p2/attack_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_2": {
+          "front": "hair/side_bun_p2/attack_2_front.png",
+          "back": "hair/side_bun_p2/attack_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_3": {
+          "front": "hair/side_bun_p2/attack_3_front.png",
+          "back": "hair/side_bun_p2/attack_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_4": {
+          "front": "hair/side_bun_p2/attack_4_front.png",
+          "back": "hair/side_bun_p2/attack_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_5": {
+          "front": "hair/side_bun_p2/attack_5_front.png",
+          "back": "hair/side_bun_p2/attack_5_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "attack_6": {
+          "front": "hair/side_bun_p2/attack_6_front.png",
+          "back": "hair/side_bun_p2/attack_6_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_0": {
+          "front": "hair/side_bun_p2/cast_0_front.png",
+          "back": "hair/side_bun_p2/cast_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_1": {
+          "front": "hair/side_bun_p2/cast_1_front.png",
+          "back": "hair/side_bun_p2/cast_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_2": {
+          "front": "hair/side_bun_p2/cast_2_front.png",
+          "back": "hair/side_bun_p2/cast_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "cast_3": {
+          "front": "hair/side_bun_p2/cast_3_front.png",
+          "back": "hair/side_bun_p2/cast_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_0": {
+          "front": "hair/side_bun_p2/hurt_0_front.png",
+          "back": "hair/side_bun_p2/hurt_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "hurt_1": {
+          "front": "hair/side_bun_p2/hurt_1_front.png",
+          "back": "hair/side_bun_p2/hurt_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_0": {
+          "front": "hair/side_bun_p2/dead_0_front.png",
+          "back": "hair/side_bun_p2/dead_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_1": {
+          "front": "hair/side_bun_p2/dead_1_front.png",
+          "back": "hair/side_bun_p2/dead_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "dead_2": {
+          "front": "hair/side_bun_p2/dead_2_front.png",
+          "back": "hair/side_bun_p2/dead_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "sit_0": {
+          "front": "hair/side_bun_p2/sit_0_front.png",
+          "back": "hair/side_bun_p2/sit_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      }
     }
   },
   "weapons": {
@@ -4145,6 +5167,38 @@
           "dead_1": "weapons/bow/archer_male_p2/dead_1.png",
           "dead_2": "weapons/bow/archer_male_p2/dead_2.png",
           "sit_0": "weapons/bow/archer_male_p2/sit_0.png"
+        }
+      }
+    },
+    "mace": {
+      "frames": {
+        "acolyte_female_p2": {
+          "idle_0": "weapons/mace/acolyte_female_p2/idle_0.png",
+          "idle_1": "weapons/mace/acolyte_female_p2/idle_1.png",
+          "idle_2": "weapons/mace/acolyte_female_p2/idle_2.png",
+          "walk_0": "weapons/mace/acolyte_female_p2/walk_0.png",
+          "walk_1": "weapons/mace/acolyte_female_p2/walk_1.png",
+          "walk_2": "weapons/mace/acolyte_female_p2/walk_2.png",
+          "walk_3": "weapons/mace/acolyte_female_p2/walk_3.png",
+          "walk_4": "weapons/mace/acolyte_female_p2/walk_4.png",
+          "walk_5": "weapons/mace/acolyte_female_p2/walk_5.png",
+          "attack_0": "weapons/mace/acolyte_female_p2/attack_0.png",
+          "attack_1": "weapons/mace/acolyte_female_p2/attack_1.png",
+          "attack_2": "weapons/mace/acolyte_female_p2/attack_2.png",
+          "attack_3": "weapons/mace/acolyte_female_p2/attack_3.png",
+          "attack_4": "weapons/mace/acolyte_female_p2/attack_4.png",
+          "attack_5": "weapons/mace/acolyte_female_p2/attack_5.png",
+          "attack_6": "weapons/mace/acolyte_female_p2/attack_6.png",
+          "cast_0": "weapons/mace/acolyte_female_p2/cast_0.png",
+          "cast_1": "weapons/mace/acolyte_female_p2/cast_1.png",
+          "cast_2": "weapons/mace/acolyte_female_p2/cast_2.png",
+          "cast_3": "weapons/mace/acolyte_female_p2/cast_3.png",
+          "hurt_0": "weapons/mace/acolyte_female_p2/hurt_0.png",
+          "hurt_1": "weapons/mace/acolyte_female_p2/hurt_1.png",
+          "dead_0": "weapons/mace/acolyte_female_p2/dead_0.png",
+          "dead_1": "weapons/mace/acolyte_female_p2/dead_1.png",
+          "dead_2": "weapons/mace/acolyte_female_p2/dead_2.png",
+          "sit_0": "weapons/mace/acolyte_female_p2/sit_0.png"
         }
       }
     }
