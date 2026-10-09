@@ -120,7 +120,10 @@ export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: 
   let [state, t] = clip(pose);
   if (state === 'attack' && table.attack) {
     // the game swings in pose.dur with the hit at half of it; this art's hit is the 5th of 8 frames (MOTION_SPEC), so map half → its start
-    const a = table.attack, hit = a.frames.length >= 8 ? a.durations.slice(0, 4).reduce((x, y) => x + y, 0) : a.duration / 2;
+    // `hitFrame` (index) marks the contact frame (docs/art/MOTION_REFERENCE.md); round-8 art without it hits on its 5th of 8 frames
+    const a = table.attack as typeof table.attack & { hitFrame?: number };
+    const hi = a.hitFrame ?? (a.frames.length >= 8 ? 4 : -1);
+    const hit = hi >= 0 ? a.durations.slice(0, hi).reduce((x, y) => x + y, 0) : a.duration / 2;
     t = pose.t / Math.max(1, pose.dur ?? 280) * 2 * hit;
   }
   if (state === 'dead') t = pose.t; // play the fall, then hold the last frame
