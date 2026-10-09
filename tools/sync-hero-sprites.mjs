@@ -1,7 +1,7 @@
 // Copy the reviewed hero sprite delivery into the game: docs/art-production/hero-sprites/ → src/assets/sprites/.
 // Every character, weapon and headgear in the production game-manifest.json is copied with its frames, hair masks and
 // grip overlays; the game manifest keeps only what src/render/whole.ts reads (no source/scale records).
-// usage: node tools/sync-hero-sprites.mjs [--dry]
+// usage: node tools/sync-hero-sprites.mjs [--dry] [--hold id,id]   (--hold keeps delivered characters that failed review out of the game)
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -9,11 +9,14 @@ const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
 const from = path.join(root, 'docs/art-production/hero-sprites');
 const to = path.join(root, 'src/assets/sprites');
 const dry = process.argv.includes('--dry');
+const holdArg = process.argv.indexOf('--hold');
+const hold = new Set(holdArg > 0 ? process.argv[holdArg + 1].split(',') : []);
 const prod = JSON.parse(fs.readFileSync(path.join(from, 'game-manifest.json'), 'utf8'));
 
 const out = { schema: prod.schema, canvas: prod.canvas, animations: prod.animations, characters: {}, weapons: {}, headgear: prod.headgear, hairTints: prod.hairTints, renderContract: prod.renderContract };
 const files = new Set();
 for (const [id, c] of Object.entries(prod.characters)) {
+  if (hold.has(id)) continue;
   const { frames, ...rest } = c;
   out.characters[id] = { ...rest, frames: {} };
   for (const [state, f] of Object.entries(frames)) {
