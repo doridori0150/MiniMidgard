@@ -3131,6 +3131,7 @@ export class World {
             m.x = tm.x + (m.x - tm.x) * k; m.y = tm.y + (m.y - tm.y) * k; m.charge = null; m.dest = null;
           }
         }
+        if (!free) this.emit({ t: 'skillHits', uid: h.uid, skill: sk.id, hits: Array.from({ length: hits }, (_, i) => 150 + i * 180) });
         const span = 150 + hits * 180 + 100;
         for (const m of this.mobs) if (this.targetable(m) && inArea(m)) { this.lexPacket(m, span); this.holdBreak(m, span); }
         const rm = this.resonate(h, sk, el); // 원소 공명

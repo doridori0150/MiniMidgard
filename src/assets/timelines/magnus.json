@@ -1,0 +1,18 @@
+{
+  "kit": 1, "format": "timeline@1", "id": "mm-magnus", "game": "Mini Midgard",
+  "subject": "priest_female_p2", "action": "skill_magnus", "skills": ["magnus"], "tier": "signature",
+  "title": "대퇴마(시전 3.3초, 성스러운 십자 결계): 따뜻하게 어두워지며 이름을 띄우고, 결계가 서는 순간 흰 금빛 섬광과 떨림",
+  "fps": 60, "events": { "contact": 130 }, "exclusive": ["camera"],
+  "tracks": [
+    { "id": "hush", "type": "dim", "clips": [
+      { "at": 0, "dur": 1100, "color": "#1a1408", "reduced": "static", "keys": { "opacity": [[0, 0], [140, 0.28, "outQuad"], [800, 0.28], [1100, 0]] } } ] },
+    { "id": "name", "type": "text", "clips": [
+      { "at": 0, "dur": 1000, "text": "대퇴마", "style": "title",
+        "keys": { "opacity": [[0, 0], [110, 1], [780, 1], [1000, 0]], "scale": [[0, 1.4, "outBack"], [170, 1]], "x": 0.5, "y": [[0, 0.32, "outCubic"], [1000, 0.29]] } } ] },
+    { "id": "seal", "type": "flash", "clips": [
+      { "at": "contact", "dur": 240, "area": "full", "color": "#fff3c8", "flash": true, "keys": { "opacity": [[0, 0.3, "outQuad"], [240, 0]] } },
+      { "at": 0, "dur": 700, "area": "local", "anchor": "caster", "color": "#fff3c4", "flash": true, "keys": { "opacity": [[0, 0], [130, 0.5], [700, 0]], "radius": [[0, 30], [700, 70]] } } ] },
+    { "id": "tremor", "type": "camera", "clips": [
+      { "at": "contact", "dur": 300, "kind": "shake", "reduced": "skip", "keys": { "amp": [[0, 2.6, "outQuad"], [300, 0]] } } ] }
+  ]
+}

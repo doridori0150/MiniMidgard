@@ -1,0 +1,17 @@
+{
+  "kit": 1, "format": "timeline@1", "id": "mm-storm-gust", "game": "Mini Midgard",
+  "subject": "wizard_female_p2", "action": "skill_blizzard", "skills": ["storm_gust"], "tier": "signature",
+  "title": "폭풍한설(시전 4초, 눈보라 장판): 푸르게 어두워지며 이름을 띄우고, 눈보라가 이는 동안 잔잔한 떨림",
+  "fps": 60, "events": { "contact": 130 }, "exclusive": ["camera"],
+  "tracks": [
+    { "id": "chill", "type": "dim", "clips": [
+      { "at": 0, "dur": 1300, "color": "#0a1830", "reduced": "static", "keys": { "opacity": [[0, 0], [160, 0.3, "outQuad"], [950, 0.3], [1300, 0]] } } ] },
+    { "id": "name", "type": "text", "clips": [
+      { "at": 0, "dur": 1000, "text": "폭풍한설", "style": "title",
+        "keys": { "opacity": [[0, 0], [110, 1], [780, 1], [1000, 0]], "scale": [[0, 1.4, "outBack"], [170, 1]], "x": 0.5, "y": [[0, 0.32, "outCubic"], [1000, 0.29]] } } ] },
+    { "id": "gust", "type": "camera", "clips": [
+      { "at": 150, "dur": 1100, "kind": "shake", "reduced": "skip", "keys": { "amp": [[0, 1.6], [900, 1.2], [1100, 0]] } } ] },
+    { "id": "frost", "type": "flash", "clips": [
+      { "at": 120, "dur": 260, "area": "full", "color": "#dff4ff", "flash": true, "keys": { "opacity": [[0, 0.2, "outQuad"], [260, 0]] } } ] }
+  ]
+}

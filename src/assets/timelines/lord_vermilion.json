@@ -1,0 +1,17 @@
+{
+  "kit": 1, "format": "timeline@1", "id": "mm-lord-vermilion", "game": "Mini Midgard",
+  "subject": "wizard_female_p2", "action": "skill_sky", "skills": ["lord_vermilion"], "tier": "signature",
+  "title": "천둥왕의 심판(시전 5초, 가장 넓은 범위): 화면을 어둡게 하고 이름을 띄운 뒤, 벼락 파도(hits)마다 흰 섬광과 흔들림",
+  "fps": 60, "events": { "contact": 130, "hits": [150, 330, 510, 690] }, "exclusive": ["camera"],
+  "tracks": [
+    { "id": "dim", "type": "dim", "clips": [
+      { "at": 0, "dur": 1150, "color": "#0b0f24", "reduced": "static", "keys": { "opacity": [[0, 0], [140, 0.34, "outQuad"], [850, 0.34], [1150, 0]] } } ] },
+    { "id": "name", "type": "text", "clips": [
+      { "at": 0, "dur": 1000, "text": "천둥왕의 심판", "style": "title",
+        "keys": { "opacity": [[0, 0], [110, 1], [780, 1], [1000, 0]], "scale": [[0, 1.4, "outBack"], [170, 1]], "x": 0.5, "y": [[0, 0.32, "outCubic"], [1000, 0.29]] } } ] },
+    { "id": "bolt", "type": "flash", "clips": [
+      { "repeat": { "event": "hits" }, "dur": 110, "area": "full", "color": "#e8f0ff", "flash": true, "keys": { "opacity": [[0, 0.24], [110, 0]] } } ] },
+    { "id": "rumble", "type": "camera", "clips": [
+      { "repeat": { "event": "hits" }, "dur": 150, "kind": "shake", "reduced": "skip", "keys": { "amp": [[0, 3.2, "outQuad"], [150, 0]] } } ] }
+  ]
+}

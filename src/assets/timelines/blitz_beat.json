@@ -1,0 +1,13 @@
+{
+  "kit": 1, "format": "timeline@1", "id": "mm-blitz-beat", "game": "Mini Midgard",
+  "subject": "hunter_male_p2", "action": "skill_falcon", "skills": ["blitz_beat", "falcon_strike"], "tier": "skill",
+  "title": "블리츠 비트·매의 일격: 매에게 신호하는 순간 헌터 둘레가 반짝이고, 매가 내리꽂힐 무렵 대상에 짧은 빛과 떨림",
+  "fps": 60, "events": { "contact": 130 },
+  "tracks": [
+    { "id": "signal", "type": "flash", "clips": [
+      { "at": 0, "dur": 260, "area": "local", "anchor": "caster", "color": "#fff0c0", "flash": true, "keys": { "opacity": [[0, 0], [90, 0.4], [260, 0]], "radius": [[0, 20], [260, 36]] } },
+      { "at": { "event": "contact", "offset": 220 }, "dur": 160, "area": "local", "anchor": "target", "color": "#ffe8a0", "flash": true, "keys": { "opacity": [[0, 0.6, "outQuad"], [160, 0]], "radius": [[0, 20], [160, 44]] } } ] },
+    { "id": "dive", "type": "camera", "clips": [
+      { "at": { "event": "contact", "offset": 220 }, "dur": 120, "kind": "shake", "reduced": "skip", "keys": { "amp": [[0, 1.8], [120, 0]] } } ] }
+  ]
+}

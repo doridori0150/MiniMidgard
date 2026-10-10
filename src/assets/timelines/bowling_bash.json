@@ -1,0 +1,16 @@
+{
+  "kit": 1, "format": "timeline@1", "id": "mm-bowling-bash", "game": "Mini Midgard",
+  "subject": "knight_female_p2", "action": "skill_double", "skills": ["bowling_bash"], "tier": "skill",
+  "title": "회전 강타(2연타 범위): 반 걸음 파고들며 두 번 후려침. 타격마다 대상에 묵직한 빛과 흔들림, 둘째 타에 짧은 히트스톱",
+  "fps": 60, "events": { "contact": 130, "hits": [150, 330] }, "exclusive": ["camera"],
+  "tracks": [
+    { "id": "step", "type": "move", "clips": [
+      { "at": 0, "dur": 640, "actor": "caster", "units": "body", "keys": { "x": [[0, 0, "outCubic"], [120, 0.25], [500, 0.25, "inOutQuad"], [640, 0]] } } ] },
+    { "id": "impact", "type": "flash", "clips": [
+      { "repeat": { "event": "hits" }, "dur": 140, "area": "local", "anchor": "target", "color": "#ffcf80", "flash": true,
+        "keys": { "opacity": [[0, 0.7, "outQuad"], [140, 0]], "radius": [[0, 24], [140, 50]] } } ] },
+    { "id": "thud", "type": "camera", "clips": [
+      { "repeat": { "event": "hits" }, "dur": 110, "kind": "shake", "reduced": "skip", "keys": { "amp": [[0, 2.2, "outQuad"], [110, 0]] } } ] },
+    { "id": "stop", "type": "hitstop", "clips": [ { "at": { "event": "hits", "index": -1 }, "dur": 45, "scope": "field" } ] }
+  ]
+}

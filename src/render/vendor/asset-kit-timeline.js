@@ -1,4 +1,4 @@
-// asset-kit 0d89290 tools/lib/timeline.mjs 복사본 — 고치지 말고 asset-kit에서 고친 뒤 npm run timelines로 다시 복사합니다.
+// asset-kit a98116a tools/lib/timeline.mjs 복사본 — 고치지 말고 asset-kit에서 고친 뒤 npm run timelines로 다시 복사합니다.
 // 연출 타임라인 timeline@1 (docs/타임라인-형식.md). 스킬·필살기·컷인 연출을 트랙과 클립, 키프레임으로 적습니다.
 // 이 파일은 순수 함수(Node·브라우저 공용)입니다: 시간 풀기, 키프레임 보간, 지금 재생 중인 클립, 지나간 사건, 검사.
 // 그리기는 각 게임 런타임과 공방 무대가 합니다. 피해 시점은 게임 로직이 정하고 타임라인은 보여 주기만 합니다.
@@ -73,6 +73,7 @@ export const interruptMode = (track, clip) => clip.onInterrupt || track.onInterr
 
 // 키프레임: [[클립 안 시간(ms), 값, 다음 키까지의 이징?], …]. 값은 숫자 또는 숫자 배열. 첫 키 전은 첫 값, 끝 키 뒤는 끝 값.
 export function sampleKeys(keys, local) {
+  if (typeof keys === 'number') return keys; // 값 하나 = 고정 값(문서 4절)
   if (!Array.isArray(keys) || !keys.length) return undefined;
   if (!Array.isArray(keys[0])) return keys; // 키가 아니라 고정 값
   if (local <= keys[0][0]) return keys[0][1];
@@ -191,7 +192,8 @@ export function validateTimeline(tl) {
       if (c.reduced && !['skip', 'static', 'keep'].includes(c.reduced)) e.push(`${cat}: reduced는 skip·static·keep`);
       if (tr.type === 'image' && c.asset && !tl.assets?.[c.asset]) e.push(`${cat}: 없는 자산 ${c.asset}`);
       for (const [k, keys] of Object.entries({ ...(c.keys || {}), ...(c.portrait?.keys || {}) })) {
-        if (!Array.isArray(keys) || !Array.isArray(keys[0])) continue;
+        if (typeof keys === 'number' || (Array.isArray(keys) && keys.length && keys.every((v) => typeof v === 'number'))) continue; // 고정 값
+        if (!Array.isArray(keys) || !keys.length || !keys.every((kf) => Array.isArray(kf) && typeof kf[0] === 'number')) { e.push(`${cat}.keys.${k}: 숫자 하나, 숫자 배열, [[시간, 값, 이징?], …] 중 하나여야 합니다`); continue; }
         let last = -Infinity;
         for (const kf of keys) {
           if (!(kf[0] >= last)) e.push(`${cat}.keys.${k}: 키 시간이 앞으로만 가야 합니다`);
