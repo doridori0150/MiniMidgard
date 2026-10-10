@@ -1,0 +1,5350 @@
+{
+  "kit": 1,
+  "source": {
+    "schema": "minimidgard.sprites/1",
+    "note": "변환기로 만든 표준 기록입니다. 원본은 게임 manifest입니다."
+  },
+  "sheets": [
+    {
+      "id": "mage_female",
+      "kind": "idle",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "src/assets/sprites/frames/mage/idle_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                283.254,
+                289.338
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                231.967,
+                83.051
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                290.092,
+                148.015
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/idle_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/idle_0.png"
+          }
+        },
+        {
+          "name": "idle_1",
+          "file": "src/assets/sprites/frames/mage/idle_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                283.254,
+                289.794
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                231.967,
+                84.838
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                290.092,
+                149.383
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/idle_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/idle_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mage_female",
+      "kind": "walk",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "file": "src/assets/sprites/frames/mage/walk_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                294.651,
+                269.963
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                228.548,
+                78.493
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                290.092,
+                143.456
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/walk_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/walk_0.png"
+          }
+        },
+        {
+          "name": "walk_1",
+          "file": "src/assets/sprites/frames/mage/walk_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                276.985,
+                272.243
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                225.699,
+                83.051
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                286.103,
+                148.015
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/walk_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/walk_1.png"
+          }
+        },
+        {
+          "name": "walk_2",
+          "file": "src/assets/sprites/frames/mage/walk_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                289.233,
+                253.222
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                222,
+                78
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                280,
+                140
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/walk_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/walk_2.png"
+          }
+        },
+        {
+          "name": "walk_3",
+          "file": "src/assets/sprites/frames/mage/walk_3.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                283.824,
+                273.382
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                217.721,
+                87.61
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                278.125,
+                150.294
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/walk_3.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/walk_3.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mage_female",
+      "kind": "attack",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "file": "src/assets/sprites/frames/mage/attack_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                318.534,
+                173.776
+              ],
+              "angle": -115,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                223,
+                78
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                283,
+                145
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/attack_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/attack_0.png"
+          }
+        },
+        {
+          "name": "attack_1",
+          "file": "src/assets/sprites/frames/mage/attack_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 80,
+          "anchors": {
+            "hand": {
+              "point": [
+                325.423,
+                235.772
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                230.827,
+                93.309
+              ],
+              "angle": 4
+            },
+            "side": {
+              "point": [
+                292.371,
+                152.574
+              ],
+              "angle": 4
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/attack_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/attack_1.png"
+          }
+        },
+        {
+          "name": "attack_2",
+          "file": "src/assets/sprites/frames/mage/attack_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                288.952,
+                260.846
+              ],
+              "angle": -25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                219.43,
+                91.029
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                280.974,
+                153.713
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/attack_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/attack_2.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mage_female",
+      "kind": "cast",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "cast_0",
+          "file": "src/assets/sprites/frames/mage/cast_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                319.2,
+                218.089
+              ],
+              "angle": -70,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                226,
+                87
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                280,
+                151
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/cast_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/cast_0.png"
+          }
+        },
+        {
+          "name": "cast_1",
+          "file": "src/assets/sprites/frames/mage/cast_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                326.778,
+                216.022
+              ],
+              "angle": -70,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                225,
+                87
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                280,
+                152
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/cast_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/cast_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mage_female",
+      "kind": "sit",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sit_0",
+          "file": "src/assets/sprites/frames/mage/sit_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                276.415,
+                307.574
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                216.011,
+                130.919
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                276.415,
+                193.603
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/sit_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/sit_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mage_female",
+      "kind": "hurt",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hurt_0",
+          "file": "src/assets/sprites/frames/mage/hurt_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                275.846,
+                241.471
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                177.831,
+                117.243
+              ],
+              "angle": -20
+            },
+            "side": {
+              "point": [
+                248.493,
+                161.691
+              ],
+              "angle": -20
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/hurt_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/hurt_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mage_female",
+      "kind": "dead",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "dead_0",
+          "file": "src/assets/sprites/frames/mage/dead_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                219.43,
+                340.625
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                348.217,
+                247.169
+              ],
+              "angle": 75
+            },
+            "side": {
+              "point": [
+                336.82,
+                324.669
+              ],
+              "angle": 75
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/mage/dead_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/mage/dead_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "idle",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "src/assets/sprites/frames/acolyte/idle_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                289.089,
+                286.705
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                230.213,
+                54.806
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                296.298,
+                125.698
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/idle_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/idle_0.png"
+          }
+        },
+        {
+          "name": "idle_1",
+          "file": "src/assets/sprites/frames/acolyte/idle_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                289.089,
+                287.178
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                230.213,
+                56.775
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                296.298,
+                127.21
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/idle_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/idle_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "walk",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "file": "src/assets/sprites/frames/acolyte/walk_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                304.109,
+                261.473
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                230.814,
+                56.008
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                298.101,
+                123.295
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/walk_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/walk_0.png"
+          }
+        },
+        {
+          "name": "walk_1",
+          "file": "src/assets/sprites/frames/acolyte/walk_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                301.105,
+                259.07
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                225.407,
+                57.209
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                293.895,
+                126.899
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/walk_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/walk_1.png"
+          }
+        },
+        {
+          "name": "walk_2",
+          "file": "src/assets/sprites/frames/acolyte/walk_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                300.504,
+                267.481
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                230.814,
+                54.806
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                300.504,
+                128.101
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/walk_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/walk_2.png"
+          }
+        },
+        {
+          "name": "walk_3",
+          "file": "src/assets/sprites/frames/acolyte/walk_3.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                296.899,
+                273.488
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                226.008,
+                58.411
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                294.496,
+                126.899
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/walk_3.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/walk_3.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "attack",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "file": "src/assets/sprites/frames/acolyte/attack_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                319.742,
+                160.516
+              ],
+              "angle": -115,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                223.128,
+                54.17
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                287.074,
+                108.386
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/attack_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/attack_0.png"
+          }
+        },
+        {
+          "name": "attack_1",
+          "file": "src/assets/sprites/frames/acolyte/attack_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 80,
+          "anchors": {
+            "hand": {
+              "point": [
+                355.775,
+                223.023
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                233.217,
+                62.016
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                302.907,
+                130.504
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/attack_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/attack_1.png"
+          }
+        },
+        {
+          "name": "attack_2",
+          "file": "src/assets/sprites/frames/acolyte/attack_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                305.911,
+                263.876
+              ],
+              "angle": -25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                230.213,
+                57.209
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                298.702,
+                126.899
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/attack_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/attack_2.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "cast",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "cast_0",
+          "file": "src/assets/sprites/frames/acolyte/cast_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                312.096,
+                225.157
+              ],
+              "angle": -90,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                223.823,
+                54.17
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                287.769,
+                108.386
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/cast_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/cast_0.png"
+          }
+        },
+        {
+          "name": "cast_1",
+          "file": "src/assets/sprites/frames/acolyte/cast_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                291.244,
+                225.852
+              ],
+              "angle": -90,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                221.738,
+                55.561
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                287.769,
+                111.166
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/cast_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/cast_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "sit",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sit_0",
+          "file": "src/assets/sprites/frames/acolyte/sit_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                286.686,
+                316.744
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                233.818,
+                106.473
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                298.702,
+                176.163
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/sit_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/sit_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "hurt",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hurt_0",
+          "file": "src/assets/sprites/frames/acolyte/hurt_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                257.849,
+                251.86
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                218.198,
+                83.643
+              ],
+              "angle": -12
+            },
+            "side": {
+              "point": [
+                285.484,
+                152.132
+              ],
+              "angle": -12
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/hurt_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/hurt_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "acolyte_female",
+      "kind": "dead",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "dead_0",
+          "file": "src/assets/sprites/frames/acolyte/dead_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                225.407,
+                337.171
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                374.399,
+                253.062
+              ],
+              "angle": 70
+            },
+            "side": {
+              "point": [
+                355.174,
+                325.155
+              ],
+              "angle": 70
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/acolyte/dead_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/acolyte/dead_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "idle",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "src/assets/sprites/frames/archer/idle_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                288.569,
+                281.636
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                221.729,
+                71.896
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                287.416,
+                135.279
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/idle_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/idle_0.png"
+          }
+        },
+        {
+          "name": "idle_1",
+          "file": "src/assets/sprites/frames/archer/idle_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                288.569,
+                282.142
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                221.729,
+                73.755
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                287.416,
+                136.729
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/idle_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/idle_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "walk",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "file": "src/assets/sprites/frames/archer/walk_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                301.822,
+                255.13
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                222.305,
+                64.981
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                286.84,
+                128.364
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/walk_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/walk_0.png"
+          }
+        },
+        {
+          "name": "walk_1",
+          "file": "src/assets/sprites/frames/archer/walk_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                296.059,
+                266.654
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                225.762,
+                70.743
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                291.45,
+                135.279
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/walk_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/walk_1.png"
+          }
+        },
+        {
+          "name": "walk_2",
+          "file": "src/assets/sprites/frames/archer/walk_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                300.093,
+                283.941
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                234.405,
+                84.572
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                298.941,
+                146.803
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/walk_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/walk_2.png"
+          }
+        },
+        {
+          "name": "walk_3",
+          "file": "src/assets/sprites/frames/archer/walk_3.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                296.01,
+                271.351
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                228.484,
+                79.855
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                286.66,
+                145.995
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/walk_3.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/walk_3.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "attack",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "file": "src/assets/sprites/frames/archer/attack_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                337.546,
+                241.301
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                218.848,
+                90.335
+              ],
+              "angle": -3
+            },
+            "side": {
+              "point": [
+                285.688,
+                154.87
+              ],
+              "angle": -3
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/attack_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/attack_0.png"
+          }
+        },
+        {
+          "name": "attack_1",
+          "file": "src/assets/sprites/frames/archer/attack_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 80,
+          "anchors": {
+            "hand": {
+              "point": [
+                339.275,
+                241.301
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                219.424,
+                92.639
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                287.416,
+                157.175
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/attack_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/attack_1.png"
+          }
+        },
+        {
+          "name": "attack_2",
+          "file": "src/assets/sprites/frames/archer/attack_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                314.498,
+                264.349
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                221.152,
+                97.249
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                289.145,
+                161.784
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/attack_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/attack_2.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "cast",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "cast_0",
+          "file": "src/assets/sprites/frames/archer/cast_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                326.67,
+                215.011
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                211,
+                73
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                277,
+                135
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/cast_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/cast_0.png"
+          }
+        },
+        {
+          "name": "cast_1",
+          "file": "src/assets/sprites/frames/archer/cast_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                327.706,
+                208.107
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                211,
+                80
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                277,
+                138
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/cast_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/cast_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "sit",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sit_0",
+          "file": "src/assets/sprites/frames/archer/sit_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                237.286,
+                313.903
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                205.019,
+                137.584
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                269.554,
+                197.509
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/sit_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/sit_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "hurt",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hurt_0",
+          "file": "src/assets/sprites/frames/archer/hurt_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                269.554,
+                278.178
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                255.725,
+                121.45
+              ],
+              "angle": -15
+            },
+            "side": {
+              "point": [
+                322.565,
+                183.68
+              ],
+              "angle": -15
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/hurt_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/hurt_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "archer_male",
+      "kind": "dead",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "dead_0",
+          "file": "src/assets/sprites/frames/archer/dead_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                263.792,
+                340.409
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                375.576,
+                249.368
+              ],
+              "angle": 73
+            },
+            "side": {
+              "point": [
+                353.68,
+                318.513
+              ],
+              "angle": 73
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/archer/dead_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/archer/dead_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "idle",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "src/assets/sprites/frames/novice/idle_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                276.307,
+                289.63
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                218.885,
+                83.507
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                273.792,
+                134.187
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/idle_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/novice/idle_0.png"
+          }
+        },
+        {
+          "name": "idle_1",
+          "file": "src/assets/sprites/frames/novice/idle_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                276.307,
+                289.349
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                218.885,
+                82.401
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                273.792,
+                133.284
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/idle_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/novice/idle_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "walk",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "file": "src/assets/sprites/frames/novice/walk_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                280.961,
+                264.513
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                208.196,
+                82.305
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                263.05,
+                132.985
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/walk_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/novice/walk_0.png"
+          }
+        },
+        {
+          "name": "walk_1",
+          "file": "src/assets/sprites/frames/novice/walk_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                285.802,
+                259.104
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                224.874,
+                84.119
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                277.516,
+                128.962
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/walk_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/novice/walk_1.png"
+          }
+        },
+        {
+          "name": "walk_2",
+          "file": "src/assets/sprites/frames/novice/walk_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                286.252,
+                279.776
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                210.833,
+                84.836
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                266.05,
+                135.516
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/walk_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/novice/walk_2.png"
+          }
+        },
+        {
+          "name": "walk_3",
+          "file": "src/assets/sprites/frames/novice/walk_3.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                274.12,
+                286.504
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                220.066,
+                88.787
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                275.651,
+                139.467
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/walk_3.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/novice/walk_3.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "attack",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "file": "src/assets/sprites/frames/novice/attack_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                288.382,
+                188.167
+              ],
+              "angle": -115,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                222,
+                84
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                274,
+                128
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/attack_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/novice/attack_0.png"
+          }
+        },
+        {
+          "name": "attack_1",
+          "file": "src/assets/sprites/frames/novice/attack_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 80,
+          "anchors": {
+            "hand": {
+              "point": [
+                318.947,
+                228.396
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                231.698,
+                90.943
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                284.827,
+                136.274
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/attack_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/novice/attack_1.png"
+          }
+        },
+        {
+          "name": "attack_2",
+          "file": "src/assets/sprites/frames/novice/attack_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                313.097,
+                273.726
+              ],
+              "angle": 35,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                243.396,
+                95.818
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                296.038,
+                139.686
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/attack_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/novice/attack_2.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "cast",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "cast_0",
+          "file": "src/assets/sprites/frames/novice/cast_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                306.968,
+                217.624
+              ],
+              "angle": -55,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                211,
+                84
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                264,
+                130
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/cast_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/novice/cast_0.png"
+          }
+        },
+        {
+          "name": "cast_1",
+          "file": "src/assets/sprites/frames/novice/cast_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                302.76,
+                206.403
+              ],
+              "angle": -55,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                211,
+                84
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                265,
+                130
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/cast_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/novice/cast_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "sit",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sit_0",
+          "file": "src/assets/sprites/frames/novice/sit_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                262.876,
+                308.99
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                190.416,
+                144.305
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                243.582,
+                194.985
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/sit_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "hurt",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hurt_0",
+          "file": "src/assets/sprites/frames/novice/hurt_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                256.048,
+                210.506
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                138.786,
+                110.26
+              ],
+              "angle": -22
+            },
+            "side": {
+              "point": [
+                214.466,
+                157.918
+              ],
+              "angle": -22
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/hurt_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/novice/hurt_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "novice_female",
+      "kind": "dead",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "dead_0",
+          "file": "src/assets/sprites/frames/novice/dead_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                300.709,
+                317.386
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                63.8,
+                272.279
+              ],
+              "angle": -82
+            },
+            "side": {
+              "point": [
+                144.805,
+                335.064
+              ],
+              "angle": -82
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/novice/dead_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "idle",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "src/assets/sprites/frames/swordsman/idle_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                284.865,
+                282.048
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                227.589,
+                83.524
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                282.216,
+                134.204
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/idle_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman/idle_0.png"
+          }
+        },
+        {
+          "name": "idle_1",
+          "file": "src/assets/sprites/frames/swordsman/idle_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                284.865,
+                281.736
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                227.589,
+                82.418
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                282.216,
+                133.301
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/idle_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman/idle_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "walk",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "file": "src/assets/sprites/frames/swordsman/walk_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                289.262,
+                276.425
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                230.889,
+                83.569
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                286.148,
+                134.249
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/walk_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman/walk_0.png"
+          }
+        },
+        {
+          "name": "walk_1",
+          "file": "src/assets/sprites/frames/swordsman/walk_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                282.37,
+                271.155
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                225.082,
+                89.112
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                275.44,
+                135.311
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/walk_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman/walk_1.png"
+          }
+        },
+        {
+          "name": "walk_2",
+          "file": "src/assets/sprites/frames/swordsman/walk_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                297.333,
+                266.454
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                230.496,
+                84.867
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                287.04,
+                135.547
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/walk_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman/walk_2.png"
+          }
+        },
+        {
+          "name": "walk_3",
+          "file": "src/assets/sprites/frames/swordsman/walk_3.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                285.373,
+                271.553
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                227.623,
+                89.65
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                278.443,
+                136.773
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/walk_3.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman/walk_3.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "attack",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "file": "src/assets/sprites/frames/swordsman/attack_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                299.724,
+                195.762
+              ],
+              "angle": -115,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                225,
+                82
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                281,
+                135
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/attack_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman/attack_0.png"
+          }
+        },
+        {
+          "name": "attack_1",
+          "file": "src/assets/sprites/frames/swordsman/attack_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 80,
+          "anchors": {
+            "hand": {
+              "point": [
+                316.644,
+                239.076
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                221.761,
+                85.864
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                277.02,
+                136.544
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/attack_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman/attack_1.png"
+          }
+        },
+        {
+          "name": "attack_2",
+          "file": "src/assets/sprites/frames/swordsman/attack_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                317.25,
+                260.209
+              ],
+              "angle": 35,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                232.243,
+                95.738
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                282.139,
+                143.785
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/attack_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman/attack_2.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "cast",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "cast_0",
+          "file": "src/assets/sprites/frames/swordsman/cast_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                250.795,
+                242.98
+              ],
+              "angle": -80,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                224,
+                81
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                278,
+                135
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/cast_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman/cast_0.png"
+          }
+        },
+        {
+          "name": "cast_1",
+          "file": "src/assets/sprites/frames/swordsman/cast_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                278.168,
+                244.349
+              ],
+              "angle": -80,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                222,
+                85
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                275,
+                136
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/cast_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman/cast_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "sit",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sit_0",
+          "file": "src/assets/sprites/frames/swordsman/sit_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                274.765,
+                323.917
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                209.455,
+                155.663
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                265.047,
+                206.343
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/sit_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "hurt",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hurt_0",
+          "file": "src/assets/sprites/frames/swordsman/hurt_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                269.176,
+                257.506
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                142.871,
+                119.781
+              ],
+              "angle": -22
+            },
+            "side": {
+              "point": [
+                218.551,
+                168.719
+              ],
+              "angle": -22
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/hurt_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman/hurt_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_male",
+      "kind": "dead",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "dead_0",
+          "file": "src/assets/sprites/frames/swordsman/dead_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                297.612,
+                325.179
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                75.833,
+                278.648
+              ],
+              "angle": -82
+            },
+            "side": {
+              "point": [
+                152.693,
+                338.325
+              ],
+              "angle": -82
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman/dead_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "thief_male",
+      "kind": "idle",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "src/assets/sprites/frames/thief/idle_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                284.847,
+                285.136
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                237.527,
+                99.741
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                300.663,
+                161.769
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/idle_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/idle_0.png"
+          }
+        },
+        {
+          "name": "idle_1",
+          "file": "src/assets/sprites/frames/thief/idle_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                284.847,
+                285.619
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                237.527,
+                101.42
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                300.663,
+                163.048
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/idle_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/idle_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "thief_male",
+      "kind": "walk",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "file": "src/assets/sprites/frames/thief/walk_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                296.075,
+                265.65
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                250.175,
+                104.85
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                306.275,
+                160.25
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/walk_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/walk_0.png"
+          }
+        },
+        {
+          "name": "walk_1",
+          "file": "src/assets/sprites/frames/thief/walk_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                272.7,
+                287.75
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                243.8,
+                109.1
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                299.9,
+                166.2
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/walk_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/walk_1.png"
+          }
+        },
+        {
+          "name": "walk_2",
+          "file": "src/assets/sprites/frames/thief/walk_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                295.075,
+                264.65
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                251.175,
+                107.85
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                307.275,
+                163.25
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/walk_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/walk_2.png"
+          }
+        },
+        {
+          "name": "walk_3",
+          "file": "src/assets/sprites/frames/thief/walk_3.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                272.7,
+                287.75
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                237.85,
+                109.1
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                300.75,
+                166.2
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/walk_3.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/walk_3.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "thief_male",
+      "kind": "attack",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "file": "src/assets/sprites/frames/thief/attack_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                308.203,
+                179.676
+              ],
+              "angle": -110,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                245.293,
+                91.797
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                292.962,
+                152.437
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/attack_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/attack_0.png"
+          }
+        },
+        {
+          "name": "attack_1",
+          "file": "src/assets/sprites/frames/thief/attack_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 80,
+          "anchors": {
+            "hand": {
+              "point": [
+                372.891,
+                266.156
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                299.211,
+                158.789
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                360.238,
+                196.565
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/attack_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/attack_1.png"
+          }
+        },
+        {
+          "name": "attack_2",
+          "file": "src/assets/sprites/frames/thief/attack_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                318.175,
+                274.15
+              ],
+              "angle": 25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                256.975,
+                118.45
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                321.575,
+                177.25
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/attack_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/attack_2.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "thief_male",
+      "kind": "cast",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "cast_0",
+          "file": "src/assets/sprites/frames/thief/cast_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                314.35,
+                246.1
+              ],
+              "angle": -25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                241.25,
+                114.2
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                301.6,
+                169.6
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/cast_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/cast_0.png"
+          }
+        },
+        {
+          "name": "cast_1",
+          "file": "src/assets/sprites/frames/thief/cast_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                307.55,
+                237.6
+              ],
+              "angle": -25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                226.8,
+                114.2
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                291.4,
+                169.6
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/cast_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/cast_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "thief_male",
+      "kind": "sit",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sit_0",
+          "file": "src/assets/sprites/frames/thief/sit_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                244.779,
+                331.531
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                221.711,
+                166.17
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                276.412,
+                211.327
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/sit_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/sit_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "thief_male",
+      "kind": "hurt",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hurt_0",
+          "file": "src/assets/sprites/frames/thief/hurt_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                276.991,
+                333.983
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                274.714,
+                191.11
+              ],
+              "angle": -15
+            },
+            "side": {
+              "point": [
+                318.219,
+                244.252
+              ],
+              "angle": -15
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/hurt_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/hurt_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "thief_male",
+      "kind": "dead",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "dead_0",
+          "file": "src/assets/sprites/frames/thief/dead_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                233.18,
+                343.129
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                365.31,
+                268.265
+              ],
+              "angle": 90
+            },
+            "side": {
+              "point": [
+                304.881,
+                349.456
+              ],
+              "angle": 90
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/thief/dead_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/thief/dead_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merchant_female",
+      "kind": "idle",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "src/assets/sprites/frames/merchant/idle_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                279.74,
+                269.583
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                220.538,
+                58.153
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                292.656,
+                145.799
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/idle_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/idle_0.png"
+          }
+        },
+        {
+          "name": "idle_1",
+          "file": "src/assets/sprites/frames/merchant/idle_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                279.74,
+                270.166
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                220.538,
+                60.1
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                292.656,
+                147.181
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/idle_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/idle_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merchant_female",
+      "kind": "walk",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "file": "src/assets/sprites/frames/merchant/walk_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                301.175,
+                255.45
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                224.675,
+                68.5
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                297.775,
+                150.9
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/walk_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/walk_0.png"
+          }
+        },
+        {
+          "name": "walk_1",
+          "file": "src/assets/sprites/frames/merchant/walk_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                279.5,
+                273.3
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                226.8,
+                67.65
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                293.95,
+                152.6
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/walk_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/walk_1.png"
+          }
+        },
+        {
+          "name": "walk_2",
+          "file": "src/assets/sprites/frames/merchant/walk_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                310.175,
+                254.45
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                234.675,
+                67.5
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                307.775,
+                149.9
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/walk_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/walk_2.png"
+          }
+        },
+        {
+          "name": "walk_3",
+          "file": "src/assets/sprites/frames/merchant/walk_3.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                276.525,
+                272.45
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                222.975,
+                65.95
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                290.975,
+                150.9
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/walk_3.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/walk_3.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merchant_female",
+      "kind": "attack",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "file": "src/assets/sprites/frames/merchant/attack_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                307.633,
+                152.435
+              ],
+              "angle": -110,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                212.322,
+                57.606
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                281.158,
+                138.668
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/attack_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/attack_0.png"
+          }
+        },
+        {
+          "name": "attack_1",
+          "file": "src/assets/sprites/frames/merchant/attack_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 80,
+          "anchors": {
+            "hand": {
+              "point": [
+                333.559,
+                208.229
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                232.378,
+                62.458
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                293.733,
+                151.181
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/attack_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/attack_1.png"
+          }
+        },
+        {
+          "name": "attack_2",
+          "file": "src/assets/sprites/frames/merchant/attack_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                314.35,
+                253.75
+              ],
+              "angle": 25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                214.9,
+                65.1
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                279.5,
+                148.35
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/attack_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/attack_2.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merchant_female",
+      "kind": "cast",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "cast_0",
+          "file": "src/assets/sprites/frames/merchant/cast_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                319.875,
+                217.2
+              ],
+              "angle": -25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                215.325,
+                65.95
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                288.425,
+                148.35
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/cast_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/cast_0.png"
+          }
+        },
+        {
+          "name": "cast_1",
+          "file": "src/assets/sprites/frames/merchant/cast_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                311.8,
+                212.95
+              ],
+              "angle": -25,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                214.9,
+                65.1
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                288.85,
+                149.2
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/cast_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/cast_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merchant_female",
+      "kind": "sit",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sit_0",
+          "file": "src/assets/sprites/frames/merchant/sit_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                271.667,
+                292.188
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                208.16,
+                119.507
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                266.285,
+                201.771
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/sit_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/sit_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merchant_female",
+      "kind": "hurt",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hurt_0",
+          "file": "src/assets/sprites/frames/merchant/hurt_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                221.615,
+                288.958
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                256.059,
+                122.736
+              ],
+              "angle": -15
+            },
+            "side": {
+              "point": [
+                309.878,
+                179.167
+              ],
+              "angle": -15
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/hurt_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/hurt_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merchant_female",
+      "kind": "dead",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "dead_0",
+          "file": "src/assets/sprites/frames/merchant/dead_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                267.899,
+                337.396
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                371.691,
+                252.361
+              ],
+              "angle": 90
+            },
+            "side": {
+              "point": [
+                330.33,
+                339.549
+              ],
+              "angle": 90
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/merchant/dead_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/merchant/dead_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_female",
+      "kind": "idle",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "src/assets/sprites/frames/swordsman_female/idle_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                285.807,
+                275.158
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                231.421,
+                85.895
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                293.421,
+                152.246
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/idle_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/idle_0.png"
+          }
+        },
+        {
+          "name": "idle_1",
+          "file": "src/assets/sprites/frames/swordsman_female/idle_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 800,
+          "anchors": {
+            "hand": {
+              "point": [
+                285.807,
+                275.705
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                231.421,
+                87.663
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                293.421,
+                153.586
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/idle_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/idle_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_female",
+      "kind": "walk",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "file": "src/assets/sprites/frames/swordsman_female/walk_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                293.965,
+                263.193
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                241.754,
+                78.281
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                296.14,
+                143.544
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/walk_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/walk_0.png"
+          }
+        },
+        {
+          "name": "walk_1",
+          "file": "src/assets/sprites/frames/swordsman_female/walk_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                282.544,
+                270.807
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                237.947,
+                81.544
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                290.158,
+                145.719
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/walk_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/walk_1.png"
+          }
+        },
+        {
+          "name": "walk_2",
+          "file": "src/assets/sprites/frames/swordsman_female/walk_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                303.65,
+                255.926
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                244.686,
+                79.392
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                302.229,
+                155.405
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/walk_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/walk_2.png"
+          }
+        },
+        {
+          "name": "walk_3",
+          "file": "src/assets/sprites/frames/swordsman_female/walk_3.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 180,
+          "anchors": {
+            "hand": {
+              "point": [
+                291.246,
+                269.719
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                241.211,
+                82.632
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                301.035,
+                148.982
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/walk_3.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/walk_3.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_female",
+      "kind": "attack",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "file": "src/assets/sprites/frames/swordsman_female/attack_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                302.123,
+                147.895
+              ],
+              "angle": -110,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                225.982,
+                84.807
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                280.368,
+                144.632
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/attack_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/attack_0.png"
+          }
+        },
+        {
+          "name": "attack_1",
+          "file": "src/assets/sprites/frames/swordsman_female/attack_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 80,
+          "anchors": {
+            "hand": {
+              "point": [
+                340.737,
+                226.211
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                235.228,
+                90.246
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                300.491,
+                151.158
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/attack_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/attack_1.png"
+          }
+        },
+        {
+          "name": "attack_2",
+          "file": "src/assets/sprites/frames/swordsman_female/attack_2.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 100,
+          "anchors": {
+            "hand": {
+              "point": [
+                328.228,
+                268.632
+              ],
+              "angle": 30,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                236.86,
+                100.035
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                297.772,
+                165.298
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/attack_2.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/attack_2.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_female",
+      "kind": "cast",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": true,
+      "frames": [
+        {
+          "name": "cast_0",
+          "file": "src/assets/sprites/frames/swordsman_female/cast_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                310.281,
+                224.035
+              ],
+              "angle": -65,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                226.526,
+                89.158
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                283.088,
+                152.246
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/cast_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/cast_0.png"
+          }
+        },
+        {
+          "name": "cast_1",
+          "file": "src/assets/sprites/frames/swordsman_female/cast_1.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 360,
+          "anchors": {
+            "hand": {
+              "point": [
+                310.281,
+                226.211
+              ],
+              "angle": -65,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                224.351,
+                91.333
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                286.351,
+                153.333
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/cast_1.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/cast_1.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_female",
+      "kind": "sit",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sit_0",
+          "file": "src/assets/sprites/frames/swordsman_female/sit_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                233.596,
+                305.614
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                206.404,
+                128.316
+              ],
+              "angle": 0
+            },
+            "side": {
+              "point": [
+                277.105,
+                192.491
+              ],
+              "angle": 0
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/sit_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/sit_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_female",
+      "kind": "hurt",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hurt_0",
+          "file": "src/assets/sprites/frames/swordsman_female/hurt_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                265.14,
+                239.263
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": true
+            },
+            "crown": {
+              "point": [
+                130.263,
+                125.053
+              ],
+              "angle": -32
+            },
+            "side": {
+              "point": [
+                210.754,
+                166.386
+              ],
+              "angle": -32
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/hurt_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/hurt_0.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "swordsman_female",
+      "kind": "dead",
+      "category": "motion",
+      "canvas": [
+        512,
+        400
+      ],
+      "bodyHeight": 310,
+      "loop": false,
+      "frames": [
+        {
+          "name": "dead_0",
+          "file": "src/assets/sprites/frames/swordsman_female/dead_0.png",
+          "pivot": [
+            220,
+            360
+          ],
+          "duration": 1,
+          "anchors": {
+            "hand": {
+              "point": [
+                236.532,
+                332.715
+              ],
+              "angle": -48,
+              "z": "front",
+              "visible": false
+            },
+            "crown": {
+              "point": [
+                76.674,
+                227.106
+              ],
+              "angle": -52
+            },
+            "side": {
+              "point": [
+                140.874,
+                349.086
+              ],
+              "angle": -52
+            }
+          },
+          "masks": {
+            "hair": "src/assets/sprites/masks/swordsman_female/dead_0.png"
+          },
+          "overlays": {
+            "grip": "src/assets/sprites/grips/swordsman_female/dead_0.png"
+          }
+        }
+      ]
+    }
+  ],
+  "attachments": {
+    "staff": {
+      "file": "src/assets/sprites/equipment/staff.png",
+      "pivot": [
+        55,
+        128
+      ],
+      "tip": [
+        144.631,
+        128
+      ],
+      "anchor": "hand",
+      "slot": "weapon"
+    },
+    "mace": {
+      "file": "src/assets/sprites/equipment/mace.png",
+      "pivot": [
+        55,
+        128
+      ],
+      "tip": [
+        113.043,
+        128
+      ],
+      "anchor": "hand",
+      "slot": "weapon"
+    },
+    "bow": {
+      "file": "src/assets/sprites/equipment/bow.png",
+      "pivot": [
+        140,
+        128
+      ],
+      "tip": [
+        165.65,
+        128
+      ],
+      "anchor": "hand",
+      "slot": "weapon"
+    },
+    "dagger": {
+      "file": "src/assets/sprites/equipment/dagger.png",
+      "pivot": [
+        16.5,
+        16.5
+      ],
+      "tip": [
+        81.5,
+        16.5
+      ],
+      "anchor": "hand",
+      "slot": "weapon"
+    },
+    "sword": {
+      "file": "src/assets/sprites/equipment/sword.png",
+      "pivot": [
+        23,
+        18.5
+      ],
+      "tip": [
+        120.5,
+        18.5
+      ],
+      "anchor": "hand",
+      "slot": "weapon"
+    },
+    "axe": {
+      "file": "src/assets/sprites/equipment/axe.png",
+      "pivot": [
+        56,
+        128
+      ],
+      "tip": [
+        140.714,
+        128
+      ],
+      "anchor": "hand",
+      "slot": "weapon"
+    },
+    "leaf": {
+      "file": "src/assets/sprites/equipment/leaf.png",
+      "pivot": [
+        12,
+        20.5
+      ],
+      "anchor": "crown",
+      "slot": "headgear"
+    },
+    "hairpin": {
+      "file": "src/assets/sprites/equipment/hairpin.png",
+      "pivot": [
+        17,
+        10
+      ],
+      "anchor": "side",
+      "slot": "headgear"
+    }
+  },
+  "tints": {
+    "hair": {
+      "cream": [
+        1,
+        1,
+        1
+      ],
+      "blue": [
+        0.3779527559055118,
+        0.575,
+        0.8590909090909091
+      ],
+      "auburn": [
+        0.62,
+        0.36,
+        0.23
+      ],
+      "brown": [
+        0.52,
+        0.32,
+        0.18
+      ],
+      "black": [
+        0.16,
+        0.15,
+        0.18
+      ],
+      "pink": [
+        1,
+        0.55,
+        0.76
+      ]
+    }
+  },
+  "display": {
+    "bodyPx": 80
+  },
+  "render": {
+    "order": [
+      "weaponBehind",
+      "figure",
+      "weaponFront",
+      "grip",
+      "headgear"
+    ],
+    "tint": "out = base × (1 − m + m × tint), tint는 0~1 배수"
+  }
+}

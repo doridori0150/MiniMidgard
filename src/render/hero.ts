@@ -58,6 +58,8 @@ export interface Pose {
   /** a skill being released (its id) and ms since release: sprites with a motion for it play that instead */
   skill?: string;
   skillT?: number;
+  /** tools only (asset-kit stage): play this pixel animation by name, `t` ms in */
+  anim?: string;
 }
 
 interface Outfit { main: string; second: string; pants: string; shoes: string; trim: string; robe?: boolean; skirt?: boolean }

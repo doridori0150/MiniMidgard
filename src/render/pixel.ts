@@ -5,7 +5,7 @@
 import type { WeaponType } from '../game/types.ts';
 import type { HeroLookDraw, Pose } from './hero.ts';
 import { SKILL_CONTACT } from '../game/world.ts';
-import { HAIR_TINT, LINE, clip, pickFrame } from './whole.ts';
+import { HAIR_TINT, LINE, clip } from './whole.ts';
 
 type V2 = [number, number];
 interface WeaponPlace { z?: 'front' | 'behind'; visible?: boolean; gripOverlay?: string; gripBakedIntoWeapon?: boolean }
@@ -120,8 +120,9 @@ function layer(file: string | undefined, color: number): CanvasImageSource | und
   return c;
 }
 
-export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {
-  if (!pixelSupports(L)) return false;
+/** which animation and frame a pose shows (shared by the field and the asset-kit stage's frame filming) */
+export function pixelFrame(L: HeroLookDraw, pose: Pose): { id: string; anim: string; t: number; index: number; name: string } | null {
+  if (!pixelSupports(L)) return null;
   const id = character(L)!;
   const c = M!.characters[id];
   const table = c.animations ?? M!.animations;
@@ -132,9 +133,7 @@ export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: 
     const a = table.attack as typeof table.attack & { hitFrame?: number };
     const hi = a.hitFrame ?? (a.frames.length >= 8 ? 4 : -1);
     const hit = hi >= 0 ? a.durations.slice(0, hi).reduce((x, y) => x + y, 0) : a.duration / 2;
-    // world.ts lands a sword hit at half the swing, a bow release at 0.6 and a spear thrust at 0.47 of it
-    const contact = L.wtype === 'bow' ? 0.6 : L.wtype === 'spear' ? 0.47 : 0.5;
-    t = pose.t / Math.max(1, pose.dur ?? 280) / contact * hit;
+    t = pose.t / Math.max(1, pose.dur ?? 280) / attackContact(L.wtype) * hit;
   }
   if (state === 'dead') t = pose.t; // play the fall, then hold the last frame
   const sm = pose.skill ? c.skillMotions?.[pose.skill] : undefined;
@@ -152,7 +151,25 @@ export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: 
     const since = pose.since ?? pose.t;
     if (since < table.cast_start.duration) { state = 'cast_start'; t = since; } else t = since - table.cast_start.duration;
   }
-  const name = pickFrame(table, state, t);
+  if (pose.anim && table[pose.anim]) { state = pose.anim; t = pose.t; } // tools: one animation by name, on its own clock
+  const anim = table[state] ? state : 'idle';
+  // the frame index at t (as whole.ts pickFrame: loops wrap, one-shots hold the last frame); an animation may reuse a frame name
+  const a = table[anim];
+  let rest = Math.max(0, Math.floor(t));
+  rest = a.loop ? rest % a.duration : Math.min(rest, a.duration - 1);
+  let index = a.frames.length - 1;
+  for (let i = 0; i < a.frames.length; i++) { if (rest < a.durations[i]) { index = i; break; } rest -= a.durations[i]; }
+  return { id, anim, t, index, name: a.frames[index] };
+}
+
+/** fraction of the game's swing at which world.ts lands the hit: a sword at half, a bow release at 0.6, a spear thrust at 0.47 */
+export const attackContact = (w: WeaponType) => (w === 'bow' ? 0.6 : w === 'spear' ? 0.47 : 0.5);
+
+export function drawPixel(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {
+  const pf = pixelFrame(L, pose);
+  if (!pf) return false;
+  const { id, name } = pf;
+  const c = M!.characters[id];
   const f = c.frames[name];
   if (!f) return false;
   const w = WEAPON[L.wtype];

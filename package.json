@@ -13,7 +13,10 @@
     "build-check": "taskpolicy -b node --experimental-strip-types tools/build-check.ts",
     "expedition-check": "taskpolicy -b node --experimental-strip-types tools/expedition-check.ts",
     "rift-check": "taskpolicy -b node --experimental-strip-types tools/rift-check.ts",
-    "rift-flow": "taskpolicy -b node --experimental-strip-types tools/rift-flow.ts"
+    "rift-flow": "taskpolicy -b node --experimental-strip-types tools/rift-flow.ts",
+    "asset:records": "node tools/asset-kit-pixel.mjs && node tools/asset-kit-sprites.mjs --root . --in src/assets/sprites/manifest.json --out asset-records/hero-sprites/manifest.json",
+    "asset:check": "node ../asset-kit/tools/check.mjs --root .",
+    "asset:workshop": "npm run asset:records && vite build && node ../asset-kit/tools/serve.mjs --root ."
   },
   "dependencies": {
     "preact": "^10.26.0"

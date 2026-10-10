@@ -1,0 +1,15 @@
+{
+  "game": "Mini Midgard",
+  "kit": "https://github.com/doridori0150/asset-kit (로컬 ../asset-kit)",
+  "specs": ["asset-specs"],
+  "records": ["asset-records"],
+  "stage": {
+    "local": "dist/asset-stage.html",
+    "static": "dist/asset-stage.html",
+    "include": ["dist"]
+  },
+  "workshop": {
+    "manifests": ["asset-records/pixel-heroes/manifest.json", "asset-records/hero-sprites/manifest.json"],
+    "specs": ["asset-specs/hero-sprites.json"]
+  }
+}
