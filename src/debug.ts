@@ -60,6 +60,14 @@ export async function qaBoot(q = new URLSearchParams(location.search)): Promise<
     if (h.cls === 'novice') st.learnPath(h, 'basic', 9);
     h.tactics = st.defaultTactics(h.cls);
     st.autoFillSlots(h, b?.skills ?? []);
+    // a QA hero holds its line's usual weapon like a real one (pixel heroes are drawn gripping it); &bare keeps them empty-handed
+    if (!q.has('bare')) {
+      const WEAPON: Record<string, string> = { novice: 'w_knife', swordsman: 'w_sword', knight: 'w_sword', mage: 'w_rod', wizard: 'w_rod', archer: 'w_bow', hunter: 'w_bow', acolyte: 'w_club', priest: 'w_club', thief: 'w_knife', assassin: 'w_katar', merchant: 'w_axe', blacksmith: 'w_axe' };
+      const item = WEAPON[h.cls];
+      const inst = item ? st.addItem(s, item) : null;
+      if (inst) st.equip(s, h, inst.uid);
+      if (item === 'w_bow') { s.stacks.am_arrow = (s.stacks.am_arrow ?? 0) + 999; st.equipAmmo?.(s, h, 'am_arrow'); }
+    }
     s.heroes.push(h);
   });
   // open everything up to the party's level so the world map shows a realistic mid-game state
@@ -135,14 +143,15 @@ export async function demoBoot(): Promise<boolean> {
     for (const h of w.heroes) { h.target = null; h.lockUntil = Math.max(h.lockUntil, w.time + ms); h.sitting = false; }
     // the others wait a step behind the caster (the side away from the dummy) so they never cover it
     const c = unitOf(); w.heroes.forEach((h, i) => { if (h !== c) { h.x = c.x - 64 * i; h.y = c.y - 6; h.facing = 1; } });
-    if (dummy) { dummy.hp = dummy.maxHp = 1e9; dummy.lockUntil = w.time + ms; dummy.atkReady = w.time + ms; }
+    // the training dummy stays put in front of the caster: a step away for melee skills, further for spells and arrows
+    if (dummy) { dummy.hp = dummy.maxHp = 1e9; dummy.lockUntil = w.time + ms; dummy.atkReady = w.time + ms; dummy.x = c.x + (sk.kind === 'melee' ? 56 : 120); dummy.y = c.y; dummy.dest = null; }
   };
   const cast = () => {
     const caster = unitOf();
     const other = w.heroes.find((h) => h !== caster);
     let target: Parameters<typeof w.startSkill>[3] = self ? caster : ally ? other ?? caster : null;
     if (!self && !ally) {
-      if (!dummy || !w.mobs.includes(dummy)) { const mob = w.zone.mobs[0]?.id; dummy = mob ? w.spawnMob(mob, false, caster.x + 70, caster.y) : null; }
+      if (!dummy || !w.mobs.includes(dummy)) { const mob = w.zone.mobs[0]?.id; dummy = mob ? w.spawnMob(mob, false, caster.x + (sk.kind === 'melee' ? 56 : 120), caster.y) : null; }
       target = dummy;
     }
     caster.sp = caster.d.maxSp;

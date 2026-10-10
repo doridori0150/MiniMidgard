@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef } from 'preact/hooks';
 import type { Element, EquipInst, Hero } from '../game/types.ts';
 import { inked } from '../render/ink.ts';
 import { drawRigHero, rigSupports } from '../render/rig.ts';
+import { pixelSupports } from '../render/pixel.ts';
 import { featureTypes, type FeatureKind } from '../render/sprite.ts';
 import { drawHero, type HeroLookDraw } from '../render/hero.ts';
 import { drawMob, mobHeight } from '../render/monster.ts';
@@ -56,7 +57,12 @@ export function LookCanvas(props: { look: HeroLookDraw; state?: string; class?: 
     const rig = rigSupports(lookRef.current);
     // painted heroes carry a bigger head (and ponytails): closer for a face, a little further for the full figure
     const s = (props.zoom ?? h / 70) * dpr * (rig ? (props.face ? 1.2 : 0.86) : 1);
-    if (props.face) {
+    if (props.face && pixelSupports(lookRef.current)) {
+      // pixel heroes are two heads tall: the head with its hair is about 37 × 30 field units, centred 2.5 left of the feet and
+      // 45 above them (measured on all twelve), so it fills the frame with a little margin
+      const sp = (props.zoom ?? h / 70) * dpr * 1.7;
+      ctx.setTransform(sp, 0, 0, sp, c.width / 2 + 2.5 * sp, c.height / 2 + 45 * sp);
+    } else if (props.face) {
       // painted heroes carry a bigger head: frame it a little closer so the face fills the portrait
       ctx.setTransform(s, 0, 0, s, c.width / 2, c.height + (rig ? 30 : 16) * s);
     } else {
