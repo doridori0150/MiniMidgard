@@ -161,6 +161,9 @@ export function convert(src, { base, derivedDir, canvasFor = (p) => readPng(p), 
       tintLayers: { hair: ['hair_back', 'hair_front'] },
       // the check measures standing height on the body with these overlays on (asset-kit v0.4.8), the same figure as bodyHeight
       figureOverlays: ['hair_back', 'hair_front'],
+      // feet sit at y 112 of a 120 canvas, so whatever touches the ground (a fallen body, a staff tip, a blade in the earth) lies
+      // in the default 8 px bottom margin; only the last 2 rows count as clipping risk there (asset-kit v0.4.9)
+      checkRules: { guard: { bottom: 2 } },
       ...(hairTint ? { tints: { hair: hairTint } } : {}),
       render: { order: ['overlay:hair_back', 'weaponBehind', 'figure', 'weaponFront', 'grip', 'overlay:hair_front'] },
       // 게임에서 선 자세 몸 높이: 48 그림 px × (76 / 62) 필드 단위(src/render/pixel.ts unitPerPx), 기본 줌 1

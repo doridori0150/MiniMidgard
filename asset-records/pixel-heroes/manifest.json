@@ -30,6 +30,11 @@
   "hair_back",
   "hair_front"
  ],
+ "checkRules": {
+  "guard": {
+   "bottom": 2
+  }
+ },
  "tints": {
   "hair": {
    "흑갈색": [
