@@ -56,6 +56,10 @@ const missing = [...files].filter((f) => !fs.existsSync(path.join(dir, f)));
 if (missing.length) fail(`납품에 없는 파일 ${missing.length}개: ${missing.slice(0, 5).join(', ')}`);
 if (dry) { console.log(`확인만: 파일 ${files.size}개를 복사할 예정`); process.exit(0); }
 for (const f of files) { fs.mkdirSync(path.dirname(path.join(A, f)), { recursive: true }); fs.copyFileSync(path.join(dir, f), path.join(A, f)); }
+// the loop timing standard (walk 720 ms, idle 840 ms) so a new hero walks and breathes in step with the rest
+const { normalizeTiming } = await import('./normalize-timing.mjs');
+const retimed = normalizeTiming(game);
+if (retimed.length) console.log('시간 규격: ' + retimed.join(', '));
 fs.writeFileSync(path.join(A, 'manifest.json'), JSON.stringify(game, null, 2) + '\n');
 // the delivery folder keeps its sources and build caches out of git
 const gi = path.join(dir, '.gitignore');

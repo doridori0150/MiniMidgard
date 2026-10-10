@@ -17,6 +17,8 @@
   - 쿠키 검사: `docs/art-production/pixel-hero-r12/`
   - 기사: `docs/art-production/pixel-knight-r15/`
   - 공통 규격: 2등신, 대기 키 48px, 캔버스 128×120, 발 기준점 (64,112), 오른쪽 3/4 시점.
+  - 크기 규격(12명을 잰 값, `asset-specs/pixel-heroes.json`): 키 48px은 머리카락 포함, 발 맨 아랫줄 y=111, 머리 폭 27~30px(30px을 넘기지 않음), 몸 폭 32px 안.
+  - 시간 규격: 걷기 한 바퀴 720ms(6장×120 또는 8장×90), 대기 한 바퀴 840ms. 합칠 때 게임이 합을 맞춥니다.
 - **모션:** 같은 직업의 라그나로크 온라인 모션입니다.
   - 첨부한 시트는 실제 클라이언트 스프라이트를 남동 방향으로 그린 것입니다.
   - 주소와 동작 번호는 `docs/art/CLASS_MOTION_REFS.md`에 있습니다.
@@ -37,7 +39,7 @@ Actions:
 - idle, walk, attack, hurt, dead, sit;
 - also **cast** if the class brief says so.
 
-You decide frame counts and timing from the RO reference, adapted to our game, keeping the user's rule above: walk and attack use at least 6–8 frames (our heroes' walks have 6–8). The attack's hit lands about halfway through a short swing; put `hitFrame` on that frame.
+Follow the size and timing standard in `asset-specs/pixel-heroes.json`: standing height 48 px including hair, feet on row 111, head no wider than 30 px; a walk cycle is 720 ms and an idle cycle 840 ms for every hero. You decide frame counts and timing from the RO reference, adapted to our game, keeping the user's rule above: walk and attack use at least 6–8 frames (our heroes' walks have 6–8). The attack's hit lands about halfway through a short swing; put `hitFrame` on that frame.
 
 Deliver into `docs/art-production/pixel-class-<class>/`:
 - a `manifest.json` in the `minimidgard.pixel/1` format of r15:

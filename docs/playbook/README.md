@@ -30,7 +30,9 @@
 |---|---|
 | `tools/art/ro-sheet.mjs <job> <gender> <weapon>` | 라그나로크 직업 모션 시트(저장소 밖에 저장) |
 | `tools/art/codex-run.sh <요청서> <폴더> [첨부…]` | 아스트라 실행(다른 codex가 끝날 때까지 기다림) |
-| `tools/art/merge-pixel.mjs <납품> [--only 동작] [--dry]` | 납품을 `src/assets/pixel/manifest.json`에 합침 |
+| `tools/art/merge-pixel.mjs <납품> [--only 동작] [--dry]` | 납품을 `src/assets/pixel/manifest.json`에 합침. 합칠 때 시간 규격(걷기 720ms·대기 840ms)도 맞춤 |
+| `tools/art/normalize-timing.mjs [--dry]` | 반복 동작 박자 맞추기: 장마다의 비율은 두고 걷기 한 바퀴 720ms, 대기 840ms로 늘이고 줄임. 파티가 함께 걸을 때 발이 맞음 |
+| `asset-specs/pixel-heroes.json` | 도트 영웅 규격서(공방 요구서): 캔버스 128×120, 발 (64,112), 키 48px(머리카락 포함), 머리 폭 30px 이하, 장 수 범위, 시간 규격 |
 | `tools/art/hero-sheet.mjs <id> \| --lineup` | 게임 렌더러로 그린 동작·스킬 시트 |
 | `tools/art/field-skills.mjs --party …` | 필드에서 실제 스킬 발동 장면 캡처 |
 | `tools/qa/ui-check.mjs` | UI 회귀 검사 32개 |
