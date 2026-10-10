@@ -1,0 +1,6 @@
+{
+  "checkedAt": "2026-10-10T13:45:30.856Z",
+  "protectedExistingFiles": 12895,
+  "changedOutsideTarget": [],
+  "method": "SHA256 comparison of pre-existing tracked and untracked files outside the permitted directory"
+}

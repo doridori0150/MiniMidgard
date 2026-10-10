@@ -1,0 +1,385 @@
+{
+  "passed": true,
+  "poseCount": 10,
+  "checks": [
+    "five nonempty layers; binary alpha; correct four hair colors",
+    "composite pixel equality and nearest 4x",
+    "head width55, baseline223, anchor pixels, actual foot ranges",
+    "idle feet and lower legs exact; head, katar and grip shifted2",
+    "walk crowns130/127/130/127, contact spacing30..36",
+    "all five attack back boots identical to SSOT and rear x105",
+    "apex to swing to contact front-foot advance; contact tip furthest",
+    "SSOT-first motion sheets and play-order attack; 48px x2 comparison",
+    "request verbatim and outside-scope SHA256 unchanged"
+  ],
+  "poses": [
+    {
+      "id": "idle_1_breath_out",
+      "crownY": 130,
+      "headWidth": 55,
+      "backFootX": 105,
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            105,
+            114
+          ]
+        ],
+        "near": null,
+        "far": [
+          105,
+          114
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        127,
+        195
+      ],
+      "tip": [
+        140,
+        203
+      ]
+    },
+    {
+      "id": "walk_1_contact_near",
+      "crownY": 130,
+      "headWidth": 55,
+      "backFootX": 107,
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            109,
+            116
+          ],
+          [
+            141,
+            144
+          ]
+        ],
+        "near": [
+          141,
+          144
+        ],
+        "far": [
+          109,
+          116
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        112,
+        189
+      ],
+      "tip": [
+        108,
+        200
+      ]
+    },
+    {
+      "id": "walk_2_pass_near",
+      "crownY": 127,
+      "headWidth": 55,
+      "backFootX": 122,
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            122,
+            124
+          ],
+          [
+            126,
+            134
+          ]
+        ],
+        "near": [
+          122,
+          134
+        ],
+        "far": null,
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        123,
+        194
+      ],
+      "tip": [
+        131,
+        206
+      ]
+    },
+    {
+      "id": "walk_3_contact_far",
+      "crownY": 130,
+      "headWidth": 55,
+      "backFootX": 104,
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            106,
+            111
+          ],
+          [
+            137,
+            141
+          ]
+        ],
+        "near": [
+          106,
+          111
+        ],
+        "far": [
+          137,
+          141
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        129,
+        191
+      ],
+      "tip": [
+        145,
+        201
+      ]
+    },
+    {
+      "id": "walk_4_pass_far",
+      "crownY": 127,
+      "headWidth": 55,
+      "backFootX": 122,
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            122,
+            134
+          ]
+        ],
+        "near": null,
+        "far": [
+          122,
+          134
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        127,
+        194
+      ],
+      "tip": [
+        134,
+        204
+      ]
+    },
+    {
+      "id": "attack_1_wind_up",
+      "crownY": 136,
+      "headWidth": 55,
+      "backFootX": 105,
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            105,
+            114
+          ],
+          [
+            164,
+            167
+          ],
+          [
+            171,
+            182
+          ]
+        ],
+        "near": [
+          164,
+          182
+        ],
+        "far": [
+          105,
+          114
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        113,
+        175
+      ],
+      "tip": [
+        93,
+        176
+      ]
+    },
+    {
+      "id": "attack_2_apex",
+      "crownY": 144,
+      "headWidth": 55,
+      "backFootX": 105,
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            105,
+            114
+          ],
+          [
+            163,
+            167
+          ],
+          [
+            171,
+            181
+          ]
+        ],
+        "near": [
+          163,
+          181
+        ],
+        "far": [
+          105,
+          114
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        124,
+        188
+      ],
+      "tip": [
+        103,
+        189
+      ]
+    },
+    {
+      "id": "attack_5_swing",
+      "crownY": 140,
+      "headWidth": 55,
+      "backFootX": 105,
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            105,
+            114
+          ],
+          [
+            168,
+            172
+          ],
+          [
+            175,
+            184
+          ]
+        ],
+        "near": [
+          168,
+          184
+        ],
+        "far": [
+          105,
+          114
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        183,
+        195
+      ],
+      "tip": [
+        205,
+        203
+      ]
+    },
+    {
+      "id": "attack_3_contact",
+      "crownY": 138,
+      "headWidth": 55,
+      "backFootX": 105,
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            105,
+            114
+          ],
+          [
+            173,
+            176
+          ],
+          [
+            179,
+            187
+          ]
+        ],
+        "near": [
+          173,
+          187
+        ],
+        "far": [
+          105,
+          114
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        198,
+        195
+      ],
+      "tip": [
+        219,
+        195
+      ]
+    },
+    {
+      "id": "attack_4_recovery",
+      "crownY": 134,
+      "headWidth": 55,
+      "backFootX": 105,
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            105,
+            114
+          ],
+          [
+            146,
+            149
+          ],
+          [
+            151,
+            160
+          ]
+        ],
+        "near": [
+          146,
+          160
+        ],
+        "far": [
+          105,
+          114
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        129,
+        199
+      ],
+      "tip": [
+        141,
+        208
+      ]
+    }
+  ],
+  "outsideScope": {
+    "checkedFiles": 15181,
+    "changed": [],
+    "added": []
+  }
+}

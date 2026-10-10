@@ -1,0 +1,2774 @@
+{
+  "kit": 1,
+  "source": "src/assets/fx/library.json (tools/fx/pxf-graphs.mjs → PXF 엔진 렌더)",
+  "checkRules": {
+    "guard": 3
+  },
+  "fxTints": {
+    "steel": [
+      "#3a5a9a",
+      "#6f8fd0",
+      "#b0c8f0",
+      "#e0ecff",
+      "#ffffff"
+    ],
+    "fire": [
+      "#701434",
+      "#c81e2e",
+      "#ff5e3a",
+      "#ffb08a",
+      "#fff1e8"
+    ],
+    "ember": [
+      "#d04f1e",
+      "#ff8f2e",
+      "#ffc94d",
+      "#ffe9a3",
+      "#fffbe8"
+    ],
+    "ice": [
+      "#2e5fa0",
+      "#5eb0e8",
+      "#a3e0ff",
+      "#dff6ff",
+      "#ffffff"
+    ],
+    "wind": [
+      "#1f5a3c",
+      "#3a9a5c",
+      "#7fd68a",
+      "#c8f5c0",
+      "#f6fff2"
+    ],
+    "bolt": [
+      "#3a2a8a",
+      "#5a5ae0",
+      "#9aacff",
+      "#d6defe",
+      "#ffffff"
+    ],
+    "earth": [
+      "#4a2f1c",
+      "#7d5532",
+      "#b08550",
+      "#dcc08a",
+      "#f6ead0"
+    ],
+    "holy": [
+      "#c07a10",
+      "#f0a826",
+      "#ffd84a",
+      "#fff0a0",
+      "#fffbe8"
+    ],
+    "heal": [
+      "#145a2e",
+      "#2ea648",
+      "#63e85e",
+      "#b8ffa3",
+      "#eaffe8"
+    ],
+    "dark": [
+      "#2a1240",
+      "#5b2a8a",
+      "#9156c8",
+      "#c9a0f0",
+      "#f3e8ff"
+    ],
+    "poison": [
+      "#2e3d12",
+      "#5a7a1c",
+      "#8fbf2e",
+      "#cdeb6a",
+      "#f4ffd0"
+    ],
+    "blood": [
+      "#4a0d12",
+      "#a3231b",
+      "#e04a3a",
+      "#ff9a8a",
+      "#ffe8e2"
+    ],
+    "ghost": [
+      "#1e3a4a",
+      "#3f7a8a",
+      "#7fc0c8",
+      "#c0eef0",
+      "#f4ffff"
+    ],
+    "dust": [
+      "#4a3a2c",
+      "#7a6550",
+      "#a89078",
+      "#d0c0a8",
+      "#f0e8dc"
+    ],
+    "gold": [
+      "#c07a10",
+      "#f0a826",
+      "#ffd84a",
+      "#fff0a0",
+      "#fffbe8"
+    ],
+    "violet": [
+      "#33125e",
+      "#6a2ed4",
+      "#a55eff",
+      "#d9a6ff",
+      "#f4e8ff"
+    ]
+  },
+  "display": {
+    "pixel": true
+  },
+  "sheets": [
+    {
+      "id": "fx",
+      "kind": "slash",
+      "category": "effect",
+      "title": "MM 참격",
+      "file": "src/assets/fx/sheets/slash.png",
+      "sha256": "1e9dc12bf11321df81f395e8bdab3311ef2c7d1c55cfcb96e91c171fb93c147b",
+      "size": [
+        832,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        13,
+        1
+      ],
+      "loop": false,
+      "impactFrame": 2,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            768,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "thrust",
+      "category": "effect",
+      "title": "MM 찌르기",
+      "file": "src/assets/fx/sheets/thrust.png",
+      "sha256": "44fb14500b82bf0978a0ba2cfeece7625ba69542078878081f47588065fa8523",
+      "size": [
+        512,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        8,
+        1
+      ],
+      "loop": false,
+      "impactFrame": 1,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "impact",
+      "category": "effect",
+      "title": "MM 강타",
+      "file": "src/assets/fx/sheets/impact.png",
+      "sha256": "851e1168ad43dd682b8a454f39c815437db7543b88de41df9ca9127510de11f4",
+      "size": [
+        768,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        12,
+        1
+      ],
+      "loop": false,
+      "impactFrame": 1,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "explosion",
+      "category": "effect",
+      "title": "MM 폭발",
+      "file": "src/assets/fx/sheets/explosion.png",
+      "sha256": "a2bb1d4780e021ade41863aded9a2d22f7ec6af47d9a3b6c974ce6b6638a4ebc",
+      "size": [
+        1344,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        21,
+        1
+      ],
+      "loop": false,
+      "impactFrame": 1,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            768,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            832,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            896,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            960,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            1024,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            1088,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            1216,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "shockwave",
+      "category": "effect",
+      "title": "MM 충격파",
+      "file": "src/assets/fx/sheets/shockwave.png",
+      "sha256": "702f54224966a2d23a761a8871a4570f57315c73644fde19c325a81a11a17972",
+      "size": [
+        1024,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        16,
+        1
+      ],
+      "loop": false,
+      "impactFrame": 1,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            768,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            832,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            896,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            960,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "fire",
+      "category": "effect",
+      "title": "MM 화염",
+      "file": "src/assets/fx/sheets/fire.png",
+      "sha256": "fbaa4f1576a555dabd972ccd775beffe9709f9b5d876c8e05112235026d9cbec",
+      "size": [
+        1536,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        24,
+        1
+      ],
+      "loop": false,
+      "impactFrame": 0,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            768,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            832,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            896,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            960,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            1024,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            1088,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            1216,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            1408,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        },
+        {
+          "rect": [
+            1472,
+            0,
+            64,
+            64
+          ],
+          "duration": 38
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "ice",
+      "category": "effect",
+      "title": "MM 얼음",
+      "file": "src/assets/fx/sheets/ice.png",
+      "sha256": "6ddd7f34e531aaf97c2af69b08f1bcd970edb3e6c6575d2a693d5a7c0e1468e6",
+      "size": [
+        1536,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        24,
+        1
+      ],
+      "loop": false,
+      "impactFrame": 2,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            768,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            832,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            896,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            960,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1024,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1088,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1216,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1408,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1472,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "lightning",
+      "category": "effect",
+      "title": "MM 번개",
+      "file": "src/assets/fx/sheets/lightning.png",
+      "sha256": "30433e33b55e792d7fcd596381f24cc2ef8513bc7f8ed352a9d88ad07777fa42",
+      "size": [
+        768,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        12,
+        1
+      ],
+      "loop": false,
+      "impactFrame": 1,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "cast",
+      "category": "effect",
+      "title": "MM 마법진",
+      "file": "src/assets/fx/sheets/cast.png",
+      "sha256": "11380836144d0bf50fab75b5eadc8c55161efc6e51e092d0bb7075d6ed331437",
+      "size": [
+        1536,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        24,
+        1
+      ],
+      "loop": true,
+      "impactFrame": 0,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            768,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            832,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            896,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            960,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1024,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1088,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1216,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1408,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1472,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "buff",
+      "category": "effect",
+      "title": "MM 버프",
+      "file": "src/assets/fx/sheets/buff.png",
+      "sha256": "aaa0d7c948c76aed735ccab5079c304aa7fdfec0e4dd506eb2fa852c54fb0c83",
+      "size": [
+        1536,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        24,
+        1
+      ],
+      "loop": false,
+      "impactFrame": 0,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            768,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            832,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            896,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            960,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            1024,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            1088,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            1216,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            1408,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        },
+        {
+          "rect": [
+            1472,
+            0,
+            64,
+            64
+          ],
+          "duration": 56
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "heal",
+      "category": "effect",
+      "title": "MM 힐",
+      "file": "src/assets/fx/sheets/heal.png",
+      "sha256": "5651e7471e768dc40b133597333725891681a0d456ecb841170ad9fea0d9081c",
+      "size": [
+        1536,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        24,
+        1
+      ],
+      "loop": false,
+      "impactFrame": 0,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            768,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            832,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            896,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            960,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            1024,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            1088,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            1216,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            1280,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            1408,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        },
+        {
+          "rect": [
+            1472,
+            0,
+            64,
+            64
+          ],
+          "duration": 50
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "pillar",
+      "category": "effect",
+      "title": "MM 빛기둥",
+      "file": "src/assets/fx/sheets/pillar.png",
+      "sha256": "954aa03dce186582fb875b1e6a83edf94919f99bde72513735166af4598207cf",
+      "size": [
+        1280,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        20,
+        1
+      ],
+      "loop": false,
+      "impactFrame": 0,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            768,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            832,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            896,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            960,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1024,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1088,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            1216,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "dust",
+      "category": "effect",
+      "title": "MM 흙먼지",
+      "file": "src/assets/fx/sheets/dust.png",
+      "sha256": "d481bd41e0d52f734882c481e2c51842a7f1e71d3d21f07027787b2d813562df",
+      "size": [
+        768,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        12,
+        1
+      ],
+      "loop": false,
+      "impactFrame": 0,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 33
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "bolt",
+      "category": "effect",
+      "title": "MM 마법탄",
+      "file": "src/assets/fx/sheets/bolt.png",
+      "sha256": "326383cac2cde014267769946f06c1ff1cb5566109868bd84288339ee45d0839",
+      "size": [
+        768,
+        64
+      ],
+      "cell": [
+        64,
+        64
+      ],
+      "grid": [
+        12,
+        1
+      ],
+      "loop": true,
+      "impactFrame": 0,
+      "palette": [
+        "#303030",
+        "#606060",
+        "#909090",
+        "#c0c0c0",
+        "#f0f0f0"
+      ],
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            512,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            576,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            640,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        },
+        {
+          "rect": [
+            704,
+            0,
+            64,
+            64
+          ],
+          "duration": 42
+        }
+      ]
+    }
+  ]
+}

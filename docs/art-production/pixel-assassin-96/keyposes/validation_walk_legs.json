@@ -1,0 +1,449 @@
+{
+  "passed": true,
+  "frames": [
+    {
+      "index": 1,
+      "id": "walk_1_contact_near",
+      "crownY": 130,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        130,
+        155,
+        172
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            109,
+            116
+          ],
+          [
+            141,
+            144
+          ]
+        ],
+        "near": [
+          141,
+          144
+        ],
+        "far": [
+          109,
+          116
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        112,
+        189
+      ],
+      "tip": [
+        108,
+        200
+      ]
+    },
+    {
+      "index": 2,
+      "id": "walk_5_down_near",
+      "crownY": 132,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        132,
+        155,
+        175
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            125,
+            143
+          ]
+        ],
+        "near": [
+          125,
+          143
+        ],
+        "far": null,
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        114,
+        190
+      ],
+      "tip": [
+        108,
+        204
+      ]
+    },
+    {
+      "index": 3,
+      "id": "walk_2_pass_near",
+      "crownY": 131,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        131,
+        155,
+        173
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            119,
+            121
+          ],
+          [
+            124,
+            131
+          ]
+        ],
+        "near": [
+          119,
+          131
+        ],
+        "far": null,
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        124,
+        193
+      ],
+      "tip": [
+        135,
+        202
+      ]
+    },
+    {
+      "index": 4,
+      "id": "walk_6_up_near",
+      "crownY": 128,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        128,
+        155,
+        172
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            114,
+            120
+          ]
+        ],
+        "near": [
+          114,
+          120
+        ],
+        "far": null,
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        131,
+        190
+      ],
+      "tip": [
+        146,
+        197
+      ]
+    },
+    {
+      "index": 5,
+      "id": "walk_3_contact_far",
+      "crownY": 130,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        130,
+        155,
+        173
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            106,
+            111
+          ],
+          [
+            137,
+            141
+          ]
+        ],
+        "near": [
+          106,
+          111
+        ],
+        "far": [
+          137,
+          141
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        129,
+        191
+      ],
+      "tip": [
+        145,
+        201
+      ]
+    },
+    {
+      "index": 6,
+      "id": "walk_7_down_far",
+      "crownY": 132,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        132,
+        155,
+        177
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            125,
+            128
+          ],
+          [
+            130,
+            139
+          ]
+        ],
+        "near": null,
+        "far": [
+          125,
+          139
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        132,
+        195
+      ],
+      "tip": [
+        149,
+        202
+      ]
+    },
+    {
+      "index": 7,
+      "id": "walk_4_pass_far",
+      "crownY": 131,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        131,
+        155,
+        172
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            118,
+            132
+          ]
+        ],
+        "near": null,
+        "far": [
+          118,
+          132
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        117,
+        192
+      ],
+      "tip": [
+        117,
+        208
+      ]
+    },
+    {
+      "index": 8,
+      "id": "walk_8_up_far",
+      "crownY": 128,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        128,
+        155,
+        171
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            114,
+            122
+          ]
+        ],
+        "near": null,
+        "far": [
+          114,
+          122
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        108,
+        185
+      ],
+      "tip": [
+        101,
+        198
+      ]
+    }
+  ],
+  "supportRuns": [
+    {
+      "side": "near",
+      "indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "nextContact": 4,
+      "centers": [
+        142.5,
+        134,
+        125,
+        117,
+        108.5
+      ],
+      "steps": [
+        -8.5,
+        -9,
+        -8,
+        -8.5
+      ],
+      "contactTransition": -8.5
+    },
+    {
+      "side": "far",
+      "indices": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "nextContact": 0,
+      "centers": [
+        139,
+        132,
+        125,
+        118,
+        112.5
+      ],
+      "steps": [
+        -7,
+        -7,
+        -7,
+        -5.5
+      ],
+      "contactTransition": -5.5
+    }
+  ],
+  "pixelChecks": [
+    {
+      "id": "walk_5_down_near",
+      "changed": 451,
+      "minChangedY": 195,
+      "protectedChanged": 0,
+      "aboveHipsChanged": 0,
+      "clothChanged": 0,
+      "plantedFootCenter": 134,
+      "groundRow": 223
+    },
+    {
+      "id": "walk_2_pass_near",
+      "changed": 572,
+      "minChangedY": 195,
+      "protectedChanged": 0,
+      "aboveHipsChanged": 0,
+      "clothChanged": 0,
+      "plantedFootCenter": 125,
+      "groundRow": 223
+    },
+    {
+      "id": "walk_6_up_near",
+      "changed": 506,
+      "minChangedY": 193,
+      "protectedChanged": 0,
+      "aboveHipsChanged": 0,
+      "clothChanged": 0,
+      "plantedFootCenter": 117,
+      "groundRow": 223
+    },
+    {
+      "id": "walk_7_down_far",
+      "changed": 395,
+      "minChangedY": 198,
+      "protectedChanged": 0,
+      "aboveHipsChanged": 0,
+      "clothChanged": 0,
+      "plantedFootCenter": 132,
+      "groundRow": 223
+    },
+    {
+      "id": "walk_4_pass_far",
+      "changed": 454,
+      "minChangedY": 195,
+      "protectedChanged": 0,
+      "aboveHipsChanged": 0,
+      "clothChanged": 0,
+      "plantedFootCenter": 125,
+      "groundRow": 223
+    },
+    {
+      "id": "walk_8_up_far",
+      "changed": 579,
+      "minChangedY": 192,
+      "protectedChanged": 0,
+      "aboveHipsChanged": 0,
+      "clothChanged": 0,
+      "plantedFootCenter": 118,
+      "groundRow": 223
+    }
+  ],
+  "generated": 7,
+  "accepted": 6,
+  "rejectedNew": 1,
+  "archivedFolders": 6,
+  "archivedFiles": 78,
+  "protectedFiles": 96,
+  "outsideScope": {
+    "checkedFiles": 15183,
+    "changed": [],
+    "added": []
+  },
+  "checks": [
+    "256x240 canvas",
+    "binary alpha",
+    "layer reconstruction",
+    "4x nearest",
+    "crown and head width",
+    "foot center targets",
+    "continuous contact-inclusive steps",
+    "sheet order",
+    "APNG frame pixels and90ms",
+    "verbatim request and rules",
+    "non-leg pixel equality",
+    "cloth masks",
+    "unchanged head/weapon metadata",
+    "non-body byte equality",
+    "archive SHA256",
+    "outside SHA256"
+  ],
+  "artApproval": "사용자 시각 승인 전"
+}

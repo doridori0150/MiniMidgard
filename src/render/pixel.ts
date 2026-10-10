@@ -133,7 +133,11 @@ export function pixelFrame(L: HeroLookDraw, pose: Pose): { id: string; anim: str
     const a = table.attack as typeof table.attack & { hitFrame?: number };
     const hi = a.hitFrame ?? (a.frames.length >= 8 ? 4 : -1);
     const hit = hi >= 0 ? a.durations.slice(0, hi).reduce((x, y) => x + y, 0) : a.duration / 2;
-    t = pose.t / Math.max(1, pose.dur ?? 280) / attackContact(L.wtype) * hit;
+    const contact = Math.max(1, pose.dur ?? 280) * attackContact(L.wtype);
+    // 'uniform' (the game today): the whole swing scaled so its hit frame starts at the contact; 'contact' (candidate, not in the
+    // game yet): only the wind-up is fitted into the contact, the follow-through plays at its drawn pace (like skill motions)
+    // 'event' (candidate): the drawn timing played at attackRate (attack speed); the hit lands on the contact frame, hit / rate ms in
+    t = attackTiming === 'event' ? pose.t * attackRate : attackTiming === 'contact' && pose.t >= contact ? hit + (pose.t - contact) : (pose.t / contact) * hit;
   }
   if (state === 'dead') t = pose.t; // play the fall, then hold the last frame
   const sm = pose.skill ? c.skillMotions?.[pose.skill] : undefined;
@@ -160,6 +164,29 @@ export function pixelFrame(L: HeroLookDraw, pose: Pose): { id: string; anim: str
   let index = a.frames.length - 1;
   for (let i = 0; i < a.frames.length; i++) { if (rest < a.durations[i]) { index = i; break; } rest -= a.durations[i]; }
   return { id, anim, t, index, name: a.frames[index] };
+}
+
+/** how a plain attack's frames are timed: 'uniform' (default, the game today) or 'contact' (the workshop's candidate, see pixelFrame) */
+let attackTiming: 'uniform' | 'contact' | 'event' = 'uniform';
+export function setAttackTiming(mode: 'uniform' | 'contact' | 'event') { attackTiming = mode; }
+/** 'event' timing: the playback rate from attack speed (1 = the drawn timing) */
+let attackRate = 1;
+export function setAttackRate(rate: number) { attackRate = Math.max(0.25, Math.min(4, rate || 1)); }
+/** when the hit lands under 'event' timing: the contact frame's start at the current rate (ms after the swing); null if not pixel art */
+export function attackEventMs(L: HeroLookDraw): number | null {
+  if (attackTiming !== 'event' || !pixelSupports(L)) return null;
+  const c = M!.characters[character(L)!], a = (c.animations ?? M!.animations).attack as Manifest['animations'][string] & { hitFrame?: number };
+  if (!a || a.hitFrame == null) return null;
+  return a.durations.slice(0, a.hitFrame).reduce((x, y) => x + y, 0) / attackRate;
+}
+/** how long a plain attack shows from the swing to its last frame under the current timing (ms) */
+export function attackShowMs(L: HeroLookDraw, dur = 280): number {
+  if (!pixelSupports(L)) return dur;
+  const c = M!.characters[character(L)!], a = (c.animations ?? M!.animations).attack as Manifest['animations'][string] & { hitFrame?: number };
+  if (!a) return dur;
+  const hi = a.hitFrame ?? (a.frames.length >= 8 ? 4 : -1), hit = hi >= 0 ? a.durations.slice(0, hi).reduce((x, y) => x + y, 0) : a.duration / 2;
+  const contact = dur * attackContact(L.wtype);
+  return attackTiming === 'event' ? a.duration / attackRate : attackTiming === 'contact' ? contact + (a.duration - hit) : (contact / hit) * a.duration;
 }
 
 /** fraction of the game's swing at which world.ts lands the hit: a sword at half, a bow release at 0.6, a spear thrust at 0.47 */

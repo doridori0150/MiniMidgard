@@ -1,0 +1,57 @@
+{
+  "role": "swing",
+  "canvas": [
+    128,
+    120
+  ],
+  "origin": [
+    64,
+    112
+  ],
+  "facing": "right_3_4",
+  "head": {
+    "point": [
+      77,
+      83
+    ],
+    "layerOffset": [
+      0,
+      0
+    ]
+  },
+  "weapon": {
+    "hand": "near",
+    "gripPoint": [
+      79,
+      97
+    ],
+    "tipPoint": [
+      85,
+      102
+    ],
+    "angleDegrees": 39.81,
+    "z": "front",
+    "smear": true
+  },
+  "layerOrder": [
+    "hair_back",
+    "body",
+    "hair_front",
+    "katar",
+    "grip"
+  ],
+  "source": "../../sources/05_swing.png",
+  "normalization": {
+    "maskCoordinateSystem": [
+      128,
+      120
+    ],
+    "resampling": "single-pass nearest from generated original; integer translation (+5,-1)",
+    "uniformScale": 1,
+    "sourceFootCenter": 59,
+    "sourceFootBaseline": 113,
+    "alphaThreshold": 128,
+    "palette": "approved Assassin idle palette; hair restricted to four SSOT key colors"
+  },
+  "notes": "between:1>2 전용 사이 장. 추가 dx/dy 없이 뒷발 108–111행 최소 x=52. 앞발은 111행에 닿는다. 잔상은 katar 레이어만 포함한다. 레이어는 현재 보이는 픽셀을 분리했으며 가려진 면의 재구성은 포함하지 않는다. head.point는 얼굴 중심, layerOffset은 전체 캔버스 배치 기준이다."
+}

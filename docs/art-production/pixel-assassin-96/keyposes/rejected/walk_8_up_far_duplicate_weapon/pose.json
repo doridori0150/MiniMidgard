@@ -1,0 +1,89 @@
+{
+  "schema": "assassin96-keypose@1",
+  "role": "up_far",
+  "canvas": [
+    256,
+    240
+  ],
+  "origin": [
+    128,
+    224
+  ],
+  "facing": "right_3_4",
+  "head": {
+    "point": [
+      139,
+      157
+    ],
+    "crownY": 128,
+    "bounds": [
+      101,
+      128,
+      155,
+      171
+    ],
+    "width": 55
+  },
+  "weapon": {
+    "hand": "near",
+    "gripPoint": [
+      108,
+      185
+    ],
+    "tipPoint": [
+      101,
+      198
+    ],
+    "angleDegrees": 118.3,
+    "angleConvention": "screen right 0, clockwise positive",
+    "smear": false
+  },
+  "backFoot": {
+    "rows": [
+      220,
+      223
+    ],
+    "rearmostX": 113
+  },
+  "feet": {
+    "row": 223,
+    "opaqueRanges": [
+      [
+        116,
+        120
+      ]
+    ],
+    "near": null,
+    "far": [
+      116,
+      120
+    ],
+    "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+  },
+  "bounds": [
+    91,
+    128,
+    155,
+    223
+  ],
+  "layerOrder": [
+    "hair_back",
+    "body",
+    "hair_front",
+    "katar",
+    "grip"
+  ],
+  "normalization": "내장 image_gen 다리 재묘사; 최근접 축소; 승인 idle 팔레트; 다리 마스크 합성; 상체 및 나머지 4개 레이어 원본 보존",
+  "notes": "REQUEST_WALK_LEGS.md 기준. 접지 y223. 골반 위/머리/얼굴/상체/팔/카타르/천 원본 픽셀 보존. 생성 소스의 상체는 사용하지 않음.",
+  "registration": {
+    "targetSupportCenter": 118,
+    "actualSupportCenter": 118,
+    "sourceSupportCenter": 115,
+    "legFootDx": 3
+  },
+  "timing": {
+    "ms": 90,
+    "dx": 0,
+    "dy": 0
+  }
+}

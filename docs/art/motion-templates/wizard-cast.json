@@ -1,0 +1,176 @@
+{
+  "format": "ro-breakdown@1",
+  "source": {
+    "job": 9,
+    "class": "wizard",
+    "gender": "female",
+    "weapon": 10,
+    "action": 103,
+    "direction": "SE",
+    "url": "https://assets.latam-tools.com.br/gif?job=9&gender=female&weapon=10&action=103",
+    "note": "라그나로크 공개 렌더러의 실제 클라이언트 스프라이트. 숫자만 기록하고 그림은 저장하지 않습니다."
+  },
+  "foot": [
+    26,
+    59
+  ],
+  "figureHeight0": 94,
+  "totalMs": 600,
+  "frameCount": 6,
+  "roles": [
+    "시작",
+    "유지",
+    "유지",
+    "준비",
+    "준비",
+    "준비"
+  ],
+  "rhythm": [
+    0.167,
+    0.167,
+    0.167,
+    0.167,
+    0.167,
+    0.167
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "ms": 100,
+      "box": [
+        -25,
+        -56,
+        16,
+        37
+      ],
+      "width": 42,
+      "height": 94,
+      "area": 2814,
+      "dx": 0,
+      "dy": 0,
+      "front": [
+        16,
+        -8
+      ],
+      "pale": 64,
+      "footSpread": 39,
+      "smear": false,
+      "role": "시작"
+    },
+    {
+      "index": 1,
+      "ms": 100,
+      "box": [
+        -24,
+        -57,
+        17,
+        36
+      ],
+      "width": 42,
+      "height": 94,
+      "area": 2853,
+      "dx": 1,
+      "dy": -1,
+      "front": [
+        17,
+        -27
+      ],
+      "pale": 77,
+      "footSpread": 36,
+      "smear": false,
+      "role": "유지"
+    },
+    {
+      "index": 2,
+      "ms": 100,
+      "box": [
+        -24,
+        -58,
+        17,
+        36
+      ],
+      "width": 42,
+      "height": 95,
+      "area": 2877,
+      "dx": 1,
+      "dy": -2,
+      "front": [
+        17,
+        16
+      ],
+      "pale": 78,
+      "footSpread": 37,
+      "smear": false,
+      "role": "유지"
+    },
+    {
+      "index": 3,
+      "ms": 100,
+      "box": [
+        -24,
+        -57,
+        21,
+        36
+      ],
+      "width": 46,
+      "height": 94,
+      "area": 2842,
+      "dx": 3,
+      "dy": -1,
+      "front": [
+        21,
+        -23
+      ],
+      "pale": 70,
+      "footSpread": 40,
+      "smear": false,
+      "role": "준비"
+    },
+    {
+      "index": 4,
+      "ms": 100,
+      "box": [
+        -23,
+        -56,
+        25,
+        36
+      ],
+      "width": 49,
+      "height": 93,
+      "area": 2878,
+      "dx": 6,
+      "dy": 0,
+      "front": [
+        25,
+        -15
+      ],
+      "pale": 72,
+      "footSpread": 47,
+      "smear": false,
+      "role": "준비"
+    },
+    {
+      "index": 5,
+      "ms": 100,
+      "box": [
+        -23,
+        -56,
+        25,
+        36
+      ],
+      "width": 49,
+      "height": 93,
+      "area": 2858,
+      "dx": 6,
+      "dy": 0,
+      "front": [
+        25,
+        -14
+      ],
+      "pale": 71,
+      "footSpread": 48,
+      "smear": false,
+      "role": "준비"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "PROMPT.txt",
+  "promptSha256": "e9690ee5da5160569e9b9a91a5755a6f5fe74f5de4496b01b41ab14bf6fff318",
+  "referenceOrder": [
+    "../../art/ssot/look_assassin_idle0_4x.png",
+    "../pixel-assassin-attack-keyposes/keyposes_4x.png",
+    "../../art/ssot/style_knight_r15_idle0_4x.png"
+  ],
+  "samePrompt": true,
+  "sequential": true,
+  "independent": true,
+  "generationCount": 2,
+  "rejectedCount": 0,
+  "rejections": [],
+  "reviewSequence": [
+    "PLAN 작성 및 참고 3장 확인",
+    "A 독립 생성 및 96px 변환 검토",
+    "A 검토 후 원래 참고 3장과 같은 프롬프트로 B 독립 생성",
+    "B 검토, 머리 팔레트/레이어 분리",
+    "머리 및 칼날 경계 분류 수정, 칼끝 실제 좌표 재측정",
+    "A/B 각각 기준 원화와 같은 크기로 비교, 최종 규격 및 보존 검사"
+  ],
+  "candidates": {
+    "idle_a": {
+      "source": "idle_a/sources/generated.png",
+      "sourceSha256": "b1942026203806737c79c48de308f2a842c78fa3fea74755414a42df471f6b19",
+      "approved": false
+    },
+    "idle_b": {
+      "source": "idle_b/sources/generated.png",
+      "sourceSha256": "189afe68f5c3c8769185809bcd229151ceb835cc4139084ccc75d8e33a685cc7",
+      "approved": false
+    }
+  }
+}

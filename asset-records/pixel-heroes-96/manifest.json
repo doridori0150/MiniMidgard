@@ -1,0 +1,918 @@
+{
+  "kit": 1,
+  "source": "docs/art-production/pixel-<직업>-96/ (96px 시범, 파이프라인 B-5-1)",
+  "display": {
+    "bodyPx": 118,
+    "pixel": true
+  },
+  "overlayGroups": {
+    "weapon": {
+      "label": "무기",
+      "inside": false
+    },
+    "hair_back": {
+      "label": "뒷머리",
+      "inside": false
+    },
+    "hair_front": {
+      "label": "앞머리",
+      "inside": false
+    }
+  },
+  "figureOverlays": [
+    "hair_back",
+    "hair_front"
+  ],
+  "checkRules": {
+    "guard": {
+      "bottom": 2
+    }
+  },
+  "styleRef": {
+    "id": "assassin_male_p96",
+    "kind": "idle",
+    "frame": 0
+  },
+  "sheets": [
+    {
+      "id": "assassin_male_p96",
+      "kind": "idle",
+      "category": "motion",
+      "layout": "frames",
+      "canvas": [
+        256,
+        240
+      ],
+      "bodyHeight": 96,
+      "gameHeight": 96,
+      "loop": true,
+      "overlayDefaults": {
+        "weapon": "katar"
+      },
+      "source": "docs/art-production/pixel-assassin-96/idle",
+      "frames": [
+        {
+          "name": "idle_0",
+          "file": "docs/art-production/pixel-assassin-96/idle/body.png",
+          "sha256": "06564ddfdc884ff6ed136975c10d2daacb55223da71c279a83ffcb3db8c9f4e5",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 400,
+          "anchors": {
+            "hand": {
+              "point": [
+                127,
+                193
+              ],
+              "angle": 31.61,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                140,
+                201
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/idle/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/idle/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/idle/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/idle/hair_front.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "assassin_male_p96",
+      "kind": "keyposes_attack",
+      "category": "motion",
+      "layout": "frames",
+      "canvas": [
+        256,
+        240
+      ],
+      "bodyHeight": 96,
+      "gameHeight": 96,
+      "loop": true,
+      "candidate": true,
+      "overlayDefaults": {
+        "weapon": "katar"
+      },
+      "source": "docs/art-production/pixel-assassin-96/keyposes",
+      "frames": [
+        {
+          "name": "attack_1_wind_up (wind_up)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/attack_1_wind_up/body.png",
+          "sha256": "1d305121084be80e5e9004eb882bc042100ed9387e602288c8aefd10f14084eb",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                113,
+                175
+              ],
+              "angle": 177.14,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                93,
+                176
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/attack_1_wind_up/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/attack_1_wind_up/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/attack_1_wind_up/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/attack_1_wind_up/hair_front.png"
+          }
+        },
+        {
+          "name": "attack_2_apex (apex)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/attack_2_apex/body.png",
+          "sha256": "c2e777394486ef87fa9445a0f018abbd2cb67cb61226a1e92dd2f2380985a2a5",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                124,
+                188
+              ],
+              "angle": 177.27,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                103,
+                189
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/attack_2_apex/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/attack_2_apex/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/attack_2_apex/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/attack_2_apex/hair_front.png"
+          }
+        },
+        {
+          "name": "attack_3_contact (contact)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/attack_3_contact/body.png",
+          "sha256": "04543ab1410a003991ab27ba1b0575ba1607641787069824699e9ece4d406235",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                198,
+                195
+              ],
+              "angle": 0,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                219,
+                195
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/attack_3_contact/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/attack_3_contact/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/attack_3_contact/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/attack_3_contact/hair_front.png"
+          }
+        },
+        {
+          "name": "attack_4_recovery (recovery)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/attack_4_recovery/body.png",
+          "sha256": "0abaf10a2a942c08a56224373f85b7eed0c7b9aae4b1195bdde5a4fdd4d30020",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                129,
+                199
+              ],
+              "angle": 36.87,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                141,
+                208
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/attack_4_recovery/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/attack_4_recovery/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/attack_4_recovery/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/attack_4_recovery/hair_front.png"
+          }
+        },
+        {
+          "name": "attack_5_swing (swing)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/attack_5_swing/body.png",
+          "sha256": "2526919ebf2458ce81e6603d83c0581a99bec1e5552dbb1ed973e904e1a311f2",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                183,
+                195
+              ],
+              "angle": 19.98,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                205,
+                203
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/attack_5_swing/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/attack_5_swing/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/attack_5_swing/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/attack_5_swing/hair_front.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "assassin_male_p96",
+      "kind": "keyposes_idle",
+      "category": "motion",
+      "layout": "frames",
+      "canvas": [
+        256,
+        240
+      ],
+      "bodyHeight": 96,
+      "gameHeight": 96,
+      "loop": true,
+      "candidate": true,
+      "overlayDefaults": {
+        "weapon": "katar"
+      },
+      "source": "docs/art-production/pixel-assassin-96/keyposes",
+      "frames": [
+        {
+          "name": "idle (idle_inhale)",
+          "file": "docs/art-production/pixel-assassin-96/idle/body.png",
+          "sha256": "06564ddfdc884ff6ed136975c10d2daacb55223da71c279a83ffcb3db8c9f4e5",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                127,
+                193
+              ],
+              "angle": 31.61,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                140,
+                201
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/idle/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/idle/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/idle/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/idle/hair_front.png"
+          }
+        },
+        {
+          "name": "idle_1_breath_out (breath_out)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/idle_1_breath_out/body.png",
+          "sha256": "ea18aef3b485e9eca79d977771223299161f6d0747077e68f86a5cea622bad9e",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                127,
+                195
+              ],
+              "angle": 31.61,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                140,
+                203
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/idle_1_breath_out/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/idle_1_breath_out/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/idle_1_breath_out/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/idle_1_breath_out/hair_front.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "assassin_male_p96",
+      "kind": "keyposes_walk",
+      "category": "motion",
+      "layout": "frames",
+      "canvas": [
+        256,
+        240
+      ],
+      "bodyHeight": 96,
+      "gameHeight": 96,
+      "loop": true,
+      "candidate": true,
+      "overlayDefaults": {
+        "weapon": "katar"
+      },
+      "source": "docs/art-production/pixel-assassin-96/keyposes",
+      "frames": [
+        {
+          "name": "walk_1_contact_near (contact_near)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/walk_1_contact_near/body.png",
+          "sha256": "d9502cdc1630f48fb64b88aa47fbfd7d8b248d218d25214a008c6846ba5ee36d",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                112,
+                189
+              ],
+              "angle": 109.98,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                108,
+                200
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/walk_1_contact_near/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/walk_1_contact_near/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/walk_1_contact_near/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/walk_1_contact_near/hair_front.png"
+          }
+        },
+        {
+          "name": "walk_2_pass_near (pass_near)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/walk_2_pass_near/body.png",
+          "sha256": "67d7c8f12ab205ce8aca9d28308cf2da3d9d455d067cee00584fcba2b77b35c0",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                124,
+                193
+              ],
+              "angle": 39.29,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                135,
+                202
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/walk_2_pass_near/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/walk_2_pass_near/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/walk_2_pass_near/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/walk_2_pass_near/hair_front.png"
+          }
+        },
+        {
+          "name": "walk_3_contact_far (contact_far)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/walk_3_contact_far/body.png",
+          "sha256": "02df42caaca85c66c8a50fc447acdba114b4f4b0fd8406401721f12286a21a9a",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                129,
+                191
+              ],
+              "angle": 32.01,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                145,
+                201
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/walk_3_contact_far/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/walk_3_contact_far/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/walk_3_contact_far/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/walk_3_contact_far/hair_front.png"
+          }
+        },
+        {
+          "name": "walk_4_pass_far (pass_far)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/walk_4_pass_far/body.png",
+          "sha256": "ad5d2cd467153da1497d7e21aee8f0f7a1639e61ef5281961eb489eec480a7c7",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                117,
+                192
+              ],
+              "angle": 90,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                117,
+                208
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/walk_4_pass_far/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/walk_4_pass_far/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/walk_4_pass_far/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/walk_4_pass_far/hair_front.png"
+          }
+        },
+        {
+          "name": "walk_5_down_near (down_near)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/walk_5_down_near/body.png",
+          "sha256": "f92d403aa7e489ab8dc2f7e161dd4aa6e7e8cad580e0f8e61265c83899c2cea1",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                114,
+                190
+              ],
+              "angle": 113.2,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                108,
+                204
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/walk_5_down_near/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/walk_5_down_near/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/walk_5_down_near/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/walk_5_down_near/hair_front.png"
+          }
+        },
+        {
+          "name": "walk_6_up_near (up_near)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/walk_6_up_near/body.png",
+          "sha256": "324cc3053a3b872cd70e8649f3969518c0333f64f9872bdb0313dd11bec1547d",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                131,
+                190
+              ],
+              "angle": 25.02,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                146,
+                197
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/walk_6_up_near/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/walk_6_up_near/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/walk_6_up_near/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/walk_6_up_near/hair_front.png"
+          }
+        },
+        {
+          "name": "walk_7_down_far (down_far)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/walk_7_down_far/body.png",
+          "sha256": "a12fe3c8a19830fab7a620bc795662c311a1292550808f427a68a6de0dc71930",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                132,
+                195
+              ],
+              "angle": 22.38,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                149,
+                202
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/walk_7_down_far/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/walk_7_down_far/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/walk_7_down_far/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/walk_7_down_far/hair_front.png"
+          }
+        },
+        {
+          "name": "walk_8_up_far (up_far)",
+          "file": "docs/art-production/pixel-assassin-96/keyposes/walk_8_up_far/body.png",
+          "sha256": "114b7f7801a82eb77ed40e334179b7273228c02de6b93dd0e9d2989db8c1c645",
+          "pivot": [
+            128,
+            224
+          ],
+          "duration": 300,
+          "anchors": {
+            "hand": {
+              "point": [
+                108,
+                185
+              ],
+              "angle": 118.3,
+              "z": "front",
+              "visible": true
+            },
+            "tip": {
+              "point": [
+                101,
+                198
+              ],
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:katar": {
+              "file": "docs/art-production/pixel-assassin-96/keyposes/walk_8_up_far/katar.png",
+              "z": "front"
+            },
+            "grip": "docs/art-production/pixel-assassin-96/keyposes/walk_8_up_far/grip.png",
+            "hair_back": "docs/art-production/pixel-assassin-96/keyposes/walk_8_up_far/hair_back.png",
+            "hair_front": "docs/art-production/pixel-assassin-96/keyposes/walk_8_up_far/hair_front.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "assassin_male_p96",
+      "kind": "attack_candidate",
+      "category": "motion",
+      "layout": "frames",
+      "canvas": [
+        256,
+        240
+      ],
+      "bodyHeight": 96,
+      "loop": false,
+      "candidate": true,
+      "overlayDefaults": {
+        "weapon": "katar"
+      },
+      "note": "96px 어새신 공격 조립표 초안(assembly@1). 48px 조립(pixel-assassin-attack-keyposes/assembly.json)과 같은 리듬: 접촉 앞 170ms, 타격 뒤 410ms(event 재생 기준). 키포즈 시트 keyposes_attack = 폴더 순서 [0 준비, 1 정점, 2 접촉, 3 회수, 4 휘두름]. 다섯 장 모두 뒷발 최후방 x 105로 그려 달라고 했으므로 dx 0(납품 뒤 재서 어긋나면 그 장만 dx로 맞춤). dy 0.",
+      "hit": {
+        "style": "slash",
+        "fx": [
+          "slash",
+          "impact"
+        ],
+        "hitstopMs": 70,
+        "knockPx": 3
+      },
+      "anchor": {
+        "backFootX": 105,
+        "from": "idle",
+        "rows": [
+          220,
+          223
+        ]
+      },
+      "assembly": {
+        "format": "assembly@1",
+        "poses": "assassin_male_p96#keyposes_attack",
+        "hitFrame": 3,
+        "frames": [
+          {
+            "pose": 0,
+            "ms": 60,
+            "dx": 0,
+            "dy": 0,
+            "note": "준비"
+          },
+          {
+            "pose": 1,
+            "ms": 70,
+            "dx": 0,
+            "dy": 0,
+            "note": "정점"
+          },
+          {
+            "pose": 4,
+            "ms": 40,
+            "dx": 0,
+            "dy": 0,
+            "note": "휘두름(잔상)"
+          },
+          {
+            "pose": 2,
+            "ms": 100,
+            "dx": 0,
+            "dy": 0,
+            "note": "접촉 — hitFrame"
+          },
+          {
+            "pose": 2,
+            "ms": 60,
+            "dx": 0,
+            "dy": 0,
+            "note": "팔로스루"
+          },
+          {
+            "pose": 3,
+            "ms": 100,
+            "dx": 0,
+            "dy": 0,
+            "note": "회수"
+          },
+          {
+            "pose": 3,
+            "ms": 150,
+            "dx": 0,
+            "dy": 0,
+            "note": "멈춤"
+          }
+        ]
+      },
+      "frames": []
+    },
+    {
+      "id": "assassin_male_p96",
+      "kind": "idle_candidate",
+      "category": "motion",
+      "layout": "frames",
+      "canvas": [
+        256,
+        240
+      ],
+      "bodyHeight": 96,
+      "loop": true,
+      "candidate": true,
+      "overlayDefaults": {
+        "weapon": "katar"
+      },
+      "note": "96px 어새신 대기 조립표 초안(assembly@1). 키포즈 시트 keyposes_idle = [0 들숨(승인 대기 B), 1 날숨]. 한 바퀴 840ms(대기 시간 규격, tools/art/normalize-timing.mjs). 발은 두 장이 픽셀 단위로 같아야 하므로 dx·dy 0.",
+      "assembly": {
+        "format": "assembly@1",
+        "poses": "assassin_male_p96#keyposes_idle",
+        "frames": [
+          {
+            "pose": 0,
+            "ms": 420,
+            "dx": 0,
+            "dy": 0,
+            "note": "들숨 — 승인 대기(B)"
+          },
+          {
+            "pose": 1,
+            "ms": 420,
+            "dx": 0,
+            "dy": 0,
+            "note": "날숨 — 어깨·머리 2px 아래"
+          }
+        ]
+      },
+      "frames": []
+    },
+    {
+      "id": "assassin_male_p96",
+      "kind": "walk_candidate",
+      "category": "motion",
+      "layout": "frames",
+      "canvas": [
+        256,
+        240
+      ],
+      "bodyHeight": 96,
+      "loop": true,
+      "candidate": true,
+      "overlayDefaults": {
+        "weapon": "katar"
+      },
+      "note": "96px 어새신 걷기 조립표 초안(assembly@1). 제자리 걷기 8칸 × 90ms = 720ms(걷기 시간 규격). 키포즈 시트 keyposes_walk = [0 가까운 발 앞 접지, 1 가까운 발 디딘 통과, 2 먼 발 앞 접지, 3 먼 발 디딘 통과]. 리듬은 RO 어새신 걷기 분해(docs/art/motion-templates/assassin-walk.json: 올라섬 → 접지 → 내려앉음 → 통과 ×2, 정수리 dy 0·1·3·2). 내려앉음·올라섬 4칸은 T4 납품(walk_5~8). 키포즈 시트 순서 = 폴더 순서 [0 접지 가까운, 1 통과 가까운, 2 접지 먼, 3 통과 먼, 4 내려앉음 가까운, 5 올라섬 가까운, 6 내려앉음 먼, 7 올라섬 먼]. 몸 오르내림은 그림에 넣으므로 dx·dy 0.",
+      "assembly": {
+        "format": "assembly@1",
+        "poses": "assassin_male_p96#keyposes_walk",
+        "frames": [
+          {
+            "pose": 0,
+            "ms": 90,
+            "dx": 0,
+            "dy": 0,
+            "note": "접지 — 가까운 발 앞"
+          },
+          {
+            "pose": 4,
+            "ms": 90,
+            "dx": 0,
+            "dy": 0,
+            "note": "내려앉음 — 가까운 발 디딤, 가장 낮음"
+          },
+          {
+            "pose": 1,
+            "ms": 90,
+            "dx": 0,
+            "dy": 0,
+            "note": "통과 — 가까운 발 디딤"
+          },
+          {
+            "pose": 5,
+            "ms": 90,
+            "dx": 0,
+            "dy": 0,
+            "note": "올라섬 — 가장 높음, 먼 발이 앞으로"
+          },
+          {
+            "pose": 2,
+            "ms": 90,
+            "dx": 0,
+            "dy": 0,
+            "note": "접지 — 먼 발 앞"
+          },
+          {
+            "pose": 6,
+            "ms": 90,
+            "dx": 0,
+            "dy": 0,
+            "note": "내려앉음 — 먼 발 디딤"
+          },
+          {
+            "pose": 3,
+            "ms": 90,
+            "dx": 0,
+            "dy": 0,
+            "note": "통과 — 먼 발 디딤"
+          },
+          {
+            "pose": 7,
+            "ms": 90,
+            "dx": 0,
+            "dy": 0,
+            "note": "올라섬 — 가까운 발이 앞으로"
+          }
+        ]
+      },
+      "frames": []
+    }
+  ]
+}

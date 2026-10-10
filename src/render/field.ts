@@ -18,6 +18,7 @@ import { findEquip } from '../game/stats.ts';
 import { itemIcon } from './icons.ts';
 import { rgba } from './color.ts';
 import { TimelinePlayer } from './timeline.ts';
+import { ASSEMBLY, drawFx, expandAssembly, rampOf, type FxLayer } from './fxlib.ts';
 import { drawGround, drawIceBlock, drawTalkie, drawCart } from './grounds.ts';
 
 interface Particle {
@@ -304,7 +305,7 @@ export class FieldRenderer {
         if (this.nums.length > 90) this.nums.splice(0, this.nums.length - 90);
         break;
       }
-      case 'hit': this.hitFx(e.uid, e.style, e.element, !!e.crit); break;
+      case 'hit': this.hitFx(e.uid, e.style, e.element, !!e.crit, e.from); break;
       case 'skill': if (!this.timeline.replaces(e.from, e.fx)) this.skillFx(e); break;
       case 'skillStart': this.timeline.start(e, now); break;
       case 'skillHits': this.timeline.hits(e); break;
@@ -411,9 +412,29 @@ export class FieldRenderer {
     if (this.particles.length > 900) this.particles.splice(0, this.particles.length - 900);
   }
 
-  private hitFx(uid: number, style: string, element: Element, crit: boolean) {
+  /** plays an assembled effect (src/assets/fx/assembly.json): base effects from the PXF library, recoloured, sized and placed */
+  private playAsm(layers: FxLayer[], c: { from?: number; to?: number; x: number; y: number; element: Element; hits?: number; radius?: number }) {
+    const now = this.now;
+    const src = c.from !== undefined ? this.pos(c.from) : null, tgt = c.to !== undefined ? this.pos(c.to) : null;
+    for (const f of expandAssembly(layers, { element: c.element, hits: c.hits, radius: c.radius, sourceRight: !!(src && tgt && src.x > tgt.x), maxRepeat: this.lowFx ? 2 : undefined })) {
+      const uid = f.at === 'caster' ? c.from : f.at === 'point' ? undefined : c.to ?? c.from;
+      const fixed = (uid !== undefined ? this.pos(uid) : null) ?? { x: c.x, y: c.y, h: 0 };
+      this.effects.push({ t0: now + f.delay, dur: f.dur, layer: f.layer, draw: (ctx, _q, age) => {
+        const p = (f.follow && uid !== undefined ? this.pos(uid) : null) ?? fixed;
+        drawFx(ctx, f.play, p.x + f.dx, (f.on === 'body' ? p.y - p.h * 0.5 : p.y) + f.dy, age);
+      } });
+    }
+  }
+
+  private hitFx(uid: number, style: string, element: Element, crit: boolean, from?: number) {
     const p = this.pos(uid);
     if (!p) return;
+    const asm = ASSEMBLY.hits[style];
+    if (asm) {
+      this.playAsm(asm, { from, to: uid, x: p.x, y: p.y, element });
+      if (crit) this.playAsm(ASSEMBLY.crit, { from, to: uid, x: p.x, y: p.y, element });
+      return;
+    }
     const x = p.x + (Math.random() - 0.5) * 6, y = p.y - p.h * 0.5 + (Math.random() - 0.5) * 6;
     const now = this.now;
     const col = style === 'magic' ? ELEMENT_COLOR[element] : style === 'claw' ? '#ff5050' : element !== 'neutral' ? ELEMENT_COLOR[element] : '#ffffff';
@@ -494,6 +515,8 @@ export class FieldRenderer {
     const tgt = e.to !== undefined ? this.pos(e.to) : null;
     const ty = tgt ? tgt.y - tgt.h * 0.5 : y - 16;
     const add = (dur: number, layer: Effect['layer'], draw: Effect['draw']) => this.effects.push({ t0: now, dur, layer, draw });
+    const asm = ASSEMBLY.skills[e.fx];
+    if (asm) { this.playAsm(asm, { from: e.from, to: e.to, x, y, element: el, hits: e.hits, radius: e.radius }); return; }
     switch (e.fx) {
       case 'bash': {
         add(260, 'top', (ctx, q) => {
@@ -1047,7 +1070,8 @@ export class FieldRenderer {
     for (const [uid, cst] of this.casts) {
       const p = this.pos(uid);
       if (!p) { this.casts.delete(uid); continue; }
-      this.magicCircle(ctx, p.x, p.y, cst.element, (nowMs - cst.t0) / Math.max(1, cst.dur), nowMs);
+      if (ASSEMBLY.cast) { const C = ASSEMBLY.cast; drawFx(ctx, { id: C.fx, ramp: rampOf(C.ramp, cst.element), scale: C.scale }, p.x, p.y, nowMs - cst.t0); }
+      else this.magicCircle(ctx, p.x, p.y, cst.element, (nowMs - cst.t0) / Math.max(1, cst.dur), nowMs);
     }
     if (w.focus !== null) {
       const p = this.pos(w.focus);

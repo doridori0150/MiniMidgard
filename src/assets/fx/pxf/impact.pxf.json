@@ -1,0 +1,242 @@
+{
+  "format": "pxf.graph@1",
+  "name": "MM 강타",
+  "settings": {
+    "size": 64,
+    "frames": 12,
+    "fps": 30,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "star",
+      "type": "Shape",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "shape": "star",
+        "points": 4,
+        "rot": 45,
+        "size": {
+          "k": [
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              14,
+              "out"
+            ],
+            [
+              11,
+              2
+            ]
+          ]
+        },
+        "size2": 0.22,
+        "falloff": 0.4,
+        "intensity": {
+          "k": [
+            [
+              0,
+              0.7
+            ],
+            [
+              2,
+              1,
+              "out"
+            ],
+            [
+              11,
+              0.2
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "ring",
+      "type": "Shape",
+      "x": 40,
+      "y": 160,
+      "params": {
+        "shape": "ring",
+        "size": {
+          "a": 3,
+          "b": 25,
+          "e": "out"
+        },
+        "size2": {
+          "a": 0.3,
+          "b": 0.06,
+          "e": "out"
+        },
+        "aspect": 0.6,
+        "falloff": 0.35,
+        "intensity": {
+          "a": 0.85,
+          "b": 0.25,
+          "e": "in",
+          "t0": 0.15,
+          "t1": 1
+        }
+      }
+    },
+    {
+      "id": "sp",
+      "type": "Particles",
+      "x": 40,
+      "y": 280,
+      "params": {
+        "count": 18,
+        "seed": 31,
+        "life": 0.8,
+        "lifeVar": 0.25,
+        "area": "point",
+        "dirMode": "outward",
+        "speed": 2.2,
+        "speedVar": 0.55,
+        "gravity": 0.06,
+        "drag": 0.12,
+        "sizeA": 1.5,
+        "sizeB": 0.5,
+        "pshape": "diamond",
+        "brightVar": 0.3
+      }
+    },
+    {
+      "id": "m1",
+      "type": "Blend",
+      "x": 760,
+      "y": 400,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "m",
+      "type": "Blend",
+      "x": 760,
+      "y": 520,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "pal",
+      "type": "Palette",
+      "x": 950,
+      "y": 40,
+      "params": {
+        "colors": [
+          "#303030",
+          "#606060",
+          "#909090",
+          "#c0c0c0",
+          "#f0f0f0"
+        ],
+        "cutoff": 0.13,
+        "mode": "bands",
+        "key": "alpha"
+      }
+    },
+    {
+      "id": "ol",
+      "type": "Outline",
+      "x": 960,
+      "y": 40,
+      "params": {
+        "color": "#303030",
+        "threshold": 0.5,
+        "width": 1
+      }
+    },
+    {
+      "id": "cut",
+      "type": "Tint",
+      "x": 970,
+      "y": 40,
+      "params": {
+        "amount": 0,
+        "opacity": {
+          "k": [
+            [
+              0,
+              1
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              11,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 980,
+      "y": 40,
+      "params": {
+        "alpha": "hard",
+        "threshold": 0.5
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "star",
+      "t": "m1",
+      "p": 0
+    },
+    {
+      "f": "ring",
+      "t": "m1",
+      "p": 1
+    },
+    {
+      "f": "m1",
+      "t": "m",
+      "p": 0
+    },
+    {
+      "f": "sp",
+      "t": "m",
+      "p": 1
+    },
+    {
+      "f": "m",
+      "t": "pal",
+      "p": 0
+    },
+    {
+      "f": "pal",
+      "t": "ol",
+      "p": 0
+    },
+    {
+      "f": "ol",
+      "t": "cut",
+      "p": 0
+    },
+    {
+      "f": "cut",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 90,
+    "blend": "normal",
+    "impactFrame": 1
+  }
+}

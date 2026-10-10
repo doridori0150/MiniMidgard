@@ -1,0 +1,251 @@
+{
+  "format": "ro-breakdown@1",
+  "source": {
+    "job": 9,
+    "class": "wizard",
+    "gender": "female",
+    "weapon": 10,
+    "action": 87,
+    "direction": "SE",
+    "url": "https://assets.latam-tools.com.br/gif?job=9&gender=female&weapon=10&action=87",
+    "note": "라그나로크 공개 렌더러의 실제 클라이언트 스프라이트. 숫자만 기록하고 그림은 저장하지 않습니다."
+  },
+  "foot": [
+    29,
+    54
+  ],
+  "figureHeight0": 89,
+  "totalMs": 900,
+  "frameCount": 9,
+  "roles": [
+    "준비",
+    "준비",
+    "준비",
+    "준비(웅크림)",
+    "타격",
+    "멈춤",
+    "멈춤",
+    "멈춤",
+    "멈춤"
+  ],
+  "rhythm": [
+    0.111,
+    0.111,
+    0.111,
+    0.111,
+    0.111,
+    0.111,
+    0.111,
+    0.111,
+    0.111
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "ms": 100,
+      "box": [
+        -15,
+        -53,
+        19,
+        35
+      ],
+      "width": 35,
+      "height": 89,
+      "area": 2108,
+      "dx": 0,
+      "dy": 0,
+      "front": [
+        19,
+        23
+      ],
+      "pale": 57,
+      "footSpread": 30,
+      "smear": false,
+      "role": "준비"
+    },
+    {
+      "index": 1,
+      "ms": 100,
+      "box": [
+        -16,
+        -53,
+        19,
+        35
+      ],
+      "width": 36,
+      "height": 89,
+      "area": 2130,
+      "dx": 0,
+      "dy": 0,
+      "front": [
+        19,
+        22
+      ],
+      "pale": 52,
+      "footSpread": 32,
+      "smear": false,
+      "role": "준비"
+    },
+    {
+      "index": 2,
+      "ms": 100,
+      "box": [
+        -16,
+        -53,
+        19,
+        35
+      ],
+      "width": 36,
+      "height": 89,
+      "area": 2130,
+      "dx": 0,
+      "dy": 0,
+      "front": [
+        19,
+        22
+      ],
+      "pale": 52,
+      "footSpread": 32,
+      "smear": false,
+      "role": "준비"
+    },
+    {
+      "index": 3,
+      "ms": 100,
+      "box": [
+        -17,
+        -52,
+        20,
+        33
+      ],
+      "width": 38,
+      "height": 86,
+      "area": 2067,
+      "dx": 0,
+      "dy": 1,
+      "front": [
+        20,
+        26
+      ],
+      "pale": 45,
+      "footSpread": 30,
+      "smear": false,
+      "role": "준비(웅크림)"
+    },
+    {
+      "index": 4,
+      "ms": 100,
+      "box": [
+        -28,
+        -41,
+        42,
+        38
+      ],
+      "width": 71,
+      "height": 80,
+      "area": 2583,
+      "dx": 5,
+      "dy": 12,
+      "front": [
+        42,
+        -11
+      ],
+      "pale": 102,
+      "footSpread": 70,
+      "smear": true,
+      "role": "타격"
+    },
+    {
+      "index": 5,
+      "ms": 100,
+      "box": [
+        -18,
+        -40,
+        44,
+        38
+      ],
+      "width": 63,
+      "height": 79,
+      "area": 2478,
+      "dx": 11,
+      "dy": 13,
+      "front": [
+        44,
+        -9
+      ],
+      "pale": 97,
+      "footSpread": 62,
+      "smear": false,
+      "role": "멈춤"
+    },
+    {
+      "index": 6,
+      "ms": 100,
+      "box": [
+        -18,
+        -40,
+        44,
+        38
+      ],
+      "width": 63,
+      "height": 79,
+      "area": 2478,
+      "dx": 11,
+      "dy": 13,
+      "front": [
+        44,
+        -9
+      ],
+      "pale": 97,
+      "footSpread": 62,
+      "smear": false,
+      "role": "멈춤"
+    },
+    {
+      "index": 7,
+      "ms": 100,
+      "box": [
+        -18,
+        -40,
+        44,
+        38
+      ],
+      "width": 63,
+      "height": 79,
+      "area": 2478,
+      "dx": 11,
+      "dy": 13,
+      "front": [
+        44,
+        -9
+      ],
+      "pale": 97,
+      "footSpread": 62,
+      "smear": false,
+      "role": "멈춤"
+    },
+    {
+      "index": 8,
+      "ms": 100,
+      "box": [
+        -18,
+        -40,
+        44,
+        38
+      ],
+      "width": 63,
+      "height": 79,
+      "area": 2478,
+      "dx": 11,
+      "dy": 13,
+      "front": [
+        44,
+        -9
+      ],
+      "pale": 97,
+      "footSpread": 62,
+      "smear": false,
+      "role": "멈춤"
+    }
+  ]
+}

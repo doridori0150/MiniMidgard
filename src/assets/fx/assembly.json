@@ -1,0 +1,586 @@
+{
+ "_": "조립 데이터: 명중·스킬 이펙트를 기본 이펙트(library.json)로 조립합니다. 형식은 src/render/fxlib.ts FxLayer. ramp: RAMPS 이름 또는 $element·$hit. at: target(기본)·caster·point. on: feet·body(기본은 기준점이 가운데면 body). repeat: 횟수 또는 hits, gap(ms), scatter(px 또는 radius). 여기 없는 스킬은 예전 코드 이펙트를 씁니다. 빛기둥(pillar)은 캐릭터 뒤(ground 층)에 그립니다: 앞에 그리면 시전자를 통째로 가립니다.",
+ "hits": {
+  "slash": [
+   {
+    "fx": "slash",
+    "ramp": "$hit",
+    "scale": 0.7,
+    "rotJitter": 20,
+    "flip": "source"
+   }
+  ],
+  "blunt": [
+   {
+    "fx": "impact",
+    "ramp": "$hit",
+    "scale": 0.75
+   }
+  ],
+  "pierce": [
+   {
+    "fx": "thrust",
+    "ramp": "$hit",
+    "scale": 0.55,
+    "flip": "source"
+   }
+  ],
+  "magic": [
+   {
+    "fx": "impact",
+    "ramp": "$element",
+    "scale": 0.6
+   }
+  ],
+  "claw": [
+   {
+    "fx": "slash",
+    "ramp": "blood",
+    "scale": 0.6,
+    "rot": 70,
+    "flip": "source"
+   }
+  ]
+ },
+ "crit": [
+  {
+   "fx": "impact",
+   "ramp": "gold",
+   "scale": 1.0
+  }
+ ],
+ "cast": {
+  "fx": "cast",
+  "ramp": "$element",
+  "layer": "ground",
+  "scale": 0.9
+ },
+ "skills": {
+  "bash": [
+   {
+    "fx": "impact",
+    "ramp": "fire",
+    "scale": 1.1
+   },
+   {
+    "fx": "slash",
+    "ramp": "ember",
+    "scale": 0.9,
+    "flip": "source"
+   }
+  ],
+  "magnum": [
+   {
+    "fx": "shockwave",
+    "ramp": "fire",
+    "at": "point",
+    "layer": "ground",
+    "scale": 1.0
+   },
+   {
+    "fx": "explosion",
+    "ramp": "fire",
+    "at": "point",
+    "dy": -12,
+    "scale": 0.7
+   }
+  ],
+  "endure": [
+   {
+    "fx": "buff",
+    "ramp": "gold",
+    "follow": true
+   }
+  ],
+  "conc": [
+   {
+    "fx": "buff",
+    "ramp": "wind",
+    "follow": true
+   }
+  ],
+  "agi": [
+   {
+    "fx": "buff",
+    "ramp": "ice",
+    "follow": true
+   }
+  ],
+  "quicken": [
+   {
+    "fx": "buff",
+    "ramp": "gold",
+    "follow": true,
+    "speed": 1.4
+   }
+  ],
+  "amp": [
+   {
+    "fx": "buff",
+    "ramp": "violet",
+    "follow": true
+   }
+  ],
+  "poisonbuff": [
+   {
+    "fx": "buff",
+    "ramp": "poison",
+    "follow": true
+   }
+  ],
+  "adrenaline": [
+   {
+    "fx": "buff",
+    "ramp": "fire",
+    "follow": true,
+    "speed": 1.3
+   }
+  ],
+  "kyrie": [
+   {
+    "fx": "buff",
+    "ramp": "ghost",
+    "follow": true
+   }
+  ],
+  "angelus": [
+   {
+    "fx": "buff",
+    "ramp": "holy",
+    "follow": true
+   },
+   {
+    "fx": "cast",
+    "ramp": "holy",
+    "layer": "ground",
+    "hold": 700,
+    "follow": true
+   }
+  ],
+  "blessing": [
+   {
+    "fx": "pillar",
+    "ramp": "holy",
+    "at": "caster",
+    "follow": true,
+    "layer": "ground",
+    "scale": 1.3
+   },
+   {
+    "fx": "buff",
+    "ramp": "holy",
+    "follow": true,
+    "delay": 120
+   }
+  ],
+  "heal": [
+   {
+    "fx": "heal",
+    "ramp": "heal",
+    "follow": true
+   }
+  ],
+  "revive": [
+   {
+    "fx": "pillar",
+    "ramp": "holy",
+    "layer": "ground"
+   },
+   {
+    "fx": "heal",
+    "ramp": "heal",
+    "follow": true,
+    "delay": 200
+   }
+  ],
+  "firebolt": [
+   {
+    "fx": "fire",
+    "ramp": "fire",
+    "scale": 0.75,
+    "repeat": "hits",
+    "gap": 110,
+    "scatter": 6
+   }
+  ],
+  "coldbolt": [
+   {
+    "fx": "ice",
+    "ramp": "ice",
+    "scale": 0.6,
+    "repeat": "hits",
+    "gap": 110,
+    "scatter": 6
+   }
+  ],
+  "lightning": [
+   {
+    "fx": "lightning",
+    "ramp": "bolt",
+    "scale": 0.8,
+    "repeat": "hits",
+    "gap": 110,
+    "scatter": 6
+   }
+  ],
+  "holy": [
+   {
+    "fx": "pillar",
+    "ramp": "holy",
+    "scale": 0.8,
+    "layer": "ground"
+   },
+   {
+    "fx": "impact",
+    "ramp": "holy",
+    "scale": 0.8
+   }
+  ],
+  "fireball": [
+   {
+    "fx": "explosion",
+    "ramp": "fire",
+    "scale": 0.8
+   }
+  ],
+  "waterball": [
+   {
+    "fx": "explosion",
+    "ramp": "ice",
+    "scale": 0.55,
+    "repeat": "hits",
+    "gap": 110
+   }
+  ],
+  "meteor": [
+   {
+    "fx": "explosion",
+    "ramp": "fire",
+    "at": "point",
+    "dy": -12,
+    "scale": 0.5,
+    "repeat": "hits",
+    "gap": 180,
+    "scatter": "radius"
+   },
+   {
+    "fx": "shockwave",
+    "ramp": "ember",
+    "at": "point",
+    "layer": "ground",
+    "scale": 0.9
+   }
+  ],
+  "storm": [
+   {
+    "fx": "ice",
+    "ramp": "ice",
+    "at": "point",
+    "scale": 0.6,
+    "repeat": "hits",
+    "gap": 180,
+    "scatter": "radius"
+   },
+   {
+    "fx": "shockwave",
+    "ramp": "ice",
+    "at": "point",
+    "layer": "ground",
+    "scale": 1.0
+   }
+  ],
+  "frost": [
+   {
+    "fx": "ice",
+    "ramp": "ice",
+    "scale": 0.9
+   }
+  ],
+  "jupitel": [
+   {
+    "fx": "lightning",
+    "ramp": "bolt",
+    "scale": 0.7,
+    "repeat": "hits",
+    "gap": 110
+   },
+   {
+    "fx": "impact",
+    "ramp": "bolt",
+    "scale": 0.8
+   }
+  ],
+  "lov": [
+   {
+    "fx": "lightning",
+    "ramp": "bolt",
+    "at": "point",
+    "scale": 0.9,
+    "repeat": "hits",
+    "gap": 180,
+    "scatter": "radius"
+   },
+   {
+    "fx": "shockwave",
+    "ramp": "bolt",
+    "at": "point",
+    "layer": "ground",
+    "scale": 1.4
+   }
+  ],
+  "gust": [
+   {
+    "fx": "shockwave",
+    "ramp": "wind",
+    "at": "point",
+    "layer": "ground",
+    "scale": 1.2
+   },
+   {
+    "fx": "dust",
+    "ramp": "wind",
+    "at": "point",
+    "scale": 1.2
+   }
+  ],
+  "magnus": [
+   {
+    "fx": "cast",
+    "ramp": "holy",
+    "at": "point",
+    "layer": "ground",
+    "scale": 1.8,
+    "hold": 900
+   },
+   {
+    "fx": "pillar",
+    "ramp": "holy",
+    "at": "point",
+    "scale": 0.8,
+    "repeat": "hits",
+    "gap": 180,
+    "scatter": "radius",
+    "layer": "ground"
+   }
+  ],
+  "bowling": [
+   {
+    "fx": "impact",
+    "ramp": "steel",
+    "scale": 1.2
+   },
+   {
+    "fx": "shockwave",
+    "ramp": "dust",
+    "at": "point",
+    "layer": "ground",
+    "scale": 1.0
+   }
+  ],
+  "brandish": [
+   {
+    "fx": "slash",
+    "ramp": "steel",
+    "scale": 1.3,
+    "flip": "source"
+   }
+  ],
+  "moonslash": [
+   {
+    "fx": "slash",
+    "ramp": "holy",
+    "scale": 1.2,
+    "flip": "source"
+   },
+   {
+    "fx": "impact",
+    "ramp": "holy",
+    "scale": 0.8,
+    "delay": 60
+   }
+  ],
+  "sonic": [
+   {
+    "fx": "slash",
+    "ramp": "blood",
+    "scale": 0.8,
+    "rotJitter": 70,
+    "flip": "source",
+    "repeat": "hits",
+    "gap": 70,
+    "scatter": 6
+   }
+  ],
+  "pierce": [
+   {
+    "fx": "thrust",
+    "ramp": "steel",
+    "scale": 0.7,
+    "flip": "source",
+    "repeat": "hits",
+    "gap": 120,
+    "scatter": 4
+   }
+  ],
+  "grimtooth": [
+   {
+    "fx": "ice",
+    "ramp": "dark",
+    "scale": 0.7
+   }
+  ],
+  "hammer": [
+   {
+    "fx": "shockwave",
+    "ramp": "earth",
+    "at": "point",
+    "layer": "ground",
+    "scale": 1.2
+   },
+   {
+    "fx": "impact",
+    "ramp": "gold",
+    "at": "point",
+    "dy": -8
+   }
+  ],
+  "cart": [
+   {
+    "fx": "impact",
+    "ramp": "steel",
+    "scale": 1.1
+   },
+   {
+    "fx": "dust",
+    "ramp": "dust",
+    "on": "feet",
+    "scale": 1.2
+   }
+  ],
+  "mammonite": [
+   {
+    "fx": "impact",
+    "ramp": "gold",
+    "scale": 1.0
+   }
+  ],
+  "envenom": [
+   {
+    "fx": "impact",
+    "ramp": "poison",
+    "scale": 0.8
+   }
+  ],
+  "stone": [
+   {
+    "fx": "impact",
+    "ramp": "earth",
+    "scale": 0.8
+   }
+  ],
+  "counter": [
+   {
+    "fx": "impact",
+    "ramp": "steel",
+    "scale": 0.8
+   }
+  ],
+  "shower": [
+   {
+    "fx": "impact",
+    "ramp": "steel",
+    "at": "point",
+    "dy": -6,
+    "scale": 0.5,
+    "repeat": 6,
+    "gap": 50,
+    "scatter": "radius"
+   }
+  ],
+  "backslide": [
+   {
+    "fx": "dust",
+    "ramp": "dust",
+    "at": "caster"
+   }
+  ],
+  "hide": [
+   {
+    "fx": "dust",
+    "ramp": "dark",
+    "at": "caster"
+   }
+  ],
+  "trap": [
+   {
+    "fx": "dust",
+    "ramp": "dust",
+    "scale": 0.7
+   }
+  ],
+  "teleport": [
+   {
+    "fx": "cast",
+    "ramp": "violet",
+    "at": "caster",
+    "layer": "ground",
+    "hold": 500
+   },
+   {
+    "fx": "pillar",
+    "ramp": "violet",
+    "at": "caster",
+    "layer": "ground"
+   }
+  ],
+  "warp": [
+   {
+    "fx": "cast",
+    "ramp": "violet",
+    "at": "caster",
+    "layer": "ground",
+    "hold": 500
+   },
+   {
+    "fx": "pillar",
+    "ramp": "violet",
+    "at": "caster",
+    "layer": "ground"
+   }
+  ],
+  "summon": [
+   {
+    "fx": "cast",
+    "ramp": "dark",
+    "at": "caster",
+    "layer": "ground",
+    "hold": 600
+   }
+  ],
+  "slam": [
+   {
+    "fx": "shockwave",
+    "ramp": "dust",
+    "at": "point",
+    "layer": "ground",
+    "scale": 1.2
+   }
+  ],
+  "darkslam": [
+   {
+    "fx": "shockwave",
+    "ramp": "dark",
+    "at": "point",
+    "layer": "ground",
+    "scale": 1.3
+   },
+   {
+    "fx": "explosion",
+    "ramp": "dark",
+    "at": "point",
+    "dy": -10,
+    "scale": 0.7
+   }
+  ]
+ }
+}

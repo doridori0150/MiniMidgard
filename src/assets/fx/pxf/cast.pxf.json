@@ -1,0 +1,200 @@
+{
+  "format": "pxf.graph@1",
+  "name": "MM 마법진",
+  "settings": {
+    "size": 64,
+    "frames": 24,
+    "fps": 24,
+    "loop": true
+  },
+  "nodes": [
+    {
+      "id": "r1",
+      "type": "Shape",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "shape": "ring",
+        "y": 0.66,
+        "size": 22,
+        "size2": 0.08,
+        "aspect": 0.4,
+        "intensity": {
+          "k": [
+            [
+              0,
+              0.8
+            ],
+            [
+              12,
+              1,
+              "inout"
+            ],
+            [
+              23,
+              0.8
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "st",
+      "type": "Shape",
+      "x": 40,
+      "y": 160,
+      "params": {
+        "shape": "star",
+        "points": 6,
+        "y": 0.66,
+        "size": 16,
+        "size2": 0.55,
+        "aspect": 0.4,
+        "rot": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              23,
+              57.5
+            ]
+          ]
+        },
+        "stroke": 1,
+        "intensity": 0.75
+      }
+    },
+    {
+      "id": "sp",
+      "type": "Particles",
+      "x": 40,
+      "y": 280,
+      "params": {
+        "count": 18,
+        "seed": 3,
+        "emit": "stream",
+        "life": 0.5,
+        "lifeVar": 0.35,
+        "area": "ring",
+        "y": 0.65,
+        "aw": 22,
+        "ah": 8,
+        "dirMode": "fixed",
+        "angle": -90,
+        "spread": 10,
+        "speed": 0.8,
+        "speedVar": 0.55,
+        "drag": 0.12,
+        "sizeA": 2,
+        "sizeB": 0.5,
+        "pshape": "square",
+        "loop": true
+      }
+    },
+    {
+      "id": "m1",
+      "type": "Blend",
+      "x": 760,
+      "y": 400,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "m",
+      "type": "Blend",
+      "x": 760,
+      "y": 520,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "pal",
+      "type": "Palette",
+      "x": 950,
+      "y": 40,
+      "params": {
+        "colors": [
+          "#303030",
+          "#606060",
+          "#909090",
+          "#c0c0c0",
+          "#f0f0f0"
+        ],
+        "cutoff": 0.13,
+        "mode": "bands",
+        "key": "alpha"
+      }
+    },
+    {
+      "id": "ol",
+      "type": "Outline",
+      "x": 960,
+      "y": 40,
+      "params": {
+        "color": "#303030",
+        "threshold": 0.5,
+        "width": 1
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 970,
+      "y": 40,
+      "params": {
+        "alpha": "hard",
+        "threshold": 0.5
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "r1",
+      "t": "m1",
+      "p": 0
+    },
+    {
+      "f": "st",
+      "t": "m1",
+      "p": 1
+    },
+    {
+      "f": "m1",
+      "t": "m",
+      "p": 0
+    },
+    {
+      "f": "sp",
+      "t": "m",
+      "p": 1
+    },
+    {
+      "f": "m",
+      "t": "pal",
+      "p": 0
+    },
+    {
+      "f": "pal",
+      "t": "ol",
+      "p": 0
+    },
+    {
+      "f": "ol",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 100,
+    "blend": "normal",
+    "impactFrame": 0
+  }
+}

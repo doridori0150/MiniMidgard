@@ -1,0 +1,94 @@
+{
+  "schema": "assassin96-keypose@1",
+  "role": "down_near",
+  "canvas": [
+    256,
+    240
+  ],
+  "origin": [
+    128,
+    224
+  ],
+  "facing": "right_3_4",
+  "head": {
+    "point": [
+      138,
+      163
+    ],
+    "crownY": 132,
+    "bounds": [
+      101,
+      132,
+      155,
+      175
+    ],
+    "width": 55
+  },
+  "weapon": {
+    "hand": "near",
+    "gripPoint": [
+      114,
+      190
+    ],
+    "tipPoint": [
+      108,
+      204
+    ],
+    "angleDegrees": 113.2,
+    "angleConvention": "screen right 0, clockwise positive",
+    "smear": false
+  },
+  "backFoot": {
+    "rows": [
+      220,
+      223
+    ],
+    "rearmostX": 109
+  },
+  "feet": {
+    "row": 223,
+    "opaqueRanges": [
+      [
+        129,
+        134
+      ],
+      [
+        136,
+        146
+      ]
+    ],
+    "near": [
+      129,
+      146
+    ],
+    "far": null,
+    "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+  },
+  "bounds": [
+    91,
+    132,
+    155,
+    223
+  ],
+  "layerOrder": [
+    "hair_back",
+    "body",
+    "hair_front",
+    "katar",
+    "grip"
+  ],
+  "normalization": "내장 image_gen 생성; 최근접 단일 축소; 알파128 이진화; 승인 idle 팔레트; 머리 중심128 및 폭55 등록; 지지 무릎 아래 발 위치 미세 등록; 보이는 5레이어 분리",
+  "notes": "REQUEST_WALK_INBETWEENS.md 기준. 엔진 dx=dy=0. 생성 외형은 idle 재첨부, 동작은 승인 접지 참조. 가려진 면을 복원한 리그가 아닌 보이는 픽셀 분리.",
+  "registration": {
+    "headDx": 2,
+    "sourceHeadWidth": 57,
+    "footDx": -5,
+    "targetSupportCenter": 137.5,
+    "actualSupportCenter": 137.5
+  },
+  "timing": {
+    "ms": 90,
+    "dx": 0,
+    "dy": 0
+  }
+}

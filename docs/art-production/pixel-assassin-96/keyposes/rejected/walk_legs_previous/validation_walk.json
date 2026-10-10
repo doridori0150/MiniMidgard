@@ -1,0 +1,371 @@
+{
+  "structuralChecksPassed": true,
+  "artApproval": "사용자 시각 승인 전",
+  "poses": 8,
+  "generated": 8,
+  "accepted": 6,
+  "rejectedNew": 2,
+  "archivedOldPassing": 2,
+  "frames": [
+    {
+      "index": 1,
+      "id": "walk_1_contact_near",
+      "crownY": 130,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        130,
+        155,
+        172
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            109,
+            116
+          ],
+          [
+            141,
+            144
+          ]
+        ],
+        "near": [
+          141,
+          144
+        ],
+        "far": [
+          109,
+          116
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        112,
+        189
+      ],
+      "tip": [
+        108,
+        200
+      ]
+    },
+    {
+      "index": 2,
+      "id": "walk_5_down_near",
+      "crownY": 132,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        132,
+        155,
+        175
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            129,
+            134
+          ],
+          [
+            136,
+            146
+          ]
+        ],
+        "near": [
+          129,
+          146
+        ],
+        "far": null,
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        114,
+        190
+      ],
+      "tip": [
+        108,
+        204
+      ]
+    },
+    {
+      "index": 3,
+      "id": "walk_2_pass_near",
+      "crownY": 131,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        131,
+        155,
+        173
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            126,
+            139
+          ]
+        ],
+        "near": [
+          126,
+          139
+        ],
+        "far": null,
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        124,
+        193
+      ],
+      "tip": [
+        135,
+        202
+      ]
+    },
+    {
+      "index": 4,
+      "id": "walk_6_up_near",
+      "crownY": 128,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        128,
+        155,
+        172
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            125,
+            130
+          ]
+        ],
+        "near": [
+          125,
+          130
+        ],
+        "far": null,
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        131,
+        190
+      ],
+      "tip": [
+        146,
+        197
+      ]
+    },
+    {
+      "index": 5,
+      "id": "walk_3_contact_far",
+      "crownY": 130,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        130,
+        155,
+        173
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            106,
+            111
+          ],
+          [
+            137,
+            141
+          ]
+        ],
+        "near": [
+          106,
+          111
+        ],
+        "far": [
+          137,
+          141
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        129,
+        191
+      ],
+      "tip": [
+        145,
+        201
+      ]
+    },
+    {
+      "index": 6,
+      "id": "walk_7_down_far",
+      "crownY": 132,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        132,
+        155,
+        177
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            127,
+            131
+          ],
+          [
+            133,
+            142
+          ]
+        ],
+        "near": null,
+        "far": [
+          127,
+          142
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        132,
+        195
+      ],
+      "tip": [
+        149,
+        202
+      ]
+    },
+    {
+      "index": 7,
+      "id": "walk_4_pass_far",
+      "crownY": 131,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        131,
+        155,
+        172
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            122,
+            136
+          ]
+        ],
+        "near": null,
+        "far": [
+          122,
+          136
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        117,
+        192
+      ],
+      "tip": [
+        117,
+        208
+      ]
+    },
+    {
+      "index": 8,
+      "id": "walk_8_up_far",
+      "crownY": 128,
+      "headWidth": 55,
+      "headBounds": [
+        101,
+        128,
+        155,
+        171
+      ],
+      "feet": {
+        "row": 223,
+        "opaqueRanges": [
+          [
+            121,
+            128
+          ]
+        ],
+        "near": null,
+        "far": [
+          121,
+          128
+        ],
+        "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+      },
+      "grip": [
+        108,
+        185
+      ],
+      "tip": [
+        101,
+        198
+      ]
+    }
+  ],
+  "supportRuns": [
+    {
+      "side": "near",
+      "indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "nextContact": 4,
+      "centers": [
+        142.5,
+        137.5,
+        132.5,
+        127.5
+      ],
+      "steps": [
+        -5,
+        -5,
+        -5
+      ],
+      "newPhaseTravel": 15,
+      "fixedContactTransition": -19
+    },
+    {
+      "side": "far",
+      "indices": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "nextContact": 0,
+      "centers": [
+        139,
+        134.5,
+        129,
+        124.5
+      ],
+      "steps": [
+        -4.5,
+        -5.5,
+        -4.5
+      ],
+      "newPhaseTravel": 14.5,
+      "fixedContactTransition": -12
+    }
+  ],
+  "limitations": [
+    "고정 접지 장까지 포함하면 한 지지 주기의 실제 이동은 가까운 발34px, 먼 발26.5px다. 새 세 구간의 약15px 조건과 완전 균등 이동은 동시에 만족할 수 없어 고정 접지 보존을 우선했다.",
+    "브라우저 연결 없음 및 Safari 도구 승인 제한으로 HTML의 실시간 재생 화면 검수는 하지 못했다. 8장 시각 대조 및 APNG 픽셀·90ms 타이밍 검증을 수행했다."
+  ],
+  "outsideScope": {
+    "checkedFiles": 15182,
+    "changed": [],
+    "added": []
+  },
+  "protectedFiles": 92
+}

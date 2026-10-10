@@ -1,0 +1,104 @@
+{
+  "passed": true,
+  "role": "swing",
+  "slot": "between:1>2",
+  "canvas": [
+    128,
+    120
+  ],
+  "origin": [
+    64,
+    112
+  ],
+  "bounds": [
+    46,
+    71,
+    101,
+    111
+  ],
+  "height": 41,
+  "headWidth": 27,
+  "rearFootMinX": 52,
+  "footRows": {
+    "108": [
+      52,
+      53,
+      54,
+      55,
+      56,
+      73,
+      74,
+      75,
+      76,
+      77
+    ],
+    "109": [
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80
+    ],
+    "110": [
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81
+    ],
+    "111": [
+      73,
+      74,
+      75,
+      77,
+      78,
+      79,
+      80,
+      81
+    ]
+  },
+  "frontFoot": {
+    "row": 111,
+    "x": [
+      73,
+      74,
+      75,
+      77,
+      78,
+      79,
+      80,
+      81
+    ],
+    "toe": 81,
+    "apexToe": 82,
+    "contactToe": 80,
+    "comparison": "attached native pose coordinates; assembly remains unchanged"
+  },
+  "binaryAlpha": true,
+  "paletteMatch": true,
+  "hairFourColors": true,
+  "compositeMatchesLayers": true,
+  "nearest4x": true,
+  "smearLayer": "katar",
+  "preservedFileCount": 36,
+  "animationAssembled": false
+}

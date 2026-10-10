@@ -17,11 +17,12 @@
   "workshop": {
     "manifests": [
       "asset-records/pixel-heroes/manifest.json",
-      "asset-records/hero-sprites/manifest.json"
+      "asset-records/pixel-heroes-96/manifest.json",
+      "asset-records/hero-sprites/manifest.json",
+      "asset-records/fx/manifest.json"
     ],
     "specs": [
-      "asset-specs/pixel-heroes.json",
-      "asset-specs/hero-sprites.json"
+      "asset-specs/pixel-heroes.json"
     ]
   }
 }

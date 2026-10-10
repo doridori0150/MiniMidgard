@@ -1,0 +1,68 @@
+{
+  "mode": "built-in image_gen",
+  "sequence": [
+    {
+      "id": "walk_5_down_near",
+      "prompt": "Use case: precise-object-edit. Edit image 1 only, a single approved pixel-art assassin walk DOWN NEAR frame. Image 2 is approved idle style/proportion reference only. Preserve the EXACT canvas 1024x960 and character placement of image 1, huge transparent margins included. Pixel grid is 4x4 per game pixel, game canvas256x240. Change LEGS ONLY, below hips game y194. Keep head, face, crown game y132, torso, arms, katar weapon and navy cloth tails exactly unchanged. Move planted near/front boot slightly LEFT/backward from game x137.5 to x134, sole touching game row223 (image row892-895). Bend planted knee a little more to suit that foot, retaining compressed down pose and leather boot details. Other foot remains lifted behind, progressing toward passing. Keep original thin legs, chibi 96px scale, brown violet leather and small brass straps, hand-placed pixel clusters, no smooth anti-aliasing, no text, no shadow. Render exactly one frame with transparent background. 사용자 말: \"앞쪽 지지발과 뒷쪽 발이 흔들려서 캐릭터 전체가 흔들려 보여.\" Rules: match proportions/style/overall size; check references; plan and draw one frame at a time checking previous. This follows approved near contact whose planted foot x142.5: next is134, then125, then117, then fixed rear contact108.5.",
+      "index": 1,
+      "status": "accepted",
+      "source": "walk_5_down_near/sources/generated.png",
+      "idleReattached": true,
+      "previousChecked": "walk_1_contact_near"
+    },
+    {
+      "id": "walk_2_pass_near",
+      "prompt": "Use case: precise-object-edit. Image1 is the edit target: approved 96px assassin walking PASSING NEAR. Image2 is immutable idle STYLE reference. Redraw ONLY the two legs below hips. Preserve EXACT head, torso, arms, katar, cloth tails, composition, canvas, proportions and small pixel-art scale. Planted near leg goes from hip down beneath the body to a flat boot centered at game x125 on ground row223, about 7px LEFT/back from original x132.5. Adjust knee naturally, do not just bend ankle. Far swinging knee is lifted and passing FORWARD on screen right; its foot is airborne forward of supporting ankle. Crown stays y131. Image1 canvas1024x960 represents256x240 with 4x4 pixels. Sharp 1 game pixel outline, brown-violet leather slim legs, brass boot straps, no new costume. Keep the huge transparent margins and original character placement. No text, no backdrop. This follows down frame planted x134 with rear foot lifting and precedes up frame planted x117 with swinging foot extended forward. Match proportion/style/size, check references, draw this one frame after checking previous.",
+      "index": 2,
+      "status": "accepted",
+      "source": "walk_2_pass_near/sources/generated.png",
+      "idleReattached": true,
+      "previousChecked": "walk_5_down_near"
+    },
+    {
+      "id": "walk_6_up_near",
+      "prompt": "Use case precise-object-edit. Image1 edit target: approved assassin UP NEAR walk frame. Image2 immutable idle style/proportions reference. Change ONLY legs below hips, keep all head/crown y128/face/torso/arms/weapon/cloth tails pixel-identical. Repose the planted NEAR leg significantly backward LEFT: toes touching ground game row223 centered x117 instead of x127.5. Hip stays fixed around x125,y192, supporting thigh angles BACK LEFT, knee around x116,y205, ankle lifted near x112,y217, toes point down/right to x117,y223. Heel CLEARLY off ground, narrow toe contact. Other far leg swings forward RIGHT, knee lifted, boot ahead around x143,y213, airborne, preparing next contact centered139. Do not move upper body. Slim brown-violet leather legs, brass boot straps, crisp pixel clusters, no smoothing. Maintain full original1024x960 canvas256x240 game grid, 4x4pixel blocks and enormous transparent margins. Single frame. Previous passing has planted x125 and next fixed contact same foot at108.5, so x117 gives even backward progression. Match proportions/style/size; check references; draw this one frame after checking previous.",
+      "index": 3,
+      "status": "accepted",
+      "source": "walk_6_up_near/sources/generated.png",
+      "idleReattached": true,
+      "previousChecked": "walk_2_pass_near"
+    },
+    {
+      "id": "walk_7_down_far",
+      "prompt": "Use case precise-object-edit. Image1 approved DOWN FAR walk frame is edit target; image2 approved idle is style and proportions reference only. Redraw ONLY legs below hips. Keep exact original crown y132, head face torso arms katar and cloth tails, all upper body placement. Far leg on right is planted with BENT compressed knee, flat sole center game x132 on row223; move sole slightly LEFT from original134.5. Hip stays fixed; pronounced natural down knee bend, not straight contact pose. Near back leg has lifted heel and is swinging from behind, its boot airborne near x113 y219, preparing to pass next. Preserve thin brown-violet leather limbs, brass boot straps, original pixel-art cluster sizes, anatomy and chibi96px proportions. Single frame, full original1024x960 transparent canvas (game256x240; 4x4 blocks), huge transparent margins, no text no shadow. Prior fixed contact far foot139, this132, then125 and118, then fixed far rear foot112.5. Match proportions/style/size, check references, draw one frame at a time checking previous.",
+      "index": 4,
+      "status": "accepted",
+      "source": "walk_7_down_far/sources/generated.png",
+      "idleReattached": true,
+      "previousChecked": "walk_3_contact_far"
+    },
+    {
+      "id": "walk_4_pass_far",
+      "prompt": "Use case precise-object-edit. Image1 is target approved PASSING FAR walk sprite, image2 immutable idle style reference. Change LEGS ONLY below hips. Preserve head crown131, face, hair, torso arms katar and cloth tails exactly as image1. Far supporting leg passes under body with boot planted centered game x125 on ground row223, move LEFT from129. Natural hip-knee-ankle alignment; far leg a little darker than near leg. Near swinging leg on screen right has lifted knee passing the support and airborne boot forward around game x141,y213. Keep slim leather legs and brass straps, sharp game pixel clusters and same size/chibi proportions, no repaint elsewhere. Single frame on full1024x960 transparent canvas representing256x240 game with4x4pixel blocks. Keep huge margins. Previous down far132 -> this125 -> up118 -> rear contact112.5. Match proportion/style/size; check references; draw one frame checking previous.",
+      "index": 5,
+      "status": "accepted",
+      "source": "walk_4_pass_far/sources/generated.png",
+      "idleReattached": true,
+      "previousChecked": "walk_7_down_far"
+    },
+    {
+      "id": "walk_8_up_far",
+      "prompt": "Use case precise-object-edit. Image1 is approved UP FAR walk frame target; image2 approved idle defines immutable style/proportions. Edit ONLY legs below hips. Keep all above hips EXACTLY unchanged: crown game y128, head face hair torso arms katar two navy cloth tails. Far support leg angles backward LEFT with heel lifted: boot TOE contact centered game x118 at ground row223 instead of original124.5. Hip fixed around126,192; knee approx119,204; raised heel around113,217; toes angle down/right to118,223. Only narrow toe tip planted, not flat sole. Near swinging leg advances forward screen right, knee lifted with airborne boot around game x146,y212, preparing fixed next near contact142.5. Slim leather brown violet legs, muted brass straps, hard pixel outlines1px, same sprite scale. Preserve full1024x960 transparent canvas,256x240 game coordinates4x4pixels, huge margins. Single frame no text no background no shadow. Prior passing support125 -> this118 -> next fixed rear far112.5. Match proportions/style/size; check references; draw this frame after previous, connect last to first.",
+      "status": "rejected",
+      "source": "rejected/walk_8_up_far_duplicate_weapon/sources/generated.png",
+      "index": 6,
+      "idleReattached": true,
+      "previousChecked": "walk_4_pass_far"
+    },
+    {
+      "id": "walk_8_up_far",
+      "prompt": "Edit IMAGE 1, not image2. Image2 is ONLY STYLE reference. Return the SAME single pixel-art assassin frame, SAME framing, transparent background. Make ONE SMALL correction: move the REAR SUPPORTING BOOT and its knee backward toward screen LEFT so the toe touches ground 6 game pixels farther left. Heel remains lifted, toe pushes off. Keep front lifted leg swinging forward. EVERYTHING ELSE must be unchanged. In particular the character holds ONE silver katar IN THE HAND ON SCREEN LEFT BEHIND THE HIP, POINTING DOWN-LEFT, exactly like image1. NO blade in front of hips. Exactly TWO navy cloth tails sweep LEFT, do not add any extra dangling strip. Do not redraw torso/arms/hair/face. Do not rotate torso. Do not add objects. Preserve96px chibi proportions and slim brown violet leather legs, original crisp pixel-art4x4blocks. Original1024x960 canvas256x240 game, crown128 sole223. Rear toe target game x118. One frame, substantial empty transparent margins remain. Rule1 match proportions/style/size; rule2 check references; rule3 plan then draw one frame checking previous passing support125 and next contact rear112.5.",
+      "index": 7,
+      "status": "accepted",
+      "source": "walk_8_up_far/sources/generated.png",
+      "idleReattached": true,
+      "previousChecked": "walk_4_pass_far"
+    }
+  ]
+}

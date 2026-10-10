@@ -1,0 +1,57 @@
+{
+  "role": "recovery",
+  "canvas": [
+    128,
+    120
+  ],
+  "origin": [
+    64,
+    112
+  ],
+  "facing": "right_3_4",
+  "head": {
+    "point": [
+      65,
+      79
+    ],
+    "layerOffset": [
+      0,
+      0
+    ]
+  },
+  "weapon": {
+    "hand": "near",
+    "gripPoint": [
+      64,
+      95
+    ],
+    "tipPoint": [
+      76,
+      102
+    ],
+    "angleDegrees": 30.26,
+    "z": "front",
+    "smear": false
+  },
+  "layerOrder": [
+    "hair_back",
+    "body",
+    "hair_front",
+    "katar",
+    "grip"
+  ],
+  "source": "../../sources/04_recovery.png",
+  "normalization": {
+    "maskCoordinateSystem": [
+      128,
+      120
+    ],
+    "resampling": "single-pass nearest from generated original",
+    "uniformScale": 1,
+    "sourceFootCenter": 65,
+    "sourceFootBaseline": 111,
+    "alphaThreshold": 128,
+    "palette": "approved Assassin idle palette; hair restricted to four SSOT key colors"
+  },
+  "notes": "레이어는 현재 자세에서 보이는 픽셀을 분리했다. 가려진 해부학 면의 재구성은 포함하지 않는다. head.point는 얼굴 중심 앵커이며, 전체 캔버스 레이어를 붙일 때는 layerOffset [0,0]을 사용한다."
+}

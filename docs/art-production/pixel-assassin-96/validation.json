@@ -1,0 +1,84 @@
+{
+  "checkedAt": "2026-10-10T13:45:30.856Z",
+  "status": "passed",
+  "candidates": {
+    "idle_a": {
+      "canvas": [
+        256,
+        240
+      ],
+      "height": 96,
+      "headWidth": 53,
+      "headRegionHeight": 47,
+      "backFootRearmostX": 105,
+      "lastFootRow": 223,
+      "layerPixels": {
+        "hair_back": 167,
+        "body": 2018,
+        "hair_front": 1126,
+        "katar": 70,
+        "grip": 41
+      },
+      "hairColors": [
+        "73,52,47",
+        "250,240,215",
+        "180,155,145",
+        "225,205,184"
+      ],
+      "alpha": "0 or 255",
+      "recomposition": "byte-identical",
+      "enlargement": "nearest exact 4x",
+      "comparison": "exact prescribed pairs at 1x and 2x",
+      "referenceSilhouetteIoU": 0.8199,
+      "nonUniform2x2Blocks": 732,
+      "nonempty2x2Blocks": 914,
+      "eyePixels": {
+        "amber": 15,
+        "highlight": 63
+      },
+      "sourceSha256": "b1942026203806737c79c48de308f2a842c78fa3fea74755414a42df471f6b19",
+      "compositeSha256": "8456be97b9876f1b911b7a8c2eb9fc2f5f1c9b8bb78ce762200811d9bbdeb925"
+    },
+    "idle_b": {
+      "canvas": [
+        256,
+        240
+      ],
+      "height": 96,
+      "headWidth": 55,
+      "headRegionHeight": 47,
+      "backFootRearmostX": 105,
+      "lastFootRow": 223,
+      "layerPixels": {
+        "hair_back": 160,
+        "body": 2007,
+        "hair_front": 1182,
+        "katar": 77,
+        "grip": 32
+      },
+      "hairColors": [
+        "73,52,47",
+        "225,205,184",
+        "180,155,145",
+        "250,240,215"
+      ],
+      "alpha": "0 or 255",
+      "recomposition": "byte-identical",
+      "enlargement": "nearest exact 4x",
+      "comparison": "exact prescribed pairs at 1x and 2x",
+      "referenceSilhouetteIoU": 0.7896,
+      "nonUniform2x2Blocks": 759,
+      "nonempty2x2Blocks": 938,
+      "eyePixels": {
+        "amber": 14,
+        "highlight": 46
+      },
+      "sourceSha256": "189afe68f5c3c8769185809bcd229151ceb835cc4139084ccc75d8e33a685cc7",
+      "compositeSha256": "48ad5893fe95ffa5b963111c726a2463e11de003f7e431bb6e42600672d9dbcf"
+    }
+  },
+  "scope": {
+    "protectedExistingFiles": 12895,
+    "changedOutsideTarget": []
+  }
+}

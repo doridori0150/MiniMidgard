@@ -1,0 +1,100 @@
+{
+  "schema": "assassin-idle-96-candidate@1",
+  "candidate": "idle_b → idle (사용자 선택 2026-10-10 \"B가 훨씬 좋네.\")",
+  "approved": true,
+  "role": "idle_inhale",
+  "canvas": [
+    256,
+    240
+  ],
+  "origin": [
+    128,
+    224
+  ],
+  "facing": "right_3_4",
+  "head": {
+    "point": [
+      133,
+      160
+    ],
+    "layerOffset": [
+      0,
+      0
+    ],
+    "bounds": [
+      99,
+      128,
+      153,
+      174
+    ],
+    "width": 55
+  },
+  "weapon": {
+    "hand": "near",
+    "gripPoint": [
+      127,
+      193
+    ],
+    "tipPoint": [
+      140,
+      201
+    ],
+    "angleDegrees": 31.61,
+    "angleConvention": "screen-right 0 degrees; clockwise positive",
+    "z": "front"
+  },
+  "backFoot": {
+    "rows": [
+      220,
+      223
+    ],
+    "rearmostX": 105
+  },
+  "bounds": [
+    94,
+    128,
+    153,
+    223
+  ],
+  "height": 96,
+  "layerOrder": [
+    "hair_back",
+    "body",
+    "hair_front",
+    "katar",
+    "grip"
+  ],
+  "source": "sources/generated.png",
+  "normalization": {
+    "sourceCanvas": [
+      1295,
+      1214
+    ],
+    "sourceBounds": [
+      464,
+      584,
+      812,
+      1144
+    ],
+    "uniformScale": 0.1711229946524064,
+    "sampling": "nearest, one pass",
+    "alphaThreshold": 128,
+    "offset": [
+      94,
+      128
+    ],
+    "footAnchor": [
+      128,
+      224
+    ],
+    "bounds": [
+      94,
+      128,
+      153,
+      223
+    ],
+    "palette": "approved Assassin palette; hair uses exactly four specified key colors",
+    "colorMappedPixels": 3456
+  },
+  "notes": "보이는 픽셀을 5개 레이어로 분리했다. 가려진 신체/머리/무기 면을 새로 복원한 교체용 리그는 아니다. 전체 레이어 오프셋 (0,0)."
+}

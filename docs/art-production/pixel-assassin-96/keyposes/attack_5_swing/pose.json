@@ -1,0 +1,89 @@
+{
+  "schema": "assassin96-keypose@1",
+  "role": "swing",
+  "canvas": [
+    256,
+    240
+  ],
+  "origin": [
+    128,
+    224
+  ],
+  "facing": "right_3_4",
+  "head": {
+    "point": [
+      176,
+      172
+    ],
+    "crownY": 140,
+    "bounds": [
+      142,
+      140,
+      196,
+      183
+    ],
+    "width": 55
+  },
+  "weapon": {
+    "hand": "near",
+    "gripPoint": [
+      183,
+      195
+    ],
+    "tipPoint": [
+      205,
+      203
+    ],
+    "angleDegrees": 19.98,
+    "angleConvention": "screen right 0, clockwise positive",
+    "smear": true
+  },
+  "backFoot": {
+    "rows": [
+      220,
+      223
+    ],
+    "rearmostX": 105
+  },
+  "feet": {
+    "row": 223,
+    "opaqueRanges": [
+      [
+        105,
+        114
+      ],
+      [
+        168,
+        172
+      ],
+      [
+        175,
+        184
+      ]
+    ],
+    "near": [
+      168,
+      184
+    ],
+    "far": [
+      105,
+      114
+    ],
+    "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+  },
+  "bounds": [
+    96,
+    140,
+    231,
+    223
+  ],
+  "layerOrder": [
+    "hair_back",
+    "body",
+    "hair_front",
+    "katar",
+    "grip"
+  ],
+  "normalization": "single nearest sample; binary alpha; approved palette; head width normalized55; attack rear boot pixels locked to SSOT; visible pixel layers only",
+  "notes": "가려진 면을 복원한 리그가 아니라 보이는 픽셀의 레이어 분리다."
+}

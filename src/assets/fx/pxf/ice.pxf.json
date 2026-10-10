@@ -1,0 +1,356 @@
+{
+  "format": "pxf.graph@1",
+  "name": "MM 얼음",
+  "settings": {
+    "size": 64,
+    "frames": 24,
+    "fps": 24,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "s1",
+      "type": "Spike",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "x0": 0.5,
+        "y0": 0.76,
+        "x1": 0.5,
+        "y1": 0.3,
+        "width": 13,
+        "grow": {
+          "k": [
+            [
+              0,
+              0.25
+            ],
+            [
+              3,
+              1,
+              "out"
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        "facet": 0.3,
+        "ridge": 0.2,
+        "intensity": 0.96
+      }
+    },
+    {
+      "id": "s2",
+      "type": "Spike",
+      "x": 40,
+      "y": 160,
+      "params": {
+        "x0": 0.4,
+        "y0": 0.77,
+        "x1": 0.28,
+        "y1": 0.49,
+        "width": 10,
+        "grow": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              4,
+              1,
+              "out"
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        "facet": 0.3,
+        "ridge": 0.2,
+        "intensity": 0.96
+      }
+    },
+    {
+      "id": "s3",
+      "type": "Spike",
+      "x": 40,
+      "y": 280,
+      "params": {
+        "x0": 0.6,
+        "y0": 0.77,
+        "x1": 0.73,
+        "y1": 0.44,
+        "width": 10,
+        "grow": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              5,
+              1,
+              "out"
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        "facet": -0.3,
+        "ridge": 0.2,
+        "intensity": 0.96
+      }
+    },
+    {
+      "id": "ring",
+      "type": "Shape",
+      "x": 40,
+      "y": 400,
+      "params": {
+        "shape": "ring",
+        "y": 0.76,
+        "size": {
+          "a": 4,
+          "b": 24,
+          "e": "out"
+        },
+        "size2": {
+          "a": 0.3,
+          "b": 0.045,
+          "e": "out"
+        },
+        "aspect": 0.4,
+        "falloff": 0.35,
+        "intensity": {
+          "a": 0.85,
+          "b": 0,
+          "e": "in",
+          "t0": 0.15,
+          "t1": 0.8
+        }
+      }
+    },
+    {
+      "id": "sp",
+      "type": "Particles",
+      "x": 40,
+      "y": 520,
+      "params": {
+        "count": 14,
+        "seed": 5,
+        "start": 0.5,
+        "life": 0.35,
+        "lifeVar": 0.35,
+        "area": "point",
+        "y": 0.52,
+        "dirMode": "fixed",
+        "angle": -90,
+        "spread": 110,
+        "speed": 1.6,
+        "speedVar": 0.55,
+        "gravity": 0.18,
+        "drag": 0.12,
+        "sizeA": 2.5,
+        "sizeB": 0.5,
+        "pshape": "diamond"
+      }
+    },
+    {
+      "id": "m1",
+      "type": "Blend",
+      "x": 760,
+      "y": 640,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "m2",
+      "type": "Blend",
+      "x": 760,
+      "y": 760,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "m3",
+      "type": "Blend",
+      "x": 760,
+      "y": 880,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "m",
+      "type": "Blend",
+      "x": 760,
+      "y": 1000,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "pal",
+      "type": "Palette",
+      "x": 990,
+      "y": 40,
+      "params": {
+        "colors": [
+          "#303030",
+          "#606060",
+          "#909090",
+          "#c0c0c0",
+          "#f0f0f0"
+        ],
+        "cutoff": 0.13,
+        "mode": "bands",
+        "key": "alpha"
+      }
+    },
+    {
+      "id": "ol",
+      "type": "Outline",
+      "x": 1000,
+      "y": 40,
+      "params": {
+        "color": "#303030",
+        "threshold": 0.5,
+        "width": 1
+      }
+    },
+    {
+      "id": "cut",
+      "type": "Tint",
+      "x": 1010,
+      "y": 40,
+      "params": {
+        "amount": 0,
+        "opacity": {
+          "k": [
+            [
+              0,
+              1
+            ],
+            [
+              22,
+              1
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 1020,
+      "y": 40,
+      "params": {
+        "alpha": "hard",
+        "threshold": 0.5
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "s1",
+      "t": "m1",
+      "p": 0
+    },
+    {
+      "f": "s2",
+      "t": "m1",
+      "p": 1
+    },
+    {
+      "f": "m1",
+      "t": "m2",
+      "p": 0
+    },
+    {
+      "f": "s3",
+      "t": "m2",
+      "p": 1
+    },
+    {
+      "f": "m2",
+      "t": "m3",
+      "p": 0
+    },
+    {
+      "f": "ring",
+      "t": "m3",
+      "p": 1
+    },
+    {
+      "f": "m3",
+      "t": "m",
+      "p": 0
+    },
+    {
+      "f": "sp",
+      "t": "m",
+      "p": 1
+    },
+    {
+      "f": "m",
+      "t": "pal",
+      "p": 0
+    },
+    {
+      "f": "pal",
+      "t": "ol",
+      "p": 0
+    },
+    {
+      "f": "ol",
+      "t": "cut",
+      "p": 0
+    },
+    {
+      "f": "cut",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 96,
+    "blend": "normal",
+    "impactFrame": 2
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "format": "pxf.graph@1",
+  "name": "MM 찌르기",
+  "settings": {
+    "size": 64,
+    "frames": 8,
+    "fps": 30,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "blade",
+      "type": "Shape",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "shape": "diamond",
+        "x": {
+          "a": 0.5,
+          "b": 0.66,
+          "e": "out",
+          "t0": 0,
+          "t1": 0.3
+        },
+        "size": {
+          "k": [
+            [
+              0,
+              7
+            ],
+            [
+              2,
+              18,
+              "out"
+            ],
+            [
+              7,
+              3
+            ]
+          ]
+        },
+        "aspect": 0.16,
+        "falloff": 0.65,
+        "intensity": {
+          "k": [
+            [
+              0,
+              0.75
+            ],
+            [
+              1,
+              1,
+              "out"
+            ],
+            [
+              7,
+              0.35
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "glint",
+      "type": "Shape",
+      "x": 40,
+      "y": 160,
+      "params": {
+        "shape": "star",
+        "points": 4,
+        "x": 0.74,
+        "size": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              6,
+              "out"
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              4,
+              0
+            ]
+          ]
+        },
+        "size2": 0.2
+      }
+    },
+    {
+      "id": "sp",
+      "type": "Particles",
+      "x": 40,
+      "y": 280,
+      "params": {
+        "count": 8,
+        "seed": 57,
+        "life": 0.7,
+        "lifeVar": 0.3,
+        "area": "point",
+        "x": 0.55,
+        "dirMode": "fixed",
+        "angle": 180,
+        "spread": 30,
+        "speed": 0.9,
+        "speedVar": 0.5,
+        "drag": 0.12,
+        "sizeA": 1.5,
+        "sizeB": 0.5,
+        "pshape": "streak",
+        "stretch": 0.8
+      }
+    },
+    {
+      "id": "m1",
+      "type": "Blend",
+      "x": 760,
+      "y": 400,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "m",
+      "type": "Blend",
+      "x": 760,
+      "y": 520,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "pal",
+      "type": "Palette",
+      "x": 950,
+      "y": 40,
+      "params": {
+        "colors": [
+          "#303030",
+          "#606060",
+          "#909090",
+          "#c0c0c0",
+          "#f0f0f0"
+        ],
+        "cutoff": 0.13,
+        "mode": "bands",
+        "key": "alpha"
+      }
+    },
+    {
+      "id": "ol",
+      "type": "Outline",
+      "x": 960,
+      "y": 40,
+      "params": {
+        "color": "#303030",
+        "threshold": 0.5,
+        "width": 1
+      }
+    },
+    {
+      "id": "cut",
+      "type": "Tint",
+      "x": 970,
+      "y": 40,
+      "params": {
+        "amount": 0,
+        "opacity": {
+          "k": [
+            [
+              0,
+              1
+            ],
+            [
+              6,
+              1
+            ],
+            [
+              7,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 980,
+      "y": 40,
+      "params": {
+        "alpha": "hard",
+        "threshold": 0.5
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "blade",
+      "t": "m1",
+      "p": 0
+    },
+    {
+      "f": "glint",
+      "t": "m1",
+      "p": 1
+    },
+    {
+      "f": "m1",
+      "t": "m",
+      "p": 0
+    },
+    {
+      "f": "sp",
+      "t": "m",
+      "p": 1
+    },
+    {
+      "f": "m",
+      "t": "pal",
+      "p": 0
+    },
+    {
+      "f": "pal",
+      "t": "ol",
+      "p": 0
+    },
+    {
+      "f": "ol",
+      "t": "cut",
+      "p": 0
+    },
+    {
+      "f": "cut",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 140,
+    "blend": "normal",
+    "impactFrame": 1
+  }
+}

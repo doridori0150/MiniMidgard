@@ -1,0 +1,74 @@
+{
+  "_": "어새신 공격 조립표(assembly@1). 공방 검토 세션 초안(asset-kit specs/examples/assembly-assassin-attack.example.json)을 사용자 판정(2026-10-10: '휘두르는 걸로 보이지만 타격감이 좀 떨어져 보여', '앞쪽 지지발과 뒷쪽 발이 흔들려서 캐릭터 전체가 흔들려 보여')에 맞춰 다시 잡음. 시간은 event 재생(그림 시간 ÷ 공속 배율) 기준. 접촉 앞 170ms, 리듬은 RO 어새신 공격 분해(docs/art/motion-templates/assassin-attack.json: 준비 → 웅크림 → 타격 → 잔상 → 회수 → 멈춤)의 순서와 비율. dx는 뒷발 고정: 대기 첫 장의 뒷발(몸 그림 맨 아래 4줄의 가장 뒤 픽셀) x 52에 포즈마다 맞춤(준비 48 → +4, 정점 46 → +6, 접촉 49 → +3, 회수 50 → +2). 몸 전체를 미는 돌진 dx는 넣지 않음(디딘 뒷발이 미끄러짐): 내딛기는 포즈 그림의 앞발이 함. dy는 0(땅 위 포즈를 내리면 발이 땅에 묻힘).",
+  "format": "assembly@1",
+  "poses": "assassin_male_p2#keyposes_attack",
+  "hitFrame": 3,
+  "anchor": {
+    "backFootX": 52,
+    "from": "idle_0",
+    "rows": [
+      108,
+      111
+    ]
+  },
+  "frames": [
+    {
+      "pose": 0,
+      "ms": 60,
+      "dx": 4,
+      "dy": 0,
+      "note": "준비 — 카타르 뒤로 당김"
+    },
+    {
+      "pose": 1,
+      "ms": 70,
+      "dx": 6,
+      "dy": 0,
+      "note": "정점 — 가장 낮게 웅크림"
+    },
+    {
+      "pose": 4,
+      "ms": 40,
+      "dx": 0,
+      "dy": 0,
+      "note": "휘두름 — 카타르 궤적 중간, 넓은 잔상(무기 층). 뒷발이 이미 x 52라 dx 0 (T4 납품 poses/5_swing)"
+    },
+    {
+      "pose": 2,
+      "ms": 100,
+      "dx": 3,
+      "dy": 0,
+      "note": "접촉 — 카타르 끝 가장 앞. hitFrame"
+    },
+    {
+      "pose": 2,
+      "ms": 60,
+      "dx": 3,
+      "dy": 0,
+      "note": "팔로스루 — 접촉 자세 유지(히트스톱 뒤)"
+    },
+    {
+      "pose": 3,
+      "ms": 100,
+      "dx": 2,
+      "dy": 0,
+      "note": "회수"
+    },
+    {
+      "pose": 3,
+      "ms": 150,
+      "dx": 2,
+      "dy": 0,
+      "note": "멈춤 — 타격 뒤 길게(RO 멈춤). 뒷발이 대기와 같은 자리라 대기로 그대로 이어짐"
+    }
+  ],
+  "hit": {
+    "style": "slash",
+    "fx": [
+      "slash",
+      "impact"
+    ],
+    "hitstopMs": 70,
+    "knockPx": 3
+  }
+}

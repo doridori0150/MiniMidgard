@@ -1,0 +1,252 @@
+{
+  "format": "pxf.graph@1",
+  "name": "MM 빛기둥",
+  "settings": {
+    "size": 64,
+    "frames": 20,
+    "fps": 24,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "core",
+      "type": "Shape",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "shape": "square",
+        "y": 0.47,
+        "size": {
+          "k": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3,
+              "out3"
+            ],
+            [
+              13,
+              3
+            ],
+            [
+              19,
+              1
+            ]
+          ]
+        },
+        "aspect": 7,
+        "falloff": 0.9,
+        "intensity": {
+          "k": [
+            [
+              0,
+              1
+            ],
+            [
+              12,
+              1
+            ],
+            [
+              19,
+              0.2,
+              "in"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "rays",
+      "type": "Particles",
+      "x": 40,
+      "y": 160,
+      "params": {
+        "count": 18,
+        "seed": 61,
+        "emit": "stream",
+        "span": 0.75,
+        "life": 0.3,
+        "lifeVar": 0.3,
+        "area": "box",
+        "y": 0.62,
+        "aw": 12,
+        "ah": 20,
+        "dirMode": "fixed",
+        "angle": -90,
+        "spread": 0,
+        "speed": 1.8,
+        "speedVar": 0.4,
+        "sizeA": 1,
+        "sizeB": 0.5,
+        "pshape": "streak",
+        "stretch": 4,
+        "brightVar": 0.4
+      }
+    },
+    {
+      "id": "ring",
+      "type": "Shape",
+      "x": 40,
+      "y": 280,
+      "params": {
+        "shape": "ring",
+        "y": 0.77,
+        "size": {
+          "a": 4,
+          "b": 20,
+          "e": "out"
+        },
+        "size2": {
+          "a": 0.3,
+          "b": 0.06,
+          "e": "out"
+        },
+        "aspect": 0.35,
+        "falloff": 0.35,
+        "intensity": {
+          "a": 0.9,
+          "b": 0.1,
+          "e": "in",
+          "t0": 0.2,
+          "t1": 1
+        }
+      }
+    },
+    {
+      "id": "m1",
+      "type": "Blend",
+      "x": 760,
+      "y": 400,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "m",
+      "type": "Blend",
+      "x": 760,
+      "y": 520,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "pal",
+      "type": "Palette",
+      "x": 950,
+      "y": 40,
+      "params": {
+        "colors": [
+          "#303030",
+          "#606060",
+          "#909090",
+          "#c0c0c0",
+          "#f0f0f0"
+        ],
+        "cutoff": 0.13,
+        "mode": "bands",
+        "key": "alpha"
+      }
+    },
+    {
+      "id": "ol",
+      "type": "Outline",
+      "x": 960,
+      "y": 40,
+      "params": {
+        "color": "#303030",
+        "threshold": 0.5,
+        "width": 1
+      }
+    },
+    {
+      "id": "cut",
+      "type": "Tint",
+      "x": 970,
+      "y": 40,
+      "params": {
+        "amount": 0,
+        "opacity": {
+          "k": [
+            [
+              0,
+              1
+            ],
+            [
+              18,
+              1
+            ],
+            [
+              19,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 980,
+      "y": 40,
+      "params": {
+        "alpha": "hard",
+        "threshold": 0.5
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "core",
+      "t": "m1",
+      "p": 0
+    },
+    {
+      "f": "rays",
+      "t": "m1",
+      "p": 1
+    },
+    {
+      "f": "m1",
+      "t": "m",
+      "p": 0
+    },
+    {
+      "f": "ring",
+      "t": "m",
+      "p": 1
+    },
+    {
+      "f": "m",
+      "t": "pal",
+      "p": 0
+    },
+    {
+      "f": "pal",
+      "t": "ol",
+      "p": 0
+    },
+    {
+      "f": "ol",
+      "t": "cut",
+      "p": 0
+    },
+    {
+      "f": "cut",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 110,
+    "blend": "normal",
+    "impactFrame": 0
+  }
+}

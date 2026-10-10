@@ -1,0 +1,182 @@
+{
+  "status": "passed",
+  "scope": "납품 파일 규격·좌표·팔레트·합성 검증. 외형 승인이나 애니메이션 연결성 합격을 의미하지 않는다.",
+  "poses": [
+    {
+      "role": "wind_up",
+      "boundsInclusive": [
+        38,
+        67,
+        82,
+        111
+      ],
+      "height": 45,
+      "hairWidth": 28,
+      "hairHeight": 22,
+      "opaquePixels": {
+        "hair_back": 35,
+        "body": 677,
+        "hair_front": 285,
+        "katar": 50,
+        "grip": 12
+      },
+      "grip": [
+        46,
+        89
+      ],
+      "tip": [
+        38,
+        90
+      ],
+      "angleDegrees": 172.87,
+      "smearOnWeaponLayer": false
+    },
+    {
+      "role": "apex",
+      "boundsInclusive": [
+        44,
+        71,
+        85,
+        111
+      ],
+      "height": 41,
+      "hairWidth": 27,
+      "hairHeight": 24,
+      "opaquePixels": {
+        "hair_back": 25,
+        "body": 590,
+        "hair_front": 290,
+        "katar": 44,
+        "grip": 4
+      },
+      "grip": [
+        55,
+        95
+      ],
+      "tip": [
+        44,
+        95
+      ],
+      "angleDegrees": 180,
+      "smearOnWeaponLayer": false
+    },
+    {
+      "role": "contact",
+      "boundsInclusive": [
+        48,
+        69,
+        97,
+        111
+      ],
+      "height": 43,
+      "hairWidth": 26,
+      "hairHeight": 23,
+      "opaquePixels": {
+        "hair_back": 23,
+        "body": 623,
+        "hair_front": 235,
+        "katar": 85,
+        "grip": 4
+      },
+      "grip": [
+        86,
+        95
+      ],
+      "tip": [
+        97,
+        96
+      ],
+      "angleDegrees": 5.19,
+      "smearOnWeaponLayer": true
+    },
+    {
+      "role": "recovery",
+      "boundsInclusive": [
+        48,
+        67,
+        77,
+        111
+      ],
+      "height": 45,
+      "hairWidth": 26,
+      "hairHeight": 24,
+      "opaquePixels": {
+        "hair_back": 32,
+        "body": 517,
+        "hair_front": 227,
+        "katar": 63,
+        "grip": 9
+      },
+      "grip": [
+        64,
+        95
+      ],
+      "tip": [
+        76,
+        102
+      ],
+      "angleDegrees": 30.26,
+      "smearOnWeaponLayer": false
+    }
+  ],
+  "checks": [
+    "요청 원문·사용자 말·그림 규칙 원문 보존",
+    "4개 포즈, 각 5개 비어 있지 않은 RGBA 레이어",
+    "128×120 및 발 기준 y=112",
+    "알파 0/255, 캔버스 여백",
+    "승인 팔레트 및 머리 4색",
+    "머리 폭 30px 이하, 축소 여부 수치 기록",
+    "그립·칼끝 실제 픽셀 및 각도",
+    "정점 최저 높이·접촉 최전방 칼끝·회수 상승",
+    "게임 레이어 순서 재합성 일치",
+    "512×120 시트 및 최근접 4배 일치",
+    "승인 원본을 직접 읽은 비교 시트 일치",
+    "첨부 네 승인 PNG 및 외부 RO 시트 원본이 납품 폴더에 복사되지 않음"
+  ],
+  "sha256": {
+    "keyposes.png": "a5ab9e9591c028ffe7044853dbd43e33da57bbc18bfbb561c9b64c28b8d32269",
+    "keyposes_4x.png": "aa9cac3834957ea1ec7d3e0edadac904b9a46233958e5ad7f5d86aa6283f9c73",
+    "poses/1_wind_up/body.png": "b78f12d030112261207e7be5b30707d68544a883a08354449bf08bbbc41630d3",
+    "poses/1_wind_up/composite.png": "951596b79d0fec81781135ce712ca866d14249208e3efdf93b38a9ec4c931436",
+    "poses/1_wind_up/composite_4x.png": "c29cb8d77aa004c9b76d16186ce328adfc56209601593b4e387fa5a3add0f575",
+    "poses/1_wind_up/grip.png": "0a48835afea0bc9344079d869feb0b25bc31c7c902dd39bd66e1315415f39dc5",
+    "poses/1_wind_up/hair_back.png": "7677b0c5740616bde0308cd722244befda0077e0a0b4212fc42b6406b45c0ccd",
+    "poses/1_wind_up/hair_front.png": "b5e506fc43a171127228e794cca645515909447d2f07145fb07237306e833840",
+    "poses/1_wind_up/katar.png": "ba6016657eaf99da428539de803e332cbf28add5d10760cc4d1ad09cae07dfed",
+    "poses/2_apex/body.png": "56f3c0c206d32d959c01583cb444745468898176ce95602c5ac37288a73e3cfd",
+    "poses/2_apex/composite.png": "be622df6473157be724bf970fdf35d3d320b00029b0f57467a4aeba65949ee39",
+    "poses/2_apex/composite_4x.png": "17150a983c89f9e8f1731511338a65a92ea53bae529f151f30087e316c5c85bb",
+    "poses/2_apex/grip.png": "0e97ef037ed523113a56236f30a82d51f160d58a35a4814344bc89f7b294dcb1",
+    "poses/2_apex/hair_back.png": "a143bc444e71e3f1d8e5a416ad5a441c0743a693868ef527e5501a6767444d8e",
+    "poses/2_apex/hair_front.png": "a1324dca19640f2b5cf5550ad2fe8707fcc92c267a49781f6cf2083178e4951b",
+    "poses/2_apex/katar.png": "f93f2877f9919651ff81ca5be95d97b54ec2a0244202816e1a68422174f0d81a",
+    "poses/3_contact/body.png": "9306b6193aee05991b5e829cb91bb7a2d9354f16241245f9082faad0538d4965",
+    "poses/3_contact/composite.png": "14a9ac11c57e9104ee0c57b003ec93493d81806c8f6b999de39a1e121dcfc093",
+    "poses/3_contact/composite_4x.png": "ff9ca050888283c7593d049db06062898ee5aaf4d48085d1ebc6703cd012343a",
+    "poses/3_contact/grip.png": "da5950136abb6c7223c7ab9561e7b389a67acffbc9f7b6fe255a7d23aa39069e",
+    "poses/3_contact/hair_back.png": "a343f6b7e3af1c25abf3f418a30e70d864e8969645932058610ee3f6b74d4a1b",
+    "poses/3_contact/hair_front.png": "25620c98f8e27bb3216e44980bd3800c3af73b3b48ded042e63ed238baf912b5",
+    "poses/3_contact/katar.png": "8a452be33ef5b0dbf6e5730491c8323ce726a432da2792c8f28734e3b3d295bb",
+    "poses/4_recovery/body.png": "c9470506327198c51c47355783cd9335d1e012c5061b0958b2512726aaa58375",
+    "poses/4_recovery/composite.png": "8485c40164bf73e8a0b97c84951733f17416fdc488ae787b91682f360ccf3ca6",
+    "poses/4_recovery/composite_4x.png": "c34ebedd3a7030a358a8874e7eb081e7ba4e925572ec271f918f565699098092",
+    "poses/4_recovery/grip.png": "2c08a699b0adfcef9e9879ef50da643cb615d4d664e201d37eb292b89e4b78eb",
+    "poses/4_recovery/hair_back.png": "a687d3b7408f864647dec42b6a569f0eb8535a742911825360f7ac3745f6c409",
+    "poses/4_recovery/hair_front.png": "e4e19e903f957b86a5be4bc1a89b9450273d01593affd7cd054d6fea15899632",
+    "poses/4_recovery/katar.png": "98b9d16626b07caf081971a838fbb726561db7554c7fe3f77de7117ef34c1594",
+    "side_by_side.png": "cc62a186390bcea7c37f0ed68549a417a925fdb56aea07f377d0bfe396c37d79",
+    "sources/01_preview_4x.png": "f6ceaba1d860037a25bd1a5d0995a00f02a08f647ff94f1d0ed8527d554f5ebc",
+    "sources/01_wind_up.png": "b7396997d44916bf847ebedd0db705ac7b8a4eedf6b47d76dc858c09af473097",
+    "sources/01_wind_up_native.png": "24bdd01ca106b1f57d092a9619b5f4db63904b56d18b84b777687365f04297c1",
+    "sources/02_apex.png": "270521ce20e242df20b91ba697331a6458f7387d655ce5ea26f68ecb003dd307",
+    "sources/02_apex_draft.png": "713aadc26cc3b5e2ca1e92432fd1c66c3ee84f15b13bf394e8c4b1df2cc613cc",
+    "sources/02_apex_high_arm_draft.png": "b97f41fee1447d04c3ba70a9041da1f988395aa1a34dc2702b137afea71f8ea9",
+    "sources/02_apex_native.png": "3583a4cd8522b1f50039e42cd3814979446e34f346bd469d1b433412089598e5",
+    "sources/03_contact.png": "8d893012e1cb0504a2a71c18df476a6b19c8d7b72944751952f41832dffe3813",
+    "sources/03_contact_high_arm_draft.png": "92ef309d26ffd538f9d11b4e04c400e39bc58925a6254087012e40060ecad61d",
+    "sources/03_contact_native.png": "74cf87981b086243cfbea95aacd3c62635220eed3a9b678b7abe7748778e05c2",
+    "sources/04_recovery.png": "995da3aaf0b92faab433ae37bba4e393a665f71f35983636597ea3fd289950cb",
+    "sources/04_recovery_native.png": "bc7941a352420876654e0affdf812570cf63e6ec153e6713c92d88f291014e30",
+    "sources/review_4x.png": "43e403299adee948546026fee3d6c2966ce6f5de48fba6998783a5230aead783"
+  }
+}

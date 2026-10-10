@@ -1,0 +1,226 @@
+{
+  "format": "ro-breakdown@1",
+  "source": {
+    "job": 12,
+    "class": "assassin",
+    "gender": "male",
+    "weapon": 1,
+    "action": 15,
+    "direction": "SE",
+    "url": "https://assets.latam-tools.com.br/gif?job=12&gender=male&weapon=1&action=15",
+    "note": "라그나로크 공개 렌더러의 실제 클라이언트 스프라이트. 숫자만 기록하고 그림은 저장하지 않습니다."
+  },
+  "foot": [
+    22,
+    56
+  ],
+  "figureHeight0": 88,
+  "totalMs": 800,
+  "frameCount": 8,
+  "roles": [
+    "올라섬",
+    "접지",
+    "내려앉음",
+    "통과",
+    "올라섬",
+    "접지",
+    "내려앉음",
+    "통과"
+  ],
+  "rhythm": [
+    0.125,
+    0.125,
+    0.125,
+    0.125,
+    0.125,
+    0.125,
+    0.125,
+    0.125
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "ms": 100,
+      "box": [
+        -13,
+        -55,
+        19,
+        32
+      ],
+      "width": 33,
+      "height": 88,
+      "area": 2035,
+      "dx": 0,
+      "dy": 0,
+      "front": [
+        19,
+        -45
+      ],
+      "pale": 62,
+      "footSpread": 30,
+      "smear": false,
+      "role": "올라섬"
+    },
+    {
+      "index": 1,
+      "ms": 100,
+      "box": [
+        -15,
+        -54,
+        20,
+        35
+      ],
+      "width": 36,
+      "height": 90,
+      "area": 2169,
+      "dx": 0,
+      "dy": 1,
+      "front": [
+        20,
+        11
+      ],
+      "pale": 59,
+      "footSpread": 32,
+      "smear": false,
+      "role": "접지"
+    },
+    {
+      "index": 2,
+      "ms": 100,
+      "box": [
+        -18,
+        -52,
+        23,
+        36
+      ],
+      "width": 42,
+      "height": 89,
+      "area": 2182,
+      "dx": 0,
+      "dy": 3,
+      "front": [
+        23,
+        11
+      ],
+      "pale": 58,
+      "footSpread": 33,
+      "smear": false,
+      "role": "내려앉음"
+    },
+    {
+      "index": 3,
+      "ms": 100,
+      "box": [
+        -18,
+        -53,
+        24,
+        40
+      ],
+      "width": 43,
+      "height": 94,
+      "area": 2171,
+      "dx": 0,
+      "dy": 2,
+      "front": [
+        24,
+        13
+      ],
+      "pale": 63,
+      "footSpread": 31,
+      "smear": false,
+      "role": "통과"
+    },
+    {
+      "index": 4,
+      "ms": 100,
+      "box": [
+        -13,
+        -55,
+        19,
+        35
+      ],
+      "width": 33,
+      "height": 91,
+      "area": 2117,
+      "dx": 0,
+      "dy": 0,
+      "front": [
+        19,
+        -45
+      ],
+      "pale": 68,
+      "footSpread": 30,
+      "smear": false,
+      "role": "올라섬"
+    },
+    {
+      "index": 5,
+      "ms": 100,
+      "box": [
+        -16,
+        -54,
+        26,
+        32
+      ],
+      "width": 43,
+      "height": 87,
+      "area": 2235,
+      "dx": 2,
+      "dy": 1,
+      "front": [
+        26,
+        19
+      ],
+      "pale": 67,
+      "footSpread": 31,
+      "smear": false,
+      "role": "접지"
+    },
+    {
+      "index": 6,
+      "ms": 100,
+      "box": [
+        -21,
+        -52,
+        27,
+        32
+      ],
+      "width": 49,
+      "height": 85,
+      "area": 2142,
+      "dx": 0,
+      "dy": 3,
+      "front": [
+        27,
+        10
+      ],
+      "pale": 52,
+      "footSpread": 31,
+      "smear": false,
+      "role": "내려앉음"
+    },
+    {
+      "index": 7,
+      "ms": 100,
+      "box": [
+        -16,
+        -53,
+        21,
+        36
+      ],
+      "width": 38,
+      "height": 90,
+      "area": 2111,
+      "dx": 0,
+      "dy": 2,
+      "front": [
+        21,
+        13
+      ],
+      "pale": 56,
+      "footSpread": 27,
+      "smear": false,
+      "role": "통과"
+    }
+  ]
+}

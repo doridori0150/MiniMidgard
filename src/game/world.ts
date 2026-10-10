@@ -21,7 +21,7 @@ export type DmgKind = 'normal' | 'crit' | 'taken' | 'heal' | 'sp' | 'miss' | 'lu
 
 export type FxEvent =
   | { t: 'dmg'; uid: number; n: number; kind: DmgKind; i?: number }
-  | { t: 'hit'; uid: number; style: 'slash' | 'blunt' | 'pierce' | 'magic' | 'claw'; element: Element; crit?: boolean }
+  | { t: 'hit'; uid: number; from?: number; style: 'slash' | 'blunt' | 'pierce' | 'magic' | 'claw'; element: Element; crit?: boolean }
   | { t: 'skill'; fx: string; from: number; to?: number; x: number; y: number; lv: number; radius?: number; hits?: number; element?: Element }
   /** a skill released (not a free repeat): its presentation timeline starts here; events are ms from now (timeline@1 events) */
   | { t: 'skillStart'; uid: number; skill: string; lv: number; to?: number; events: Record<string, number | number[]> }
@@ -2729,7 +2729,7 @@ export class World {
     const em = elementMod(el, this.mobElement(t));
     const n = em <= 0 ? 0 : Math.max(1, Math.floor(base * em * (0.9 + this.rng() * 0.2) * (this.rift?.mods.fixedMul ?? 1)));
     this.dealToMob(h, t, n, kind, idx);
-    this.emit({ t: 'hit', uid: t.uid, style, element: el });
+    this.emit({ t: 'hit', from: h.uid, uid: t.uid, style, element: el });
     return n;
   }
 
@@ -2832,7 +2832,7 @@ export class World {
     let n = Math.floor(dmg);
     if (em <= 0) n = 0; else n = Math.max(1, n);
     this.dealToMob(h, t, n, crit ? 'crit' : 'normal', idx);
-    this.emit({ t: 'hit', uid: t.uid, style, element: el, crit });
+    this.emit({ t: 'hit', from: h.uid, uid: t.uid, style, element: el, crit });
     this.sound(crit ? 'crit' : style === 'pierce' ? 'arrow_hit' : style === 'blunt' ? 'hit_heavy' : 'hit');
     if (b.lifeStealPct && n > 0) this.healHero(h, Math.floor(n * b.lifeStealPct / 100), false);
     // steal
@@ -2860,7 +2860,7 @@ export class World {
     let n = Math.floor(dmg);
     if (em <= 0) n = 0; else n = Math.max(1, n);
     this.dealToMob(h, t, n, 'normal', idx);
-    this.emit({ t: 'hit', uid: t.uid, style: 'magic', element: el });
+    this.emit({ t: 'hit', from: h.uid, uid: t.uid, style: 'magic', element: el });
     if (ft && !chained) {
       const o2 = this.mobs.find((m) => m !== t && this.targetable(m) && !this.shunned(m) && m.frozenUntil > this.time && dist(m, t) < 5 * CELL);
       if (o2) {
@@ -3174,7 +3174,7 @@ export class World {
           this.sound('heal');
           if (this.alive(tm)) {
             this.dealToMob(h, tm, Math.max(0, this.healDamage(h, tm, lv)), 'normal', 0);
-            this.emit({ t: 'hit', uid: tm.uid, style: 'magic', element: 'holy' });
+            this.emit({ t: 'hit', from: h.uid, uid: tm.uid, style: 'magic', element: 'holy' });
           }
           return;
         }
@@ -4036,7 +4036,7 @@ export class World {
       if (t.sp <= 0) t.buffs = t.buffs.filter((b) => b.id !== 'ecoat');
     }
     const n = Math.max(1, Math.floor(dmg));
-    this.emit({ t: 'hit', uid: t.uid, style: 'claw', element: el });
+    this.emit({ t: 'hit', from: m.uid, uid: t.uid, style: 'claw', element: el });
     // 독 반격: a poisonous melee blow is paid back in full; anything else may get an envenom in return
     if (!magic && m.m.range < 60 && this.hasBuff(t, 'preact') && !this.shunned(m)) {
       const pr = t.buffs.find((b) => b.id === 'preact')!;

@@ -1,0 +1,142 @@
+{
+  "slash": {
+    "name": "MM 참격",
+    "frames": 13,
+    "fps": 30,
+    "loop": false,
+    "cell": 64,
+    "logical": 104,
+    "impact": 2,
+    "anchor": 0.5
+  },
+  "thrust": {
+    "name": "MM 찌르기",
+    "frames": 8,
+    "fps": 30,
+    "loop": false,
+    "cell": 64,
+    "logical": 140,
+    "impact": 1,
+    "anchor": 0.5
+  },
+  "impact": {
+    "name": "MM 강타",
+    "frames": 12,
+    "fps": 30,
+    "loop": false,
+    "cell": 64,
+    "logical": 90,
+    "impact": 1,
+    "anchor": 0.5
+  },
+  "explosion": {
+    "name": "MM 폭발",
+    "frames": 21,
+    "fps": 30,
+    "loop": false,
+    "cell": 64,
+    "logical": 138,
+    "impact": 1,
+    "anchor": 0.5
+  },
+  "shockwave": {
+    "name": "MM 충격파",
+    "frames": 16,
+    "fps": 30,
+    "loop": false,
+    "cell": 64,
+    "logical": 160,
+    "impact": 1,
+    "anchor": 0.6
+  },
+  "fire": {
+    "name": "MM 화염",
+    "frames": 24,
+    "fps": 26,
+    "loop": false,
+    "cell": 64,
+    "logical": 96,
+    "impact": 0,
+    "anchor": 0.7
+  },
+  "ice": {
+    "name": "MM 얼음",
+    "frames": 24,
+    "fps": 24,
+    "loop": false,
+    "cell": 64,
+    "logical": 96,
+    "impact": 2,
+    "anchor": 0.77
+  },
+  "lightning": {
+    "name": "MM 번개",
+    "frames": 12,
+    "fps": 30,
+    "loop": false,
+    "cell": 64,
+    "logical": 120,
+    "impact": 1,
+    "anchor": 0.8
+  },
+  "cast": {
+    "name": "MM 마법진",
+    "frames": 24,
+    "fps": 24,
+    "loop": true,
+    "cell": 64,
+    "logical": 100,
+    "impact": 0,
+    "anchor": 0.66
+  },
+  "buff": {
+    "name": "MM 버프",
+    "frames": 24,
+    "fps": 18,
+    "loop": false,
+    "cell": 64,
+    "logical": 90,
+    "impact": 0,
+    "anchor": 0.76
+  },
+  "heal": {
+    "name": "MM 힐",
+    "frames": 24,
+    "fps": 20,
+    "loop": false,
+    "cell": 64,
+    "logical": 88,
+    "impact": 0,
+    "anchor": 0.75
+  },
+  "pillar": {
+    "name": "MM 빛기둥",
+    "frames": 20,
+    "fps": 24,
+    "loop": false,
+    "cell": 64,
+    "logical": 110,
+    "impact": 0,
+    "anchor": 0.77
+  },
+  "dust": {
+    "name": "MM 흙먼지",
+    "frames": 12,
+    "fps": 30,
+    "loop": false,
+    "cell": 64,
+    "logical": 90,
+    "impact": 0,
+    "anchor": 0.75
+  },
+  "bolt": {
+    "name": "MM 마법탄",
+    "frames": 12,
+    "fps": 24,
+    "loop": true,
+    "cell": 64,
+    "logical": 80,
+    "impact": 0,
+    "anchor": 0.5
+  }
+}

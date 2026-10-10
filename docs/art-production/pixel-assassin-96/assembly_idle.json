@@ -1,0 +1,10 @@
+{
+  "_": "96px 어새신 대기 조립표 초안(assembly@1). 키포즈 시트 keyposes_idle = [0 들숨(승인 대기 B), 1 날숨]. 한 바퀴 840ms(대기 시간 규격, tools/art/normalize-timing.mjs). 발은 두 장이 픽셀 단위로 같아야 하므로 dx·dy 0.",
+  "format": "assembly@1",
+  "poses": "assassin_male_p96#keyposes_idle",
+  "loop": true,
+  "frames": [
+    { "pose": 0, "ms": 420, "dx": 0, "dy": 0, "note": "들숨 — 승인 대기(B)" },
+    { "pose": 1, "ms": 420, "dx": 0, "dy": 0, "note": "날숨 — 어깨·머리 2px 아래" }
+  ]
+}

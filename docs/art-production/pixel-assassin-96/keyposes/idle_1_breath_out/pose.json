@@ -1,0 +1,78 @@
+{
+  "schema": "assassin96-keypose@1",
+  "role": "breath_out",
+  "canvas": [
+    256,
+    240
+  ],
+  "origin": [
+    128,
+    224
+  ],
+  "facing": "right_3_4",
+  "head": {
+    "point": [
+      133,
+      162
+    ],
+    "crownY": 130,
+    "bounds": [
+      99,
+      130,
+      153,
+      173
+    ],
+    "width": 55
+  },
+  "weapon": {
+    "hand": "near",
+    "gripPoint": [
+      127,
+      195
+    ],
+    "tipPoint": [
+      140,
+      203
+    ],
+    "angleDegrees": 31.61,
+    "angleConvention": "screen right 0, clockwise positive",
+    "smear": false
+  },
+  "backFoot": {
+    "rows": [
+      220,
+      223
+    ],
+    "rearmostX": 105
+  },
+  "feet": {
+    "row": 223,
+    "opaqueRanges": [
+      [
+        105,
+        114
+      ]
+    ],
+    "near": null,
+    "far": [
+      105,
+      114
+    ],
+    "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
+  },
+  "bounds": [
+    94,
+    130,
+    153,
+    223
+  ],
+  "layerOrder": [
+    "hair_back",
+    "body",
+    "hair_front",
+    "katar",
+    "grip"
+  ],
+  "normalization": "SSOT integer pixel edit only; head/shoulder +2 y, katar/grip +2 y; settled cloth +1 y; legs/feet unchanged",
+  "notes": "가려진 면을 복원한 리그가 아니라 보이는 픽셀의 레이어 분리다."
+}

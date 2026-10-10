@@ -1,0 +1,274 @@
+{
+  "format": "pxf.graph@1",
+  "name": "MM 번개",
+  "settings": {
+    "size": 64,
+    "frames": 12,
+    "fps": 30,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "bolt",
+      "type": "Lightning",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "x0": 0.5,
+        "y0": 0.1,
+        "x1": 0.5,
+        "y1": 0.8,
+        "detail": 5,
+        "jag": 0.4,
+        "branch": 0.3,
+        "seed": 9,
+        "rate": 2,
+        "thick": 2,
+        "grow": {
+          "k": [
+            [
+              0,
+              0.4
+            ],
+            [
+              1,
+              1,
+              "out3"
+            ],
+            [
+              11,
+              1
+            ]
+          ]
+        },
+        "intensity": {
+          "k": [
+            [
+              0,
+              1
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              11,
+              0.15,
+              "in"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "ring",
+      "type": "Shape",
+      "x": 40,
+      "y": 160,
+      "params": {
+        "shape": "ring",
+        "y": 0.8,
+        "size": {
+          "k": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              11,
+              22,
+              "out"
+            ]
+          ]
+        },
+        "size2": {
+          "a": 0.3,
+          "b": 0.06,
+          "e": "out"
+        },
+        "aspect": 0.35,
+        "falloff": 0.35,
+        "intensity": {
+          "k": [
+            [
+              0,
+              0.6
+            ],
+            [
+              1,
+              0.9
+            ],
+            [
+              11,
+              0.15,
+              "in"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "sp",
+      "type": "Particles",
+      "x": 40,
+      "y": 280,
+      "params": {
+        "count": 12,
+        "seed": 21,
+        "start": 0.08,
+        "life": 0.5,
+        "lifeVar": 0.3,
+        "area": "point",
+        "y": 0.8,
+        "dirMode": "fixed",
+        "angle": -90,
+        "spread": 140,
+        "speed": 1.5,
+        "speedVar": 0.55,
+        "gravity": 0.12,
+        "drag": 0.12,
+        "sizeA": 1.5,
+        "sizeB": 0.5,
+        "pshape": "streak",
+        "stretch": 0.8
+      }
+    },
+    {
+      "id": "m1",
+      "type": "Blend",
+      "x": 760,
+      "y": 400,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "m",
+      "type": "Blend",
+      "x": 760,
+      "y": 520,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "pal",
+      "type": "Palette",
+      "x": 950,
+      "y": 40,
+      "params": {
+        "colors": [
+          "#303030",
+          "#606060",
+          "#909090",
+          "#c0c0c0",
+          "#f0f0f0"
+        ],
+        "cutoff": 0.13,
+        "mode": "bands",
+        "key": "alpha"
+      }
+    },
+    {
+      "id": "ol",
+      "type": "Outline",
+      "x": 960,
+      "y": 40,
+      "params": {
+        "color": "#303030",
+        "threshold": 0.5,
+        "width": 1
+      }
+    },
+    {
+      "id": "cut",
+      "type": "Tint",
+      "x": 970,
+      "y": 40,
+      "params": {
+        "amount": 0,
+        "opacity": {
+          "k": [
+            [
+              0,
+              1
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              11,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 980,
+      "y": 40,
+      "params": {
+        "alpha": "hard",
+        "threshold": 0.5
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "bolt",
+      "t": "m1",
+      "p": 0
+    },
+    {
+      "f": "ring",
+      "t": "m1",
+      "p": 1
+    },
+    {
+      "f": "m1",
+      "t": "m",
+      "p": 0
+    },
+    {
+      "f": "sp",
+      "t": "m",
+      "p": 1
+    },
+    {
+      "f": "m",
+      "t": "pal",
+      "p": 0
+    },
+    {
+      "f": "pal",
+      "t": "ol",
+      "p": 0
+    },
+    {
+      "f": "ol",
+      "t": "cut",
+      "p": 0
+    },
+    {
+      "f": "cut",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 120,
+    "blend": "normal",
+    "impactFrame": 1
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "format": "pxf.graph@1",
+  "name": "MM 참격",
+  "settings": {
+    "size": 64,
+    "frames": 13,
+    "fps": 30,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "arc",
+      "type": "Arc",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "radius": 23,
+        "thick": 8,
+        "start": -95,
+        "sweep": 150,
+        "head": {
+          "a": 0.07,
+          "b": 1.35,
+          "e": "out3",
+          "t0": 0,
+          "t1": 0.84
+        },
+        "tail": 0.5,
+        "taper": 1.4,
+        "aspect": 0.62,
+        "rot": -15,
+        "intensity": {
+          "a": 1,
+          "b": 0.15,
+          "e": "in",
+          "t0": 0.4,
+          "t1": 1
+        }
+      }
+    },
+    {
+      "id": "edge",
+      "type": "Arc",
+      "x": 40,
+      "y": 160,
+      "params": {
+        "radius": 21,
+        "thick": 3,
+        "start": -95,
+        "sweep": 150,
+        "head": {
+          "a": 0.07,
+          "b": 1.35,
+          "e": "out3",
+          "t0": 0,
+          "t1": 0.84
+        },
+        "tail": 0.3,
+        "taper": 2,
+        "aspect": 0.62,
+        "rot": -15,
+        "intensity": {
+          "a": 1,
+          "b": 0,
+          "e": "in",
+          "t0": 0.1,
+          "t1": 0.6
+        }
+      }
+    },
+    {
+      "id": "sp",
+      "type": "Particles",
+      "x": 40,
+      "y": 280,
+      "params": {
+        "count": 6,
+        "seed": 211,
+        "life": 0.5,
+        "lifeVar": 0.35,
+        "area": "ring",
+        "aw": 18,
+        "ah": 10,
+        "dirMode": "outward",
+        "speed": 1.2,
+        "speedVar": 0.5,
+        "gravity": 0.04,
+        "drag": 0.12,
+        "sizeA": 1.5,
+        "sizeB": 0.5,
+        "pshape": "streak",
+        "stretch": 0.8
+      }
+    },
+    {
+      "id": "m1",
+      "type": "Blend",
+      "x": 760,
+      "y": 400,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "m",
+      "type": "Blend",
+      "x": 760,
+      "y": 520,
+      "params": {
+        "mode": "max"
+      }
+    },
+    {
+      "id": "pal",
+      "type": "Palette",
+      "x": 950,
+      "y": 40,
+      "params": {
+        "colors": [
+          "#303030",
+          "#606060",
+          "#909090",
+          "#c0c0c0",
+          "#f0f0f0"
+        ],
+        "cutoff": 0.13,
+        "mode": "bands",
+        "key": "alpha"
+      }
+    },
+    {
+      "id": "ol",
+      "type": "Outline",
+      "x": 960,
+      "y": 40,
+      "params": {
+        "color": "#303030",
+        "threshold": 0.5,
+        "width": 1
+      }
+    },
+    {
+      "id": "cut",
+      "type": "Tint",
+      "x": 970,
+      "y": 40,
+      "params": {
+        "amount": 0,
+        "opacity": {
+          "k": [
+            [
+              0,
+              1
+            ],
+            [
+              11,
+              1
+            ],
+            [
+              12,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 980,
+      "y": 40,
+      "params": {
+        "alpha": "hard",
+        "threshold": 0.5
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "arc",
+      "t": "m1",
+      "p": 0
+    },
+    {
+      "f": "edge",
+      "t": "m1",
+      "p": 1
+    },
+    {
+      "f": "m1",
+      "t": "m",
+      "p": 0
+    },
+    {
+      "f": "sp",
+      "t": "m",
+      "p": 1
+    },
+    {
+      "f": "m",
+      "t": "pal",
+      "p": 0
+    },
+    {
+      "f": "pal",
+      "t": "ol",
+      "p": 0
+    },
+    {
+      "f": "ol",
+      "t": "cut",
+      "p": 0
+    },
+    {
+      "f": "cut",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 104,
+    "blend": "normal",
+    "impactFrame": 2
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "format": "ro-breakdown@1",
+  "source": {
+    "job": 11,
+    "class": "hunter",
+    "gender": "male",
+    "weapon": 11,
+    "action": 87,
+    "direction": "SE",
+    "url": "https://assets.latam-tools.com.br/gif?job=11&gender=male&weapon=11&action=87",
+    "note": "라그나로크 공개 렌더러의 실제 클라이언트 스프라이트. 숫자만 기록하고 그림은 저장하지 않습니다."
+  },
+  "foot": [
+    27,
+    55
+  ],
+  "figureHeight0": 91,
+  "totalMs": 900,
+  "frameCount": 9,
+  "roles": [
+    "준비",
+    "준비",
+    "준비",
+    "준비",
+    "준비",
+    "타격",
+    "멈춤",
+    "멈춤",
+    "멈춤"
+  ],
+  "rhythm": [
+    0.111,
+    0.111,
+    0.111,
+    0.111,
+    0.111,
+    0.111,
+    0.111,
+    0.111,
+    0.111
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "ms": 100,
+      "box": [
+        -19,
+        -54,
+        11,
+        36
+      ],
+      "width": 31,
+      "height": 91,
+      "area": 1971,
+      "dx": 0,
+      "dy": 0,
+      "front": [
+        11,
+        -44
+      ],
+      "pale": 231,
+      "footSpread": 30,
+      "smear": false,
+      "role": "준비"
+    },
+    {
+      "index": 1,
+      "ms": 100,
+      "box": [
+        -18,
+        -54,
+        10,
+        36
+      ],
+      "width": 29,
+      "height": 91,
+      "area": 1769,
+      "dx": 0,
+      "dy": 0,
+      "front": [
+        10,
+        -44
+      ],
+      "pale": 188,
+      "footSpread": 22,
+      "smear": false,
+      "role": "준비"
+    },
+    {
+      "index": 2,
+      "ms": 100,
+      "box": [
+        -20,
+        -54,
+        7,
+        36
+      ],
+      "width": 28,
+      "height": 91,
+      "area": 1706,
+      "dx": -2,
+      "dy": 0,
+      "front": [
+        7,
+        -44
+      ],
+      "pale": 163,
+      "footSpread": 25,
+      "smear": false,
+      "role": "준비"
+    },
+    {
+      "index": 3,
+      "ms": 100,
+      "box": [
+        -24,
+        -54,
+        4,
+        36
+      ],
+      "width": 29,
+      "height": 91,
+      "area": 1660,
+      "dx": -6,
+      "dy": 0,
+      "front": [
+        4,
+        -16
+      ],
+      "pale": 158,
+      "footSpread": 26,
+      "smear": false,
+      "role": "준비"
+    },
+    {
+      "index": 4,
+      "ms": 100,
+      "box": [
+        -26,
+        -54,
+        3,
+        36
+      ],
+      "width": 30,
+      "height": 91,
+      "area": 1653,
+      "dx": -7,
+      "dy": 0,
+      "front": [
+        3,
+        -18
+      ],
+      "pale": 160,
+      "footSpread": 25,
+      "smear": false,
+      "role": "준비"
+    },
+    {
+      "index": 5,
+      "ms": 100,
+      "box": [
+        -17,
+        -40,
+        40,
+        36
+      ],
+      "width": 58,
+      "height": 77,
+      "area": 2160,
+      "dx": 16,
+      "dy": 14,
+      "front": [
+        40,
+        -7
+      ],
+      "pale": 276,
+      "footSpread": 55,
+      "smear": true,
+      "role": "타격"
+    },
+    {
+      "index": 6,
+      "ms": 100,
+      "box": [
+        -17,
+        -38,
+        42,
+        36
+      ],
+      "width": 60,
+      "height": 75,
+      "area": 2113,
+      "dx": 17,
+      "dy": 16,
+      "front": [
+        42,
+        -4
+      ],
+      "pale": 267,
+      "footSpread": 51,
+      "smear": false,
+      "role": "멈춤"
+    },
+    {
+      "index": 7,
+      "ms": 100,
+      "box": [
+        -17,
+        -38,
+        42,
+        36
+      ],
+      "width": 60,
+      "height": 75,
+      "area": 2113,
+      "dx": 17,
+      "dy": 16,
+      "front": [
+        42,
+        -4
+      ],
+      "pale": 267,
+      "footSpread": 51,
+      "smear": false,
+      "role": "멈춤"
+    },
+    {
+      "index": 8,
+      "ms": 100,
+      "box": [
+        -17,
+        -38,
+        42,
+        36
+      ],
+      "width": 60,
+      "height": 75,
+      "area": 2113,
+      "dx": 17,
+      "dy": 16,
+      "front": [
+        42,
+        -4
+      ],
+      "pale": 267,
+      "footSpread": 51,
+      "smear": false,
+      "role": "멈춤"
+    }
+  ]
+}

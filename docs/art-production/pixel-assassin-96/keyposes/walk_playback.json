@@ -1,0 +1,72 @@
+{
+  "schema": "assassin96-walk-review@1",
+  "sheet": "keyposes_walk.png",
+  "canvas": [
+    256,
+    240
+  ],
+  "origin": [
+    128,
+    224
+  ],
+  "loop": true,
+  "totalMs": 720,
+  "frames": [
+    {
+      "index": 0,
+      "id": "walk_1_contact_near",
+      "ms": 90,
+      "dx": 0,
+      "dy": 0
+    },
+    {
+      "index": 1,
+      "id": "walk_5_down_near",
+      "ms": 90,
+      "dx": 0,
+      "dy": 0
+    },
+    {
+      "index": 2,
+      "id": "walk_2_pass_near",
+      "ms": 90,
+      "dx": 0,
+      "dy": 0
+    },
+    {
+      "index": 3,
+      "id": "walk_6_up_near",
+      "ms": 90,
+      "dx": 0,
+      "dy": 0
+    },
+    {
+      "index": 4,
+      "id": "walk_3_contact_far",
+      "ms": 90,
+      "dx": 0,
+      "dy": 0
+    },
+    {
+      "index": 5,
+      "id": "walk_7_down_far",
+      "ms": 90,
+      "dx": 0,
+      "dy": 0
+    },
+    {
+      "index": 6,
+      "id": "walk_4_pass_far",
+      "ms": 90,
+      "dx": 0,
+      "dy": 0
+    },
+    {
+      "index": 7,
+      "id": "walk_8_up_far",
+      "ms": 90,
+      "dx": 0,
+      "dy": 0
+    }
+  ]
+}

@@ -143,7 +143,11 @@ export function convert(src, { base, derivedDir, canvasFor = (p) => readPng(p), 
           if (hp.front && !blank(hp.front)) overlays.hair_front = placed(hp.front, dx, dy);
         }
         const w = f.weapon;
-        const anchors = w?.gripPoint ? { hand: { point: w.gripPoint, angle: w.angleDegrees ?? 0, z: w.z ?? 'front', visible: w.visible !== false } } : {};
+        const anchors = {
+          ...(w?.gripPoint ? { hand: { point: w.gripPoint, angle: w.angleDegrees ?? 0, z: w.z ?? 'front', visible: w.visible !== false } } : {}),
+          // the default weapon's tip: the workshop measures how far the swing reaches from it (contact check)
+          ...(w?.tipPoint ? { tip: { point: w.tipPoint, visible: w.visible !== false } } : {}),
+        };
         return { name, file: at(f.image), pivot: src.canvas.origin, duration: a.durations[i], anchors, overlays };
       });
       const skills = skillsOf(kind);

@@ -1,0 +1,17 @@
+{
+  "_": "96px 어새신 공격 조립표 초안(assembly@1). 48px 조립(pixel-assassin-attack-keyposes/assembly.json)과 같은 리듬: 접촉 앞 170ms, 타격 뒤 410ms(event 재생 기준). 키포즈 시트 keyposes_attack = 폴더 순서 [0 준비, 1 정점, 2 접촉, 3 회수, 4 휘두름]. 다섯 장 모두 뒷발 최후방 x 105로 그려 달라고 했으므로 dx 0(납품 뒤 재서 어긋나면 그 장만 dx로 맞춤). dy 0.",
+  "format": "assembly@1",
+  "poses": "assassin_male_p96#keyposes_attack",
+  "hitFrame": 3,
+  "anchor": { "backFootX": 105, "from": "idle", "rows": [220, 223] },
+  "frames": [
+    { "pose": 0, "ms": 60, "dx": 0, "dy": 0, "note": "준비" },
+    { "pose": 1, "ms": 70, "dx": 0, "dy": 0, "note": "정점" },
+    { "pose": 4, "ms": 40, "dx": 0, "dy": 0, "note": "휘두름(잔상)" },
+    { "pose": 2, "ms": 100, "dx": 0, "dy": 0, "note": "접촉 — hitFrame" },
+    { "pose": 2, "ms": 60, "dx": 0, "dy": 0, "note": "팔로스루" },
+    { "pose": 3, "ms": 100, "dx": 0, "dy": 0, "note": "회수" },
+    { "pose": 3, "ms": 150, "dx": 0, "dy": 0, "note": "멈춤" }
+  ],
+  "hit": { "style": "slash", "fx": ["slash", "impact"], "hitstopMs": 70, "knockPx": 3 }
+}
