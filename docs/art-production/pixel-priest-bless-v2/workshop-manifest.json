@@ -1,0 +1,270 @@
+{
+  "kit": 1,
+  "source": "manifest.json",
+  "overlayGroups": {
+    "weapon": {
+      "label": "무기",
+      "default": "sword",
+      "inside": false
+    },
+    "hair_back": {
+      "label": "뒷머리",
+      "inside": false
+    },
+    "hair_front": {
+      "label": "앞머리",
+      "inside": false
+    }
+  },
+  "tintLayers": {
+    "hair": [
+      "hair_back",
+      "hair_front"
+    ]
+  },
+  "tints": {
+    "hair": {
+      "흑갈색": [
+        0.42,
+        0.31,
+        0.27
+      ],
+      "적갈색": [
+        0.66,
+        0.39,
+        0.24
+      ],
+      "금발": [
+        0.93,
+        0.73,
+        0.38
+      ],
+      "백금(원색)": [
+        1,
+        1,
+        1
+      ],
+      "빨강": [
+        0.85,
+        0.32,
+        0.31
+      ],
+      "파랑": [
+        0.39,
+        0.6,
+        0.79
+      ],
+      "초록": [
+        0.52,
+        0.69,
+        0.42
+      ],
+      "보라": [
+        0.67,
+        0.42,
+        0.77
+      ],
+      "분홍": [
+        0.91,
+        0.53,
+        0.64
+      ],
+      "흑청": [
+        0.35,
+        0.36,
+        0.38
+      ]
+    }
+  },
+  "render": {
+    "order": [
+      "overlay:hair_back",
+      "weaponBehind",
+      "figure",
+      "weaponFront",
+      "grip",
+      "overlay:hair_front"
+    ]
+  },
+  "display": {
+    "bodyPx": 59
+  },
+  "sheets": [
+    {
+      "id": "priest_female_p2",
+      "kind": "skill_bless",
+      "category": "motion",
+      "layout": "frames",
+      "canvas": [
+        128,
+        120
+      ],
+      "bodyHeight": 37,
+      "gameHeight": 48,
+      "loop": false,
+      "skills": [
+        "blessing",
+        "increase_agi",
+        "impositio",
+        "suffragium",
+        "aspersio",
+        "kyrie"
+      ],
+      "overlayDefaults": {
+        "weapon": "mace"
+      },
+      "frames": [
+        {
+          "name": "skill_bless_0",
+          "file": "body/priest_female_p2/skill_bless_0.png",
+          "pivot": [
+            64,
+            112
+          ],
+          "duration": 100,
+          "sha256": "a873436a1a10c5e15566a49afe026fc44f3a1fe9b791c773f53003cd75746e66",
+          "anchors": {
+            "hand": {
+              "point": [
+                72,
+                98
+              ],
+              "angle": 32.01,
+              "z": "front",
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:mace": {
+              "file": "weapons/mace/priest_female_p2/skill_bless_0.png",
+              "z": "front"
+            },
+            "grip": "grips/priest_female_p2/skill_bless_0.png",
+            "hair_back": "hair/priest_crown_braid_p2/skill_bless_0_back.png",
+            "hair_front": "hair/priest_crown_braid_p2/skill_bless_0_front.png"
+          }
+        },
+        {
+          "name": "skill_bless_1",
+          "file": "body/priest_female_p2/skill_bless_1.png",
+          "pivot": [
+            64,
+            112
+          ],
+          "duration": 140,
+          "sha256": "a7ae941f8286136110983f5236cd9d65ed90c33519bf81226907edd8be8385f5",
+          "anchors": {
+            "hand": {
+              "point": [
+                68,
+                92
+              ],
+              "angle": 45.0,
+              "z": "front",
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:mace": {
+              "file": "weapons/mace/priest_female_p2/skill_bless_1.png",
+              "z": "front"
+            },
+            "grip": "grips/priest_female_p2/skill_bless_1.png",
+            "hair_back": "hair/priest_crown_braid_p2/skill_bless_1_back.png",
+            "hair_front": "hair/priest_crown_braid_p2/skill_bless_1_front.png"
+          }
+        },
+        {
+          "name": "skill_bless_2",
+          "file": "body/priest_female_p2/skill_bless_2.png",
+          "pivot": [
+            64,
+            112
+          ],
+          "duration": 160,
+          "sha256": "83c90cf6bb19527c185a5d07beedc6a8420d7c909d8d4ef4b0ad3feaa6e314a7",
+          "anchors": {
+            "hand": {
+              "point": [
+                68,
+                94
+              ],
+              "angle": 52.43,
+              "z": "front",
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:mace": {
+              "file": "weapons/mace/priest_female_p2/skill_bless_2.png",
+              "z": "front"
+            },
+            "grip": "grips/priest_female_p2/skill_bless_2.png",
+            "hair_back": "hair/priest_crown_braid_p2/skill_bless_2_back.png",
+            "hair_front": "hair/priest_crown_braid_p2/skill_bless_2_front.png"
+          }
+        },
+        {
+          "name": "skill_bless_3",
+          "file": "body/priest_female_p2/skill_bless_3.png",
+          "pivot": [
+            64,
+            112
+          ],
+          "duration": 100,
+          "sha256": "73c84b6d539e9581b7391b011242a622d1d75ce0c060ba88efaa6bab64424593",
+          "anchors": {
+            "hand": {
+              "point": [
+                71,
+                95
+              ],
+              "angle": 26.57,
+              "z": "front",
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:mace": {
+              "file": "weapons/mace/priest_female_p2/skill_bless_3.png",
+              "z": "front"
+            },
+            "grip": "grips/priest_female_p2/skill_bless_3.png",
+            "hair_back": "hair/priest_crown_braid_p2/skill_bless_3_back.png",
+            "hair_front": "hair/priest_crown_braid_p2/skill_bless_3_front.png"
+          }
+        },
+        {
+          "name": "skill_bless_4",
+          "file": "body/priest_female_p2/skill_bless_4.png",
+          "pivot": [
+            64,
+            112
+          ],
+          "duration": 100,
+          "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5",
+          "anchors": {
+            "hand": {
+              "point": [
+                72,
+                98
+              ],
+              "angle": 32.01,
+              "z": "front",
+              "visible": true
+            }
+          },
+          "overlays": {
+            "weapon:mace": {
+              "file": "weapons/mace/priest_female_p2/skill_bless_4.png",
+              "z": "front"
+            },
+            "grip": "grips/priest_female_p2/skill_bless_4.png",
+            "hair_back": "hair/priest_crown_braid_p2/skill_bless_4_back.png",
+            "hair_front": "hair/priest_crown_braid_p2/skill_bless_4_front.png"
+          }
+        }
+      ]
+    }
+  ]
+}

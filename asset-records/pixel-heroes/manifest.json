@@ -16072,10 +16072,10 @@
      "anchors": {
       "hand": {
        "point": [
-        71,
-        98
+        68,
+        92
        ],
-       "angle": 29.05,
+       "angle": 45,
        "z": "front",
        "visible": true
       }
@@ -16089,7 +16089,7 @@
       "hair_back": "src/assets/pixel/hair/priest_crown_braid_p2/skill_bless_1_back.png",
       "hair_front": "src/assets/pixel/hair/priest_crown_braid_p2/skill_bless_1_front.png"
      },
-     "sha256": "a9d21f36b8a75abfba662f0630564f504065c6381e3d8a84ad7ff524b3ffb9ca"
+     "sha256": "a7ae941f8286136110983f5236cd9d65ed90c33519bf81226907edd8be8385f5"
     },
     {
      "name": "skill_bless_2",
@@ -16102,10 +16102,10 @@
      "anchors": {
       "hand": {
        "point": [
-        71,
-        98
+        68,
+        94
        ],
-       "angle": 29.05,
+       "angle": 52.43,
        "z": "front",
        "visible": true
       }
@@ -16119,7 +16119,7 @@
       "hair_back": "src/assets/pixel/hair/priest_crown_braid_p2/skill_bless_2_back.png",
       "hair_front": "src/assets/pixel/hair/priest_crown_braid_p2/skill_bless_2_front.png"
      },
-     "sha256": "0a30be7276db68b95d86bcc03728d9b0e58924efee7be7728046d6df71465b67"
+     "sha256": "83c90cf6bb19527c185a5d07beedc6a8420d7c909d8d4ef4b0ad3feaa6e314a7"
     },
     {
      "name": "skill_bless_3",
@@ -16132,10 +16132,10 @@
      "anchors": {
       "hand": {
        "point": [
-        72,
-        98
+        71,
+        95
        ],
-       "angle": 32.01,
+       "angle": 26.57,
        "z": "front",
        "visible": true
       }
@@ -16149,7 +16149,7 @@
       "hair_back": "src/assets/pixel/hair/priest_crown_braid_p2/skill_bless_3_back.png",
       "hair_front": "src/assets/pixel/hair/priest_crown_braid_p2/skill_bless_3_front.png"
      },
-     "sha256": "a873436a1a10c5e15566a49afe026fc44f3a1fe9b791c773f53003cd75746e66"
+     "sha256": "73c84b6d539e9581b7391b011242a622d1d75ce0c060ba88efaa6bab64424593"
     },
     {
      "name": "skill_bless_4",

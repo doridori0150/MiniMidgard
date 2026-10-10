@@ -1,0 +1,65 @@
+[
+  {
+    "frame": "skill_bless_1",
+    "tool": "image_gen.imagegen",
+    "model": "not exposed by tool",
+    "transparent_background": true,
+    "prompt": "Edit identity-preserve pixel sprite animation, ONE frame only: skill_bless_1, hands gathering into prayer. Input 1 is the approved sprite at exact 8x nearest-neighbor scale on 1024x960 transparent canvas; retain EXACT head, face, hair, legs, feet, clothing, palette, size, position, no extra detail. Input 2 is approved costume detail ONLY. Input 3 RO sheet is pose ONLY: last row w-attack3/cast hands gather in front of chest, do NOT copy RO design. Change ONLY arms, hands, mace: both elbows bend, both forearms rise toward chest center at base pixel (67,93), hands almost meet with a one-base-pixel gap, not pointing outward. Mace remains in the screen-right hand, hangs diagonally down toward screen-right from chest instead of extended away, keep its existing design and size. Head remains motionless, feet remain precisely at current positions, center pivot base (64,112). Hard 8x pixel blocks only, no antialias, same two-head proportion and 48-base-pixel full character height. All unchanged pixels must match input 1. No lighting effect, no beam, no particles, no text. Transparent background. User original: 축복은 두빛 기둥 받으면서 앞으로 손 모아서 기도 하는 느낌으로하자. mmo다 보니 모션이 길면 안되니까. Beam is separately drawn by game. This is frame 1 of 5, 140ms; previous frame 0 inspected: hand near chest and mace extended low. Keep transition continuous. Return PNG image.",
+    "referenced_image_paths": [
+      "/Users/oreocookie03/Projects/MiniMidgard/docs/art-production/pixel-priest-bless-v2/references/approved_8x.png",
+      "/Users/oreocookie03/Projects/MiniMidgard/docs/art-production/pixel-priest-bless-v2/references/bless_raise.png",
+      "/Users/oreocookie03/Projects/MiniMidgard/docs/art-production/pixel-priest-bless-v2/references/priest.png"
+    ],
+    "reference_sha256": {
+      "approved_8x.png": "af10c69801aa47ce9b6261e04782a97242db6512a9acc79aaee9a4f90b0fdca9",
+      "bless_raise.png": "08858169ad0c8c46ad6da85e7a625df1a52cee69c88eba8b304dba7967e85451",
+      "priest.png": "035c772613e4d6c22f09a4e21f62bdcecb7950d46aff5080894db21d864106d2"
+    },
+    "output": "authored/skill_bless_1.png",
+    "raw_sha256": "9d63d7ad4c30423145f47cfb585fec168c6385e9f51f2f8bb876f8114528bb8a",
+    "previous_review": "verification/frame_0_review.md",
+    "result_review": "verification/frame_1_review.md"
+  },
+  {
+    "frame": "skill_bless_2",
+    "tool": "image_gen.imagegen",
+    "model": "not exposed by tool",
+    "transparent_background": true,
+    "prompt": "Edit identity-preserve pixel sprite animation, ONE frame only: skill_bless_2, full prayer peak. Input 1 is the approved sprite at exact 8x nearest-neighbor scale on 1024x960 transparent canvas; retain EXACT head, face, hair, legs, feet, clothing, palette, size, position, no extra detail. Input 2 is approved costume detail ONLY. Input 3 RO sheet is pose ONLY: last row w-attack3/cast hands gather in front of chest, do NOT copy RO design. Change ONLY arms, hands, mace: both elbows bend, both forearms rise toward chest center at base pixel (67,93), palms firmly pressed together, fingertips up, hands raised just below chin in front of chest, both bent elbows spread clearly to either side, not pointing outward. Mace remains secured between the screen-right fingers, shaft angles steeply downward from the joined hands, head beside screen-right hip, keep its existing design and size. Head remains motionless, feet remain precisely at current positions, center pivot base (64,112). Hard 8x pixel blocks only, no antialias, same two-head proportion and 48-base-pixel full character height. All unchanged pixels must match input 1. No lighting effect, no beam, no particles, no text. Transparent background. User original: 축복은 두빛 기둥 받으면서 앞으로 손 모아서 기도 하는 느낌으로하자. mmo다 보니 모션이 길면 안되니까. Beam is separately drawn by game. This is frame 2 of 5, 160ms; previous frame 1 inspected: hands just meeting at chest, diagonal mace low. Raise joined hands slightly and bend elbows more to make an unmistakable compact prayer silhouette. Keep head angle unchanged. Keep transition continuous. Return PNG image.",
+    "referenced_image_paths": [
+      "/Users/oreocookie03/Projects/MiniMidgard/docs/art-production/pixel-priest-bless-v2/references/approved_8x.png",
+      "/Users/oreocookie03/Projects/MiniMidgard/docs/art-production/pixel-priest-bless-v2/references/bless_raise.png",
+      "/Users/oreocookie03/Projects/MiniMidgard/docs/art-production/pixel-priest-bless-v2/references/priest.png"
+    ],
+    "reference_sha256": {
+      "approved_8x.png": "af10c69801aa47ce9b6261e04782a97242db6512a9acc79aaee9a4f90b0fdca9",
+      "bless_raise.png": "08858169ad0c8c46ad6da85e7a625df1a52cee69c88eba8b304dba7967e85451",
+      "priest.png": "035c772613e4d6c22f09a4e21f62bdcecb7950d46aff5080894db21d864106d2"
+    },
+    "output": "authored/skill_bless_2.png",
+    "raw_sha256": "92a882ec04d9799fdf4fedcbb3d207c2df84afb3e4bea3cac744cc6d7d72f0b4",
+    "previous_review": "verification/frame_1_review.md",
+    "result_review": "verification/frame_2_review.md"
+  },
+  {
+    "frame": "skill_bless_3",
+    "tool": "image_gen.imagegen",
+    "model": "not exposed by tool",
+    "transparent_background": true,
+    "prompt": "Edit identity-preserve pixel sprite animation, ONE frame only: skill_bless_3, release and recover after prayer. Input 1 is the approved sprite at exact 8x nearest-neighbor scale on 1024x960 transparent canvas; retain EXACT head, face, hair, legs, feet, clothing, palette, size, position, no extra detail. Input 2 is approved costume detail ONLY. Input 3 RO sheet is pose ONLY: last row w-attack3/cast hands gather in front of chest, do NOT copy RO design. Change ONLY arms, hands, mace: both elbows relax downward, both hands separate gently from the prayer pose in front of the chest; screen-left visible hand lowers toward lower chest, screen-right hand still holding the mace lowers toward upper waist. Not a raised blessing finger.. Mace remains in the screen-right hand, hangs diagonally down toward screen-right from chest instead of extended away, keep its existing design and size. Head remains motionless, feet remain precisely at current positions, center pivot base (64,112). Hard 8x pixel blocks only, no antialias, same two-head proportion and 48-base-pixel full character height. All unchanged pixels must match input 1. No lighting effect, no beam, no particles, no text. Transparent background. User original: 축복은 두빛 기둥 받으면서 앞으로 손 모아서 기도 하는 느낌으로하자. mmo다 보니 모션이 길면 안되니까. Beam is separately drawn by game. This is frame 3 of 5, 100ms; previous frame 2 inspected: palms together at upper chest and elbows folded, mace low. Hands move apart slightly and lower toward idle. The next frame is the approved idle image, so recover smoothly without a new gesture. Keep transition continuous. Return PNG image.",
+    "referenced_image_paths": [
+      "/Users/oreocookie03/Projects/MiniMidgard/docs/art-production/pixel-priest-bless-v2/references/approved_8x.png",
+      "/Users/oreocookie03/Projects/MiniMidgard/docs/art-production/pixel-priest-bless-v2/references/bless_raise.png",
+      "/Users/oreocookie03/Projects/MiniMidgard/docs/art-production/pixel-priest-bless-v2/references/priest.png"
+    ],
+    "reference_sha256": {
+      "approved_8x.png": "af10c69801aa47ce9b6261e04782a97242db6512a9acc79aaee9a4f90b0fdca9",
+      "bless_raise.png": "08858169ad0c8c46ad6da85e7a625df1a52cee69c88eba8b304dba7967e85451",
+      "priest.png": "035c772613e4d6c22f09a4e21f62bdcecb7950d46aff5080894db21d864106d2"
+    },
+    "output": "authored/skill_bless_3.png",
+    "raw_sha256": "0d466fcd9d49d77d52548eede268b77baba6a8e9171ebb710bdb9c7337c01546",
+    "previous_review": "verification/frame_2_review.md",
+    "result_review": "verification/frame_3_review.md"
+  }
+]

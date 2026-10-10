@@ -1,0 +1,29 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "model": "tool does not expose exact backend model identifier",
+  "generatedFrames": [
+    1,
+    2,
+    3
+  ],
+  "preservedFrames": [
+    0,
+    4
+  ],
+  "rawOriginals": [
+    "authored/skill_bless_1.png",
+    "authored/skill_bless_2.png",
+    "authored/skill_bless_3.png"
+  ],
+  "exportTool": "Python 3 standard library + copied approved raster.py",
+  "sampling": "nearest neighbor",
+  "uniformScale": 0.08727272727272728,
+  "registration": "registration.json",
+  "alphaThreshold": 220,
+  "palette": "original approved register.py BP, 28 colors; hair unchanged",
+  "protectedPixels": "body y<88 and y>=101, both entire hair layers; endpoint PNGs unchanged",
+  "changedRegion": "body x40..89 y88..100; weapon and grip",
+  "generatedImageCache": "Image generation service also saves its automatic original cache under CODEX_HOME; no project writes outside delivery folder. These service-managed files were not removed.",
+  "effects": "none; game draws light pillars separately",
+  "references": "references/hashes.json"
+}

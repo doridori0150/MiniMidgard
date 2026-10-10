@@ -1,0 +1,395 @@
+{
+  "excludes": "FILES.json itself, to avoid recursive checksum",
+  "files": [
+    {
+      "path": "NOTES.md",
+      "bytes": 4401,
+      "sha256": "0002ee73619175d0e1cbaad22244548682945202c063efbd3b247ff1fead66d0"
+    },
+    {
+      "path": "PLAN.md",
+      "bytes": 1178,
+      "sha256": "3ad89097f56dee871d6a7af0837075cb86d2f4ac1c035bb8a7ed30ee4a28d735"
+    },
+    {
+      "path": "PROMPTS.json",
+      "bytes": 8107,
+      "sha256": "8e9bdc46eab9fe9a30545c5fa61ce6a0d12627ff6105867b19790e7a4cc18b54"
+    },
+    {
+      "path": "REQUEST.md",
+      "bytes": 5184,
+      "sha256": "5ea1741c831671300a760e58b784704990dd69dac22d17d4e4febbc9894596bd"
+    },
+    {
+      "path": "TRANSFORMS.json",
+      "bytes": 1069,
+      "sha256": "8486561c94a2fb869d33a6708fa84dc557d455f9d1b86f986a88e4c4581e76af"
+    },
+    {
+      "path": "authored/skill_bless_1.png",
+      "bytes": 273628,
+      "sha256": "9d63d7ad4c30423145f47cfb585fec168c6385e9f51f2f8bb876f8114528bb8a"
+    },
+    {
+      "path": "authored/skill_bless_2.png",
+      "bytes": 318245,
+      "sha256": "92a882ec04d9799fdf4fedcbb3d207c2df84afb3e4bea3cac744cc6d7d72f0b4"
+    },
+    {
+      "path": "authored/skill_bless_3.png",
+      "bytes": 250906,
+      "sha256": "0d466fcd9d49d77d52548eede268b77baba6a8e9171ebb710bdb9c7337c01546"
+    },
+    {
+      "path": "body/priest_female_p2/skill_bless_0.png",
+      "bytes": 838,
+      "sha256": "a873436a1a10c5e15566a49afe026fc44f3a1fe9b791c773f53003cd75746e66"
+    },
+    {
+      "path": "body/priest_female_p2/skill_bless_1.png",
+      "bytes": 791,
+      "sha256": "a7ae941f8286136110983f5236cd9d65ed90c33519bf81226907edd8be8385f5"
+    },
+    {
+      "path": "body/priest_female_p2/skill_bless_2.png",
+      "bytes": 821,
+      "sha256": "83c90cf6bb19527c185a5d07beedc6a8420d7c909d8d4ef4b0ad3feaa6e314a7"
+    },
+    {
+      "path": "body/priest_female_p2/skill_bless_3.png",
+      "bytes": 825,
+      "sha256": "73c84b6d539e9581b7391b011242a622d1d75ce0c060ba88efaa6bab64424593"
+    },
+    {
+      "path": "body/priest_female_p2/skill_bless_4.png",
+      "bytes": 883,
+      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
+    },
+    {
+      "path": "composite/skill_bless_0.png",
+      "bytes": 1273,
+      "sha256": "0ccb61f2ef0269f0dafe49d7f48661a55deae7d43dbab028cd63a2fb78fc9bef"
+    },
+    {
+      "path": "composite/skill_bless_1.png",
+      "bytes": 1229,
+      "sha256": "32772b167672bc86d3dffbb1c46e1cefef1dcd251491e3b5365dc9597edf4536"
+    },
+    {
+      "path": "composite/skill_bless_2.png",
+      "bytes": 1258,
+      "sha256": "8314ed51821d42efb2235dcd953aad8821efad318d628921b7ccc323eee12c9d"
+    },
+    {
+      "path": "composite/skill_bless_3.png",
+      "bytes": 1271,
+      "sha256": "7ef919a271a57b307e245af7bc23cfa56869c414ba7096f978889c7d0ffbe39f"
+    },
+    {
+      "path": "composite/skill_bless_4.png",
+      "bytes": 1297,
+      "sha256": "d330764b4bfa000bf1bda9b2d2cab7ffcbba69b7573895257675a8a6c0ee97db"
+    },
+    {
+      "path": "contact_sheet.png",
+      "bytes": 6525,
+      "sha256": "f3d2a067b56886bc384c71f39632bee1627cbf0e65ffcaadfb6fc8d8ac3665d2"
+    },
+    {
+      "path": "grips/priest_female_p2/skill_bless_0.png",
+      "bytes": 174,
+      "sha256": "1e75733b27d94a125c2bc2ebaaf23e592f43b51b7587befa6705b21368c77ce3"
+    },
+    {
+      "path": "grips/priest_female_p2/skill_bless_1.png",
+      "bytes": 202,
+      "sha256": "41787d6137f731c873a5b867043efa8874a5b4d878ea3b954e30a16961eee475"
+    },
+    {
+      "path": "grips/priest_female_p2/skill_bless_2.png",
+      "bytes": 208,
+      "sha256": "dba15a329dbb41c12dcdf101b838f264106fc6a4a5a773edd722b245bc5c8b8f"
+    },
+    {
+      "path": "grips/priest_female_p2/skill_bless_3.png",
+      "bytes": 194,
+      "sha256": "e703e0926b34e92d783fad7f41009413f6144a975eaf51ad4b0c77837f6b8c5c"
+    },
+    {
+      "path": "grips/priest_female_p2/skill_bless_4.png",
+      "bytes": 176,
+      "sha256": "9c7a723786f8d3f493f8bc047d12398a6e69a6bb25e20a23ec7130d4764614be"
+    },
+    {
+      "path": "hair/priest_crown_braid_p2/skill_bless_0_back.png",
+      "bytes": 268,
+      "sha256": "8762ba51229db7fb34c4dc12d191a99d40cb6bc3714b6106db3525c376c8c4d4"
+    },
+    {
+      "path": "hair/priest_crown_braid_p2/skill_bless_0_front.png",
+      "bytes": 531,
+      "sha256": "c782b6673f9dbe294e0d75e11e3a38570fb7307df917682a3822d6198a50770d"
+    },
+    {
+      "path": "hair/priest_crown_braid_p2/skill_bless_1_back.png",
+      "bytes": 268,
+      "sha256": "8762ba51229db7fb34c4dc12d191a99d40cb6bc3714b6106db3525c376c8c4d4"
+    },
+    {
+      "path": "hair/priest_crown_braid_p2/skill_bless_1_front.png",
+      "bytes": 531,
+      "sha256": "c782b6673f9dbe294e0d75e11e3a38570fb7307df917682a3822d6198a50770d"
+    },
+    {
+      "path": "hair/priest_crown_braid_p2/skill_bless_2_back.png",
+      "bytes": 268,
+      "sha256": "8762ba51229db7fb34c4dc12d191a99d40cb6bc3714b6106db3525c376c8c4d4"
+    },
+    {
+      "path": "hair/priest_crown_braid_p2/skill_bless_2_front.png",
+      "bytes": 531,
+      "sha256": "c782b6673f9dbe294e0d75e11e3a38570fb7307df917682a3822d6198a50770d"
+    },
+    {
+      "path": "hair/priest_crown_braid_p2/skill_bless_3_back.png",
+      "bytes": 268,
+      "sha256": "8762ba51229db7fb34c4dc12d191a99d40cb6bc3714b6106db3525c376c8c4d4"
+    },
+    {
+      "path": "hair/priest_crown_braid_p2/skill_bless_3_front.png",
+      "bytes": 531,
+      "sha256": "c782b6673f9dbe294e0d75e11e3a38570fb7307df917682a3822d6198a50770d"
+    },
+    {
+      "path": "hair/priest_crown_braid_p2/skill_bless_4_back.png",
+      "bytes": 267,
+      "sha256": "749ba16bf83478cf9f75d6730f962ab3207b74ef212b5800d550d1c8b321f065"
+    },
+    {
+      "path": "hair/priest_crown_braid_p2/skill_bless_4_front.png",
+      "bytes": 536,
+      "sha256": "f3335c6b0d833020bdee7b3f6f969585284de996be1f16aeef7a99e64d019880"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 9869,
+      "sha256": "206897177f21af4302abaf853450836851e02b8173d0c275d59f639bfae64dae"
+    },
+    {
+      "path": "old_vs_v2_1x.gif",
+      "bytes": 175116,
+      "sha256": "b47602dd95d437231a84767054764c9697d878d2a975bbd20f3277cbb6e608af"
+    },
+    {
+      "path": "old_vs_v2_4x.gif",
+      "bytes": 2788121,
+      "sha256": "cbe5e4a32a6b698aa6f1d3d75bec892c66e6eba9b2d5f41a8eafbb931f1d0a3b"
+    },
+    {
+      "path": "package.py",
+      "bytes": 5419,
+      "sha256": "85f31f0263cc2dd39e95e4414af6daee81d167b9195dc00b655d2dd9a65c2ce0"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 968,
+      "sha256": "cb1e0955f04412adde8b4d12d26ec95650bb21800afc733b2975663571d2656d"
+    },
+    {
+      "path": "prompts/skill_bless_1.txt",
+      "bytes": 1434,
+      "sha256": "22566fcda918cb700b3b6ea4fc52cb6cc933a1f398f24ca16f2f626c5c3cf2a8"
+    },
+    {
+      "path": "prompts/skill_bless_2.txt",
+      "bytes": 1676,
+      "sha256": "f2e8e07f3288db4e1b89709dc0a8671710b7ddd782638eadc7c3f50dd8bf88d1"
+    },
+    {
+      "path": "prompts/skill_bless_3.txt",
+      "bytes": 1697,
+      "sha256": "60b6a6c528eb3c9984dfa2d4147b6282d374bee46d94f1c870a335b0b5099d5a"
+    },
+    {
+      "path": "raster.py",
+      "bytes": 5358,
+      "sha256": "8a12806bfe58c3866bc94bb8fd3ff03557d639a78f2314b48fd9543f0d291569"
+    },
+    {
+      "path": "references/approved_8x.png",
+      "bytes": 7559,
+      "sha256": "af10c69801aa47ce9b6261e04782a97242db6512a9acc79aaee9a4f90b0fdca9"
+    },
+    {
+      "path": "references/bless_raise.png",
+      "bytes": 530124,
+      "sha256": "08858169ad0c8c46ad6da85e7a625df1a52cee69c88eba8b304dba7967e85451"
+    },
+    {
+      "path": "references/comparison_4x.png",
+      "bytes": 10703,
+      "sha256": "2bc5f997ee9bd3c6297dc11e703f5ef19428833de75bf9c1d69406b3a9143e99"
+    },
+    {
+      "path": "references/contact_sheet.png",
+      "bytes": 149003,
+      "sha256": "8252a2ec5b83ba1f6d384a7fc91c5c8aa1579f14fee33714f37031af3cd3cf6d"
+    },
+    {
+      "path": "references/hashes.json",
+      "bytes": 1340,
+      "sha256": "fd1a56c13182a2627c257989dcd604eeb9e1a6888982a9e3b5ad50707abf01c3"
+    },
+    {
+      "path": "references/priest.png",
+      "bytes": 335349,
+      "sha256": "035c772613e4d6c22f09a4e21f62bdcecb7950d46aff5080894db21d864106d2"
+    },
+    {
+      "path": "references/skill_bless_0.png",
+      "bytes": 1273,
+      "sha256": "0ccb61f2ef0269f0dafe49d7f48661a55deae7d43dbab028cd63a2fb78fc9bef"
+    },
+    {
+      "path": "references/skill_bless_contact_sheet.png",
+      "bytes": 6987,
+      "sha256": "4cd45e42e786d57e3a0df5e3072354fcf5bf24cd6294ea0bb9dfeee80b65a535"
+    },
+    {
+      "path": "register_frame.py",
+      "bytes": 2187,
+      "sha256": "ac4f156078fb677874f44f71a934c487663ea3d7d7566a62c42c35b8e3c09885"
+    },
+    {
+      "path": "registration.json",
+      "bytes": 1740,
+      "sha256": "d2144ec0d5e05f227bb66a26d7365134663a4e0502cab40d25a0ef7fc870824d"
+    },
+    {
+      "path": "skill_bless.png",
+      "bytes": 3551,
+      "sha256": "c4bc5b0ac6aadd820a37ac43717da8cad5a9af06b5d2e307ff2211c38c0e7a51"
+    },
+    {
+      "path": "skill_bless_1x.gif",
+      "bytes": 88016,
+      "sha256": "78d1101791993100378d2399556cc63c9d41caab6e1751aed0763b85a0c55f49"
+    },
+    {
+      "path": "skill_bless_4x.gif",
+      "bytes": 1394516,
+      "sha256": "52a17d88bd936e76febf6e5aafd2554f3d67979bbf934a0d93299702c77be53a"
+    },
+    {
+      "path": "skill_bless_contact_sheet.png",
+      "bytes": 6525,
+      "sha256": "f3d2a067b56886bc384c71f39632bee1627cbf0e65ffcaadfb6fc8d8ac3665d2"
+    },
+    {
+      "path": "validate.py",
+      "bytes": 5075,
+      "sha256": "702d294ff8dcf2560f9b620aa0c581efe51e9d8d219516ebf5a891b4ecaac378"
+    },
+    {
+      "path": "verification/asset-check.json",
+      "bytes": 4342,
+      "sha256": "1ca002ca16535ef5ae4f44cbc16b51ccd55157a06abd04addff86478b015f995"
+    },
+    {
+      "path": "verification/frame_0_review.md",
+      "bytes": 265,
+      "sha256": "a20eff640818b1bf257ba6cf6f6f10b1c6dc80714fe84d2629367188327762db"
+    },
+    {
+      "path": "verification/frame_1_review.md",
+      "bytes": 386,
+      "sha256": "9f8e4f893dff5f1b4b354ac9f403853fd59e0efff164b42d3b2e689e3c307933"
+    },
+    {
+      "path": "verification/frame_2_review.md",
+      "bytes": 438,
+      "sha256": "a284d7cca6492a117aebe2fc5157a873d5d7b898692abe8fcdf70f6fcc69db80"
+    },
+    {
+      "path": "verification/frame_3_review.md",
+      "bytes": 354,
+      "sha256": "84dfa2ad051ba6938a2514623a94cf293b7256684b0485095d2a800659a2dec8"
+    },
+    {
+      "path": "verification/frame_4_review.md",
+      "bytes": 412,
+      "sha256": "8e93b2aeabe4ac0398460fcc28adbd51878305570acf770e52142df1e21ea19e"
+    },
+    {
+      "path": "verification/skill_bless_1_grid.png",
+      "bytes": 26897,
+      "sha256": "01ebbb4aa0e43c09e25f12104eb1fea2b8136a27c6d8dad5126b506552bd6129"
+    },
+    {
+      "path": "verification/skill_bless_2_grid.png",
+      "bytes": 27205,
+      "sha256": "72037cc7cfd14d3fb76838add0370047f03d1942bfba2a3bc7ad68cf66c83be1"
+    },
+    {
+      "path": "verification/skill_bless_3_grid.png",
+      "bytes": 27008,
+      "sha256": "ca34fa0fe4cd249f130cdcb1de0d6a444894858e0698c0d15184c71bee7def9c"
+    },
+    {
+      "path": "verification/transition_0_1.png",
+      "bytes": 6407,
+      "sha256": "b2808f9f1f9d07417d0b9d9541a518a14ff2340a5692477d6911f2c2fd6137f0"
+    },
+    {
+      "path": "verification/transition_1_2.png",
+      "bytes": 6487,
+      "sha256": "b6bd5faf41b96b45b2e1da287145547bcf07026691ebb3b1614ec422ae39d53b"
+    },
+    {
+      "path": "verification/transition_2_3.png",
+      "bytes": 6531,
+      "sha256": "4e1688e02e1d3ad06cd7ee65ff42017c49a755d3a57e4501da76d8b4e516aa12"
+    },
+    {
+      "path": "verification/transition_3_4.png",
+      "bytes": 7110,
+      "sha256": "f2e548c275cac15bc7a108d70d7b3d147ccfe1d564492d151908508d5f21e957"
+    },
+    {
+      "path": "verification/validation.json",
+      "bytes": 2608,
+      "sha256": "e0a590b829bec62e97a2d125fb75e92f17c3da347abd6ad5ef8579d1b96dad5d"
+    },
+    {
+      "path": "weapons/mace/priest_female_p2/skill_bless_0.png",
+      "bytes": 323,
+      "sha256": "3e1b16815b419c93b76484b4c01bb45efc5204cf3b7325eea0fc2225c5e9f318"
+    },
+    {
+      "path": "weapons/mace/priest_female_p2/skill_bless_1.png",
+      "bytes": 341,
+      "sha256": "7b7953ecd47047daed7bc21230e6001379433ca293b377c7339854d069efc971"
+    },
+    {
+      "path": "weapons/mace/priest_female_p2/skill_bless_2.png",
+      "bytes": 386,
+      "sha256": "fca80d42bbbcbfa077edccea3b472c116c0148257d99bad67f961ace4d6977f7"
+    },
+    {
+      "path": "weapons/mace/priest_female_p2/skill_bless_3.png",
+      "bytes": 312,
+      "sha256": "8901496131c2f884aab5026d46ce5c4e8047844c06a8ab4434c80d256ed2a7e6"
+    },
+    {
+      "path": "weapons/mace/priest_female_p2/skill_bless_4.png",
+      "bytes": 314,
+      "sha256": "7c197bde41df8d28cb2509cc5cada1becdffc736b068a2eecb1d80c345a1e885"
+    },
+    {
+      "path": "workshop-manifest.json",
+      "bytes": 6526,
+      "sha256": "e83ef7329c7d0498164aba25c2a0b7ad51b9752139417155a411ae53c9561418"
+    }
+  ]
+}

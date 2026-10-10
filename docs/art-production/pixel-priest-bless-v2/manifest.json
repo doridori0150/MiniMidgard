@@ -1,0 +1,340 @@
+{
+  "schema": "minimidgard.pixel/1",
+  "canvas": {
+    "size": [
+      128,
+      120
+    ],
+    "origin": [
+      64,
+      112
+    ],
+    "bodyHeight": 48
+  },
+  "animations": {
+    "skill_bless": {
+      "frames": [
+        "skill_bless_0",
+        "skill_bless_1",
+        "skill_bless_2",
+        "skill_bless_3",
+        "skill_bless_4"
+      ],
+      "durations": [
+        100,
+        140,
+        160,
+        100,
+        100
+      ],
+      "duration": 600,
+      "loop": false
+    }
+  },
+  "hairKeys": [
+    "#faf0d7",
+    "#e1cdb8",
+    "#b49b91",
+    "#49342f"
+  ],
+  "characters": {
+    "priest_female_p2": {
+      "gender": "female",
+      "class": "priest",
+      "bodyHeight": 48,
+      "headHeight": 24,
+      "proportion": 2,
+      "defaultWeapon": "mace",
+      "defaultHair": "priest_crown_braid_p2",
+      "hairStyles": [
+        "priest_crown_braid_p2"
+      ],
+      "animations": {
+        "skill_bless": {
+          "frames": [
+            "skill_bless_0",
+            "skill_bless_1",
+            "skill_bless_2",
+            "skill_bless_3",
+            "skill_bless_4"
+          ],
+          "durations": [
+            100,
+            140,
+            160,
+            100,
+            100
+          ],
+          "duration": 600,
+          "loop": false
+        }
+      },
+      "skillMotions": {
+        "blessing": "skill_bless",
+        "increase_agi": "skill_bless",
+        "impositio": "skill_bless",
+        "suffragium": "skill_bless",
+        "aspersio": "skill_bless",
+        "kyrie": "skill_bless"
+      },
+      "frames": {
+        "skill_bless_0": {
+          "image": "body/priest_female_p2/skill_bless_0.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_bless_0",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_bless_0.png",
+          "pivot": [
+            64,
+            112
+          ],
+          "sha256": "a873436a1a10c5e15566a49afe026fc44f3a1fe9b791c773f53003cd75746e66",
+          "layerHashes": {
+            "body": "a873436a1a10c5e15566a49afe026fc44f3a1fe9b791c773f53003cd75746e66",
+            "back": "8762ba51229db7fb34c4dc12d191a99d40cb6bc3714b6106db3525c376c8c4d4",
+            "front": "c782b6673f9dbe294e0d75e11e3a38570fb7307df917682a3822d6198a50770d",
+            "mace": "3e1b16815b419c93b76484b4c01bb45efc5204cf3b7325eea0fc2225c5e9f318",
+            "grip": "1e75733b27d94a125c2bc2ebaaf23e592f43b51b7587befa6705b21368c77ce3"
+          }
+        },
+        "skill_bless_1": {
+          "image": "body/priest_female_p2/skill_bless_1.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_bless_1",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              68,
+              92
+            ],
+            "tipPoint": [
+              76,
+              100
+            ],
+            "angleDegrees": 45.0
+          },
+          "grip": "grips/priest_female_p2/skill_bless_1.png",
+          "pivot": [
+            64,
+            112
+          ],
+          "sha256": "a7ae941f8286136110983f5236cd9d65ed90c33519bf81226907edd8be8385f5",
+          "layerHashes": {
+            "body": "a7ae941f8286136110983f5236cd9d65ed90c33519bf81226907edd8be8385f5",
+            "back": "8762ba51229db7fb34c4dc12d191a99d40cb6bc3714b6106db3525c376c8c4d4",
+            "front": "c782b6673f9dbe294e0d75e11e3a38570fb7307df917682a3822d6198a50770d",
+            "mace": "7b7953ecd47047daed7bc21230e6001379433ca293b377c7339854d069efc971",
+            "grip": "41787d6137f731c873a5b867043efa8874a5b4d878ea3b954e30a16961eee475"
+          }
+        },
+        "skill_bless_2": {
+          "image": "body/priest_female_p2/skill_bless_2.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_bless_2",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              68,
+              94
+            ],
+            "tipPoint": [
+              78,
+              107
+            ],
+            "angleDegrees": 52.43
+          },
+          "grip": "grips/priest_female_p2/skill_bless_2.png",
+          "pivot": [
+            64,
+            112
+          ],
+          "sha256": "83c90cf6bb19527c185a5d07beedc6a8420d7c909d8d4ef4b0ad3feaa6e314a7",
+          "layerHashes": {
+            "body": "83c90cf6bb19527c185a5d07beedc6a8420d7c909d8d4ef4b0ad3feaa6e314a7",
+            "back": "8762ba51229db7fb34c4dc12d191a99d40cb6bc3714b6106db3525c376c8c4d4",
+            "front": "c782b6673f9dbe294e0d75e11e3a38570fb7307df917682a3822d6198a50770d",
+            "mace": "fca80d42bbbcbfa077edccea3b472c116c0148257d99bad67f961ace4d6977f7",
+            "grip": "dba15a329dbb41c12dcdf101b838f264106fc6a4a5a773edd722b245bc5c8b8f"
+          }
+        },
+        "skill_bless_3": {
+          "image": "body/priest_female_p2/skill_bless_3.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_bless_3",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              71,
+              95
+            ],
+            "tipPoint": [
+              79,
+              99
+            ],
+            "angleDegrees": 26.57
+          },
+          "grip": "grips/priest_female_p2/skill_bless_3.png",
+          "pivot": [
+            64,
+            112
+          ],
+          "sha256": "73c84b6d539e9581b7391b011242a622d1d75ce0c060ba88efaa6bab64424593",
+          "layerHashes": {
+            "body": "73c84b6d539e9581b7391b011242a622d1d75ce0c060ba88efaa6bab64424593",
+            "back": "8762ba51229db7fb34c4dc12d191a99d40cb6bc3714b6106db3525c376c8c4d4",
+            "front": "c782b6673f9dbe294e0d75e11e3a38570fb7307df917682a3822d6198a50770d",
+            "mace": "8901496131c2f884aab5026d46ce5c4e8047844c06a8ab4434c80d256ed2a7e6",
+            "grip": "e703e0926b34e92d783fad7f41009413f6144a975eaf51ad4b0c77837f6b8c5c"
+          }
+        },
+        "skill_bless_4": {
+          "image": "body/priest_female_p2/skill_bless_4.png",
+          "head": {
+            "point": [
+              0,
+              0
+            ],
+            "pose": "skill_bless_4",
+            "basePose": "up"
+          },
+          "weapon": {
+            "z": "front",
+            "visible": true,
+            "hand": "near",
+            "gripPoint": [
+              72,
+              98
+            ],
+            "tipPoint": [
+              80,
+              103
+            ],
+            "angleDegrees": 32.01
+          },
+          "grip": "grips/priest_female_p2/skill_bless_4.png",
+          "pivot": [
+            64,
+            112
+          ],
+          "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5",
+          "layerHashes": {
+            "body": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5",
+            "back": "749ba16bf83478cf9f75d6730f962ab3207b74ef212b5800d550d1c8b321f065",
+            "front": "f3335c6b0d833020bdee7b3f6f969585284de996be1f16aeef7a99e64d019880",
+            "mace": "7c197bde41df8d28cb2509cc5cada1becdffc736b068a2eecb1d80c345a1e885",
+            "grip": "9c7a723786f8d3f493f8bc047d12398a6e69a6bb25e20a23ec7130d4764614be"
+          }
+        }
+      }
+    }
+  },
+  "hair": {
+    "priest_crown_braid_p2": {
+      "gender": "female",
+      "style": "priest_crown_braid",
+      "proportion": "p2",
+      "pivot": [
+        0,
+        0
+      ],
+      "poses": {
+        "skill_bless_0": {
+          "front": "hair/priest_crown_braid_p2/skill_bless_0_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_bless_0_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_bless_1": {
+          "front": "hair/priest_crown_braid_p2/skill_bless_1_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_bless_1_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_bless_2": {
+          "front": "hair/priest_crown_braid_p2/skill_bless_2_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_bless_2_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_bless_3": {
+          "front": "hair/priest_crown_braid_p2/skill_bless_3_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_bless_3_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        "skill_bless_4": {
+          "front": "hair/priest_crown_braid_p2/skill_bless_4_front.png",
+          "back": "hair/priest_crown_braid_p2/skill_bless_4_back.png",
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      }
+    }
+  },
+  "weapons": {
+    "mace": {
+      "frames": {
+        "priest_female_p2": {
+          "skill_bless_0": "weapons/mace/priest_female_p2/skill_bless_0.png",
+          "skill_bless_1": "weapons/mace/priest_female_p2/skill_bless_1.png",
+          "skill_bless_2": "weapons/mace/priest_female_p2/skill_bless_2.png",
+          "skill_bless_3": "weapons/mace/priest_female_p2/skill_bless_3.png",
+          "skill_bless_4": "weapons/mace/priest_female_p2/skill_bless_4.png"
+        }
+      }
+    }
+  }
+}

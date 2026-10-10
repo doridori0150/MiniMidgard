@@ -1,0 +1,32 @@
+[
+  {
+    "source": "/private/tmp/claude-501/-Users-oreocookie03-Projects/696241a4-5818-43e7-ac3b-9d1bcdbdb5ed/scratchpad/ro/priest.png",
+    "copy": "references/priest.png",
+    "sha256": "035c772613e4d6c22f09a4e21f62bdcecb7950d46aff5080894db21d864106d2"
+  },
+  {
+    "source": "docs/art-production/pixel-class-priest/skill_bless_contact_sheet.png",
+    "copy": "references/skill_bless_contact_sheet.png",
+    "sha256": "4cd45e42e786d57e3a0df5e3072354fcf5bf24cd6294ea0bb9dfeee80b65a535"
+  },
+  {
+    "source": "docs/art-production/pixel-class-priest/contact_sheet.png",
+    "copy": "references/contact_sheet.png",
+    "sha256": "8252a2ec5b83ba1f6d384a7fc91c5c8aa1579f14fee33714f37031af3cd3cf6d"
+  },
+  {
+    "source": "docs/art-production/pixel-class-priest/comparison_4x.png",
+    "copy": "references/comparison_4x.png",
+    "sha256": "2bc5f997ee9bd3c6297dc11e703f5ef19428833de75bf9c1d69406b3a9143e99"
+  },
+  {
+    "source": "docs/art-production/pixel-class-priest/authored/bless_raise.png",
+    "copy": "references/bless_raise.png",
+    "sha256": "08858169ad0c8c46ad6da85e7a625df1a52cee69c88eba8b304dba7967e85451"
+  },
+  {
+    "source": "docs/art-production/pixel-class-priest/composite/skill_bless_0.png",
+    "copy": "references/skill_bless_0.png",
+    "sha256": "0ccb61f2ef0269f0dafe49d7f48661a55deae7d43dbab028cd63a2fb78fc9bef"
+  }
+]
