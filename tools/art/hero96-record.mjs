@@ -82,8 +82,9 @@ const approved = sheets.find((s) => s.kind === 'idle' && !s.candidate);
 const out = {
   kit: 1,
   source: 'docs/art-production/pixel-<직업>-96/ (96px 시범, 파이프라인 B-5-1)',
-  // game size: twice today's 59 px body; pixel art is drawn without smoothing
-  display: { bodyPx: 118, pixel: true },
+  // game size: the same height as today's 48 px heroes (59 field px, about 70 CSS px on a phone), so 96 px art shows twice as fine —
+  // the user's choice 2026-10-11: "96. 같은 키. 선명해야 뭐가 보이지". Pixel art is drawn without smoothing
+  display: { bodyPx: 59, pixel: true },
   overlayGroups: { weapon: { label: '무기', inside: false }, hair_back: { label: '뒷머리', inside: false }, hair_front: { label: '앞머리', inside: false } },
   figureOverlays: ['hair_back', 'hair_front'],
   checkRules: { guard: { bottom: 2 } },

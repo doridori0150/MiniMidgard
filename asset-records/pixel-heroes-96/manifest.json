@@ -2,7 +2,7 @@
   "kit": 1,
   "source": "docs/art-production/pixel-<직업>-96/ (96px 시범, 파이프라인 B-5-1)",
   "display": {
-    "bodyPx": 118,
+    "bodyPx": 59,
     "pixel": true
   },
   "overlayGroups": {

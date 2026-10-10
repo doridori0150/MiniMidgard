@@ -18,7 +18,9 @@
   - 대기 키 96px(머리 포함), 머리 폭 60px 이하
   - 오른쪽 3/4 시점(엔진이 뒤집음)
   - 대기의 뒷발: 220~223행의 가장 뒤 픽셀이 x 105
-- **기록:** `asset-records/pixel-heroes-96/manifest.json`(display.bodyPx 118, styleRef = idle)
+- **화면 키:** 지금 48px 영웅과 같은 키(필드 59px, 폰 390×844에서 약 70px)입니다. 96px 그림이 그 키 안에 2배로 촘촘하게 들어갑니다. 2026-10-11 사용자 결정: "96. 같은 키. 선명해야 뭐가 보이지". 폰 화면 비교에서 2배 키는 파티와 몬스터가 화면에 다 들어가지 않아 버렸습니다.
+- **기록:** `asset-records/pixel-heroes-96/manifest.json`(display.bodyPx 59, styleRef = idle)
 - **동작 참조:** 라그나로크 어새신(남, 단검) 남동 시트(`node tools/art/ro-sheet.mjs 12 male 1`, 저장소 밖). 숫자 분해는 `docs/art/motion-templates/assassin-*.json`에 있습니다. 순서와 리듬만 가져옵니다.
 - **수정 이력:**
   - 2026-10-10: 후보 A·B 중 B를 승인했습니다. A는 `pixel-assassin-96/rejected/idle_a`에 남깁니다.
+  - 2026-10-11: 화면 키를 2배(bodyPx 118)에서 같은 키(59)로 바꿨습니다(사용자 결정).
