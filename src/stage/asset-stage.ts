@@ -13,6 +13,8 @@ import type { HeroLookDraw, Pose } from '../render/hero.ts';
 import { attackContact, pixelFrame, setPixelEnabled } from '../render/pixel.ts';
 import { drawRigHero, loadRig } from '../render/rig.ts';
 import { setWholeEnabled } from '../render/whole.ts';
+import { timelines } from '../render/timeline.ts';
+import { validateTimeline, type Timeline } from '../render/vendor/asset-kit-timeline.js';
 
 interface Anim { frames: string[]; durations: number[]; duration: number; loop: boolean; hitFrame?: number }
 interface Char { class: string; gender: string; defaultWeapon?: string; animations?: Record<string, Anim>; skillMotions?: Record<string, string> }
@@ -161,6 +163,19 @@ addEventListener('message', (ev) => {
     if (m.loop !== undefined) state.loop = !!m.loop;
     if (m.speed) state.speed = Math.min(2, Math.max(0.25, Number(m.speed) || 1));
   }
+  // timeline@1 (asset-kit 타임라인): checked with the shared validator; this bare stage plays the timeline's body motion only —
+  // its effects, camera and cut-ins play on the field (game URL ?demo=<skill id>)
+  if (m.type === 'asset-stage:timeline' && ev.source) {
+    const src = ev.source as Window;
+    const tl = (m.timeline as Timeline | undefined) ?? timelines().find((t) => t.id === m.id);
+    const errors = tl ? validateTimeline(tl) : ['타임라인을 찾지 못했습니다: ' + (m.id ?? '')];
+    if (tl && !errors.length) {
+      const motion = tl.tracks.find((t) => t.type === 'motion')?.clips[0] as { anim?: string } | undefined;
+      if (tl.subject && M.characters[tl.subject]) show(tl.subject, motion?.anim ?? state.kind);
+      if (motion?.anim) play('selected');
+    }
+    src.postMessage({ type: 'asset-stage:timelined', req: m.req, ok: !errors.length, ...(errors.length ? { errors } : { event: 'motion', note: '무대는 몸 동작만 재생합니다. 이펙트·카메라·컷인은 게임 ?demo=<스킬 id>에서' }) }, '*');
+  }
   if (m.type === 'asset-stage:film' && ev.source) {
     const src = ev.source as Window;
     film(m).then((f) => src.postMessage({ type: 'asset-stage:filmed', req: m.req, film: f }, '*'), (e) => src.postMessage({ type: 'asset-stage:filmed', req: m.req, error: String(e?.message ?? e) }, '*'));
@@ -182,6 +197,6 @@ Object.assign(window, { AssetStageFilm, MiniMidgardStage: { state, plan, film, s
     { id: 'selected', label: '고른 동작 재생' }, { id: 'attack', label: '평타' }, { id: 'cast', label: '시전' },
     { id: 'walk', label: '걷기' }, { id: 'hurt', label: '피격' }, { id: 'dead', label: '쓰러짐' },
   ];
-  tell({ type: 'asset-stage:ready', heroes, tunables: {}, defaults: {}, actions, film: ['selected', 'attack', 'cast', 'walk'] });
+  tell({ type: 'asset-stage:ready', heroes, tunables: {}, defaults: {}, actions, film: ['selected', 'attack', 'cast', 'walk'], timelines: timelines().map((t) => ({ id: t.id, skills: t.skills, subject: t.subject })) });
   show(state.id);
 })().catch((e) => say('무대를 열지 못했습니다: ' + (e?.message ?? e)));

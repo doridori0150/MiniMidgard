@@ -23,6 +23,10 @@ export type FxEvent =
   | { t: 'dmg'; uid: number; n: number; kind: DmgKind; i?: number }
   | { t: 'hit'; uid: number; style: 'slash' | 'blunt' | 'pierce' | 'magic' | 'claw'; element: Element; crit?: boolean }
   | { t: 'skill'; fx: string; from: number; to?: number; x: number; y: number; lv: number; radius?: number; hits?: number; element?: Element }
+  /** a skill released (not a free repeat): its presentation timeline starts here; events are ms from now (timeline@1 events) */
+  | { t: 'skillStart'; uid: number; skill: string; lv: number; to?: number; events: Record<string, number | number[]> }
+  /** the hit times of a multi-hit or ranged skill, sent right after its skillStart */
+  | { t: 'skillHits'; uid: number; skill: string; hits: number[] }
   | { t: 'cast'; uid: number; dur: number; element: Element; name: string }
   | { t: 'castEnd'; uid: number }
   | { t: 'shot'; from: number; to: number; kind: 'arrow' | 'bone' | 'shadow' | 'falcon'; dur: number; element: Element }
@@ -2972,6 +2976,7 @@ export class World {
       h.atkReady = Math.max(h.atkReady, this.time + Math.min(delay, h.d.delay));
       this.setState(h, sk.magic || sk.kind === 'heal' || sk.kind === 'buff' || sk.kind === 'selfBuff' || sk.kind === 'ground' || sk.kind === 'cure' ? 'cast' : 'attack');
       h.skillAnim = { id: sk.id, at: this.time };
+      this.emit({ t: 'skillStart', uid: h.uid, skill: sk.id, lv, to: c.target ?? undefined, events: { contact: sk.kind === 'ranged' ? BOW_RELEASE : SKILL_CONTACT } });
       this.stateHold(h, Math.min(delay, 450));
     }
     // a cloaked assassin shows itself when it acts — except grimtooth (RO)
@@ -3012,6 +3017,7 @@ export class World {
         this.holdBreak(tm, SKILL_CONTACT + mhits * gap + 100);
         const hb = (sk.hitBonus ? sk.hitBonus(lv) : 0) + (sk.id === 'sonic_blow' && h.hero.skills.sonic_accel ? 50 : 0);
         if (mhits > 1) {
+          if (!free) this.emit({ t: 'skillHits', uid: h.uid, skill: sk.id, hits: Array.from({ length: mhits }, (_, i) => SKILL_CONTACT + i * gap) });
           let total = 0;
           for (let i = 0; i < mhits; i++) {
             this.after(SKILL_CONTACT + i * gap, () => {
@@ -3049,6 +3055,7 @@ export class World {
         const hits = sk.hits ? sk.hits(lv) : 1;
         const fly = Math.max(100, dist(h, tm) / 0.9);
         this.after(BOW_RELEASE, () => this.sound('arrow'));
+        if (!free) this.emit({ t: 'skillHits', uid: h.uid, skill: sk.id, hits: Array.from({ length: hits }, (_, i) => BOW_RELEASE + i * 110 + fly) });
         this.lexPacket(tm, BOW_RELEASE + hits * 110 + fly + 100);
         let total = 0;
         for (let i = 0; i < hits; i++) {

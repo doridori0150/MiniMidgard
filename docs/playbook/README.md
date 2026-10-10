@@ -40,6 +40,24 @@
 - 그림을 합친 뒤에는 개발 서버를 다시 띄웁니다(Vite가 옛 PNG를 줌).
 - 노트북 발열: 무거운 작업(codex, 헤드리스 브라우저, 시뮬레이션)은 한 번에 하나만, `taskpolicy -b`로 돌립니다.
 
+## 스킬 연출 타임라인 (timeline@1)
+- 형식: asset-kit `docs/타임라인-형식.md` (공방 세션이 관리). 공통 함수는 `npm run timelines`가 `src/render/vendor/asset-kit-timeline.js`로 복사하고 검사합니다.
+- 타임라인: `src/assets/timelines/<이름>.json`
+  - `skills`(띄우는 스킬 id)를 꼭 적습니다.
+  - fx는 `game:<field.ts 이펙트 이름>`입니다.
+  - 효과음 키는 `public/audio/manifest.json`에 있는 것만 씁니다.
+  - 미니 미드가르 전용 필드: `skills`, `gameFx`(`replace`면 게임 기본 이펙트 대신 타임라인이 이펙트를 냄).
+- 게임: 스킬을 놓을 때 world.ts가 `skillStart`(접촉 시각), 연타·원거리는 `skillHits`(타격 시각 배열)를 내고, `src/render/timeline.ts`가 그 시각에 맞춰 재생합니다.
+  - 피해 시점은 게임 로직이 정하고, 타임라인은 보여 주기만 합니다.
+  - 몸 동작은 영웅의 스킬 모션(pixel.ts가 접촉 시각에 맞춤)입니다.
+- 지원
+  - fx(game:), 효과음, 카메라 흔들림·줌, 히트스톱, 섬광(부분·전체), 어둡게, 이동(몸 높이 단위, 좌우 반전), 컷인 그림·글자
+  - 끊김(cut·finish·fade), 등급(화면이 바쁘면 TIER_DROP), 카메라 독점
+- 안 함: 카메라 이동·기울기(선택 트랙), sheet:·module: 이펙트, scene
+- 확인
+  - 시연 주소 `?demo=<스킬 id>`. 예: `?demo=meteor`, `?demo=sonic_blow`
+  - 공방 무대는 `asset-stage:timeline`에 검사 결과로 답하고 몸 동작만 재생합니다.
+
 ## 새 게임에서 시작하는 순서
 1. 제작 노트의 "생성 프로세스"에서 맞는 영역을 고르고, "AI 요청 프롬프트 틀"을 복사합니다.
 2. 위 도구들을 새 저장소의 `tools/art/`로 복사하고 경로·형식 이름만 바꿉니다.

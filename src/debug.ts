@@ -111,7 +111,10 @@ export async function demoBoot(): Promise<boolean> {
   // the 2nd job of the skill's line (its own art and skill motions), and a knight to receive buffs
   const second = (Object.keys(CLASSES) as (keyof typeof CLASSES)[]).find((c) => CLASSES[c].tier === 2 && c !== 'blacksmith' && lineage(c).includes(sk.cls)) ?? sk.cls;
   await qaBoot(new URLSearchParams({ qa: '', party: q.get('party') ?? `${second},knight`, lv: q.get('lv') ?? '60', zone: q.get('zone') ?? 'meadow', art: 'd', bg: q.get('bg') ?? 'hd', band: 'closed' }));
-  const w = game.world, every = Math.max(800, Number(q.get('every')) || 2400);
+  const w = game.world, lvMax = sk.maxLv;
+  // long casts (meteor 3 s) need the cast and its after-cast delay to finish before the next one
+  const busyMs = (sk.cast ? sk.cast(lvMax) : 0) + (sk.delay ? sk.delay(lvMax) : 300);
+  const every = Math.max(800, Number(q.get('every')) || Math.max(2400, busyMs + 900));
   const who = (w.heroes.find((h) => lineage(h.hero.cls).includes(sk.cls)) ?? w.heroes[0]).hero;
   who.skills[id] = Math.max(who.skills[id] ?? 0, sk.maxLv);
   // syncParty rebuilds the field units, so the caster is looked up by its hero each time

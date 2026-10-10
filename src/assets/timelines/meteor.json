@@ -1,0 +1,31 @@
+{
+  "kit": 1,
+  "format": "timeline@1",
+  "id": "mm-meteor",
+  "game": "Mini Midgard",
+  "subject": "wizard_female_p2",
+  "action": "skill_meteor",
+  "skills": ["meteor"],
+  "tier": "signature",
+  "title": "유성우(대표 스킬, 시전 3초): 하늘을 가리키는 순간 화면을 조금 어둡게 하고 스킬 이름을 띄움, 유성이 떨어지는 동안 흔들림과 붉은 섬광. 유성 자체는 게임 이펙트 meteor",
+  "fps": 60,
+  "events": { "contact": 130 },
+  "stage": { "ref": [420, 860], "fit": "contain" },
+  "exclusive": ["camera"],
+  "tracks": [
+    { "id": "dim", "type": "dim", "clips": [
+      { "at": 0, "dur": 1300, "color": "#140a1c", "reduced": "static",
+        "keys": { "opacity": [[0, 0], [160, 0.32, "outQuad"], [900, 0.32], [1300, 0]] } }
+    ] },
+    { "id": "name", "type": "text", "clips": [
+      { "at": 0, "dur": 1100, "text": "유성우", "style": "title",
+        "keys": { "opacity": [[0, 0], [120, 1], [850, 1], [1100, 0]], "scale": [[0, 1.5, "outBack"], [180, 1]], "x": [[0, 0.5]], "y": [[0, 0.33, "outCubic"], [1100, 0.3]] } }
+    ] },
+    { "id": "rumble", "type": "camera", "clips": [
+      { "at": 480, "dur": 1000, "kind": "shake", "reduced": "skip", "keys": { "amp": [[0, 4.5, "outQuad"], [1000, 0]] } }
+    ] },
+    { "id": "impact", "type": "flash", "clips": [
+      { "at": 480, "dur": 220, "area": "full", "color": "#ff9a50", "flash": true, "keys": { "opacity": [[0, 0.22], [220, 0]] } }
+    ] }
+  ]
+}

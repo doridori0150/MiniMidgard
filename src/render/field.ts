@@ -17,6 +17,7 @@ import { MONSTERS } from '../game/data/monsters.ts';
 import { findEquip } from '../game/stats.ts';
 import { itemIcon } from './icons.ts';
 import { rgba } from './color.ts';
+import { TimelinePlayer } from './timeline.ts';
 import { drawGround, drawIceBlock, drawTalkie, drawCart } from './grounds.ts';
 
 interface Particle {
@@ -142,6 +143,17 @@ export class FieldRenderer {
   lastFrame = 0;
   lookCache = new Map<number, { key: string; look: HeroLookDraw }>();
   onSound: (key: string) => void = () => {};
+  /** skill presentation timelines (timeline@1, src/assets/timelines): started by the sim's skillStart, drawn over the field */
+  readonly timeline = new TimelinePlayer({
+    pos: (uid) => this.pos(uid),
+    facing: (uid) => (this.world.unit(uid)?.facing ?? 1) as 1 | -1,
+    skillOf: (uid) => { const u = this.world.unit(uid); return u?.kind === 'hero' && !['walk', 'dead', 'sit'].includes(u.state) ? u.skillAnim : null; },
+    fireFx: (fx, from, to, at, params) => this.skillFx({ t: 'skill', fx, from, to, x: at.x, y: at.y, lv: Number(params.lv ?? 1), element: params.element as Element | undefined }),
+    sound: (key) => this.onSound(key),
+    kick: (shake, flash, color, stop) => this.kick(stop > 0 || shake >= 6 ? 'climax' : 'decision', shake, flash, color, stop),
+    shakeTo: (amp) => { if (!this.lowFx && !REDUCED_MOTION) this.shake = Math.max(this.shake, amp); },
+    reduced: typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches,
+  });
   onAnnounce: (text: string, kind: string) => void = () => {};
   onNpc: (npc: string) => void = () => {};
   onTapMob: (uid: number) => void = () => {};
@@ -293,7 +305,9 @@ export class FieldRenderer {
         break;
       }
       case 'hit': this.hitFx(e.uid, e.style, e.element, !!e.crit); break;
-      case 'skill': this.skillFx(e); break;
+      case 'skill': if (!this.timeline.replaces(e.from, e.fx)) this.skillFx(e); break;
+      case 'skillStart': this.timeline.start(e, now); break;
+      case 'skillHits': this.timeline.hits(e); break;
       case 'cast': this.casts.set(e.uid, { t0: now, dur: e.dur, element: e.element, name: e.name }); break;
       case 'castEnd': this.casts.delete(e.uid); break;
       case 'shot': {
@@ -982,6 +996,7 @@ export class FieldRenderer {
       for (const p of due) p.fn();
     }
     this.consume(this.world.events);
+    this.timeline.update(nowMs, this.cssH > this.cssW);
     const ctx = this.ctx;
     const w = this.world;
     const art = this.art!;
@@ -1016,7 +1031,7 @@ export class FieldRenderer {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.fillStyle = art.theme === 'cave' ? '#1a1416' : art.theme === 'forest' ? '#2a4a22' : art.theme === 'desert' ? '#b89058' : art.theme === 'snow' ? '#b8cce0' : '#5a8a40';
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    const z = this.cam.zoom * this.dpr;
+    const z = this.cam.zoom * this.timeline.zoom * this.dpr;
     const ox = this.cssW / 2 * this.dpr - this.cam.x * z + sx * this.dpr;
     const oy = (this.cssH - this.insetBottom) / 2 * this.dpr - this.cam.y * z + sy * this.dpr;
     ctx.setTransform(z, 0, 0, z, ox, oy);
@@ -1088,6 +1103,7 @@ export class FieldRenderer {
     // projectiles
     this.drawShots(ctx, nowMs);
     this.runEffects(ctx, 'top');
+    this.timeline.drawField(ctx, nowMs, this.cssH > this.cssW);
     this.stepParticles(ctx, dt);
 
     // lighting
@@ -1107,6 +1123,8 @@ export class FieldRenderer {
       ctx.fillRect(0, 0, this.cssW, this.cssH);
       this.flash *= Math.pow(0.0005, dt / 1000);
     }
+    ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    this.timeline.drawScreen(ctx, nowMs, this.cssW, this.cssH);
     if (w.wipeUntil) {
       ctx.fillStyle = 'rgba(30,0,0,0.35)';
       ctx.fillRect(0, 0, this.cssW, this.cssH);
@@ -1188,7 +1206,8 @@ export class FieldRenderer {
     const state = w.wipeUntil ? 'dead' : h.state === 'spawn' ? 'idle' : h.state;
     const flash = rt - h.hurtAt < 160 ? 1 - (rt - h.hurtAt) / 160 : 0;
     ctx.save();
-    ctx.translate(sm.x, sm.y);
+    const off = this.timeline.offsets.get(h.uid); // a timeline's move track (dash, recoil) — drawing only, the unit stays put
+    ctx.translate(sm.x + (off?.x ?? 0), sm.y + (off?.y ?? 0));
     // swing length chosen so the blade/spear/katar passes straight ahead at MELEE_CONTACT and the bow releases at BOW_RELEASE
     const dur = h.state === 'attack' ? (h.d.wtype === 'bow' ? BOW_RELEASE / 0.6 : h.d.wtype === 'spear' ? MELEE_CONTACT / 0.47 : MELEE_CONTACT / 0.5) : undefined;
     const pose: Pose = { state: flash > 0.5 && (state === 'idle' || state === 'ready') ? 'hurt' : state, t: state === 'idle' || state === 'ready' || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing, since: t };
@@ -1249,7 +1268,8 @@ export class FieldRenderer {
     const spawn = m.state === 'spawn' ? Math.min(1, (rt - m.stateT) / 600) : 1;
     let dead = m.state === 'dead' ? Math.min(1, (rt - m.deadAt) / (m.m.boss ? 1600 : 900)) : 0;
     ctx.save();
-    ctx.translate(sm.x, sm.y);
+    const off = this.timeline.offsets.get(m.uid);
+    ctx.translate(sm.x + (off?.x ?? 0), sm.y + (off?.y ?? 0));
     const guardian = !!w.rift && w.rift.guardian === m.uid;
     if ((m.m.boss || m.danger || m.elite?.leader) && !dead) {
       ctx.save(); ctx.globalCompositeOperation = 'lighter';

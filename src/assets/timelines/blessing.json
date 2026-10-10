@@ -1,0 +1,19 @@
+{
+  "kit": 1,
+  "format": "timeline@1",
+  "id": "mm-blessing",
+  "game": "Mini Midgard",
+  "subject": "priest_female_p2",
+  "action": "skill_bless",
+  "skills": ["blessing", "increase_agi", "impositio", "suffragium", "aspersio", "kyrie"],
+  "tier": "skill",
+  "title": "축복 계열: 빛 기둥을 받으며 손을 모아 기도. 기둥(시전자 금빛 + 받는 동료 흰빛)은 게임 이펙트 blessing이 그리고, 타임라인은 시전자 둘레의 따뜻한 빛만 더함. 자주 쓰는 버프라 카메라·히트스톱 없음",
+  "fps": 60,
+  "events": { "contact": 130 },
+  "tracks": [
+    { "id": "glow", "type": "flash", "clips": [
+      { "at": 0, "dur": 620, "area": "local", "anchor": "caster", "color": "#fff3c4", "flash": true,
+        "keys": { "opacity": [[0, 0], [130, 0.45, "outQuad"], [620, 0]], "radius": [[0, 30], [620, 52]] } }
+    ] }
+  ]
+}

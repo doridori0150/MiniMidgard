@@ -1,0 +1,37 @@
+{
+  "kit": 1,
+  "format": "timeline@1",
+  "id": "mm-sonic-blow",
+  "game": "Mini Midgard",
+  "subject": "assassin_male_p2",
+  "action": "skill_sonic",
+  "skills": ["sonic_blow"],
+  "tier": "skill",
+  "title": "음속 연격 8타: 게임이 넘기는 타격 시각(hits, 70ms 간격)마다 작은 섬광과 흔들림, 마지막 타격에 히트스톱. 몸은 반 걸음 파고들었다 돌아옴",
+  "fps": 60,
+  "events": { "contact": 130, "hits": [130, 200, 270, 340, 410, 480, 550, 620] },
+  "exclusive": ["camera"],
+  "tracks": [
+    { "id": "dash", "type": "move", "onInterrupt": "cut", "clips": [
+      { "at": 0, "dur": 820, "actor": "caster", "units": "body", "mirror": "caster",
+        "keys": { "x": [[0, 0, "outCubic"], [110, 0.3], [660, 0.3, "inOutQuad"], [820, 0]] } }
+    ] },
+    { "id": "spark", "type": "flash", "clips": [
+      { "repeat": { "event": "hits" }, "dur": 90, "area": "local", "anchor": "target", "color": "#ffd6ec", "flash": true,
+        "keys": { "opacity": [[0, 0.6], [90, 0]], "radius": [[0, 18], [90, 30]] } }
+    ] },
+    { "id": "tick", "type": "camera", "clips": [
+      { "repeat": { "event": "hits" }, "dur": 60, "kind": "shake", "reduced": "skip", "keys": { "amp": [[0, 1.4], [60, 0]] } }
+    ] },
+    { "id": "last", "type": "flash", "clips": [
+      { "at": { "event": "hits", "index": -1 }, "dur": 200, "area": "local", "anchor": "target", "color": "#ff9ac0", "flash": true,
+        "keys": { "opacity": [[0, 0.8, "outQuad"], [200, 0]], "radius": [[0, 26], [200, 60]] } }
+    ] },
+    { "id": "stop", "type": "hitstop", "clips": [
+      { "at": { "event": "hits", "index": -1, "offset": 10 }, "dur": 60, "scope": "field" }
+    ] },
+    { "id": "cam", "type": "camera", "clips": [
+      { "at": { "event": "hits", "index": -1 }, "dur": 160, "kind": "shake", "reduced": "skip", "keys": { "amp": [[0, 3.5, "outQuad"], [160, 0]] } }
+    ] }
+  ]
+}
