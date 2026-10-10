@@ -122,7 +122,6 @@ export async function demoBoot(): Promise<boolean> {
   const drawn = pixelCharacters();
   for (const h of game.s.heroes) { const g = drawn.find((c) => c.cls === h.cls) ?? drawn.find((c) => c.cls === LINE[h.cls]); if (g) h.look.gender = g.gender as 'm' | 'f'; }
   w.syncParty();
-  { const c = unitOf(); w.heroes.forEach((h, i) => { if (h !== c) { h.x = c.x + 70 * i; h.y = c.y + 6; } }); }
   game.notify();
   const self = ['selfBuff', 'selfAoe', 'stance'].includes(sk.kind);
   const ally = ['buff', 'heal', 'cure', 'revive'].includes(sk.kind);
@@ -131,6 +130,8 @@ export async function demoBoot(): Promise<boolean> {
     // keep the field calm: no other monsters, nobody acts on their own between casts
     w.mobs = w.mobs.filter((m) => m === dummy);
     for (const h of w.heroes) { h.target = null; h.lockUntil = Math.max(h.lockUntil, w.time + ms); h.sitting = false; }
+    // the others wait a step behind the caster (the side away from the dummy) so they never cover it
+    const c = unitOf(); w.heroes.forEach((h, i) => { if (h !== c) { h.x = c.x - 64 * i; h.y = c.y - 6; h.facing = 1; } });
     if (dummy) { dummy.hp = dummy.maxHp = 1e9; dummy.lockUntil = w.time + ms; dummy.atkReady = w.time + ms; }
   };
   const cast = () => {
