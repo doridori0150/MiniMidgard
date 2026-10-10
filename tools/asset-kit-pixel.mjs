@@ -210,6 +210,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     const rules = {};
     if (rv.checks.includes('hand')) rules.anchorSide = []; // hand side / jump / outlier / hidden-weapon checks
     if (rv.checks.includes('grip')) rules.overlayFree = ['weapon', 'hair_back', 'hair_front', 'grip'];
+    if (rv.checks.includes('speck')) rules.speckPad = 32;
+    if (rv.checks.includes('pose')) { rules.standing = []; rules.bodyTol = 0.2; } // ends crouched / reaches overhead on purpose // the swing smear's broken tail counts as part of the figure
     s.checkRules = { ...(s.checkRules ?? {}), ...rules };
     s.review = { by: rv.by, date: rv.date, checks: rv.checks, note: rv.note };
     applied++;
