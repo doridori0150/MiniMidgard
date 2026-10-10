@@ -10,7 +10,8 @@
 // - 머리: 고른 헤어의 뒤·앞 조각 → `hair_back`·`hair_front` 덧그림(render.order로 순서). 몸 프레임에는 머리가 없어 몸 밖 검사는 빼고(overlayGroups inside: false),
 //   bodyHeight는 머리 없는 몸 그림의 선 키입니다(게임 키 48px은 gameHeight). 머리 위치가 (0,0)이 아닌 조각(쿠키 wavy_p2)은
 //   캔버스 크기로 옮긴 사본을 asset-records/pixel-heroes/derived/에 씁니다.
-// - 머리색: 게임은 네 키 색을 HAIR_TINT 배수로 바꿉니다. 표준의 tints(마스크 배수)와 같은 공식이지만 마스크는 아직 만들지 않았습니다.
+// - 머리색: 게임은 네 키 색을 HAIR_TINT 배수로 바꿉니다. 표준 tints + tintLayers(앞·뒷머리 덧그림 전체에 base × tint, v0.4.3)로 옮깁니다.
+//   몸 프레임에 남은 짧은 바탕 머리는 마스크를 만들지 않아 공방에서는 원색으로 보입니다.
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -51,7 +52,17 @@ function writePng(file, { w, h, data }) {
   fs.writeFileSync(file, Buffer.concat([Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]), chunk('IHDR', ihdr), chunk('IDAT', zlib.deflateSync(raw, { level: 9 })), chunk('IEND', Buffer.alloc(0))]));
 }
 
-export function convert(src, { base, derivedDir, canvasFor = (p) => readPng(p), measure = null }) {
+// 설정의 머리색 순서(src/game/state.ts HAIR_COLORS)와 같은 이름
+const HAIR_NAMES = ['흑갈색', '적갈색', '금발', '백금(원색)', '빨강', '파랑', '초록', '보라', '분홍', '흑청'];
+/** whole.ts HAIR_TINT (per-colour multipliers; null = the cream as drawn), read from the source so the two never drift */
+export function hairTints(wholeTs) {
+  const m = wholeTs.match(/HAIR_TINT[^=]*=\s*(\[[\s\S]*?\]);/);
+  if (!m) return null;
+  const list = JSON.parse(m[1].replace(/,\s*\]/g, ']'));
+  return Object.fromEntries(list.map((t, i) => [HAIR_NAMES[i] ?? String(i), t ?? [1, 1, 1]]));
+}
+
+export function convert(src, { base, derivedDir, canvasFor = (p) => readPng(p), measure = null, hairTint = null }) {
   if (!src.canvas || !src.characters) throw new Error('minimidgard.pixel/1 형식이 아닙니다');
   const at = (p) => path.posix.join(base, p);
   const [CW, CH] = src.canvas.size;
@@ -117,7 +128,10 @@ export function convert(src, { base, derivedDir, canvasFor = (p) => readPng(p), 
       const skills = skillsOf(kind);
       sheets.push({
         id, kind, category: 'motion', layout: 'frames', canvas: src.canvas.size, bodyHeight, gameHeight: c.bodyHeight ?? src.canvas.bodyHeight, loop: !!a.loop,
-        ...(a.hitFrame != null ? { hitFrame: a.hitFrame } : {}), ...(skills.length ? { skills } : {}), defaultWeapon: c.defaultWeapon, frames,
+        ...(a.hitFrame != null ? { hitFrame: a.hitFrame } : {}), ...(skills.length ? { skills } : {}),
+        // the weapon the workshop picks first for this hero (asset-kit v0.4.3), when its frames have that layer
+        ...(c.defaultWeapon && frames.some((f) => f.overlays['weapon:' + c.defaultWeapon]) ? { overlayDefaults: { weapon: c.defaultWeapon } } : {}),
+        frames,
       });
     }
   }
@@ -128,6 +142,10 @@ export function convert(src, { base, derivedDir, canvasFor = (p) => readPng(p), 
       // weapon: the per-frame weapon to show (one at a time). hair_back / hair_front are plain overlays (no "묶음:종류" key, so no
       // chooser); listing them inside: false only tells the check they lie outside the body frame by design (it has no hair)
       overlayGroups: { weapon: { label: '무기', default: 'sword', inside: false }, hair_back: { label: '뒷머리', inside: false }, hair_front: { label: '앞머리', inside: false } },
+      // hair colour: the game multiplies the four hair key colours by HAIR_TINT; the workshop tints the hair overlays the same way
+      // (asset-kit v0.4.3 tintLayers). The body frame's close-cropped base hair is not masked yet, so it stays cream there.
+      tintLayers: { hair: ['hair_back', 'hair_front'] },
+      ...(hairTint ? { tints: { hair: hairTint } } : {}),
       render: { order: ['overlay:hair_back', 'weaponBehind', 'figure', 'weaponFront', 'grip', 'overlay:hair_front'] },
       // 게임에서 선 자세 몸 높이: 48 그림 px × (76 / 62) 필드 단위(src/render/pixel.ts unitPerPx), 기본 줌 1
       display: { bodyPx: Math.round((src.canvas.bodyHeight ?? 48) * 76 / 62) },
@@ -146,7 +164,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   // asset-kit's frame measure when the kit sits next to this repo (as the workshop scripts expect), else a plain bounding box
   const kit = await import(path.join(root, '..', 'asset-kit', 'tools', 'lib', 'analyze.mjs')).catch(() => null);
   const measure = kit?.measureFrame ? (img) => kit.measureFrame({ width: img.w, height: img.h, data: img.data }, [0, 0, img.w, img.h], { despeck: true, guard: 8, pivotAlpha: 16, pivotBand: 0.12 }).height : null;
-  const { record, derived } = convert(src, { base: path.posix.dirname(inRel), derivedDir, canvasFor: (p) => readPng(path.join(root, p)), measure });
+  const hairTint = hairTints(fs.readFileSync(path.join(root, 'src/render/whole.ts'), 'utf8'));
+  const { record, derived } = convert(src, { base: path.posix.dirname(inRel), derivedDir, canvasFor: (p) => readPng(path.join(root, p)), measure, hairTint });
   fs.rmSync(path.join(root, derivedDir), { recursive: true, force: true });
   for (const [file, img] of derived) writePng(path.join(root, file), img);
   // sha256 last, so the derived copies are hashed as written

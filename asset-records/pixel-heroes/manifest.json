@@ -20,6 +20,66 @@
    "inside": false
   }
  },
+ "tintLayers": {
+  "hair": [
+   "hair_back",
+   "hair_front"
+  ]
+ },
+ "tints": {
+  "hair": {
+   "흑갈색": [
+    0.42,
+    0.31,
+    0.27
+   ],
+   "적갈색": [
+    0.66,
+    0.39,
+    0.24
+   ],
+   "금발": [
+    0.93,
+    0.73,
+    0.38
+   ],
+   "백금(원색)": [
+    1,
+    1,
+    1
+   ],
+   "빨강": [
+    0.85,
+    0.32,
+    0.31
+   ],
+   "파랑": [
+    0.39,
+    0.6,
+    0.79
+   ],
+   "초록": [
+    0.52,
+    0.69,
+    0.42
+   ],
+   "보라": [
+    0.67,
+    0.42,
+    0.77
+   ],
+   "분홍": [
+    0.91,
+    0.53,
+    0.64
+   ],
+   "흑청": [
+    0.35,
+    0.36,
+    0.38
+   ]
+  }
+ },
  "render": {
   "order": [
    "overlay:hair_back",
@@ -46,7 +106,9 @@
    "bodyHeight": 48,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "idle_0",
@@ -178,7 +240,9 @@
    "bodyHeight": 48,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "walk_0",
@@ -435,7 +499,9 @@
    "gameHeight": 48,
    "loop": false,
    "hitFrame": 2,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -626,7 +692,9 @@
    "bodyHeight": 48,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -702,7 +770,9 @@
    "bodyHeight": 48,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "dead_0",
@@ -838,7 +908,9 @@
    "bodyHeight": 48,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "sit_0",
@@ -884,7 +956,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "idle_0",
@@ -1036,7 +1110,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "walk_0",
@@ -1325,7 +1401,9 @@
    "gameHeight": 48,
    "loop": false,
    "hitFrame": 3,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -1613,7 +1691,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -1697,7 +1777,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "dead_0",
@@ -1849,7 +1931,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "sit_0",
@@ -1899,7 +1983,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "cast_0",
@@ -1987,7 +2073,9 @@
    "skills": [
     "bash"
    ],
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "skill_cleave_0",
@@ -2212,7 +2300,9 @@
     "magnum_break",
     "brandish"
    ],
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "skill_sweep_0",
@@ -2471,7 +2561,9 @@
     "pierce",
     "spear_stab"
    ],
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "skill_thrust_0",
@@ -2695,7 +2787,9 @@
    "skills": [
     "spear_boomerang"
    ],
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "skill_throw_0",
@@ -2878,7 +2972,9 @@
     "auto_counter",
     "iron_stance"
    ],
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "skill_guard_0",
@@ -3035,7 +3131,9 @@
     "element_shift",
     "mana_edge"
    ],
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "skill_enchant_0",
@@ -3191,7 +3289,9 @@
    "skills": [
     "provoke"
    ],
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "skill_provoke_0",
@@ -3347,7 +3447,9 @@
    "skills": [
     "bowling_bash"
    ],
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "skill_double_0",
@@ -3639,7 +3741,9 @@
    "skills": [
     "moon_slash"
    ],
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "skill_crescent_0",
@@ -3999,7 +4103,9 @@
    "skills": [
     "charge_attack"
    ],
-   "defaultWeapon": "sword",
+   "overlayDefaults": {
+    "weapon": "sword"
+   },
    "frames": [
     {
      "name": "skill_charge_0",
@@ -4185,7 +4291,9 @@
    "bodyHeight": 44,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "idle_0",
@@ -4291,7 +4399,9 @@
    "bodyHeight": 44,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "walk_0",
@@ -4488,7 +4598,9 @@
    "gameHeight": 48,
    "loop": false,
    "hitFrame": 3,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -4714,7 +4826,9 @@
    "bodyHeight": 44,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "cast_start_0",
@@ -4790,7 +4904,9 @@
    "bodyHeight": 44,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "cast_0",
@@ -4896,7 +5012,9 @@
    "bodyHeight": 44,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -4972,7 +5090,9 @@
    "bodyHeight": 44,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "dead_0",
@@ -5078,7 +5198,9 @@
    "bodyHeight": 44,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "sit_0",
@@ -5124,7 +5246,9 @@
    "bodyHeight": 39,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "idle_0",
@@ -5227,7 +5351,9 @@
    "bodyHeight": 39,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "walk_0",
@@ -5418,7 +5544,9 @@
    "gameHeight": 48,
    "loop": false,
    "hitFrame": 3,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -5637,7 +5765,9 @@
    "bodyHeight": 39,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -5711,7 +5841,9 @@
    "bodyHeight": 39,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "dead_0",
@@ -5814,7 +5946,9 @@
    "bodyHeight": 39,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "sit_0",
@@ -5859,7 +5993,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "idle_0",
@@ -5965,7 +6101,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "walk_0",
@@ -6162,7 +6300,9 @@
    "gameHeight": 48,
    "loop": false,
    "hitFrame": 3,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -6388,7 +6528,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "cast_0",
@@ -6524,7 +6666,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -6600,7 +6744,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "dead_0",
@@ -6706,7 +6852,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "sit_0",
@@ -6752,7 +6900,9 @@
    "bodyHeight": 43,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "dagger",
+   "overlayDefaults": {
+    "weapon": "dagger"
+   },
    "frames": [
     {
      "name": "idle_0",
@@ -6858,7 +7008,9 @@
    "bodyHeight": 43,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "dagger",
+   "overlayDefaults": {
+    "weapon": "dagger"
+   },
    "frames": [
     {
      "name": "walk_0",
@@ -7115,7 +7267,9 @@
    "gameHeight": 48,
    "loop": false,
    "hitFrame": 3,
-   "defaultWeapon": "dagger",
+   "overlayDefaults": {
+    "weapon": "dagger"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -7341,7 +7495,9 @@
    "bodyHeight": 43,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "dagger",
+   "overlayDefaults": {
+    "weapon": "dagger"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -7447,7 +7603,9 @@
    "bodyHeight": 43,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "dagger",
+   "overlayDefaults": {
+    "weapon": "dagger"
+   },
    "frames": [
     {
      "name": "dead_0",
@@ -7553,7 +7711,9 @@
    "bodyHeight": 43,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "dagger",
+   "overlayDefaults": {
+    "weapon": "dagger"
+   },
    "frames": [
     {
      "name": "sit_0",
@@ -7599,7 +7759,9 @@
    "bodyHeight": 41,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "axe",
+   "overlayDefaults": {
+    "weapon": "axe"
+   },
    "frames": [
     {
      "name": "idle_0",
@@ -7705,7 +7867,9 @@
    "bodyHeight": 41,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "axe",
+   "overlayDefaults": {
+    "weapon": "axe"
+   },
    "frames": [
     {
      "name": "walk_0",
@@ -7902,7 +8066,9 @@
    "gameHeight": 48,
    "loop": false,
    "hitFrame": 3,
-   "defaultWeapon": "axe",
+   "overlayDefaults": {
+    "weapon": "axe"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -8158,7 +8324,9 @@
    "bodyHeight": 41,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "axe",
+   "overlayDefaults": {
+    "weapon": "axe"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -8234,7 +8402,9 @@
    "bodyHeight": 41,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "axe",
+   "overlayDefaults": {
+    "weapon": "axe"
+   },
    "frames": [
     {
      "name": "dead_0",
@@ -8340,7 +8510,9 @@
    "bodyHeight": 41,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "axe",
+   "overlayDefaults": {
+    "weapon": "axe"
+   },
    "frames": [
     {
      "name": "sit_0",
@@ -8386,7 +8558,9 @@
    "bodyHeight": 39,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "dagger",
+   "overlayDefaults": {
+    "weapon": "dagger"
+   },
    "frames": [
     {
      "name": "idle_0",
@@ -8492,7 +8666,9 @@
    "bodyHeight": 39,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "dagger",
+   "overlayDefaults": {
+    "weapon": "dagger"
+   },
    "frames": [
     {
      "name": "walk_0",
@@ -8689,7 +8865,9 @@
    "gameHeight": 48,
    "loop": false,
    "hitFrame": 2,
-   "defaultWeapon": "dagger",
+   "overlayDefaults": {
+    "weapon": "dagger"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -8885,7 +9063,9 @@
    "bodyHeight": 39,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "dagger",
+   "overlayDefaults": {
+    "weapon": "dagger"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -8961,7 +9141,9 @@
    "bodyHeight": 39,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "dagger",
+   "overlayDefaults": {
+    "weapon": "dagger"
+   },
    "frames": [
     {
      "name": "dead_0",
@@ -9067,7 +9249,9 @@
    "bodyHeight": 39,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "dagger",
+   "overlayDefaults": {
+    "weapon": "dagger"
+   },
    "frames": [
     {
      "name": "sit_0",
@@ -9113,7 +9297,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "idle_0",
@@ -9219,7 +9405,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "walk_0",
@@ -9476,7 +9664,9 @@
    "gameHeight": 48,
    "loop": false,
    "hitFrame": 2,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -9672,7 +9862,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "cast_start_0",
@@ -9748,7 +9940,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "cast_0",
@@ -9854,7 +10048,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -9960,7 +10156,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "dead_0",
@@ -10066,7 +10264,9 @@
    "bodyHeight": 40,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "sit_0",
@@ -10121,7 +10321,9 @@
     "frost_diver",
     "stone_curse"
    ],
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "skill_bolt_0",
@@ -10293,7 +10495,9 @@
     "fire_ball",
     "jupitel"
    ],
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "skill_orb_0",
@@ -10499,7 +10703,9 @@
     "quagmire",
     "heavens_drive"
    ],
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "skill_ground_0",
@@ -10700,7 +10906,9 @@
     "thunderstorm",
     "lord_vermilion"
    ],
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "skill_sky_0",
@@ -10900,7 +11108,9 @@
    "skills": [
     "water_ball"
    ],
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "skill_water_0",
@@ -11130,7 +11340,9 @@
    "skills": [
     "meteor"
    ],
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "skill_meteor_0",
@@ -11330,7 +11542,9 @@
    "skills": [
     "storm_gust"
    ],
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "skill_blizzard_0",
@@ -11531,7 +11745,9 @@
     "frost_nova",
     "sightrasher"
    ],
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "skill_nova_0",
@@ -11673,7 +11889,9 @@
     "sight_blaster",
     "mystic_amp"
    ],
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "skill_aura_0",
@@ -11812,7 +12030,9 @@
    "skills": [
     "mana_barrier"
    ],
-   "defaultWeapon": "staff",
+   "overlayDefaults": {
+    "weapon": "staff"
+   },
    "frames": [
     {
      "name": "skill_barrier_0",
@@ -11948,7 +12168,9 @@
    "bodyHeight": 48,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "idle_0",
@@ -12051,7 +12273,9 @@
    "bodyHeight": 48,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "walk_0",
@@ -12300,7 +12524,9 @@
    "gameHeight": 48,
    "loop": false,
    "hitFrame": 4,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -12548,7 +12774,9 @@
    "bodyHeight": 48,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -12622,7 +12850,9 @@
    "bodyHeight": 48,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -12725,7 +12955,9 @@
    "bodyHeight": 48,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "sit_0",
@@ -12770,7 +13002,9 @@
    "bodyHeight": 48,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "cast_0",
@@ -12848,7 +13082,9 @@
    "skills": [
     "double_strafe"
    ],
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "attack_1",
@@ -13129,7 +13365,9 @@
    "skills": [
     "arrow_shower"
    ],
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -13353,7 +13591,9 @@
     "arrow_repel",
     "phantasmic"
    ],
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "attack_2",
@@ -13575,7 +13815,9 @@
    "skills": [
     "improve_conc"
    ],
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "attack_6",
@@ -13770,7 +14012,9 @@
     "blitz_beat",
     "falcon_strike"
    ],
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "attack_6",
@@ -13963,7 +14207,9 @@
    "skills": [
     "detect"
    ],
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "attack_6",
@@ -14156,7 +14402,9 @@
    "skills": [
     "drover_whistle"
    ],
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "attack_6",
@@ -14329,7 +14577,9 @@
     "blast_mine",
     "claymore_trap"
    ],
-   "defaultWeapon": "bow",
+   "overlayDefaults": {
+    "weapon": "bow"
+   },
    "frames": [
     {
      "name": "trap_crouch",
@@ -14519,7 +14769,9 @@
    "bodyHeight": 37,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "idle_0",
@@ -14625,7 +14877,9 @@
    "bodyHeight": 37,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "walk_0",
@@ -14882,7 +15136,9 @@
    "gameHeight": 48,
    "loop": false,
    "hitFrame": 4,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -15138,7 +15394,9 @@
    "bodyHeight": 37,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "cast_start_0",
@@ -15214,7 +15472,9 @@
    "bodyHeight": 37,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "cast_0",
@@ -15320,7 +15580,9 @@
    "bodyHeight": 37,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -15426,7 +15688,9 @@
    "bodyHeight": 37,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "dead_0",
@@ -15532,7 +15796,9 @@
    "bodyHeight": 37,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "sit_0",
@@ -15585,7 +15851,9 @@
     "slow_poison",
     "status_recovery"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_mend_0",
@@ -15759,7 +16027,9 @@
     "aspersio",
     "kyrie"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_bless_0",
@@ -15931,7 +16201,9 @@
     "magnificat",
     "gloria"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_hymn_0",
@@ -16134,7 +16406,9 @@
     "lex_divina",
     "lex_aeterna"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_judgment_0",
@@ -16335,7 +16609,9 @@
     "holy_light",
     "turn_undead"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_light_0",
@@ -16535,7 +16811,9 @@
    "skills": [
     "holy_strike"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_holy_strike_0",
@@ -16825,7 +17103,9 @@
     "ruwach",
     "sanct_aura"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_aura_0",
@@ -17027,7 +17307,9 @@
     "pr_safety_wall",
     "sanctuary"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_ground_0",
@@ -17227,7 +17509,9 @@
    "skills": [
     "magnus"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_magnus_0",
@@ -17427,7 +17711,9 @@
    "skills": [
     "resurrection"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_resurrection_0",
@@ -17627,7 +17913,9 @@
    "skills": [
     "redemptio"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_redemptio_0",
@@ -17828,7 +18116,9 @@
     "teleport",
     "warp_portal"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_portal_0",
@@ -18028,7 +18318,9 @@
    "skills": [
     "aqua_benedicta"
    ],
-   "defaultWeapon": "mace",
+   "overlayDefaults": {
+    "weapon": "mace"
+   },
    "frames": [
     {
      "name": "skill_water_0",
@@ -18224,7 +18516,9 @@
    "bodyHeight": 46,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "idle_0",
@@ -18341,7 +18635,9 @@
    "bodyHeight": 46,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "walk_0",
@@ -18623,7 +18919,9 @@
    "gameHeight": 48,
    "loop": false,
    "hitFrame": 3,
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "attack_0",
@@ -18905,7 +19203,9 @@
    "bodyHeight": 46,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "hurt_0",
@@ -19022,7 +19322,9 @@
    "bodyHeight": 46,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "dead_0",
@@ -19171,7 +19473,9 @@
    "bodyHeight": 46,
    "gameHeight": 48,
    "loop": false,
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "sit_0",
@@ -19220,7 +19524,9 @@
    "bodyHeight": 46,
    "gameHeight": 48,
    "loop": true,
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "cast_0",
@@ -19339,7 +19645,9 @@
    "skills": [
     "sonic_blow"
    ],
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "skill_sonic_0",
@@ -20000,7 +20308,9 @@
    "skills": [
     "grimtooth"
    ],
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "skill_grimtooth_0",
@@ -20220,7 +20530,9 @@
    "skills": [
     "envenom"
    ],
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "skill_envenom_0",
@@ -20443,7 +20755,9 @@
     "sand_attack",
     "venom_dust"
    ],
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "skill_scatter_0",
@@ -20665,7 +20979,9 @@
     "throw_stone",
     "venom_knife"
    ],
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "skill_throw_0",
@@ -20870,7 +21186,9 @@
    "skills": [
     "find_stone"
    ],
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "skill_pickup_0",
@@ -21091,7 +21409,9 @@
    "skills": [
     "venom_splasher"
    ],
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "skill_plant_0",
@@ -21310,7 +21630,9 @@
    "skills": [
     "enchant_poison"
    ],
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "skill_coat_0",
@@ -21496,7 +21818,9 @@
    "skills": [
     "poison_react"
    ],
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "skill_guard_0",
@@ -21682,7 +22006,9 @@
    "skills": [
     "detoxify"
    ],
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "skill_detox_0",
@@ -21868,7 +22194,9 @@
     "hiding",
     "cloaking"
    ],
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "skill_hide_0",
@@ -22020,7 +22348,9 @@
    "skills": [
     "back_slide"
    ],
-   "defaultWeapon": "katar",
+   "overlayDefaults": {
+    "weapon": "katar"
+   },
    "frames": [
     {
      "name": "skill_backslide_0",
