@@ -24,9 +24,10 @@ void loadRig();
     history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : ''));
   }
 }
-if (import.meta.env.DEV) {
+// dev hooks and ?qa boots in development; ?demo=<스킬 id> (스킬 시연, never saved) also on the public build
+if (import.meta.env.DEV || new URLSearchParams(location.search).has('demo')) {
   const m = await import('./debug.ts');
-  m.installDebug();
-  await m.qaBoot();
+  if (import.meta.env.DEV) m.installDebug();
+  if (!(await m.demoBoot()) && import.meta.env.DEV) await m.qaBoot();
 }
 render(<App />, document.getElementById('app')!);

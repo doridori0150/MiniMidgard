@@ -27,8 +27,7 @@ export function installDebug() {
  * &builds=kn_crit,,wz_storm gives those heroes a build: its card's skills (signature skills first) are learned first and
  * fill the slots (SKILLS_META.md); without it, signature skills stay unlearned.
  */
-export async function qaBoot(): Promise<boolean> {
-  const q = new URLSearchParams(location.search);
+export async function qaBoot(q = new URLSearchParams(location.search)): Promise<boolean> {
   if (!q.has('qa')) return false;
   const st = await import('./game/state.ts');
   const { SKILLS } = await import('./game/data/skills.ts');
@@ -93,5 +92,59 @@ export async function qaBoot(): Promise<boolean> {
     if (q.has('riftgo')) game.enterRift();
   }
   if (q.has('hero')) game.setModal({ kind: 'hero', id: s.heroes[Number(q.get('hero'))]?.id ?? s.heroes[0].id });
+  return true;
+}
+
+/**
+ * 스킬 시연 (공개판에서도 열림): ?demo=<스킬 id>[&party=priest,knight][&every=2400][&zone=meadow][&lv=60]
+ * 버리는 게임(저장 안 함)을 띄우고, 그 스킬 계열의 2차 직업 영웅이 조용한 필드에서 몇 초마다 그 스킬을 씁니다. 몸 동작·이펙트·소리를
+ * 휴대폰에서 바로 확인하는 주소입니다(예: ?demo=blessing). 다른 영웅과 몬스터는 움직이지 않게 묶어 둡니다.
+ */
+export async function demoBoot(): Promise<boolean> {
+  const q = new URLSearchParams(location.search);
+  const id = q.get('demo');
+  if (!id) return false;
+  const { SKILLS } = await import('./game/data/skills.ts');
+  const { CLASSES, lineage } = await import('./game/data/classes.ts');
+  const sk = SKILLS[id];
+  if (!sk) { alert('모르는 스킬: ' + id); return false; }
+  // the 2nd job of the skill's line (its own art and skill motions), and a knight to receive buffs
+  const second = (Object.keys(CLASSES) as (keyof typeof CLASSES)[]).find((c) => CLASSES[c].tier === 2 && c !== 'blacksmith' && lineage(c).includes(sk.cls)) ?? sk.cls;
+  await qaBoot(new URLSearchParams({ qa: '', party: q.get('party') ?? `${second},knight`, lv: q.get('lv') ?? '60', zone: q.get('zone') ?? 'meadow', art: 'd', bg: q.get('bg') ?? 'hd', band: 'closed' }));
+  const w = game.world, every = Math.max(800, Number(q.get('every')) || 2400);
+  const who = (w.heroes.find((h) => lineage(h.hero.cls).includes(sk.cls)) ?? w.heroes[0]).hero;
+  who.skills[id] = Math.max(who.skills[id] ?? 0, sk.maxLv);
+  // syncParty rebuilds the field units, so the caster is looked up by its hero each time
+  const unitOf = () => w.heroes.find((h) => h.hero === who)!;
+  // each hero in the gender its pixel art is drawn in (a knight is a she, a hunter a he), standing apart so both read
+  const { pixelCharacters } = await import('./render/pixel.ts');
+  const { LINE } = await import('./render/whole.ts');
+  const drawn = pixelCharacters();
+  for (const h of game.s.heroes) { const g = drawn.find((c) => c.cls === h.cls) ?? drawn.find((c) => c.cls === LINE[h.cls]); if (g) h.look.gender = g.gender as 'm' | 'f'; }
+  w.syncParty();
+  { const c = unitOf(); w.heroes.forEach((h, i) => { if (h !== c) { h.x = c.x + 70 * i; h.y = c.y + 6; } }); }
+  game.notify();
+  const self = ['selfBuff', 'selfAoe', 'stance'].includes(sk.kind);
+  const ally = ['buff', 'heal', 'cure', 'revive'].includes(sk.kind);
+  let dummy: (typeof w.mobs)[number] | null = null;
+  const hold = (ms: number) => {
+    // keep the field calm: no other monsters, nobody acts on their own between casts
+    w.mobs = w.mobs.filter((m) => m === dummy);
+    for (const h of w.heroes) { h.target = null; h.lockUntil = Math.max(h.lockUntil, w.time + ms); h.sitting = false; }
+    if (dummy) { dummy.hp = dummy.maxHp = 1e9; dummy.lockUntil = w.time + ms; dummy.atkReady = w.time + ms; }
+  };
+  const cast = () => {
+    const caster = unitOf();
+    const other = w.heroes.find((h) => h !== caster);
+    let target: Parameters<typeof w.startSkill>[3] = self ? caster : ally ? other ?? caster : null;
+    if (!self && !ally) {
+      if (!dummy || !w.mobs.includes(dummy)) { const mob = w.zone.mobs[0]?.id; dummy = mob ? w.spawnMob(mob, false, caster.x + 70, caster.y) : null; }
+      target = dummy;
+    }
+    caster.sp = caster.d.maxSp;
+    w.startSkill(caster, sk, caster.hero.skills[id] ?? 1, target);
+  };
+  setInterval(() => hold(400), 250);
+  setTimeout(() => { cast(); setInterval(cast, every); }, 1200);
   return true;
 }

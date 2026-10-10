@@ -241,6 +241,37 @@ export class FieldRenderer {
     return { x: sm?.x ?? u.x, y: sm?.y ?? u.y, h };
   }
 
+  /** 축복's pillar on the caster: a soft beam comes down from above in ~130 ms with two bright shafts in it, rings out at the feet,
+   *  motes rise through it. Once per cast — a party blessing sends one event per ally. Lasts about as long as the prayer motion. */
+  private lastPillar = new Map<number, number>();
+  private blessPillar(uid: number, now: number) {
+    if (now - (this.lastPillar.get(uid) ?? -1e9) < 400) return;
+    this.lastPillar.set(uid, now);
+    this.effects.push({ t0: now, dur: 760, layer: 'top', draw: (ctx, q) => {
+      const pp = this.pos(uid); if (!pp) return;
+      const top = -150, grow = Math.min(1, q / 0.17), bottom = top * (1 - grow);
+      const fade = q < 0.6 ? 1 : 1 - (q - 0.6) / 0.4;
+      ctx.save(); ctx.translate(pp.x, pp.y); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = fade;
+      const beam = ctx.createLinearGradient(0, top, 0, 0);
+      beam.addColorStop(0, 'rgba(255,238,180,0)'); beam.addColorStop(0.4, 'rgba(255,236,170,0.32)'); beam.addColorStop(1, 'rgba(255,248,220,0.5)');
+      ctx.fillStyle = beam; ctx.fillRect(-15, top, 30, bottom - top);
+      for (const [dx, w] of [[-5, 3], [5, 2.4]] as const) {
+        const sway = Math.sin(q * 9 + dx) * 1.2;
+        const shaft = ctx.createLinearGradient(0, top, 0, bottom);
+        shaft.addColorStop(0, 'rgba(255,255,255,0)'); shaft.addColorStop(1, 'rgba(255,255,240,0.9)');
+        ctx.fillStyle = shaft; ctx.fillRect(dx + sway - w / 2, top, w, bottom - top);
+      }
+      if (grow >= 1) {
+        const r = 14 + (q - 0.17) * 30;
+        ctx.globalAlpha = fade * 0.8; ctx.strokeStyle = 'rgba(255,236,160,0.9)'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.ellipse(0, 0, r, r * 0.38, 0, 0, Math.PI * 2); ctx.stroke();
+      }
+      ctx.restore();
+    } });
+    const pp = this.pos(uid);
+    if (pp) for (let i = 0; i < (this.lowFx ? 4 : 10); i++) this.particles.push({ x: pp.x + (Math.random() - 0.5) * 20, y: pp.y - Math.random() * 30, z: 0, vx: (Math.random() - 0.5) * 6, vy: -45 - Math.random() * 35, vz: 0, g: 0, life: 650 + Math.random() * 250, age: 0, size: 2, color: '#fff3c0', kind: 'spark', add: true, rot: 0, vr: 0, drag: 0 });
+  }
+
   private handle(e: FxEvent) {
     const now = this.now;
     switch (e.t) {
@@ -483,6 +514,8 @@ export class FieldRenderer {
       }
       case 'endure': case 'conc': case 'angelus': case 'blessing': case 'agi':
       case 'quicken': case 'amp': case 'poisonbuff': case 'adrenaline': case 'kyrie': {
+        // 축복: the caster prays under its own pillar of light while the blessing lands on the ally ("두빛 기둥 받으면서")
+        if (e.fx === 'blessing' && e.from !== undefined) this.blessPillar(e.from, now);
         const AURA: Record<string, string> = { endure: '#ffcf60', conc: '#90ff90', agi: '#80f0ff', quicken: '#ffd84a', amp: '#d080ff', poisonbuff: '#b060e0', adrenaline: '#ff6a3a', kyrie: '#9fe0ff' };
         const c2 = AURA[e.fx] ?? '#ffffff';
         const uid = e.to ?? e.from;
