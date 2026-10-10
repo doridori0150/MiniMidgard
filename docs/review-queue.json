@@ -1,0 +1,51 @@
+{
+  "kit": 1,
+  "note": "판정판(kit/workshop/review.html)이 읽는 목록. 사용자 결정이 필요한 것만. 공방 세션이 관리.",
+  "items": [
+    {
+      "id": "a96-attack",
+      "question": "어새신 96px 공격(뒷발 고친 판): 칼을 휘두르는 걸로 보이고, 타격감이 있나요?",
+      "why": "3번째 휘두름 장과 접촉 장의 뒷다리를 다시 그렸습니다(상체·머리·카타르·앞다리는 그대로). 보러 가기를 누르면 무대에서 조립이 자동 재생됩니다. 공속 ×2는 attackRate에서.",
+      "link": "index.html?manifest=asset-records%2Fpixel-heroes-96%2Fmanifest.json&sheet=assassin_male_p96:attack_candidate&view=game&tab=direct&wide=1&play=assembly",
+      "media": [
+        "docs/art-production/pixel-assassin-96/keyposes/side_by_side_attack.png",
+        "docs/art-production/pixel-assassin-96/keyposes/backleg_before_after_4x.png"
+      ],
+      "yes": "휘두른다·타격감 있다",
+      "no": "아직 아니다(메모에 어느 칸)",
+      "status": "pending",
+      "note": "이전 판정 2026-10-11: 3번째 장 뒷발 사라짐 → 뒷다리 두 장 다시 그림(커밋 d36f50b)"
+    },
+    {
+      "id": "a96-walk",
+      "question": "어새신 96px 걷기: 발이 미끄러지거나 몸이 흔들리지 않나요?",
+      "why": "8칸 720ms 반복. 디딘 발 칸당 7~9px, 정수리 출렁임 4px.",
+      "link": "index.html?manifest=asset-records%2Fpixel-heroes-96%2Fmanifest.json&sheet=assassin_male_p96:walk_candidate&view=game&tab=direct&wide=1&play=assembly",
+      "yes": "괜찮다",
+      "no": "흔들린다(메모)"
+    },
+    {
+      "id": "a96-go",
+      "question": "96px로 12명 전부 갈까요? (1명 기본 동작 약 2~3시간, 12명 약 1~1.5주)",
+      "why": "위 두 항목이 괜찮으면 예. 아니오면 48px 유지 + 조립만.",
+      "yes": "96px로 간다",
+      "no": "48px 유지"
+    },
+    {
+      "id": "attack-timing",
+      "question": "평타 재생 규칙을 바꿀까요? (피해는 접촉 칸에서, 공속은 재생 배율, 기준 간격 600ms, 최대 2.5배)",
+      "why": "지금은 평타를 280ms로 고정해 늘이고 줄여서 타격 뒤가 96ms로 뭉개집니다. 무대 attackTiming=event에서 비교해 보실 수 있습니다. 무대 줄의 \"공격 간격\"(860/600/480/360/240ms)으로 3연타를 볼 수 있습니다. 시뮬레이션(7빌드 × 시드 3, 10분): 피해 시각 평균 약 140ms 늦어지고 처치 속도·DPS는 흔들림 안에서 차이 없음. 적용은 도트 영웅만, 통짜 그림은 지금대로.",
+      "link": "index.html?manifest=asset-records%2Fpixel-heroes-96%2Fmanifest.json&sheet=assassin_male_p96:attack_candidate&view=game&tab=direct&wide=1",
+      "yes": "바꾼다",
+      "no": "지금대로"
+    },
+    {
+      "id": "fx-deploy",
+      "question": "이펙트 14종(기본 자산 + 엔진 조립)을 실제 게임에 넣을까요? 라이브 평타·스킬 이펙트 그림이 바뀝니다.",
+      "why": "공방에서는 조립이 끝났고 필드 렌더 변경이라 보류 중입니다. 보러 가기에서 무대로 종류별로 재생해 보실 수 있습니다.",
+      "link": "index.html?manifest=asset-records%2Ffx%2Fmanifest.json&sheet=fx:slash&view=game&tab=direct&wide=1",
+      "yes": "게임에 넣는다",
+      "no": "아직(메모)"
+    }
+  ]
+}
