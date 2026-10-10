@@ -26,6 +26,10 @@
    "hair_front"
   ]
  },
+ "figureOverlays": [
+  "hair_back",
+  "hair_front"
+ ],
  "tints": {
   "hair": {
    "흑갈색": [

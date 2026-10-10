@@ -159,6 +159,8 @@ export function convert(src, { base, derivedDir, canvasFor = (p) => readPng(p), 
       // hair colour: the game multiplies the four hair key colours by HAIR_TINT; the workshop tints the hair overlays the same way
       // (asset-kit v0.4.3 tintLayers). The body frame's close-cropped base hair is not masked yet, so it stays cream there.
       tintLayers: { hair: ['hair_back', 'hair_front'] },
+      // the check measures standing height on the body with these overlays on (asset-kit v0.4.8), the same figure as bodyHeight
+      figureOverlays: ['hair_back', 'hair_front'],
       ...(hairTint ? { tints: { hair: hairTint } } : {}),
       render: { order: ['overlay:hair_back', 'weaponBehind', 'figure', 'weaponFront', 'grip', 'overlay:hair_front'] },
       // 게임에서 선 자세 몸 높이: 48 그림 px × (76 / 62) 필드 단위(src/render/pixel.ts unitPerPx), 기본 줌 1
