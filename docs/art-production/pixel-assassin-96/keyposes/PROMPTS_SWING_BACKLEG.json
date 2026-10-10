@@ -1,0 +1,27 @@
+{
+  "method": "내장 image_gen",
+  "frames": [
+    {
+      "id": "attack_5_swing",
+      "prompt": "Use case: precise-object-edit. Produce ONE corrected pixel-art sprite, the SWING frame only. Input 1 is the approved idle and is the sole style/proportion/palette reference. Input 2 is the approved attack strip, for motion sequence. Input 3 is the current SWING edit target. Input 4 is the preceding APEX, reference for a readable supporting rear leg. Input 5 is the following CONTACT, motion reference only.\nUser's words, preserve intent: \"어쌔신은 3번째 이미지인가에서 뒷발이 사라졌어.\"\n그림 규칙 세 가지:\n1. 등신대, 컨셉 스타일, 전반적인 크기 영역을 맞출 것\n2. 레퍼런스를 체크할 것\n3. 스프라이트 애니메이션을 사전에 어떤 동작을 할지 고려하여, 1장씩 생성하고, 연결할 것\nPlan: apex -> this swing -> contact. Draw just this one frame. This is a surgical correction of the screen-LEFT rear supporting leg of input 3, not a new pose. Keep its head, face, hair, torso, BOTH arms, katar and hand, screen-RIGHT front leg, and waist cloth in exactly the same pose and position.\nDraw a solid complete rear leg from the hip below the torso, diagonally down-left through a readable bent knee and substantial shin into a planted boot. Same thickness and dark leather/brass pixel cluster treatment as the apex rear leg. No severed thigh, no gaps, no skinny pole, no disconnected foot. Knee near original-canvas (127,211), hip around (155,198), planted boot from x105 to x117, bottom row y223 on original 256x240 grid. Boot roughly 8-10 rows tall, clear flat sole and toe. The leg's angle is intermediate between apex and contact. Do not move the front leg.\nIMPORTANT PRODUCTION LAYER REQUEST: OMIT THE PALE CRESCENT TRAIL from this output so the entire repaired hip/thigh behind it is visible. This is a BODY-LAYER donor image; the original crescent is retained separately on original katar.png during compositing. Keep actual blade and its hand, just remove pale swoosh effect. Fill the missing rear thigh where that swoosh currently crosses, with solid continuous leather anatomy.\nPreserve canvas composition at 1024x960 (4x of 256x240) if possible, substantial transparent empty space above, feet bottom at y895 (4x grid), no ground/shadow. Nearest-style hard pixel edges, limited palette, NO antialiasing, NO new design details, NO text, no inset, no sheet. Transparent background. Save only under /Users/oreocookie03/Projects/MiniMidgard/docs/art-production/pixel-assassin-96/keyposes/ if choosing a local output location.",
+      "references": [
+        "docs/art/ssot/ssot96_assassin_idle_4x.png",
+        "keyposes_attack_4x.png",
+        "attack_5_swing/composite_4x.png (수정 전)",
+        "attack_2_apex/composite_4x.png",
+        "attack_3_contact/composite_4x.png (수정 전)"
+      ]
+    },
+    {
+      "id": "attack_3_contact",
+      "prompt": "Use case: precise-object-edit. ONE CONTACT-frame rear-leg correction, not a sheet. Input 1 is the approved idle: sole authority for style, character proportions, overall pixel size, palette and design. Input 2 is the CURRENT CONTACT FRAME TO EDIT. Input 3 is the approved apex, for readable rear supporting leg thickness. Input 4 is the just corrected SWING, the preceding frame for motion continuity. Input 5 is original attack strip for overall movement only.\nUser's words: \"어쌔신은 3번째 이미지인가에서 뒷발이 사라졌어.\"\n그림 규칙 세 가지:\n1. 등신대, 컨셉 스타일, 전반적인 크기 영역을 맞출 것\n2. 레퍼런스를 체크할 것\n3. 스프라이트 애니메이션을 사전에 어떤 동작을 할지 고려하여, 1장씩 생성하고, 연결할 것\nPlan: completed swing -> this contact -> existing recovery. Only redraw the screen-LEFT rear supporting leg of INPUT 2. Its current long thin line is wrong. Draw a complete substantial dark leather leg from hip through readable knee, shin and planted boot. It holds and pushes the forward lunge; approximately the thickness and boot volume of input 3's rear leg. Transition smoothly from input 4's rear leg; this contact hip is a little farther forward. Original 256x240 logical canvas: hip near (155,197), knee around (128,210), boot at x105-117 and y215-223, flat sole planted on row223 with rearmost x105. Broad 10-12px boot sole. The knee is clearly a joint, not a skinny straight rod. Match original chunky pixel clusters and 1 logical pixel outline, dark plum leather with muted brass trim.\nEverything else must stay exactly as INPUT 2: head, face, hair, torso, arms, katar and hand, screen-RIGHT front leg, pose and placement. Katar tip remains farthest-forward in the attack. No slash trail.\nWaist cloth: keep original two navy tails attached at waist and flowing left, but shorten/lift only their ENDS enough that neither covers the rear knee, shin or boot. Do not add long vertical tassels between legs. No blue cloth strip following the rear leg.\nComposition: match input 2's transparent canvas and exact character location, 1024x960 if possible (4x logical 256x240), same generous empty transparent space above. No ground or shadow. No antialiasing, blur, gradients, labels, text, extra equipment or new decoration. Generate this single frame only.",
+      "references": [
+        "docs/art/ssot/ssot96_assassin_idle_4x.png",
+        "attack_3_contact/composite_4x.png (수정 전)",
+        "attack_2_apex/composite_4x.png",
+        "attack_5_swing/composite_4x.png (직전 수정 프레임)",
+        "keyposes_attack_4x.png (수정 전)"
+      ]
+    }
+  ]
+}

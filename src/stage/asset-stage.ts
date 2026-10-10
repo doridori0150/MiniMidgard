@@ -3,11 +3,11 @@
 // motion through its skill (pose.skill, the wind-up fitted into SKILL_CONTACT), the attack over the swing the field uses, the cast
 // with its lead-in. The player's save is never read or written.
 // Protocol (asset-kit README "게임 저장소에 붙이기"):
-// in  asset-stage:show {id, kind}, :play {id, action, loop, speed}, :options {loop, speed, attackTiming, attackRate}, :tuning (ignored), :film {req, id, action, speed, fps}
+// in  asset-stage:show {id, kind}, :play {id, action, loop, speed}, :options {loop, speed, attackTiming, attackRate, attackInterval}, :tuning (ignored), :film {req, id, action, speed, fps}
 //     asset-stage:fx {req?, id?, skill? | hit? | base?, ramp?, element?, hits?, loop?, speed?} — hero + training dummy + an assembled effect
 //       skill: a game skill id (the hero plays its skill motion, the skill's assembly lands on the dummy at contact)
 //       hit: a hit style (slash · blunt · pierce · magic · claw; the hero swings its attack), base: one base effect (ramp: colour name)
-//     asset-stage:assembly {req?, record? (pixel-heroes | pixel-heroes-96), id?, kind? (attack_candidate), rate? 1~2.5, hitstop?, knock?, hitFx?, element?, cycles?, dist?} — a candidate assembly@1 from the workshop record, played with event timing + hit
+//     asset-stage:assembly {req?, record? (pixel-heroes | pixel-heroes-96), id?, kind? (attack_candidate), rate? 1~2.5, interval? (ms; rate by the rule, swings? times), hitstop?, knock?, hitFx?, element?, cycles?, dist?} — a candidate assembly@1 from the workshop record, played with event timing + hit
 // out asset-stage:ready {heroes, tunables, defaults, actions, film, fx}, :subject {id, frameMs, cells}, :played {id, action}, :status {text},
 //     :filmed {req, film | error}, :fxed {req, ok, error? | label, contactMs, durationMs, layers}; window.AssetStageFilm = {ready, record} (asset-kit tools/film.mjs)
 // Effects are placed by the same code as the field (fxlib expandAssembly + drawFx), so the stage shows what the game draws.
@@ -24,6 +24,7 @@ import { ASSEMBLY, FX_IDS, RAMPS, drawFx, expandAssembly, fxInfo, type FxInstanc
 import { drawMob, mobHeight } from '../render/monster.ts';
 import { SKILLS } from '../game/data/skills.ts';
 import type { Element } from '../game/types.ts';
+import { attackRateFor } from '../game/attack-rule.ts';
 
 interface Anim { frames: string[]; durations: number[]; duration: number; loop: boolean; hitFrame?: number }
 interface Char { class: string; gender: string; defaultWeapon?: string; animations?: Record<string, Anim>; skillMotions?: Record<string, string> }
@@ -101,7 +102,7 @@ function paint(g: CanvasRenderingContext2D, pose: Pose, id: string, ground: bool
   if (sc) drawFxLayer(g, sc, 'ground', t);
   g.save(); g.translate(hx, 0); if (sc?.hero) sc.hero(g, t); else drawRigHero(g, look(id), pose); g.restore();
   if (sc) {
-    const since = t - sc.contactMs, hit = sc.knockPx && since >= 0 && since < 160;
+    const since = t - lastContact(sc, t), hit = sc.knockPx && since >= 0 && since < 160;
     const push = hit ? sc.knockPx! * Math.sin(Math.PI * Math.min(1, since / 160)) : 0;
     g.save(); g.translate(sc.dummyX + push, 0); drawMob(g, DUMMY.sprite, DUMMY.palette, { state: 'idle', t: 0, facing: -1, hurt: hit ? 1 - since / 160 : 0, frozen: false, spawn: 1, dead: 0 }, 1, false, ground); g.restore();
     drawFxLayer(g, sc, 'top', t);
@@ -115,13 +116,18 @@ interface FxScene { label: string; heroX: number; dummyX: number; selfPoint: boo
   /** a candidate drawn from the workshop record (assembly@1) instead of the game's frames: draws the hero at real time t */
   hero?: (g: CanvasRenderingContext2D, t: number) => void;
   /** the dummy is pushed back this many px after the contact, and flashes */
-  knockPx?: number }
+  knockPx?: number;
+  /** repeated swings (평타 연속): every contact gets the hit effects and the knock; contactMs is the first */
+  contacts?: number[] }
 let scene: FxScene | null = null;
+/** asset-stage:options {attackInterval}: the attack interval (ms) the assembly scene repeats its swing at; 0 = one swing */
+let attackInterval = 0;
+const lastContact = (sc: FxScene, t: number) => (sc.contacts ?? [sc.contactMs]).reduce((a, c) => (c <= t ? c : a), sc.contactMs);
 function drawFxLayer(g: CanvasRenderingContext2D, sc: FxScene, layer: 'ground' | 'top', t: number) {
   const dh = mobHeight(DUMMY.sprite);
-  for (const f of sc.insts) {
+  for (const c0 of sc.contacts ?? [sc.contactMs]) for (const f of sc.insts) {
     if (f.layer !== layer) continue;
-    const age = t - sc.contactMs - f.delay;
+    const age = t - c0 - f.delay;
     if (age < 0 || age > f.dur) continue;
     const onHero = f.at === 'caster' || (f.at === 'point' && sc.selfPoint);
     const x = onHero ? sc.heroX : sc.dummyX, h = onHero ? 48 : f.at === 'point' ? 0 : dh;
@@ -157,7 +163,10 @@ async function assemblyScene(m: Record<string, any>): Promise<FxScene | string> 
   const idleSheet = rec.sheets.find((x: any) => x.id === id && x.kind === 'idle' && !x.candidate);
   const idlePose = idleSheet?.frames?.[0] ? await layersOf(idleSheet.frames[0]) : null;
   const looped = A.hitFrame == null, cycles = looped ? Number(m.cycles) || 2 : 1;
-  const rate = Math.min(2.5, Math.max(1, Number(m.rate) || 1)), hs = looped ? 0 : m.hitstop ?? sheet.hit?.hitstopMs ?? 70;
+  // 평타 연속 (attack-rule.ts): with an attack interval the rate follows the rule and the swing repeats `swings` times at that
+  // interval — the approved idle fills the gap of a slow hero, the next swing cuts the recovery of a fast one
+  const interval = looped ? 0 : Number(m.interval ?? attackInterval) || 0, swings = interval ? Math.max(1, Number(m.swings) || 3) : 1;
+  const rate = Math.min(2.5, Math.max(1, Number(m.rate) || (interval ? attackRateFor(interval) : 1))), hs = looped ? 0 : m.hitstop ?? sheet.hit?.hitstopMs ?? 70;
   const starts: number[] = []; let acc = 0; for (const f of A.frames) { starts.push(acc); acc += f.ms; }
   const total = acc, contactAnim = looped ? total * cycles : starts[A.hitFrame!] ?? 0, c = looped ? 0 : contactAnim / rate;
   // real ms → drawn ms: rate-scaled, frozen for the hitstop at the contact
@@ -169,9 +178,10 @@ async function assemblyScene(m: Record<string, any>): Promise<FxScene | string> 
     g.restore();
   };
   const endMs = looped ? (total * cycles) / rate : c + hs + (total - contactAnim) / rate;
-  const hero = (g: CanvasRenderingContext2D, t: number) => {
-    // before and after the motion: the approved idle, so the step from idle into it (and back) can be judged
-    if (t < 0 || t >= endMs) { if (idlePose) drawPose(g, idlePose, 0, 0); else drawRigHero(g, look(id), { state: 'idle', t: 0, facing: 1 }); return; }
+  const hero = (g: CanvasRenderingContext2D, at: number) => {
+    const t = interval ? at - Math.min(swings - 1, Math.max(0, Math.floor(at / interval))) * interval : at;
+    // before and after the motion (and between swings): the approved idle, so the step from idle into it (and back) can be judged
+    if (at < 0 || t >= endMs) { if (idlePose) drawPose(g, idlePose, 0, 0); else drawRigHero(g, look(id), { state: 'idle', t: 0, facing: 1 }); return; }
     const a = looped ? (t * rate) % total : Math.max(0, Math.min(total - 1, animAt(t)));
     let i = A.frames.length - 1; for (let k = 0; k < A.frames.length; k++) if (a < starts[k] + A.frames[k].ms) { i = k; break; }
     const F = A.frames[i];
@@ -188,7 +198,11 @@ async function assemblyScene(m: Record<string, any>): Promise<FxScene | string> 
   const reach = Math.max(0, ...A.frames.map((f) => (typeof f.pose === 'number' ? (ps.frames[f.pose]?.anchors?.tip?.point?.[0] ?? ox) - ox + (f.dx ?? 0) : 0)));
   const dist = m.dist ?? Math.max(56 * k, reach + 14);
   if (M.characters[id]) show(id);
-  return { label: `${id} · ${kind} · ×${rate}${hs ? ` · 히트스톱 ${hs}ms` : ''}`, heroX: -dist / 2, dummyX: dist / 2, selfPoint: false, contactMs: c, durationMs: Math.max(endMs, ...insts.map((f) => c + f.delay + f.dur)), insts, motion: null, hero, knockPx: looped ? 0 : m.knock ?? sheet.hit?.knockPx ?? 3 };
+  const contacts = Array.from({ length: swings }, (_, j) => c + j * interval), last = contacts[swings - 1];
+  return {
+    label: `${id} · ${kind} · ×${+rate.toFixed(2)}${interval ? ` · 간격 ${interval}ms ×${swings}` : ''}${hs ? ` · 히트스톱 ${hs}ms` : ''}`, heroX: -dist / 2, dummyX: dist / 2, selfPoint: false,
+    contactMs: c, contacts: swings > 1 ? contacts : undefined, durationMs: Math.max((swings - 1) * interval + endMs, ...insts.map((f) => last + f.delay + f.dur)), insts, motion: null, hero, knockPx: looped ? 0 : m.knock ?? sheet.hit?.knockPx ?? 3,
+  };
 }
 
 /** builds the scene for an asset-stage:fx message; a string is an error to report */
@@ -353,6 +367,12 @@ addEventListener('message', (ev) => {
   if (m.type === 'asset-stage:options') {
     // 평타 타이밍 기준본/후보: 'uniform' = 지금 게임(그림 전체를 한 배율로), 'contact' = 후보(접촉 앞만 맞추고 타격 뒤는 그림 시간대로)
     // 'event' = 공속 배율 후보(그림 시간 × 1/배율, 피해는 접촉 장 시작): attackRate 1·1.5·2·2.5 …
+    // attackInterval (ms): the rule picks the rate (attack-rule.ts) and the assembly scene repeats the swing at that interval
+    if (m.attackInterval != null) {
+      attackInterval = Math.max(0, Number(m.attackInterval) || 0);
+      if (attackInterval) { setAttackTiming('event'); setAttackRate(attackRateFor(attackInterval)); }
+      say(attackInterval ? `평타 간격 ${attackInterval}ms → 배율 ×${+attackRateFor(attackInterval).toFixed(2)} (조립 재생은 3번 연속)` : '평타 간격 끔(한 번 재생)');
+    }
     if (m.attackRate != null) setAttackRate(Number(m.attackRate));
     if (m.attackTiming === 'uniform' || m.attackTiming === 'contact' || m.attackTiming === 'event' || m.attackRate != null) {
       if (m.attackTiming) setAttackTiming(m.attackTiming);
@@ -403,6 +423,8 @@ Object.assign(window, { AssetStageFilm, MiniMidgardStage: { state, plan, film, s
     options: {
       attackTiming: { values: ['uniform', 'contact', 'event'], labels: ['기준본(지금 게임)', '후보(타격 뒤 그림 시간대로)', '공속 배율(그림 시간 ÷ 배율, 피해 = 접촉 장)'], default: 'uniform' },
       attackRate: { values: [1, 1.5, 2, 2.5], labels: ['×1 (기준 간격)', '×1.5', '×2', '×2.5 (최대)'], default: 1, appliesTo: 'event' },
+      // the adopted rule (attack-rule.ts): pick an attack interval, the rate follows; the assembly scene swings 3 times at it
+      attackInterval: { values: [0, 860, 600, 480, 360, 240], labels: ['끔 (한 번)', '0.86초 · 초반 (×1, 쉬는 틈)', '0.6초 · 기준 (×1)', '0.48초 (×1.25)', '0.36초 · 공속 버프 (×1.67)', '0.24초 · 최대 (×2.5)'], default: 0, appliesTo: 'event' },
     } });
   show(state.id);
 })().catch((e) => say('무대를 열지 못했습니다: ' + (e?.message ?? e)));

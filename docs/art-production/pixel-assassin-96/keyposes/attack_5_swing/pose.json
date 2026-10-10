@@ -50,7 +50,7 @@
     "opaqueRanges": [
       [
         105,
-        114
+        116
       ],
       [
         168,
@@ -67,7 +67,7 @@
     ],
     "far": [
       105,
-      114
+      116
     ],
     "nullMeaning": "해당 발은 223행에 불투명 픽셀이 없음"
   },
@@ -84,6 +84,6 @@
     "katar",
     "grip"
   ],
-  "normalization": "single nearest sample; binary alpha; approved palette; head width normalized55; attack rear boot pixels locked to SSOT; visible pixel layers only",
-  "notes": "가려진 면을 복원한 리그가 아니라 보이는 픽셀의 레이어 분리다."
+  "normalization": "내장 image_gen 뒷다리 소스; 최근접 축소; 승인 idle 팔레트; 뒷다리 마스크 합성; 보호 픽셀 원본 보존",
+  "notes": "REQUEST_SWING_BACKLEG.md: 뒷다리 전체를 body에 복원. 머리·얼굴·상체·팔·앞다리·무기·그립 원본 보존."
 }

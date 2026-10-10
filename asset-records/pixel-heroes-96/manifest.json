@@ -185,7 +185,7 @@
         {
           "name": "attack_3_contact (contact)",
           "file": "docs/art-production/pixel-assassin-96/keyposes/attack_3_contact/body.png",
-          "sha256": "04543ab1410a003991ab27ba1b0575ba1607641787069824699e9ece4d406235",
+          "sha256": "d64a58fa4abfc3a2899f8f13822f2a31ec231d22b35012eb25a451406d23f3c4",
           "pivot": [
             128,
             224
@@ -259,7 +259,7 @@
         {
           "name": "attack_5_swing (swing)",
           "file": "docs/art-production/pixel-assassin-96/keyposes/attack_5_swing/body.png",
-          "sha256": "2526919ebf2458ce81e6603d83c0581a99bec1e5552dbb1ed973e904e1a311f2",
+          "sha256": "7258b9c81cbd70fd70288291f10e80e057bd703e8c1dae452e62ef76d26921ca",
           "pivot": [
             128,
             224

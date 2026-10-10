@@ -1,0 +1,490 @@
+{
+  "passed": true,
+  "frames": [
+    {
+      "id": "attack_5_swing",
+      "bootRow223": [
+        105,
+        116
+      ],
+      "bootRows": [
+        215,
+        223
+      ],
+      "bootHeight": 9,
+      "bootRowWidths": [
+        {
+          "y": 215,
+          "ranges": [
+            [
+              110,
+              118
+            ]
+          ],
+          "width": 9
+        },
+        {
+          "y": 216,
+          "ranges": [
+            [
+              109,
+              117
+            ]
+          ],
+          "width": 9
+        },
+        {
+          "y": 217,
+          "ranges": [
+            [
+              108,
+              115
+            ]
+          ],
+          "width": 8
+        },
+        {
+          "y": 218,
+          "ranges": [
+            [
+              106,
+              116
+            ]
+          ],
+          "width": 11
+        },
+        {
+          "y": 219,
+          "ranges": [
+            [
+              105,
+              116
+            ]
+          ],
+          "width": 12
+        },
+        {
+          "y": 220,
+          "ranges": [
+            [
+              105,
+              116
+            ]
+          ],
+          "width": 12
+        },
+        {
+          "y": 221,
+          "ranges": [
+            [
+              105,
+              116
+            ]
+          ],
+          "width": 12
+        },
+        {
+          "y": 222,
+          "ranges": [
+            [
+              105,
+              116
+            ]
+          ],
+          "width": 12
+        },
+        {
+          "y": 223,
+          "ranges": [
+            [
+              105,
+              116
+            ]
+          ],
+          "width": 12
+        }
+      ],
+      "changedBodyPixels": 391,
+      "clothEndChangedPixels": 0,
+      "changedOutsideBacklegAndClothEnds": 0,
+      "frontLegChangedPixels": 0,
+      "upperBodyChangedPixels": 0,
+      "smearPixelsInForbiddenArea": 0,
+      "katarChangedPixels": 0,
+      "protectedLayerChangedPixels": 0,
+      "hip": [
+        148,
+        197
+      ],
+      "hipToBootConnected": true,
+      "connectedRowWidths": [
+        [
+          198,
+          27
+        ],
+        [
+          199,
+          27
+        ],
+        [
+          200,
+          24
+        ],
+        [
+          201,
+          24
+        ],
+        [
+          202,
+          23
+        ],
+        [
+          203,
+          24
+        ],
+        [
+          204,
+          23
+        ],
+        [
+          205,
+          23
+        ],
+        [
+          206,
+          24
+        ],
+        [
+          207,
+          22
+        ],
+        [
+          208,
+          22
+        ],
+        [
+          209,
+          20
+        ],
+        [
+          210,
+          17
+        ],
+        [
+          211,
+          17
+        ],
+        [
+          212,
+          15
+        ],
+        [
+          213,
+          13
+        ],
+        [
+          214,
+          11
+        ],
+        [
+          215,
+          9
+        ],
+        [
+          216,
+          9
+        ],
+        [
+          217,
+          8
+        ],
+        [
+          218,
+          11
+        ],
+        [
+          219,
+          12
+        ],
+        [
+          220,
+          12
+        ],
+        [
+          221,
+          12
+        ],
+        [
+          222,
+          12
+        ],
+        [
+          223,
+          12
+        ]
+      ],
+      "navyPixelsOnContactShinOrBoot": 0
+    },
+    {
+      "id": "attack_3_contact",
+      "bootRow223": [
+        105,
+        116
+      ],
+      "bootRows": [
+        215,
+        223
+      ],
+      "bootHeight": 9,
+      "bootRowWidths": [
+        {
+          "y": 215,
+          "ranges": [
+            [
+              109,
+              118
+            ]
+          ],
+          "width": 10
+        },
+        {
+          "y": 216,
+          "ranges": [
+            [
+              107,
+              116
+            ]
+          ],
+          "width": 10
+        },
+        {
+          "y": 217,
+          "ranges": [
+            [
+              106,
+              115
+            ]
+          ],
+          "width": 10
+        },
+        {
+          "y": 218,
+          "ranges": [
+            [
+              106,
+              115
+            ]
+          ],
+          "width": 10
+        },
+        {
+          "y": 219,
+          "ranges": [
+            [
+              105,
+              116
+            ]
+          ],
+          "width": 12
+        },
+        {
+          "y": 220,
+          "ranges": [
+            [
+              105,
+              116
+            ]
+          ],
+          "width": 12
+        },
+        {
+          "y": 221,
+          "ranges": [
+            [
+              105,
+              116
+            ]
+          ],
+          "width": 12
+        },
+        {
+          "y": 222,
+          "ranges": [
+            [
+              105,
+              116
+            ]
+          ],
+          "width": 12
+        },
+        {
+          "y": 223,
+          "ranges": [
+            [
+              105,
+              116
+            ]
+          ],
+          "width": 12
+        }
+      ],
+      "changedBodyPixels": 495,
+      "clothEndChangedPixels": 126,
+      "changedOutsideBacklegAndClothEnds": 0,
+      "frontLegChangedPixels": 0,
+      "upperBodyChangedPixels": 0,
+      "smearPixelsInForbiddenArea": 0,
+      "katarChangedPixels": 0,
+      "protectedLayerChangedPixels": 0,
+      "hip": [
+        152,
+        197
+      ],
+      "hipToBootConnected": true,
+      "connectedRowWidths": [
+        [
+          198,
+          32
+        ],
+        [
+          199,
+          32
+        ],
+        [
+          200,
+          30
+        ],
+        [
+          201,
+          29
+        ],
+        [
+          202,
+          30
+        ],
+        [
+          203,
+          28
+        ],
+        [
+          204,
+          27
+        ],
+        [
+          205,
+          25
+        ],
+        [
+          206,
+          23
+        ],
+        [
+          207,
+          19
+        ],
+        [
+          208,
+          18
+        ],
+        [
+          209,
+          17
+        ],
+        [
+          210,
+          17
+        ],
+        [
+          211,
+          13
+        ],
+        [
+          212,
+          13
+        ],
+        [
+          213,
+          11
+        ],
+        [
+          214,
+          10
+        ],
+        [
+          215,
+          10
+        ],
+        [
+          216,
+          10
+        ],
+        [
+          217,
+          10
+        ],
+        [
+          218,
+          10
+        ],
+        [
+          219,
+          12
+        ],
+        [
+          220,
+          12
+        ],
+        [
+          221,
+          12
+        ],
+        [
+          222,
+          12
+        ],
+        [
+          223,
+          12
+        ]
+      ],
+      "navyPixelsOnContactShinOrBoot": 0
+    }
+  ],
+  "scope": {
+    "outsideUnchangedFiles": 15188,
+    "insideUnchangedFiles": 326,
+    "archivedOriginalFiles": 24
+  },
+  "sheets": {
+    "playOrder": [
+      "idle",
+      "attack_1_wind_up",
+      "attack_2_apex",
+      "attack_5_swing",
+      "attack_3_contact",
+      "attack_4_recovery"
+    ],
+    "keyposes": [
+      1536,
+      240
+    ],
+    "keyposes4x": [
+      6144,
+      960
+    ],
+    "sideBySide": [
+      512,
+      1200
+    ],
+    "verifiedPixelForPixel": true
+  },
+  "generated": [
+    "attack_5_swing/sources/generated.png",
+    "attack_3_contact/sources/generated.png"
+  ],
+  "rejected": [
+    "rejected/attack_5_swing_backleg_previous/",
+    "rejected/attack_3_contact_backleg_previous/"
+  ],
+  "referenceImagesCopied": false
+}
