@@ -7,8 +7,8 @@
 // - 시트 하나 = 캐릭터 하나(id: knight_female_p2)의 애니메이션 하나(kind: idle, attack, skill_bless …). hitFrame과 그 동작을 쓰는 스킬 id도 적습니다.
 // - 무기: 프레임마다 미리 그린 무기 레이어 → 덧그림 묶음 `weapon:<종류>` ({file, z}). 그 프레임에서 숨긴 무기는 넣지 않습니다.
 // - 앞 손가락 덮개 → `grip`. 무기 종류별 덮개(byType.gripOverlay)는 무기 그림에 이미 합쳐져 있습니다(gripBakedIntoWeapon).
-// - 머리: 고른 헤어의 뒤·앞 조각 → `hair_back`·`hair_front` 덧그림(render.order로 순서). 몸 프레임에는 머리가 없어 몸 밖 검사는 빼고(overlayGroups inside: false),
-//   bodyHeight는 머리 없는 몸 그림의 선 키입니다(게임 키 48px은 gameHeight). 머리 위치가 (0,0)이 아닌 조각(쿠키 wavy_p2)은
+// - 머리: 고른 헤어의 뒤·앞 조각 → `hair_back`·`hair_front` 덧그림(render.order로 순서). 몸 프레임에는 머리가 없어 몸 밖 검사는 뺍니다(overlayGroups inside: false).
+// - bodyHeight: 몸 + 머리 조각을 겹친 대기 첫 장의 선 키(게임에서 보이는 키). 공방은 이 값으로 시트를 키우므로 영웅마다 같은 기준이어야 합니다. 머리 위치가 (0,0)이 아닌 조각(쿠키 wavy_p2)은
 //   캔버스 크기로 옮긴 사본을 asset-records/pixel-heroes/derived/에 씁니다.
 // - 머리색: 게임은 네 키 색을 HAIR_TINT 배수로 바꿉니다. 표준 tints + tintLayers(앞·뒷머리 덧그림 전체에 base × tint, v0.4.3)로 옮깁니다.
 //   몸 프레임에 남은 짧은 바탕 머리는 마스크를 만들지 않아 공방에서는 원색으로 보입니다.
@@ -84,10 +84,16 @@ export function convert(src, { base, derivedDir, canvasFor = (p) => readPng(p), 
     return out;
   };
   const weaponTypes = Object.keys(src.weapons || {});
+  // union of several canvas-sized layers (shifted hair copies come from the derived map), measured like one frame
+  const figureHeight = (files) => {
+    const imgs = files.map((f) => derived.get(f) ?? canvasFor(f));
+    const data = Buffer.alloc(CW * CH * 4);
+    for (const im of imgs) for (let i = 3; i < data.length; i += 4) if (im.data[i] > data[i]) data[i] = im.data[i];
+    return measureImg({ w: CW, h: CH, data });
+  };
   // the check measures the standing height on the body frame alone, and our body frames carry no hair (it is its own layer),
   // so each character's bodyHeight here is its first idle body frame's painted height (no hair); the game's 48 px includes the hair
-  const paintedHeight = (file) => {
-    const img = canvasFor(at(file));
+  const measureImg = (img) => {
     if (measure) return measure(img); // asset-kit's own measure (small detached bits set aside), so the check compares like with like
     let top = -1, bottom = -1;
     for (let y = 0; y < img.h; y++) for (let x = 0; x < img.w; x++) if (img.data[(y * img.w + x) * 4 + 3]) { if (top < 0) top = y; bottom = y; break; }
@@ -98,8 +104,16 @@ export function convert(src, { base, derivedDir, canvasFor = (p) => readPng(p), 
     const table = c.animations ?? src.animations;
     const style = c.defaultHair ?? c.hairStyles?.[0];
     const hair = style ? src.hair?.[style] : undefined;
+    // standing height of the whole figure as the game draws it: body + its hair pieces (idle_0). The workshop scales every
+    // sheet by bodyHeight, so this must be the same kind of height for every hero or they show at different sizes
     const idle0 = c.frames[(c.animations ?? src.animations).idle?.frames[0]];
-    const bodyHeight = idle0 ? paintedHeight(idle0.image) : c.bodyHeight ?? src.canvas.bodyHeight;
+    let bodyHeight = c.bodyHeight ?? src.canvas.bodyHeight;
+    if (idle0) {
+      const hp = hair?.poses?.[idle0.head.pose], piv = hp?.pivot ?? hair?.pivot ?? [0, 0];
+      const dx = idle0.head.point[0] - piv[0], dy = idle0.head.point[1] - piv[1];
+      const parts = [at(idle0.image), ...[hp?.back, hp?.front].filter(Boolean).map((f) => placed(f, dx, dy))];
+      bodyHeight = figureHeight(parts);
+    }
     const skillsOf = (anim) => Object.entries(c.skillMotions || {}).filter(([, v]) => v === anim).map(([k]) => k);
     for (const [kind, a] of Object.entries(table)) {
       const frames = a.frames.map((name, i) => {
