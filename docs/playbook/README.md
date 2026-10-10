@@ -35,6 +35,8 @@
 | `tools/art/field-skills.mjs --party …` | 필드에서 실제 스킬 발동 장면 캡처 |
 | `tools/qa/ui-check.mjs` | UI 회귀 검사 32개 |
 | `tools/asset-kit-pixel.mjs` (`npm run asset:records`) | 도트 영웅 → 공방 표준 기록 |
+| `tools/art/clean-weapon-bits.mjs` | 몸 그림에 남은 무기 조각(기본 무기에 완전히 가려지는 떨어진 조각)을 지움. 쥐는 손은 건드리지 않고, 기본 무기를 든 모습이 같은지 스스로 확인. 납품을 합친 뒤 다시 돌림 |
+| `asset-records/pixel-heroes/reviews.json` | 사람 검토 기록: 눈으로 보고 괜찮다고 판단한 시트의 검사 경고를 끔(그림 해시가 같을 때만) |
 
 - 헤드리스 도구는 다른 저장소의 playwright를 빌립니다: `PLAYWRIGHT_FROM`(기본 `../RiftLoopPrototype`). 실행마다 자기 프로필이라 사용자 저장을 건드리지 않습니다.
 - 그림을 합친 뒤에는 개발 서버를 다시 띄웁니다(Vite가 옛 PNG를 줌).

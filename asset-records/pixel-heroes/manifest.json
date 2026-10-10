@@ -235,7 +235,8 @@
      },
      "sha256": "47212c96aba3727a4bf240a750b524f7c2ae0a039a97ed1da4d1cd7b16af6536"
     }
-   ]
+   ],
+   "reviewHash": "effe14ee2bf353bd"
   },
   {
    "id": "swordsman_female_p2",
@@ -493,7 +494,19 @@
      },
      "sha256": "619372df6d926b4c1051a413a7e396c4db6ddd9f3d66a8419209c70d442ec201"
     }
-   ]
+   ],
+   "reviewHash": "c3958e888c1b65b6",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "swordsman_female_p2",
@@ -687,7 +700,19 @@
      },
      "sha256": "47212c96aba3727a4bf240a750b524f7c2ae0a039a97ed1da4d1cd7b16af6536"
     }
-   ]
+   ],
+   "reviewHash": "86e7dba8d5dac428",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "swordsman_female_p2",
@@ -765,7 +790,19 @@
      },
      "sha256": "ad9f207de62f6e1277f614369ddbe80afa1456ecec3ae7566e8ad4bcef587fa7"
     }
-   ]
+   ],
+   "reviewHash": "7171c85b276ac912",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "swordsman_female_p2",
@@ -903,7 +940,8 @@
      },
      "sha256": "ca8ddd6b137f59a939727bb1b43b95b78c92460f12df617455e2650430cdad06"
     }
-   ]
+   ],
+   "reviewHash": "4da3f67f530c05d0"
   },
   {
    "id": "swordsman_female_p2",
@@ -951,7 +989,8 @@
      },
      "sha256": "b1d3313c08b609630a9b0c1e21be144f84b5b03d70edaf4ef43b9cab39b792dc"
     }
-   ]
+   ],
+   "reviewHash": "14d2345070bc1fbf"
   },
   {
    "id": "knight_female_p2",
@@ -1105,7 +1144,8 @@
      },
      "sha256": "ab99508a74cc988457dd12b8921d2f9992a8009441765ddc432f94012c79ec6e"
     }
-   ]
+   ],
+   "reviewHash": "b8d0e6af626a12dc"
   },
   {
    "id": "knight_female_p2",
@@ -1395,7 +1435,8 @@
      },
      "sha256": "87b4dfaf86396c6d5dc553ec613156b1205c37e75943d5029dc42f4c72d3d898"
     }
-   ]
+   ],
+   "reviewHash": "df22fdee2d3a5104"
   },
   {
    "id": "knight_female_p2",
@@ -1686,7 +1727,19 @@
      },
      "sha256": "ae2a88a1304e2a6378d74e6b345b233d1e59c3f1fdeed08e74b6160d7e4c3e5c"
     }
-   ]
+   ],
+   "reviewHash": "d37ffe2b0145018f",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "knight_female_p2",
@@ -1772,7 +1825,8 @@
      },
      "sha256": "e555287f3c1bdeacd5db14312a2c56939f063113f7d3aacbdbcdfe0574b417dc"
     }
-   ]
+   ],
+   "reviewHash": "3c242a6e1d1fff94"
   },
   {
    "id": "knight_female_p2",
@@ -1926,7 +1980,19 @@
      },
      "sha256": "4784d47d6b106f3bf421117569df01affd26536230ba80329992d6f34005eba5"
     }
-   ]
+   ],
+   "reviewHash": "289e63a58e7dea8a",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "knight_female_p2",
@@ -1978,7 +2044,8 @@
      },
      "sha256": "beeb535f3bbe3b60fa7a2e8b947173bd5f35204c3ed4a8738d54ed3bace10c04"
     }
-   ]
+   ],
+   "reviewHash": "ef216626362204d3"
   },
   {
    "id": "knight_female_p2",
@@ -2064,7 +2131,8 @@
      },
      "sha256": "614079354704f53c7284dc7e9072e3bf614d55791e2dfec689293f591aca7b83"
     }
-   ]
+   ],
+   "reviewHash": "5760fe44fc2999f4"
   },
   {
    "id": "knight_female_p2",
@@ -2290,7 +2358,19 @@
      },
      "sha256": "ae2a88a1304e2a6378d74e6b345b233d1e59c3f1fdeed08e74b6160d7e4c3e5c"
     }
-   ]
+   ],
+   "reviewHash": "12c7d43b9ca50964",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "knight_female_p2",
@@ -2551,7 +2631,19 @@
      },
      "sha256": "ae2a88a1304e2a6378d74e6b345b233d1e59c3f1fdeed08e74b6160d7e4c3e5c"
     }
-   ]
+   ],
+   "reviewHash": "12af856ab0192aca",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "knight_female_p2",
@@ -2778,7 +2870,19 @@
      },
      "sha256": "ae2a88a1304e2a6378d74e6b345b233d1e59c3f1fdeed08e74b6160d7e4c3e5c"
     }
-   ]
+   ],
+   "reviewHash": "9892a813889f55bd",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "knight_female_p2",
@@ -2854,7 +2958,6 @@
       }
      },
      "overlays": {
-      "grip": "src/assets/pixel/grips/knight_female_p2/skill_throw_1.png",
       "hair_back": "src/assets/pixel/hair/knight_braided_bob_p2/skill_throw_1_back.png",
       "hair_front": "src/assets/pixel/hair/knight_braided_bob_p2/skill_throw_1_front.png"
      },
@@ -2962,7 +3065,26 @@
      },
      "sha256": "ae2a88a1304e2a6378d74e6b345b233d1e59c3f1fdeed08e74b6160d7e4c3e5c"
     }
-   ]
+   ],
+   "reviewHash": "b17d552a2992496d",
+   "checkRules": {
+    "anchorSide": [],
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand",
+     "grip"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 / 손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "knight_female_p2",
@@ -3121,7 +3243,19 @@
      },
      "sha256": "ae2a88a1304e2a6378d74e6b345b233d1e59c3f1fdeed08e74b6160d7e4c3e5c"
     }
-   ]
+   ],
+   "reviewHash": "26867f6439c8cab2",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "knight_female_p2",
@@ -3280,7 +3414,19 @@
      },
      "sha256": "ae2a88a1304e2a6378d74e6b345b233d1e59c3f1fdeed08e74b6160d7e4c3e5c"
     }
-   ]
+   ],
+   "reviewHash": "60b8b02c541ef5e6",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "knight_female_p2",
@@ -3438,7 +3584,8 @@
      },
      "sha256": "ae2a88a1304e2a6378d74e6b345b233d1e59c3f1fdeed08e74b6160d7e4c3e5c"
     }
-   ]
+   ],
+   "reviewHash": "75ff484fe7617eac"
   },
   {
    "id": "knight_female_p2",
@@ -3732,7 +3879,19 @@
      },
      "sha256": "ae2a88a1304e2a6378d74e6b345b233d1e59c3f1fdeed08e74b6160d7e4c3e5c"
     }
-   ]
+   ],
+   "reviewHash": "a332a18def42b53e",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "knight_female_p2",
@@ -4094,7 +4253,19 @@
      },
      "sha256": "ae2a88a1304e2a6378d74e6b345b233d1e59c3f1fdeed08e74b6160d7e4c3e5c"
     }
-   ]
+   ],
+   "reviewHash": "451c327deca590f9",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "knight_female_p2",
@@ -4286,7 +4457,19 @@
      },
      "sha256": "ae2a88a1304e2a6378d74e6b345b233d1e59c3f1fdeed08e74b6160d7e4c3e5c"
     }
-   ]
+   ],
+   "reviewHash": "871074a0e11c6015",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "mage_female_p2",
@@ -4394,7 +4577,8 @@
      },
      "sha256": "720e214f3fcac6a536452bf8047bdefed5a7fa9d7140f29581b3487576972152"
     }
-   ]
+   ],
+   "reviewHash": "8383c68a85b42386"
   },
   {
    "id": "mage_female_p2",
@@ -4592,7 +4776,8 @@
      },
      "sha256": "05d69f72e94a3ce5205eb14c30444e4dec55cce420ab047f7f5d5bf895f1e796"
     }
-   ]
+   ],
+   "reviewHash": "62861cf6f1dba47c"
   },
   {
    "id": "mage_female_p2",
@@ -4821,7 +5006,19 @@
      },
      "sha256": "905f555ec5d743f66af3995b938ad4f783a148b19968f9c7208533c34efbf649"
     }
-   ]
+   ],
+   "reviewHash": "6ef4fbf1bd26425c",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "mage_female_p2",
@@ -4899,7 +5096,8 @@
      },
      "sha256": "ee7395ca10eeddecf56b2f8c95ca4ae1ac2fb1fbeeaa8702d25e7664a5884019"
     }
-   ]
+   ],
+   "reviewHash": "993565066bfb5c0b"
   },
   {
    "id": "mage_female_p2",
@@ -5007,7 +5205,8 @@
      },
      "sha256": "9b9e3e81d9a29a73999aa67c50eae0bd15746ea6be21aa7bb013258a31515946"
     }
-   ]
+   ],
+   "reviewHash": "adcb9dd697a6589e"
   },
   {
    "id": "mage_female_p2",
@@ -5085,7 +5284,8 @@
      },
      "sha256": "32387feeb7ff0b80813afdfa37cb88af8640a9ee815fe7a7fd84fef7c313e014"
     }
-   ]
+   ],
+   "reviewHash": "92ddfb27682ceaa7"
   },
   {
    "id": "mage_female_p2",
@@ -5193,7 +5393,8 @@
      },
      "sha256": "2461063eaa8b56a7201588e2aeae104ed6600d8a4bebe978a9209f0871076c7d"
     }
-   ]
+   ],
+   "reviewHash": "79bcdaf0b9a4fcc3"
   },
   {
    "id": "mage_female_p2",
@@ -5241,7 +5442,8 @@
      },
      "sha256": "c3e1dd46e46bb811b6546afcc5086716ca5f9818fa8a30fe1b9ee62d075a9fa7"
     }
-   ]
+   ],
+   "reviewHash": "80a008ca13cbd8ce"
   },
   {
    "id": "archer_male_p2",
@@ -5346,7 +5548,8 @@
      },
      "sha256": "1f003a33c4b9d3dca71a7294721de3a267a61920b1e8c8297f6b0dbc1524bfdf"
     }
-   ]
+   ],
+   "reviewHash": "235ecdbb7e8f1fce"
   },
   {
    "id": "archer_male_p2",
@@ -5538,7 +5741,8 @@
      },
      "sha256": "fa6db703e9f555a3be24c748b8258cdc523c2634a8fb001ec5acdfe44bcd63c5"
     }
-   ]
+   ],
+   "reviewHash": "718ade1ec33415be"
   },
   {
    "id": "archer_male_p2",
@@ -5760,7 +5964,8 @@
      },
      "sha256": "75c209677f1678fb5153660983c3d45f0b49eaad70a0e1dc4b50a9e6c7f09799"
     }
-   ]
+   ],
+   "reviewHash": "eed43b6006c5d25e"
   },
   {
    "id": "archer_male_p2",
@@ -5836,7 +6041,8 @@
      },
      "sha256": "0e4b5803bb451d09663b9f927aee3dbe741a1079987c53453ffe74dc4a2a54da"
     }
-   ]
+   ],
+   "reviewHash": "eff8fd2e9e4c2bc4"
   },
   {
    "id": "archer_male_p2",
@@ -5941,7 +6147,8 @@
      },
      "sha256": "d93dcd9c38205fa13ded647e5cb5413c4739388375cc559c291a18c09f5fd505"
     }
-   ]
+   ],
+   "reviewHash": "7820c14bf6266eac"
   },
   {
    "id": "archer_male_p2",
@@ -5988,7 +6195,8 @@
      },
      "sha256": "018e764db71041b37a421961a1ae1b4eb310b0ce15775648fd1ca730f6b0c8b3"
     }
-   ]
+   ],
+   "reviewHash": "61e9b0ef1f8bdd26"
   },
   {
    "id": "acolyte_female_p2",
@@ -6096,7 +6304,8 @@
      },
      "sha256": "fa57cc1730e3df28669ee41f5bc41dd52670bbccca4a63c8c71ca839e99bb104"
     }
-   ]
+   ],
+   "reviewHash": "f0940eb2fd442d5d"
   },
   {
    "id": "acolyte_female_p2",
@@ -6294,7 +6503,8 @@
      },
      "sha256": "90b266960e6b9a008c9a0a65f407204351340371ec670dabcc30257ac16b6cea"
     }
-   ]
+   ],
+   "reviewHash": "eb57c7e99961f40f"
   },
   {
    "id": "acolyte_female_p2",
@@ -6523,7 +6733,19 @@
      },
      "sha256": "da89903f89859967f1f7f690940324a18caa13f62760dbfecc11596898812fec"
     }
-   ]
+   ],
+   "reviewHash": "bdcb38832a3ca59e",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "acolyte_female_p2",
@@ -6661,7 +6883,8 @@
      },
      "sha256": "081d2dead416adda612b6412a010522e41639b8072a314871b3d660c1a37c17c"
     }
-   ]
+   ],
+   "reviewHash": "46eebbc788638c2f"
   },
   {
    "id": "acolyte_female_p2",
@@ -6739,7 +6962,8 @@
      },
      "sha256": "af7597830d4ea6b3042fe917a56c0a9600ee01db426499b0ba9b32d866c0a460"
     }
-   ]
+   ],
+   "reviewHash": "2adeae2f0257fa83"
   },
   {
    "id": "acolyte_female_p2",
@@ -6847,7 +7071,8 @@
      },
      "sha256": "131d065f4a3197286abc8c8b74d0e7f1acf4b68590a886a3f0ab4f4ead486edc"
     }
-   ]
+   ],
+   "reviewHash": "d8c751934c9bea40"
   },
   {
    "id": "acolyte_female_p2",
@@ -6895,7 +7120,8 @@
      },
      "sha256": "58c0cdbe99cc6284622960156b93f38170a63e634e25fba7c079461e60b84f2e"
     }
-   ]
+   ],
+   "reviewHash": "493928f4bc5d3eb0"
   },
   {
    "id": "thief_male_p2",
@@ -7003,7 +7229,19 @@
      },
      "sha256": "3f92a4e344d6cf878ac21d3f0e22a55cf2de9763208890cc2cdb35c706d7dbf1"
     }
-   ]
+   ],
+   "reviewHash": "df9ae1f993e8a925",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "thief_male_p2",
@@ -7261,7 +7499,19 @@
      },
      "sha256": "588df67509795eef6d605021839222efc2dd6cd4ba1600bf477994d5c16733af"
     }
-   ]
+   ],
+   "reviewHash": "c75265067ef4064a",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "thief_male_p2",
@@ -7490,7 +7740,19 @@
      },
      "sha256": "9a8fcd9ad205e446194764a702d9a8f15d7bbfd40bd0d5a35df25b56f2554379"
     }
-   ]
+   ],
+   "reviewHash": "d343713ae6655436",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "thief_male_p2",
@@ -7598,7 +7860,19 @@
      },
      "sha256": "17430b3c59494a68ead2614a17ffa622c2e747fc0246f72cea6d0fa2b42c174e"
     }
-   ]
+   ],
+   "reviewHash": "9e9128923783202d",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "thief_male_p2",
@@ -7706,7 +7980,8 @@
      },
      "sha256": "51acab188d55a5fa01851b87081da6059397acfa10d8f19496c3b4661e5a9fb5"
     }
-   ]
+   ],
+   "reviewHash": "c4ce3e36596cdaf9"
   },
   {
    "id": "thief_male_p2",
@@ -7754,7 +8029,19 @@
      },
      "sha256": "0965f3fbe8ac7a3fdc4b51b5cbadf2996113c6d89ccaa1202bd77e0db1cf6993"
     }
-   ]
+   ],
+   "reviewHash": "641944c04c1a1136",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "merchant_female_p2",
@@ -7862,7 +8149,8 @@
      },
      "sha256": "cd14ca3ec2c01c65690643322c929ce332f7a08fdc46621c472650199c8d72ea"
     }
-   ]
+   ],
+   "reviewHash": "8adc4fb4d91fcdb8"
   },
   {
    "id": "merchant_female_p2",
@@ -8060,7 +8348,8 @@
      },
      "sha256": "f730dc2cadd46b38b6574aa68e5fafb1e9e1f83430e77b9706f5e5352ba4c677"
     }
-   ]
+   ],
+   "reviewHash": "f3a693961e2aedec"
   },
   {
    "id": "merchant_female_p2",
@@ -8319,7 +8608,19 @@
      },
      "sha256": "3590f411dd30c960075d21aec30ff4377eb7dcc8e41c83cfdfe3f50a6db054ce"
     }
-   ]
+   ],
+   "reviewHash": "ba39c95c530ac61f",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "merchant_female_p2",
@@ -8397,7 +8698,8 @@
      },
      "sha256": "4854635b1bc5709fe6fc6cb177cb67b2964af701b91e6445d552726957ec23cb"
     }
-   ]
+   ],
+   "reviewHash": "49c893f863a5659f"
   },
   {
    "id": "merchant_female_p2",
@@ -8505,7 +8807,8 @@
      },
      "sha256": "2cd0be7438dea8bf232f76813cd746798bab0dab31ce5e8ffeef328d7ef9a91f"
     }
-   ]
+   ],
+   "reviewHash": "237c8662d95fc19a"
   },
   {
    "id": "merchant_female_p2",
@@ -8553,7 +8856,8 @@
      },
      "sha256": "8c6ee40e4bef4e155715707ca6043f64709ff31228ba007a30aaa397c522015d"
     }
-   ]
+   ],
+   "reviewHash": "c889bb661f9b7de5"
   },
   {
    "id": "novice_female_p2",
@@ -8661,7 +8965,8 @@
      },
      "sha256": "fdc951303ea20d14df490026a4fdf3539d8909c17e81c633a9ff4a0d56882298"
     }
-   ]
+   ],
+   "reviewHash": "92a330f84c72eb69"
   },
   {
    "id": "novice_female_p2",
@@ -8859,7 +9164,8 @@
      },
      "sha256": "27f8f8e37b07534b67bfa93f4cb5cc4bed543d54cc29e80232388c9c6d820788"
     }
-   ]
+   ],
+   "reviewHash": "8b665d6f87da22c1"
   },
   {
    "id": "novice_female_p2",
@@ -9058,7 +9364,8 @@
      },
      "sha256": "b1b9a2efce54b6e6992c024e2dd0ddd43700b5ddce21d2e8819ab02f8b982476"
     }
-   ]
+   ],
+   "reviewHash": "449d198bcb7acbfb"
   },
   {
    "id": "novice_female_p2",
@@ -9136,7 +9443,8 @@
      },
      "sha256": "ebae8575542dea4816e0c007f0b7ae30b101365d2bd48f6413b286cf6688fdb9"
     }
-   ]
+   ],
+   "reviewHash": "2793c2f54046253b"
   },
   {
    "id": "novice_female_p2",
@@ -9244,7 +9552,19 @@
      },
      "sha256": "84bdbbec6b6957478a02de62a557dcca830cd25e1691da0c457c0e3336ba94f7"
     }
-   ]
+   ],
+   "reviewHash": "53e9d9612e00217c",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "novice_female_p2",
@@ -9292,7 +9612,8 @@
      },
      "sha256": "f8e984994d49efc04bc26d671c94405436d7162d98134294bf1c55f2aaafa28a"
     }
-   ]
+   ],
+   "reviewHash": "b2fa674cfc4ec25c"
   },
   {
    "id": "wizard_female_p2",
@@ -9400,7 +9721,24 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "7f9205502a6aedf0",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -9658,7 +9996,24 @@
      },
      "sha256": "e0fc4e381a58c7d938fde5cf4be28a71459b2e96e63cbfc5998af7e5596644b0"
     }
-   ]
+   ],
+   "reviewHash": "51d190b00a73a5d8",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -9857,7 +10212,26 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "7b9be2411e3eea53",
+   "checkRules": {
+    "anchorSide": [],
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand",
+     "grip"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 / 손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -9935,7 +10309,24 @@
      },
      "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
     }
-   ]
+   ],
+   "reviewHash": "c68d68f5bafae670",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -10043,7 +10434,24 @@
      },
      "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
     }
-   ]
+   ],
+   "reviewHash": "95327667c2ea7279",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -10151,7 +10559,24 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "d9214baaed3d5773",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -10259,7 +10684,24 @@
      },
      "sha256": "a0c388cd56222f49b993805ecf3d458e550dbeb6b419a08202ca2b973a51ef01"
     }
-   ]
+   ],
+   "reviewHash": "9c3500af34159de5",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -10307,7 +10749,24 @@
      },
      "sha256": "74f24c1f289adb44b2edfd2af374a36c9495634372d0ebe528f5c3d5c7cd73b0"
     }
-   ]
+   ],
+   "reviewHash": "2b3b556cdce3540c",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -10484,7 +10943,24 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "362cc04ccb2b515d",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -10688,7 +11164,24 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "009543aabdaf740d",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -10896,7 +11389,24 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "b1569be46f2971e0",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -11099,7 +11609,26 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "b766258b7fb3e975",
+   "checkRules": {
+    "anchorSide": [],
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand",
+     "grip"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 / 손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -11331,7 +11860,26 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "d31a0b6fb1b4e4cb",
+   "checkRules": {
+    "anchorSide": [],
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand",
+     "grip"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 / 손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -11533,7 +12081,26 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "678ef970c5db73bd",
+   "checkRules": {
+    "anchorSide": [],
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand",
+     "grip"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 / 손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -11735,7 +12302,24 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "f7e3fcf38c810f78",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -11878,7 +12462,24 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "d908a8914fa3d881",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -12022,7 +12623,24 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "05710f45660e06d5",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "wizard_female_p2",
@@ -12163,7 +12781,24 @@
      },
      "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
     }
-   ]
+   ],
+   "reviewHash": "2ff990afd61111ba",
+   "checkRules": {
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "grip"
+    ],
+    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "hunter_male_p2",
@@ -12268,7 +12903,8 @@
      },
      "sha256": "d4ab0267d94206a745abe1a4e51b1038d569dc5351bdfd047b10a4e6c8db019e"
     }
-   ]
+   ],
+   "reviewHash": "6c6b6f458118a628"
   },
   {
    "id": "hunter_male_p2",
@@ -12518,7 +13154,8 @@
      },
      "sha256": "eb5e959f243880fb6a9ee62c22790085dbe23cfc30fa21d84ada847c243fc209"
     }
-   ]
+   ],
+   "reviewHash": "99a85b21c5ca5600"
   },
   {
    "id": "hunter_male_p2",
@@ -12769,7 +13406,8 @@
      },
      "sha256": "c07669ef4a56bed2f2e7828e876b2e9b1b129292cde0a7a9fd2ebce0f2bf0fde"
     }
-   ]
+   ],
+   "reviewHash": "11bb65ec80061240"
   },
   {
    "id": "hunter_male_p2",
@@ -12845,7 +13483,8 @@
      },
      "sha256": "cf7c4d648fdb629230de030e2f4df51df520537e3548549f3442d49ec4b1366d"
     }
-   ]
+   ],
+   "reviewHash": "6cf0c05aa3c2d289"
   },
   {
    "id": "hunter_male_p2",
@@ -12950,7 +13589,19 @@
      },
      "sha256": "337f02f44426d28e99b53054d1ca99d44150566fb88a6b38b149909081a9ad54"
     }
-   ]
+   ],
+   "reviewHash": "d7c65ccbe6712f6e",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "hunter_male_p2",
@@ -12997,7 +13648,8 @@
      },
      "sha256": "1143e02af93784ac8423c96309350210e920413b74bd1bb1dd6464ea7d5cf857"
     }
-   ]
+   ],
+   "reviewHash": "12a2ba357598de36"
   },
   {
    "id": "hunter_male_p2",
@@ -13073,7 +13725,8 @@
      },
      "sha256": "9b2ba9d886e8813677111e0a41d0d4c2b3725c5c5f9f910879324affbf97bf99"
     }
-   ]
+   ],
+   "reviewHash": "26489fdae3bbb75a"
   },
   {
    "id": "hunter_male_p2",
@@ -13356,7 +14009,8 @@
      },
      "sha256": "c07669ef4a56bed2f2e7828e876b2e9b1b129292cde0a7a9fd2ebce0f2bf0fde"
     }
-   ]
+   ],
+   "reviewHash": "081f1d07563cb0d1"
   },
   {
    "id": "hunter_male_p2",
@@ -13434,7 +14088,7 @@
       "grip": "src/assets/pixel/grips/hunter_male_p2/sky_draw.png",
       "hair_front": "src/assets/pixel/hair/hunter_swept_crop_p2/sky_draw_front.png"
      },
-     "sha256": "c9b44a9d32abed10c7c0fabc27e060f4fd745ca54ba0ab1258fe02640a1298ed"
+     "sha256": "da105844c084f906626069238736a6484327d1309765200ce330e0c7be630dca"
     },
     {
      "name": "sky_release",
@@ -13581,7 +14235,19 @@
      },
      "sha256": "c07669ef4a56bed2f2e7828e876b2e9b1b129292cde0a7a9fd2ebce0f2bf0fde"
     }
-   ]
+   ],
+   "reviewHash": "7d8e76c717e896da",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "hunter_male_p2",
@@ -13807,7 +14473,8 @@
      },
      "sha256": "c07669ef4a56bed2f2e7828e876b2e9b1b129292cde0a7a9fd2ebce0f2bf0fde"
     }
-   ]
+   ],
+   "reviewHash": "949915ccdcbff240"
   },
   {
    "id": "hunter_male_p2",
@@ -14002,7 +14669,8 @@
      },
      "sha256": "c07669ef4a56bed2f2e7828e876b2e9b1b129292cde0a7a9fd2ebce0f2bf0fde"
     }
-   ]
+   ],
+   "reviewHash": "a4b6a5934fbc088e"
   },
   {
    "id": "hunter_male_p2",
@@ -14199,7 +14867,8 @@
      },
      "sha256": "c07669ef4a56bed2f2e7828e876b2e9b1b129292cde0a7a9fd2ebce0f2bf0fde"
     }
-   ]
+   ],
+   "reviewHash": "7cbe159c0689599a"
   },
   {
    "id": "hunter_male_p2",
@@ -14394,7 +15063,8 @@
      },
      "sha256": "c07669ef4a56bed2f2e7828e876b2e9b1b129292cde0a7a9fd2ebce0f2bf0fde"
     }
-   ]
+   ],
+   "reviewHash": "9744583f62cda454"
   },
   {
    "id": "hunter_male_p2",
@@ -14560,7 +15230,8 @@
      },
      "sha256": "c07669ef4a56bed2f2e7828e876b2e9b1b129292cde0a7a9fd2ebce0f2bf0fde"
     }
-   ]
+   ],
+   "reviewHash": "baf70a0f58bef69a"
   },
   {
    "id": "hunter_male_p2",
@@ -14764,7 +15435,8 @@
      },
      "sha256": "c07669ef4a56bed2f2e7828e876b2e9b1b129292cde0a7a9fd2ebce0f2bf0fde"
     }
-   ]
+   ],
+   "reviewHash": "c763f2d9f2c1a13c"
   },
   {
    "id": "priest_female_p2",
@@ -14872,7 +15544,8 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "1ad1f7c9704666ed"
   },
   {
    "id": "priest_female_p2",
@@ -15130,7 +15803,8 @@
      },
      "sha256": "18586e18d381891c3b2c5146a1c0347fe06acb142df79322d483b7e7742c12dd"
     }
-   ]
+   ],
+   "reviewHash": "615661a59aef5fa5"
   },
   {
    "id": "priest_female_p2",
@@ -15389,7 +16063,19 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "214c15e2ef673c8c",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "priest_female_p2",
@@ -15467,7 +16153,8 @@
      },
      "sha256": "4f01755d76c690f55846974bcc5bf70035eaf6a2e27bcc56f51a972046e2eb47"
     }
-   ]
+   ],
+   "reviewHash": "e85dc7b03a0406fc"
   },
   {
    "id": "priest_female_p2",
@@ -15575,7 +16262,8 @@
      },
      "sha256": "4f01755d76c690f55846974bcc5bf70035eaf6a2e27bcc56f51a972046e2eb47"
     }
-   ]
+   ],
+   "reviewHash": "af56173d0bb404a7"
   },
   {
    "id": "priest_female_p2",
@@ -15683,7 +16371,8 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "d7e145f84eaf06b8"
   },
   {
    "id": "priest_female_p2",
@@ -15791,7 +16480,8 @@
      },
      "sha256": "98ba001aeafb2e0bea0efed405f9da0dc03d5eb8955489355a4d1cca6c0e8cdb"
     }
-   ]
+   ],
+   "reviewHash": "7663330326d9bc06"
   },
   {
    "id": "priest_female_p2",
@@ -15839,7 +16529,8 @@
      },
      "sha256": "7e33e7c794aec831ca5ed59714afb04447ab58efed7286301de50efa4dd48421"
     }
-   ]
+   ],
+   "reviewHash": "d64333bcd89beaa0"
   },
   {
    "id": "priest_female_p2",
@@ -16014,7 +16705,8 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "2a853180b1f7e4e9"
   },
   {
    "id": "priest_female_p2",
@@ -16190,7 +16882,8 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "e2eeaf469b74113b"
   },
   {
    "id": "priest_female_p2",
@@ -16394,7 +17087,8 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "d4b7b4577f60bf54"
   },
   {
    "id": "priest_female_p2",
@@ -16599,7 +17293,8 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "70069715d474ac6a"
   },
   {
    "id": "priest_female_p2",
@@ -16802,7 +17497,8 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "aa91aae716087f7d"
   },
   {
    "id": "priest_female_p2",
@@ -17094,7 +17790,19 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "2c8be1e76bcf75fc",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "priest_female_p2",
@@ -17296,7 +18004,8 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "89fdda87876caa28"
   },
   {
    "id": "priest_female_p2",
@@ -17500,7 +18209,19 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "31997c2f355c4094",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "priest_female_p2",
@@ -17702,7 +18423,19 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "907e4a9a4f0110b0",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "priest_female_p2",
@@ -17904,7 +18637,8 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "4141b7547b32741b"
   },
   {
    "id": "priest_female_p2",
@@ -18106,7 +18840,8 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "dcc11d87160ce3e2"
   },
   {
    "id": "priest_female_p2",
@@ -18309,7 +19044,8 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "dc20b4653bbcadb6"
   },
   {
    "id": "priest_female_p2",
@@ -18511,7 +19247,8 @@
      },
      "sha256": "b3bf9437287ba443865314baef2d7ace964c7bb84978cf20b698ee2d2f2b59d5"
     }
-   ]
+   ],
+   "reviewHash": "e8742d3e6d0fab63"
   },
   {
    "id": "assassin_male_p2",
@@ -18630,7 +19367,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "1ed2c60a15e3a7ca",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -18913,7 +19662,19 @@
      },
      "sha256": "448b90a086003a78fa70e658ca4ffd4378026fb45faa26485e00208595d4cd5a"
     }
-   ]
+   ],
+   "reviewHash": "79902890f8280273",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -18996,7 +19757,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/attack_1.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/attack_1_front.png"
      },
-     "sha256": "7376d6185747f73971726af37aa07457381234cd94218b5d05826499968c5afe"
+     "sha256": "9c0bb8959174e9fee5f0f09a2e33cd9ccde146c3bdd36c2fba097a69cbba5c90"
     },
     {
      "name": "attack_2",
@@ -19029,7 +19790,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/attack_2.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/attack_2_front.png"
      },
-     "sha256": "374336b4f1cff9853bfcbe760e8224950cde0f7a5e3f78c688c971003568f3b8"
+     "sha256": "e89202aea5d381253b896305dbcf48ac2621c2c9eaf3aa33d5c58f8cac81cbb0"
     },
     {
      "name": "attack_3",
@@ -19095,7 +19856,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/attack_4.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/attack_4_front.png"
      },
-     "sha256": "bf0d9e942fcb78821a056b6250edff6c911a983c7035ca955507345fd44a9a21"
+     "sha256": "17bd357011751021ab0ab24018ee728d9129394f928cc13ab17d582539775ed2"
     },
     {
      "name": "attack_5",
@@ -19198,7 +19959,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "5bcd54718dbc1396",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -19317,7 +20090,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "c11d7a50d0342f0c",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -19468,7 +20253,8 @@
      },
      "sha256": "d6b6f41d5731127e1d51c860b1fb07d58e9997ff898984b580498515132b0c38"
     }
-   ]
+   ],
+   "reviewHash": "872d485842009287"
   },
   {
    "id": "assassin_male_p2",
@@ -19519,7 +20305,19 @@
      },
      "sha256": "92637834e535576bd87ead5337a5190edbe8a285449408aa660a4db85d62b7d0"
     }
-   ]
+   ],
+   "reviewHash": "4be2b339ef62421a",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -19568,7 +20366,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/cast_0.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/cast_0_front.png"
      },
-     "sha256": "6de3d474533f45b0809652730c7a887564cd37a622e34d86197149a93379d092"
+     "sha256": "26e10959b467cc160cb5db8bdfca8da21ad16e17a944258c5e3fc992f28fe327"
     },
     {
      "name": "cast_1",
@@ -19634,9 +20432,21 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/cast_2.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/cast_2_front.png"
      },
-     "sha256": "6de3d474533f45b0809652730c7a887564cd37a622e34d86197149a93379d092"
+     "sha256": "26e10959b467cc160cb5db8bdfca8da21ad16e17a944258c5e3fc992f28fe327"
     }
-   ]
+   ],
+   "reviewHash": "f56b495801751bf0",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -19723,7 +20533,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_1_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_1_front.png"
      },
-     "sha256": "cf1bd7a89e8b071e471b355e4ff21c3539fd06bf08a605f78d3b80c20485dad7"
+     "sha256": "412ed88a8ea29980e42371cd5cfa8e19fbed1eebe23add119e0a1aaf894cf169"
     },
     {
      "name": "skill_sonic_2",
@@ -19756,7 +20566,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_sonic_2.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_2_front.png"
      },
-     "sha256": "29543bab75dfce59beada1fed9b60a63515b253d58b9fd5de25bf3f590676587"
+     "sha256": "956be956046785370a7f43eb15832e253001b967b8d8529d0159f95b93afb3dc"
     },
     {
      "name": "skill_sonic_3",
@@ -19790,7 +20600,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_3_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_3_front.png"
      },
-     "sha256": "cf1bd7a89e8b071e471b355e4ff21c3539fd06bf08a605f78d3b80c20485dad7"
+     "sha256": "412ed88a8ea29980e42371cd5cfa8e19fbed1eebe23add119e0a1aaf894cf169"
     },
     {
      "name": "skill_sonic_4",
@@ -19824,7 +20634,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_4_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_4_front.png"
      },
-     "sha256": "2c4419e9b15aa9ab91d07b76d256f350ab311987580d1a60d9e77e1a6a59f249"
+     "sha256": "ab2e70a380cfc46907e674da24b062c1e9121cc6cc30771035cda49ebe55e246"
     },
     {
      "name": "skill_sonic_5",
@@ -19858,7 +20668,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_5_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_5_front.png"
      },
-     "sha256": "cf1bd7a89e8b071e471b355e4ff21c3539fd06bf08a605f78d3b80c20485dad7"
+     "sha256": "412ed88a8ea29980e42371cd5cfa8e19fbed1eebe23add119e0a1aaf894cf169"
     },
     {
      "name": "skill_sonic_6",
@@ -19891,7 +20701,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_sonic_6.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_6_front.png"
      },
-     "sha256": "29543bab75dfce59beada1fed9b60a63515b253d58b9fd5de25bf3f590676587"
+     "sha256": "956be956046785370a7f43eb15832e253001b967b8d8529d0159f95b93afb3dc"
     },
     {
      "name": "skill_sonic_7",
@@ -19925,7 +20735,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_7_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_7_front.png"
      },
-     "sha256": "cf1bd7a89e8b071e471b355e4ff21c3539fd06bf08a605f78d3b80c20485dad7"
+     "sha256": "412ed88a8ea29980e42371cd5cfa8e19fbed1eebe23add119e0a1aaf894cf169"
     },
     {
      "name": "skill_sonic_8",
@@ -19959,7 +20769,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_8_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_8_front.png"
      },
-     "sha256": "2c4419e9b15aa9ab91d07b76d256f350ab311987580d1a60d9e77e1a6a59f249"
+     "sha256": "ab2e70a380cfc46907e674da24b062c1e9121cc6cc30771035cda49ebe55e246"
     },
     {
      "name": "skill_sonic_9",
@@ -19993,7 +20803,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_9_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_9_front.png"
      },
-     "sha256": "cf1bd7a89e8b071e471b355e4ff21c3539fd06bf08a605f78d3b80c20485dad7"
+     "sha256": "412ed88a8ea29980e42371cd5cfa8e19fbed1eebe23add119e0a1aaf894cf169"
     },
     {
      "name": "skill_sonic_10",
@@ -20026,7 +20836,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_sonic_10.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_10_front.png"
      },
-     "sha256": "29543bab75dfce59beada1fed9b60a63515b253d58b9fd5de25bf3f590676587"
+     "sha256": "956be956046785370a7f43eb15832e253001b967b8d8529d0159f95b93afb3dc"
     },
     {
      "name": "skill_sonic_11",
@@ -20060,7 +20870,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_11_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_11_front.png"
      },
-     "sha256": "cf1bd7a89e8b071e471b355e4ff21c3539fd06bf08a605f78d3b80c20485dad7"
+     "sha256": "412ed88a8ea29980e42371cd5cfa8e19fbed1eebe23add119e0a1aaf894cf169"
     },
     {
      "name": "skill_sonic_12",
@@ -20094,7 +20904,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_12_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_12_front.png"
      },
-     "sha256": "2c4419e9b15aa9ab91d07b76d256f350ab311987580d1a60d9e77e1a6a59f249"
+     "sha256": "ab2e70a380cfc46907e674da24b062c1e9121cc6cc30771035cda49ebe55e246"
     },
     {
      "name": "skill_sonic_13",
@@ -20128,7 +20938,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_13_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_13_front.png"
      },
-     "sha256": "cf1bd7a89e8b071e471b355e4ff21c3539fd06bf08a605f78d3b80c20485dad7"
+     "sha256": "412ed88a8ea29980e42371cd5cfa8e19fbed1eebe23add119e0a1aaf894cf169"
     },
     {
      "name": "skill_sonic_14",
@@ -20161,7 +20971,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_sonic_14.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_14_front.png"
      },
-     "sha256": "29543bab75dfce59beada1fed9b60a63515b253d58b9fd5de25bf3f590676587"
+     "sha256": "956be956046785370a7f43eb15832e253001b967b8d8529d0159f95b93afb3dc"
     },
     {
      "name": "skill_sonic_15",
@@ -20195,7 +21005,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_15_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_15_front.png"
      },
-     "sha256": "cf1bd7a89e8b071e471b355e4ff21c3539fd06bf08a605f78d3b80c20485dad7"
+     "sha256": "412ed88a8ea29980e42371cd5cfa8e19fbed1eebe23add119e0a1aaf894cf169"
     },
     {
      "name": "skill_sonic_16",
@@ -20229,7 +21039,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_16_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_sonic_16_front.png"
      },
-     "sha256": "2c4419e9b15aa9ab91d07b76d256f350ab311987580d1a60d9e77e1a6a59f249"
+     "sha256": "ab2e70a380cfc46907e674da24b062c1e9121cc6cc30771035cda49ebe55e246"
     },
     {
      "name": "skill_sonic_17",
@@ -20299,7 +21109,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "efd7eb6250370bfe",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -20521,7 +21343,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "36693d1e609878f3",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -20608,7 +21442,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_envenom_1_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_envenom_1_front.png"
      },
-     "sha256": "cf1bd7a89e8b071e471b355e4ff21c3539fd06bf08a605f78d3b80c20485dad7"
+     "sha256": "412ed88a8ea29980e42371cd5cfa8e19fbed1eebe23add119e0a1aaf894cf169"
     },
     {
      "name": "skill_envenom_2",
@@ -20641,7 +21475,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_envenom_2.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_envenom_2_front.png"
      },
-     "sha256": "29543bab75dfce59beada1fed9b60a63515b253d58b9fd5de25bf3f590676587"
+     "sha256": "956be956046785370a7f43eb15832e253001b967b8d8529d0159f95b93afb3dc"
     },
     {
      "name": "skill_envenom_3",
@@ -20675,7 +21509,7 @@
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_envenom_3_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_envenom_3_front.png"
      },
-     "sha256": "cf1bd7a89e8b071e471b355e4ff21c3539fd06bf08a605f78d3b80c20485dad7"
+     "sha256": "412ed88a8ea29980e42371cd5cfa8e19fbed1eebe23add119e0a1aaf894cf169"
     },
     {
      "name": "skill_envenom_4",
@@ -20745,7 +21579,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "0e0c8a8946740b68",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -20833,7 +21679,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_scatter_1.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_scatter_1_front.png"
      },
-     "sha256": "3417746cef397ff541d650e5dd74106448d59d45e774e18187ffa43d36f99b3c"
+     "sha256": "0ad8a170ea992bb13aa8c6127a37d441b3b9f4191ce489635b11d653724cbba3"
     },
     {
      "name": "skill_scatter_2",
@@ -20933,7 +21779,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_scatter_4.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_scatter_4_front.png"
      },
-     "sha256": "3417746cef397ff541d650e5dd74106448d59d45e774e18187ffa43d36f99b3c"
+     "sha256": "0ad8a170ea992bb13aa8c6127a37d441b3b9f4191ce489635b11d653724cbba3"
     },
     {
      "name": "skill_scatter_5",
@@ -20969,7 +21815,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "1dd1c2bae3a784cd",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -21056,7 +21914,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_throw_1.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_throw_1_front.png"
      },
-     "sha256": "cf1318d39382a3e3d4b0db407d4da1778252b25010ecad051cf888046f5611ba"
+     "sha256": "be8818f8836b39827945bbe249f60bd345aa8997bf096a315fe26973ffefa71d"
     },
     {
      "name": "skill_throw_2",
@@ -21078,7 +21936,6 @@
       }
      },
      "overlays": {
-      "grip": "src/assets/pixel/grips/assassin_male_p2/skill_throw_2.png",
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_throw_2_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_throw_2_front.png"
      },
@@ -21104,7 +21961,6 @@
       }
      },
      "overlays": {
-      "grip": "src/assets/pixel/grips/assassin_male_p2/skill_throw_3.png",
       "hair_back": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_throw_3_back.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_throw_3_front.png"
      },
@@ -21178,7 +22034,26 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "c8e8777ff5c24cc9",
+   "checkRules": {
+    "anchorSide": [],
+    "overlayFree": [
+     "weapon",
+     "hair_back",
+     "hair_front",
+     "grip"
+    ]
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand",
+     "grip"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 / 손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -21230,7 +22105,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_pickup_0.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_pickup_0_front.png"
      },
-     "sha256": "6de3d474533f45b0809652730c7a887564cd37a622e34d86197149a93379d092"
+     "sha256": "26e10959b467cc160cb5db8bdfca8da21ad16e17a944258c5e3fc992f28fe327"
     },
     {
      "name": "skill_pickup_1",
@@ -21364,7 +22239,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_pickup_4.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_pickup_4_front.png"
      },
-     "sha256": "3417746cef397ff541d650e5dd74106448d59d45e774e18187ffa43d36f99b3c"
+     "sha256": "0ad8a170ea992bb13aa8c6127a37d441b3b9f4191ce489635b11d653724cbba3"
     },
     {
      "name": "skill_pickup_5",
@@ -21400,7 +22275,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "8642fa31b7426cab",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -21453,7 +22340,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_plant_0.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_plant_0_front.png"
      },
-     "sha256": "6de3d474533f45b0809652730c7a887564cd37a622e34d86197149a93379d092"
+     "sha256": "26e10959b467cc160cb5db8bdfca8da21ad16e17a944258c5e3fc992f28fe327"
     },
     {
      "name": "skill_plant_1",
@@ -21486,7 +22373,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_plant_1.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_plant_1_front.png"
      },
-     "sha256": "3417746cef397ff541d650e5dd74106448d59d45e774e18187ffa43d36f99b3c"
+     "sha256": "0ad8a170ea992bb13aa8c6127a37d441b3b9f4191ce489635b11d653724cbba3"
     },
     {
      "name": "skill_plant_2",
@@ -21586,7 +22473,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_plant_4.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_plant_4_front.png"
      },
-     "sha256": "6de3d474533f45b0809652730c7a887564cd37a622e34d86197149a93379d092"
+     "sha256": "26e10959b467cc160cb5db8bdfca8da21ad16e17a944258c5e3fc992f28fe327"
     },
     {
      "name": "skill_plant_5",
@@ -21622,7 +22509,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "a87cf68c5d889ae9",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -21708,7 +22607,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_coat_1.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_coat_1_front.png"
      },
-     "sha256": "b1fc8ceeefe330836f8264ae315d2bd80d526b2af7c03f15961ee94c02a09ad1"
+     "sha256": "73d1584d2227c12f8c4e37bc83209e7f7b5b84ef904c0def67bcce2b83ead97b"
     },
     {
      "name": "skill_coat_2",
@@ -21774,7 +22673,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_coat_3.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_coat_3_front.png"
      },
-     "sha256": "b1fc8ceeefe330836f8264ae315d2bd80d526b2af7c03f15961ee94c02a09ad1"
+     "sha256": "73d1584d2227c12f8c4e37bc83209e7f7b5b84ef904c0def67bcce2b83ead97b"
     },
     {
      "name": "skill_coat_4",
@@ -21810,7 +22709,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "9aa93e6078f2bf85",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -21896,7 +22807,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_guard_1.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_guard_1_front.png"
      },
-     "sha256": "b1fc8ceeefe330836f8264ae315d2bd80d526b2af7c03f15961ee94c02a09ad1"
+     "sha256": "73d1584d2227c12f8c4e37bc83209e7f7b5b84ef904c0def67bcce2b83ead97b"
     },
     {
      "name": "skill_guard_2",
@@ -21929,7 +22840,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_guard_2.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_guard_2_front.png"
      },
-     "sha256": "5dce57fc32f38d78f3a9f2d54ae786b7f50425138ab26b7b117952e310633810"
+     "sha256": "43d758f944b885b3b488961aa44a5767c67aa90d8deca31976af4b22029c61a7"
     },
     {
      "name": "skill_guard_3",
@@ -21962,7 +22873,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_guard_3.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_guard_3_front.png"
      },
-     "sha256": "b1fc8ceeefe330836f8264ae315d2bd80d526b2af7c03f15961ee94c02a09ad1"
+     "sha256": "73d1584d2227c12f8c4e37bc83209e7f7b5b84ef904c0def67bcce2b83ead97b"
     },
     {
      "name": "skill_guard_4",
@@ -21998,7 +22909,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "3f403d6fa22af9ed",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -22050,7 +22973,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_detox_0.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_detox_0_front.png"
      },
-     "sha256": "6de3d474533f45b0809652730c7a887564cd37a622e34d86197149a93379d092"
+     "sha256": "26e10959b467cc160cb5db8bdfca8da21ad16e17a944258c5e3fc992f28fe327"
     },
     {
      "name": "skill_detox_1",
@@ -22149,7 +23072,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_detox_3.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_detox_3_front.png"
      },
-     "sha256": "6de3d474533f45b0809652730c7a887564cd37a622e34d86197149a93379d092"
+     "sha256": "26e10959b467cc160cb5db8bdfca8da21ad16e17a944258c5e3fc992f28fe327"
     },
     {
      "name": "skill_detox_4",
@@ -22185,7 +23108,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "31361fa83712333a",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -22272,7 +23207,7 @@
       "grip": "src/assets/pixel/grips/assassin_male_p2/skill_hide_1.png",
       "hair_front": "src/assets/pixel/hair/assassin_swept_crop_p2/skill_hide_1_front.png"
      },
-     "sha256": "6de3d474533f45b0809652730c7a887564cd37a622e34d86197149a93379d092"
+     "sha256": "26e10959b467cc160cb5db8bdfca8da21ad16e17a944258c5e3fc992f28fe327"
     },
     {
      "name": "skill_hide_2",
@@ -22340,7 +23275,19 @@
      },
      "sha256": "3a72d44fd7bc8d995abda40b9c48f6e09fd2dd7b125f1e57d396f992323deb82"
     }
-   ]
+   ],
+   "reviewHash": "7159e928bc94b5b9",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   },
   {
    "id": "assassin_male_p2",
@@ -22595,7 +23542,19 @@
      },
      "sha256": "5a389ff95a136309965cbd29fccfd0b3b29b3eadf171e3d2967a6d98607b2a51"
     }
-   ]
+   ],
+   "reviewHash": "3293a4733ed8067b",
+   "checkRules": {
+    "anchorSide": []
+   },
+   "review": {
+    "by": "Claude",
+    "date": "2026-10-10",
+    "checks": [
+     "hand"
+    ],
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남"
+   }
   }
  ]
 }

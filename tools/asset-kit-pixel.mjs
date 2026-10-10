@@ -62,6 +62,13 @@ export function hairTints(wholeTs) {
   return Object.fromEntries(list.map((t, i) => [HAIR_NAMES[i] ?? String(i), t ?? [1, 1, 1]]));
 }
 
+/** what a review looked at: each frame's body, default weapon and finger overlay files and its hand point */
+export function reviewHash(sheet, sha) {
+  const w = sheet.overlayDefaults?.weapon;
+  const parts = sheet.frames.map((f) => [f.sha256 ?? sha(f.file), w && f.overlays['weapon:' + w] ? sha(f.overlays['weapon:' + w].file) : '', f.overlays.grip ? sha(f.overlays.grip) : '', JSON.stringify(f.anchors?.hand?.point ?? null)].join(':'));
+  return crypto.createHash('sha256').update(parts.join('|')).digest('hex').slice(0, 16);
+}
+
 export function convert(src, { base, derivedDir, canvasFor = (p) => readPng(p), measure = null, hairTint = null }) {
   if (!src.canvas || !src.characters) throw new Error('minimidgard.pixel/1 형식이 아닙니다');
   const at = (p) => path.posix.join(base, p);
@@ -127,7 +134,7 @@ export function convert(src, { base, derivedDir, canvasFor = (p) => readPng(p), 
           if ((bt?.visible ?? f.weapon?.visible) === false) continue;
           overlays['weapon:' + w] = { file: at(file), z: bt?.z ?? f.weapon?.z ?? 'front' };
         }
-        if (f.grip) overlays.grip = at(f.grip);
+        if (f.grip && !blank(f.grip)) overlays.grip = at(f.grip); // an empty finger overlay (the weapon thrown away) is left out
         const hp = hair?.poses?.[f.head.pose];
         if (hp) {
           const piv = hp.pivot ?? hair.pivot ?? [0, 0], dx = f.head.point[0] - piv[0], dy = f.head.point[1] - piv[1];
@@ -190,6 +197,24 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   // sha256 last, so the derived copies are hashed as written
   const sha = (p) => crypto.createHash('sha256').update(fs.readFileSync(path.join(root, p))).digest('hex');
   for (const s of record.sheets) for (const f of s.frames) f.sha256 = sha(f.file);
+  // 사람 검토(asset-records/pixel-heroes/reviews.json): 눈으로 보고 괜찮다고 판단한 시트는 그 경고 검사를 끕니다. 검토할 때의 그림
+  // (몸·기본 무기·손 덮개·손 기준점) 해시가 지금과 같을 때만 적용하므로, 그림이 바뀌면 검사가 다시 켜집니다.
+  const reviewsPath = path.join(root, path.posix.dirname(outRel), 'reviews.json');
+  const reviews = fs.existsSync(reviewsPath) ? JSON.parse(fs.readFileSync(reviewsPath, 'utf8')).reviews ?? [] : [];
+  let applied = 0, stale = [];
+  for (const s of record.sheets) {
+    s.reviewHash = reviewHash(s, sha);
+    const rv = reviews.find((r) => r.id === s.id && r.kind === s.kind);
+    if (!rv) continue;
+    if (rv.hash !== s.reviewHash) { stale.push(`${s.id}·${s.kind}`); continue; }
+    const rules = {};
+    if (rv.checks.includes('hand')) rules.anchorSide = []; // hand side / jump / outlier / hidden-weapon checks
+    if (rv.checks.includes('grip')) rules.overlayFree = ['weapon', 'hair_back', 'hair_front', 'grip'];
+    s.checkRules = { ...(s.checkRules ?? {}), ...rules };
+    s.review = { by: rv.by, date: rv.date, checks: rv.checks, note: rv.note };
+    applied++;
+  }
+  if (reviews.length) console.log(`사람 검토 ${applied}개 적용${stale.length ? ` · 그림이 바뀌어 다시 봐야 할 것 ${stale.length}개: ${stale.join(', ')}` : ''}`);
   fs.mkdirSync(path.dirname(path.join(root, outRel)), { recursive: true });
   fs.writeFileSync(path.join(root, outRel), JSON.stringify(record, null, 1) + '\n');
   console.log(`${outRel}: 시트 ${record.sheets.length}개 (캐릭터 ${new Set(record.sheets.map((s) => s.id)).size}), 옮긴 머리 조각 ${derived.size}개`);
