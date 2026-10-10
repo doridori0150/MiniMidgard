@@ -14,6 +14,6 @@ ATTACH=(); for f in "$@"; do ATTACH+=(-i "$f"); done
 while pgrep -fl "codex exec" | grep -v "exec-server" | grep -q .; do sleep 60; done
 cd "$ROOT"
 echo "$NAME start $(date)" | tee -a "$LOG_DIR/$NAME.log"
-codex exec -m "${CODEX_MODEL:-gpt-6-astra}" "Read $BRIEF and do exactly what it says, into $OUT/. Keep the user's words and the three drawing rules in it (match proportion/style/size, check references, plan then draw one frame at a time checking the previous). The attached images are the references and the current approved art named in it; do not copy the attached images into $OUT/ (reference images from other games must never be saved in this public repo). Write only inside $OUT/. Do not change src/, commit or push. End with a short Korean summary." \
+taskpolicy -b codex exec -m "${CODEX_MODEL:-gpt-6-astra}" "Read $BRIEF and do exactly what it says, into $OUT/. Keep the user's words and the three drawing rules in it (match proportion/style/size, check references, plan then draw one frame at a time checking the previous). The attached images are the references and the current approved art named in it; do not copy the attached images into $OUT/ (reference images from other games must never be saved in this public repo). Write only inside $OUT/. Do not change src/, commit or push. End with a short Korean summary." \
   -s workspace-write -C . -o "$LOG_DIR/$NAME.last.md" "${ATTACH[@]}" < /dev/null >> "$LOG_DIR/$NAME.log" 2>&1
 echo "$NAME done $(date) exit $?" | tee -a "$LOG_DIR/$NAME.log"

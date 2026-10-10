@@ -110,7 +110,12 @@ function play(action: string) {
   say(`${state.id} · ${kind} 재생${state.plan.contactMs != null ? ` (접촉 ${Math.round(state.plan.contactMs)}ms)` : ''}`);
   tell({ type: 'asset-stage:played', id: state.id, action });
 }
+let lastPaint = 0;
 function frame(now: number) {
+  requestAnimationFrame(frame);
+  // idle (nothing playing) or hidden: the idle breathing changes every ~200 ms, so a few repaints a second are enough (laptop heat)
+  if (document.hidden || (!state.plan && now - lastPaint < 100)) return;
+  lastPaint = now;
   const p = state.plan;
   let pose: Pose = { state: 'idle', t: now, facing: 1 };
   if (p) {
@@ -120,7 +125,6 @@ function frame(now: number) {
     else if (!state.loop && t >= p.durationMs) state.plan = null;
   }
   paint(ctx, pose, state.id, true);
-  requestAnimationFrame(frame);
 }
 
 // ── 촬영 (asset-kit film): the motion painted frame by frame at even times, with the cell drawn and crops of the stage and of the hero alone
