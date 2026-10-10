@@ -79,3 +79,17 @@ Deliver into `docs/art-production/pixel-class-wizard/`.
 
 ### REQUEST (for Codex)
 Redo only the **walk** of `wizard_female_p2` in `docs/art-production/pixel-class-wizard/` with 6–8 distinct frames (the user's rule above), a proper alternating stride, the staff in the same hand throughout. Keep the user's three rules: same proportion/style/size, check the reference (the RO Wizard walk row), plan the cycle first and draw one frame at a time, checking the previous frame before the next. Keep every other action, the design and the skill motions unchanged. Update `manifest.json`, the walk GIFs and contact sheet, and add a short section to `NOTES.md`. Write only inside that folder; no build caches. Do not change `src/`, commit or push. End with a short Korean summary.
+
+---
+
+## 보강 2 — 몸 그림의 지팡이 조각, 지저분한 머리카락 (2026-10-10)
+공방 검사와 게임 화면에서 확인한 것입니다.
+- 사용자 말: "수정해줘봐" (공방 검사 경고를 보고). 앞서 "캐릭터 짤린게 너무 많은데?"
+- **몸 그림(body/)에 지팡이가 함께 그려져 있습니다.** 지팡이 레이어(weapons/staff/)와 1~2픽셀 어긋나 있어서, 지팡이를 들면 지팡이 테두리가 두 겹으로 지저분해 보이고, 맨손이면 지팡이 조각이 허공에 뜹니다. 공방 검사의 "본체와 떨어진 작은 얼룩"이 위저드에만 11개 동작에서 남은 이유입니다. 다른 직업(기사·헌터·프리스트 등)은 몸 그림에 무기가 없습니다.
+- **머리카락 가장자리와 안쪽이 점점이 끊겨 보입니다**(체크무늬처럼 비는 픽셀). 작은 크기에서 지저분해 보입니다. 다른 직업 머리처럼 덩어리가 이어지게 해 주세요.
+
+### REQUEST (for Codex)
+In `docs/art-production/pixel-class-wizard/`, clean the layers of `wizard_female_p2` for every frame (base actions and skill motions):
+1. The body frames must not contain any part of the staff. Only the hand that holds it stays in the body (and the finger overlay in grips/). Put the whole staff, exactly as it should look, in `weapons/staff/` so the composite looks like the approved art, without a doubled outline.
+2. Make the hair pieces (`hair/wizard_crescent_braid_p2/`) solid like the other classes' hair: no checkerboard holes or stray single pixels; same shape, colours (the four hair key colours) and design.
+Keep the design, poses, timing, canvas, foot point and everything else unchanged. Keep the user's three rules. Check every frame with the staff on and bare-handed (a contact sheet of each, `verification/clean_armed.png` and `verification/clean_bare.png`), and say in NOTES.md what you changed. Write only inside that folder; no build caches; do not copy attached references into the folder. Do not change src/, commit or push. End with a short Korean summary.
