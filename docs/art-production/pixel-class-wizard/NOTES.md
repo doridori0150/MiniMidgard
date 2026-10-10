@@ -49,3 +49,15 @@
 걷기는 서로 다른 8장, 각 100ms, 총 800ms다. 2등신·기준 키 48px·128×120 캔버스·발 원점 (64,112)과 가까운 화면 오른쪽 손의 지팡이를 유지했다. 매니페스트, 걷기 GIF 1×/4×, 걷기·전체 컨택트 시트와 미리보기 데이터를 갱신했다. [걷기 검사](verification/walk_validation.json)에서 하체 실루엣 8장 구별, 비걷기 매니페스트 동일, 보호 파일 743개 바이트 일치를 확인했다. Apple ImageIO로 GIF 프레임·시간·크기를 재검증했다. 이번 세션은 연결된 브라우저가 없어 UI 재생 검수는 하지 못했다. 디자인·나머지 동작·28개 스킬은 그대로다.
 
 걷기만 재포장: `PYTHONDONTWRITEBYTECODE=1 python3 build_walk.py` → `compact_gifs.py` → `verify_gif.swift` → `make_preview.py` → `validate.py`. 신규 원화별 등록값은 `registration.json`, 프롬프트·전후 검토는 [WALK_PROMPTS.json](WALK_PROMPTS.json)에 남겼다. 빌드 캐시는 제거했으며 `src/` 수정·커밋·푸시는 하지 않았다.
+
+## 보강 2 — 몸의 지팡이 조각·머리 정리 (2026-10-10)
+
+[CLEAN_PLAN.md](CLEAN_PLAN.md)의 순서로 기존 등록 레이어를 정리했다. 첨부 RO 위저드의 자세·순서와 쿠키 r12·기사 r15 비교 시트를 확인하고, 새 원화를 생성하지 않고 기존 픽셀의 분리 경계를 수정했다. 등록 포즈 36개(현재 재생에 쓰이는 33개와 남아 있는 이전 포즈 3개)를 한 장씩 수정한 뒤 수정 전·무장·맨손·직전 포즈를 나란히 보았다. [포즈별 검토 기록](verification/clean_frame_reviews.json)과 `verification/clean_review_*.png`에 남겼다.
+
+- 몸에 잘못 들어 있던 지팡이 픽셀 398개를 해당 포즈의 `weapons/staff/`로 재배정했다. 손가락 오버레이는 원본 그대로 유지하고, 맨손에서도 손이 빠지지 않도록 몸에도 쥐는 손을 유지했다. 무기 분리 경계에 걸린 손목·소매도 이어 주었다. 지팡이 좌표를 새로 이동하거나 두 번째 윤곽을 추가하지 않았다.
+- 머리 앞·뒤 조각의 내부 투명 구멍, 끊긴 가장자리와 고립된 점을 정리했다. 초승달 장식·얼굴·단발·땋은 머리 디자인과 `#faf0d7 #e1cdb8 #b49b91 #49342f` 네 키 색은 유지했다.
+- 18개 동작의 **83프레임 전체**를 [무장 시트](verification/clean_armed.png)와 [맨손 시트](verification/clean_bare.png)로 확인했다. 각 행은 실제 동작 순서이며 프레임 이름을 표시했다. [1× 전후 비교](verification/clean_before_after_1x.png)와 [4× 전후 비교](verification/clean_before_after_4x.png)는 왼쪽부터 수정 전 무장·수정 후 무장·수정 전 맨손·수정 후 맨손이다. 전체·동작별 시트, 비교 이미지, 합성 PNG와 GIF 56개도 갱신했다.
+
+[정리 검증](verification/clean_validation.json) 974개 항목과 [기존 납품 검증](verification/validation.json) 700개 항목을 통과했다. 모든 재생 프레임에서 작은 맨손 분리 얼룩(12px 미만) 0개, 머리의 고립된 단일 픽셀 0개, 얼굴·장식 영역을 제외한 내부 투명 구멍 0개다. 머리 수정 영역 밖의 무장 합성은 수정 전과 픽셀 단위로 동일하다. 매니페스트는 **바이트 단위로 동일**하므로 포즈·시간·지팡이 손·기준점·스킬 연결이 그대로다. 원화·그립·등록 정보 161개 파일도 원본 해시와 일치한다. 128×120, 발 (64,112), 대기 48px와 걷기 8장의 차이를 유지했다. Apple ImageIO로 GIF 56개·384프레임을 실제 디코딩해 크기·시간을 검증했다.
+
+수정 전 레이어는 `verification/clean_original_layers.json`, 원본 해시는 `verification/clean_original_hashes.json`에 보존했다. `clean_layers.py <포즈>`는 이 원본에서 해당 포즈만 복원·정리하며, 직전 결과를 검토한 뒤 `clean_layers.py approve <포즈>`로 기록해야 다음 포즈를 처리한다. 재포장은 정리된 레이어에서 `build.py` → `compact_gifs.py` → `verify_clean_gifs.py` → `verify_clean.py` → `validate.py` 순서로 한다. `register.py`로 원화 분리를 다시 실행하면 보강 2 마스크를 재적용해야 한다. Python은 모두 `PYTHONDONTWRITEBYTECODE=1`로 실행한다. 외부 참조 복사·빌드 캐시·`src/` 변경·커밋·푸시는 없다.

@@ -9667,7 +9667,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/idle_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/idle_0_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     },
     {
      "name": "idle_1",
@@ -9697,7 +9697,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/idle_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/idle_1_front.png"
      },
-     "sha256": "6b07df101054826715ed4e5e4e25ea2a172604320aa3918cb1bbe19a4b7850a3"
+     "sha256": "b36956ecd7f1561ddd7a216971b9c9a8fbfad3425487daf53fd1ed1d9b8ff6ce"
     },
     {
      "name": "idle_2",
@@ -9727,26 +9727,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/idle_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/idle_2_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "7f9205502a6aedf0",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "732ecc3b108f7acd"
   },
   {
    "id": "wizard_female_p2",
@@ -9792,7 +9776,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_0_front.png"
      },
-     "sha256": "2da27ac08f96145be2882ad3bf7e67358c78958cb9733755092b205ce5a77dc9"
+     "sha256": "b476a1948b5634f8fe52667451bb12721853a0f3f364f8ec495d92f9819a6425"
     },
     {
      "name": "walk_1",
@@ -9822,7 +9806,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_1_front.png"
      },
-     "sha256": "b1d468da3d18a8a660a02282e864057af7a3e7ced5128524958b743884b9eb27"
+     "sha256": "6bfb44c3ca1d868c6aa12d5dde1f3717795e20c7de61324f0ca87b0c940d5be9"
     },
     {
      "name": "walk_2",
@@ -9852,7 +9836,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_2_front.png"
      },
-     "sha256": "f5c31f8a4c2c04b435e656dce334f08e54ee051148f96acf56315789453472b4"
+     "sha256": "5f02d69ec974a5aee8ffa5ef65fd43b3d7b0bbfe61606a31914260b85ddd95cd"
     },
     {
      "name": "walk_3",
@@ -9882,7 +9866,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_3_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_3_front.png"
      },
-     "sha256": "8f2fbb63a1a62a3796d5998b31551b6ddfac4ebf5b7681da1e520440c4311a9c"
+     "sha256": "103fefb35b742b3122ee087d2b29760a6983337dbf9500313f7a52a4c3ea6c93"
     },
     {
      "name": "walk_4",
@@ -9912,7 +9896,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_4_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_4_front.png"
      },
-     "sha256": "636543466ff2177f5a8cb7c30a2cd4dbb78417d28af0bf6c564806d3d4ef9bea"
+     "sha256": "a72f25c0e952c57cc750f4d465628ef195c4d547af8cd32913aa2bc8884632b3"
     },
     {
      "name": "walk_5",
@@ -9942,7 +9926,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_5_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_5_front.png"
      },
-     "sha256": "139da90b6cb280833ace0314fadc2a10f0759f88dbf9bb838ac2a462eb6828e6"
+     "sha256": "f97756bbe6af0d804a0563652f6629a74aaf2255a6a9d9257d67c494e217f4e2"
     },
     {
      "name": "walk_6",
@@ -9972,7 +9956,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_6_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_6_front.png"
      },
-     "sha256": "05f259a7455e99eed76387ecbe2ddbb64145ffed2305b043697d8f4fcc85d96c"
+     "sha256": "0f02e61efe8f1f8afffc8bcf5db9715a23b4b2532cd5dddb640178a5769cc1f8"
     },
     {
      "name": "walk_7",
@@ -10002,26 +9986,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_7_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/walk_7_front.png"
      },
-     "sha256": "e0fc4e381a58c7d938fde5cf4be28a71459b2e96e63cbfc5998af7e5596644b0"
+     "sha256": "cffaa240dec24a67c9166bb359eaf36de7bf8a3bdb41a1bd0c2718de9a50984d"
     }
    ],
-   "reviewHash": "51d190b00a73a5d8",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "298f157e1030ee51"
   },
   {
    "id": "wizard_female_p2",
@@ -10068,7 +10036,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/attack_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/attack_0_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     },
     {
      "name": "attack_1",
@@ -10098,7 +10066,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/attack_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/attack_1_front.png"
      },
-     "sha256": "f9600ec9299fb252a5228f2fb8e7714074a104e5742c1dc6e87096faa117f7bf"
+     "sha256": "ae26349ca97e46da702de40d7f89738cafeef5a0cdcfa4047578db1da78a0256"
     },
     {
      "name": "attack_2",
@@ -10128,7 +10096,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/attack_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/attack_2_front.png"
      },
-     "sha256": "8313a2da13e7b1d7d107652afc2eff350a390c7da2a611151372152094600780"
+     "sha256": "aba23f8f4ae87673ea0219fb155680168879628761db12b276de831acb274313"
     },
     {
      "name": "attack_3",
@@ -10158,7 +10126,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/attack_3_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/attack_3_front.png"
      },
-     "sha256": "445e8b239e717152e33eb10f534533dbc59b3012394fd750246af07404460309"
+     "sha256": "1ae6800bdcebfa87eb69820400166cf887617765d6c66bcf54442fea7b0b6ea0"
     },
     {
      "name": "attack_4",
@@ -10188,7 +10156,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/attack_4_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/attack_4_front.png"
      },
-     "sha256": "02cae4e8ba8143d0c5bac117b4c06613d2585c64b335a622fe461d3ab38363a4"
+     "sha256": "cb9b048899c982b37c57d202664b6422382b5aa3e97edce7d05b067a1bb88835"
     },
     {
      "name": "attack_5",
@@ -10218,27 +10186,20 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/attack_5_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/attack_5_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "7b9be2411e3eea53",
+   "reviewHash": "bce6784296414aba",
    "checkRules": {
-    "anchorSide": [],
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
+    "anchorSide": []
    },
    "review": {
     "by": "Claude",
     "date": "2026-10-10",
     "checks": [
-     "hand",
-     "grip"
+     "hand"
     ],
-    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 / 손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 (보강 2 뒤 다시 봄: 지팡이는 계속 오른손)"
    }
   },
   {
@@ -10285,7 +10246,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/cast_start_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/cast_start_0_front.png"
      },
-     "sha256": "cfdb43b0f6ef9310dbfbbf976418d0d53d9d658b3511dbf892e4301d265e7a0a"
+     "sha256": "52ea887843733ec6e5c4d0ccac9a5be30044f7a9d50c6531d10bdfcb99e1f6ff"
     },
     {
      "name": "cast_start_1",
@@ -10315,26 +10276,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/cast_start_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/cast_start_1_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     }
    ],
-   "reviewHash": "c68d68f5bafae670",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "5e1caac25ce423fd"
   },
   {
    "id": "wizard_female_p2",
@@ -10380,7 +10325,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/cast_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/cast_0_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     },
     {
      "name": "cast_1",
@@ -10410,7 +10355,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/cast_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/cast_1_front.png"
      },
-     "sha256": "faa9d76824c508f53628607fddd6b894378197c0742f29bcf3caa294b34482f1"
+     "sha256": "e0521e6de0f4d76875fd10bf722e213d39199fe824ceafe9047cfe79a788bbf7"
     },
     {
      "name": "cast_2",
@@ -10440,26 +10385,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/cast_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/cast_2_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     }
    ],
-   "reviewHash": "95327667c2ea7279",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "28eaafa2c27344d7"
   },
   {
    "id": "wizard_female_p2",
@@ -10505,7 +10434,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/hurt_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/hurt_0_front.png"
      },
-     "sha256": "ab0f0c64441cc84a295fbcdccb30cfa7f92b76efa4fd280f74d8eec2c09b3d22"
+     "sha256": "df74d1ac6e7b42e705afad2a94fab7fb9f2670d1edc9d052ee0fce18c8519961"
     },
     {
      "name": "hurt_1",
@@ -10535,7 +10464,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/hurt_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/hurt_1_front.png"
      },
-     "sha256": "02cae4e8ba8143d0c5bac117b4c06613d2585c64b335a622fe461d3ab38363a4"
+     "sha256": "cb9b048899c982b37c57d202664b6422382b5aa3e97edce7d05b067a1bb88835"
     },
     {
      "name": "hurt_2",
@@ -10565,26 +10494,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/hurt_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/hurt_2_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "d9214baaed3d5773",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "9a43ce5e33e41a02"
   },
   {
    "id": "wizard_female_p2",
@@ -10630,7 +10543,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/dead_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/dead_0_front.png"
      },
-     "sha256": "ab0f0c64441cc84a295fbcdccb30cfa7f92b76efa4fd280f74d8eec2c09b3d22"
+     "sha256": "df74d1ac6e7b42e705afad2a94fab7fb9f2670d1edc9d052ee0fce18c8519961"
     },
     {
      "name": "dead_1",
@@ -10660,7 +10573,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/dead_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/dead_1_front.png"
      },
-     "sha256": "61bafac0c60468994f09f834a2abd5cce9e05b24d2508750d6ac8bb794903c76"
+     "sha256": "fbf671ff93896c7cac2a85facd8a4dc35289556671418199f0c41cd26b1ddd91"
     },
     {
      "name": "dead_2",
@@ -10690,26 +10603,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/dead_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/dead_2_front.png"
      },
-     "sha256": "a0c388cd56222f49b993805ecf3d458e550dbeb6b419a08202ca2b973a51ef01"
+     "sha256": "feee91545d8ab35ad8277b48ba6a398f4b4f95554bab11bf392d0d5ca970ec37"
     }
    ],
-   "reviewHash": "9c3500af34159de5",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "080124b6abb4af4c"
   },
   {
    "id": "wizard_female_p2",
@@ -10755,26 +10652,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/sit_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/sit_0_front.png"
      },
-     "sha256": "74f24c1f289adb44b2edfd2af374a36c9495634372d0ebe528f5c3d5c7cd73b0"
+     "sha256": "44d290dfaa3def5bb7562a673fa13f0055b6c7a19a7edaa7725059f7c14ee4aa"
     }
    ],
-   "reviewHash": "2b3b556cdce3540c",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "0dd2fd32ba940434"
   },
   {
    "id": "wizard_female_p2",
@@ -10829,7 +10710,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_bolt_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_bolt_0_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     },
     {
      "name": "skill_bolt_1",
@@ -10859,7 +10740,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_bolt_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_bolt_1_front.png"
      },
-     "sha256": "8ae0f43b5fab478d171d0652dfeea6dbe391b8e0f9d3caad21d65a0816fb48f9"
+     "sha256": "03a43d05e4652bc1d3fae95b1a9dccc0f69ce9b1a95f8e0697b79c13e38314ff"
     },
     {
      "name": "skill_bolt_2",
@@ -10889,7 +10770,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_bolt_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_bolt_2_front.png"
      },
-     "sha256": "02cae4e8ba8143d0c5bac117b4c06613d2585c64b335a622fe461d3ab38363a4"
+     "sha256": "cb9b048899c982b37c57d202664b6422382b5aa3e97edce7d05b067a1bb88835"
     },
     {
      "name": "skill_bolt_3",
@@ -10919,7 +10800,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_bolt_3_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_bolt_3_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     },
     {
      "name": "skill_bolt_4",
@@ -10949,26 +10830,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_bolt_4_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_bolt_4_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "362cc04ccb2b515d",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "2e3819dfdd04228d"
   },
   {
    "id": "wizard_female_p2",
@@ -11020,7 +10885,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_orb_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_orb_0_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     },
     {
      "name": "skill_orb_1",
@@ -11050,7 +10915,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_orb_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_orb_1_front.png"
      },
-     "sha256": "8ae0f43b5fab478d171d0652dfeea6dbe391b8e0f9d3caad21d65a0816fb48f9"
+     "sha256": "03a43d05e4652bc1d3fae95b1a9dccc0f69ce9b1a95f8e0697b79c13e38314ff"
     },
     {
      "name": "skill_orb_2",
@@ -11080,7 +10945,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_orb_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_orb_2_front.png"
      },
-     "sha256": "50686591844cd5950e474ef0c463b36010dc0239fb2196605e785439e274f82d"
+     "sha256": "8fa85a2beaf0b5168a20f166ebc2fbc9b0c47d72c448f6f81cef371dca170843"
     },
     {
      "name": "skill_orb_3",
@@ -11110,7 +10975,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_orb_3_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_orb_3_front.png"
      },
-     "sha256": "8ae0f43b5fab478d171d0652dfeea6dbe391b8e0f9d3caad21d65a0816fb48f9"
+     "sha256": "03a43d05e4652bc1d3fae95b1a9dccc0f69ce9b1a95f8e0697b79c13e38314ff"
     },
     {
      "name": "skill_orb_4",
@@ -11140,7 +11005,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_orb_4_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_orb_4_front.png"
      },
-     "sha256": "02cae4e8ba8143d0c5bac117b4c06613d2585c64b335a622fe461d3ab38363a4"
+     "sha256": "cb9b048899c982b37c57d202664b6422382b5aa3e97edce7d05b067a1bb88835"
     },
     {
      "name": "skill_orb_5",
@@ -11170,26 +11035,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_orb_5_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_orb_5_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "009543aabdaf740d",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "db9a17c3bed60b06"
   },
   {
    "id": "wizard_female_p2",
@@ -11245,7 +11094,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_ground_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_ground_0_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     },
     {
      "name": "skill_ground_1",
@@ -11275,7 +11124,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_ground_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_ground_1_front.png"
      },
-     "sha256": "6ba58aea2338368607be6ed8360b78af7f2b046e2fa85190a1611d381b1ff86b"
+     "sha256": "0e94cae7791078fba806730d540a5419d5c33be030551cf4487371f4ee84fef1"
     },
     {
      "name": "skill_ground_2",
@@ -11305,7 +11154,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_ground_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_ground_2_front.png"
      },
-     "sha256": "985aab52947f3dc45418f2fefbaf4cc56e4d66329fc0df4252d070a3d696a3dc"
+     "sha256": "4e7acc24d9392972b18971db3af9d4bdff9ad0959a4986777aae481c7162678e"
     },
     {
      "name": "skill_ground_3",
@@ -11335,7 +11184,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_ground_3_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_ground_3_front.png"
      },
-     "sha256": "6ba58aea2338368607be6ed8360b78af7f2b046e2fa85190a1611d381b1ff86b"
+     "sha256": "0e94cae7791078fba806730d540a5419d5c33be030551cf4487371f4ee84fef1"
     },
     {
      "name": "skill_ground_4",
@@ -11365,7 +11214,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_ground_4_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_ground_4_front.png"
      },
-     "sha256": "02cae4e8ba8143d0c5bac117b4c06613d2585c64b335a622fe461d3ab38363a4"
+     "sha256": "cb9b048899c982b37c57d202664b6422382b5aa3e97edce7d05b067a1bb88835"
     },
     {
      "name": "skill_ground_5",
@@ -11395,26 +11244,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_ground_5_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_ground_5_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "b1569be46f2971e0",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "a614b79b300d696c"
   },
   {
    "id": "wizard_female_p2",
@@ -11465,7 +11298,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_sky_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_sky_0_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     },
     {
      "name": "skill_sky_1",
@@ -11495,7 +11328,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_sky_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_sky_1_front.png"
      },
-     "sha256": "dc8703f7202e3e441d807a38df15a1cdfe2eb0ce0567cfe12f40fc1cf2fbfdb6"
+     "sha256": "b0550fa0b64ccabeed84565d295c83e3f2280fe222a4938a1cd3cec19e6dc06f"
     },
     {
      "name": "skill_sky_2",
@@ -11525,7 +11358,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_sky_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_sky_2_front.png"
      },
-     "sha256": "6c5f654e084bd31e863d4928cb737dec886db08a45727bdc79955e39d1169a72"
+     "sha256": "b8f4d8b326dee1f21fc7f645df599535f5dc40f331aac4f1539d686caeb05c97"
     },
     {
      "name": "skill_sky_3",
@@ -11555,7 +11388,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_sky_3_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_sky_3_front.png"
      },
-     "sha256": "dc8703f7202e3e441d807a38df15a1cdfe2eb0ce0567cfe12f40fc1cf2fbfdb6"
+     "sha256": "b0550fa0b64ccabeed84565d295c83e3f2280fe222a4938a1cd3cec19e6dc06f"
     },
     {
      "name": "skill_sky_4",
@@ -11585,7 +11418,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_sky_4_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_sky_4_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     },
     {
      "name": "skill_sky_5",
@@ -11615,18 +11448,12 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_sky_5_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_sky_5_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "b766258b7fb3e975",
+   "reviewHash": "f8115cb8bf269dd0",
    "checkRules": {
     "anchorSide": [],
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ],
     "standing": [],
     "bodyTol": 0.2
    },
@@ -11635,10 +11462,9 @@
     "date": "2026-10-10",
     "checks": [
      "hand",
-     "grip",
      "pose"
     ],
-    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 / 손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임 / 하늘 가리키기: 지팡이를 머리 위로 높이 드는 동작이라 무기 포함 높이가 큼"
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남/ 하늘 가리키기: 지팡이를 머리 위로 높이 드는 동작이라 무기 포함 높이가 큼 (보강 2 뒤 다시 봄: 지팡이는 계속 오른손)"
    }
   },
   {
@@ -11689,7 +11515,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_0_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     },
     {
      "name": "skill_water_1",
@@ -11719,7 +11545,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_1_front.png"
      },
-     "sha256": "6ba58aea2338368607be6ed8360b78af7f2b046e2fa85190a1611d381b1ff86b"
+     "sha256": "0e94cae7791078fba806730d540a5419d5c33be030551cf4487371f4ee84fef1"
     },
     {
      "name": "skill_water_2",
@@ -11749,7 +11575,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_2_front.png"
      },
-     "sha256": "7bf2fe5e831693cea781559806a32129f82b96c5135d89ba6e28760ba3f7b9ff"
+     "sha256": "36d42523b25909e29f7e1391c946d35d5f0f1e639bb461b6b71e6a4b8791ae6a"
     },
     {
      "name": "skill_water_3",
@@ -11779,7 +11605,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_3_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_3_front.png"
      },
-     "sha256": "8ae0f43b5fab478d171d0652dfeea6dbe391b8e0f9d3caad21d65a0816fb48f9"
+     "sha256": "03a43d05e4652bc1d3fae95b1a9dccc0f69ce9b1a95f8e0697b79c13e38314ff"
     },
     {
      "name": "skill_water_4",
@@ -11809,7 +11635,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_4_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_4_front.png"
      },
-     "sha256": "7bf2fe5e831693cea781559806a32129f82b96c5135d89ba6e28760ba3f7b9ff"
+     "sha256": "36d42523b25909e29f7e1391c946d35d5f0f1e639bb461b6b71e6a4b8791ae6a"
     },
     {
      "name": "skill_water_5",
@@ -11839,7 +11665,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_5_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_5_front.png"
      },
-     "sha256": "02cae4e8ba8143d0c5bac117b4c06613d2585c64b335a622fe461d3ab38363a4"
+     "sha256": "cb9b048899c982b37c57d202664b6422382b5aa3e97edce7d05b067a1bb88835"
     },
     {
      "name": "skill_water_6",
@@ -11869,27 +11695,20 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_6_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_water_6_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "d31a0b6fb1b4e4cb",
+   "reviewHash": "a70b20f0e2f56a50",
    "checkRules": {
-    "anchorSide": [],
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
+    "anchorSide": []
    },
    "review": {
     "by": "Claude",
     "date": "2026-10-10",
     "checks": [
-     "hand",
-     "grip"
+     "hand"
     ],
-    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 / 손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 (보강 2 뒤 다시 봄: 지팡이는 계속 오른손)"
    }
   },
   {
@@ -11940,7 +11759,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_meteor_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_meteor_0_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     },
     {
      "name": "skill_meteor_1",
@@ -11970,7 +11789,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_meteor_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_meteor_1_front.png"
      },
-     "sha256": "dc8703f7202e3e441d807a38df15a1cdfe2eb0ce0567cfe12f40fc1cf2fbfdb6"
+     "sha256": "b0550fa0b64ccabeed84565d295c83e3f2280fe222a4938a1cd3cec19e6dc06f"
     },
     {
      "name": "skill_meteor_2",
@@ -12000,7 +11819,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_meteor_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_meteor_2_front.png"
      },
-     "sha256": "b46db33be2ee8af2d374248514f1f64511842e60df87bceba278d4e087569c05"
+     "sha256": "a0b809b6272945c4beb350673d1d8a3695d6ea5ee343954efc667106628ff49b"
     },
     {
      "name": "skill_meteor_3",
@@ -12030,7 +11849,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_meteor_3_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_meteor_3_front.png"
      },
-     "sha256": "445e8b239e717152e33eb10f534533dbc59b3012394fd750246af07404460309"
+     "sha256": "1ae6800bdcebfa87eb69820400166cf887617765d6c66bcf54442fea7b0b6ea0"
     },
     {
      "name": "skill_meteor_4",
@@ -12060,7 +11879,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_meteor_4_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_meteor_4_front.png"
      },
-     "sha256": "02cae4e8ba8143d0c5bac117b4c06613d2585c64b335a622fe461d3ab38363a4"
+     "sha256": "cb9b048899c982b37c57d202664b6422382b5aa3e97edce7d05b067a1bb88835"
     },
     {
      "name": "skill_meteor_5",
@@ -12090,27 +11909,20 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_meteor_5_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_meteor_5_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "678ef970c5db73bd",
+   "reviewHash": "70d995caeae0b59f",
    "checkRules": {
-    "anchorSide": [],
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
+    "anchorSide": []
    },
    "review": {
     "by": "Claude",
     "date": "2026-10-10",
     "checks": [
-     "hand",
-     "grip"
+     "hand"
     ],
-    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 / 손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
+    "note": "무기를 얹은 전체 장을 확대해 봄: 무기는 처음부터 끝까지 같은 손. 경고는 준비 자세(팔을 뒤로 젖힘)·큰 휘두름·뒤쪽 손에 쥐는 디자인(도둑·어새신·검사 걷기)·던진 뒤 빈손에서 남 (보강 2 뒤 다시 봄: 지팡이는 계속 오른손)"
    }
   },
   {
@@ -12161,7 +11973,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_blizzard_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_blizzard_0_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     },
     {
      "name": "skill_blizzard_1",
@@ -12191,7 +12003,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_blizzard_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_blizzard_1_front.png"
      },
-     "sha256": "8ae0f43b5fab478d171d0652dfeea6dbe391b8e0f9d3caad21d65a0816fb48f9"
+     "sha256": "03a43d05e4652bc1d3fae95b1a9dccc0f69ce9b1a95f8e0697b79c13e38314ff"
     },
     {
      "name": "skill_blizzard_2",
@@ -12221,7 +12033,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_blizzard_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_blizzard_2_front.png"
      },
-     "sha256": "52ded099b904edf96b2a0407b07ecd55eb13fc1e88329e466c3ef823734b9a1c"
+     "sha256": "1942d424f38ef808dfd2bc243e0c2f7d9d1e7960323274d9bd2debec9298c326"
     },
     {
      "name": "skill_blizzard_3",
@@ -12251,7 +12063,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_blizzard_3_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_blizzard_3_front.png"
      },
-     "sha256": "8ae0f43b5fab478d171d0652dfeea6dbe391b8e0f9d3caad21d65a0816fb48f9"
+     "sha256": "03a43d05e4652bc1d3fae95b1a9dccc0f69ce9b1a95f8e0697b79c13e38314ff"
     },
     {
      "name": "skill_blizzard_4",
@@ -12281,7 +12093,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_blizzard_4_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_blizzard_4_front.png"
      },
-     "sha256": "02cae4e8ba8143d0c5bac117b4c06613d2585c64b335a622fe461d3ab38363a4"
+     "sha256": "cb9b048899c982b37c57d202664b6422382b5aa3e97edce7d05b067a1bb88835"
     },
     {
      "name": "skill_blizzard_5",
@@ -12311,26 +12123,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_blizzard_5_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_blizzard_5_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "f7e3fcf38c810f78",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "b5818e2851690c12"
   },
   {
    "id": "wizard_female_p2",
@@ -12381,7 +12177,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_nova_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_nova_0_front.png"
      },
-     "sha256": "cfdb43b0f6ef9310dbfbbf976418d0d53d9d658b3511dbf892e4301d265e7a0a"
+     "sha256": "52ea887843733ec6e5c4d0ccac9a5be30044f7a9d50c6531d10bdfcb99e1f6ff"
     },
     {
      "name": "skill_nova_1",
@@ -12411,7 +12207,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_nova_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_nova_1_front.png"
      },
-     "sha256": "d66e9883b561ed8cd40c9a68b72c33fd7c12e5903cb5e7d8251523281f9f8bd1"
+     "sha256": "eede6b50dfd731279b53a7b8beaadfae8a35251895a7d310df01be1b60101372"
     },
     {
      "name": "skill_nova_2",
@@ -12441,7 +12237,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_nova_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_nova_2_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     },
     {
      "name": "skill_nova_3",
@@ -12471,26 +12267,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_nova_3_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_nova_3_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "d908a8914fa3d881",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "5f9a9d2baa529dc6"
   },
   {
    "id": "wizard_female_p2",
@@ -12542,7 +12322,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_aura_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_aura_0_front.png"
      },
-     "sha256": "cfdb43b0f6ef9310dbfbbf976418d0d53d9d658b3511dbf892e4301d265e7a0a"
+     "sha256": "52ea887843733ec6e5c4d0ccac9a5be30044f7a9d50c6531d10bdfcb99e1f6ff"
     },
     {
      "name": "skill_aura_1",
@@ -12572,7 +12352,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_aura_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_aura_1_front.png"
      },
-     "sha256": "035b7e1150edb33a5946b0d95aff9117ead40527a70de5cb82046f4b6d0ea776"
+     "sha256": "92c965dcb655dfd05d1117006283671075fa0852ba9c4316012477b85564dc40"
     },
     {
      "name": "skill_aura_2",
@@ -12602,7 +12382,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_aura_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_aura_2_front.png"
      },
-     "sha256": "cfdb43b0f6ef9310dbfbbf976418d0d53d9d658b3511dbf892e4301d265e7a0a"
+     "sha256": "52ea887843733ec6e5c4d0ccac9a5be30044f7a9d50c6531d10bdfcb99e1f6ff"
     },
     {
      "name": "skill_aura_3",
@@ -12632,26 +12412,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_aura_3_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_aura_3_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "05710f45660e06d5",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "931f6a3ebd24895c"
   },
   {
    "id": "wizard_female_p2",
@@ -12700,7 +12464,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_barrier_0_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_barrier_0_front.png"
      },
-     "sha256": "cfdb43b0f6ef9310dbfbbf976418d0d53d9d658b3511dbf892e4301d265e7a0a"
+     "sha256": "52ea887843733ec6e5c4d0ccac9a5be30044f7a9d50c6531d10bdfcb99e1f6ff"
     },
     {
      "name": "skill_barrier_1",
@@ -12730,7 +12494,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_barrier_1_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_barrier_1_front.png"
      },
-     "sha256": "9fe5d647146f78fd401d0af54e388baf1aa98ae60c0d7e6f9a22cdab8babd6ce"
+     "sha256": "176b96f7f823d2abe984716864027e5ce641db2f04b59ab89636f0e32ec85ef6"
     },
     {
      "name": "skill_barrier_2",
@@ -12760,7 +12524,7 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_barrier_2_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_barrier_2_front.png"
      },
-     "sha256": "089426c0fe8f9e03cc0395b1f4e65735c3c9786bacfccaf14e3c809773ee971e"
+     "sha256": "069f7afb4d58e632c2fc337f9f5a4d18ef77222849dde3d28f2ec133a4b765ce"
     },
     {
      "name": "skill_barrier_3",
@@ -12790,26 +12554,10 @@
       "hair_back": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_barrier_3_back.png",
       "hair_front": "src/assets/pixel/hair/wizard_crescent_braid_p2/skill_barrier_3_front.png"
      },
-     "sha256": "7917e3b3abbf6edfb5692033b1f39d35cd7d82038b56087ba359e3d519810d49"
+     "sha256": "b6723bab622d7f647ad24a317aa3e4e25345cfc5e074c93919be25d0745e919a"
     }
    ],
-   "reviewHash": "2ff990afd61111ba",
-   "checkRules": {
-    "overlayFree": [
-     "weapon",
-     "hair_back",
-     "hair_front",
-     "grip"
-    ]
-   },
-   "review": {
-    "by": "Claude",
-    "date": "2026-10-10",
-    "checks": [
-     "grip"
-    ],
-    "note": "손 덮개가 몸 밖(지팡이 위 손가락)에 그려진 디자인. 합성 그림에서 손이 지팡이를 쥔 모양으로 보임"
-   }
+   "reviewHash": "c1ebb18a93750750"
   },
   {
    "id": "hunter_male_p2",
