@@ -1,0 +1,13 @@
+{
+  "point": [
+    126,
+    164
+  ],
+  "frame": "front",
+  "canvas": [
+    256,
+    240
+  ],
+  "overlapNeckPx": 2,
+  "note": "동일 캔버스의 pivot이 pose.head.point와 일치한다. 추가 이동 없음."
+}

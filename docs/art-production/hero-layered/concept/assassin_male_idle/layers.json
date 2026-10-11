@@ -1,0 +1,27 @@
+{
+  "canvas": [
+    256,
+    240
+  ],
+  "origin": [
+    128,
+    224
+  ],
+  "layerOrder": [
+    "bodies/male/idle/1_base/body.png",
+    "outfits/assassin_male/idle/1_base/outfit.png",
+    "heads/assassin_male/front.png",
+    "bodies/male/idle/1_base/near_arm.png",
+    "outfits/assassin_male/idle/1_base/outfit_arm.png",
+    "weapons/katar/idle/1_base/weapon.png",
+    "weapons/katar/idle/1_base/grip.png"
+  ],
+  "headTranslation": [
+    0,
+    0
+  ],
+  "nearArmZ": "front",
+  "weaponZ": "front",
+  "effects": false,
+  "approved": false
+}
