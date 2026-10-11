@@ -7,3 +7,7 @@ dist
 # asset production: keep deliveries, skip bulky intermediates
 docs/art-production/*/verification/
 docs/art-production/*/source/
+
+# local art references (other games, outside tools): never pushed to the public repo; only the README is tracked
+reference/*
+!reference/README.md
