@@ -1,0 +1,50 @@
+{
+  "role": "base",
+  "crownY": 128,
+  "head": {
+    "point": [
+      126,
+      164
+    ],
+    "frame": "front"
+  },
+  "nearArmZ": "front",
+  "hand": {
+    "near": {
+      "grip": [
+        129,
+        187
+      ],
+      "angle": 0
+    },
+    "far": {
+      "grip": [
+        141,
+        195
+      ]
+    }
+  },
+  "weapon": {
+    "grip": [
+      129,
+      187
+    ],
+    "tip": [
+      152,
+      187
+    ],
+    "angle": 0,
+    "z": "front"
+  },
+  "feet": {
+    "row": 223,
+    "near": [
+      111,
+      121
+    ],
+    "far": [
+      130,
+      143
+    ]
+  }
+}

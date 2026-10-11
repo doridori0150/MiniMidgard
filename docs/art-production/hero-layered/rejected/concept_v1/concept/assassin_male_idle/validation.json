@@ -1,0 +1,65 @@
+{
+  "canvas": [
+    256,
+    240
+  ],
+  "origin": [
+    128,
+    224
+  ],
+  "layerCount": 7,
+  "layerSizesPass": true,
+  "binaryAlphaPass": true,
+  "compositeEqualsStack": true,
+  "crownY": 128,
+  "chinY": 165,
+  "headHeight": 38,
+  "headWidthWithHair": 40,
+  "bodyHeight": 96,
+  "headRatio": 0.3958333333333333,
+  "feetRow": 223,
+  "feet": [
+    [
+      111,
+      121
+    ],
+    [
+      130,
+      143
+    ]
+  ],
+  "uncoveredBodyClothingPixels": 0,
+  "uncoveredNearArmPixels": 0,
+  "outfitSilhouetteDifferenceExcludingWaistTails": 0,
+  "waistTailPixels": 135,
+  "visibleTopTwoNeckPixels": 0,
+  "hairWrongColorPixels": 0,
+  "hairColors": [
+    "73,52,47",
+    "250,240,215",
+    "225,205,184",
+    "180,155,145"
+  ],
+  "eyeHighlightPixels": 2,
+  "weapon": {
+    "grip": [
+      129,
+      187
+    ],
+    "tip": [
+      152,
+      187
+    ],
+    "angle": 0,
+    "z": "front"
+  },
+  "sha256": {
+    "bodies/male/idle/1_base/body.png": "3de036707f34bcda374a2f1c61dcfcae075e5eb052cd9ac72ae33c85eed7dafe",
+    "outfits/assassin_male/idle/1_base/outfit.png": "bcd778fa482a75f4eb4d2bb8d05fb9596cc127cec5ba80b3cb7410bc2d04151f",
+    "heads/assassin_male/front.png": "e4ff22ae4354e597a7676344d761e8c011f4f68a0c6c89ed40ff6c9efea9eac9",
+    "bodies/male/idle/1_base/near_arm.png": "e7d066927a3e1da775d1f92785752cc35f8c2bf3147e92b4010bd28ec4a747a6",
+    "outfits/assassin_male/idle/1_base/outfit_arm.png": "07e25c1734aa326f94dec0db30cf8b4a54a417fffc599aa0c08404260f652b2e",
+    "weapons/katar/idle/1_base/weapon.png": "f4faca3bcb6bd67dec2d41b566cc0f787beba49752dccd5657c78eeda9bb9e46",
+    "weapons/katar/idle/1_base/grip.png": "88f56ea3b04c1c2a892a8b6633dd5d3bcc33338520c598198ca8b2058851e139"
+  }
+}

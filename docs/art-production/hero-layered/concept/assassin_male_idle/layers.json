@@ -16,9 +16,47 @@
     "weapons/katar/idle/1_base/weapon.png",
     "weapons/katar/idle/1_base/grip.png"
   ],
+  "translations": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      -19,
+      11
+    ],
+    [
+      -19,
+      11
+    ]
+  ],
   "headTranslation": [
-    0,
-    0
+    7,
+    1
+  ],
+  "weaponTranslation": [
+    -19,
+    11
+  ],
+  "weaponSourceGrip": [
+    129,
+    187
   ],
   "nearArmZ": "front",
   "weaponZ": "front",
