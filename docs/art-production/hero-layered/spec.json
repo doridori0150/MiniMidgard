@@ -1,0 +1,59 @@
+{
+  "format": "minimidgard.layered/1",
+  "doc": "docs/art/PIPELINE_LAYERED.md",
+  "canvas": [256, 240],
+  "origin": [128, 224],
+  "footRow": 223,
+  "bodyPx": 96,
+  "display": { "bodyPx": 59, "note": "96 px art at today's hero height (user 2026-10-11: \"96. 같은 키. 선명해야 뭐가 보이지\")" },
+  "proportions": { "headHeightPx": [36, 40], "headWidthMaxPx": 50, "note": "crown to chin about 40% of the height, about 2.5 heads (measured on the 도깨비의세계 reference)" },
+  "direction": "right_3_4",
+  "mirroredForLeft": true,
+  "alpha": "binary (0 or 255)",
+  "style": {
+    "outline": "1 px, outer silhouette dark; inner lines the darkest tone of that material",
+    "shading": "3 tones + 1 highlight per material, light from the upper left",
+    "forbidden": ["dithering", "blur", "anti-aliased edges", "semi-transparent pixels", "drop shadow", "text", "background"]
+  },
+  "layers": [
+    { "name": "weapon", "file": "weapon.png", "when": "z = behind" },
+    { "name": "head_back", "file": "head_back.png", "optional": true, "what": "hair or cloth falling behind the body (from the head set)" },
+    { "name": "body", "file": "body.png", "what": "bare body: skin + base underwear, legs, torso, far arm, neck. The motion lives here; shared by every class of the build" },
+    { "name": "outfit", "file": "outfit.png", "what": "the class's clothes for this frame, fitted to body; hides body where it covers" },
+    { "name": "head", "file": "heads/<character>/<frame>.png", "what": "lego head: face, hair, mask; placed at head.point" },
+    { "name": "near_arm", "file": "near_arm.png", "what": "the arm nearest the viewer (skin); z per frame (nearArmZ)" },
+    { "name": "outfit_arm", "file": "outfit_arm.png", "optional": true, "what": "sleeve / glove on the near arm; same z as near_arm" },
+    { "name": "weapon", "file": "weapon.png", "when": "z = front" },
+    { "name": "grip", "file": "grip.png", "optional": true, "what": "fingers over the weapon handle" }
+  ],
+  "headFrames": ["front", "down", "hurt"],
+  "head": { "attach": "head.point is the top centre of the neck; the head PNG's own pivot (heads/<character>/pivot.json) lands on it; the head covers the top 2 px of the neck" },
+  "motions": {
+    "idle": { "frames": 4, "roles": ["base", "breath_in", "base", "breath_out"] },
+    "walk": { "frames": 4, "roles": ["contact_right", "passing", "contact_left", "passing"] },
+    "attack_slash": { "frames": 4, "roles": ["windup", "apex", "contact", "recovery"], "weapons": ["sword", "axe", "mace", "staff"] },
+    "attack_thrust": { "frames": 4, "roles": ["pullback", "apex", "contact", "recovery"], "weapons": ["spear", "dagger", "katar", "fist"] },
+    "attack_shoot": { "frames": 4, "roles": ["raise", "draw", "release", "recovery"], "weapons": ["bow"] },
+    "cast": { "frames": 4, "roles": ["gather_start", "gather", "release", "recovery"] },
+    "hurt": { "frames": 2, "roles": ["flinch", "return"] },
+    "dead": { "frames": 4, "roles": ["stagger", "knee", "fall", "lying"] },
+    "sit": { "frames": 1, "roles": ["sit"] }
+  },
+  "holdPoses": { "skillStrike": "attack_*:apex|contact", "skillCast": "cast:gather" },
+  "pose": {
+    "role": "string",
+    "crownY": "int, top opaque row of the head as placed",
+    "head": { "point": "[x, y]", "frame": "front | down | hurt" },
+    "nearArmZ": "front | behind",
+    "hand": { "near": { "grip": "[x, y]", "angle": "deg, screen right 0, clockwise +" }, "far": { "grip": "[x, y]" } },
+    "weapon": { "grip": "[x, y]", "tip": "[x, y]", "angle": "deg", "z": "front | behind" },
+    "feet": { "row": 223, "near": "[x0, x1] | null", "far": "[x0, x1] | null" }
+  },
+  "folders": {
+    "bodies": "bodies/<build>/<motion>/<n>_<role>/ (body.png, near_arm.png, pose.json)",
+    "heads": "heads/<character>/<frame>.png + pivot.json",
+    "outfits": "outfits/<class>_<build>/<motion>/<n>_<role>/ (outfit.png, outfit_arm.png)",
+    "weapons": "weapons/<weapon>/<motion>/<n>_<role>/ (weapon.png, grip.png)",
+    "previews": "<…>/composite.png, composite_4x.png"
+  }
+}
