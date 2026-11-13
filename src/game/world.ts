@@ -16,7 +16,7 @@ import {
   type EliteAffix, type GuardianMech, type LootSource, type RiftMods, type RiftRole,
 } from './rift.ts';
 import type { RiftPlan } from './types.ts';
-import { accountBonus, arcComplete, cellAt, cellCenter, chargeShrines, dawnBell, endArcByBoss, isExplored, lightIfBossDown, regionShrinesLit, shrineNeedsBoss, stepOn } from './explore.ts';
+import { accountBonus, arcComplete, cellAt, cellCenter, chargeShrines, endArcByBoss, quietDanger, isExplored, lightIfBossDown, regionShrinesLit, shrineNeedsBoss, stepOn } from './explore.ts';
 import { expeditionTick as benchExplore, openChest } from './explore-actions.ts';
 import { EXPLORE_CELLS, FRAGMENT, SHRINE_TEXT, type PoiDef, type StoryArc } from './data/explore.ts';
 
@@ -645,8 +645,8 @@ export class World {
     // a danger monster appears now and then, one at a time (a woken trap chest counts)
     if (z.danger?.length && this.time >= this.dangerAt && !this.mobs.some((m) => m.danger && m.state !== 'dead')) {
       const now = this.clock();
-      // 가라앉은 수도원의 종: after the story ends the night ghost no longer comes
-      const awake = z.danger.filter((d) => (!d.hours || inHours(d.hours, now)) && !(d.id === 'bellghost' && dawnBell(this.s)));
+      // an ended story can lay a danger monster to rest (StoryArc.effect.quiet)
+      const awake = z.danger.filter((d) => (!d.hours || inHours(d.hours, now)) && !quietDanger(this.s, d.id));
       if (awake.length) this.spawnDanger(awake[Math.floor(this.rng() * awake.length)]);
       else this.dangerAt = this.time + 30000;
     }
@@ -4330,7 +4330,7 @@ export class World {
   private storyEnded(arc: StoryArc) {
     this.emit({ t: 'announce', text: `📜 이야기 완결 — ${arc.title}`, kind: 'mvp' });
     this.log(`「${arc.title}」 이야기가 끝났다. (지도 → 이야기)`, '#ffd890');
-    if (arc.id === 'bell') this.log('새벽종이 다시 울린다. 가라앉은 수도원의 밤 유령은 이제 나타나지 않고, 그곳에서 사냥하는 동안 명중이 오른다.', '#ffd890');
+    this.log(arc.effect.text, '#ffd890');
     this.syncParty();
   }
 

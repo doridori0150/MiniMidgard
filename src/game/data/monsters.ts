@@ -1369,6 +1369,64 @@ mob({
   desc: '수도원을 스스로 물에 잠근 수도원장. 종탑 아래 수문실에서 물 아래 잠든 것을 지키고 있다. [숨은 보스]',
 });
 
+// ── 숨은 던전의 보스 (지방 이야기 P2, docs/design/EXPLORATION.md)
+mob({
+  id: 'mirrormage', name: '거울 속 수석 마도사', lv: 49, hp: 38000, atk: [250, 315], def: 25, mdef: 65, agi: 50, dex: 110, luk: 30,
+  element: 'water', race: 'demihuman', size: 'medium', range: 34, delay: 1300, speed: 60, aggressive: true, boss: 'field', scale: 1.4, expMul: 20,
+  sprite: 'wraith', palette: ['#e8f0ff', '#8aa0d8', '#c0d8ff'],
+  skills: [{ kind: 'slam', cd: 8000, mult: 1.8, radius: 95 }, { kind: 'summon', cd: 15000, summon: 'phantom', count: 2, below: 0.75 }],
+  drops: [{ id: 'u_white', rate: 1 }, { id: 'r_elu', rate: 0.4 }, { id: 'r_ori', rate: 0.4 }, { id: 'x_mistlens', rate: 0.06, slots: 1 }, { id: 'c_mirrormage', rate: CARD.sboss }],
+  desc: '물에 비친 탑에 남아 거울을 붙잡고 있는 수석 마도사. 이쪽을 보고도 아무 말이 없다. [숨은 보스]',
+});
+mob({
+  id: 'lampkeeper', name: '물에 잠긴 등대지기', lv: 53, hp: 45000, atk: [280, 350], def: 40, mdef: 45, agi: 35, dex: 110, luk: 30,
+  element: 'fire', race: 'undead', size: 'medium', range: 32, delay: 1300, speed: 55, aggressive: true, boss: 'field', scale: 1.5, expMul: 20,
+  sprite: 'zombie', palette: ['#f0e0c0', '#3a5a70', '#ffb040'],
+  skills: [{ kind: 'slam', cd: 8000, mult: 1.8, radius: 95 }, { kind: 'summon', cd: 15000, summon: 'piratebones', count: 2, below: 0.75 }],
+  drops: [{ id: 'u_white', rate: 1 }, { id: 'r_elu', rate: 0.4 }, { id: 'r_ori', rate: 0.4 }, { id: 'x_keeperlamp', rate: 0.06, slots: 1 }, { id: 'c_lampkeeper', rate: CARD.sboss }],
+  desc: '바다 밑까지 등잔을 들고 내려간 등대지기. 물속인데도 등잔의 불씨가 꺼지지 않았다. [숨은 보스]',
+});
+mob({
+  id: 'echotree', name: '고목의 메아리', lv: 49, hp: 40000, atk: [240, 300], def: 50, mdef: 40, agi: 20, dex: 100, luk: 30,
+  element: 'earth', race: 'plant', size: 'large', range: 40, delay: 1400, speed: 35, aggressive: true, boss: 'field', scale: 1.6, expMul: 20,
+  sprite: 'treant', palette: ['#c8d8a0', '#3a5a2a', '#e0f0a0'],
+  skills: [{ kind: 'slam', cd: 8000, mult: 1.8, radius: 95 }, { kind: 'summon', cd: 15000, summon: 'dryad', count: 2, below: 0.75 }],
+  drops: [{ id: 'u_white', rate: 1 }, { id: 'r_elu', rate: 0.4 }, { id: 'r_ori', rate: 0.4 }, { id: 'x_namecharm', rate: 0.06, slots: 1 }, { id: 'c_echotree', rate: CARD.sboss }],
+  desc: '고목 뿌리 밑에서 같은 이름을 되풀이하는 메아리. 부르는 쪽인지 대답하는 쪽인지 알 수 없다. [숨은 보스]',
+});
+mob({
+  id: 'dryking', name: '마른 왕', lv: 71, hp: 105000, atk: [430, 530], def: 50, mdef: 60, agi: 40, dex: 140, luk: 30,
+  element: 'earth', race: 'undead', size: 'large', range: 34, delay: 1300, speed: 50, aggressive: true, boss: 'field', scale: 1.6, expMul: 20,
+  sprite: 'zombie', palette: ['#f0e0a0', '#8a6a2a', '#ffd860'],
+  skills: [{ kind: 'slam', cd: 8000, mult: 1.8, radius: 95 }, { kind: 'summon', cd: 15000, summon: 'cursedmummy', count: 2, below: 0.75 }],
+  drops: [{ id: 'u_white', rate: 1 }, { id: 'r_elu', rate: 0.4 }, { id: 'r_ori', rate: 0.4 }, { id: 'x_waterseal', rate: 0.06, slots: 1 }, { id: 'c_dryking', rate: CARD.sboss }],
+  desc: '물을 팔아 영원을 산 왕. 마르지도 썩지도 않지만, 한 모금도 마시지 못한다. [숨은 보스]',
+});
+mob({
+  id: 'bloodlord', name: '핏빛 성주', lv: 57, hp: 56000, atk: [340, 420], def: 50, mdef: 40, agi: 40, dex: 120, luk: 30,
+  element: 'shadow', race: 'undead', size: 'large', range: 36, delay: 1250, speed: 60, aggressive: true, boss: 'field', scale: 1.7, expMul: 20,
+  sprite: 'skeleton_knight', palette: ['#f0e0d8', '#5a2a38', '#e03040'],
+  skills: [{ kind: 'slam', cd: 8000, mult: 1.8, radius: 95 }, { kind: 'summon', cd: 15000, summon: 'jailer', count: 2, below: 0.75 }],
+  drops: [{ id: 'u_white', rate: 1 }, { id: 'r_elu', rate: 0.4 }, { id: 'r_ori', rate: 0.4 }, { id: 'x_moonkey', rate: 0.06, slots: 1 }, { id: 'c_bloodlord', rate: CARD.sboss }],
+  desc: '성이 무너진 밤부터 알현실을 떠나지 않은 성주. 홀 끝의 붉은 돌이 달처럼 빛난다. [숨은 보스]',
+});
+mob({
+  id: 'frostcommander', name: '서리 기사단장', lv: 89, hp: 180000, atk: [740, 900], def: 65, mdef: 55, agi: 50, dex: 175, luk: 30,
+  element: 'water', race: 'demihuman', size: 'large', range: 36, delay: 1250, speed: 60, aggressive: true, boss: 'field', scale: 1.7, expMul: 20,
+  sprite: 'skeleton_knight', palette: ['#e8f4ff', '#4a7ad0', '#a0e0ff'],
+  skills: [{ kind: 'slam', cd: 8000, mult: 1.8, radius: 95 }, { kind: 'summon', cd: 15000, summon: 'frostknight', count: 2, below: 0.75 }],
+  drops: [{ id: 'u_white', rate: 1 }, { id: 'r_elu', rate: 0.4 }, { id: 'r_ori', rate: 0.4 }, { id: 'x_springbadge', rate: 0.06, slots: 1 }, { id: 'c_frostcommander', rate: CARD.sboss }],
+  desc: '봄까지 사흘이라고 백 년 넘게 말해 온 기사단장. 겨울 막사를 아직 떠나지 않았다. [숨은 보스]',
+});
+mob({
+  id: 'skyferryman', name: '구름 항구의 사공', lv: 99, hp: 250000, atk: [1000, 1240], def: 60, mdef: 60, agi: 90, dex: 210, luk: 30,
+  element: 'wind', race: 'angel', size: 'large', range: 36, delay: 1200, speed: 70, aggressive: true, boss: 'field', scale: 1.6, expMul: 20,
+  sprite: 'wraith', palette: ['#fffbe0', '#a0c8ff', '#ffe080'],
+  skills: [{ kind: 'slam', cd: 8000, mult: 1.8, radius: 95 }, { kind: 'summon', cd: 15000, summon: 'skyknight', count: 2, below: 0.75 }],
+  drops: [{ id: 'u_white', rate: 1 }, { id: 'r_elu', rate: 0.4 }, { id: 'r_ori', rate: 0.4 }, { id: 'x_skycompass', rate: 0.06, slots: 1 }, { id: 'c_skyferryman', rate: CARD.sboss }],
+  desc: '하늘 사람들을 모두 아래로 실어 보낸 사공. 빈 항구에서 아직 노를 놓지 않았다. [숨은 보스]',
+});
+
 export function monster(id: string): MonsterDef {
   const m = MONSTERS[id];
   if (!m) throw new Error('unknown monster ' + id);

@@ -162,6 +162,13 @@ armor('x_earring', '귀걸이', 'acc', 0, 30000, { bonus: { int: 2 }, icon: { gl
 armor('x_glove', '장갑', 'acc', 0, 30000, { bonus: { dex: 2 }, icon: { glyph: 'glove', color: '#e0b080' }, desc: 'DEX +2' });
 armor('x_rosary', '로자리', 'acc', 0, 30000, { bonus: { luk: 2, mdef: 3 }, icon: { glyph: 'rosary', color: '#f0e0a0' }, desc: 'LUK +2, MDEF +3' });
 armor('x_dawnbell', '새벽종 방울', 'acc', 0, 42000, { bonus: { hit: 6, statusRes: { blind: 30 } }, icon: { glyph: 'rosary', color: '#ffd860' }, desc: 'HIT +6, 실명 저항 +30%\n다시 울린 새벽종의 쇳조각을 엮은 방울. [숨은 보스: 수몰된 수도원장]' });
+armor('x_mistlens', '안개 렌즈', 'acc', 0, 42000, { bonus: { hit: 6, int: 2 }, icon: { glyph: 'rosary', color: '#c0d8ff' }, desc: 'HIT +6, INT +2\n안개 너머를 비추던 마도탑의 렌즈. [숨은 보스: 거울 속 수석 마도사]' });
+armor('x_keeperlamp', '등대지기의 등잔', 'acc', 0, 42000, { bonus: { maxSpPct: 5, eleRes: { water: 10 } }, icon: { glyph: 'rosary', color: '#ffb040' }, desc: 'MaxSP +5%, 받는 물속성 피해 −10%\n바다 밑에서도 꺼지지 않은 불씨. [숨은 보스: 물에 잠긴 등대지기]' });
+armor('x_namecharm', '이름 부적', 'acc', 0, 42000, { bonus: { flee: 6, luk: 2 }, icon: { glyph: 'rosary', color: '#a0d080' }, desc: 'FLEE +6, LUK +2\n나무패에 새긴 이름 하나. 숲이 대답했다. [숨은 보스: 고목의 메아리]' });
+armor('x_waterseal', '물의 인장', 'acc', 0, 42000, { bonus: { maxHpPct: 3, eleRes: { fire: 15 } }, icon: { glyph: 'rosary', color: '#ffd860' }, desc: 'MaxHP +3%, 받는 불속성 피해 −15%\n물 한 동이마다 찍던 왕의 인장. [숨은 보스: 마른 왕]' });
+armor('x_moonkey', '감옥 열쇠', 'acc', 0, 42000, { bonus: { str: 2, statusRes: { curse: 40 } }, icon: { glyph: 'rosary', color: '#e03040' }, desc: 'STR +2, 저주 저항 +40%\n기사가 삼켰던 가장 안쪽 감방의 열쇠. [숨은 보스: 핏빛 성주]' });
+armor('x_springbadge', '기사단 휘장', 'acc', 0, 42000, { bonus: { vit: 3, eleRes: { water: 10 } }, icon: { glyph: 'rosary', color: '#a0e0ff' }, desc: 'VIT +3, 받는 물속성 피해 −10%\n봄이 오면 돌아가기로 한 서리 기사단의 휘장. [숨은 보스: 서리 기사단장]' });
+armor('x_skycompass', '하늘 나침반', 'acc', 0, 42000, { bonus: { agi: 3, flee: 5 }, icon: { glyph: 'rosary', color: '#ffe080' }, desc: 'AGI +3, FLEE +5\n바늘이 언제나 아래를 가리킨다. [숨은 보스: 구름 항구의 사공]' });
 // 맵 특산 장신구 — 같은 이름의 [1] 슬롯 변종이 더 드물게 떨어진다
 armor('x_clover', '네잎클로버', 'acc', 0, 16000, { bonus: { luk: 1, crit: 3 }, icon: { glyph: 'brooch', color: '#6ad06a' }, desc: '네잎 언덕에서만 자라는 행운. LUK +1, 크리티컬 +3', rarity: 'rare' });
 armor('x_bell', '은방울', 'acc', 0, 30000, { bonus: { agi: 1, flee: 6 }, icon: { glyph: 'earring', color: '#e0e8ff' }, desc: '달밤에만 울리는 방울. AGI +1, FLEE +6', rarity: 'rare' });
@@ -676,6 +683,13 @@ card('bloodknight', '핏빛 기사', 'weapon', '핏빛', { crit: 8, critDmgPct: 
 card('drownedmonk', '물에 잠긴 수도사', 'armor', '수도사의', { vit: 1, hpRegenPct: 20 }, 'VIT +1, HP 회복 +20%\n[갑옷]');
 card('bellghost', '종 치는 유령', 'acc', '종소리의', { healPct: 10, statusRes: { blind: 50, curse: 50 } }, '힐 회복량 +10%\n실명·저주 저항 +50%\n[액세서리]', 'epic');
 card('drownedabbot', '수몰된 수도원장', 'armor', '수도원장의', { maxHpPct: 8, eleRes: { water: 15 } }, 'MaxHP +8%\n받는 물속성 피해 −15%\n[갑옷]', 'epic');
+card('mirrormage', '거울 속 수석 마도사', 'acc', '거울의', { int: 2, mdef: 5 }, 'INT +2, MDEF +5\n[액세서리]', 'epic');
+card('lampkeeper', '물에 잠긴 등대지기', 'armor', '등대지기의', { maxSpPct: 5, eleRes: { water: 10 } }, 'MaxSP +5%\n받는 물속성 피해 −10%\n[갑옷]', 'epic');
+card('echotree', '고목의 메아리', 'garment', '메아리의', { flee: 8, eleRes: { earth: 10 } }, 'FLEE +8\n받는 땅속성 피해 −10%\n[걸치기]', 'epic');
+card('dryking', '마른 왕', 'shield', '마른 왕의', { eleRes: { fire: 15 }, maxHpPct: 3 }, '받는 불속성 피해 −15%\nMaxHP +3%\n[방패]', 'epic');
+card('bloodlord', '핏빛 성주', 'weapon', '성주의', { raceDmg: { demihuman: 10 }, str: 1 }, '인간형에게 주는 피해 +10%\nSTR +1\n[무기]', 'epic');
+card('frostcommander', '서리 기사단장', 'armor', '기사단장의', { vit: 2, eleRes: { water: 15 } }, 'VIT +2\n받는 물속성 피해 −15%\n[갑옷]', 'epic');
+card('skyferryman', '구름 항구의 사공', 'shoes', '사공의', { agi: 2, flee: 5 }, 'AGI +2, FLEE +5\n[신발]', 'epic');
 
 /** accessory cards that teach a skill (needs engine support: world.ts enabledSkills should add these while the card is equipped) */
 // ───────── skill catalysts & tools (SKILLS_RO.md): gemstones, traps, holy water, stones, the appraisal lens.

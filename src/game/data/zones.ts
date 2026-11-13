@@ -404,6 +404,20 @@ export const ZONES: ZoneDef[] = [
     desc: '빛이 닿지 않는 바다 밑 동굴. 초롱아귀의 불빛만 깜박인다. 가장 깊은 곳에 심연의 해룡이 똬리를 틀었다. 물속성이라 바람이 잘 든다.', map: [28, 84],
   },
   {
+    // 숨은 던전 (docs/design/EXPLORATION.md): 속삭이는 숲 지방 이야기 조각을 모두 찾으면 드러난다
+    id: 'whisperroot', name: '속삭임의 뿌리', theme: 'cave', tint: '#3a5a2a', lv: [36, 44], bgm: 'dungeon', region: '속삭이는 숲 지방', kind: 'dungeon', role: ['loot'],
+    mobs: [{ id: 'dryad', w: 35 }, { id: 'beetle', w: 35 }, { id: 'stump', w: 30 }],
+    maxMobs: 11, boss: 'echotree', bossGauge: 120, mvpGauge: 0, w: 920, h: 780,
+    gate: {
+      hidden: true,
+      hint: '숲 곳곳에 한 아이의 이름이 남아 있다더라. 다 모으면 고목 뿌리 밑으로 내려가는 길이 보인다고.',
+      need: [{ kind: 'story', arc: 'name' }],
+      openText: '숲이 이름을 한 번 부르고, 고목 뿌리 사이로 길이 열렸다!',
+    },
+    specialty: ['x_namecharm'],
+    desc: '고목 뿌리 밑의 어두운 굴. 걸음마다 누군가 이름을 부르는 소리가 따라온다.', map: [5, 60],
+  },
+  {
     id: 'sealedvein', name: '봉인된 광맥', theme: 'cave', tint: '#7a5ad0', lv: [38, 48], bgm: 'dungeon', region: '잿빛 광산 지방', kind: 'dungeon', role: ['ore', 'loot'],
     mobs: [{ id: 'crystalgolem', w: 32 }, { id: 'gemjelly', w: 26 }, { id: 'orejelly', w: 16 }, { id: 'rockworm', w: 12 }],
     maxMobs: 11, boss: 'veinguard', bossGauge: 120, mvpGauge: 0, w: 920, h: 780,
@@ -424,11 +438,53 @@ export const ZONES: ZoneDef[] = [
     desc: '광산 가장 깊은 갱도(3층). 갱도 망령(염)에는 속성 공격을, 해골 사냥개에는 성·불을. 망령 군주가 산다.', map: [29, 18],
   },
   {
+    // 숨은 던전 (docs/design/EXPLORATION.md): 안개 호수 지방 이야기 조각을 모두 찾으면 드러난다
+    id: 'mirrortower', name: '물에 비친 탑', theme: 'cave', tint: '#5a6aa0', lv: [40, 48], bgm: 'dungeon', region: '안개 호수 지방', kind: 'dungeon', role: ['loot'],
+    mobs: [{ id: 'gargoyle', w: 30 }, { id: 'phantom', w: 25 }, { id: 'icebook', w: 20 }, { id: 'firebook', w: 15 }, { id: 'wisp', w: 10 }],
+    maxMobs: 11, boss: 'mirrormage', bossGauge: 120, mvpGauge: 0, w: 920, h: 780,
+    gate: {
+      hidden: true,
+      hint: '마도탑 곳곳에 탑을 둘로 센 사람들의 흔적이 남아 있다더라. 다 모으면 물에 비친 탑의 문이 보인다고.',
+      need: [{ kind: 'story', arc: 'mist' }],
+      openText: '안개가 한순간 걷히고, 물에 비친 탑의 문이 열렸다!',
+    },
+    specialty: ['x_mistlens'],
+    desc: '호수에 거꾸로 비친 마도탑. 계단은 아래로 올라가고, 창밖에는 물 대신 하늘이 있다.', map: [50, 24],
+  },
+  {
+    // 숨은 던전 (docs/design/EXPLORATION.md): 푸른 항구 지방 이야기 조각을 모두 찾으면 드러난다
+    id: 'sunkenlight', name: '바다 밑 등대', theme: 'cave', tint: '#2a4a7a', lv: [42, 50], bgm: 'dungeon', region: '푸른 항구 지방', kind: 'dungeon', role: ['loot'],
+    mobs: [{ id: 'deepfish', w: 30 }, { id: 'piratebones', w: 25 }, { id: 'pufferfish', w: 20 }, { id: 'anemone', w: 15 }, { id: 'coralcrab', w: 10 }],
+    maxMobs: 11, boss: 'lampkeeper', bossGauge: 120, mvpGauge: 0, w: 920, h: 780,
+    gate: {
+      hidden: true,
+      hint: '항구 곳곳에 꺼진 등대의 흔적이 남아 있다더라. 다 모으면 바다 밑으로 이어진 불빛이 보인다고.',
+      need: [{ kind: 'story', arc: 'lamp' }],
+      openText: '산호 동굴 깊은 곳에서 희미한 불빛이 깜박인다… 바다 밑 등대로 가는 물길이 열렸다!',
+    },
+    specialty: ['x_keeperlamp'],
+    desc: '바다 밑에 선 등대. 물이 가득한데도 꼭대기의 등잔 하나가 꺼지지 않고 있다.', map: [25, 86],
+  },
+  {
     id: 'desert', name: '작열하는 사막', theme: 'desert', lv: [44, 54], bgm: 'field', region: '작열하는 사막 지방', kind: 'field', role: ['exp'],
     mobs: [{ id: 'sandjelly', w: 30 }, { id: 'scorpion', w: 26 }, { id: 'jackal', w: 24 }, { id: 'sandgolem', w: 20 }],
     maxMobs: 12, boss: 'scorpking', bossGauge: 140, mvpGauge: 0, unlockBy: 'quarry', w: 980, h: 820,
     specialty: ['w_jur', 'w_huntbow', 'w_bloodfang'],
     desc: '태양이 모든 것을 태우는 사막. 불속성(전갈·자칼)은 물로, 땅속성(말랑·골렘)은 불로 공략하자. 모래바람에 낡은 지도 조각이 날려 온다고.', map: [79, 62],
+  },
+  {
+    // 숨은 던전 (docs/design/EXPLORATION.md): 잿빛 광산 지방 이야기 조각을 모두 찾으면 드러난다
+    id: 'throneroom', name: '옛 성의 알현실', theme: 'cave', tint: '#6a2a38', lv: [44, 52], bgm: 'dungeon', region: '잿빛 광산 지방', kind: 'dungeon', role: ['loot'],
+    mobs: [{ id: 'jailer', w: 25 }, { id: 'skeleton', w: 20 }, { id: 'bonearcher', w: 20 }, { id: 'bonehound', w: 20 }, { id: 'shambler', w: 15 }],
+    maxMobs: 11, boss: 'bloodlord', bossGauge: 120, mvpGauge: 0, w: 920, h: 780,
+    gate: {
+      hidden: true,
+      hint: '광산 곳곳에 무너진 성의 흔적이 남아 있다더라. 다 모으면 성의 알현실로 올라가는 계단이 보인다고.',
+      need: [{ kind: 'story', arc: 'moon' }],
+      openText: '감옥 천장의 돌이 무너지고, 옛 성의 알현실로 이어진 계단이 드러났다!',
+    },
+    specialty: ['x_moonkey'],
+    desc: '무너진 성의 알현실. 깨진 창으로 들어오는 달빛이 늘 붉다.', map: [18, 22],
   },
   {
     id: 'oasis', name: '신기루 오아시스', theme: 'desert', tint: '#7ad0c0', lv: [46, 56], bgm: 'field', region: '작열하는 사막 지방', kind: 'field', role: ['loot'],
@@ -499,6 +555,20 @@ export const ZONES: ZoneDef[] = [
     desc: '빙하가 갈라진 협곡. 물속성 사이에 눈보라 정령(바람)이 섞여 바람 무기 하나로는 막힌다. 눈꽃 목도리와 폭풍의 활이 나온다.', map: [75, 23],
   },
   {
+    // 숨은 던전 (docs/design/EXPLORATION.md): 작열하는 사막 지방 이야기 조각을 모두 찾으면 드러난다
+    id: 'drycity', name: '마른 우물 밑 도시', theme: 'cave', tint: '#9a7a3a', lv: [62, 70], bgm: 'dungeon', region: '작열하는 사막 지방', kind: 'dungeon', role: ['loot'],
+    mobs: [{ id: 'anubis', w: 30 }, { id: 'cursedmummy', w: 25 }, { id: 'tombguard', w: 25 }, { id: 'scarab', w: 20 }],
+    maxMobs: 11, boss: 'dryking', bossGauge: 120, mvpGauge: 0, w: 920, h: 780,
+    gate: {
+      hidden: true,
+      hint: '사막 곳곳에 물을 팔던 왕의 흔적이 남아 있다더라. 다 모으면 마른 우물 밑의 도시가 보인다고.',
+      need: [{ kind: 'story', arc: 'water' }],
+      openText: '마른 우물 바닥의 모래가 꺼지고, 그 밑의 도시로 가는 계단이 드러났다!',
+    },
+    specialty: ['x_waterseal'],
+    desc: '마른 우물 밑에 묻힌 옛 도시. 분수와 수로가 그대로인데 물은 한 방울도 없다.', map: [77, 83],
+  },
+  {
     id: 'icecave', name: '얼음 동굴', theme: 'cave', tint: '#80c0ff', lv: [68, 76], bgm: 'dungeon', region: '얼어붙은 설원 지방', kind: 'dungeon', role: ['exp', 'ore'],
     mobs: [{ id: 'icebat', w: 28 }, { id: 'icegolem', w: 24 }, { id: 'frosttroll', w: 22 }, { id: 'icewisp', w: 16 }],
     maxMobs: 11, boss: 'frostwyrm', bossGauge: 150, mvpGauge: 0, unlockBy: 'snow', w: 940, h: 800,
@@ -537,6 +607,20 @@ export const ZONES: ZoneDef[] = [
     desc: '하늘에 떠 있는 유적으로 오르는 구름 계단. 구름 말랑과 폭풍 매가 모두 바람속성이라 땅 무기가 좋다. 구름 거인이 신전과 정원으로 가는 문을 지킨다.', map: [81, 17],
   },
   {
+    // 숨은 던전 (docs/design/EXPLORATION.md): 얼어붙은 설원 지방 이야기 조각을 모두 찾으면 드러난다
+    id: 'wintercamp', name: '기사단의 겨울 막사', theme: 'cave', tint: '#5a8ad0', lv: [80, 88], bgm: 'dungeon', region: '얼어붙은 설원 지방', kind: 'dungeon', role: ['loot'],
+    mobs: [{ id: 'frostknight', w: 35 }, { id: 'icewraith', w: 25 }, { id: 'frosttroll', w: 25 }, { id: 'iceworm', w: 15 }],
+    maxMobs: 11, boss: 'frostcommander', bossGauge: 120, mvpGauge: 0, w: 920, h: 780,
+    gate: {
+      hidden: true,
+      hint: '설원 곳곳에 봄을 기다린 기사단의 흔적이 남아 있다더라. 다 모으면 눈보라 속 막사가 보인다고.',
+      need: [{ kind: 'story', arc: 'spring' }],
+      openText: '눈보라가 잠시 갈라지고, 기사단의 겨울 막사가 모습을 드러냈다!',
+    },
+    specialty: ['x_springbadge'],
+    desc: '눈보라 속에 묻힌 기사단의 막사. 화롯불은 얼어 있고, 달력은 같은 장에 멈춰 있다.', map: [42, 9],
+  },
+  {
     id: 'windtemple', name: '바람의 신전', theme: 'cave', tint: '#f0e0a0', lv: [84, 94], bgm: 'dungeon', region: '하늘 유적 지방', kind: 'dungeon', role: ['exp', 'loot'],
     mobs: [{ id: 'galespirit', w: 28 }, { id: 'scripture', w: 26 }, { id: 'sentinel', w: 24 }, { id: 'windbird', w: 16 }],
     maxMobs: 11, boss: 'stormking', bossGauge: 160, mvpGauge: 0, unlockBy: 'cloudstair', w: 960, h: 800,
@@ -556,6 +640,20 @@ export const ZONES: ZoneDef[] = [
     maxMobs: 11, mvp: 'skykeeper', bossGauge: 0, mvpGauge: 600, unlockBy: 'windtemple', w: 960, h: 800,
     specialty: ['w_skyrod', 'h_skycrown', 'x_skyring'],
     desc: '하늘 유적의 가장 높은 곳. 천공 기사들이 지키는 왕좌에 천공의 파수신이 앉아 있다. 파수신은 성속성이라 암흑 무기가 잘 든다.', map: [85, 10],
+  },
+  {
+    // 숨은 던전 (docs/design/EXPLORATION.md): 하늘 유적 지방 이야기 조각을 모두 찾으면 드러난다
+    id: 'cloudharbor', name: '구름 아래 항구', theme: 'cave', tint: '#e0f0ff', lv: [94, 99], bgm: 'dungeon', region: '하늘 유적 지방', kind: 'dungeon', role: ['loot'],
+    mobs: [{ id: 'skyknight', w: 30 }, { id: 'galespirit', w: 25 }, { id: 'cherub', w: 25 }, { id: 'scripture', w: 20 }],
+    maxMobs: 11, boss: 'skyferryman', bossGauge: 120, mvpGauge: 0, w: 920, h: 780,
+    gate: {
+      hidden: true,
+      hint: '하늘 유적 곳곳에 떠난 사람들의 흔적이 남아 있다더라. 다 모으면 구름 아래 항구로 내려가는 길이 보인다고.',
+      need: [{ kind: 'story', arc: 'sky' }],
+      openText: '구름이 걷히고, 유적 아래로 매달린 항구가 보였다!',
+    },
+    specialty: ['x_skycompass'],
+    desc: '하늘 유적 아래에 매달린 항구. 배를 묶던 말뚝만 줄지어 있고 배는 한 척도 없다.', map: [89, 13],
   },
 ];
 

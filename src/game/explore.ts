@@ -117,5 +117,9 @@ export function endArcByBoss(s: GameState, mob: string): StoryArc | null {
   st.unread.push('end:' + arc.id);
   return arc;
 }
-/** 가라앉은 수도원의 종: after the ending the night ghost no longer comes, and the dawn bell steadies the party there */
+/** ended stories change their region (StoryArc.effect): a bonus while hunting on its maps, a danger monster that stops coming */
+export const endedArcs = (s: GameState) => STORY_ARCS.filter((a) => arcEnded(s, a.id));
+export const storyZoneBonus = (s: GameState, zone: string): Bonus[] => endedArcs(s).filter((a) => a.effect.zones.includes(zone)).map((a) => a.effect.bonus);
+export const quietDanger = (s: GameState, mob: string) => endedArcs(s).some((a) => a.effect.quiet === mob);
+/** 가라앉은 수도원의 종 (the P1 story) has ended */
 export const dawnBell = (s: GameState) => arcEnded(s, 'bell');
