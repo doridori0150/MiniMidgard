@@ -315,7 +315,8 @@ export interface Settings {
   powerSave?: boolean;
   /** hero art: 'rig' = the assembled parts renderer (A); absent = whole-figure sprites where a class×gender has them (B);
    *  'pixel' / 'pixel2' = pixel-art layered heroes about 3–4 / 2–2.5 heads tall where they exist (C / D, trial), else B */
-  heroArt?: 'rig' | 'pixel' | 'pixel2';
+  /** 'kit' = D: the asset workshop's new heroes (test), others fall back to C → B → A */
+  heroArt?: 'rig' | 'pixel' | 'pixel2' | 'kit';
   /** field background: 'hd' = the layered 2.5D kits where a theme has one (trial) */
   bgArt?: 'hd';
 }

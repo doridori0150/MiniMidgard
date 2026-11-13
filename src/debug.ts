@@ -76,6 +76,7 @@ export async function qaBoot(q = new URLSearchParams(location.search)): Promise<
   if (q.get('art') === 'a') s.settings.heroArt = 'rig'; // &art=a: assembled heroes, &art=c: pixel heroes (A/B/C check)
   if (q.get('art') === 'c') s.settings.heroArt = 'pixel';
   if (q.get('art') === 'd') s.settings.heroArt = 'pixel2';
+  if (q.get('art') === 'k') s.settings.heroArt = 'kit'; // &art=k: the asset workshop's new heroes (설정 D)
   if (q.get('bg') === 'hd') s.settings.bgArt = 'hd'; // &bg=hd: layered 2.5D field kit
   game.qa = true;
   game.begin(s, true);

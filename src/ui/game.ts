@@ -7,6 +7,7 @@ import { applyOffline, type OfflineReport } from '../game/offline.ts';
 import { FieldRenderer } from '../render/field.ts';
 import { setWholeEnabled } from '../render/whole.ts';
 import { setPixelEnabled } from '../render/pixel.ts';
+import { setKitHeroEnabled } from '../render/kit-hero.ts';
 import { setKitHd } from '../render/bg.ts';
 import { audio } from '../audio/audio.ts';
 import { zone } from '../game/data/zones.ts';
@@ -97,7 +98,8 @@ class Game {
   begin(s: GameState, fresh: boolean) {
     this.s = s;
     setWholeEnabled(s.settings.heroArt !== 'rig');
-    setPixelEnabled(s.settings.heroArt === 'pixel' || s.settings.heroArt === 'pixel2', 'p2'); // the 3–4-head trial (round 8 P3) was dropped
+    setPixelEnabled(s.settings.heroArt === 'pixel' || s.settings.heroArt === 'pixel2' || s.settings.heroArt === 'kit', 'p2'); // the 3–4-head trial (round 8 P3) was dropped
+    setKitHeroEnabled(s.settings.heroArt === 'kit');
     setKitHd(s.settings.bgArt === 'hd');
     if (!fresh) {
       const away = Date.now() - s.lastSave;

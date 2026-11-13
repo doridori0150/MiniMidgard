@@ -4,6 +4,7 @@ import type { Element, EquipInst, Hero } from '../game/types.ts';
 import { inked } from '../render/ink.ts';
 import { drawRigHero, rigSupports } from '../render/rig.ts';
 import { pixelSupports } from '../render/pixel.ts';
+import { kitSupports } from '../render/kit-hero.ts';
 import { featureTypes, type FeatureKind } from '../render/sprite.ts';
 import { drawHero, type HeroLookDraw } from '../render/hero.ts';
 import { drawMob, mobHeight } from '../render/monster.ts';
@@ -57,7 +58,11 @@ export function LookCanvas(props: { look: HeroLookDraw; state?: string; class?: 
     const rig = rigSupports(lookRef.current);
     // painted heroes carry a bigger head (and ponytails): closer for a face, a little further for the full figure
     const s = (props.zoom ?? h / 70) * dpr * (rig ? (props.face ? 1.2 : 0.86) : 1);
-    if (props.face && pixelSupports(lookRef.current)) {
+    if (props.face && kitSupports(lookRef.current)) {
+      // workshop heroes are about 4 heads tall (59 units): frame the head and shoulders, centred 47 units above the feet
+      const sp = (props.zoom ?? h / 70) * dpr * 2.1;
+      ctx.setTransform(sp, 0, 0, sp, c.width / 2, c.height / 2 + 47 * sp);
+    } else if (props.face && pixelSupports(lookRef.current)) {
       // pixel heroes are two heads tall: the head with its hair is about 37 × 30 field units, centred 2.5 left of the feet and
       // 45 above them (measured on all twelve), so it fills the frame with a little margin
       const sp = (props.zoom ?? h / 70) * dpr * 1.7;

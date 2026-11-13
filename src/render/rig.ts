@@ -8,6 +8,7 @@ import type { HeroLookDraw, Pose } from './hero.ts';
 import { drawSprite, loadSprites, spriteBounds, spriteSupports } from './sprite.ts';
 import { drawWhole, loadWhole, wholeSupports } from './whole.ts';
 import { drawPixel, loadPixel, pixelSupports } from './pixel.ts';
+import { drawKitHero, kitSupports } from './kit-hero.ts';
 export { spriteBounds as rigBounds };
 
 type V2 = [number, number];
@@ -56,7 +57,7 @@ const HEADGEAR: Record<string, string> = { leaf: 'leaf', hairpin: 'hairpin' };
 
 /** painted frame sprites (v4) win wherever they exist; the cut-out rig stays as the fallback and for comparison */
 export function rigSupports(L: HeroLookDraw) {
-  return pixelSupports(L) || wholeSupports(L) || spriteSupports(L) || cutoutSupports(L);
+  return kitSupports(L) || pixelSupports(L) || wholeSupports(L) || spriteSupports(L) || cutoutSupports(L);
 }
 export function cutoutSupports(L: HeroLookDraw) {
   return ready && !!M && !!OUTFIT[L.cls] && !!M.outfits[OUTFIT[L.cls]!] && L.wtype in WEAPON;
@@ -144,6 +145,8 @@ function tint(name: string, color: string): CanvasImageSource | undefined {
 
 export function drawRigHero(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {
   // pixel heroes when 설정 picks C, else whole-figure sprites (the lineup art, one painted figure per frame), then the assembled sets
+  // 설정 D: the workshop's new heroes where they exist (src/render/kit-hero.ts)
+  if (drawKitHero(ctx, L, pose)) return true;
   if (drawPixel(ctx, L, pose)) return true;
   if (drawWhole(ctx, L, pose)) return true;
   if (drawSprite(ctx, L, pose)) return true;

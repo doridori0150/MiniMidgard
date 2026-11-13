@@ -1,0 +1,229 @@
+{
+ "schema": "minimidgard.kit-hero/1",
+ "note": "asset-kit works/minimidgard 납품을 tools/art/import-kit-heroes.py로 가져옴. 오른쪽을 봄(왼쪽은 엔진이 뒤집음), 무기는 손에 그려져 있음.",
+ "characters": {
+  "assassin_male": {
+   "class": "assassin",
+   "gender": "male",
+   "source": "assassin_m",
+   "bodyHeight": 134,
+   "size": [
+    71,
+    135
+   ],
+   "pivot": [
+    42,
+    134
+   ],
+   "animations": {
+    "idle": {
+     "frames": [
+      "assassin_male/idle_01.png",
+      "assassin_male/idle_02.png",
+      "assassin_male/idle_03.png",
+      "assassin_male/idle_04.png",
+      "assassin_male/idle_05.png",
+      "assassin_male/idle_06.png",
+      "assassin_male/idle_07.png",
+      "assassin_male/idle_08.png",
+      "assassin_male/idle_09.png",
+      "assassin_male/idle_10.png",
+      "assassin_male/idle_11.png",
+      "assassin_male/idle_12.png",
+      "assassin_male/idle_13.png",
+      "assassin_male/idle_14.png",
+      "assassin_male/idle_15.png",
+      "assassin_male/idle_16.png",
+      "assassin_male/idle_17.png",
+      "assassin_male/idle_18.png",
+      "assassin_male/idle_19.png",
+      "assassin_male/idle_20.png"
+     ],
+     "durations": [
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125
+     ],
+     "loop": true,
+     "duration": 2500,
+     "from": "characters/assassin_m-pixel-battle-idle/manifest.json"
+    }
+   }
+  },
+  "knight_female": {
+   "class": "knight",
+   "gender": "female",
+   "source": "knight_f",
+   "bodyHeight": 127,
+   "size": [
+    67,
+    129
+   ],
+   "pivot": [
+    39,
+    128
+   ],
+   "animations": {
+    "idle": {
+     "frames": [
+      "knight_female/idle_01.png",
+      "knight_female/idle_02.png",
+      "knight_female/idle_03.png",
+      "knight_female/idle_04.png",
+      "knight_female/idle_05.png",
+      "knight_female/idle_06.png",
+      "knight_female/idle_07.png",
+      "knight_female/idle_08.png",
+      "knight_female/idle_09.png",
+      "knight_female/idle_10.png",
+      "knight_female/idle_11.png",
+      "knight_female/idle_12.png",
+      "knight_female/idle_13.png",
+      "knight_female/idle_14.png",
+      "knight_female/idle_15.png",
+      "knight_female/idle_16.png",
+      "knight_female/idle_17.png",
+      "knight_female/idle_18.png",
+      "knight_female/idle_19.png",
+      "knight_female/idle_20.png",
+      "knight_female/idle_21.png",
+      "knight_female/idle_22.png",
+      "knight_female/idle_23.png",
+      "knight_female/idle_24.png",
+      "knight_female/idle_25.png",
+      "knight_female/idle_26.png",
+      "knight_female/idle_27.png",
+      "knight_female/idle_28.png"
+     ],
+     "durations": [
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125
+     ],
+     "loop": true,
+     "duration": 3500,
+     "from": "characters/knight_f-pixel-battle-idle/manifest.json"
+    }
+   }
+  },
+  "wizard_female": {
+   "class": "wizard",
+   "gender": "female",
+   "source": "wizard_f",
+   "bodyHeight": 129,
+   "size": [
+    66,
+    131
+   ],
+   "pivot": [
+    33,
+    130
+   ],
+   "animations": {
+    "idle": {
+     "frames": [
+      "wizard_female/idle_01.png",
+      "wizard_female/idle_02.png",
+      "wizard_female/idle_03.png",
+      "wizard_female/idle_04.png",
+      "wizard_female/idle_05.png",
+      "wizard_female/idle_06.png",
+      "wizard_female/idle_07.png",
+      "wizard_female/idle_08.png",
+      "wizard_female/idle_09.png",
+      "wizard_female/idle_10.png",
+      "wizard_female/idle_11.png",
+      "wizard_female/idle_12.png",
+      "wizard_female/idle_13.png",
+      "wizard_female/idle_14.png",
+      "wizard_female/idle_15.png",
+      "wizard_female/idle_16.png",
+      "wizard_female/idle_17.png",
+      "wizard_female/idle_18.png",
+      "wizard_female/idle_19.png",
+      "wizard_female/idle_20.png",
+      "wizard_female/idle_21.png",
+      "wizard_female/idle_22.png",
+      "wizard_female/idle_23.png",
+      "wizard_female/idle_24.png",
+      "wizard_female/idle_25.png",
+      "wizard_female/idle_26.png"
+     ],
+     "durations": [
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125,
+      125
+     ],
+     "loop": true,
+     "duration": 3250,
+     "from": "characters/wizard_f-pixel-battle-idle/manifest.json"
+    }
+   }
+  }
+ }
+}

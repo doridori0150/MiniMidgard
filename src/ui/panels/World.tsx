@@ -10,6 +10,7 @@ import { ITEMS, SHOPS } from '../../game/data/items.ts';
 import { CLASSES } from '../../game/data/classes.ts';
 import { setWholeEnabled, wholeCharacters } from '../../render/whole.ts';
 import { setPixelEnabled, pixelCharacters } from '../../render/pixel.ts';
+import { setKitHeroEnabled, kitCharacters } from '../../render/kit-hero.ts';
 import { setKitHd } from '../../render/bg.ts';
 
 const artList = (cs: { cls: string; gender: string }[]) => cs.map((c) => `${CLASSES[c.cls as keyof typeof CLASSES]?.name ?? c.cls}(${c.gender === 'm' ? '남' : '여'})`).join(' · ');
@@ -320,12 +321,12 @@ export function SettingsPanel() {
           {Sw('배경 2.5D (시험, 햇살 평원)', st.bgArt === 'hd', () => { st.bgArt = st.bgArt === 'hd' ? undefined : 'hd'; setKitHd(st.bgArt === 'hd'); })}
           <div class="row" style={{ margin: '8px 0 4px' }}><span>캐릭터 그림</span></div>
           <div class="tabs">
-            {([['rig', 'A 조립형'], [undefined, 'B 통짜'], ['pixel2', 'C 도트']] as const).map(([v, label]) => (
-              <button class={st.heroArt === v || (v === 'pixel2' && st.heroArt === 'pixel') ? 'on' : ''} onClick={() => set(() => { st.heroArt = v; setWholeEnabled(v !== 'rig'); setPixelEnabled(v === 'pixel2', 'p2'); })}>{label}</button>
+            {([['rig', 'A 조립형'], [undefined, 'B 통짜'], ['pixel2', 'C 도트'], ['kit', 'D 새 영웅']] as const).map(([v, label]) => (
+              <button class={st.heroArt === v || (v === 'pixel2' && st.heroArt === 'pixel') ? 'on' : ''} onClick={() => set(() => { st.heroArt = v; setWholeEnabled(v !== 'rig'); setPixelEnabled(v === 'pixel2' || v === 'kit', 'p2'); setKitHeroEnabled(v === 'kit'); })}>{label}</button>
             ))}
           </div>
           <div class="small muted" style={{ margin: '4px 0 6px' }}>
-            B: {artList(wholeCharacters())}. C 도트(시험): {artList(pixelCharacters()) || '아직 없음'}. 2차 직업은 1차 그림을 입고, 그림이 없는 직업은 도트 → B → A 순서로 있는 그림을 씁니다.
+            B: {artList(wholeCharacters())}. C 도트(시험): {artList(pixelCharacters()) || '아직 없음'}. D 새 영웅(시험): {artList(kitCharacters())}, 아직 전투 대기 동작뿐이라 걷기 · 공격도 대기 그림으로 보입니다. 2차 직업은 1차 그림을 입고, 그림이 없는 직업은 D → C → B → A 순서로 있는 그림을 씁니다.
           </div>
           {Sw('잡템 자동 판매', st.autoSellEtc, () => { st.autoSellEtc = !st.autoSellEtc; })}
           {Sw('보스·MVP 자동 소환', st.autoBoss, () => { st.autoBoss = !st.autoBoss; })}
