@@ -7,7 +7,7 @@ import type { HeroLookDraw, Pose } from './hero.ts';
 import { clip } from './whole.ts';
 import { attackContact } from './pixel.ts';
 
-interface Anim { frames: string[]; durations: number[]; duration: number; loop: boolean; hitFrame?: number }
+interface Anim { frames: string[]; durations: number[]; duration: number; loop: boolean; hitFrame?: number; size?: [number, number]; pivot?: [number, number] }
 interface Char { class: string; gender: string; bodyHeight: number; size: [number, number]; pivot: [number, number]; animations: Record<string, Anim> }
 interface Manifest { schema: string; characters: Record<string, Char> }
 
@@ -23,7 +23,8 @@ let loading: Promise<void> | null = null;
 export const KIT_UNIT_PER_PX = 59 / 132;
 
 export function setKitHeroEnabled(on: boolean) { enabled = on; if (on) loadKitHeroes(); }
-export const kitCharacters = () => Object.values(M?.characters ?? {}).map((c) => ({ cls: c.class, gender: c.gender === 'male' ? 'm' : 'f' }));
+/** `moving`: walk and attack delivered (the rest borrow the battle idle) */
+export const kitCharacters = () => Object.values(M?.characters ?? {}).map((c) => ({ cls: c.class, gender: c.gender === 'male' ? 'm' : 'f', moving: !!(c.animations.walk && c.animations.attack) }));
 
 /** decode the frames once, the first time the art is switched on */
 export function loadKitHeroes(): Promise<void> {
@@ -93,7 +94,8 @@ export function drawKitHero(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose
   ctx.scale(pose.facing, 1);
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
-  ctx.drawImage(upscaled(file, img, n), -c.pivot[0] * s, -c.pivot[1] * s, c.size[0] * s, c.size[1] * s);
+  const [w, h] = a.size ?? c.size, [px, py] = a.pivot ?? c.pivot; // each motion is cropped to its own box
+  ctx.drawImage(upscaled(file, img, n), -px * s, -py * s, w * s, h * s);
   ctx.restore();
   return true;
 }

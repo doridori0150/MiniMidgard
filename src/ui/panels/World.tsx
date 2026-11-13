@@ -326,7 +326,7 @@ export function SettingsPanel() {
             ))}
           </div>
           <div class="small muted" style={{ margin: '4px 0 6px' }}>
-            B: {artList(wholeCharacters())}. C 도트(시험): {artList(pixelCharacters()) || '아직 없음'}. D 새 영웅(시험): {artList(kitCharacters())}, 아직 전투 대기 동작뿐이라 걷기 · 공격도 대기 그림으로 보입니다. 2차 직업은 1차 그림을 입고, 그림이 없는 직업은 D → C → B → A 순서로 있는 그림을 씁니다.
+            B: {artList(wholeCharacters())}. C 도트(시험): {artList(pixelCharacters()) || '아직 없음'}. D 새 영웅(시험): {artList(kitCharacters())}{kitCharacters().some((c) => !c.moving) ? `, 그중 ${artList(kitCharacters().filter((c) => !c.moving))}은 아직 전투 대기 동작뿐이라 걷기 · 공격도 대기 그림으로 보입니다` : ''}. 2차 직업은 1차 그림을 입고, 그림이 없는 직업은 D → C → B → A 순서로 있는 그림을 씁니다.
           </div>
           {Sw('잡템 자동 판매', st.autoSellEtc, () => { st.autoSellEtc = !st.autoSellEtc; })}
           {Sw('보스·MVP 자동 소환', st.autoBoss, () => { st.autoBoss = !st.autoBoss; })}
