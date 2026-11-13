@@ -5,6 +5,7 @@
 // the other renderers.
 import type { HeroLookDraw, Pose } from './hero.ts';
 import { clip } from './whole.ts';
+import { attackContact } from './pixel.ts';
 
 interface Anim { frames: string[]; durations: number[]; duration: number; loop: boolean; hitFrame?: number }
 interface Char { class: string; gender: string; bodyHeight: number; size: [number, number]; pivot: [number, number]; animations: Record<string, Anim> }
@@ -59,12 +60,24 @@ function upscaled(file: string, img: HTMLImageElement, n: number): CanvasImageSo
 export function drawKitHero(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {
   const c = character(L);
   if (!c) return false;
-  const [state, t0] = clip(pose);
+  let [state] = clip(pose);
   if (state === 'dead' && !c.animations.dead) return false;
-  const own = c.animations[state];
-  const a = own ?? c.animations.idle;
-  // an undelivered motion borrows the idle on the pose's own clock (clip() pins hurt to 0)
-  const t = own ? t0 : pose.t;
+  let t = pose.t;
+  // the field's pose clocks (field.ts): idle / walk / cast / sit run on the shared clock, attack / dead on time in the state
+  // (pose.t, = since). clip() pins hurt / dead / sit to 0 and squeezes attack into 280 ms, so the clocks are read here instead.
+  if (state === 'attack' && c.animations.attack) {
+    // as pixel.ts 'uniform' (the game today): the whole swing scaled so the contact frame (`hitFrame`) starts when world.ts
+    // lands the hit (pose.dur × attackContact); without a hitFrame the middle of the motion meets it
+    const a = c.animations.attack;
+    const hit = a.hitFrame != null ? a.durations.slice(0, a.hitFrame).reduce((x, y) => x + y, 0) : a.duration / 2;
+    t = (pose.t / (Math.max(1, pose.dur ?? 280) * attackContact(L.wtype))) * hit;
+  } else if (state === 'cast' && c.animations.cast_start) {
+    // a one-shot lead-in before the looping cast, timed from when the cast began
+    const since = pose.since ?? pose.t, lead = c.animations.cast_start.duration;
+    if (since < lead) { state = 'cast_start'; t = since; } else t = since - lead;
+  } else if (state === 'sit' && c.animations.sit && !c.animations.sit.loop) t = pose.since ?? pose.t; // sit down once, then hold
+  else if (state === 'hurt' && c.animations.hurt) t = 0; // the field shows hurt for 80 ms after a hit (no clock of its own yet): its first frame
+  const a = c.animations[state] ?? c.animations.idle; // an undelivered motion borrows the idle (on the pose's clock)
   let rest = Math.max(0, Math.floor(t));
   rest = a.loop ? rest % a.duration : Math.min(rest, a.duration - 1);
   let i = a.frames.length - 1;

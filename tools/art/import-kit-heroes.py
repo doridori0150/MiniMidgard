@@ -13,18 +13,33 @@ OUT = os.path.normpath(OUT)
 GENDER = {'m': 'male', 'f': 'female'}
 ANIM = {'battle_idle': 'idle'}  # 공방 동작 이름 → 게임 상태 이름(같으면 그대로)
 
-chars = {}
+CANVAS, PIVOT = [320, 300], (160, 280)  # 공방 영웅 동작 납품 규격(전투 대기 납품, 2026-11-14)
+
+def delivered(sh):
+    # 작업 폴더(영상 칸 · 핵심 자세 시트 …)도 같은 glob에 걸린다: 납품 표시가 있으면 그것만, 없으면 납품 규격(캔버스 · 발 기준점)인 동작 시트만
+    if 'delivered' in sh:
+        return sh['delivered'] is True
+    return sh.get('category') == 'motion' and sh.get('canvas') == CANVAS and all(tuple(f.get('pivot', ())) == PIVOT for f in sh.get('frames', []))
+
+chars, skipped = {}, []
 for mf in sorted(glob.glob(os.path.join(SRC, 'characters', '*-pixel-*', 'manifest.json'))):
     m = json.load(open(mf))
     for sh in m.get('sheets', []):
-        if sh.get('category') != 'motion':
+        if sh.get('category') == 'motion' and not delivered(sh):
+            skipped.append(f"{os.path.relpath(mf, SRC)} {sh.get('id')} {sh.get('kind')}")
+        if not delivered(sh):
             continue
         aid = sh['id']                      # assassin_m
         cls, g = aid.rsplit('_', 1)
         key = f'{cls}_{GENDER.get(g, g)}'   # assassin_male
         c = chars.setdefault(key, {'class': cls, 'gender': GENDER.get(g, g), 'source': aid, 'bodyHeight': sh.get('bodyHeight'), 'anims': {}})
-        c['anims'][ANIM.get(sh['kind'], sh['kind'])] = {'sheet': sh, 'manifest': os.path.relpath(mf, SRC)}
+        an = ANIM.get(sh['kind'], sh['kind'])
+        if an in c['anims']:
+            sys.exit(f"{key} {an}: 납품 시트가 둘 — {c['anims'][an]['manifest']} · {os.path.relpath(mf, SRC)} (하나만 남기거나 delivered 표시)")
+        c['anims'][an] = {'sheet': sh, 'manifest': os.path.relpath(mf, SRC)}
 
+for k in skipped:
+    print('건너뜀(납품 규격 아님):', k)
 if not chars:
     sys.exit(f'납품을 못 찾음: {SRC}/characters/*-pixel-*/manifest.json')
 
