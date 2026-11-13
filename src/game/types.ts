@@ -239,6 +239,8 @@ export interface PartyOrders {
   rest: number;
   /** M10: what the party does about a roaming danger monster on an expedition map (absent = avoid) */
   danger?: 'avoid' | 'fight';
+  /** 탐험 (EXPLORATION.md): between fights the party walks toward cells of the map it hasn't stood in yet */
+  explore?: boolean;
 }
 
 export interface Hero {
@@ -265,6 +267,17 @@ export interface Hero {
   tactics: Tactics;
   /** chosen build (data/builds.ts): 추천 분배 follows its stat axis */
   build?: string;
+  /** 빌드 프리셋 (EXPLORATION.md §7): skill slots, tactics, gear and ammo saved under a name */
+  presets?: (BuildPreset | null)[];
+}
+
+export interface BuildPreset {
+  name: string;
+  skillSlots: (string | null)[];
+  tactics: Tactics;
+  /** equipped instance uids by slot (missing ones are skipped on load: sold, broken by refining) */
+  equip: Partial<Record<EquipSlot, number>>;
+  ammo?: string;
 }
 
 /** mobile-style quick slot: a registered consumable, whether it fires automatically, and its trigger % */
@@ -346,4 +359,11 @@ export interface GameState {
   skillsV?: number;
   /** a one-time notice for the player (e.g. skill points refunded by the skill migration) */
   notice?: string;
+  /** 탐험 (EXPLORATION.md): explored cells per map, a bitmask over data/explore.ts EXPLORE_CELLS */
+  explore?: Record<string, number>;
+  /** 발견 지점: found = revealed, done = shrine lit / chest opened / ending reached ('end:<arc>'),
+   *  charge = shrine kills so far, unread = story pieces not yet opened in the story window */
+  poi?: { found: string[]; done: string[]; charge: Record<string, number>; unread: string[] };
+  /** 벤치 탐험대: bench heroes (ids) sent to explore a map; carry = etc items picked up on the way */
+  expedition?: { zone: string; heroes: number[]; since: number; acc: number; carry: Record<string, number> };
 }

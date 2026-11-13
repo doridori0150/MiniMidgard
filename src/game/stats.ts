@@ -4,6 +4,7 @@ import { STAT_KEYS } from './types.ts';
 import { CLASSES, jobBonusStats } from './data/classes.ts';
 import { SKILLS } from './data/skills.ts';
 import { ITEMS } from './data/items.ts';
+import { accountBonus, dawnBell } from './explore.ts';
 
 export interface ActiveBuff {
   id: string;
@@ -202,6 +203,11 @@ export function computeDerived(s: GameState, h: Hero, buffs: ActiveBuff[] = [], 
     addBonus(b, bf.bonus);
     if (bf.statPct) for (const [k, v] of Object.entries(bf.statPct)) pct[k as 'agi'] = (pct[k as 'agi'] ?? 0) + v;
   }
+
+  // 석등 (account max HP/SP %) and the dawn bell over the sunken abbey after its story (EXPLORATION.md)
+  const ab = accountBonus(s);
+  if (ab.maxHpPct || ab.maxSpPct) addBonus(b, { maxHpPct: ab.maxHpPct, maxSpPct: ab.maxSpPct });
+  if (s.zone === 'sunkenabbey' && dawnBell(s)) addBonus(b, { hit: 5 });
 
   const jb = jobBonusStats(h.cls, h.jobLv);
   const plus = {} as Record<StatKey, number>;

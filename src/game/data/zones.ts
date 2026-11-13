@@ -99,7 +99,9 @@ export type GateNeed =
   /** someone in the party is wearing this piece of equipment */
   | { kind: 'equip'; id: string }
   /** only open during these local-clock hours (from → to, may wrap past midnight: 22 → 4) */
-  | { kind: 'hours'; from: number; to: number };
+  | { kind: 'hours'; from: number; to: number }
+  /** every piece of this region story has been found (data/explore.ts STORY_ARCS) */
+  | { kind: 'story'; arc: string };
 
 // Region spots on the world map (mean of their maps' pins): 미드가르 [48,57] · 햇살 평원 [50,82] · 속삭이는 숲 [13,53]
 // · 잿빛 광산 [24,27] · 안개 호수 [46,33] · 작열하는 사막 [80,65] · 푸른 항구 [26,77] · 얼어붙은 설원 [62,15]
@@ -309,6 +311,20 @@ export const ZONES: ZoneDef[] = [
     maxMobs: 12, boss: 'quarrygolem', bossGauge: 120, mvpGauge: 0, unlockBy: 'forest', alsoBy: ['magetower1', 'thiefden', 'wreck'], w: 940, h: 800,
     specialty: ['w_mace', 'w_pike', 'h_helm'],
     desc: '바위를 깎아 내던 채석장. 땅속성·무형뿐이라 불속성 무기가 빛난다. 숲·마도탑·도적 소굴·난파선에서 길이 모인다. 채석장 거인이 광산과 사막으로 가는 길을 막고 있다.', map: [34, 35],
+  },
+  {
+    // 숨은 던전 (docs/design/EXPLORATION.md): 햇살 평원 이야기 조각 다섯을 모두 찾으면 드러난다
+    id: 'belltower', name: '종탑 아래 수문실', theme: 'cave', tint: '#2a4e60', lv: [28, 38], bgm: 'dungeon', region: '햇살 평원 지방', kind: 'dungeon', role: ['loot'],
+    mobs: [{ id: 'drownedmonk', w: 40 }, { id: 'eel', w: 20 }, { id: 'coralcrab', w: 16 }, { id: 'candlewisp', w: 14 }, { id: 'drownjelly', w: 10 }],
+    maxMobs: 12, boss: 'drownedabbot', bossGauge: 120, mvpGauge: 0, w: 920, h: 780,
+    gate: {
+      hidden: true,
+      hint: '평원 곳곳에 수도원의 흔적이 흩어져 있다더라. 다 모으면 물에 잠긴 종탑 아래로 내려가는 계단이 보인다고.',
+      need: [{ kind: 'story', arc: 'bell' }],
+      openText: '흩어진 조각이 하나로 이어졌다… 가라앉은 수도원 종탑 아래, 물에 잠긴 계단이 드러났다!',
+    },
+    specialty: ['x_dawnbell'],
+    desc: '가라앉은 수도원 종탑 아래의 수문실. 물이 가슴까지 차오른 어둠 속에서 누군가 아직 수문을 지키고 있다.', map: [43, 88],
   },
   {
     id: 'coralcave', name: '산호 동굴', theme: 'cave', tint: '#ff88a8', lv: [28, 38], bgm: 'dungeon', region: '푸른 항구 지방', kind: 'dungeon', role: ['loot'],

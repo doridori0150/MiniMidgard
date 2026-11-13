@@ -161,6 +161,7 @@ armor('x_necklace', '목걸이', 'acc', 0, 30000, { bonus: { vit: 2 }, icon: { g
 armor('x_earring', '귀걸이', 'acc', 0, 30000, { bonus: { int: 2 }, icon: { glyph: 'earring', color: '#a0b0ff' }, desc: 'INT +2' });
 armor('x_glove', '장갑', 'acc', 0, 30000, { bonus: { dex: 2 }, icon: { glyph: 'glove', color: '#e0b080' }, desc: 'DEX +2' });
 armor('x_rosary', '로자리', 'acc', 0, 30000, { bonus: { luk: 2, mdef: 3 }, icon: { glyph: 'rosary', color: '#f0e0a0' }, desc: 'LUK +2, MDEF +3' });
+armor('x_dawnbell', '새벽종 방울', 'acc', 0, 42000, { bonus: { hit: 6, statusRes: { blind: 30 } }, icon: { glyph: 'rosary', color: '#ffd860' }, desc: 'HIT +6, 실명 저항 +30%\n다시 울린 새벽종의 쇳조각을 엮은 방울. [숨은 보스: 수몰된 수도원장]' });
 // 맵 특산 장신구 — 같은 이름의 [1] 슬롯 변종이 더 드물게 떨어진다
 armor('x_clover', '네잎클로버', 'acc', 0, 16000, { bonus: { luk: 1, crit: 3 }, icon: { glyph: 'brooch', color: '#6ad06a' }, desc: '네잎 언덕에서만 자라는 행운. LUK +1, 크리티컬 +3', rarity: 'rare' });
 armor('x_bell', '은방울', 'acc', 0, 30000, { bonus: { agi: 1, flee: 6 }, icon: { glyph: 'earring', color: '#e0e8ff' }, desc: '달밤에만 울리는 방울. AGI +1, FLEE +6', rarity: 'rare' });
@@ -674,6 +675,7 @@ card('jailer', '감옥 간수', 'head', '간수의', { vit: 1, statusRes: { curs
 card('bloodknight', '핏빛 기사', 'weapon', '핏빛', { crit: 8, critDmgPct: 10, selfCurse: 1 }, '크리티컬 +8, 크리티컬 피해 +10%\n대신 평타 시 1% 확률로 자신에게 저주\n[무기]', 'epic');
 card('drownedmonk', '물에 잠긴 수도사', 'armor', '수도사의', { vit: 1, hpRegenPct: 20 }, 'VIT +1, HP 회복 +20%\n[갑옷]');
 card('bellghost', '종 치는 유령', 'acc', '종소리의', { healPct: 10, statusRes: { blind: 50, curse: 50 } }, '힐 회복량 +10%\n실명·저주 저항 +50%\n[액세서리]', 'epic');
+card('drownedabbot', '수몰된 수도원장', 'armor', '수도원장의', { maxHpPct: 8, eleRes: { water: 15 } }, 'MaxHP +8%\n받는 물속성 피해 −15%\n[갑옷]', 'epic');
 
 /** accessory cards that teach a skill (needs engine support: world.ts enabledSkills should add these while the card is equipped) */
 // ───────── skill catalysts & tools (SKILLS_RO.md): gemstones, traps, holy water, stones, the appraisal lens.

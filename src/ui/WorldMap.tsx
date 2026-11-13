@@ -12,6 +12,62 @@ import { itemIconURL } from '../render/icons.ts';
 import { audio } from '../audio/audio.ts';
 import { zoneKnown, gateLines, gateReady, openGate, canEnter, hoursText, allHeroes } from '../game/state.ts';
 import { computeDerived } from '../game/stats.ts';
+import { POI_BY_ZONE, SHRINE_TEXT, STORY_ARCS, FRAGMENT, type PoiDef } from '../game/data/explore.ts';
+import { arcEnded, arcFound, explorePct, poiDone, poiFound, regionShrines, shrineNeedsBoss } from '../game/explore.ts';
+
+// ── 탐험 (docs/design/EXPLORATION.md): a map's exploration, its found points, and the region's story and shrines
+const POI_ICON: Record<PoiDef['kind'], string> = { lore: '📜', shrine: '🏮', chest: '🎁' };
+function poiStatus(s: import('../game/types.ts').GameState, p: PoiDef): string {
+  if (p.kind === 'lore') return `「${p.lore ? FRAGMENT[p.lore]?.frag.title ?? '' : ''}」`;
+  if (p.kind === 'chest') return '열었다';
+  if (poiDone(s, p.id)) return `켜짐 · ${p.shrine ? SHRINE_TEXT[p.shrine] : ''}`;
+  const boss = shrineNeedsBoss(p);
+  return boss ? `${MONSTERS[boss]?.name ?? '보스'} 처치하면 불이 켜짐` : `사냥 ${Math.min(p.charge ?? 0, s.poi?.charge[p.id] ?? 0)}/${p.charge}마리`;
+}
+function ExploreBlock(props: { z: ZoneDef }) {
+  const g = useGame();
+  const s = g.s;
+  const z = props.z;
+  const pct = explorePct(s, z.id);
+  const pois = POI_BY_ZONE[z.id] ?? [];
+  const found = pois.filter((p) => poiFound(s, p.id));
+  return (
+    <div class="zc-explore">
+      <div class="zc-gauges">
+        <div><span>탐험도</span><div class="mini-bar"><i style={{ width: pct + '%', background: 'linear-gradient(#c8f0d0,#3aa860)' }} /></div><small>{pct}%{pois.length ? ` · 발견 ${found.length}/${pois.length}` : ''}</small></div>
+      </div>
+      {found.length > 0 && (
+        <ul class="zc-pois">
+          {found.map((p) => (
+            <li>
+              <i>{POI_ICON[p.kind]}</i><b>{p.name}</b><span>{poiStatus(s, p)}</span>
+              {p.kind === 'lore' && p.lore && <button class="btn xs" onClick={() => g.pushModal({ kind: 'story', arc: FRAGMENT[p.lore!]?.arc.id })}>읽기</button>}
+            </li>
+          ))}
+        </ul>
+      )}
+      {pois.length > found.length && <div class="small muted">이 맵에 아직 찾지 못한 것이 {pois.length - found.length}개 있다.</div>}
+    </div>
+  );
+}
+function RegionStory(props: { region: string }) {
+  const g = useGame();
+  const s = g.s;
+  const arc = STORY_ARCS.find((a) => a.region === props.region);
+  const sh = regionShrines(props.region);
+  if (!arc && !sh.length) return null;
+  const lit = sh.filter((p) => poiDone(s, p.id)).length;
+  return (
+    <div class="zc-story">
+      {arc && (
+        <button class="btn sm" onClick={() => g.pushModal({ kind: 'story', arc: arc.id })}>
+          📜 이야기 「{arc.title}」 {arcFound(s, arc)}/{arc.fragments.length}{arcEnded(s, arc.id) ? ' · 완결' : ''}
+        </button>
+      )}
+      {sh.length > 0 && <span class="small">🏮 석등 {lit}/{sh.length}{lit === sh.length ? ` · 지방 보너스 경험치 +${arc?.setExp ?? 2}%` : ''}</span>}
+    </div>
+  );
+}
 
 type Fit = { label: string; cls: string };
 export function zoneFit(z: ZoneDef, avgLv: number): Fit {
@@ -136,6 +192,7 @@ export function MapPanel() {
               </div>
             </div>
             <div class="zc-body">
+              <RegionStory region={r.name} />
               <div class="mrows">
                 {known.map((zz) => {
                   const lk = !unlocked.has(zz.id);
@@ -220,6 +277,7 @@ export function MapPanel() {
                     {z.mvp && z.mvpGauge > 0 && <div><span>MVP 게이지</span><div class="mini-bar"><i style={{ width: p.mvpGauge / z.mvpGauge * 100 + '%', background: 'linear-gradient(#fff0a0,#ffb020)' }} /></div><small>{p.mvpGauge}/{z.mvpGauge} · 처치 {p.mvpKills}</small></div>}
                   </div>
                 )}
+                {!locked && z.id !== 'town' && <ExploreBlock z={z} />}
                 {mobs.length > 0 && !sealed && (
                   <>
                     <div class="zc-sec">출현 몬스터 <small>누르면 상세 정보</small></div>

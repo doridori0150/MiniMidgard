@@ -1359,6 +1359,16 @@ mob({
   desc: '가라앉은 종탑에서 밤마다 종을 치는 유령. 종소리를 들으면 눈앞이 캄캄해진다. 무속성 공격은 거의 통하지 않는다. [위험]',
 });
 
+// ── 숨은 던전: 종탑 아래 수문실 (햇살 평원 이야기 「가라앉은 수도원의 종」, docs/design/EXPLORATION.md)
+mob({
+  id: 'drownedabbot', name: '수몰된 수도원장', lv: 38, hp: 19000, atk: [160, 210], def: 22, mdef: 45, agi: 30, dex: 75, luk: 30,
+  element: 'water', race: 'undead', size: 'large', range: 32, delay: 1300, speed: 55, aggressive: true, boss: 'field', scale: 1.6, expMul: 20,
+  sprite: 'zombie', palette: ['#d8e0d0', '#3a5868', '#e0c060'],
+  skills: [{ kind: 'slam', cd: 8000, mult: 1.8, radius: 95 }, { kind: 'summon', cd: 15000, summon: 'drownedmonk', count: 2, below: 0.75 }],
+  drops: [{ id: 'e_wetprayer', rate: 1 }, { id: 'e_bellclapper', rate: 0.3 }, { id: 'x_dawnbell', rate: 0.06, slots: 1 }, { id: 'u_white', rate: 1 }, { id: 'r_elu', rate: 0.3 }, { id: 'c_drownedabbot', rate: CARD.sboss }],
+  desc: '수도원을 스스로 물에 잠근 수도원장. 종탑 아래 수문실에서 물 아래 잠든 것을 지키고 있다. [숨은 보스]',
+});
+
 export function monster(id: string): MonsterDef {
   const m = MONSTERS[id];
   if (!m) throw new Error('unknown monster ' + id);

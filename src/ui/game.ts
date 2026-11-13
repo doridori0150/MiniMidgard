@@ -52,7 +52,8 @@ export type Modal =
   | { kind: 'sell'; id?: string; uid?: number }
   | { kind: 'build'; heroId: number }
   | { kind: 'targets' }
-  | { kind: 'roster' };
+  | { kind: 'roster' }
+  | { kind: 'story'; arc?: string };
 
 class Game {
   s!: GameState;

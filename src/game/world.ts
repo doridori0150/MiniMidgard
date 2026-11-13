@@ -16,6 +16,9 @@ import {
   type EliteAffix, type GuardianMech, type LootSource, type RiftMods, type RiftRole,
 } from './rift.ts';
 import type { RiftPlan } from './types.ts';
+import { accountBonus, arcComplete, cellAt, cellCenter, chargeShrines, dawnBell, endArcByBoss, isExplored, lightIfBossDown, regionShrinesLit, shrineNeedsBoss, stepOn } from './explore.ts';
+import { expeditionTick as benchExplore, openChest } from './explore-actions.ts';
+import { EXPLORE_CELLS, FRAGMENT, SHRINE_TEXT, type PoiDef, type StoryArc } from './data/explore.ts';
 
 export type DmgKind = 'normal' | 'crit' | 'taken' | 'heal' | 'sp' | 'miss' | 'lucky' | 'total' | 'zero' | 'absorb';
 
@@ -457,6 +460,8 @@ export class World {
     this.gateTick();
     this.spawnTick();
     this.expeditionTick();
+    this.exploreStep();
+    this.benchExploreStep(dt);
     this.autoItems();
     this.partyScan();
     if (this.run) this.dangerStats.evadeMs += dt;
@@ -640,7 +645,8 @@ export class World {
     // a danger monster appears now and then, one at a time (a woken trap chest counts)
     if (z.danger?.length && this.time >= this.dangerAt && !this.mobs.some((m) => m.danger && m.state !== 'dead')) {
       const now = this.clock();
-      const awake = z.danger.filter((d) => !d.hours || inHours(d.hours, now));
+      // 가라앉은 수도원의 종: after the story ends the night ghost no longer comes
+      const awake = z.danger.filter((d) => (!d.hours || inHours(d.hours, now)) && !(d.id === 'bellghost' && dawnBell(this.s)));
       if (awake.length) this.spawnDanger(awake[Math.floor(this.rng() * awake.length)]);
       else this.dangerAt = this.time + 30000;
     }
@@ -1592,6 +1598,11 @@ export class World {
       const chest = this.chestFor(h);
       if (chest) { this.goChest(h, chest, dt); return; }
       const best = this.pullCandidate(h, Infinity);
+      // 탐험 (EXPLORATION.md): between fights, walk to the nearest cell of the map nobody has stood in yet
+      if (this.s.orders?.explore && !this.rift && (!best || dist(best, h) > 150)) {
+        const goal = this.exploreGoal(h);
+        if (goal) { h.doing = '탐험 중'; this.moveTo(h, goal[0], goal[1], h.d.moveSpd * 0.85, dt, 30); return; }
+      }
       // 순간이동: nothing worth hunting nearby — the party blinks next to a monster elsewhere on the map
       if ((!best || dist(best, h) > 380) && this.tryTeleport(best)) return;
       h.doing = best ? '사냥감 찾는 중' : '대기';
@@ -4238,6 +4249,12 @@ export class World {
       // field bosses also ping the MVP gauge
       if (m.boss === 'field' && z.mvp) prog.mvpGauge = Math.min(z.mvpGauge, prog.mvpGauge + Math.floor(z.mvpGauge * 0.1));
     }
+    // 석등 charge on this map, and a hidden story boss ends its story (EXPLORATION.md)
+    if (!this.rift && !t.summoned) {
+      for (const p of chargeShrines(s, z.id, m.boss === 'field' && z.boss === m.id)) this.shrineLit(p);
+      const arc = endArcByBoss(s, m.id);
+      if (arc) this.storyEnded(arc);
+    }
     if (t.danger) {
       this.dangerStats.kills++;
       this.emit({ t: 'announce', text: `⚠ ${m.name} 처치!`, kind: 'danger' });
@@ -4246,6 +4263,75 @@ export class World {
       this.dangerGone(t);
     }
     this.onPersist();
+  }
+
+  // ───────────────────────────── 탐험 (docs/design/EXPLORATION.md)
+  private exploreAt = 0;
+  private benchAcc = 0;
+  /** the cells the party stands in count as explored; a few times a second is plenty */
+  private exploreStep() {
+    if (this.rift || this.zone.id === 'town' || this.time < this.exploreAt) return;
+    this.exploreAt = this.time + 400;
+    for (const h of this.heroes) {
+      if (h.state === 'dead') continue;
+      for (const p of stepOn(this.s, this.zone, cellAt(this.zone, h.x, h.y))) this.poiFound(p, false);
+    }
+  }
+  /** the bench expedition keeps walking its map while the party hunts elsewhere */
+  private benchExploreStep(dt: number) {
+    if (!this.s.expedition) return;
+    this.benchAcc += dt;
+    if (this.benchAcc < 1000) return;
+    const ms = this.benchAcc;
+    this.benchAcc = 0;
+    for (const p of benchExplore(this.s, ms, this.rng)) this.poiFound(p, true);
+  }
+  /** the nearest cell centre of this map nobody has stood in yet */
+  private exploreGoal(h: HeroUnit): [number, number] | null {
+    let best: [number, number] | null = null, bd = Infinity;
+    for (let c = 0; c < EXPLORE_CELLS; c++) {
+      if (isExplored(this.s, this.zone.id, c)) continue;
+      const [x, y] = cellCenter(this.zone, c);
+      const d = Math.hypot(x - h.x, y - h.y);
+      if (d < bd) { bd = d; best = [x, y]; }
+    }
+    return best;
+  }
+  private poiFound(p: PoiDef, bench: boolean) {
+    const zn = zoneDef(p.zone)?.name ?? p.zone;
+    const who = bench ? '탐험대가 ' : '';
+    if (p.kind === 'lore' && p.lore) {
+      const f = FRAGMENT[p.lore];
+      this.emit({ t: 'announce', text: `📜 이야기 흔적 — ${p.name}`, kind: 'unlock' });
+      this.log(`${who}${zn}에서 「${f?.frag.title ?? p.name}」을(를) 찾았다. (지도 → 이야기)`, '#e8d8a0');
+      if (f && arcComplete(this.s, f.arc.id)) this.log(`「${f.arc.title}」의 조각을 모두 모았다. 어딘가에 길이 열린 것 같다…`, '#ffd890');
+    } else if (p.kind === 'shrine') {
+      this.emit({ t: 'announce', text: `🏮 석등 발견 — ${p.name}`, kind: 'unlock' });
+      const boss = shrineNeedsBoss(p);
+      this.log(`${who}${zn}에서 ${p.name}을(를) 찾았다. ${boss ? `${MONSTERS[boss]?.name ?? '이 맵의 보스'}을(를) 쓰러뜨리면` : `이 맵에서 ${p.charge}마리를 사냥하면`} 불이 켜진다 (${p.shrine ? SHRINE_TEXT[p.shrine] : ''}).`, '#c8e0ff');
+      if (lightIfBossDown(this.s, p)) this.shrineLit(p);
+    } else if (p.kind === 'chest') {
+      const got = openChest(this.s, p);
+      if (got) {
+        const items = Object.entries(got.items).map(([id, n]) => `${ITEMS[id]?.name ?? id} ×${n}`).join(', ');
+        this.emit({ t: 'announce', text: `🎁 ${p.name}`, kind: 'unlock' });
+        this.log(`${who}${zn}에서 ${p.name}을(를) 열었다: ${items}${got.zeny ? `, ${got.zeny}z` : ''}`, '#ffe0a0');
+      }
+    }
+    this.onPersist();
+  }
+  private shrineLit(p: PoiDef) {
+    this.emit({ t: 'announce', text: `🏮 ${p.name}에 불이 켜졌다`, kind: 'unlock' });
+    this.log(`${p.name}에 불이 켜졌다! 계정 전체 ${p.shrine ? SHRINE_TEXT[p.shrine] : ''}`, '#a0e8ff');
+    const region = zoneDef(p.zone)?.region;
+    if (region && regionShrinesLit(this.s, region)) this.log(`${region}의 석등을 모두 밝혔다! 지방 보너스: 경험치 추가`, '#a0e8ff');
+    this.syncParty();
+  }
+  private storyEnded(arc: StoryArc) {
+    this.emit({ t: 'announce', text: `📜 이야기 완결 — ${arc.title}`, kind: 'mvp' });
+    this.log(`「${arc.title}」 이야기가 끝났다. (지도 → 이야기)`, '#ffd890');
+    if (arc.id === 'bell') this.log('새벽종이 다시 울린다. 가라앉은 수도원의 밤 유령은 이제 나타나지 않고, 그곳에서 사냥하는 동안 명중이 오른다.', '#ffd890');
+    this.syncParty();
   }
 
   private unlockSlot(n: number) {
@@ -4260,7 +4346,8 @@ export class World {
     // the party's best drop-rate gear (탐욕 상자 카드) adds to the pushcart perk
     let gear = 0;
     for (const h of this.heroes) gear = Math.max(gear, h.d.b.dropPct ?? 0);
-    const etcMul = 1 + (perks.dropPct + gear) / 100;
+    // 석등: the account's drop bonus (EXPLORATION.md §5)
+    const etcMul = 1 + (perks.dropPct + gear + accountBonus(this.s).dropPct) / 100;
     let n = 0;
     for (const d of t.m.drops) {
       const def = ITEMS[d.id];
@@ -4345,7 +4432,8 @@ export class World {
 
   private gainExp(base: number, job: number) {
     const n = this.heroes.length;
-    const bonus = 1 + 0.15 * (n - 1);
+    // party share bonus × 석등 account EXP bonus (EXPLORATION.md §5)
+    const bonus = (1 + 0.15 * (n - 1)) * (1 + accountBonus(this.s).expPct / 100);
     const maxLv = Math.max(...this.heroes.map((h) => h.hero.baseLv));
     for (const h of this.heroes) {
       const catchup = h.hero.baseLv < maxLv - 5 ? 2.5 : 1;

@@ -4,6 +4,8 @@ import { MONSTERS } from './data/monsters.ts';
 import { ITEMS } from './data/items.ts';
 import { addItem, applyExp, sellStack, isKeepItem, inHours } from './state.ts';
 import { partyPerks } from './stats.ts';
+import { accountBonus, lightIfBossDown } from './explore.ts';
+import { expeditionTick, openChest } from './explore-actions.ts';
 
 export const OFFLINE_CAP_MS = 12 * 3600 * 1000;
 export const OFFLINE_EFF = 0.6;
@@ -18,6 +20,8 @@ export interface OfflineReport {
   cards: string[];
   zeny: number;
   levels: { name: string; base: number; job: number }[];
+  /** 벤치 탐험대: what it found while away (EXPLORATION.md §6) */
+  found?: string[];
   /** a night-only map closed while away: the party walked back here */
   faded?: { from: string; to: string };
 }
@@ -44,6 +48,17 @@ function msUntilClose(h: { from: number; to: number }, start: Date): number {
 }
 
 export function applyOffline(s: GameState, elapsed: number, rng: () => number = Math.random): OfflineReport | null {
+  const r = huntWhileAway(s, elapsed, rng);
+  // the bench expedition walks on too: found chests open, shrines whose boss already fell light up
+  if (!s.expedition || elapsed < 60_000) return r;
+  const found = expeditionTick(s, Math.min(OFFLINE_CAP_MS, elapsed), rng);
+  for (const p of found) { if (p.kind === 'chest') openChest(s, p); else lightIfBossDown(s, p); }
+  if (!found.length) return r;
+  const names = found.map((p) => `${zone(p.zone).name} · ${p.name}`);
+  return r ? { ...r, found: names } : { ms: Math.min(OFFLINE_CAP_MS, elapsed), zone: s.zone, kills: 0, exp: 0, items: {}, equips: [], cards: [], zeny: 0, levels: [], found: names };
+}
+
+function huntWhileAway(s: GameState, elapsed: number, rng: () => number): OfflineReport | null {
   const ms = Math.min(OFFLINE_CAP_MS, elapsed);
   if (ms < 60_000) return null;
   // a night-only path stays open only until dawn: hunt there until it closes, then back on the previous map
@@ -88,7 +103,7 @@ function huntOffline(s: GameState, ms: number, rng: () => number): OfflineReport
   if (kills <= 0) return null;
   const report: OfflineReport = { ms, zone: z.id, kills, exp: 0, items: {}, equips: [], cards: [], zeny: 0, levels: [] };
   const total = z.mobs.reduce((a, b) => a + b.w, 0);
-  const etcMul = 1 + partyPerks(s).dropPct / 100;
+  const etcMul = 1 + (partyPerks(s).dropPct + accountBonus(s).dropPct) / 100;
   let baseExp = 0, jobExp = 0;
   const prog = s.progress[z.id];
   for (const e of z.mobs) {
@@ -125,7 +140,7 @@ function huntOffline(s: GameState, ms: number, rng: () => number): OfflineReport
   if (z.mvp) prog.mvpGauge = Math.min(z.mvpGauge, prog.mvpGauge + kills);
   report.exp = Math.round(baseExp);
   const n = s.heroes.length;
-  const bonus = 1 + 0.15 * (n - 1);
+  const bonus = (1 + 0.15 * (n - 1)) * (1 + accountBonus(s).expPct / 100);
   const maxLv = Math.max(...s.heroes.map((h) => h.baseLv));
   for (const h of s.heroes) {
     const catchup = h.baseLv < maxLv - 5 ? 2.5 : 1;

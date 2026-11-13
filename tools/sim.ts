@@ -303,6 +303,8 @@ function needOk(n: GateNeed): boolean {
     // a player who owns the piece puts it on for the gate (the gear policy would not, it only scores power)
     case 'equip': return s.equips.some((e) => e.id === n.id);
     case 'hours': return inWindow(n);
+    // the sim doesn't walk the maps for story pieces (EXPLORATION.md): hidden story dungeons stay shut
+    case 'story': return false;
   }
 }
 function gateCheck() {

@@ -119,13 +119,13 @@ export function PartyOps() {
   const g = useGame();
   const s = g.s;
   const setOrders = (o: Partial<PartyOrders>) => { s.orders = { ...s.orders, ...o }; g.commit('click'); };
-  const active = PRESETS.find((p) => same({ ...p.orders, danger: s.orders.danger }, s.orders) && s.heroes.every((h) => same(p.tac(h), h.tactics)));
+  const active = PRESETS.find((p) => same({ ...p.orders, danger: s.orders.danger, explore: s.orders.explore }, s.orders) && s.heroes.every((h) => same(p.tac(h), h.tactics)));
   return (
     <>
       <div class="presets">
         {PRESETS.map((p) => (
           <button class={'preset' + (active?.id === p.id ? ' on' : '')} aria-pressed={active?.id === p.id} onClick={() => {
-            s.orders = { ...p.orders, danger: s.orders.danger };
+            s.orders = { ...p.orders, danger: s.orders.danger, explore: s.orders.explore };
             for (const h of s.heroes) h.tactics = p.tac(h);
             g.commit('click');
             g.toast(`작전: ${p.name}`, 'info');
@@ -147,6 +147,10 @@ export function PartyOps() {
         <div class="ord-row">
           <span class="ord-l">위험 몹<small>{(s.orders.danger ?? 'avoid') === 'avoid' ? '원정 맵: 치지 않고 다가오면 물러남' : '원정 맵: 찾아가서 싸움'}</small></span>
           <Seg opts={DANGER} value={s.orders.danger ?? 'avoid'} onPick={(v) => setOrders({ danger: v })} />
+        </div>
+        <div class="ord-row">
+          <span class="ord-l">탐험<small>{s.orders.explore ? '싸움 사이에 안 가 본 곳으로 걸어감(이야기 흔적 · 석등 · 보물)' : '사냥만 함 — 지나간 곳만 탐험도에 들어감'}</small></span>
+          <Seg opts={[['off', '끔'], ['on', '켬']]} value={s.orders.explore ? 'on' : 'off'} onPick={(v) => setOrders({ explore: v === 'on' || undefined })} />
         </div>
       </div>
     </>

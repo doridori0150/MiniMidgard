@@ -20,6 +20,8 @@ import { rgba } from './color.ts';
 import { TimelinePlayer } from './timeline.ts';
 import { ASSEMBLY, drawFx, expandAssembly, rampOf, type FxLayer } from './fxlib.ts';
 import { drawGround, drawIceBlock, drawTalkie, drawCart } from './grounds.ts';
+import { POI_BY_ZONE, EXPLORE_COLS, EXPLORE_ROWS, EXPLORE_CELLS } from '../game/data/explore.ts';
+import { cellCenter, isExplored, poiDone, poiFound } from '../game/explore.ts';
 
 interface Particle {
   x: number; y: number; z: number; vx: number; vy: number; vz: number;
@@ -1064,6 +1066,14 @@ export class FieldRenderer {
     ctx.imageSmoothingEnabled = true;
     ctx.drawImage(art.ground, x0 * art.scale, y0 * art.scale, (x1 - x0) * art.scale, (y1 - y0) * art.scale, x0, y0, x1 - x0, y1 - y0);
 
+    // 탐험 (EXPLORATION.md): with the explore order on, cells nobody has stood in yet are veiled
+    if (w.s.orders?.explore && !w.rift && w.zone.id !== 'town') {
+      const cw = w.zone.w / EXPLORE_COLS, ch = w.zone.h / EXPLORE_ROWS;
+      ctx.save(); ctx.fillStyle = 'rgba(16,24,36,0.16)';
+      for (let c = 0; c < EXPLORE_CELLS; c++) if (!isExplored(w.s, w.zone.id, c)) ctx.fillRect((c % EXPLORE_COLS) * cw, Math.floor(c / EXPLORE_COLS) * ch, cw, ch);
+      ctx.restore();
+    }
+
     // ground effects + placed skills (fire wall, sanctuary, traps…) + cast circles + focus marker
     this.runEffects(ctx, 'ground');
     for (const g of w.grounds) drawGround(ctx, g, w.renderTime);
@@ -1105,6 +1115,20 @@ export class FieldRenderer {
     }
     for (const g of w.ground) drawables.push({ y: g.y - 1, draw: () => this.drawGroundItem(ctx, g, nowMs) });
     for (const c of w.chests) drawables.push({ y: c.y, draw: () => this.drawChest(ctx, c, nowMs) });
+    // found points of interest: story traces, shrines (glowing once lit), opened chests
+    if (!w.rift) for (const p of POI_BY_ZONE[w.zone.id] ?? []) {
+      if (!poiFound(w.s, p.id)) continue;
+      const [px, py] = cellCenter(w.zone, p.cell);
+      const lit = p.kind === 'shrine' && poiDone(w.s, p.id);
+      drawables.push({ y: py, draw: () => {
+        ctx.save();
+        if (lit || p.kind === 'lore') { ctx.globalAlpha = 0.35 + 0.15 * Math.sin(nowMs / 400); ctx.fillStyle = lit ? '#a0e8ff' : '#ffe8a0'; ctx.beginPath(); ctx.ellipse(px, py, 16, 6, 0, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1; }
+        ctx.font = '18px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+        if (p.kind === 'chest') ctx.globalAlpha = 0.55;
+        ctx.fillText(p.kind === 'lore' ? '📜' : p.kind === 'shrine' ? '🏮' : '📦', px, py);
+        ctx.restore();
+      } });
+    }
     for (const g of w.grounds) {
       const rt = w.renderTime;
       if (g.sk.id === 'ice_wall') {

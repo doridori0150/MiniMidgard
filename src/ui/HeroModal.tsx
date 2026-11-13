@@ -6,6 +6,33 @@ import { CLASSES } from '../game/data/classes.ts';
 import { expNext, jobExpNext } from '../game/exp.ts';
 import { HeroTactics, PartyOps, moveHero, roleLabel } from './panels/Party.tsx';
 import type { PanelId } from './game.ts';
+import type { Hero } from '../game/types.ts';
+import { PRESET_NAMES, loadPreset, presetsOf, savePreset } from '../game/explore-actions.ts';
+
+/** 빌드 프리셋 (EXPLORATION.md §7): skill slots, tactics, gear and ammo — stats and skill points stay as they are */
+function Presets(props: { h: Hero }) {
+  const g = useGame();
+  const h = props.h;
+  const list = presetsOf(h);
+  return (
+    <div class="presets-b">
+      {PRESET_NAMES.map((name, i) => (
+        <div class="row pb-row">
+          <b>{list[i]?.name ?? name}</b>
+          <span class="small muted">{list[i] ? `스킬 ${list[i]!.skillSlots.filter(Boolean).length}칸 · 장비 ${Object.keys(list[i]!.equip).length}개` : '비어 있음'}</span>
+          <span class="sp1" />
+          <button class="btn sm" onClick={() => { savePreset(h, i, list[i]?.name ?? name); g.toast(`${name} 프리셋에 저장`, 'good'); g.commit('click'); }}>저장</button>
+          <button class="btn sm pri" disabled={!list[i]} onClick={() => {
+            const notes = loadPreset(g.s, h, i);
+            g.toast(notes.length ? `${name} 불러옴 — ${notes.join(' / ')}` : `${name} 프리셋을 불러왔습니다`, notes.length ? 'bad' : 'good');
+            g.commit('confirm');
+          }}>불러오기</button>
+        </div>
+      ))}
+      <div class="small muted">스킬 칸 · 전술 · 장비 · 화살을 저장합니다. 스탯과 스킬 포인트는 그대로입니다.</div>
+    </div>
+  );
+}
 
 export function HeroModal(props: { id: number }) {
   const g = useGame();
@@ -48,6 +75,8 @@ export function HeroModal(props: { id: number }) {
         </div>
         <div class="sec">전투 설정</div>
         <HeroTactics h={h} />
+        <div class="sec">빌드 프리셋</div>
+        <Presets h={h} />
         {s.heroes.length > 1 && (
           <>
             <div class="sec">파티 순서</div>

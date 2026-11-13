@@ -9,6 +9,8 @@ import { buildOf } from './data/builds.ts'; // also registers the build identity
 import { awakenCost, nextStarId } from './data/cardstars.ts'; // also registers the ★2/★3 card forms
 import { START_STAT_POINTS, statCost } from './exp.ts';
 import { ARMOR_SAFE, WEAPON_SAFE, partyPerks, offhandOk } from './stats.ts';
+import { accountBonus, arcComplete, arcFound } from './explore.ts';
+import { ARC } from './data/explore.ts';
 
 export const SAVE_KEY = 'minimidgard.save.v1';
 
@@ -454,7 +456,7 @@ export function learnPath(h: Hero, id: string, lv = SKILLS[id]?.maxLv ?? 1): boo
 }
 
 // ───────── 스킬 슬롯: the auto AI uses only the active skills in these 6 slots (left first = attack priority)
-function slotsOf(h: Hero): (string | null)[] {
+export function slotsOf(h: Hero): (string | null)[] {
   if (!Array.isArray(h.skillSlots)) h.skillSlots = [];
   while (h.skillSlots.length < SLOT_COUNT) h.skillSlots.push(null);
   if (h.skillSlots.length > SLOT_COUNT) h.skillSlots.length = SLOT_COUNT;
@@ -661,7 +663,8 @@ export function sellPrice(s: GameState, id: string, refine = 0): number {
   const d = ITEMS[id];
   const base = d.kind === 'card' ? ({ rare: 800, epic: 3000, mvp: 10000 } as Record<string, number>)[d.rarity ?? 'rare'] ?? 800 : Math.floor(d.price / 2);
   const pk = partyPerks(s);
-  return Math.floor(base * (1 + pk.overcharge / 100) * (d.kind === 'equip' ? 1 + pk.vending / 100 : 1)) + refine * 50;
+  // 석등: the account's zeny bonus (EXPLORATION.md §5)
+  return Math.floor(base * (1 + pk.overcharge / 100 + accountBonus(s).zenyPct / 100) * (d.kind === 'equip' ? 1 + pk.vending / 100 : 1)) + refine * 50;
 }
 
 export function buy(s: GameState, id: string, qty = 1): string | null {
@@ -871,6 +874,7 @@ export function needMet(s: GameState, n: GateNeed, now = new Date()): boolean {
     case 'job': return s.heroes.some((h) => CLASSES[h.cls].tier >= n.tier);
     case 'equip': return s.heroes.some((h) => Object.values(h.equip).some((uid) => s.equips.find((e) => e.uid === uid)?.id === n.id));
     case 'hours': return inHours(n, now);
+    case 'story': return arcComplete(s, n.arc);
   }
 }
 
@@ -932,6 +936,7 @@ export function gateLines(s: GameState, z: ZoneDef, now = new Date()): { text: s
       case 'job': return { ok, text: n.tier === 2 ? '2차 전직한 동료' : '전직한 동료' };
       case 'equip': return { ok, text: `${ITEMS[n.id].name}을(를) 몸에 지닌 동료` };
       case 'hours': return { ok, text: `${hoursText(n)}에만 열림` };
+      case 'story': { const arc = ARC[n.arc]; return { ok, text: `이야기 「${arc?.title ?? '???'}」 조각 ${arc ? arcFound(s, arc) : 0}/${arc?.fragments.length ?? 0}` }; }
     }
   });
 }

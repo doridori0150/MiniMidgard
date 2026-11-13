@@ -23,6 +23,7 @@ import { BuyModal, SellModal } from './Shop.tsx';
 import { BuildModal, PinButton } from './BuildModal.tsx';
 import { TargetsModal } from './Targets.tsx';
 import { RosterModal } from './Roster.tsx';
+import { StoryModal } from './Story.tsx';
 import { GRADE_KO, gradeBase, gradeOf, rerollCost, rerollEssence, rerollOption, rerollZenyOk } from '../game/gear.ts';
 import { ESSENCE, awakenCardEssence, awakenEssence, essence } from '../game/rift.ts';
 import { awakenCost, nextStarId } from '../game/data/cardstars.ts';
@@ -197,6 +198,7 @@ function OfflineModal(props: { report: import('../game/offline.ts').OfflineRepor
         {r.levels.map((l) => <div class="small" style={{ color: '#2a6ae0', marginTop: '4px' }}>{l.name}: {l.base ? `레벨 +${l.base} ` : ''}{l.job ? `직업 레벨 +${l.job}` : ''}</div>)}
         {r.cards.length > 0 && <div class="hint" style={{ marginTop: '8px' }}>🎴 카드 획득! {r.cards.map((c) => ITEMS[c].name).join(', ')}</div>}
         {r.equips.length > 0 && <div class="small" style={{ marginTop: '6px', color: '#3a7ac0' }}>장비: {r.equips.map((e) => ITEMS[e].name).join(', ')}</div>}
+        {r.found && r.found.length > 0 && <div class="hint" style={{ marginTop: '8px' }}>🧭 탐험대가 찾은 것: {r.found.join(', ')}</div>}
         <div class="offline-items">{items.map(([id, n]) => <ItemSlot id={id} qty={n} />)}</div>
         <div class="small muted" style={{ marginTop: '8px' }}>오프라인 보상은 최근 사냥 속도의 60%로 계산됩니다 (최대 12시간).</div>
       </div>
@@ -384,6 +386,7 @@ function ModalBody(props: { m: Modal }) {
     case 'build': return <BuildModal heroId={m.heroId} />;
     case 'targets': return <TargetsModal />;
     case 'roster': return <RosterModal />;
+    case 'story': return <StoryModal arc={m.arc} />;
     case 'confirm': return <ConfirmModal text={m.text} ok={m.ok} danger={m.danger} closeAll={m.closeAll} />;
     case 'card': return null;
     case 'credits': return (
