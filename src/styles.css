@@ -1240,3 +1240,6 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .exp-zone { font: inherit; font-size: 12px; padding: 4px; border-radius: 6px; }
 .presets-b { display: grid; gap: 4px; }
 .pb-row { gap: 6px; align-items: center; }
+/* 이야기: 사물에 남은 글귀(「」)는 새긴 글처럼, 묘사 줄은 담담하게 */
+.story-frag p { color: #4a4a52; }
+.story-frag p.ins { color: #3a2a18; padding-left: 8px; border-left: 2px solid #d8c090; font-family: 'Galmuri11', serif; }

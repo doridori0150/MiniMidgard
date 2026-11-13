@@ -26,7 +26,7 @@ export function StoryModal(props: { arc?: string }) {
                 return ok ? (
                   <div class="story-frag">
                     <div class="sf-head"><b>{i + 1}. {f.title}</b><small>{where}</small></div>
-                    {f.text.map((p) => <p>{p}</p>)}
+                    {f.text.map((p) => <p class={p.startsWith('「') ? 'ins' : ''}>{p}</p>)}
                   </div>
                 ) : (
                   <div class="story-frag unk"><div class="sf-head"><b>{i + 1}. ???</b><small>{where} 어딘가</small></div></div>
@@ -36,7 +36,7 @@ export function StoryModal(props: { arc?: string }) {
               {ended && (
                 <div class="story-frag end">
                   <div class="sf-head"><b>맺음 · {arc.ending.title}</b></div>
-                  {arc.ending.text.map((p) => <p>{p}</p>)}
+                  {arc.ending.text.map((p) => <p class={p.startsWith('「') ? 'ins' : ''}>{p}</p>)}
                 </div>
               )}
             </div>
