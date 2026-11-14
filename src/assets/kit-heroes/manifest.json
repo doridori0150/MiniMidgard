@@ -657,11 +657,11 @@
      "loop": true,
      "size": [
       95,
-      134
+      133
      ],
      "pivot": [
       48,
-      133
+      132
      ],
      "duration": 600,
      "from": "characters/wizard_f-pixel-cast/manifest.json"
