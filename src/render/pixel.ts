@@ -137,9 +137,11 @@ export function pixelFrame(L: HeroLookDraw, pose: Pose): { id: string; anim: str
     // 'uniform' (the game today): the whole swing scaled so its hit frame starts at the contact; 'contact' (candidate, not in the
     // game yet): only the wind-up is fitted into the contact, the follow-through plays at its drawn pace (like skill motions)
     // 'event' (candidate): the drawn timing played at attackRate (attack speed); the hit lands on the contact frame, hit / rate ms in
-    t = attackTiming === 'event' ? pose.t * attackRate : attackTiming === 'contact' && pose.t >= contact ? hit + (pose.t - contact) : (pose.t / contact) * hit;
+    // the field passes pose.rate (the attack rule, 2026-11-14): the drawn timing at that rate, the hit on the contact frame
+    const rate = pose.rate ?? (attackTiming === 'event' ? attackRate : null);
+    t = rate != null ? pose.t * rate : attackTiming === 'contact' && pose.t >= contact ? hit + (pose.t - contact) : (pose.t / contact) * hit;
   }
-  if (state === 'dead') t = pose.t; // play the fall, then hold the last frame
+  if (state === 'dead' || state === 'hurt') t = pose.t; // play the fall / the flinch, then hold the last frame
   const sm = pose.skill ? c.skillMotions?.[pose.skill] : undefined;
   if (sm && table[sm]) {
     // a skill's own motion, played once from its release; the sim lands the hit SKILL_CONTACT ms in, so the art's wind-up
@@ -187,6 +189,20 @@ export function attackShowMs(L: HeroLookDraw, dur = 280): number {
   const hi = a.hitFrame ?? (a.frames.length >= 8 ? 4 : -1), hit = hi >= 0 ? a.durations.slice(0, hi).reduce((x, y) => x + y, 0) : a.duration / 2;
   const contact = dur * attackContact(L.wtype);
   return attackTiming === 'event' ? a.duration / attackRate : attackTiming === 'contact' ? contact + (a.duration - hit) : (contact / hit) * a.duration;
+}
+
+/** the drawn plain swing for the field's attack rule: ms to the contact frame at ×1 and the whole length (null without a hitFrame) */
+export function pixelSwing(L: HeroLookDraw): { contact: number; duration: number } | null {
+  if (!pixelSupports(L)) return null;
+  const c = M!.characters[character(L)!], a = (c.animations ?? M!.animations).attack as Manifest['animations'][string] & { hitFrame?: number };
+  if (!a || a.hitFrame == null) return null;
+  return { contact: a.durations.slice(0, a.hitFrame).reduce((x, y) => x + y, 0), duration: a.duration };
+}
+/** how long the drawn flinch lasts (ms), null without one */
+export function pixelHurtMs(L: HeroLookDraw): number | null {
+  if (!pixelSupports(L)) return null;
+  const c = M!.characters[character(L)!];
+  return (c.animations ?? M!.animations).hurt?.duration ?? null;
 }
 
 /** fraction of the game's swing at which world.ts lands the hit: a sword at half, a bow release at 0.6, a spear thrust at 0.47 */

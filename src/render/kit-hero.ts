@@ -41,6 +41,14 @@ function character(L: HeroLookDraw): Char | undefined {
   return c && c.animations.idle?.frames.every((f) => imgs.has(key(f))) ? c : undefined;
 }
 export const kitSupports = (L: HeroLookDraw) => !!character(L);
+/** the drawn plain swing for the field's attack rule: ms to the contact frame (`hitFrame`) at ×1 and the whole length */
+export function kitSwing(L: HeroLookDraw): { contact: number; duration: number } | null {
+  const a = character(L)?.animations.attack;
+  if (!a || a.hitFrame == null) return null;
+  return { contact: a.durations.slice(0, a.hitFrame).reduce((x, y) => x + y, 0), duration: a.duration };
+}
+/** how long the drawn flinch lasts (ms), null without one */
+export const kitHurtMs = (L: HeroLookDraw) => character(L)?.animations.hurt?.duration ?? null;
 
 /** a frame scaled up by a whole number with no smoothing (cached): drawn smoothed from there, a non-integer size stays sharp */
 const big = new Map<string, HTMLCanvasElement>();
@@ -64,20 +72,20 @@ export function drawKitHero(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose
   let [state] = clip(pose);
   if (state === 'dead' && !c.animations.dead) return false;
   let t = pose.t;
-  // the field's pose clocks (field.ts): idle / walk / cast / sit run on the shared clock, attack / dead on time in the state
-  // (pose.t, = since). clip() pins hurt / dead / sit to 0 and squeezes attack into 280 ms, so the clocks are read here instead.
+  // the field's pose clocks (field.ts): idle / walk / cast / sit run on the shared clock, attack on time since the swing, hurt since
+  // the hit, dead on time in the state (pose.t, = since). clip() pins hurt / dead / sit to 0, so the clocks are read here instead.
   if (state === 'attack' && c.animations.attack) {
-    // as pixel.ts 'uniform' (the game today): the whole swing scaled so the contact frame (`hitFrame`) starts when world.ts
-    // lands the hit (pose.dur × attackContact); without a hitFrame the middle of the motion meets it
     const a = c.animations.attack;
     const hit = a.hitFrame != null ? a.durations.slice(0, a.hitFrame).reduce((x, y) => x + y, 0) : a.duration / 2;
-    t = (pose.t / (Math.max(1, pose.dur ?? 280) * attackContact(L.wtype))) * hit;
+    // the attack rule (pose.rate, field.ts): the drawn timing at the attack-speed rate, world.ts lands the hit on the contact frame.
+    // Without it (no hitFrame) as pixel.ts 'uniform': the whole swing scaled so the contact meets pose.dur × attackContact
+    t = pose.rate != null ? pose.t * pose.rate : (pose.t / (Math.max(1, pose.dur ?? 280) * attackContact(L.wtype))) * hit;
   } else if (state === 'cast' && c.animations.cast_start) {
     // a one-shot lead-in before the looping cast, timed from when the cast began
     const since = pose.since ?? pose.t, lead = c.animations.cast_start.duration;
     if (since < lead) { state = 'cast_start'; t = since; } else t = since - lead;
   } else if (state === 'sit' && c.animations.sit && !c.animations.sit.loop) t = pose.since ?? pose.t; // sit down once, then hold
-  else if (state === 'hurt' && c.animations.hurt) t = 0; // the field shows hurt for 80 ms after a hit (no clock of its own yet): its first frame
+  else if (state === 'hurt' && c.animations.hurt) t = pose.t; // ms since the hit: the field shows hurt for the motion's length (heroHurtMs)
   const a = c.animations[state] ?? c.animations.idle; // an undelivered motion borrows the idle (on the pose's clock)
   let rest = Math.max(0, Math.floor(t));
   rest = a.loop ? rest % a.duration : Math.min(rest, a.duration - 1);

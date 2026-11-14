@@ -19,6 +19,7 @@ import type { RiftPlan } from './types.ts';
 import { accountBonus, arcComplete, cellAt, cellCenter, chargeShrines, endArcByBoss, quietDanger, isExplored, lightIfBossDown, regionShrinesLit, shrineNeedsBoss, stepOn } from './explore.ts';
 import { expeditionTick as benchExplore, openChest } from './explore-actions.ts';
 import { EXPLORE_CELLS, FRAGMENT, SHRINE_TEXT, type PoiDef, type StoryArc } from './data/explore.ts';
+import { attackRateFor } from './attack-rule.ts';
 
 export type DmgKind = 'normal' | 'crit' | 'taken' | 'heal' | 'sp' | 'miss' | 'lucky' | 'total' | 'zero' | 'absorb';
 
@@ -74,6 +75,8 @@ export interface HeroUnit {
   cast: CastInfo | null;
   /** the last skill released and when (sprites with per-skill motions play it instead of the plain attack / cast) */
   skillAnim: { id: string; at: number } | null;
+  /** the last plain swing and its playback rate (평타 규칙, attack-rule.ts): drawing only, the drawn swing runs on through the wait */
+  swing: { at: number; rate: number } | null;
   buffs: ActiveBuff[];
   cds: Record<string, number>;
   deadUntil: number;
@@ -291,6 +294,9 @@ export class World {
   events: FxEvent[] = [];
   logs: LogLine[] = [];
   fx = true;
+  /** 평타 규칙 (attack-rule.ts, 2026-11-14 적용): ms from a hero's drawn swing start to its contact frame at ×1, or null for the
+   *  fixed MELEE_CONTACT / BOW_RELEASE. The field renderer sets it from the art the hero is drawn with; headless sims leave it null */
+  attackContactMs: ((h: HeroUnit) => number | null) | null = null;
   rng: () => number;
   version = 0;
   wipeUntil = 0;
@@ -350,7 +356,7 @@ export class World {
       return {
         kind: 'hero', uid: this.uidSeq++, hero, x: sx - i * 26, y: sy + (i % 2 ? 22 : -10), facing: 1,
         hp: d.maxHp, sp: d.maxSp, d, dAt: 0, state: 'idle', stateT: 0, lockUntil: 0, atkReady: 0,
-        target: null, cast: null, skillAnim: null, buffs: [], cds: {}, deadUntil: 0, hpTickAt: HP_TICK, spTickAt: SP_TICK, potAt: 0,
+        target: null, cast: null, skillAnim: null, swing: null, buffs: [], cds: {}, deadUntil: 0, hpTickAt: HP_TICK, spTickAt: SP_TICK, potAt: 0,
         poisonUntil: 0, poisonNext: 0, hurtAt: -9999, sitting: false, thinkAt: 0, kiteUntil: 0, kiteNext: 0, backOff: false, doing: '',
         counterUntil: 0, slowPoisonUntil: 0, hideDrainAt: 0, prCounters: 0, utilAt: 0,
         gale: 0, flurryUntil: 0, lastEl: null, reso: 0, auraAt: 0,
@@ -2548,11 +2554,15 @@ export class World {
     this.setState(h, 'attack');
     h.skillAnim = null; // a plain swing ends any skill motion
     const delay = d.delay * (h.flurryUntil > this.time && d.wtype === 'none' ? 0.5 : 1); // 맨주먹 연타
+    // the drawn swing played at the attack-speed rate: the hit (a bow's release) lands when its contact frame starts
+    const rate = attackRateFor(delay), drawn = this.attackContactMs?.(h) ?? null;
+    const contact = drawn != null ? drawn / rate : d.ranged ? BOW_RELEASE : MELEE_CONTACT;
+    h.swing = { at: this.time, rate };
     h.atkReady = this.time + delay;
-    h.lockUntil = this.time + Math.min(320, delay * 0.8);
+    h.lockUntil = this.time + Math.max(contact, Math.min(320, delay * 0.8)); // stays put until its own hit lands
     if (d.ranged) {
       // draw → release (the arrow leaves on the release frame) → flight → hit
-      this.after(BOW_RELEASE, () => {
+      this.after(contact, () => {
         if (!this.alive(t)) return;
         const fly = Math.max(120, dist(h, t) / 0.75);
         this.emit({ t: 'shot', from: h.uid, to: t.uid, kind: 'arrow', dur: fly, element: d.weaponElement });
@@ -2571,7 +2581,7 @@ export class World {
       return;
     }
     this.sound('swing');
-    this.after(MELEE_CONTACT, () => {
+    this.after(contact, () => {
       // 이도류: each hand at its mastery %, the left one right after
       const lh = d.lh;
       const r = this.resolvePhys(h, t, lh ? lh.rpct : 100, d.weaponElement, 0, true, d.wtype === 'mace' || d.wtype === 'staff' || d.wtype === 'none' ? 'blunt' : 'slash');
@@ -2987,6 +2997,7 @@ export class World {
       h.atkReady = Math.max(h.atkReady, this.time + Math.min(delay, h.d.delay));
       this.setState(h, sk.magic || sk.kind === 'heal' || sk.kind === 'buff' || sk.kind === 'selfBuff' || sk.kind === 'ground' || sk.kind === 'cure' ? 'cast' : 'attack');
       h.skillAnim = { id: sk.id, at: this.time };
+      h.swing = null; // a skill ends the plain swing's follow-through
       this.emit({ t: 'skillStart', uid: h.uid, skill: sk.id, lv, to: c.target ?? undefined, events: { contact: sk.kind === 'ranged' ? BOW_RELEASE : SKILL_CONTACT } });
       this.stateHold(h, Math.min(delay, 450));
     }

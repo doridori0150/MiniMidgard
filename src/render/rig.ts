@@ -7,8 +7,8 @@ import { BOW_RELEASE, MELEE_CONTACT } from '../game/world.ts';
 import type { HeroLookDraw, Pose } from './hero.ts';
 import { drawSprite, loadSprites, spriteBounds, spriteSupports } from './sprite.ts';
 import { drawWhole, loadWhole, wholeSupports } from './whole.ts';
-import { drawPixel, loadPixel, pixelSupports } from './pixel.ts';
-import { drawKitHero, kitSupports } from './kit-hero.ts';
+import { drawPixel, loadPixel, pixelHurtMs, pixelSupports, pixelSwing } from './pixel.ts';
+import { drawKitHero, kitHurtMs, kitSupports, kitSwing } from './kit-hero.ts';
 export { spriteBounds as rigBounds };
 
 type V2 = [number, number];
@@ -141,6 +141,17 @@ function tint(name: string, color: string): CanvasImageSource | undefined {
     tinted.set(k, c);
   }
   return c;
+}
+
+/** the drawn plain swing of the art this hero is drawn with (D, then C; the painted / code-drawn heroes have none): the field's
+ *  attack rule (attack-rule.ts) plays it at the attack-speed rate and world.ts lands the hit on its contact frame */
+export function heroDrawnSwing(L: HeroLookDraw): { contact: number; duration: number } | null {
+  if (kitSupports(L)) return kitSwing(L);
+  return pixelSupports(L) ? pixelSwing(L) : null;
+}
+/** how long the field shows a hero's flinch after a hit: its drawn hurt motion, else 80 ms (the first half of the hit flash) */
+export function heroHurtMs(L: HeroLookDraw): number {
+  return (kitSupports(L) ? kitHurtMs(L) : pixelSupports(L) ? pixelHurtMs(L) : null) ?? 80;
 }
 
 export function drawRigHero(ctx: CanvasRenderingContext2D, L: HeroLookDraw, pose: Pose): boolean {

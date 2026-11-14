@@ -4,7 +4,7 @@ import { AFFIXES } from '../game/rift.ts';
 import type { Element, Hero, GameState } from '../game/types.ts';
 import { buildZoneArt, drawProp, kitLook, kitPropBox, kitVersion, type KitGrade, type ZoneArt, type Prop } from './bg.ts';
 import { inked } from './ink.ts';
-import { drawRigHero, rigBounds, rigSupports } from './rig.ts';
+import { drawRigHero, heroDrawnSwing, heroHurtMs, rigBounds, rigSupports } from './rig.ts';
 
 const REDUCED_MOTION = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 import { drawHero, drawFalcon, type HeroLookDraw, type Pose } from './hero.ts';
@@ -166,6 +166,8 @@ export class FieldRenderer {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d')!;
     this.world = world;
+    // 평타 규칙: the sim lands a plain hit on the contact frame of the swing this renderer draws (none for painted / code-drawn heroes)
+    world.attackContactMs = (h) => heroDrawnSwing(this.heroLook(h))?.contact ?? null;
     warmFont();
     canvas.addEventListener('pointerdown', (e) => this.onPointer(e));
   }
@@ -1258,7 +1260,13 @@ export class FieldRenderer {
     ctx.translate(sm.x + (off?.x ?? 0), sm.y + (off?.y ?? 0));
     // swing length chosen so the blade/spear/katar passes straight ahead at MELEE_CONTACT and the bow releases at BOW_RELEASE
     const dur = h.state === 'attack' ? (h.d.wtype === 'bow' ? BOW_RELEASE / 0.6 : h.d.wtype === 'spear' ? MELEE_CONTACT / 0.47 : MELEE_CONTACT / 0.5) : undefined;
-    const pose: Pose = { state: flash > 0.5 && (state === 'idle' || state === 'ready') ? 'hurt' : state, t: state === 'idle' || state === 'ready' || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing, since: t };
+    const rest = state === 'idle' || state === 'ready', hurtT = rt - h.hurtAt;
+    // 평타 규칙 (attack-rule.ts): art with a drawn swing plays it from the swing at its rate, on through the wait for the next one
+    const sw = h.swing, drawn = sw && (state === 'attack' || rest) ? heroDrawnSwing(look) : null, swingT = sw ? rt - sw.at : 0;
+    const pose: Pose =
+      rest && hurtT < heroHurtMs(look) ? { state: 'hurt', t: hurtT, facing: h.facing, since: hurtT } // the flinch, its drawn length
+      : drawn && (state === 'attack' || swingT < drawn.duration / sw!.rate) ? { state: 'attack', t: swingT, rate: sw!.rate, facing: h.facing, since: swingT }
+      : { state, t: rest || state === 'walk' || state === 'cast' || state === 'sit' ? now : t, dur, facing: h.facing, since: t };
     const sa = h.skillAnim;
     // a released skill's motion runs on through the after-cast pause (ready / idle) until the hero moves, casts again or swings
     if (sa && !h.cast && state !== 'walk' && state !== 'dead' && state !== 'sit' && rt - sa.at < 1500) { pose.skill = sa.id; pose.skillT = rt - sa.at; }

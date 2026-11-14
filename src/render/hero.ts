@@ -60,6 +60,8 @@ export interface Pose {
   skillT?: number;
   /** tools only (asset-kit stage): play this pixel animation by name, `t` ms in */
   anim?: string;
+  /** a plain swing under the attack rule (attack-rule.ts): `t` is ms since the swing, the drawn frames play at this rate */
+  rate?: number;
 }
 
 interface Outfit { main: string; second: string; pants: string; shoes: string; trim: string; robe?: boolean; skirt?: boolean }
